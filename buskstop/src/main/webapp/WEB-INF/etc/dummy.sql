@@ -19,7 +19,11 @@ insert into USERS values('kimm990', '김원진', 'cvf5558', '경기도 남양주
 insert into AUTHORITY values('', '');
 
 /* 팔로우 */
-insert into FOLLOW values('', '');
+insert into FOLLOW values('hong1653', 'kim4845');
+insert into FOLLOW values('beck4848', 'kim4845');
+insert into FOLLOW values('suck1598', 'kim4845');
+insert into FOLLOW values('sim1', 'kim4845');
+insert into FOLLOW values('sim1', 'yunee33');
 
 /* 프리미엄 대관 공급자 */
 insert into STAGE_SUPPLIER values('', '');

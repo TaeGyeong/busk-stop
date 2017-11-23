@@ -33,7 +33,7 @@ from PERFORMANCE p, STAGE s
 where p.stage_no = s.stage_no
 and p.performance_no = 3; /* 조회할 공연정보 id */
 
-/* 공연자 영상 조회 */
+/* 공연자(공연장) 영상 조회 */
 select v.*
 from VIDEO v, (
 	select a.artist_name
@@ -143,6 +143,18 @@ where used_goods_wish_user_id = 'kimbo88' /* 조회할 등록자 id */
 
 /* 구인구직 */
 
+/* 팔로우한 회원 정보 조회 */
+select u.user_name, u.user_address, u.user_address, u.user_phone_num, u.user_email
+from FOLLOW f, USERS u
+where f.follower_id = u.user_id
+and f.following_id = 'sim1'; /* 팔로우한 회원 id */
+
+/* 날 팔로우한 회원 숫자 조회 */
+select count(*)
+from FOLLOW f, USERS u
+where f.follower_id = u.user_id
+and f.follower_id = 'kim4845'; /* 조회할 회원 id */
+
 /* 팔로우한 아티스트 정보 조회 */
 
 /* 회원 정보 조회(회원) */
@@ -161,3 +173,14 @@ select *
 from USERS u, STAGE_SUPPLIER s
 where u.user_id = s.operator_user_id
 and u.user_id = 'id2'; /* 조회할 회원 id */
+
+/* 공연영상(아티스트 프로필) 조회 */
+select v.*
+from VIDEO v,
+	(
+	select a.artist_name
+	from USERS u, ARTIST a
+	where u.user_id = a.artist_user_id
+	and u.user_id = 'kim4845' /* 조회할 유저(아티스트) id */
+	)
+where v.video_artist like '%'||artist_name||'%';
