@@ -25,17 +25,17 @@ insert into FOLLOW values('', '');
 insert into STAGE_SUPPLIER values('', '');
 
 /* 아티스트 */
-insert into ARTIST values('kim4845', '메기 매운탕', '모던록밴드', '좋은 음악을 하는 밴드 입니다.', '김경민, 김명민, 김겅민, 김엉민');
-insert into ARTIST values('kimp123', '노랑머리', '어쿠스틱듀오', '발라드 합니다.', '김민혁, 김밀현');
-insert into ARTIST values('choi22', 'mc경', '힙합', 'wtf', '최경석');
-insert into ARTIST values('yunee33', '노래 개잘핵', '발라드', '추천받아요', '윤현');
+insert into ARTIST values('kim4845', '메기 매운탕', '모던록밴드', '좋은 음악을 하는 밴드 입니다.', 'c://img/img1', '김경민, 김명민, 김겅민, 김엉민');
+insert into ARTIST values('kimp123', '노랑머리', '어쿠스틱듀오', '발라드 합니다.', 'c://img/img2', '김민혁, 김밀현');
+insert into ARTIST values('choi22', 'mc경', '힙합', 'wtf', 'c://img/img3', '최경석');
+insert into ARTIST values('yunee33', '노래 개잘핵', '발라드', '추천받아요', 'c://img/img4', '윤현');
 
-/* 공연자(공급자 게시물) */
-insert into STAGE values('1', '홍대 놀이터', '홍대 어딘가', '200000', '100', 'c://image/111.jpg', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우 쾌적한 환경을 조성하고 있습니다.', 1, 0, 1, 0, 1, 'hong1653');
-insert into STAGE values('2', '서현 라이브 카페', '서현역 5번 출구', '100000', '85', 'c://image/100.jpg', '드럼, 건반, 앰프', '쾌적한 환경을 조성.', 0, 0, 0, 0, 1, 'sim1');
-insert into STAGE values('3', '야탑 라이브', '야탑역 2번 출구', '150000', '120', 'c://image/121.jpg', '일렉기타, 건반, 앰프', '좋아요.', 0, 0, 0, 0, 0, 'suck1598');
-insert into STAGE values('4', '부산 놀이터', '부산 해운대', '120000', '100', 'c://image/10.jpg', '드럼, 건반', '오세요.', 1, 1, 1, 0, 1, 'kimm990');
-insert into STAGE values('5', '전주 놀이터', '전주 어딘가', '300000', '180', 'c://image/181.jpg', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우매우매우 쾌적한 환경을 조성하고 있습니다.', 1, 1, 1, 0, 1, 'lee534');
+/* 공연장(공급자 게시물) */
+insert into STAGE values('1', '홍대 놀이터', '홍대 어딘가', '200000', '100', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우 쾌적한 환경을 조성하고 있습니다.', 1, 0, 1, 0, 1, 'hong1653');
+insert into STAGE values('2', '서현 라이브 카페', '서현역 5번 출구', '100000', '85', '드럼, 건반, 앰프', '쾌적한 환경을 조성.', 0, 0, 0, 0, 1, 'sim1');
+insert into STAGE values('3', '야탑 라이브', '야탑역 2번 출구', '150000', '120', '일렉기타, 건반, 앰프', '좋아요.', 0, 0, 0, 0, 0, 'suck1598');
+insert into STAGE values('4', '부산 놀이터', '부산 해운대', '120000', '100', '드럼, 건반', '오세요.', 1, 1, 1, 0, 1, 'kimm990');
+insert into STAGE values('5', '전주 놀이터', '전주 어딘가', '300000', '180', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우매우매우 쾌적한 환경을 조성하고 있습니다.', 1, 1, 1, 0, 1, 'lee534');
 
 /* 대관 예약(주문) */
 insert into STAGE_RESERVATION values();
@@ -47,9 +47,9 @@ insert into STAGE_IMAGE values();
 insert into STAGE_REVIEW values();
 
 /* 공연정보(아티스트 게시물) */
-insert into PERFORMANCE values('1', '서현에서 공연합니다.', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'kimp123', null);
-insert into PERFORMANCE values('2', '야탑 고', '야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'kim4845', '3');
-insert into PERFORMANCE values('3', '부산 공연', '부산 놀이터', '2017-12-22', 30, '보러오세요.', 'yunee33', '4');
+insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'c://img/img1','kimp123', null);
+insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3');
+insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 놀이터', '2017-12-22', 30, '보러오세요.', 'c://img/img1','yunee33', '4');
 
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values();
@@ -78,22 +78,38 @@ insert into VIDEO_COMMENT values();
 insert into VIDEO_LIKE values();
 
 /* 중고상품(게시글) */
-insert into USED_GOODS values();
+insert into USED_GOODS values(1, '기타 사세요', '기타1', '데임', 170000, 'c://img/img1', 1, '2017-01-12', '좋은 기타입니다. 사주세요.', 'kimjr322');
+insert into USED_GOODS values(2, '기타 좀 사주세요', '기타2', '스윙', 80000, 'c://img/img2', 1, '2017-11-10', '팔아요', 'suck1598');
+insert into USED_GOODS values(3, '베이스 팔아요', '베이스1', '데임', 210000, 'c://img/img3', 1, '2017-09-21', '사세요.', 'hong1653');
+insert into USED_GOODS values(4, '앰프 상태 상', '앰프1', '애플', 30000, 'c://img/img4', 4, '2017-08-02', '좋아요', 'kimdo327');
+insert into USED_GOODS values(5, '건반 거래 합니다', '건반1', '야마하', 300000, 'c://img/img5', 1, '2017-02-28', '깨끗', 'kimjr322');
 
 /* 주문 */
-insert into ORDERS values();
+insert into ORDERS values(1, 1, 'sim1', 0);
+insert into ORDERS values(2, 5, 'suck1598', 1);
+insert into ORDERS values(3, 3, 'nam8118', 0);
+insert into ORDERS values(4, 4, 'sim1', 0);
 
 /* 주문정보(배송정보) */
-insert into ORDER_DETAIL values();
+insert into ORDER_DETAIL values(1, '경기도 광주시 오포읍', 1, 170000, '01032362569');
+insert into ORDER_DETAIL values(2, '경기도 성남시 분당구', 1, 300000, '01011111111');
+insert into ORDER_DETAIL values(3, '경기도 오산시', 1, 210000, '01099558866');
+insert into ORDER_DETAIL values(4, '강원도 강릉시', 3, 90000, '01022222224');
 
 /* 장바구니 */
-insert into BASKET values();
+insert into BASKET values(4, 'lee534', 1);
+insert into BASKET values(3, 'no33432', 1);
+insert into BASKET values(4, 'yunee33', 2);
 
 /* 중고상품 댓글 */
 insert into USED_COMMENT values();
 
 /* 구매희망 */
-insert into USED_GOODS_WISH values();
+insert into USED_GOODS_WISH values(1, '판매 부탁드려요', '폴앤폴 250', '구매원함', 'sim1');
+insert into USED_GOODS_WISH values(2, '급구', '릴리즈 70', '파시오', 'yunee33');
+insert into USED_GOODS_WISH values(3, '구해요', '펜더 재즈 usa', '급구', 'kimm990');
+insert into USED_GOODS_WISH values(4, '구매 원함', '릴리즈 70 콘서트', '빨리좀', 'kimbo88');
+insert into USED_GOODS_WISH values(5, 'please', '데임 폴앤폴 350', '올려요', 'kimbo88');
 
 /* 구인 - 인재구함 */
 insert into EMPLOY values();

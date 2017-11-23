@@ -6,7 +6,7 @@ from PERFORMANCE p, (
 	from performance_like
 	group by performance_like_no
 	) pl
-where p.performance_no = pl.performance_like_no;
+where p.performance_no = pl.performance_like_no(+);
 
 /* 공연정보 검색 */
 select p.*, pl.like_count /* like_count = 좋아요 수 */
@@ -42,3 +42,47 @@ from VIDEO v, (
 	and p.performance_no = 2 /* 조회할 공연정보 id */
 	)
 where v.video_artist like '%'||artist_name||'%';
+
+/***********************************중고거래*************************************************/
+/* 거래등록글 조회 */
+select *
+from USED_GOODS;
+
+/* 거래 상세 정보 조회 */
+select *
+from USED_GOODS
+where used_goods_no = 3; /* 조회할 게시글 id */
+
+/* 장바구니 조회 */
+select u.used_goods_model, u.used_goods_brand, u.used_goods_cost, u.used_goods_image,
+	u.used_goods_seller_id, b.basket_ea
+from USED_GOODS u, BASKET b
+where u.used_goods_no = b.used_goods_no
+and b.basket_consumer_id = 'lee534'; /* 조회할 사용자 id */
+
+/* 주문 정보 조회 */
+select o.used_goods_image, o.used_goods_model, o.used_goods_brand, o.used_goods_seller_id,
+	d.shipping_address, d.order_ea, d.PURCHASE_COST, d.ADDRESSEE_PHONE_NUM,
+	o.cancel_code
+from ORDER_DETAIL d, (
+	select *
+	from ORDERS o, USED_GOODS u
+	where o.used_goods_no = u.used_goods_no
+	) o
+where d.order_no = o.order_no
+and o.consumer_id = 'sim1'; /* 조회할 구매자 id */
+
+/* 구매 희망 글 목록 조회 */
+select *
+from USED_GOODS_WISH;
+
+/* 구매 희망 검색 후 목록 조회 */
+select *
+from USED_GOODS_WISH
+where used_goods_wish_title like '%구매%' /* 글제목으로 검색 또는 */
+or used_goods_wish_model like '%폴앤폴%'; /* 모델명으로 검색*/
+
+/* 구매 희망 글 상세 조회 */
+select *
+from USED_GOODS_WISH
+where used_goods_wish_no = 1; /* 조회할 게시판 번호 */
