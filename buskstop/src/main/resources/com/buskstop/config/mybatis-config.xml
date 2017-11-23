@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<package name="com.buskstop.vo"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/buskstop/config/mybatis/mapper/applicantMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/basketMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/employMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/orderDetailMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/orderMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/stageImageMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/stageReservationMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/stageReviewMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/studentMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/teachersMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/usedCommentMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/usedGoodsMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/usedGoodsWishMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/userMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/videoCommentMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/videoLikeMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/videoMapper.xml"/>
+	</mappers>
+</configuration>
