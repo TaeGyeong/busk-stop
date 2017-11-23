@@ -63,15 +63,15 @@ insert into STAGE_IMAGE values();
 
 /* 공연장 리뷰 */
 insert into STAGE_REVIEW values(1,'id1',5,'너무 멋져요');
-insert into STAGE_REVIEW values(1,'id2',4,'괘찮네');
+insert into STAGE_REVIEW values(4,'id2',4,'괘찮네');
 insert into STAGE_REVIEW values(2,'id1',2,'너무 구려요');
 insert into STAGE_REVIEW values(3,'id2',3,'멋져');
 insert into STAGE_REVIEW values(2,'id3',4,'동엽짱짱맨');
 insert into STAGE_REVIEW values(1,'id4',1,'너무 멋져요');
-insert into STAGE_REVIEW values(1,'hong1653',3,'하하하');
-insert into STAGE_REVIEW values(2,'kim4845',4,'너무 구려요');
+insert into STAGE_REVIEW values(4,'hong1653',3,'하하하');
+insert into STAGE_REVIEW values(5,'kim4845',4,'너무 구려요');
 insert into STAGE_REVIEW values(3,'beck4848',5,'갓태경');
-insert into STAGE_REVIEW values(2,'lee534',2,'동엽신');
+insert into STAGE_REVIEW values(5,'lee534',2,'동엽신');
 
 /* 공연정보(아티스트 게시물) */
 insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'c://img/img1','kimp123', null);
@@ -109,22 +109,40 @@ insert into VIDEO_COMMENT values();
 insert into VIDEO_LIKE values();
 
 /* 중고상품(게시글) */
-insert into USED_GOODS values();
+insert into USED_GOODS values(1, '기타 사세요', '기타1', '데임', 170000, 'c://img/img1', 1, '2017-01-12', '좋은 기타입니다. 사주세요.', 'kimjr322');
+insert into USED_GOODS values(2, '기타 좀 사주세요', '기타2', '스윙', 80000, 'c://img/img2', 1, '2017-11-10', '팔아요', 'suck1598');
+insert into USED_GOODS values(3, '베이스 팔아요', '베이스1', '데임', 210000, 'c://img/img3', 1, '2017-09-21', '사세요.', 'hong1653');
+insert into USED_GOODS values(4, '앰프 상태 상', '앰프1', '애플', 30000, 'c://img/img4', 4, '2017-08-02', '좋아요', 'kimdo327');
+insert into USED_GOODS values(5, '건반 거래 합니다', '건반1', '야마하', 300000, 'c://img/img5', 1, '2017-02-28', '깨끗', 'kimjr322');
+
 
 /* 주문 */
-insert into ORDERS values();
+insert into ORDERS values(1, 1, 'sim1', 0);
+insert into ORDERS values(2, 5, 'suck1598', 1);
+insert into ORDERS values(3, 3, 'nam8118', 0);
+insert into ORDERS values(4, 4, 'sim1', 0);
 
 /* 주문정보(배송정보) */
-insert into ORDER_DETAIL values();
+insert into ORDER_DETAIL values(1, '경기도 광주시 오포읍', 1, 170000, '01032362569');
+insert into ORDER_DETAIL values(2, '경기도 성남시 분당구', 1, 300000, '01011111111');
+insert into ORDER_DETAIL values(3, '경기도 오산시', 1, 210000, '01099558866');
+insert into ORDER_DETAIL values(4, '강원도 강릉시', 3, 90000, '01022222224');
 
 /* 장바구니 */
-insert into BASKET values();
+insert into BASKET values(4, 'lee534', 1);
+insert into BASKET values(3, 'no33432', 1);
+insert into BASKET values(4, 'yunee33', 2);
 
 /* 중고상품 댓글 */
 insert into USED_COMMENT values();
 
 /* 구매희망 */
-insert into USED_GOODS_WISH values();
+insert into USED_GOODS_WISH values(1, '판매 부탁드려요', '폴앤폴 250', '구매원함', 'sim1');
+insert into USED_GOODS_WISH values(2, '급구', '릴리즈 70', '파시오', 'yunee33');
+insert into USED_GOODS_WISH values(3, '구해요', '펜더 재즈 usa', '급구', 'kimm990');
+insert into USED_GOODS_WISH values(4, '구매 원함', '릴리즈 70 콘서트', '빨리좀', 'kimbo88');
+insert into USED_GOODS_WISH values(5, 'please', '데임 폴앤폴 350', '올려요', 'kimbo88');
+
 
 /* 구인 - 인재구함 */
 insert into EMPLOY values();
@@ -143,5 +161,150 @@ insert into HELP values();
 
 /* 고객센터 댓글 */
 insert into HELP_COMMENT values();
+
+
+/*--------------------------------------------------------------------*/
+/* 공연장 목록조회  */
+	select STAGE_NO, STAGE_NAME,STAGE_LOCATION from STAGE; /* 별점도 넣어야하나? */ 
+
+/* 공연장 검색 후 조회수 */
+
+	/* 리버풀쇼 이라는 공연의 공연장을 검색(키워드로 검색) */
+	select PERFORMANCE.PERFORMANCE_NAME, STAGE.* from STAGE,PERFORMANCE where STAGE.STAGE_NO = PERFORMANCE.STAGE_NO and PERFORMANCE_NAME='리버풀쇼';
+
+	/* 주소로 검색 */
+	select * from STAGE where STAGE_LOCATION like '%홍대%';
+
+	/* 음주가 불가능한 공연장 검색 */
+	select * from STAGE where STAGE_FOOD_SELL=0;
+
+	/* 주차장 o, 음주 x, 음식 x, 외부음식 o 인 공연장 검색 */
+	select * from STAGE where STAGE_PARKING=1 and not STAGE_DRINKING=1 and not STAGE_FOOD_SELL=1 and STAGE_FOOD_RESTRICTION=1;
+	
+	/* 구비된 악기로 검색(기타가 구비된 공연장) */
+	select * from STAGE where STAGE_INSTRUMENT like '%guitar%';
+
+	/* 별점이 높은 순서대로 목록 조회 */
+	select SS.SS_AVG, STAGE.STAGE_NO, STAGE.STAGE_NAME, STAGE.STAGE_LOCATION
+	from STAGE, ( select STAGE_NO, avg(STAR_SCORE) SS_AVG
+			  from STAGE_REVIEW
+			  group by STAGE_NO ) SS
+	where SS.STAGE_NO = STAGE.STAGE_NO
+	order by SS.SS_AVG DESC;
+	
+
+
+/* 공연장 상세정보조회 */
+	
+	/* 홍대관(공연장명)의 상세정보 */ 
+	select * from STAGE where STAGE_NAME like '%홍대관';
+
+/* 별점등록 후 아이디가 작성한 댓글 검색 -> 마이페이지에서 내가 등록한 리뷰 로 하면 될듯 */
+	select STAGE_REVIEW.STAGE_NO, STAGE_REVIEW.STAR_SCORE,STAGE_REVIEW.STAGE_COMMENT  from STAGE_REVIEW,USERS 
+			where STAGE_REVIEW.STAGE_REVIEW_USER_ID = USERS.USER_ID and USER_ID='id1';
+	
+
+/* 대관신청(예약) 후 신청 확인 (select) */
+	select RENTAL_NO, RENTAL_USER_ID, STAGE_NO, RENTAL_DATE
+	from STAGE_RESERVATION,USERS
+	where STAGE_RESERVATION.RENTAL_USER_ID=USERS.USER_ID and USER_ID='id2';
+
+/*-----------------------------공연정보(아티스트 게시판)---------------------------------*/
+/* 공연정보 목록 조회 */
+select p.*, pl.like_count /* like_count = 좋아요 수 */
+from PERFORMANCE p, (
+	select performance_like_no, count(*) like_count
+	from performance_like
+	group by performance_like_no
+	) pl
+where p.performance_no = pl.performance_like_no(+);
+
+/* 공연정보 검색 */
+select p.*, pl.like_count /* like_count = 좋아요 수 */
+from PERFORMANCE p, (
+	select performance_like_no, count(*) like_count
+	from performance_like
+	group by performance_like_no
+	) pl
+where p.performance_no = pl.performance_like_no
+/*and p.performance_name like '%서현%';*/ /* 공연이름으로 검색 */
+/*and p.performance_location like '%서현%';*/ /* 공연장소로 검색 */
+and p.performance_date >= '2017-11-23' /* 공연날짜로 검색 */		/* 시작 날짜 */
+and p.performance_date <= '2017-11-28';						/* 종료 날짜 */
+
+/* 공연자 정보 조회 */
+select a.*
+from PERFORMANCE p, ARTIST a
+where p.performance_user_id = a.artist_user_id /* 공연정보에 게시글을 올린 아티스트만 조회됨 */
+and p.performance_no = 1; /* 조회할 공연정보 id */
+
+/* 공연장 정보 조회 */
+select s.*
+from PERFORMANCE p, STAGE s
+where p.stage_no = s.stage_no
+and p.performance_no = 3; /* 조회할 공연정보 id */
+
+/* 공연자 영상 조회 */
+select v.*
+from VIDEO v, (
+	select a.artist_name
+	from PERFORMANCE p, ARTIST a
+	where p.performance_user_id = a.artist_user_id
+	and p.performance_no = 2 /* 조회할 공연정보 id */
+	)
+where v.video_artist like '%'||artist_name||'%';
+
+/***********************************중고거래*************************************************/
+/* 거래등록글 조회 */
+select *
+from USED_GOODS;
+
+/* 거래 상세 정보 조회 */
+select *
+from USED_GOODS
+where used_goods_no = 3; /* 조회할 게시글 id */
+
+/* 장바구니 조회 */
+select u.used_goods_model, u.used_goods_brand, u.used_goods_cost, u.used_goods_image,
+	u.used_goods_seller_id, b.basket_ea
+from USED_GOODS u, BASKET b
+where u.used_goods_no = b.used_goods_no
+and b.basket_consumer_id = 'lee534'; /* 조회할 사용자 id */
+
+/* 주문 정보 조회 */
+select o.used_goods_image, o.used_goods_model, o.used_goods_brand, o.used_goods_seller_id,
+	d.shipping_address, d.order_ea, d.PURCHASE_COST, d.ADDRESSEE_PHONE_NUM,
+	o.cancel_code
+from ORDER_DETAIL d, (
+	select *
+	from ORDERS o, USED_GOODS u
+	where o.used_goods_no = u.used_goods_no
+	) o
+where d.order_no = o.order_no
+and o.consumer_id = 'sim1'; /* 조회할 구매자 id */
+
+/* 구매 희망 글 목록 조회 */
+select *
+from USED_GOODS_WISH;
+
+/* 구매 희망 검색 후 목록 조회 */
+select *
+from USED_GOODS_WISH
+where used_goods_wish_title like '%구매%' /* 글제목으로 검색 또는 */
+or used_goods_wish_model like '%폴앤폴%'; /* 모델명으로 검색*/
+
+/* 구매 희망 글 상세 조회 */
+select *
+from USED_GOODS_WISH
+where used_goods_wish_no = 1; /* 조회할 게시판 번호 */
+
+
+
+
+
+
+
+
+
 
 
