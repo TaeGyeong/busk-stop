@@ -26,7 +26,11 @@ insert into AUTHORITY values('', '');
 insert into FOLLOW values('', '');
 
 /* 프리미엄 대관 공급자 */
-insert into STAGE_SUPPLIER values('', '');
+insert into STAGE_SUPPLIER values(11234567890, 'id1',1123456789,'홍대 놀이터','홍대 어딘가',100,'c://img/img8');
+insert into STAGE_SUPPLIER values(22234567890, 'id2',2223456789,'서현 라이브 카페','서현역 5번 출구',100,'c://img/img9');
+insert into STAGE_SUPPLIER values(3334567890, 'id3',3333456789,'야탑 라이브','야탑역 2번 출구',100,'c://img/img0');
+
+delete from STAGE_SUPPLIER where STAGE_SUPPLIER.OPERATOR_USER_ID='id1';
 
 /* 아티스트 */
 insert into ARTIST values('kim4845', '메기 매운탕', '모던록밴드', '좋은 음악을 하는 밴드 입니다.', 'c://img/img1', '김경민, 김명민, 김겅민, 김엉민');
