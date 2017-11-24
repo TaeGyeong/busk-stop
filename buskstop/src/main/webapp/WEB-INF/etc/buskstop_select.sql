@@ -363,7 +363,32 @@ ORDER BY VIDEO_COMMENT_NO;
 /* ID1이 단 댓글 조회  -> 이건 마이페이지에 필요할 거 같아서 일단 마이페이지에도 넣어뒀음*/
 SELECT * FROM VIDEO_COMMENT WHERE VIDEO_COMMENT_USER_ID='id4';
 
+/**********************************고객센터***********************************/
 
+/* 전체 목록 조회 */
+select *
+from HELP;
+
+/* 카테고리로 조회 */
+select *
+from HELP
+where help_category = '신고게시판'; /* 카테고리 이름 */
+
+/* 글제목으로 조회 */
+select *
+from HELP
+where help_title like '%신고%'; /* 검색할 내용 */
+
+/* 상세보기 */
+select *
+from HELP
+where help_no = 1; /* 조회할 게시글 id */
+
+/* 해당게시물 댓글 목록 조회 */
+select hc.*
+from HELP h, HELP_COMMENT hc
+where h.help_no = hc.help_no
+and h.help_no = 1; /* 조회갈 게시글 id */
 
 
 

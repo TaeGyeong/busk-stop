@@ -214,10 +214,25 @@ insert into STUDENTS values(4,'RRRR', 'nam8118');
 insert into STUDENTS values(5,'KKKK', 'kimbo88');
 
 /* 고객센터 */
-insert into HELP values();
+insert into HELP values(1, '신고게시판', '신고합니다', '부적절한 게시물을 올렸습니다.', 'c://img/img1', 'c://img/img1-1', 'kimbo88');
+insert into HELP values(2, '문의게시판', '문의합니다', '문의', 'c://img/img2', 'c://img/img2-1', 'kimm990');
+insert into HELP values(3, '문의게시판', '문문비행운', '좋아요좋아요', 'c://img/img3', 'c://img/img3-1', 'kimbo88');
+insert into HELP values(4, '문의게시판', '좋네요', '정말좋아요', 'c://img/img4', 'c://img/img4-1', 'yunee33');
+insert into HELP values(5, '신고게시판', '너신고', '신고합니다', 'c://img/img5', 'c://img/img5-1', 'kimbo88');
+insert into HELP values(6, '문의게시판', '아아아아아아', '안되요', 'c://img/img6', 'c://img/img6-1', 'sim1');
 
 /* 고객센터 댓글 */
-insert into HELP_COMMENT values();
+insert into HELP_COMMENT values(1, 1, '네네네네네네네', 'yunee33');
+insert into HELP_COMMENT values(2, 2, 'sp2sp2', 'no33432');
+insert into HELP_COMMENT values(3, 3, 'okokok', 'sim1');
+insert into HELP_COMMENT values(4, 4, 'gogogogogo', 'no33432');
+insert into HELP_COMMENT values(5, 1, 'backback', 'lee534');
+insert into HELP_COMMENT values(6, 5, '그래그래그래', 'kimdo327');
+insert into HELP_COMMENT values(7, 2, '아니야아니야', 'kim4845');
+insert into HELP_COMMENT values(8, 6, '몰라몰라몰라', 'kim4845');
+insert into HELP_COMMENT values(9, 3, 'goodgood', 'yunee33');
+insert into HELP_COMMENT values(10, 2, 'nicenice', 'yunee33');
+
 
 
 

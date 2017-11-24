@@ -177,6 +177,7 @@ CREATE TABLE VIDEO (
 	
 	CONSTRAINT PK_VIDEO PRIMARY KEY (VIDEO_NO),
 	CONSTRAINT FK_USERS_TO_VIDEO FOREIGN KEY (VIDEO_USER_ID) REFERENCES USERS (USER_ID)
+
 );
 
 /*------------------------------------------------------------------------------------*/
