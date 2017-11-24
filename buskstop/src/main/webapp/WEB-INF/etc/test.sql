@@ -141,21 +141,30 @@ where used_goods_wish_user_id = 'kimbo88' /* 조회할 등록자 id */
 
 /* 구인구직(등록한 레슨) */
 
+
 /* 구인구직 */
 
-/* 팔로우한 회원 정보 조회 */
+/* 내가 팔로우한 회원 정보 조회 */
 select u.user_name, u.user_address, u.user_address, u.user_phone_num, u.user_email
 from FOLLOW f, USERS u
 where f.follower_id = u.user_id
 and f.following_id = 'sim1'; /* 팔로우한 회원 id */
 
+/* 내가 팔로우한 회원 숫자 조회 */
+select count(*)
+from FOLLOW
+where  following_id = 'sim1'; /* 조회할 회원 id */
+
 /* 날 팔로우한 회원 숫자 조회 */
 select count(*)
-from FOLLOW f, USERS u
-where f.follower_id = u.user_id
-and f.follower_id = 'kim4845'; /* 조회할 회원 id */
+from FOLLOW 
+where follower_id = 'kim4845'; /* 조회할 회원 id */
 
-/* 팔로우한 아티스트 정보 조회 */
+/* 내가 팔로우한 아티스트 정보 조회 */
+select a.artist_name, a.artist_performance, a.artist_profile, a.artist_image, a.artist_members
+from FOLLOW f, ARTIST a
+where f.follower_id = a.Artist_user_id
+and f.following_id = 'sim1'; /* 조회할 회원 id */
 
 /* 회원 정보 조회(회원) */
 select user_id, user_name, user_address, user_phone_num, user_email
