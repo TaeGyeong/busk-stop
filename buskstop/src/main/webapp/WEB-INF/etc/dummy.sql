@@ -14,16 +14,6 @@ insert into USERS values('no33432', '노석준', 'fdfd84841', '강원도 원주�
 insert into USERS values('kimbo88', '김보남', 'erer88555', '강원도 강릉시', '01095685873', 'kimb22@naver.com');
 insert into USERS values('kimdo327', '김회윤', 'qwwq2222', '경기도 평택시', '01009364596', 'kimu33@gmail.com');
 insert into USERS values('kimm990', '김원진', 'cvf5558', '경기도 남양주시', '01012650485', 'kimm99855@naver.com');
-insert into USERS values('id1','갓동엽','1234','홍대입구','01029292929','acb@anb.com');
-insert into USERS values('id2','홍길동','2345','홍대입구','01012392929','adb@anb.com');
-insert into USERS values('id3','김영희','3456','홍대입','01029342929','aeb@anb.com');
-insert into USERS values('id4','김영수','5678','홍대입','01029288829','a3b@anb.com');
-insert into USERS values('id5','제라드','2324','천안','01029218209','a2cb@anb.com');
-insert into USERS values('id6','토레스','2495','대구','01012347269','ad2b@anb.com');
-insert into USERS values('id7','호날두','RJ4848','분당','01029123929','ae2b@anb.com');
-insert into USERS values('id8','로이스','QL2222','인천','01029999829','a32b@anb.com');
-
-
 
 /* 권한 */
 insert into AUTHORITY values('', '');
@@ -36,21 +26,13 @@ insert into FOLLOW values('sim1', 'kim4845');
 insert into FOLLOW values('sim1', 'yunee33');
 
 /* 프리미엄 대관 공급자 */
-insert into STAGE_SUPPLIER values(11234567890, 'id1',1123456789,'홍대 놀이터','홍대 어딘가',100,'c://img/img8');
-insert into STAGE_SUPPLIER values(22234567890, 'id2',2223456789,'서현 라이브 카페','서현역 5번 출구',100,'c://img/img9');
-insert into STAGE_SUPPLIER values(3334567890, 'id3',3333456789,'야탑 라이브','야탑역 2번 출구',100,'c://img/img0');
-
-delete from STAGE_SUPPLIER where STAGE_SUPPLIER.OPERATOR_USER_ID='id1';
-
+insert into STAGE_SUPPLIER values('', '');
 
 /* 아티스트 */
 insert into ARTIST values('kim4845', '메기 매운탕', '모던록밴드', '좋은 음악을 하는 밴드 입니다.', 'c://img/img1', '김경민, 김명민, 김겅민, 김엉민');
 insert into ARTIST values('kimp123', '노랑머리', '어쿠스틱듀오', '발라드 합니다.', 'c://img/img2', '김민혁, 김밀현');
 insert into ARTIST values('choi22', 'mc경', '힙합', 'wtf', 'c://img/img3', '최경석');
 insert into ARTIST values('yunee33', '노래 개잘핵', '발라드', '추천받아요', 'c://img/img4', '윤현');
-insert into ARTIST values('id1','busker','hiphop','첵첵 아임 더 코리안','c://img/img5','');
-insert into ARTIST values('id2','busker2','j-pop','혼모노데쓰','c://img/img6','');
-insert into ARTIST values('id3','동엽신','k-pop','소원을 말해봐~','c://img/img7','규석쓰, 태봉이, 수찬쓰');
 
 /* 공연장(공급자 게시물) */
 insert into STAGE values('1', '홍대 놀이터', '홍대 어딘가', '200000', '100', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우 쾌적한 환경을 조성하고 있습니다.', 1, 0, 1, 0, 1, 'hong1653');
@@ -58,50 +40,23 @@ insert into STAGE values('2', '서현 라이브 카페', '서현역 5번 출구'
 insert into STAGE values('3', '야탑 라이브', '야탑역 2번 출구', '150000', '120', '일렉기타, 건반, 앰프', '좋아요.', 0, 0, 0, 0, 0, 'suck1598');
 insert into STAGE values('4', '부산 놀이터', '부산 해운대', '120000', '100', '드럼, 건반', '오세요.', 1, 1, 1, 0, 1, 'kimm990');
 insert into STAGE values('5', '전주 놀이터', '전주 어딘가', '300000', '180', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우매우매우 쾌적한 환경을 조성하고 있습니다.', 1, 1, 1, 0, 1, 'lee534');
-insert into STAGE values(6,'홍대 홍대관','홍대',100000,300,'guitar','hello',1,1,0,0,1,'id1');
-insert into STAGE values(7,'리쌍 광대관','강남',200000,200,'guitar1','hello1',0,1,1,0,1,'id2');
-insert into STAGE values(8,'군대 부대관','군대',300000,100,'guitar2','hello2',1,0,0,1,1,'id3');
-
 
 /* 대관 예약(주문) */
-insert into STAGE_RESERVATION values(1,'id1',1,'2017-11-11',1);
-insert into STAGE_RESERVATION values(2,'id2',2,'2018-03-10',1);
-insert into STAGE_RESERVATION values(3,'id3',3,'2018-07-19',1);
-
+insert into STAGE_RESERVATION values();
 
 /* 공연장 사진 */
 insert into STAGE_IMAGE values();
 
 /* 공연장 리뷰 */
-insert into STAGE_REVIEW values(1,'id1',5,'너무 멋져요');
-insert into STAGE_REVIEW values(4,'id2',4,'괘찮네');
-insert into STAGE_REVIEW values(2,'id1',2,'너무 구려요');
-insert into STAGE_REVIEW values(3,'id2',3,'멋져');
-insert into STAGE_REVIEW values(2,'id3',4,'동엽짱짱맨');
-insert into STAGE_REVIEW values(1,'id4',1,'너무 멋져요');
-insert into STAGE_REVIEW values(4,'hong1653',3,'하하하');
-insert into STAGE_REVIEW values(5,'kim4845',4,'너무 구려요');
-insert into STAGE_REVIEW values(3,'beck4848',5,'갓태경');
-insert into STAGE_REVIEW values(5,'lee534',2,'동엽신');
+insert into STAGE_REVIEW values();
 
 /* 공연정보(아티스트 게시물) */
 insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'c://img/img1','kimp123', null);
 insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3');
 insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 놀이터', '2017-12-22', 30, '보러오세요.', 'c://img/img1','yunee33', '4');
-insert into PERFORMANCE values(4,'컬투쇼','안녕하세요','홍대입구','2017/12/12',3,'안녕하시오','c://img/img1','id1',1);
-insert into PERFORMANCE values(5,'리버풀쇼','리버풀 수비 할줄 몰라','홍대입구','2017/12/12',4,'안녕하시오','c://img/img1','id2',2);
-insert into PERFORMANCE values(6,'맨유쇼','맹9','홍대입구','2017/12/12',2,'안녕하시오','c://img/img1','id3',3);
-
 
 /* 공연정보 댓글 */
-insert into PERFORMANCE_COMMENT values(1,1,'id4','푸하하하하하');
-insert into PERFORMANCE_COMMENT values(1,2,'id4','푸하하하하하ㅋㅋㅋㅋ');
-insert into PERFORMANCE_COMMENT values(2,1,'id4','푸ㅋ하ㅋ하ㅋ하ㅋ하ㅋ하ㅋ');
-insert into PERFORMANCE_COMMENT values(3,1,'id5','푸ㅈ하ㅈ하ㅈ하ㅈ하ㅈ하ㅈ');
-insert into PERFORMANCE_COMMENT values(4,1,'id6','안녕하세요');
-insert into PERFORMANCE_COMMENT values(5,1,'id5','와... 역시 갓버풀 멋집니다... 우승할거 같네요');
-insert into PERFORMANCE_COMMENT values(6,1,'id6','ㅋㅋㅋㅋㅋ허더스필드한테 짐 ㅋㅋㅋㅋㅋ');
-
+insert into PERFORMANCE_COMMENT values();
 
 
 /* 공연정보 좋아요 */
@@ -121,13 +76,7 @@ insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하�
 insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부산시', '유쾌한 공연이었습니다.', '2017-09-02', '메기 매운탕, 노래 개잘핵', 'no33432');
 
 /* 동영상 댓글 */
-insert into VIDEO_COMMENT values(1,1,'id4','ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ');
-insert into VIDEO_COMMENT values(1,2,'id4','ㅎㅎㅎㅎㅎㅎㅎ');
-insert into VIDEO_COMMENT values(2,1,'id4','재밌어서 또 보러 옴');
-insert into VIDEO_COMMENT values(3,1,'id5','푸ㅈ하ㅈ하ㅈ하ㅈ하ㅈ하ㅈ');
-insert into VIDEO_COMMENT values(4,1,'id6','ㅈㅈㅈㅈㅈㅈㅈㅈ');
-insert into VIDEO_COMMENT values(5,1,'id5','리버풀 우승각');
-insert into VIDEO_COMMENT values(6,1,'id6','동팡카쿠 ㅋㅋㅋ');
+insert into VIDEO_COMMENT values();
 
 /* 동영상 좋아요 */
 insert into VIDEO_LIKE values('1', 'hong1653');
@@ -165,13 +114,7 @@ insert into BASKET values(3, 'no33432', 1);
 insert into BASKET values(4, 'yunee33', 2);
 
 /* 중고상품 댓글 */
-insert into USED_COMMENT values(1,1,'id4','정말 좋아요');
-insert into USED_COMMENT values(1,2,'id4','정말 구려요');
-insert into USED_COMMENT values(2,1,'id4','에누리 되나요');
-insert into USED_COMMENT values(3,1,'id5','팔렸나요 ?');
-insert into USED_COMMENT values(4,1,'id6','개좋다...');
-insert into USED_COMMENT values(5,1,'id5','이거 사면 리버풀 우승각?');
-insert into USED_COMMENT values(6,1,'id6','이거 사도 맨유 우승 못해');
+insert into USED_COMMENT values();
 
 /* 구매희망 */
 insert into USED_GOODS_WISH values(1, '판매 부탁드려요', '폴앤폴 250', '구매원함', 'sim1');
@@ -180,38 +123,17 @@ insert into USED_GOODS_WISH values(3, '구해요', '펜더 재즈 usa', '급구'
 insert into USED_GOODS_WISH values(4, '구매 원함', '릴리즈 70 콘서트', '빨리좀', 'kimbo88');
 insert into USED_GOODS_WISH values(5, 'please', '데임 폴앤폴 350', '올려요', 'kimbo88');
 
-
 /* 구인 - 인재구함 */
-insert into EMPLOY values(1,'기타 치는 놈 구해요','말 그대로','분당','2017-10-28',500000,'기타 중급','id1');
-insert into EMPLOY values(2,'드럼 치는 놈 구해요','말 그대로','인천','2017-10-28',400000,'드럼 숙련자','id2');
-insert into EMPLOY values(3,'바이올린 치는 놈 구해요','말 그대로','홍대','2017-10-28',300000,'바이올린 전문가','id3');
-insert into EMPLOY values(4,'첼로 치는 놈 구해요','말 그대로','강남','2017-10-28',200000,'첼로 전문가','id4');
-insert into EMPLOY values(5,'마술 좀 하는 사람 구해요','말 그대로','천안','2017-10-28',1000000,'마술 숙련자','sim1');
+insert into EMPLOY values();
 
 /* 구직 - 구직희망 - 상품에서 주문테이블 */
-insert into APPLICANT values(1,'내가 기타좀 칩니다', 'kimm990');
-insert into APPLICANT values(2,'내가 드럼좀 칩니다', 'lee534');
-insert into APPLICANT values(1,'기타 더 잘 칩니다', 'hong1653');
-insert into APPLICANT values(3,'바이올린 ㅈ고수입니다', 'choi22');
-insert into APPLICANT values(4,'첼로 빡고수', 'yunee33');
-insert into APPLICANT values(5,'마술로 님 사라지게 해드림', 'no33432');
-
-delete from APPLICANT where APPLICANT_ID='hong1653';
+insert into APPLICANT values();
 
 /* 레슨 - 선생님 */
-insert into TEACHERS values(1,'기타 배울 사람~','기타 가르쳐주마','인천','2018-01-01',200000,'기타 2개','kimm990');
-insert into TEACHERS values(2,'드럼 배울 사람~','드럼 가르쳐주마','분당','2018-02-02',300000,'드럼 2세트','lee534');
-insert into TEACHERS values(3,'마술 배울 사람~','마술 가르쳐주마','천안','2018-03-03',400000,'트럼프 카드','kimp123');
-insert into TEACHERS values(4,'춤 배울 사람~','춤 가르쳐주마','대구','2018-04-04',150000,'연습장','kimjr322');
-insert into TEACHERS values(5,'랩 배울 사람~','랩 가르쳐주마','부산','2018-05-05',250000,'','yunee33');
+insert into TEACHERS values();
 
 /* 레슨 - 학생 */
-insert into STUDENTS values(1,'GGGG', 'id5');
-insert into STUDENTS values(2,'ZZZZ', 'id6');
-insert into STUDENTS values(1,'AAAA', 'id7');
-insert into STUDENTS values(3,'DDDD', 'id8');
-insert into STUDENTS values(4,'RRRR', 'nam8118');
-insert into STUDENTS values(5,'KKKK', 'kimbo88');
+insert into STUDENTS values();
 
 /* 고객센터 */
 insert into HELP values(1, '신고게시판', '신고합니다', '부적절한 게시물을 올렸습니다.', 'c://img/img1', 'c://img/img1-1', 'kimbo88');
@@ -232,22 +154,3 @@ insert into HELP_COMMENT values(7, 2, '아니야아니야', 'kim4845');
 insert into HELP_COMMENT values(8, 6, '몰라몰라몰라', 'kim4845');
 insert into HELP_COMMENT values(9, 3, 'goodgood', 'yunee33');
 insert into HELP_COMMENT values(10, 2, 'nicenice', 'yunee33');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
