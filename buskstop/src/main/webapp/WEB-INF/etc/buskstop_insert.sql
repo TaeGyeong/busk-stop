@@ -18,6 +18,12 @@ insert into USERS values('id1','갓동엽','1234','홍대입구','01029292929','
 insert into USERS values('id2','홍길동','2345','홍대입구','01012392929','adb@anb.com');
 insert into USERS values('id3','김영희','3456','홍대입','01029342929','aeb@anb.com');
 insert into USERS values('id4','김영수','5678','홍대입','01029288829','a3b@anb.com');
+insert into USERS values('id5','제라드','2324','천안','01029218209','a2cb@anb.com');
+insert into USERS values('id6','토레스','2495','대구','01012347269','ad2b@anb.com');
+insert into USERS values('id7','호날두','RJ4848','분당','01029123929','ae2b@anb.com');
+insert into USERS values('id8','로이스','QL2222','인천','01029999829','a32b@anb.com');
+
+
 
 /* 권한 */
 insert into AUTHORITY values('', '');
@@ -31,6 +37,7 @@ insert into STAGE_SUPPLIER values(22234567890, 'id2',2223456789,'서현 라이�
 insert into STAGE_SUPPLIER values(3334567890, 'id3',3333456789,'야탑 라이브','야탑역 2번 출구',100,'c://img/img0');
 
 delete from STAGE_SUPPLIER where STAGE_SUPPLIER.OPERATOR_USER_ID='id1';
+
 
 /* 아티스트 */
 insert into ARTIST values('kim4845', '메기 매운탕', '모던록밴드', '좋은 음악을 하는 밴드 입니다.', 'c://img/img1', '김경민, 김명민, 김겅민, 김엉민');
@@ -145,16 +152,36 @@ insert into USED_GOODS_WISH values(5, 'please', '데임 폴앤폴 350', '올려�
 
 
 /* 구인 - 인재구함 */
-insert into EMPLOY values();
+insert into EMPLOY values(1,'기타 치는 놈 구해요','말 그대로','분당','2017-10-28',500000,'기타 중급','id1');
+insert into EMPLOY values(2,'드럼 치는 놈 구해요','말 그대로','인천','2017-10-28',400000,'드럼 숙련자','id2');
+insert into EMPLOY values(3,'바이올린 치는 놈 구해요','말 그대로','홍대','2017-10-28',300000,'바이올린 전문가','id3');
+insert into EMPLOY values(4,'첼로 치는 놈 구해요','말 그대로','강남','2017-10-28',200000,'첼로 전문가','id4');
+insert into EMPLOY values(5,'마술 좀 하는 사람 구해요','말 그대로','천안','2017-10-28',1000000,'마술 숙련자','sim1');
 
 /* 구직 - 구직희망 - 상품에서 주문테이블 */
-insert into APPLICANT values();
+insert into APPLICANT values(1,'내가 기타좀 칩니다', 'kimm990');
+insert into APPLICANT values(2,'내가 드럼좀 칩니다', 'lee534');
+/* insert into APPLICANT values(1,'내가 기타 더 잘 칩니다', 'hong1653'); */
+insert into APPLICANT values(3,'바이올린 ㅈ고수입니다', 'choi22');
+insert into APPLICANT values(4,'첼로 빡고수', 'yunee33');
+insert into APPLICANT values(5,'마술로 님 사라지게 해드림', 'no33432');
+
+delete from APPLICANT where APPLICANT_ID='hong1653';
 
 /* 레슨 - 선생님 */
-insert into TEACHERS values();
+insert into TEACHERS values(1,'기타 배울 사람~','기타 가르쳐주마','인천','2018-01-01',200000,'기타 2개','kimm990');
+insert into TEACHERS values(2,'드럼 배울 사람~','드럼 가르쳐주마','분당','2018-02-02',300000,'드럼 2세트','lee534');
+insert into TEACHERS values(3,'마술 배울 사람~','마술 가르쳐주마','천안','2018-03-03',400000,'트럼프 카드','kimp123');
+insert into TEACHERS values(4,'춤 배울 사람~','춤 가르쳐주마','대구','2018-04-04',150000,'연습장','kimjr322');
+insert into TEACHERS values(5,'랩 배울 사람~','랩 가르쳐주마','부산','2018-05-05',250000,'','yunee33');
 
 /* 레슨 - 학생 */
-insert into STUDENTS values();
+insert into STUDENTS values(1,'GGGG', 'id5');
+insert into STUDENTS values(2,'ZZZZ', 'id6');
+/* insert into STUDENTS values(1,'AAAA', 'id7'); */
+insert into STUDENTS values(3,'DDDD', 'id8');
+insert into STUDENTS values(4,'RRRR', 'nam8118');
+insert into STUDENTS values(5,'KKKK', 'kimbo88');
 
 /* 고객센터 */
 insert into HELP values();
@@ -297,6 +324,56 @@ or used_goods_wish_model like '%폴앤폴%'; /* 모델명으로 검색*/
 select *
 from USED_GOODS_WISH
 where used_goods_wish_no = 1; /* 조회할 게시판 번호 */
+
+
+/*********************************** 구인  *************************************************/
+
+/* 구인 글 목록 조회 */
+SELECT E.EMPLOY_NO, E.EMPLOY_TITLE, E.EMPLOY_LOCATION, E.EMPLOY_USER_ID FROM EMPLOY E,USERS U WHERE E.EMPLOY_USER_ID = U.USER_ID;
+
+/* 필요한 재능으로 검색  */
+SELECT * FROM EMPLOY WHERE EMPLOY_TALENT like '%기타%';
+
+/* 가격 범위로 검색 */
+SELECT * FROM EMPLOY WHERE EMPLOY_COST > 300000 AND EMPLOY_COST <700000;
+
+/* 게시자의 프로필 검색 */
+SELECT USERS.USER_ID, USERS.USER_NAME, USERS.USER_ADDRESS, USERS.USER_PHONE_NUM  FROM EMPLOY,USERS WHERE EMPLOY.EMPLOY_USER_ID = USERS.USER_ID AND EMPLOY_USER_ID = 'sim1';
+
+/* 게시자가 신청 확인  */
+SELECT * FROM APPLICANT WHERE APPLICANT_ID = (
+	SELECT USER_ID FROM USERS WHERE USER_ID='lee534'
+);
+
+/* 신청자 프로필 확인 */
+SELECT USERS.USER_ID, USERS.USER_NAME, USERS.USER_ADDRESS, USERS.USER_PHONE_NUM
+FROM APPLICANT, USERS WHERE APPLICANT.APPLICANT_ID = USERS.USER_ID AND USER_ID='yunee33';
+
+
+
+/*********************************** 레슨 *************************************************/
+
+/* 레슨 글 목록 조회 */
+SELECT T.TEACHERS_NO, T.TEACHERS_TITLE, T.TEACHERS_LOCATION, T.TEACHERS_ID from TEACHERS T, USERS U WHERE T.TEACHERS_ID = U.USER_ID;
+
+/* 1번 게시글 상세정보  조회 */
+SELECT * from TEACHERS T, USERS U WHERE T.TEACHERS_ID = U.USER_ID AND T.TEACHERS_NO=1;
+
+/* 신청확인 */
+SELECT * FROM STUDENTS WHERE STUDENTS_ID = (
+	SELECT USER_ID FROM USERS WHERE USER_ID='id5'
+);
+
+/* 신청자 프로필 확인 */
+SELECT USERS.USER_ID, USERS.USER_NAME, USERS.USER_ADDRESS, USERS.USER_PHONE_NUM
+FROM STUDENTS, USERS WHERE STUDENTS.STUDENTS_ID = USERS.USER_ID AND USER_ID='id8';
+
+
+
+
+
+
+
 
 
 
