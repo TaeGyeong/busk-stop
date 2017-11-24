@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------*/
+/*-------------------- 공연장  ------------------------------------------------*/
 /* 공연장 목록조회  */
 	select STAGE_NO, STAGE_NAME,STAGE_LOCATION from STAGE; /* 별점도 넣어야하나? */ 
 
@@ -89,6 +89,17 @@ from VIDEO v, (
 	)
 where v.video_artist like '%'||artist_name||'%';
 
+/********************** 공연 댓글 *********************************************/
+
+/* 해당 공연 정보에 대한 댓글 목록 */
+SELECT PERFORMANCE_COMMENT_NO, PERFORMANCE_COMMENT_USER_ID, PERFORMANCE_COMMENT
+FROM PERFORMANCE_COMMENT
+WHERE PERFORMANCE_NO=1
+ORDER BY PERFORMANCE_COMMENT_NO;
+
+/* ID1이 단 댓글 조회  -> 이건 마이페이지에 필요할 거 같아서 일단 마이페이지에도 넣어뒀음*/
+SELECT * FROM PERFORMANCE_COMMENT WHERE PERFORMANCE_COMMENT_USER_ID='id1';
+
 /***********************************중고거래*************************************************/
 /* 거래등록글 조회 */
 select *
@@ -132,6 +143,17 @@ or used_goods_wish_model like '%폴앤폴%'; /* 모델명으로 검색*/
 select *
 from USED_GOODS_WISH
 where used_goods_wish_no = 1; /* 조회할 게시판 번호 */
+
+/*--------------------------------중고거래--------------------------------------*/
+
+/* 해당 공연 정보에 대한 댓글 목록 */
+SELECT USED_COMMENT_NO, USED_COMMENT_USER_ID, USED_COMMENT
+FROM USED_COMMENT
+WHERE USED_GOODS_NO=1
+ORDER BY USED_COMMENT_NO;
+
+/* ID1이 단 댓글 조회  -> 이건 마이페이지에 필요할 거 같아서 일단 마이페이지에도 넣어뒀음*/
+SELECT * FROM USED_COMMENT WHERE USED_COMMENT_USER_ID='id4';
 
 
 /*********************************** 구인  *************************************************/
@@ -294,6 +316,10 @@ from VIDEO v,
 	)
 where v.video_artist like '%'||artist_name||'%';
 
+/* 내가(id1) 단 댓글 조회 */
+SELECT * FROM PERFORMANCE_COMMENT WHERE PERFORMANCE_COMMENT_USER_ID='id1';
+
+
 /**********************동영상(게시물)*****************************************/
 
 /* 영상 전체 조회 */
@@ -325,3 +351,27 @@ from VIDEO v, (
 	) vl
 where v.video_id = vl.video_like_no(+)
 and v.video_id = 1; /* 조회할 게시판 id */
+
+/*------------------------동영상 댓글---------------------------------------*/
+
+/* 해당 공연 정보에 대한 댓글 목록 */
+SELECT VIDEO_COMMENT_NO, VIDEO_COMMENT_USER_ID, VIDEO_COMMENT
+FROM VIDEO_COMMENT
+WHERE VIDEO_NO=1
+ORDER BY VIDEO_COMMENT_NO;
+
+/* ID1이 단 댓글 조회  -> 이건 마이페이지에 필요할 거 같아서 일단 마이페이지에도 넣어뒀음*/
+SELECT * FROM VIDEO_COMMENT WHERE VIDEO_COMMENT_USER_ID='id4';
+
+
+
+
+
+
+
+
+
+
+
+
+
