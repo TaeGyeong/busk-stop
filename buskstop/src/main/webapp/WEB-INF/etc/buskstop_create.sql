@@ -173,7 +173,11 @@ CREATE TABLE VIDEO (
 	VIDEO_CONTENT VARCHAR2(3000), /* 게시자 등록글 */
 	VIDEO_DATE DATE, /* 등록일자 */
 	VIDEO_ARTIST VARCHAR2(200), /* 아티스트 */
-	VIDEO_USER_ID VARCHAR2(50) NOT NULL /* 사용자아이디 */
+	VIDEO_USER_ID VARCHAR2(50) NOT NULL, /* 사용자아이디 */
+	
+	CONSTRAINT PK_VIDEO PRIMARY KEY (VIDEO_ID),
+	CONSTRAINT FK_USERD_TO_VIDEO FOREIGN KEY (VIDEO_USER_ID) REFERENCES USERS(USER_ID)
+	
 );
 
 /*------------------------------------------------------------------------------------*/

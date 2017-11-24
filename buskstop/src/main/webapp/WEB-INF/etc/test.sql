@@ -140,10 +140,47 @@ select *
 from USED_GOODS_WISH
 where used_goods_wish_user_id = 'kimbo88' /* 조회할 등록자 id */
 
-/* 구인구직(등록한 레슨) */
+/* 구인구직(등록한 레슨 목록보기) */
+select *
+from TEACHERS
+where teachers_id = 'kimm990' /* 조회할 회원 id */
 
+/* 구인구직(등록한 레슨의 학생 목록 보기) */
+select s.*
+from TEACHERS t, (
+	select s.students_comment, u.user_name, u.user_address, u.user_phone_num, u.user_email, s.teachers_no
+	from STUDENTS s, USERS u
+	where s.students_id = u.user_id
+	) s
+where t.teachers_no = s.teachers_no
+and t.teachers_no = 4;
 
-/* 구인구직 */
+/* 구인구직(신청한 레슨 보기) */
+select t.*, s.students_comment
+from TEACHERS t, STUDENTS s
+where t.teachers_no = s.teachers_no
+and s.students_id = 'id5'; /* 조회할 회원 id */
+
+/* 구인구직(올린 구인글 보기) */
+select *
+from EMPLOY
+where employ_user_id = 'id1'; /* 조회할 회원 id */
+
+/* 구인구직(올린 구인글의 구직자 보기) */
+select a.*
+from EMPLOY e, (
+	select a.applicant_profile, u.user_name, u.user_address, u.user_phone_num, u.user_email, a.employ_no
+	from APPLICANT a, USERS u
+	where a.applicant_id = u.user_id
+	) a
+where e.employ_no = a.employ_no
+and e.employ_no = 2; /* 조회할 게시글 id */
+
+/* 구인구직(신청한 구직글 보기) */
+select e.*, a.applicant_profile
+from EMPLOY e, APPLICANT a
+where e.employ_no = a.employ_no
+and a.applicant_id = 'no33432'; /* 조회할 회원 id */
 
 /* 내가 팔로우한 회원 정보 조회 */
 select u.user_name, u.user_address, u.user_address, u.user_phone_num, u.user_email
@@ -230,3 +267,28 @@ from VIDEO v, (
 	) vl
 where v.video_id = vl.video_like_no(+)
 and v.video_id = 1; /* 조회할 게시판 id */
+/**********************************고객센터***********************************/
+/* 전체 목록 조회 */
+select *
+from HELP;
+
+/* 카테고리로 조회 */
+select *
+from HELP
+where help_category = '신고게시판'; /* 카테고리 이름 */
+
+/* 글제목으로 조회 */
+select *
+from HELP
+where help_title like '%신고%'; /* 검색할 내용 */
+
+/* 상세보기 */
+select *
+from HELP
+where help_no = 1; /* 조회할 게시글 id */
+
+/* 해당게시물 댓글 목록 조회 */
+select hc.*
+from HELP h, HELP_COMMENT hc
+where h.help_no = hc.help_no
+and h.help_no = 1; /* 조회갈 게시글 id */
