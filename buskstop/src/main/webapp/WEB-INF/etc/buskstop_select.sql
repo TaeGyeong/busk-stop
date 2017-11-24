@@ -153,6 +153,10 @@ SELECT * FROM APPLICANT WHERE APPLICANT_ID = (
 	SELECT USER_ID FROM USERS WHERE USER_ID='lee534'
 );
 
+/* 거래번호로 신청확인 */
+SELECT APPLICANT.* FROM EMPLOY, APPLICANT 
+WHERE APPLICANT.EMPLOY_NO = EMPLOY.EMPLOY_NO AND APPLICANT.EMPLOY_NO=1;
+
 /* 신청자 프로필 확인 */
 SELECT USERS.USER_ID, USERS.USER_NAME, USERS.USER_ADDRESS, USERS.USER_PHONE_NUM
 FROM APPLICANT, USERS WHERE APPLICANT.APPLICANT_ID = USERS.USER_ID AND USER_ID='yunee33';
@@ -167,16 +171,20 @@ SELECT T.TEACHERS_NO, T.TEACHERS_TITLE, T.TEACHERS_LOCATION, T.TEACHERS_ID from 
 /* 1번 게시글 상세정보  조회 */
 SELECT * from TEACHERS T, USERS U WHERE T.TEACHERS_ID = U.USER_ID AND T.TEACHERS_NO=1;
 
-/* 신청확인 */
+/* 아이디로 신청확인 */
 SELECT * FROM STUDENTS WHERE STUDENTS_ID = (
 	SELECT USER_ID FROM USERS WHERE USER_ID='id5'
 );
+
+/* 거래번호로 신청확인 */
+SELECT STUDENTS.* FROM STUDENTS, TEACHERS 
+WHERE TEACHERS.TEACHERS_NO = STUDENTS.TEACHERS_NO AND TEACHERS.TEACHERS_NO=1;
 
 /* 신청자 프로필 확인 */
 SELECT USERS.USER_ID, USERS.USER_NAME, USERS.USER_ADDRESS, USERS.USER_PHONE_NUM
 FROM STUDENTS, USERS WHERE STUDENTS.STUDENTS_ID = USERS.USER_ID AND USER_ID='id8';
 
-/**********************************마이페이지******************************************/
+/*************************마이페이지******************************************/
 
 /* 대관정보 전체 조회(id로 등록한(공급자)) */
 select stage_name, stage_location, stage_cost, stage_area, stage_resurvation
@@ -198,7 +206,8 @@ from PERFORMANCE p, (
 	group by performance_like_no
 	) pl
 where p.performance_no = pl.performance_like_no(+)
-and p.performance_user_id = 'id2'; /* 조회할 게시자 id */
+and p.performance_user_id = 'id2';
+/* 조회할 게시자 id */
 
 /* 중고거래 정보 조회(장바구니) */
 select u.used_goods_model, u.used_goods_brand, u.used_goods_cost, u.used_goods_image,
@@ -228,11 +237,6 @@ where used_goods_seller_id = 'kimjr322'; /* 조회할 등록자 id */
 select *
 from USED_GOODS_WISH
 where used_goods_wish_user_id = 'kimbo88' /* 조회할 등록자 id */
-
-/* 구인구직(등록한 레슨) */
-
-
-/* 구인구직 */
 
 /* 내가 팔로우한 회원 정보 조회 */
 select u.user_name, u.user_address, u.user_address, u.user_phone_num, u.user_email
@@ -290,7 +294,7 @@ from VIDEO v,
 	)
 where v.video_artist like '%'||artist_name||'%';
 
-/***********************************동영상(게시물)*****************************************/
+/**********************동영상(게시물)*****************************************/
 
 /* 영상 전체 조회 */
 select v.*, vl.like_count

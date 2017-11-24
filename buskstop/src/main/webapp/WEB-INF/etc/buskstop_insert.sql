@@ -29,7 +29,11 @@ insert into USERS values('id8','로이스','QL2222','인천','01029999829','a32b
 insert into AUTHORITY values('', '');
 
 /* 팔로우 */
-insert into FOLLOW values('', '');
+insert into FOLLOW values('hong1653', 'kim4845');
+insert into FOLLOW values('beck4848', 'kim4845');
+insert into FOLLOW values('suck1598', 'kim4845');
+insert into FOLLOW values('sim1', 'kim4845');
+insert into FOLLOW values('sim1', 'yunee33');
 
 /* 프리미엄 대관 공급자 */
 insert into STAGE_SUPPLIER values(11234567890, 'id1',1123456789,'홍대 놀이터','홍대 어딘가',100,'c://img/img8');
@@ -113,7 +117,15 @@ insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부�
 insert into VIDEO_COMMENT values();
 
 /* 동영상 좋아요 */
-insert into VIDEO_LIKE values();
+insert into VIDEO_LIKE values('1', 'hong1653');
+insert into VIDEO_LIKE values('1', 'no33432');
+insert into VIDEO_LIKE values('1', 'kim4845');
+insert into VIDEO_LIKE values('1', 'kimm990');
+insert into VIDEO_LIKE values('1', 'kimdo327');
+insert into VIDEO_LIKE values('1', 'kimjr322');
+insert into VIDEO_LIKE values('2', 'kim4845');
+insert into VIDEO_LIKE values('2', 'no33432');
+insert into VIDEO_LIKE values('3', 'hong1653');
 
 /* 중고상품(게시글) */
 insert into USED_GOODS values(1, '기타 사세요', '기타1', '데임', 170000, 'c://img/img1', 1, '2017-01-12', '좋은 기타입니다. 사주세요.', 'kimjr322');
@@ -121,7 +133,6 @@ insert into USED_GOODS values(2, '기타 좀 사주세요', '기타2', '스윙',
 insert into USED_GOODS values(3, '베이스 팔아요', '베이스1', '데임', 210000, 'c://img/img3', 1, '2017-09-21', '사세요.', 'hong1653');
 insert into USED_GOODS values(4, '앰프 상태 상', '앰프1', '애플', 30000, 'c://img/img4', 4, '2017-08-02', '좋아요', 'kimdo327');
 insert into USED_GOODS values(5, '건반 거래 합니다', '건반1', '야마하', 300000, 'c://img/img5', 1, '2017-02-28', '깨끗', 'kimjr322');
-
 
 /* 주문 */
 insert into ORDERS values(1, 1, 'sim1', 0);
@@ -161,7 +172,7 @@ insert into EMPLOY values(5,'마술 좀 하는 사람 구해요','말 그대로'
 /* 구직 - 구직희망 - 상품에서 주문테이블 */
 insert into APPLICANT values(1,'내가 기타좀 칩니다', 'kimm990');
 insert into APPLICANT values(2,'내가 드럼좀 칩니다', 'lee534');
-/* insert into APPLICANT values(1,'내가 기타 더 잘 칩니다', 'hong1653'); */
+insert into APPLICANT values(1,'기타 더 잘 칩니다', 'hong1653');
 insert into APPLICANT values(3,'바이올린 ㅈ고수입니다', 'choi22');
 insert into APPLICANT values(4,'첼로 빡고수', 'yunee33');
 insert into APPLICANT values(5,'마술로 님 사라지게 해드림', 'no33432');
@@ -178,7 +189,7 @@ insert into TEACHERS values(5,'랩 배울 사람~','랩 가르쳐주마','부산
 /* 레슨 - 학생 */
 insert into STUDENTS values(1,'GGGG', 'id5');
 insert into STUDENTS values(2,'ZZZZ', 'id6');
-/* insert into STUDENTS values(1,'AAAA', 'id7'); */
+insert into STUDENTS values(1,'AAAA', 'id7');
 insert into STUDENTS values(3,'DDDD', 'id8');
 insert into STUDENTS values(4,'RRRR', 'nam8118');
 insert into STUDENTS values(5,'KKKK', 'kimbo88');
