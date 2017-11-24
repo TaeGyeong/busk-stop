@@ -1,5 +1,7 @@
 package com.buskstop.vo;
 
-public class Basket {
+import java.io.Serializable;
+
+public class Basket implements Serializable{
 
 }
