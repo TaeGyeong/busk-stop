@@ -166,6 +166,12 @@ from FOLLOW f, ARTIST a
 where f.follower_id = a.Artist_user_id
 and f.following_id = 'sim1'; /* 조회할 회원 id */
 
+/* 나를 팔로우한 회원 정보 조회 */
+select u.user_name, u.user_address, u.user_phone_num, u.user_email
+from FOLLOW f, USERS u
+where f.following_id = u.user_id
+and f.follower_id = 'kim4845'; /* 조회할 회원 id */
+
 /* 회원 정보 조회(회원) */
 select user_id, user_name, user_address, user_phone_num, user_email
 from USERS
