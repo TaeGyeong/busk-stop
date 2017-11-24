@@ -79,7 +79,15 @@ insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부�
 insert into VIDEO_COMMENT values();
 
 /* 동영상 좋아요 */
-insert into VIDEO_LIKE values();
+insert into VIDEO_LIKE values('1', 'hong1653');
+insert into VIDEO_LIKE values('1', 'no33432');
+insert into VIDEO_LIKE values('1', 'kim4845');
+insert into VIDEO_LIKE values('1', 'kimm990');
+insert into VIDEO_LIKE values('1', 'kimdo327');
+insert into VIDEO_LIKE values('1', 'kimjr322');
+insert into VIDEO_LIKE values('2', 'kim4845');
+insert into VIDEO_LIKE values('2', 'no33432');
+insert into VIDEO_LIKE values('3', 'hong1653');
 
 /* 중고상품(게시글) */
 insert into USED_GOODS values(1, '기타 사세요', '기타1', '데임', 170000, 'c://img/img1', 1, '2017-01-12', '좋은 기타입니다. 사주세요.', 'kimjr322');
