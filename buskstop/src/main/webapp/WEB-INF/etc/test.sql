@@ -3,7 +3,7 @@
 select p.*, pl.like_count /* like_count = 좋아요 수 */
 from PERFORMANCE p, (
 	select performance_like_no, count(*) like_count
-	from performance_like
+	from PERFORMANCE_LIKE
 	group by performance_like_no
 	) pl
 where p.performance_no = pl.performance_like_no(+);
@@ -12,14 +12,15 @@ where p.performance_no = pl.performance_like_no(+);
 select p.*, pl.like_count /* like_count = 좋아요 수 */
 from PERFORMANCE p, (
 	select performance_like_no, count(*) like_count
-	from performance_like
+	from PERFORMANCE_LIKE
 	group by performance_like_no
 	) pl
-where p.performance_no = pl.performance_like_no
-/*and p.performance_name like '%서현%';*/ /* 공연이름으로 검색 */
-/*and p.performance_location like '%서현%';*/ /* 공연장소로 검색 */
+where p.performance_no = pl.performance_like_no(+)
 and p.performance_date >= '2017-11-23' /* 공연날짜로 검색 */		/* 시작 날짜 */
-and p.performance_date <= '2017-11-28';						/* 종료 날짜 */
+and p.performance_date <= '2017-12-12';						/* 종료 날짜 */
+/*and p.performance_title like '%요%';*/ /* 공연제목으로 검색 */
+/*and p.performance_name like '%쇼%';*/ /* 공연이름으로 검색 */
+/*and p.performance_location like '%구%';*/ /* 공연장소로 검색 */
 
 /* 공연자 정보 조회 */
 select a.*
@@ -166,6 +167,12 @@ from FOLLOW f, ARTIST a
 where f.follower_id = a.Artist_user_id
 and f.following_id = 'sim1'; /* 조회할 회원 id */
 
+/* 나를 팔로우한 회원 정보 조회 */
+select u.user_name, u.user_address, u.user_phone_num, u.user_email
+from FOLLOW f, USERS u
+where f.following_id = u.user_id
+and f.follower_id = 'kim4845'; /* 조회할 회원 id */
+
 /* 회원 정보 조회(회원) */
 select user_id, user_name, user_address, user_phone_num, user_email
 from USERS
@@ -193,3 +200,33 @@ from VIDEO v,
 	and u.user_id = 'kim4845' /* 조회할 유저(아티스트) id */
 	)
 where v.video_artist like '%'||artist_name||'%';
+/***********************************동영상(게시물)*****************************************/
+/* 영상 전체 조회 */
+select v.*, vl.like_count
+from VIDEO v, (
+	select video_like_no, count(*) like_count
+	from VIDEO_LIKE
+	group by video_like_no
+	) vl
+where v.video_id = vl.video_like_no(+);
+
+/* 영상 검색 조회 */
+select v.*, vl.like_count
+from VIDEO v, (
+	select video_like_no, count(*) like_count
+	from VIDEO_LIKE
+	group by video_like_no
+	) vl
+where v.video_id = vl.video_like_no(+)
+and video_artist like '%메기%'; /*아티스트 이름으로 조회 */
+/*and video_title like '%영상1%';*/ /* 제목으로 조회 */
+
+/* 영상 상세 조회 */
+select v.*, vl.like_count
+from VIDEO v, (
+	select video_like_no, count(*) like_count
+	from VIDEO_LIKE
+	group by video_like_no
+	) vl
+where v.video_id = vl.video_like_no(+)
+and v.video_id = 1; /* 조회할 게시판 id */
