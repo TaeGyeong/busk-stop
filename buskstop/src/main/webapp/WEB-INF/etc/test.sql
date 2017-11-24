@@ -237,6 +237,24 @@ from VIDEO v,
 	and u.user_id = 'kim4845' /* 조회할 유저(아티스트) id */
 	)
 where v.video_artist like '%'||artist_name||'%';
+
+/* 좋아요한 공연영상 조회 */
+select v.*
+from VIDEO_LIKE vl, VIDEO v
+where vl.video_like_no = v.video_id
+and vl.video_like_user_id = 'hong1653'; /* 조회할 회원 id */
+
+/* 좋아요한 공연정보 조회 */
+select p.*
+from PERFORMANCE p, PERFORMANCE_LIKE pl
+where pl.performance_like_no = p.performance_no
+and pl.performance_like_user_id = 'kimm990'; /* 조회할 회원 id */
+
+/* 올린 고객센터 글 조회 */
+select *
+from HELP
+where help_user_id = 'kimbo88'; /* 조회할 회원 id */
+
 /***********************************동영상(게시물)*****************************************/
 /* 영상 전체 조회 */
 select v.*, vl.like_count
