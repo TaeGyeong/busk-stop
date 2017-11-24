@@ -144,16 +144,16 @@ select *
 from USED_GOODS_WISH
 where used_goods_wish_no = 1; /* 조회할 게시판 번호 */
 
-/*--------------------------------중고거래--------------------------------------*/
+/*--------------------------------중고거래 댓글--------------------------------------*/
 
 /* 해당 공연 정보에 대한 댓글 목록 */
-SELECT USED_COMMENT_NO, USED_COMMENT_USER_ID, USED_COMMENT
+SELECT USED_GOODS_COMMENT_NO, USED_GOODS_COMMENT_ID, USED_GOODS_COMMENT
 FROM USED_COMMENT
 WHERE USED_GOODS_NO=1
-ORDER BY USED_COMMENT_NO;
+ORDER BY USED_GOODS_COMMENT_NO;
 
 /* ID1이 단 댓글 조회  -> 이건 마이페이지에 필요할 거 같아서 일단 마이페이지에도 넣어뒀음*/
-SELECT * FROM USED_COMMENT WHERE USED_COMMENT_USER_ID='id4';
+SELECT * FROM USED_COMMENT WHERE USED_GOODS_COMMENT_ID='id4';
 
 
 /*********************************** 구인  *************************************************/
