@@ -11,23 +11,19 @@
 	<!-- Password 암호화 처리 bean -->
 	<beans:bean name="passwordEncoder" 
 					class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-					
+	
+	
+	<!-- 
+		admin/** : ROLE_ADMIN
+		member/** : ROLE_MEMBER, ROLE_ADMIN, ROLE_PODUCER
+		producer/** : ROLE_PRODUCER
+	 -->				
 	<http>
-		<intercept-url pattern="admin/**" access="hasRolde('ROLE_ADMIN')"/>
-		<intercept-url pattern="member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_PRODUCER')"/>
-		<intercept-url pattern="producer/**" access="hasRole('ROLE_PRODUCER')"/>
-		
-		<form-login
-			login-page=""
-			login-processing-url=""
-			username-parameter=""
-			password-parameter=""
-			authentication-failure-handler-ref=""
-			default-target-url=""
-		/>
-		<logout logout-url="" logout-success-url=""/>
-		
-		<access-denied-handler error-page=""/>
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_PRODUCER')"/>
+		<intercept-url pattern="/producer/**" access="hasRole('ROLE_PRODUCER')"/>
+		<intercept-url pattern="/**" access="permitAll"/>
+		<form-login/>
 	</http>
 					
 	<authentication-manager>

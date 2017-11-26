@@ -1,3 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userMapper"></mapper>
+<mapper namespace="com.buskstop.config.mybatis.mapper.userMapper">
+
+	<!-- sql 설정 -->
+	<sql id="user-column-sql">
+		user_id, user_name, user_password, user_address, user_phone_num, user_email
+	</sql>
+	
+	<sql id="user-select-sql">
+		SELECT <include refid="user-column-sql"/>
+		FROM	USERS
+	</sql>
+	
+	<insert id="insertUser" parameterType="user">
+		INSERT INTO USERS 
+		(<include refid="user-column-sql"/>)
+		VALUES(#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
+	</insert>
+</mapper>

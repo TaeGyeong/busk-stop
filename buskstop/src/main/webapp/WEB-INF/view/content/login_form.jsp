@@ -11,7 +11,10 @@
 <body>
 
 <form action="">
+	id : 
 	<input type="text">
+	<br>
+	password :
 	<input type="password">
 </form>
 

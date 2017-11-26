@@ -34,7 +34,6 @@
 			<tiles:insertAttribute name="content"/>		
 		</section>
 	</div>
-
 </div>
 </body>
 </html>

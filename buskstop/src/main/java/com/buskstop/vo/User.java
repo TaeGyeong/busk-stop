@@ -6,7 +6,7 @@ public class User implements Serializable{
 	
 	private String userId;
 	private String userName;
-	private String Password;
+	private String password;
 	private String userAddress;
 	private String userPhoneNum;
 	private String email;
@@ -16,7 +16,7 @@ public class User implements Serializable{
 			String email) {
 		this.userId = userId;
 		this.userName = userName;
-		Password = password;
+		password = password;
 		this.userAddress = userAddress;
 		this.userPhoneNum = userPhoneNum;
 		this.email = email;
@@ -34,10 +34,10 @@ public class User implements Serializable{
 		this.userName = userName;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		password = password;
 	}
 	public String getUserAddress() {
 		return userAddress;
@@ -63,7 +63,7 @@ public class User implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Password == null) ? 0 : Password.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((userAddress == null) ? 0 : userAddress.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
@@ -80,10 +80,10 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (Password == null) {
-			if (other.Password != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!Password.equals(other.Password))
+		} else if (!password.equals(other.password))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -115,7 +115,7 @@ public class User implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", Password=" + Password + ", userAddress="
+		return "User [userId=" + userId + ", userName=" + userName + ", Password=" + password + ", userAddress="
 				+ userAddress + ", userPhoneNum=" + userPhoneNum + ", email=" + email + "]";
 	}
 	

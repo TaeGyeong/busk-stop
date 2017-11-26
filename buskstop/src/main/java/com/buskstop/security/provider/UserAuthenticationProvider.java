@@ -7,14 +7,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.buskstop.dao.AuthorityDao;
 import com.buskstop.vo.User;
 
+@Component
 public class UserAuthenticationProvider implements AuthenticationProvider{
 	@Autowired
 	private AuthorityDao dao;
 	
+	@Autowired
 	private PasswordEncoder encoder;
 	
 	@Override
@@ -40,8 +43,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 	}
 
 	@Override
-	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
+	public boolean supports(Class<?> authentication) {
 		return false;
 	}
 	
