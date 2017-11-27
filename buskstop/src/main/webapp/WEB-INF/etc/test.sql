@@ -25,6 +25,20 @@ and p.performance_date <= '2017-12-12';						/* 종료 날짜 */
 /*and p.performance_title like '%요%';*/ /* 공연제목으로 검색 */
 /*and p.performance_name like '%쇼%';*/ /* 공연이름으로 검색 */
 /*and p.performance_location like '%구%';*/ /* 공연장소로 검색 */
+select p.*, pl.like_count /* like_count = 좋아요 수 */
+from PERFORMANCE p, (
+	insert into performance_no, performance_name, 
+		performance_title, 
+		performance_location, 
+		performance_date, 
+		performance_content, 
+		performance_image, 
+		performance_user_id
+	from PERFORMANCE
+	) pl
+where p.performance_no = pl.performance_like_no(+)
+and p.performance_date >= '2017-11-23' /* 공연날짜로 검색 */		/* 시작 날짜 */
+and p.performance_date <= '2017-12-12';			
 
 /* 공연자 정보 조회 */
 select a.*

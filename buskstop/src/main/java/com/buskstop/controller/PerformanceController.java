@@ -24,8 +24,7 @@ public class PerformanceController {
 	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-		
-		service.insertPerformance(performance);
+				service.insertPerformance(performance);
 		return new ModelAndView("redirect:/peformance_success.do","performance", performance.getPerformanceNo());
 	}
 	
@@ -40,4 +39,5 @@ public class PerformanceController {
 		String message = "삭제 성공";
 		return new ModelAndView("performance/performance.tiles","remove",message);
 	}
+	
 }

@@ -26,5 +26,6 @@
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoCommentMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoLikeMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/performanceMapper.xml"/>
 	</mappers>
 </configuration>
