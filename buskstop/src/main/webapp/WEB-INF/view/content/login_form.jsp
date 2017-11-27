@@ -10,12 +10,14 @@
 </head>
 <body>
 
-<form action="">
+<form action="${initParam.rootPath}/login.do" method="post">
+	<sec:csrfInput/>
 	id : 
-	<input type="text">
+	<input type="text" name="userId">
 	<br>
 	password :
-	<input type="password">
+	<input type="password" name="userPassword">
+	<button type="submit">로그인</button>
 </form>
 
 </body>

@@ -12,13 +12,12 @@
 		FROM	USERS
 	</sql>
 	
-	<resultMap type="user" id="user-resultmap">
+	<resultMap type="User" id="user-resultmap">
 		<id column="user_id" property="userId"/>
-		<result column="user_name" property="userName"/>
 		<result column="user_name" property="userName"/>
 		<result column="user_password" property="password"/>
 		<result column="user_address" property="userAddress"/>
-		<result column="user_phoneNum" property="userPhoneNum"/>
+		<result column="user_phone_num" property="userPhoneNum"/>
 		<result column="user_email" property="email"/>
 	</resultMap>
 	
@@ -28,7 +27,7 @@
 		VALUES(#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
 	</insert>
 	
-	<select id="selectUserByid" parameterType="string" resultMap="user-resultmap">
+	<select id="selectUserById" parameterType="string" resultMap="user-resultmap">
 		<include refid="user-select-sql"/>
 		WHERE user_id = #{value}
 	</select>
