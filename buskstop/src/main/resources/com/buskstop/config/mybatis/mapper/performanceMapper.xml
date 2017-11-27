@@ -1,3 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="performanceMapper"></mapper>
+<mapper namespace="performanceMapper">
+
+	<!-- ResultMap 등록 -->
+	<resultMap type="performance" id="performance-resultmap">
+		<id column="performance_no" property="performanceNo"/>
+		<result column="performance_name" property="performanceName"/>
+		<result column="performance_title" property="performanceTitle"/>
+		<result column="performance_location" property="performanceLocation"/>
+		<result column="performance_date" property="performanceDate"/>
+		<result column="performance_hits" property="performanceHits"/>
+		<result column="performance_content" property="performanceContent"/>
+		<result column="performance_image" property="performanceImage"/>
+		<result column="performance_user_id" property="performanceUserId"/>
+		<result column="stage_no" property="stageNo"/>
+	</resultMap>
+	
+	<!-- 공연정보 insert -->
+	<insert id="insertPerformance" parameterType="Performance">
+		INSERT into performance values(#{performanceNo}, #{performanceName}, #{performanceTitle}, 
+		#{performanceLocation}, #{performanceDate}, #{performanceHits}, #{performanceContent}, 
+		#{performanceImage}, #{performanceUserId}, #{stageNo});
+	</insert>
+</mapper>

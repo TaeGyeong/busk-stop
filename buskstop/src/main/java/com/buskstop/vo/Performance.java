@@ -15,9 +15,24 @@ public class Performance implements Serializable{
 	private String performanceContent;
 	private String performanceImage;
 	private String performanceUserId;
-	private Stage StageNo;
+	private int StageNo;
 	
 	public Performance() {}
+
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
+			String performanceUserId, int stageNo) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
+		this.performanceHits = performanceHits;
+		this.performanceContent = performanceContent;
+		this.performanceImage = performanceImage;
+		this.performanceUserId = performanceUserId;
+		StageNo = stageNo;
+	}
 
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
 			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
@@ -31,21 +46,6 @@ public class Performance implements Serializable{
 		this.performanceContent = performanceContent;
 		this.performanceImage = performanceImage;
 		this.performanceUserId = performanceUserId;
-	}
-
-	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
-			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
-			String performanceUserId, Stage stageNo) {
-		this.performanceNo = performanceNo;
-		this.performanceName = performanceName;
-		this.performanceTitle = performanceTitle;
-		this.performanceLocation = performanceLocation;
-		this.performanceDate = performanceDate;
-		this.performanceHits = performanceHits;
-		this.performanceContent = performanceContent;
-		this.performanceImage = performanceImage;
-		this.performanceUserId = performanceUserId;
-		StageNo = stageNo;
 	}
 
 	public int getPerformanceNo() {
@@ -120,11 +120,11 @@ public class Performance implements Serializable{
 		this.performanceUserId = performanceUserId;
 	}
 
-	public Stage getStageNo() {
+	public int getStageNo() {
 		return StageNo;
 	}
 
-	public void setStageNo(Stage stageNo) {
+	public void setStageNo(int stageNo) {
 		StageNo = stageNo;
 	}
 
@@ -141,7 +141,7 @@ public class Performance implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((StageNo == null) ? 0 : StageNo.hashCode());
+		result = prime * result + StageNo;
 		result = prime * result + ((performanceContent == null) ? 0 : performanceContent.hashCode());
 		result = prime * result + ((performanceDate == null) ? 0 : performanceDate.hashCode());
 		result = prime * result + performanceHits;
@@ -163,10 +163,7 @@ public class Performance implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Performance other = (Performance) obj;
-		if (StageNo == null) {
-			if (other.StageNo != null)
-				return false;
-		} else if (!StageNo.equals(other.StageNo))
+		if (StageNo != other.StageNo)
 			return false;
 		if (performanceContent == null) {
 			if (other.performanceContent != null)
@@ -209,6 +206,8 @@ public class Performance implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }
