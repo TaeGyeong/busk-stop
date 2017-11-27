@@ -31,7 +31,13 @@ public class PerformanceController {
 	
 	@RequestMapping("/performance_success")
 	public ModelAndView performanceSeccess(@RequestParam int performanceNo) {
-		String massege = "성공";
-		return new ModelAndView("performance/performance.tiles", "success", massege);
+		String message = "성공";
+		return new ModelAndView("performance/performance.tiles", "success", message);
+	}
+	
+	@RequestMapping("/removePerformance")
+	public ModelAndView removePerformance(@RequestParam int performanceNo) {
+		String message = "삭제 성공";
+		return new ModelAndView("performance/performance.tiles","remove",message);
 	}
 }
