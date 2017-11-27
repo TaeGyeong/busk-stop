@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.buskstop.dao.AuthorityDao;
+import com.buskstop.dao.UserDao;
 import com.buskstop.vo.User;
 
 @Component
 public class UserAuthenticationProvider implements AuthenticationProvider{
 	@Autowired
-	private AuthorityDao dao;
+	private UserDao dao;
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -24,7 +24,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		// ID CHECK
 		String id= authentication.getName();
-		User user = dao.selectUserByUserId(id);
+		User user = dao.selectUserById(id);
 		if(user==null) {
 			throw new UsernameNotFoundException("ID를 확인해주세요.");
 		}

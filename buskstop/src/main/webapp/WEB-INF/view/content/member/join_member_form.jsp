@@ -25,6 +25,7 @@
 		<select>
 			<option>010</option>
 			<option>011</option>
+			<option>016</option>
 			<option>018</option>
 			<option>019</option>
 		</select>
@@ -35,9 +36,9 @@
 		<input type="text" name="email" id="email">
 		<select name="domain">
 			<option>naver.com</option>
-			<option>naver.com</option>
-			<option>naver.com</option>
-			<option>naver.com</option>
+			<option>google.com</option>
+			<option>daum.net</option>
+			<option>nate.com</option>
 		</select>
 	</div>
 	

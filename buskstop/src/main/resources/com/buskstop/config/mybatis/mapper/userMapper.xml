@@ -12,9 +12,26 @@
 		FROM	USERS
 	</sql>
 	
+	<resultMap type="user" id="user-resultmap">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_password" property="password"/>
+		<result column="user_address" property="userAddress"/>
+		<result column="user_phoneNum" property="userPhoneNum"/>
+		<result column="user_email" property="email"/>
+	</resultMap>
+	
 	<insert id="insertUser" parameterType="user">
 		INSERT INTO USERS 
 		(<include refid="user-column-sql"/>)
 		VALUES(#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
 	</insert>
+	
+	<select id="selectUserByid" parameterType="string" resultMap="user-resultmap">
+		<include refid="user-select-sql"/>
+		WHERE user_id = #{value}
+	</select>
+	
+	
 </mapper>
