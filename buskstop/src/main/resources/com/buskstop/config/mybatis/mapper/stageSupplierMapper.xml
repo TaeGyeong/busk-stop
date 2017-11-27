@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.buskstop.config.mybatis.mapper.stageSupplierMapper">
+	
+	<insert id="insertStageSupplier" parameterType="stageSupplier">
+		INSERT INTO STAGE_SUPPLIER
+		(ESTABLISH_NO, OPERATOR_USER_ID, OPERATOR_NO, STAGE_NAME, STAGE_LOCATION, STAGE_AREA, STAGE_IMAGE)
+		VALUES(
+			#{establishNum},#{userId},#{operatorNum},#{stageName},#{stageLocation},#{stageArea},#{stageImage}
+		)
+	</insert>
+</mapper>

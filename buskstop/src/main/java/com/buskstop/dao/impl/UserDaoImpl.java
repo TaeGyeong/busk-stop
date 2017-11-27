@@ -16,13 +16,11 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public int insertUser(User user) {
-		return session.insert(makeSqlId("insertUser"));
+		return session.insert(makeSqlId("insertUser"),user);
 	}
 	
 	public User selectUserById(String id) {
-		System.out.println(id);
 		User user = session.selectOne(makeSqlId("selectUserById"), id);
-		System.out.println(user);
 		return session.selectOne(makeSqlId("selectUserById"), id);
 	}
 	

@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h1>회원가입</h1>
-<form action="" method="post">
-
+<form action="${initParam.rootPath }/join_member.do" method="post">
 	<div>
 		<label for="id">ID</label>
 		<input type="text" name="userId" id="id">
@@ -20,26 +19,14 @@
 		<input type="text" name="userAddress" id="address">
 	</div>
 	
-	<div >
+	<div>
 		<label for="phoneNumber">핸드폰번호</label>
-		<select>
-			<option>010</option>
-			<option>011</option>
-			<option>016</option>
-			<option>018</option>
-			<option>019</option>
-		</select>
-		<input type="text" name="phoneNumber" id="phoneNumber">
+		<input type="text" name="userPhoneNum" id="phoneNumber">
 	</div>
 	<div>
 		<label for="email">이메일주소</label>
 		<input type="text" name="email" id="email">
-		<select name="domain">
-			<option>naver.com</option>
-			<option>google.com</option>
-			<option>daum.net</option>
-			<option>nate.com</option>
-		</select>
+		
 	</div>
 	
 	<button type="submit" class="btn btn-default">가입</button>

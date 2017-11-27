@@ -5,6 +5,6 @@ import com.buskstop.vo.User;
 
 public interface UserService {
 	
-	void joinMemberService(User user, Authority authority);
+	void joinMember(User user, Authority authority);
 
 }

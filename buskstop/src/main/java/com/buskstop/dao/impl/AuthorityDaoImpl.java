@@ -17,12 +17,16 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	
 	@Override
 	public int insertAuthority(Authority authority) {
-		return session.insert(makeSqlId("insertAuthority")); 
+		return session.insert(makeSqlId("insertAuthority"),authority); 
+	}
+	
+	@Override
+	public int updateAuthority(Authority authority) {
+		return session.update(makeSqlId("updateAuthority"),authority);
 	}
 	
 	@Override
 	public List<Authority> selectAuthoritiesByUserId(String userId) {
-		System.out.println("au"+userId);
 		return session.selectList(makeSqlId("selectAuthoritiesByUserId"), userId);
 	}
 	
