@@ -62,12 +62,10 @@ insert into STAGE values(6,'홍대 홍대관','홍대',100000,300,'guitar','hell
 insert into STAGE values(7,'리쌍 광대관','강남',200000,200,'guitar1','hello1',0,1,1,0,1,'id2');
 insert into STAGE values(8,'군대 부대관','군대',300000,100,'guitar2','hello2',1,0,0,1,1,'id3');
 
-
 /* 대관 예약(주문) */
 insert into STAGE_RESERVATION values(1,'id1',1,'2017-11-11',1);
 insert into STAGE_RESERVATION values(2,'id2',2,'2018-03-10',1);
 insert into STAGE_RESERVATION values(3,'id3',3,'2018-07-19',1);
-
 
 /* 공연장 사진 */
 insert into STAGE_IMAGE values();
@@ -91,7 +89,10 @@ insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 
 insert into PERFORMANCE values(4,'컬투쇼','안녕하세요','홍대입구','2017/12/12',3,'안녕하시오','c://img/img1','id1',1);
 insert into PERFORMANCE values(5,'리버풀쇼','리버풀 수비 할줄 몰라','홍대입구','2017/12/12',4,'안녕하시오','c://img/img1','id2',2);
 insert into PERFORMANCE values(6,'맨유쇼','맹9','홍대입구','2017/12/12',2,'안녕하시오','c://img/img1','id3',3);
+insert into PERFORMANCE (performance_no, performance_name, performance_title, performance_location, performance_date, performance_content, performance_image, performance_user_id)
+values(99, '99', '99', '99', '2017-12-12', '111111', 'img', 'id1');
 
+select * from PERFORMANCE where PERFORMANCE_no = 11
 
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values(1,1,'id4','푸하하하하하');

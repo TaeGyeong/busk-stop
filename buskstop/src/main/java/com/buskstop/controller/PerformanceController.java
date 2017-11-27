@@ -25,12 +25,14 @@ public class PerformanceController {
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
 		
+		
+		
 		service.insertPerformance(performance);
 		return new ModelAndView("redirect:/peformance_success.do","performance", performance.getPerformanceNo());
 	}
 	
 	@RequestMapping("/performance_success")
-	public ModelAndView performanceSeccess(@RequestParam int performanceNo) {
+	public ModelAndView performanceSeccess(@RequestParam String performance) {
 		String massege = "성공";
 		return new ModelAndView("performance/performance.tiles", "success", massege);
 	}
