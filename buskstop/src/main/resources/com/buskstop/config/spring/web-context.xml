@@ -20,6 +20,7 @@
 	<mvc:view-controller path="/registerArtistView.do" view-name="user/registerArtistView.tiles"/>
 	<mvc:view-controller path="/registerSupplierView.do" view-name="user/registerSupplierView.tiles"/>
 	<mvc:view-controller path="/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
+	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
