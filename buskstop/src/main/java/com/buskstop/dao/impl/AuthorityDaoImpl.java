@@ -15,11 +15,12 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	
 	@Override
 	public int insertAuthority(Authority authority) {
-		return session.insert(makeSqlId("insertAuthority")); 
+		System.out.println(authority);
+		return session.insert(makeSqlId("insertAuthority"),authority); 
 	}
 
 	
 	private String makeSqlId(String id){
-		return "com.mydomain.config.mybatis.mapper.authenticationMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
 	}
 }

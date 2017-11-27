@@ -25,7 +25,7 @@
 	<insert id="insertUser" parameterType="user">
 		INSERT INTO USERS 
 		(<include refid="user-column-sql"/>)
-		VALUES(#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
+		VALUES (#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
 	</insert>
 	
 	<select id="selectUserByid" parameterType="string" resultMap="user-resultmap">

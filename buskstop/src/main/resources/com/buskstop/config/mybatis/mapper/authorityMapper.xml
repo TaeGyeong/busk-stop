@@ -8,7 +8,7 @@
 		USER_ID, AUTHORITY
 	</sql>
 	
-	<insert id="insertAuthority">
+	<insert id="insertAuthority" parameterType="authority">
 		INSERT INTO AUTHORITY
 		(<include refid="authority-column-sql"/>)
 		VALUES (#{authorityId}, #{authority})

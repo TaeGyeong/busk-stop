@@ -20,6 +20,7 @@
 	 -->				
 	<http>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/artist/**" access="hasRole('ROLE_ARTIST')"/>
 		<intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_PRODUCER')"/>
 		<intercept-url pattern="/producer/**" access="hasRole('ROLE_PRODUCER')"/>
 		<intercept-url pattern="/**" access="permitAll"/>

@@ -16,7 +16,7 @@ public class User implements Serializable{
 			String email) {
 		this.userId = userId;
 		this.userName = userName;
-		password = password;
+		this.password = password;
 		this.userAddress = userAddress;
 		this.userPhoneNum = userPhoneNum;
 		this.email = email;
@@ -37,7 +37,7 @@ public class User implements Serializable{
 		return password;
 	}
 	public void setPassword(String password) {
-		password = password;
+		this.password = password;
 	}
 	public String getUserAddress() {
 		return userAddress;
