@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.Authority;
 
 public interface AuthorityDao {
@@ -10,11 +12,9 @@ public interface AuthorityDao {
 	 * @return
 	 */
 	int insertAuthority(Authority authority);
-	
-	/**
-	 * 기존 권한 테이블을 업데이트 해주는 Dao
-	 * @param authority
-	 * @return
-	 */
+
+	List<Authority> selectAuthoritiesByUserId(String userId);
+
 	int updateAuthority(Authority authority);
+	
 }

@@ -3,19 +3,20 @@ package com.buskstop.vo;
 import java.io.Serializable;
 
 public class Authority implements Serializable{
-	private String authorityId;
+	private String userId;
 	private String authority;
 	public Authority() {
 	}
-	public Authority(String authorityId, String authority) {
-		this.authorityId = authorityId;
+	public Authority(String userId, String authority) {
+		super();
+		this.userId = userId;
 		this.authority = authority;
 	}
-	public String getAuthorityId() {
-		return authorityId;
+	public String getUserId() {
+		return userId;
 	}
-	public void setAuthorityId(String authorityId) {
-		this.authorityId = authorityId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getAuthority() {
 		return authority;
@@ -24,11 +25,15 @@ public class Authority implements Serializable{
 		this.authority = authority;
 	}
 	@Override
+	public String toString() {
+		return "Authority [userId=" + userId + ", authority=" + authority + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((authority == null) ? 0 : authority.hashCode());
-		result = prime * result + ((authorityId == null) ? 0 : authorityId.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 	@Override
@@ -45,16 +50,12 @@ public class Authority implements Serializable{
 				return false;
 		} else if (!authority.equals(other.authority))
 			return false;
-		if (authorityId == null) {
-			if (other.authorityId != null)
+		if (userId == null) {
+			if (other.userId != null)
 				return false;
-		} else if (!authorityId.equals(other.authorityId))
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "Authority [authorityId=" + authorityId + ", authority=" + authority + "]";
 	}
 	
 }

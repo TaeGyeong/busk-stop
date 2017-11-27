@@ -20,7 +20,8 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	public User selectUserById(String id) {
-		return session.selectOne(makeSqlId("selectUserById"),id);
+		User user = session.selectOne(makeSqlId("selectUserById"), id);
+		return session.selectOne(makeSqlId("selectUserById"), id);
 	}
 	
 	private String makeSqlId(String id) {
