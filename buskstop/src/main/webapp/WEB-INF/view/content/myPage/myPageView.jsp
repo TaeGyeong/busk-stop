@@ -2,11 +2,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 마이페이지
 
-<form action="${initParam.rootPath }/registerArtistView.do" method="post">
+<form action="${initParam.rootPath }/registerArtistView.do">
 	아티스트 등록.
 	<button></button>
 </form>
-<form action="${initParam.rootPath }/registerSupplierView.do" method="post">
+<form action="${initParam.rootPath }/registerSupplierView.do">
 	공연장공급자 등록.
 	<button></button>
 </form>

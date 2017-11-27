@@ -21,7 +21,7 @@ public class ArtistServiceImpl implements ArtistService{
 	@Override
 	public void registerArtist(Artist artist) {
 		artistDao.insertArtist(artist);
-		authorityDao.updateAuthority(new Authority(artist.getArtistId(),"ROLE_ARTIST"));
+		authorityDao.insertAuthority(new Authority(artist.getArtistId(),"ROLE_ARTIST"));
 	}
 	
 }

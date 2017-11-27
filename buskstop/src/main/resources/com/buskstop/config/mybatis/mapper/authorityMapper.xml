@@ -26,9 +26,10 @@
 	
 	<update id="updateAuthority" parameterType="authority">
 		UPDATE AUTHORITY 
-		SET ( AUTHORITY = #{authority} )
-		WHERE user_id = #{authorityId}
+		SET AUTHORITY = #{authority}
+		WHERE user_id = #{userId}
 	</update>
+	
 	<select id="selectAuthoritiesByUserId" parameterType="string" resultMap="authority-resultmap">
 		<include refid="authority-select-sql"/>
 		WHERE USER_ID = #{value}

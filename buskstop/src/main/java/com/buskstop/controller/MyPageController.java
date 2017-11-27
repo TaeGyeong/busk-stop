@@ -10,6 +10,7 @@ import com.buskstop.service.ArtistService;
 import com.buskstop.service.StageService;
 import com.buskstop.vo.Artist;
 import com.buskstop.vo.StageSupplier;
+import com.buskstop.vo.User;
 
 @Controller
 public class MyPageController {
@@ -21,19 +22,21 @@ public class MyPageController {
 	private StageService stageService;
 	
 	
-	@RequestMapping("/member/artist")
+	@RequestMapping("/member/registArtist")
 	public String registArtist(String artistName, String performance, String profile,String artistImage) {
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String id = authentication.getName();
+		String id = ((User)authentication.getPrincipal()).getUserId();
+		
 		artistService.registerArtist(new Artist(id, artistName, performance, profile, artistImage, artistName));
-		return "/WEB-INF/view/content/user/registerSuccessView.jsp";
+		return "user/registerSuccessView.tiles";
 	}
 	
-	@RequestMapping("/member/supplier")
+	@RequestMapping("/member/registSupplier")
 	public String registSupplier(String establishNum, String operatorNum, String stageName, String stageLocation, String stageArea, String stageImage) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String id = authentication.getName();
-		stageService.registerSupplier(new StageSupplier(Integer.parseInt(establishNum),Integer.parseInt(operatorNum),stageName,stageLocation,stageArea,stageImage,id));
-		return "/WEB-INF/view/content/user/registerSuccessView.jsp";
+		String id = ((User)authentication.getPrincipal()).getUserId();
+		stageService.registerSupplier(new StageSupplier(Integer.parseInt(establishNum),Integer.parseInt(operatorNum),stageName,stageLocation,Integer.parseInt(stageArea),stageImage,id));
+		return "user/registerSuccessView.tiles";
 	}
 }
