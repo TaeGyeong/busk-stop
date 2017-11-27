@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,9 +19,15 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	public int insertAuthority(Authority authority) {
 		return session.insert(makeSqlId("insertAuthority")); 
 	}
-
+	
+	@Override
+	public List<Authority> selectAuthoritiesByUserId(String userId) {
+		System.out.println("au"+userId);
+		return session.selectList(makeSqlId("selectAuthoritiesByUserId"), userId);
+	}
 	
 	private String makeSqlId(String id){
-		return "com.mydomain.config.mybatis.mapper.authenticationMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
 	}
+
 }

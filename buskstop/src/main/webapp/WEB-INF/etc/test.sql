@@ -1,3 +1,7 @@
+update users
+set user_password = '$2a$10$9Mx5vV4LRJThJhqcxrwFL.CO64itUT387QxcBdv1m7hkae8oTQIlq'
+
+
 /*-----------------------------공연정보(아티스트 게시판)---------------------------------*/
 /* 공연정보 목록 조회 */
 select p.*, pl.like_count /* like_count = 좋아요 수 */
@@ -227,7 +231,7 @@ and f.follower_id = 'kim4845'; /* 조회할 회원 id */
 /* 회원 정보 조회(회원) */
 select user_id, user_name, user_address, user_phone_num, user_email
 from USERS
-where user_id = 'suck1598'; /* 조회할 회원 id */
+where user_id = 'id-1'; /* 조회할 회원 id */
 
 /* 회원 정보 조회(아티스트) */
 select a.artist_name, a.artist_performance, a.artist_profile, a.artist_image, a.artist_members

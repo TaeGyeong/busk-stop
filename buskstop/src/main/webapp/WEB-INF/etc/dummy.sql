@@ -14,6 +14,7 @@ insert into USERS values('no33432', '노석준', 'fdfd84841', '강원도 원주�
 insert into USERS values('kimbo88', '김보남', 'erer88555', '강원도 강릉시', '01095685873', 'kimb22@naver.com');
 insert into USERS values('kimdo327', '김회윤', 'qwwq2222', '경기도 평택시', '01009364596', 'kimu33@gmail.com');
 insert into USERS values('kimm990', '김원진', 'cvf5558', '경기도 남양주시', '01012650485', 'kimm99855@naver.com');
+insert into USERS values('id-1', '김원진', '1111', '경기도 남양주시', '01012650485', 'kimm99855@naver.com');
 
 /* 권한 */
 insert into AUTHORITY values('', '');
