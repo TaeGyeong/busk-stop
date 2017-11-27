@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	@Transactional
-	public void joinMemberService(User user,Authority authority) {
+	public void joinMember(User user,Authority authority) {
 		userDao.insertUser(user);
 		authorDao.insertAuthority(authority);
 	}

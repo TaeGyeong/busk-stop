@@ -15,17 +15,32 @@
 	
 	<!-- 
 		admin/** : ROLE_ADMIN
-		member/** : ROLE_MEMBER, ROLE_ADMIN, ROLE_PODUCER
-		producer/** : ROLE_PRODUCER
+		member/** : ROLE_MEMBER, ROLE_ARTIST, ROLE_PODUCER - 회원 모두
+		producer/** : ROLE_PRODUCER - 프리미엄 대관공급자
+		artist/** : ROLE_ARTIST - 아티스트
 	 -->				
 	<http>
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_PRODUCER')"/>
+		<intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')"/>
 		<intercept-url pattern="/producer/**" access="hasRole('ROLE_PRODUCER')"/>
+		<intercept-url pattern="/artist/**" access="hasRole('ROLE_ARTIST')"/>
 		<intercept-url pattern="/**" access="permitAll"/>
-		<form-login/>
+		
+		
+		<form-login
+						login-page="/login_form.do"
+						login-processing-url="/login.do"
+						username-parameter="userId"
+						password-parameter="userPassword"
+						authentication-failure-handler-ref="loginFailHandler"
+						default-target-url="/index.do"/>
+		<logout logout-url="/logout.do" logout-success-url="/index.do"/>
+		
+		<!-- 사용자가 권한이 없는 요청을 한 경우 이동할 url 등록 , 등록하지 않으면 403 에러페이지.-->
+		<!-- TODO -->
 	</http>
 					
+	<!-- 인증(로그인) 처리를 담당할 bean 등록 => AuthenticationProvider -->
 	<authentication-manager>
 		<authentication-provider ref="userAuthenticationProvider"/>
 	</authentication-manager>

@@ -3,6 +3,7 @@ package com.buskstop.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Performance implements Serializable{
@@ -10,29 +11,16 @@ public class Performance implements Serializable{
 	private String performanceName;
 	private String performanceTitle;
 	private String performanceLocation;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date performanceDate;
 	private int performanceHits;
 	private String performanceContent;
 	private String performanceImage;
 	private String performanceUserId;
-	private int StageNo;
+	// TODO 공연장 번호 연결 해야함.
+	//private int StageNo;
 	
 	public Performance() {}
-
-	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
-			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
-			String performanceUserId, int stageNo) {
-		this.performanceNo = performanceNo;
-		this.performanceName = performanceName;
-		this.performanceTitle = performanceTitle;
-		this.performanceLocation = performanceLocation;
-		this.performanceDate = performanceDate;
-		this.performanceHits = performanceHits;
-		this.performanceContent = performanceContent;
-		this.performanceImage = performanceImage;
-		this.performanceUserId = performanceUserId;
-		StageNo = stageNo;
-	}
 
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
 			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
@@ -43,6 +31,18 @@ public class Performance implements Serializable{
 		this.performanceLocation = performanceLocation;
 		this.performanceDate = performanceDate;
 		this.performanceHits = performanceHits;
+		this.performanceContent = performanceContent;
+		this.performanceImage = performanceImage;
+		this.performanceUserId = performanceUserId;
+	}
+
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, String performanceContent, String performanceImage, String performanceUserId) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
 		this.performanceContent = performanceContent;
 		this.performanceImage = performanceImage;
 		this.performanceUserId = performanceUserId;
@@ -120,28 +120,19 @@ public class Performance implements Serializable{
 		this.performanceUserId = performanceUserId;
 	}
 
-	public int getStageNo() {
-		return StageNo;
-	}
-
-	public void setStageNo(int stageNo) {
-		StageNo = stageNo;
-	}
-
 	@Override
 	public String toString() {
 		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
 				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
 				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
 				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
-				+ ", performanceUserId=" + performanceUserId + ", StageNo=" + StageNo + "]";
+				+ ", performanceUserId=" + performanceUserId + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + StageNo;
 		result = prime * result + ((performanceContent == null) ? 0 : performanceContent.hashCode());
 		result = prime * result + ((performanceDate == null) ? 0 : performanceDate.hashCode());
 		result = prime * result + performanceHits;
@@ -163,8 +154,6 @@ public class Performance implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Performance other = (Performance) obj;
-		if (StageNo != other.StageNo)
-			return false;
 		if (performanceContent == null) {
 			if (other.performanceContent != null)
 				return false;
@@ -207,7 +196,4 @@ public class Performance implements Serializable{
 		return true;
 	}
 
-	
-	
-	
 }

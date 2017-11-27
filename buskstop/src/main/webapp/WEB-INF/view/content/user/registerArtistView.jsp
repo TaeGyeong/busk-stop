@@ -6,6 +6,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="/member/artist" method="post">
+	아티스트 등록.<br>
+	이름 : <input type="text" name="artistName"><br>
+	장르 : <input type="text" name="performance"><br>
+	프로필 : <input type="text" name="profile"><br>
+	아티스트 사진 : <input type="text" name="artistImage"><br>
+	
+	<button></button>
+</form>
 </body>
 </html>
