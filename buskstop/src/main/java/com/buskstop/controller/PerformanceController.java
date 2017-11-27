@@ -24,7 +24,7 @@ public class PerformanceController {
 	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-				service.insertPerformance(performance);
+		service.insertPerformance(performance);
 		return new ModelAndView("redirect:/peformance_success.do","performance", performance.getPerformanceNo());
 	}
 	

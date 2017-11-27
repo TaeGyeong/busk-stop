@@ -10,12 +10,11 @@
 	<h2>공연정보 등록</h2>
 	<form action="${initParam.rootPath }/performanceRegister.do" method="get">
 		
-		<%--
+		<%-- 테스트용 id 나중에 삭제 --%>
 		<div class="form-group">
 			<label for="performanceNo">공연 id</label>
-			<input type="number" name="performanceNo" id="performanceNo" class="form-control" required="required">
+			<input type="hidden" name="performanceNo" id="performanceNo" class="form-control" required="required" value="0">
 		</div>
-		 --%>
 		
 		<div class="form-group">
 			<label for="performanceName">공연 이름</label>
@@ -50,14 +49,12 @@
 			<input type="file" name="performanceImage" id="performanceImage" class="form-control">
 		</div>
 		
-		<%--
+		<%-- 테스트 용 id 나중에 삭제 --%>
 		<div class="form-group">
 			<label for="performanceUserId">사용자 id</label>
 			<input type="text" name="performanceUserId" id="performanceUserId" class="form-control">
 		</div>
-		 --%>
 		
-		<%--
 		<!-- 공연장 번호 -->
 		<button type="submit" class="btn btn-default">등록</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>

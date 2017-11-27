@@ -28,6 +28,9 @@
 	
 	<!-- 공연정보 insert -->
 	<insert id="insertPerformance" parameterType="Performance">
+		<selectKey keyProperty="performanceNo" resultType="_int" order="BEFORE">
+			select PERFORMANCE_NO_SEQ.nextval from dual
+		</selectKey>
 		insert into PERFORMANCE (<include refid="column-performance"/>)
 		values(#{performanceNo}, #{performanceName}, #{performanceTitle}, 
 		#{performanceLocation}, #{performanceDate}, #{performanceContent}, 
