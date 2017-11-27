@@ -17,7 +17,7 @@ insert into USERS values('kimm990', '김원진', 'cvf5558', '경기도 남양주
 insert into USERS values('id-1', '김원진', '1111', '경기도 남양주시', '01012650485', 'kimm99855@naver.com');
 
 /* 권한 */
-insert into AUTHORITY values('', '');
+insert into AUTHORITY values('id-1', 'ROLE_MEMBER');
 
 /* 팔로우 */
 insert into FOLLOW values('hong1653', 'kim4845');
