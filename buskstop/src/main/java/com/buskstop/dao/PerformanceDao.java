@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.Performance;
 
 public interface PerformanceDao {
@@ -10,4 +12,7 @@ public interface PerformanceDao {
 	 * @return
 	 */
 	int insertPerformance(Performance performance);
+	
+	//모든 공연 정보 조회 (Mock)
+	List<Performance> selectAllPerformance();
 }

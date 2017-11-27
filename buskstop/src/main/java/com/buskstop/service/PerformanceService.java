@@ -1,5 +1,7 @@
 package com.buskstop.service;
 
+import java.util.List;
+
 import com.buskstop.vo.Performance;
 
 public interface PerformanceService {
@@ -9,4 +11,6 @@ public interface PerformanceService {
 	 * @param performance
 	 */
 	void insertPerformance(Performance performance);
+	
+	List<Performance> selectAllPerformance();
 }
