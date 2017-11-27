@@ -24,7 +24,7 @@ public class UserController {
 	@RequestMapping("/join_member")
 	public String joinMember(@ModelAttribute User user) {
 		System.out.println(user);
-		service.joinMemberService(user, new Authority(user.getUserId(), "ROLE_MEMBER"));
+		service.joinMember(user, new Authority(user.getUserId(), "ROLE_MEMBER"));
 		return "index.tiles";
 	}
 }

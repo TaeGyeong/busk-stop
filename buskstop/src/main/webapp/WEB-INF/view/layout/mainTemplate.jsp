@@ -26,6 +26,7 @@
 			<div>
 				<a href="${initParam.rootPath }/login_form.do">로그인창</a> 
 				<a href="${initParam.rootPath }/join_member_form.do">회원가입</a>
+				<a href="${initParam.rootPath }/myPageView.do">마이페이지</a>
 			</div>
 		</div>
 	</header>

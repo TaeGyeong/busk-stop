@@ -4,27 +4,23 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.buskstop.dao.AuthorityDao;
-import com.buskstop.vo.Authority;
+import com.buskstop.dao.ArtistDao;
+import com.buskstop.vo.Artist;
 
 @Repository
-public class AuthorityDaoImpl implements AuthorityDao{
+public class ArtistDaoImpl implements ArtistDao{
 
 	@Autowired
 	private SqlSessionTemplate session;
 	
 	@Override
-	public int insertAuthority(Authority authority) {
-		return session.insert(makeSqlId("insertAuthority"),authority); 
+	public int insertArtist(Artist artist) {
+		return session.insert(makeSqlId("insertArtist"),artist);
 	}
 	
-	@Override
-	public int updateAuthority(Authority authority) {
-		return session.update(makeSqlId("updateAuthority"),authority);
-	}
 
-	
 	private String makeSqlId(String id){
 		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
 	}
+	
 }

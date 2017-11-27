@@ -15,7 +15,6 @@
 	<resultMap type="user" id="user-resultmap">
 		<id column="user_id" property="userId"/>
 		<result column="user_name" property="userName"/>
-		<result column="user_name" property="userName"/>
 		<result column="user_password" property="password"/>
 		<result column="user_address" property="userAddress"/>
 		<result column="user_phoneNum" property="userPhoneNum"/>
