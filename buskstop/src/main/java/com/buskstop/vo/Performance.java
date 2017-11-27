@@ -15,13 +15,27 @@ public class Performance implements Serializable{
 	private String performanceContent;
 	private MultipartFile performanceImage;
 	private String performanceUserId;
-	private int StageNo;
+	private Stage StageNo;
 	
 	public Performance() {}
 
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
 			Date performanceDate, int performanceHits, String performanceContent, MultipartFile performanceImage,
-			String performanceUserId, int stageNo) {
+			String performanceUserId) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
+		this.performanceHits = performanceHits;
+		this.performanceContent = performanceContent;
+		this.performanceImage = performanceImage;
+		this.performanceUserId = performanceUserId;
+	}
+
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, int performanceHits, String performanceContent, MultipartFile performanceImage,
+			String performanceUserId, Stage stageNo) {
 		this.performanceNo = performanceNo;
 		this.performanceName = performanceName;
 		this.performanceTitle = performanceTitle;
@@ -106,11 +120,11 @@ public class Performance implements Serializable{
 		this.performanceUserId = performanceUserId;
 	}
 
-	public int getStageNo() {
+	public Stage getStageNo() {
 		return StageNo;
 	}
 
-	public void setStageNo(int stageNo) {
+	public void setStageNo(Stage stageNo) {
 		StageNo = stageNo;
 	}
 
@@ -127,7 +141,7 @@ public class Performance implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + StageNo;
+		result = prime * result + ((StageNo == null) ? 0 : StageNo.hashCode());
 		result = prime * result + ((performanceContent == null) ? 0 : performanceContent.hashCode());
 		result = prime * result + ((performanceDate == null) ? 0 : performanceDate.hashCode());
 		result = prime * result + performanceHits;
@@ -149,7 +163,10 @@ public class Performance implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Performance other = (Performance) obj;
-		if (StageNo != other.StageNo)
+		if (StageNo == null) {
+			if (other.StageNo != null)
+				return false;
+		} else if (!StageNo.equals(other.StageNo))
 			return false;
 		if (performanceContent == null) {
 			if (other.performanceContent != null)
