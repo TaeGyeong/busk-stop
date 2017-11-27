@@ -1,8 +1,9 @@
 package com.buskstop.dao;
 
-import com.buskstop.vo.User;
+import com.buskstop.vo.Authority;
 
 public interface AuthorityDao {
-	User selectUserByUserId(String id);
+	
+	int insertAuthority(Authority authority);
 	
 }

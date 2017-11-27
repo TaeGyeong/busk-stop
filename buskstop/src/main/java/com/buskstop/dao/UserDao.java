@@ -1,5 +1,9 @@
 package com.buskstop.dao;
 
-public interface UserDao {
+import com.buskstop.vo.User;
 
+public interface UserDao {
+	int insertUser(User user);
+	
+	User selectUserById(String id);
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.buskstop.config.mybatis.mapper.authorityMapper">
+	
+	
+	<sql id="authority-column-sql">
+		USER_ID, AUTHORITY
+	</sql>
+	
+	<insert id="insertAuthority">
+		INSERT INTO AUTHORITY
+		(<include refid="authority-column-sql"/>)
+		VALUES (#{authorityId}, #{authority})
+	</insert>
+	
+	
+</mapper>
