@@ -13,14 +13,14 @@ public class Performance implements Serializable{
 	private Date performanceDate;
 	private int performanceHits;
 	private String performanceContent;
-	private MultipartFile performanceImage;
+	private String performanceImage;
 	private String performanceUserId;
 	private Stage StageNo;
 	
 	public Performance() {}
 
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
-			Date performanceDate, int performanceHits, String performanceContent, MultipartFile performanceImage,
+			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
 			String performanceUserId) {
 		this.performanceNo = performanceNo;
 		this.performanceName = performanceName;
@@ -34,7 +34,7 @@ public class Performance implements Serializable{
 	}
 
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
-			Date performanceDate, int performanceHits, String performanceContent, MultipartFile performanceImage,
+			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
 			String performanceUserId, Stage stageNo) {
 		this.performanceNo = performanceNo;
 		this.performanceName = performanceName;
@@ -104,11 +104,11 @@ public class Performance implements Serializable{
 		this.performanceContent = performanceContent;
 	}
 
-	public MultipartFile getPerformanceImage() {
+	public String getPerformanceImage() {
 		return performanceImage;
 	}
 
-	public void setPerformanceImage(MultipartFile performanceImage) {
+	public void setPerformanceImage(String performanceImage) {
 		this.performanceImage = performanceImage;
 	}
 
