@@ -17,6 +17,7 @@
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
 	<mvc:view-controller path="/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
+	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
