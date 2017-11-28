@@ -7,7 +7,7 @@
 		INSERT INTO STAGE_SUPPLIER
 		(ESTABLISH_NO, OPERATOR_USER_ID, OPERATOR_NO, STAGE_NAME, STAGE_LOCATION, STAGE_AREA, STAGE_IMAGE)
 		VALUES(
-			#{establishNum},#{userId},#{stageName},#{stageLocation},#{stageArea},#{stageImage}
+			#{establishNum},#{userId},#{operatorNum},#{stageName},#{stageLocation},#{stageArea},#{stageImage}
 		)
 	</insert>
 </mapper>

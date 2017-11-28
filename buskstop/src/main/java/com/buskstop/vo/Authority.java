@@ -8,7 +8,6 @@ public class Authority implements Serializable{
 	public Authority() {
 	}
 	public Authority(String userId, String authority) {
-		super();
 		this.userId = userId;
 		this.authority = authority;
 	}

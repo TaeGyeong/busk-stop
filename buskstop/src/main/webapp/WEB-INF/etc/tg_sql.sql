@@ -8,6 +8,9 @@
 회원정보조회 - 회원 / 아티스트/ 대관공급자 정보 수정
 기존회원에서 아티스트 / 대관공급자 등록
 */
+select * from artist
+select * from authority
+select * from stage_supplier
 
 INSERT INTO USERS (USER_ID, USER_NAME, USER_PASSWORD, USER_ADDRESS, USER_PHONE_NUM, USER_EMAIL)
 VALUES ('id-1','엄엄1','111','경기도성남시','01000000000','A@A.COM');

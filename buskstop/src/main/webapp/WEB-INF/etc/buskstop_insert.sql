@@ -236,7 +236,7 @@ insert into HELP_COMMENT values(10, 2, 'nicenice', 'yunee33');
 
 
 
-
+select * from PERFORMANCE;
 
 
 

@@ -90,6 +90,8 @@ from VIDEO v, (
 	)
 where v.video_artist like '%'||artist_name||'%';
 
+select * from performance
+
 /********************** 공연 댓글 *********************************************/
 
 /* 해당 공연 정보에 대한 댓글 목록 */

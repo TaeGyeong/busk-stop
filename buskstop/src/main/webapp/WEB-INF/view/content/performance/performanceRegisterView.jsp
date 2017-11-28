@@ -34,13 +34,6 @@
 			<input type="date" name="performanceDate" id="performanceDate" class="form-control" required="required">
 		</div>
 
-		<%--
-		<div class="form-group">
-			<label for="performanceHits">조회수</label>
-			<input type="number" name="performanceHits" id="performanceHits" class="form-control">
-		</div>
-		--%>
-		
 		<label>추가 정보 입력</label>
 		<div class="form-group">
 			<textarea rows="15" cols="150" name="performanceContent" placeholder="공연에 대한 정보를 입력하세요."></textarea>

@@ -13,7 +13,7 @@
 <form action="${initParam.rootPath}/login.do" method="post">
 	<sec:csrfInput/>
 	id : 
-	<input type="text" name="userId">
+	<input type="text" name="userId" autofocus>
 	<br>
 	password :
 	<input type="password" name="userPassword">

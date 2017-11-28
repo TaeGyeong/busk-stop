@@ -8,7 +8,7 @@ public class StageSupplier implements Serializable{
 	
 	private String stageName; // 장소명
 	private String stageLocation; // 주소
-	private String stageArea; // 면적
+	private int stageArea; // 면적
 	private String stageImage; // 대표사진
 	
 	private String userId; // 사용자 정보
@@ -16,7 +16,7 @@ public class StageSupplier implements Serializable{
 	public StageSupplier() {
 	}
 
-	public StageSupplier(int establishNum, int operatorNum, String stageName, String stageLocation, String stageArea,
+	public StageSupplier(int establishNum, int operatorNum, String stageName, String stageLocation, int stageArea,
 			String stageImage, String userId) {
 		this.establishNum = establishNum;
 		this.operatorNum = operatorNum;
@@ -59,11 +59,11 @@ public class StageSupplier implements Serializable{
 		this.stageLocation = stageLocation;
 	}
 
-	public String getStageArea() {
+	public int getStageArea() {
 		return stageArea;
 	}
 
-	public void setStageArea(String stageArea) {
+	public void setStageArea(int stageArea) {
 		this.stageArea = stageArea;
 	}
 
@@ -89,7 +89,7 @@ public class StageSupplier implements Serializable{
 		int result = 1;
 		result = prime * result + establishNum;
 		result = prime * result + operatorNum;
-		result = prime * result + ((stageArea == null) ? 0 : stageArea.hashCode());
+		result = prime * result + stageArea;
 		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
 		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
@@ -110,10 +110,7 @@ public class StageSupplier implements Serializable{
 			return false;
 		if (operatorNum != other.operatorNum)
 			return false;
-		if (stageArea == null) {
-			if (other.stageArea != null)
-				return false;
-		} else if (!stageArea.equals(other.stageArea))
+		if (stageArea != other.stageArea)
 			return false;
 		if (stageImage == null) {
 			if (other.stageImage != null)
@@ -145,5 +142,6 @@ public class StageSupplier implements Serializable{
 				+ stageImage + ", userId=" + userId + "]";
 	}
 
+	
 	
 }

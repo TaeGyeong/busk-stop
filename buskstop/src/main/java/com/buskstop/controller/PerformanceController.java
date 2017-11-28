@@ -49,11 +49,23 @@ public class PerformanceController {
 		service.insertPerformance(performance);
 		return new ModelAndView("redirect:/peformanceView.do");
 	}
+	@RequestMapping("/performanceUpdate")
+	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
+		service.updatePerformance(performance);	
+		return new ModelAndView("redirect:/performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
+	}
 	
-	@RequestMapping("/removePerformance")
-	public ModelAndView removePerformance(@RequestParam int performanceNo) {
-		String message = "삭제 성공";
-		return new ModelAndView("performance/performance.tiles","remove",message);
+	@RequestMapping("/deletePerformance")
+	public String deletePerformance(@RequestParam int performanceNo) {
+		service.deletePerformanceByPerformance(performanceNo);
+		return "performance/performanceView.tiles";
+	}
+	
+	@RequestMapping("/allSelectPerformance")
+	public ModelAndView allSelectPerformance() {
+		List<Performance> list = service.selectAllPerformance();
+		System.out.println(list);
+		return new ModelAndView("performance/performanceView.tiles","list", list);	
 	}
 	
 }

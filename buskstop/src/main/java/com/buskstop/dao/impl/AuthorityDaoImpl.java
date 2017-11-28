@@ -27,7 +27,6 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	
 	@Override
 	public List<Authority> selectAuthoritiesByUserId(String userId) {
-		System.out.println("au"+userId);
 		return session.selectList(makeSqlId("selectAuthoritiesByUserId"), userId);
 	}
 	
