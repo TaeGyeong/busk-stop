@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h1>회원가입</h1>
-<form action="${initParam.rootPath }/createVideo.do" method="post">
+<form action="${initParam.rootPath }/join_member.do" method="post">
 	<div>
 		<label for="id">ID</label>
 		<input type="text" name="userId" id="id">

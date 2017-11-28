@@ -3,9 +3,9 @@
 <mapper namespace="com.buskstop.config.mybatis.mapper.artistMapper">
    <insert id="insertArtist" parameterType="Artist">
       INSERT INTO ARTIST
-      (ARTIST_USER_ID, ARTIST_NAME, ARTIST_PERFORMANCE, ARTIST_PROFILE, ARTIST_IMAGE, ARTIST_MEMBERS)
+      (ARTIST_USER_ID, ARTIST_NAME, ARTIST_PERFORMANCE, ARTIST_PROFILE, ARTIST_IMAGE, ARTIST_MEMBERS, ARTIST_SNS)
       VALUES (
-         #{artistId}, #{artistName}, #{performance}, #{profile}, #{artistImage}, #{artistMembers}
+         #{artistId}, #{artistName}, #{performance}, #{profile}, #{artistImage}, #{artistMembers}, #{artistSns}
       )
    </insert>
 </mapper>
