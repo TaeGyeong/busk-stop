@@ -44,14 +44,15 @@
 			<input type="file" name="multiImage" id="multiImage" class="form-control">
 		</div>
 		
-		<%-- 테스트 용 id 나중에 삭제 --%>
+		<%-- 사용자 id hidden --%>
 		<div class="form-group">
-			<label for="performanceUserId">사용자 id</label>
-			<input type="text" name="performanceUserId" id="performanceUserId" class="form-control">
+			<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="performanceUserId" id="performanceUserId" class="form-control" value='<sec:authentication property="principal.userId"/>'>
+			</sec:authorize>
 		</div>
 		
 		<!-- 공연장 번호 -->
-		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/peformanceView.do'">취소</button>
+		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/performanceView.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	
