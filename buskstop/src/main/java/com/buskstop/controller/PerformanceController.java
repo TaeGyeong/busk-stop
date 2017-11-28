@@ -1,9 +1,19 @@
 package com.buskstop.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.util.Locale.Category;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,21 +33,39 @@ public class PerformanceController {
 	private PerformanceService service;
 	
 	@RequestMapping("/performanceRegister")
-	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-				service.insertPerformance(performance);
-		return new ModelAndView("redirect:/peformance_success.do","performance", performance.getPerformanceNo());
+	public ModelAndView insertPerformance(@ModelAttribute Performance performance,  HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		//파일 업로드 처리
+		MultipartFile multiImage = performance.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			//디렉토리
+			String dir = request.getServletContext().getRealPath("/performanceImage");
+			String fileName = multiImage.getOriginalFilename();
+			File upImage = new File(dir, fileName);
+			multiImage.transferTo(upImage);
+			performance.setPerformanceImage(fileName);
+		}
+		
+		service.insertPerformance(performance);
+		return new ModelAndView("redirect:/allSelectPerformance.do");
+	}
+	@RequestMapping("/performanceUpdate")
+	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
+		service.updatePerformance(performance);	
+		return new ModelAndView("redirect:/performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
 	}
 	
-	@RequestMapping("/performance_success")
-	public ModelAndView performanceSeccess(@RequestParam int performanceNo) {
-		String message = "성공";
-		return new ModelAndView("performance/performance.tiles", "success", message);
+	@RequestMapping("/deletePerformance")
+	public String deletePerformance(@RequestParam int performanceNo) {
+		service.deletePerformanceByPerformance(performanceNo);
+		return "performance/performanceView.tiles";
 	}
 	
-	@RequestMapping("/removePerformance")
-	public ModelAndView removePerformance(@RequestParam int performanceNo) {
-		String message = "삭제 성공";
-		return new ModelAndView("performance/performance.tiles","remove",message);
+	@RequestMapping("/allSelectPerformance")
+	public ModelAndView allSelectPerformance() {
+		List<Performance> list = service.selectAllPerformance();
+		System.out.println(list);
+		return new ModelAndView("performance/performanceView.tiles","list", list);	
 	}
 	
 }

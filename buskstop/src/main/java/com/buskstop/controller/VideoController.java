@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.User;
+import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
 
 @Controller
@@ -55,4 +57,18 @@ public class VideoController {
 	private String getUserId() {
 		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
+	
+	@RequestMapping("/createVideo")
+	public ModelAndView createVideo(@ModelAttribute Video video) {
+		service.insertVideo(video);
+		return new ModelAndView("/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
+		
+	}
+	
+	@RequestMapping("/readVideoByVideoNo")
+	public ModelAndView readVideoByVideoNo(@ModelAttribute int videoNo) {
+		Video video = service.selectVideoByVideoNo(videoNo);
+		return new ModelAndView("/video/videoDetail.tiles", "readVideoByVideoNo", video);
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.buskstop.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +22,26 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public void insertPerformance(Performance performance) {
 		//Performance 테이블 insert
 		dao.insertPerformance(performance);
+	}
+	
+	@Override
+	public Performance getPerformanceByPerformanceNo(int performanceNo) {
+		return dao.selectPerformanceByPerformanceNo(performanceNo);
+	}
+	
+	@Override
+	public void updatePerformance(Performance performance) {
+		dao.updatePerformance(performance);
+	}
+	
+	@Override
+	public int deletePerformanceByPerformance(int performanceNo) {
+		return dao.deletePerformanceByPerformanceNo(performanceNo);
+	}
+	
+	public List<Performance> selectAllPerformance(){
+		
+		List<Performance> list = dao.selectAllPerformance();
+		return list;
 	}
 }

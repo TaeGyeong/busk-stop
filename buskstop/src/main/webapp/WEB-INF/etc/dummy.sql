@@ -56,6 +56,7 @@ insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', 
 insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3');
 insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 놀이터', '2017-12-22', 30, '보러오세요.', 'c://img/img1','yunee33', '4');
 
+delete from PERFORMANCE;
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values();
 
@@ -71,10 +72,12 @@ insert into PERFORMANCE_LIKE values('2', 'kimjr322');
 insert into PERFORMANCE_LIKE values('2', 'kimm990');
 insert into PERFORMANCE_LIKE values('2', 'kimdo327');
 
+delete from PERFORMANCE_LIKE;
 /* 동영상(게시물) */
 insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', '2017-10-12', '메기 매운탕', 'kimm990');
 insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하남시', '재밌는 공연이었습니다.', '2017-11-12', 'mc경', 'kimbo88');
 insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부산시', '유쾌한 공연이었습니다.', '2017-09-02', '메기 매운탕, 노래 개잘핵', 'no33432');
+
 
 /* 동영상 댓글 */
 insert into VIDEO_COMMENT values();

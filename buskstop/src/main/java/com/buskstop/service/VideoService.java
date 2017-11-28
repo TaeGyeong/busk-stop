@@ -1,6 +1,7 @@
 package com.buskstop.service;
 
 import java.util.List;
+import com.buskstop.vo.Video;
 
 import com.buskstop.vo.User;
 import com.buskstop.vo.VideoLike;
@@ -22,4 +23,11 @@ public interface VideoService {
 	 * @return
 	 */
 	public List<VideoLike> selectLikeUserByNum(int num);
+	/**
+	 * 동영상 등록
+	 * @param video
+	 */
+	int insertVideo(Video video);
+	
+	Video selectVideoByVideoNo(int videoNo);
 }

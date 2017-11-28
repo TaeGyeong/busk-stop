@@ -92,7 +92,7 @@ insert into PERFORMANCE values(6,'맨유쇼','맹9','홍대입구','2017/12/12',
 insert into PERFORMANCE (performance_no, performance_name, performance_title, performance_location, performance_date, performance_content, performance_image, performance_user_id)
 values(99, '99', '99', '99', '2017-12-12', '111111', 'img', 'id1');
 
-select * from PERFORMANCE where PERFORMANCE_no = 11
+select * from PERFORMANCE where PERFORMANCE_no = 12
 
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values(1,1,'id4','푸하하하하하');
@@ -236,7 +236,7 @@ insert into HELP_COMMENT values(10, 2, 'nicenice', 'yunee33');
 
 
 
-
+select * from PERFORMANCE;
 
 
 

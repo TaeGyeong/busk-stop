@@ -4,90 +4,152 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Video implements Serializable{
-	private int videoNum;
+	private int videoNo;
 	private String videoTitle;
 	private String videoRink;
-	private String videoLocation;
+	private String videoLocation;//영상속 장소
 	private String videoContent;
 	private Date videoDate;
-	private String artist;
-	private User videoUser;
+	private String videoArtist;
+	private String videoCategory;//아티스트 홍보영상, 공연영상, 연습영상
+	private int videoUserId;
+	
 	
 	public Video() {
 	}
-	public Video(int videoNum, String videoTitle, String videoRink, String videoLocation, String videoContent,
-			Date videoDate, String artist, User videoUser) {
-		this.videoNum = videoNum;
+
+
+	public Video(int videoNo, String videoTitle, String videoRink, String videoLocation, String videoContent,
+			Date videoDate, String videoArtist, String videoCategory, int videoUserId) {
+		super();
+		this.videoNo = videoNo;
 		this.videoTitle = videoTitle;
 		this.videoRink = videoRink;
 		this.videoLocation = videoLocation;
 		this.videoContent = videoContent;
 		this.videoDate = videoDate;
-		this.artist = artist;
-		this.videoUser = videoUser;
+		this.videoArtist = videoArtist;
+		this.videoCategory = videoCategory;
+		this.videoUserId = videoUserId;
 	}
-	public int getVideoNum() {
-		return videoNum;
+
+
+	public int getVideoNo() {
+		return videoNo;
 	}
-	public void setVideoNum(int videoNum) {
-		this.videoNum = videoNum;
+
+
+	public void setVideoNo(int videoNo) {
+		this.videoNo = videoNo;
 	}
+
+
 	public String getVideoTitle() {
 		return videoTitle;
 	}
+
+
 	public void setVideoTitle(String videoTitle) {
 		this.videoTitle = videoTitle;
 	}
+
+
 	public String getVideoRink() {
 		return videoRink;
 	}
+
+
 	public void setVideoRink(String videoRink) {
 		this.videoRink = videoRink;
 	}
+
+
 	public String getVideoLocation() {
 		return videoLocation;
 	}
+
+
 	public void setVideoLocation(String videoLocation) {
 		this.videoLocation = videoLocation;
 	}
+
+
 	public String getVideoContent() {
 		return videoContent;
 	}
+
+
 	public void setVideoContent(String videoContent) {
 		this.videoContent = videoContent;
 	}
+
+
 	public Date getVideoDate() {
 		return videoDate;
 	}
+
+
 	public void setVideoDate(Date videoDate) {
 		this.videoDate = videoDate;
 	}
-	public String getArtist() {
-		return artist;
+
+
+	public String getVideoArtist() {
+		return videoArtist;
 	}
-	public void setArtist(String artist) {
-		this.artist = artist;
+
+
+	public void setVideoArtist(String videoArtist) {
+		this.videoArtist = videoArtist;
 	}
-	public User getVideoUser() {
-		return videoUser;
+
+
+	public String getVideoCategory() {
+		return videoCategory;
 	}
-	public void setVideoUser(User videoUser) {
-		this.videoUser = videoUser;
+
+
+	public void setVideoCategory(String videoCategory) {
+		this.videoCategory = videoCategory;
 	}
+
+
+	public int getVideoUserId() {
+		return videoUserId;
+	}
+
+
+	public void setVideoUserId(int videoUserId) {
+		this.videoUserId = videoUserId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoRink=" + videoRink
+				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
+				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoUserId=" + videoUserId
+				+ "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+		result = prime * result + ((videoArtist == null) ? 0 : videoArtist.hashCode());
+		result = prime * result + ((videoCategory == null) ? 0 : videoCategory.hashCode());
 		result = prime * result + ((videoContent == null) ? 0 : videoContent.hashCode());
 		result = prime * result + ((videoDate == null) ? 0 : videoDate.hashCode());
 		result = prime * result + ((videoLocation == null) ? 0 : videoLocation.hashCode());
-		result = prime * result + videoNum;
+		result = prime * result + videoNo;
 		result = prime * result + ((videoRink == null) ? 0 : videoRink.hashCode());
 		result = prime * result + ((videoTitle == null) ? 0 : videoTitle.hashCode());
-		result = prime * result + ((videoUser == null) ? 0 : videoUser.hashCode());
+		result = prime * result + videoUserId;
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -97,10 +159,15 @@ public class Video implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Video other = (Video) obj;
-		if (artist == null) {
-			if (other.artist != null)
+		if (videoArtist == null) {
+			if (other.videoArtist != null)
 				return false;
-		} else if (!artist.equals(other.artist))
+		} else if (!videoArtist.equals(other.videoArtist))
+			return false;
+		if (videoCategory == null) {
+			if (other.videoCategory != null)
+				return false;
+		} else if (!videoCategory.equals(other.videoCategory))
 			return false;
 		if (videoContent == null) {
 			if (other.videoContent != null)
@@ -117,7 +184,7 @@ public class Video implements Serializable{
 				return false;
 		} else if (!videoLocation.equals(other.videoLocation))
 			return false;
-		if (videoNum != other.videoNum)
+		if (videoNo != other.videoNo)
 			return false;
 		if (videoRink == null) {
 			if (other.videoRink != null)
@@ -129,19 +196,10 @@ public class Video implements Serializable{
 				return false;
 		} else if (!videoTitle.equals(other.videoTitle))
 			return false;
-		if (videoUser == null) {
-			if (other.videoUser != null)
-				return false;
-		} else if (!videoUser.equals(other.videoUser))
+		if (videoUserId != other.videoUserId)
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Video [videoNum=" + videoNum + ", videoTitle=" + videoTitle + ", videoRink=" + videoRink
-				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
-				+ ", artist=" + artist + ", videoUser=" + videoUser + "]";
-	}
 	
-	
+
 }
