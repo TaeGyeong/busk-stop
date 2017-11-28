@@ -1,3 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="videoMapper"></mapper>
+<mapper namespace="videoMapper">
+	
+	<!-- sql 설정 -->
+	<sql id="video-column-sql">
+		video_no,
+		video_title,
+		video_like,
+		video_location,
+		video_content,
+		video_date,
+		video_artist,
+		video_category,
+		video_user_id
+	</sql>
+	
+	<sql id="video-select-sql">
+		SELECT <include refid="video-column-sql"/>
+		FROM	VIDEO
+	</sql>
+	
+	<resultMap type="Video" id="video-resultmap">
+		<id column="video_no" property="videoNo"/>
+		<result column="video_title" property="videoTitle"/>
+		<result column="video_like" property="videoRink"/>
+		<result column="video_location" property="videoLocation"/>
+		<result column="video_content" property="videoContent"/>
+		<result column="video_date" property="videoDate"/>
+		<result column="video_artist" property="videoArtist"/>
+		<result column="video_category" property="videoCategory"/>
+		<result column="video_user_id" property="videoUserId"/>
+	</resultMap>
+	
+	<insert id="insertVideo" parameterType="Video">
+		INSERT INTO video
+		SET			<include refid="video-column-sql"/>
+		VALUES		(#{videoNo}, #{videoTitle}, #{videoRink}, #{videoLocation}, #{videoContent}, #{videoDate}, #{videoArtist}, #{videoCategory}, #{videoUserId})
+	</insert>
+
+	<select id="selectVideoByVideoNo" parameterType="_int" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE	video_no = #{value}	
+	</select>
+
+
+
+</mapper>

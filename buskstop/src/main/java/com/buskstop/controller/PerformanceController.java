@@ -47,7 +47,7 @@ public class PerformanceController {
 		}
 		
 		service.insertPerformance(performance);
-		return new ModelAndView("redirect:/peformanceView.do");
+		return new ModelAndView("redirect:/allSelectPerformance.do");
 	}
 	@RequestMapping("/performanceUpdate")
 	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
