@@ -25,10 +25,14 @@ public class MyPageController {
 	@RequestMapping("/member/registArtist")
 	public String registArtist(String artistName, String performance, String profile,String artistImage) {
 		
+		// 사용자의 id 조회
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String id = ((User)authentication.getPrincipal()).getUserId();
 		
+		// business logic
 		artistService.registerArtist(new Artist(id, artistName, performance, profile, artistImage, artistName));
+		
+		// response
 		return "user/registerSuccessView.tiles";
 	}
 	

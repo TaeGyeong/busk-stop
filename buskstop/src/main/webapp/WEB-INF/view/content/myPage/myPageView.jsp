@@ -3,11 +3,9 @@
 마이페이지
 
 <form action="${initParam.rootPath }/registerArtistView.do">
-	아티스트 등록.
-	<button></button>
+	<button>아티스트 등록.</button>
 </form>
 <form action="${initParam.rootPath }/registerSupplierView.do">
-	공연장공급자 등록.
-	<button></button>
+	<button>공연장공급자 등록.</button>
 </form>
 
