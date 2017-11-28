@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 	<h2>공연정보 등록</h2>
-	<form action="${initParam.rootPath }/performanceRegister.do" method="get">
+	<form action="${initParam.rootPath }/performanceRegister.do" method="get" class="performance_register_form">
 		
 		<%-- 테스트용 id 나중에 삭제 --%>
 		<div class="form-group">
@@ -56,9 +58,10 @@
 		</div>
 		
 		<!-- 공연장 번호 -->
-		<button type="submit" class="btn btn-default">등록</button>
+		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/peformanceView.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
+	
 	
 </body>
 </html>
