@@ -21,6 +21,21 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	public int insertPerformance(Performance performance) {
 		return session.insert(makeSqlId("insertPerformance"), performance);
 	}
+
+	@Override
+	public Performance selectPerformanceByPerformanceNo(int performanceNo) {
+		return session.selectOne(makeSqlId("selectPerformanceByPerformanceNo"),performanceNo);
+	}
+	
+	@Override
+	public int updatePerformance(Performance performance) {
+		return session.update(makeSqlId("updatePerformance"),performance);
+	}
+	
+	@Override
+	public int deletePerformanceByPerformanceNo(int performanceNo) {
+		return session.delete(makeSqlId("deletePerformanceByPerformanceNo"),performanceNo);
+	}
 	
 }
 //com.buskstop.config.mybatis.mapper.

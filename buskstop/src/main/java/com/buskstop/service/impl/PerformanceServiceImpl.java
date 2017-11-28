@@ -21,4 +21,22 @@ public class PerformanceServiceImpl implements PerformanceService {
 		//Performance 테이블 insert
 		dao.insertPerformance(performance);
 	}
+	
+	@Override
+	public Performance getPerformanceByPerformanceNo(int performanceNo) {
+		return dao.selectPerformanceByPerformanceNo(performanceNo);
+	}
+	
+	@Override
+	public void updatePerformance(Performance performance) {
+		dao.updatePerformance(performance);
+	}
+	
+	@Override
+	public int deletePerformanceByPerformance(int performanceNo) {
+		return dao.deletePerformanceByPerformanceNo(performanceNo);
+	}
+	
+	
+	
 }

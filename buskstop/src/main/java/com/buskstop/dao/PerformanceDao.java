@@ -10,4 +10,10 @@ public interface PerformanceDao {
 	 * @return
 	 */
 	int insertPerformance(Performance performance);
+
+	Performance selectPerformanceByPerformanceNo(int performanceNo);	
+
+	int deletePerformanceByPerformanceNo(int performanceNo);
+
+	int updatePerformance(Performance performance);
 }

@@ -30,14 +30,26 @@ public class PerformanceController {
 	
 	@RequestMapping("/performance_success")
 	public ModelAndView performanceSeccess(@RequestParam int performanceNo) {
-		String message = "성공";
-		return new ModelAndView("performance/performance.tiles", "success", message);
+		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
+		return new ModelAndView("performance/performance.tiles", "success", performance);
 	}
 	
-	@RequestMapping("/removePerformance")
-	public ModelAndView removePerformance(@RequestParam int performanceNo) {
-		String message = "삭제 성공";
-		return new ModelAndView("performance/performance.tiles","remove",message);
+//	@RequestMapping("/performanceUpdate")
+//	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
+//		service.updatePerformance(performance);		
+//		return new ModelAndView("performance/performanceView.tiles","performanceUp",performance.getPerformanceNo());
+//	}
+	
+	@RequestMapping("/performanceUpdate")
+	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
+		service.updatePerformance(performance);		
+		return new ModelAndView("performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
+	}
+	
+	@RequestMapping("/deletePerformance")
+	public String deletePerformance(@RequestParam int performanceNo) {
+		service.deletePerformanceByPerformance(performanceNo);
+		return "performance/performanceView.tiles";
 	}
 	
 }

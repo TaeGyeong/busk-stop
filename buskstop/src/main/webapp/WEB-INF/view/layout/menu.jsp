@@ -19,6 +19,7 @@
 	<li><a id="logout" style="cursor: pointer;">로그아웃</a>
 	<li><a href="${initParam.rootPath }/performanceRegisterView.do">공연등록</a></li>
 	<li><a href="${initParam.rootPath }/performanceView.do">공연정보 목록</a></li>
+	<li><a href="${initParam.rootPath }/update_performance.do">공연 수정</a>
 </sec:authorize>
 
 

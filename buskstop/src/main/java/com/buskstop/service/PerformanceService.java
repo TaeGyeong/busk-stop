@@ -9,4 +9,11 @@ public interface PerformanceService {
 	 * @param performance
 	 */
 	void insertPerformance(Performance performance);
+	
+	Performance getPerformanceByPerformanceNo(int performanceNo);
+
+	int deletePerformanceByPerformance(int performanceNo);
+
+	void updatePerformance(Performance performance);
+	
 }
