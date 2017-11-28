@@ -3,20 +3,20 @@
 <mapper namespace="com.buskstop.config.mybatis.mapper.performanceMapper">
 
 	<sql id="column-performance">
-		performance_no, 
-		performance_name, 
-		performance_title, 
-		performance_location, 
-		performance_date, 
-		performance_content, 
-		performance_image, 
+		performance_no,
+		performance_name,
+		performance_title,
+		performance_location,
+		performance_date,
+		performance_content,
+		performance_image,
 		performance_user_id
 	</sql>
 
 	<!-- ResultMap 등록 -->
 	<resultMap type="performance" id="performance-resultmap">
 		<id column="performance_no" property="performanceNo"/>
-		<result column="performan ce_name" property="performanceName"/>
+		<result column="performance_name" property="performanceName"/>
 		<result column="performance_title" property="performanceTitle"/>
 		<result column="performance_location" property="performanceLocation"/>
 		<result column="performance_date" property="performanceDate"/>

@@ -10,11 +10,10 @@
 </head>
 <body>
 	<h2>공연정보 등록</h2>
-	<form action="${initParam.rootPath }/performanceRegister.do" method="get" class="performance_register_form">
+	<form action="${initParam.rootPath }/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
 		
-		<%-- 테스트용 id 나중에 삭제 --%>
+		<%-- 공연id hidden --%>
 		<div class="form-group">
-			<label for="performanceNo">공연 id</label>
 			<input type="hidden" name="performanceNo" id="performanceNo" class="form-control" required="required" value="0">
 		</div>
 		
@@ -46,9 +45,10 @@
 		<div class="form-group">
 			<textarea rows="15" cols="150" name="performanceContent" placeholder="공연에 대한 정보를 입력하세요."></textarea>
 		</div>
+		
 		<div class="form-group">
-			<label for="performanceImage">이미지</label>
-			<input type="file" name="performanceImage" id="performanceImage" class="form-control">
+			<label for="multiImage">이미지</label>
+			<input type="file" name="multiImage" id="multiImage" class="form-control">
 		</div>
 		
 		<%-- 테스트 용 id 나중에 삭제 --%>
@@ -61,7 +61,6 @@
 		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/peformanceView.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
-	
 	
 </body>
 </html>

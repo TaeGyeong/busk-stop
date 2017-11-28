@@ -4,6 +4,7 @@
 
 /* 공연장 검색 후 조회수 */
 
+	select * from performance
 	/* 리버풀쇼 이라는 공연의 공연장을 검색(키워드로 검색) */
 	select PERFORMANCE.PERFORMANCE_NAME, STAGE.* from STAGE,PERFORMANCE where STAGE.STAGE_NO = PERFORMANCE.STAGE_NO and PERFORMANCE_NAME='리버풀쇼';
 
