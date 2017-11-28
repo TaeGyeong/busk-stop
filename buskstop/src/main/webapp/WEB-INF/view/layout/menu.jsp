@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%--Spring Security 커스텀태그 --%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
 <%--
    <sec:authorize> : 태그 하위 내용을 볼 수 있는 사용자인지 인증/권한 체크
     속성 -  access="Spring Security EL"  : 볼수 있는 권한 설정
@@ -13,20 +15,24 @@
 	<li><a href="${initParam.rootPath }/join_member_form.do">회원가입</a></li>
 </sec:authorize>
 
-
 <%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
 <sec:authorize access="isAuthenticated()">
 	<li><a id="logout" style="cursor: pointer;">로그아웃</a>
 	<li><a href="${initParam.rootPath }/performanceRegisterView.do">공연등록</a></li>
+	<li><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
+	<li><a href="${initParam.rootPath }/likeCheck.do">좋아요테스트</a></li>
 	<li><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보 목록</a></li>
 	<li><a href="${initParam.rootPath }/update_performance.do">공연 수정</a>
+	<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
+	<li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li>
 </sec:authorize>
 
 
-
 <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
-
+	<%-- 임시용 --%>
+	
 </ul>
+
 
 
 
