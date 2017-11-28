@@ -10,17 +10,18 @@ public class Artist implements Serializable {
 	private String profile;
 	private String artistImage;
 	private String artistMembers;
-	
+	private String artistSns;
 	public Artist() {
 	}
 	public Artist(String artistId, String artistName, String performance, String profile, String artistImage,
-			String artistMembers) {
+			String artistMembers, String artistSns) {
 		this.artistId = artistId;
 		this.artistName = artistName;
 		this.performance = performance;
 		this.profile = profile;
 		this.artistImage = artistImage;
 		this.artistMembers = artistMembers;
+		this.artistSns = artistSns;
 	}
 	public String getArtistId() {
 		return artistId;
@@ -58,6 +59,12 @@ public class Artist implements Serializable {
 	public void setArtistMembers(String artistMembers) {
 		this.artistMembers = artistMembers;
 	}
+	public String getArtistSns() {
+		return artistSns;
+	}
+	public void setArtistSns(String artistSns) {
+		this.artistSns = artistSns;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,6 +73,7 @@ public class Artist implements Serializable {
 		result = prime * result + ((artistImage == null) ? 0 : artistImage.hashCode());
 		result = prime * result + ((artistMembers == null) ? 0 : artistMembers.hashCode());
 		result = prime * result + ((artistName == null) ? 0 : artistName.hashCode());
+		result = prime * result + ((artistSns == null) ? 0 : artistSns.hashCode());
 		result = prime * result + ((performance == null) ? 0 : performance.hashCode());
 		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
 		return result;
@@ -99,6 +107,11 @@ public class Artist implements Serializable {
 				return false;
 		} else if (!artistName.equals(other.artistName))
 			return false;
+		if (artistSns == null) {
+			if (other.artistSns != null)
+				return false;
+		} else if (!artistSns.equals(other.artistSns))
+			return false;
 		if (performance == null) {
 			if (other.performance != null)
 				return false;
@@ -114,8 +127,8 @@ public class Artist implements Serializable {
 	@Override
 	public String toString() {
 		return "Artist [artistId=" + artistId + ", artistName=" + artistName + ", performance=" + performance
-				+ ", profile=" + profile + ", artistImage=" + artistImage + ", artistMembers=" + artistMembers + "]";
+				+ ", profile=" + profile + ", artistImage=" + artistImage + ", artistMembers=" + artistMembers
+				+ ", artistSns=" + artistSns + "]";
 	}
-	
 	
 }

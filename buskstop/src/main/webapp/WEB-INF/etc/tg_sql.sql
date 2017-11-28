@@ -8,9 +8,19 @@
 회원정보조회 - 회원 / 아티스트/ 대관공급자 정보 수정
 기존회원에서 아티스트 / 대관공급자 등록
 */
+SELECT * FROM VIDEO_LIKE 
 select * from artist
 select * from authority
 select * from stage_supplier
+		SELECT 
+			u.USER_ID,
+			u.USER_NAME,
+			u.USER_PASSWORD,
+			u.USER_ADDRESS,
+			u.USER_PHONE_NUM,
+			u.USER_EMAIL 
+		FROM VIDEO_LIKE v, USERS u 
+		WHERE v.VIDEO_LIKE_NO = 1 AND v.USER_ID = u.USER_ID
 
 INSERT INTO USERS (USER_ID, USER_NAME, USER_PASSWORD, USER_ADDRESS, USER_PHONE_NUM, USER_EMAIL)
 VALUES ('id-1','엄엄1','111','경기도성남시','01000000000','A@A.COM');

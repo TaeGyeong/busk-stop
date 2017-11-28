@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
@@ -21,4 +22,15 @@ public interface PerformanceDao {
 	//모든 공연 정보 조회 (Mock)
 	List<Performance> selectAllPerformance();
 
+	List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle);
+	
+	List<Performance> selectPerformanceByPerformanceUserId(String performanceUserId);
+	
+	List<Performance> selectPerformanceByPerformanceLocation(String performanceLocation);
+	
+	List<Performance> selectPerformanceByPerformanceName(String performanceName);
+	
+	List<Performance> selectPerformanceByPerformanceDate(Date performanceDate);
+	
+	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
 }

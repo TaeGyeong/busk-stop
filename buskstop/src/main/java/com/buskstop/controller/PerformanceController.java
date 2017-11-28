@@ -2,6 +2,7 @@ package com.buskstop.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -68,4 +69,31 @@ public class PerformanceController {
 		return new ModelAndView("performance/performanceView.tiles","list", list);	
 	}
 	
+	// 카테고리로 검색
+	@RequestMapping("/performanceSearch")
+	public ModelAndView selectPerformanceByCategory(@RequestParam String category, @RequestParam String search) throws ParseException {
+		if(category.equals("title")) {
+			List<Performance> list = service.selectPerformanceByPerformanceTitle(search);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}else if(category.equals("user")){
+			List<Performance> list = service.selectPerformanceByPerformanceUserId(search);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}else if(category.equals("location")) {
+			List<Performance> list = service.selectPerformanceByPerformanceLocation(search);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}else if(category.equals("name")) {
+			List<Performance> list = service.selectPerformanceByPerformanceName(search);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}else if(category.equals("date")) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date to = transFormat.parse(search);
+			
+			List<Performance> list = service.selectPerformanceByPerformanceDate(to);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}else if(category.equals("content")) {
+			List<Performance> list = service.selectPerformanceByPerformanceContent(search);
+			return new ModelAndView("performance/performanceView.tiles", "list", list);
+		}
+		return null;
+	}
 }
