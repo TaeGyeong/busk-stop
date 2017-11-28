@@ -25,13 +25,7 @@ public class PerformanceController {
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
 		service.insertPerformance(performance);
-		return new ModelAndView("redirect:/peformance_success.do","performance", performance.getPerformanceNo());
-	}
-	
-	@RequestMapping("/performance_success")
-	public ModelAndView performanceSeccess(@RequestParam int performanceNo) {
-		String message = "성공";
-		return new ModelAndView("performance/performance.tiles", "success", message);
+		return new ModelAndView("redirect:/peformanceView.do");
 	}
 	
 	@RequestMapping("/removePerformance")
