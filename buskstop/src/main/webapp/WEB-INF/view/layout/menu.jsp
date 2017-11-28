@@ -19,15 +19,12 @@
 <sec:authorize access="isAuthenticated()">
 	<li><a id="logout" style="cursor: pointer;">로그아웃</a>
 	<li><a href="${initParam.rootPath }/performanceRegisterView.do">공연등록</a></li>
-<<<<<<< HEAD
-	<li><a href="${initParam.rootPath }/performanceView.do">공연정보 목록</a></li>
 	<li><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
 	<li><a href="${initParam.rootPath }/likeCheck.do">좋아요테스트</a></li>
-=======
 	<li><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보 목록</a></li>
 	<li><a href="${initParam.rootPath }/update_performance.do">공연 수정</a>
 	<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
+	<li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li>
 </sec:authorize>
 
 
