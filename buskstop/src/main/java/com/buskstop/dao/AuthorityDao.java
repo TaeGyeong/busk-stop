@@ -3,6 +3,7 @@ package com.buskstop.dao;
 import java.util.List;
 
 import com.buskstop.vo.Authority;
+import com.buskstop.vo.Performance;
 
 public interface AuthorityDao {
 	
@@ -26,5 +27,4 @@ public interface AuthorityDao {
 	 * @return
 	 */
 	int updateAuthority(Authority authority);
-	
 }

@@ -16,6 +16,7 @@ public class Performance implements Serializable{
 	private int performanceHits;
 	private String performanceContent;
 	private String performanceImage;
+	private MultipartFile multiImage;
 	private String performanceUserId;
 	// TODO 공연장 번호 연결 해야함.
 	//private int StageNo;
@@ -45,6 +46,30 @@ public class Performance implements Serializable{
 		this.performanceDate = performanceDate;
 		this.performanceContent = performanceContent;
 		this.performanceImage = performanceImage;
+		this.performanceUserId = performanceUserId;
+	}
+	
+
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, int performanceHits, String performanceContent, String performanceUserId) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
+		this.performanceHits = performanceHits;
+		this.performanceContent = performanceContent;
+		this.performanceUserId = performanceUserId;
+	}
+
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, String performanceContent, String performanceUserId) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
+		this.performanceContent = performanceContent;
 		this.performanceUserId = performanceUserId;
 	}
 
@@ -119,6 +144,15 @@ public class Performance implements Serializable{
 	public void setPerformanceUserId(String performanceUserId) {
 		this.performanceUserId = performanceUserId;
 	}
+
+	public MultipartFile getMultiImage() {
+		return multiImage;
+	}
+
+	public void setMultiImage(MultipartFile multiImage) {
+		this.multiImage = multiImage;
+	}
+	
 
 	@Override
 	public String toString() {
