@@ -17,4 +17,6 @@ public interface VideoDao {
 	 * @return
 	 */
 	Video selectVideoByVideoNo (int videoNo);	
+	
+	
 }

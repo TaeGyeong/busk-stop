@@ -34,4 +34,10 @@
 		<include refid="authority-select-sql"/>
 		WHERE USER_ID = #{value}
 	</select>
+	
+	<select id="selectArtistAuthoritiesByUserId" parameterType="Authority" resultMap="authority-resultmap">
+		<include refid="authority-select-sql"/>
+		WHERE	USER_ID = #{userId} 
+		AND		AUTHORITY = #{authority}
+	</select>
 </mapper>
