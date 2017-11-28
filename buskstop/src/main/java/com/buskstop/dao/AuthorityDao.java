@@ -13,8 +13,18 @@ public interface AuthorityDao {
 	 */
 	int insertAuthority(Authority authority);
 
+	/**
+	 * 사용자가 가지는 모든 권한 조회
+	 * @param userId
+	 * @return
+	 */
 	List<Authority> selectAuthoritiesByUserId(String userId);
 
+	/**
+	 * 사용자 권한 수정
+	 * @param authority
+	 * @return
+	 */
 	int updateAuthority(Authority authority);
 	
 }
