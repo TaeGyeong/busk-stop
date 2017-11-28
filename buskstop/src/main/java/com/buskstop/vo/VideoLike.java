@@ -5,13 +5,14 @@ import java.util.List;
 
 public class VideoLike implements Serializable {
 	private int videoLikeNum;
+	private String videoLikeUserId;
 	private List<User> likeUser;
 	
 	public VideoLike() {}
 
-	public VideoLike(int videoLikeNum, List<User> likeUser) {
+	public VideoLike(int videoLikeNum, String videoLikeUserId) {
 		this.videoLikeNum = videoLikeNum;
-		this.likeUser = likeUser;
+		this.videoLikeUserId = videoLikeUserId;
 	}
 
 	public int getVideoLikeNum() {
@@ -22,6 +23,14 @@ public class VideoLike implements Serializable {
 		this.videoLikeNum = videoLikeNum;
 	}
 
+	public String getVideoLikeUserId() {
+		return videoLikeUserId;
+	}
+
+	public void setVideoLikeUserId(String videoLikeUserId) {
+		this.videoLikeUserId = videoLikeUserId;
+	}
+
 	public List<User> getLikeUser() {
 		return likeUser;
 	}
@@ -29,6 +38,8 @@ public class VideoLike implements Serializable {
 	public void setLikeUser(List<User> likeUser) {
 		this.likeUser = likeUser;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -36,6 +47,7 @@ public class VideoLike implements Serializable {
 		int result = 1;
 		result = prime * result + ((likeUser == null) ? 0 : likeUser.hashCode());
 		result = prime * result + videoLikeNum;
+		result = prime * result + ((videoLikeUserId == null) ? 0 : videoLikeUserId.hashCode());
 		return result;
 	}
 
@@ -55,13 +67,18 @@ public class VideoLike implements Serializable {
 			return false;
 		if (videoLikeNum != other.videoLikeNum)
 			return false;
+		if (videoLikeUserId == null) {
+			if (other.videoLikeUserId != null)
+				return false;
+		} else if (!videoLikeUserId.equals(other.videoLikeUserId))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "VideoLike [videoLikeNum=" + videoLikeNum + ", likeUser=" + likeUser + "]";
+		return "VideoLike [videoLikeNum=" + videoLikeNum + ", videoLikeUserId=" + videoLikeUserId + ", likeUser="
+				+ likeUser + "]";
 	}
-
 	
 }

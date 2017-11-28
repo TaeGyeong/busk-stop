@@ -1,5 +1,24 @@
 package com.buskstop.dao;
 
-public interface VideoLikeDao {
+import java.util.List;
 
+import com.buskstop.vo.User;
+import com.buskstop.vo.VideoLike;
+
+public interface VideoLikeDao {
+	/**
+	 * 좋아요 테이블에 데이터 저장
+	 * @param like
+	 * @return
+	 */
+	int insertVideoLike(VideoLike like);
+	
+	/**
+	 * 좋아요 데이터 삭제
+	 * @param userId
+	 * @return
+	 */
+	int deleteVideoLike(VideoLike like);
+	
+	List<VideoLike> selectLikeUserByVideoNum(int num);
 }
