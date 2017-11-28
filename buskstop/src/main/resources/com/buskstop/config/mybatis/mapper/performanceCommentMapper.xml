@@ -5,10 +5,11 @@
 
 	<insert id="performanceComment">
 		<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
-		select performance
+		select performance_comment_no_SEQ.nextval from dual
 		</selectKey>
 	
-	insert into 
+	insert into performance_comment (performance_comment_no, performance_no,performance_comment_user_id, performance_comment)
+	values()
 	
 	</insert>
 
