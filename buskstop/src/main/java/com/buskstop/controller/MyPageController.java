@@ -21,22 +21,35 @@ public class MyPageController {
 	@Autowired
 	private StageService stageService;
 	
+	/*@RequestMapping("/member/modify")
+	public ModelAndView memberModify() {
+		
+		return null;
+	}*/
+	
 	
 	@RequestMapping("/member/registArtist")
 	public String registArtist(String artistName, String performance, String profile,String artistImage) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String id = ((User)authentication.getPrincipal()).getUserId();
+		// 사용자의 id 조회
+		String id = getUserId();
 		
+		// business logic
 		artistService.registerArtist(new Artist(id, artistName, performance, profile, artistImage, artistName));
+		
+		// response
 		return "user/registerSuccessView.tiles";
 	}
 	
 	@RequestMapping("/member/registSupplier")
 	public String registSupplier(String establishNum, String operatorNum, String stageName, String stageLocation, String stageArea, String stageImage) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String id = ((User)authentication.getPrincipal()).getUserId();
+		String id = getUserId();
 		stageService.registerSupplier(new StageSupplier(Integer.parseInt(establishNum),Integer.parseInt(operatorNum),stageName,stageLocation,Integer.parseInt(stageArea),stageImage,id));
 		return "user/registerSuccessView.tiles";
+	}
+	
+	// Security context 값을 받아서 userId 를 받는 method
+	private String getUserId() {
+		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
 }
