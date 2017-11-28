@@ -37,13 +37,13 @@
 	<update id="updatePerformance" parameterType="Performance">
 		UPDATE performance
 		<set>
-			<if test="performance_name != null">performance_name=#{performanceName}</if>
-			<if test="performance_title != null">performance_title=#{performanceTitle}</if>
-			<if test="performance_location != null">performance_location=#{performanceLocation}</if>
-			<if test="performance_date != null">performance_date=#{performanceDate}</if>
-			<if test="performance_content != null">performance_content=#{performanceContent}</if>
-			<if test="performance_image != null">performance_image=#{performanceImage}</if>
-			<if test="performance_user_id != null">performance_user_id = #{performanceUserId}</if>
+			<if test="performanceName != null">performance_name=#{performanceName},</if>
+			<if test="performanceTitle != null">performance_title=#{performanceTitle},</if>
+			<if test="performanceLocation != null">performance_location=#{performanceLocation},</if>
+			<if test="performanceDate != null">performance_date=#{performanceDate},</if>
+			<if test="performanceContent != null">performance_content=#{performanceContent},</if>
+			<if test="performanceImage != null">performance_image=#{performanceImage},</if>
+			<if test="performanceUserId != null">performance_user_id = #{performanceUserId}</if>
 		</set>
 		WHERE performance_no=#{performanceNo}
 	</update>

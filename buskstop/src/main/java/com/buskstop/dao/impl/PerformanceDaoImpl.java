@@ -31,6 +31,8 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	
 	@Override
 	public int updatePerformance(Performance performance) {
+		System.out.println(performance);
+		System.out.println(session.update(makeSqlId("updatePerformance"),performance));
 		return session.update(makeSqlId("updatePerformance"),performance);
 	}
 	

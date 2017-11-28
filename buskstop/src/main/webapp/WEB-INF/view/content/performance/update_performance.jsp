@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="${initParam.rootPath }/performanceUpdate.do"
-		method="post" enctype=multipart/form-data>
+		method="post">
 
 		<div class="form-group">
 			<label for="no">공연 번호 </label> <input type="text"

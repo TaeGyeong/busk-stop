@@ -32,16 +32,10 @@ public class PerformanceController {
 		return new ModelAndView("performance/performance.tiles", "success", performance);
 	}
 	
-//	@RequestMapping("/performanceUpdate")
-//	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-//		service.updatePerformance(performance);		
-//		return new ModelAndView("performance/performanceView.tiles","performanceUp",performance.getPerformanceNo());
-//	}
-	
 	@RequestMapping("/performanceUpdate")
 	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-		service.updatePerformance(performance);		
-		return new ModelAndView("performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
+		service.updatePerformance(performance);	
+		return new ModelAndView("redirect:/performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
 	}
 	
 	@RequestMapping("/deletePerformance")
