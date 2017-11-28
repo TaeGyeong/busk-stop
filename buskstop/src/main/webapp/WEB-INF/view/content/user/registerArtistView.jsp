@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/member/artist" method="post">
+<form action="${initParam.rootPath }/member/registArtist.do" method="post">
+	<sec:csrfInput/>
 	아티스트 등록.<br>
 	이름 : <input type="text" name="artistName"><br>
 	장르 : <input type="text" name="performance"><br>

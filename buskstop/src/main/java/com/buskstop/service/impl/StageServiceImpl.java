@@ -24,7 +24,7 @@ public class StageServiceImpl implements StageService{
 	@Override
 	public void registerSupplier(StageSupplier supplier) {
 		supplierDao.insertStageSupplier(supplier);
-		authorDao.updateAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
+		authorDao.insertAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
 	}
 	
 }

@@ -24,9 +24,11 @@
 			<div class="header-top"></div>
 			<div class="container"></div>
 			<div>
+			<%-- 
 				<a href="${initParam.rootPath }/login_form.do">로그인창</a> 
 				<a href="${initParam.rootPath }/join_member_form.do">회원가입</a>
 				<a href="${initParam.rootPath }/myPageView.do">마이페이지</a>
+				 --%>
 			</div>
 		</div>
 	</header>
@@ -42,6 +44,10 @@
 		</div>
 	</nav>
 	<div class="container">
+		<%-- 메뉴 --%>
+		<nav>
+			<tiles:insertAttribute name="menu"/>
+		</nav>
 		<section class="content">
 			<tiles:insertAttribute name="content" />
 		</section>

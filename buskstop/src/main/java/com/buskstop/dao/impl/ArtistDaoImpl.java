@@ -20,7 +20,7 @@ public class ArtistDaoImpl implements ArtistDao{
 	
 
 	private String makeSqlId(String id){
-		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.artistMapper."+id;
 	}
 	
 }

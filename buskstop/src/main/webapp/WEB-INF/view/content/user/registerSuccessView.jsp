@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	등록성공!
 </body>
 </html>

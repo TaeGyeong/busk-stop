@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buskstop.config.mybatis.mapper.artistMapper">
+   <insert id="insertArtist" parameterType="Artist">
+      INSERT INTO ARTIST
+      (ARTIST_USER_ID, ARTIST_NAME, ARTIST_PERFORMANCE, ARTIST_PROFILE, ARTIST_IMAGE, ARTIST_MEMBERS)
+      VALUES (
+         #{artistId}, #{artistName}, #{performance}, #{profile}, #{artistImage}, #{artistMembers}
+      )
+   </insert>
+</mapper>

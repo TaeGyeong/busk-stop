@@ -5,7 +5,7 @@
 
 <tiles-definitions>
 	<definition name="template" template="/WEB-INF/view/layout/mainTemplate.jsp">
-		
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
 	</definition>
 	<definition name="*.tiles" extends="template">
 		<put-attribute name="content" value="/WEB-INF/view/content/{1}.jsp"/>
