@@ -1,16 +1,14 @@
 package com.buskstop.controller;
 
-import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.PerformanceService;
@@ -50,6 +48,13 @@ public class PerformanceController {
 	public String deletePerformance(@RequestParam int performanceNo) {
 		service.deletePerformanceByPerformance(performanceNo);
 		return "performance/performanceView.tiles";
+	}
+	
+	@RequestMapping("/allSelectPerformance")
+	public ModelAndView allSelectPerformance() {
+		List<Performance> list = service.selectAllPerformance();
+		System.out.println(list);
+		return new ModelAndView("performance/performanceView.tiles","list", list);	
 	}
 	
 }

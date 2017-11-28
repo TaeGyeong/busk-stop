@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,6 +37,10 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	@Override
 	public int deletePerformanceByPerformanceNo(int performanceNo) {
 		return session.delete(makeSqlId("deletePerformanceByPerformanceNo"),performanceNo);
+	}
+	
+	public List<Performance> selectAllPerformance(){
+		return session.selectList(makeSqlId("selectAllPerformance"));
 	}
 	
 }
