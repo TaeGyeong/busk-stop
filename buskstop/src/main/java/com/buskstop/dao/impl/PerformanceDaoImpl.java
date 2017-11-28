@@ -62,10 +62,6 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceName"), performanceName);
 	}
 	
-	public List<Performance> selectPerformanceByPerformanceDate(Date performanceDate){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceDate"), performanceDate);
-	}
-	
 	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), performanceContent);
 	}

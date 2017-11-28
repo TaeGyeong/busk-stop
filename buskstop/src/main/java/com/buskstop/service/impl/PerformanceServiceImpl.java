@@ -70,12 +70,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return list;
 	}
 
-	public List<Performance> selectPerformanceByPerformanceDate(Date performanceDate) {
-
-		List<Performance> list = dao.selectPerformanceByPerformanceDate(performanceDate);
-		return list;
-	}
-
 	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent) {
 
 		List<Performance> list = dao.selectPerformanceByPerformanceContent(performanceContent);

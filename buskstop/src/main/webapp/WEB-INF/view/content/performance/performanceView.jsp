@@ -77,7 +77,6 @@ select {
 				<option value="user">작성자</option>
 				<option value="location">공연장소</option>
 				<option value="name">공연이름</option>
-				<option value="date">공연날짜</option>
 				<option value="content">내용</option>
 			</select>
 			<input type="text" placeholder="검색" name="search">

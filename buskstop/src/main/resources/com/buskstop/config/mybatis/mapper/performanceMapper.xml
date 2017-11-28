@@ -85,12 +85,6 @@
 		where performance_name like '%'||#{performanceName}||'%'
 	</select>
 	
-	<!-- 공연정보 공연날짜로 검색 -->
-	<select id="selectPerformanceByPerformanceDate" parameterType="String" resultMap="performance-resultmap">
-		select * from performance
-		where performance_date like '%'||#{performanceDate}||'%'
-	</select>
-	
 	<!-- 공연정보 내용으로 검색 -->
 	<select id="selectPerformanceByPerformanceContent" parameterType="String" resultMap="performance-resultmap">
 		select * from performance
