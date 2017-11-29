@@ -18,6 +18,7 @@ public class Performance implements Serializable{
 	private String performanceImage;
 	private MultipartFile multiImage;
 	private String performanceUserId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date performanceRegTime;
 	// TODO 공연장 번호 연결 해야함.
 	//private int StageNo;
