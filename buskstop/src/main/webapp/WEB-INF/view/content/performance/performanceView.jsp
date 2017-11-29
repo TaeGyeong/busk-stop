@@ -52,7 +52,7 @@ select {
 					<td>공연장소</td>
 					<td>공연날짜</td>
 					<td>작성자</td>
-					<!-- <td>작성일</td> -->
+					<td>작성 시간</td>
 					<td>조회</td>
 					<!-- <td>좋아요</td> -->
 				</tr>
@@ -65,6 +65,7 @@ select {
 						<td>${item.performanceLocation}</td>
 						<td>${item.performanceDate}</td>
 						<td>${item.performanceUserId}</td>
+						<td>${item.performanceRegTime}</td>
 						<td>${item.performanceHits}</td>
 					</tr>
 				</c:forEach>
