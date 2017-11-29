@@ -72,18 +72,18 @@ tr:hover{
 					<td>${video.videoDate }</td>
 					<td>${video.videoArtist }</td>
 					<td>${video.videoRegTime }</td>
-					<td>
+					<%-- <td>
 						<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
-						<input type="hidden" value="${video.videoNo }">
+						<input type="hidden" value="${video.videoNo }" name="videoNo">
 						<button type="submit">상세보기</button>
 						<sec:csrfInput/>
 						</form>
-					</td>
+					</td> --%>
 				</tr>
-			<%-- <form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
 				<sec:csrfInput/>
 				<input type="hidden" value="${video.videoNo }" name="videoNumber">
-			</form> --%>
+			</form>
 		</c:forEach>
 	</tbody>
 </table>

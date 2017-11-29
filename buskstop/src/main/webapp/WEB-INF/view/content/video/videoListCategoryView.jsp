@@ -18,3 +18,8 @@
 	<input type="hidden" name="category" value="practice"/>
 	<button type="submit">연습영상</button>
 </form>
+<form action="${initParam.rootPath }/videoListCategory.do" method="post">
+	<sec:csrfInput/>
+	<input type="hidden" name="category" value="user"/>
+	<button type="submit">엄태경</button>
+</form>

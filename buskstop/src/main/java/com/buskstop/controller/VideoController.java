@@ -74,6 +74,12 @@ public class VideoController {
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
 	
+	@RequestMapping("/detailView")
+	public ModelAndView videoDetail(@RequestParam int videoNumber) {
+		Video video = service.selectVideoByVideoNo(videoNumber);
+		return new ModelAndView("video/videoDetailView.tiles","video",video);
+	}
+	
 	/**
 	 * 영상등록에사 공연영상 카테고리 선택
 	 * @return
@@ -118,21 +124,16 @@ public class VideoController {
 	public ModelAndView videoList(@RequestParam String category) {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
-	
+		System.out.println("category - "+category);
 		// response
 		if(category.equals("performance")) {
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
 		}else if (category.equals("artist")) {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
 		}else {
-			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
+			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}
 	}
 	
-	@RequestMapping("/detailView")
-	public ModelAndView videoDetail(@RequestParam int videoNumber) {
-		Video video = service.selectVideoByVideoNo(videoNumber);
-		return new ModelAndView("video/videoDetailView.tiles","video",video);
-	}
 	
 }

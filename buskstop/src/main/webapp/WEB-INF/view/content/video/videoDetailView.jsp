@@ -11,15 +11,15 @@
 		<div>
 			<h3>${requestScope.video.videoNo}. ${requestScope.video.videoTitle}</h3>
 		</div>
-		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
+		<%-- <div style="float:right; position: absolute; bottom: 10px; right: 0;">
 			<div style="float:right; margin-left:5px;">${requestScope.조회수}</div>
 			<div style="float:right; margin-left:20px;">조회</div>
 			<div style="float:right; margin-left:20px;">${requestScope.video.videoRegTime}<!--  [글쓴 날짜 들어갈 곳 2017-11-01 22:00]  --></div>
 			<div style="float:right;">${requestScope.video.videoUserId}<strong>님</strong></div>
-		</div>
-	</div>
+		</div>--%>
+	</div> 
 
-	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
+	<%-- <div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="float:left;">
 			<div style="float:left; margin-right:5px;">아티스트</div> 
 			<div style="float:left; margin-right:20px;">${requestScope.video.videoArtist}</div>
@@ -46,6 +46,6 @@
 		댓글은 이쯤에 구현하면 좋을듯?
 		</div>
 	</div>
-	<!-- Comment End-->
+	<!-- Comment End--> --%>
 	
 </div>
