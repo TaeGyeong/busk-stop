@@ -65,6 +65,7 @@ DROP TABLE STAGE_REVIEW
 DROP TABLE PERFORMANCE 
 	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE PERFORMANCE_NO_SEQ;
 /*--공연정보 댓글-----------------------------------------------------------------------*/
 
 /* 공연정보 댓글 */
