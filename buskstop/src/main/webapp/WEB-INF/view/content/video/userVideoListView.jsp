@@ -74,7 +74,7 @@ tr:hover{
 			</tr>
 			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
 				<sec:csrfInput/>
-				<input type="hidden" value="${video.videoNo }" name="videoNumber">
+				<input type="hidden" value="${video.videoNo }" name="videoNo">
 			</form>
 		</c:forEach>
 	</tbody>

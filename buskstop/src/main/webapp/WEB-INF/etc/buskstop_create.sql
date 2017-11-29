@@ -175,10 +175,7 @@ CREATE TABLE PERFORMANCE_LIKE (
 	CONSTRAINT FK_USERS_TO_P_LIKE FOREIGN KEY (PERFORMANCE_LIKE_USER_ID) REFERENCES USERS (USER_ID)
 );
 /*------------------------------------------------------------------------------------*/
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
 /* 동영상(게시물) */
 CREATE TABLE VIDEO (
 	VIDEO_NO NUMBER(10), /* 동영상번호 */

@@ -75,8 +75,8 @@ public class VideoController {
 	}
 	
 	@RequestMapping("/detailView")
-	public ModelAndView videoDetail(@RequestParam int videoNumber) {
-		Video video = service.selectVideoByVideoNo(videoNumber);
+	public ModelAndView videoDetail(@RequestParam int videoNo) {
+		Video video = service.selectVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles","video",video);
 	}
 	
@@ -127,9 +127,12 @@ public class VideoController {
 		System.out.println("category - "+category);
 		// response
 		if(category.equals("performance")) {
+			System.out.println("list - "+category);
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
 		}else if (category.equals("artist")) {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
+		}else if (category.equals("user")) {
+			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}else {
 			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}

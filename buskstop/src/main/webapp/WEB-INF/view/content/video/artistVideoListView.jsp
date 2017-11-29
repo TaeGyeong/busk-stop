@@ -9,10 +9,12 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("tr").on("click",function(){
-		document.getElementById("detailForm").submit();
+	$("#youtubeBtn").on("click",function(){
+		var txt = $("#url").val();
+		$("#result").html(txt);
 	});
 });
+
 </script>
 <style type="text/css">
 table, td {
