@@ -21,14 +21,14 @@
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="float:left;">
 			<div style="float:left; margin-right:5px;">아티스트</div> 
-			<div style="float:left; margin-right:20px;">${requestScope.video.videoㅁㄱ샨ㅅ}</div>
+			<div style="float:left; margin-right:20px;">${requestScope.video.videoArtist}</div>
 		</div>
 		<div style="float:left;">
 			<div style="float:left; margin-right:5px;">공연장소</div> 
 			<div style="float:left; margin-right:20px;">${requestScope.video.videoLocation }</div>
 		</div>
 		<div>
-			<div style="float:left; margin-right:5px;">공연 시간</div>
+			<div style="float:left; margin-right:5px;">공연시간</div>
 			<div style="float:left;">${requestScope.video.Date}</div>
 		</div>
 	</div>

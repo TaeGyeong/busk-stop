@@ -71,7 +71,7 @@ public class VideoController {
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoDetailView.tiles", "readVideoByVideoNo", video);
+		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
 	
 	/**
@@ -123,10 +123,12 @@ public class VideoController {
 		}
 		
 		// response
-		if(category.equals("user")) {
-			return new ModelAndView("video/userVideoListView.tiles","list",list);
-		}else {
+		if(category.equals("performance")) {
+			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+		}else if (category.equals("artist")) {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
+		}else {
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}
 	}
 	

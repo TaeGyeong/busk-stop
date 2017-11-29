@@ -18,7 +18,7 @@
 	</div>
 	<div class="form-group">
 		<label for="videoLink">영상 링크</label> <input type="text"
-			name="videoLink" id="videoRink" class="form-control"
+			name="videoLink" id="videoLink" class="form-control"
 			required="required">
 	</div>
 	<div class="form-group">
@@ -38,7 +38,7 @@
 			required="required">
 	</div>
 	<div class="form-group">
-		<input type="hidden" id ="videoCategory" name="videoCategory" value="공연영상" class="form-control">
+		<input type="hidden" id ="videoCategory" name="videoCategory" value="performace" class="form-control">
 	</div>
 	<label>추가 정보 입력</label>
 	<div class="form-group">

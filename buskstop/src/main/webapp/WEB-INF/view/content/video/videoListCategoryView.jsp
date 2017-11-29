@@ -4,11 +4,17 @@
 <form action="${initParam.rootPath }/videoListCategory.do" method="post">
 	<sec:csrfInput/>
 	<input type="hidden" name="category" value="artist"/>
-	<button type="submit">아티스트</button>
+	<button type="submit">아티스트 홍보영상</button>
 </form>
 <p>
 <form action="${initParam.rootPath }/videoListCategory.do" method="post">
 	<sec:csrfInput/>
-	<input type="hidden" name="category" value="user"/>
-	<button type="submit">일반회원</button>
+	<input type="hidden" name="category" value="performance"/>
+	<button type="submit">공연영상</button>
+</form>
+<p>
+<form action="${initParam.rootPath }/videoListCategory.do" method="post">
+	<sec:csrfInput/>
+	<input type="hidden" name="category" value="practice"/>
+	<button type="submit">연습영상</button>
 </form>

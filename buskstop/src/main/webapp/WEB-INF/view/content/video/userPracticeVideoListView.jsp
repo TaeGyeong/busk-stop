@@ -6,14 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("tr").on("click",function(){
-		document.getElementById("detailForm").submit();
-	});
-});
-</script>
 <style type="text/css">
 table, td {
 	border: 1px solid black;
@@ -29,14 +21,10 @@ td {
 	text-align: center;
 }
 
-tr:hover{
-	background-color : yellow;
-	
-}
-
 </style>
 </head>
 <body>
+<sec:csrfInput/>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
@@ -57,33 +45,24 @@ tr:hover{
 			<th>장소</th>
 			<th>내용</th>
 			<th>날짜</th>
-			<th>아티스트</th>
+			<th>사용자 아이디</th>
 			<th>등록시간</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.list }" var="video">
-				<tr>
-					<td>${video.videoNo }</td>
-					<td>${video.videoTitle }</td>
-					<td>${video.videoLink }</td>
-					<td>${video.videoLocation }</td>
-					<td>${video.videoContent }</td>
-					<td>${video.videoDate }</td>
-					<td>${video.videoArtist }</td>
-					<td>${video.videoRegTime }</td>
-					<td>
-						<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
-						<input type="hidden" value="${video.videoNo }">
-						<button type="submit">상세보기</button>
-						<sec:csrfInput/>
-						</form>
-					</td>
-				</tr>
-			
+			<tr>
+				<td>${video.videoNo }</td>
+				<td>${video.videoTitle }</td>
+				<td>${video.videoLink }</td>
+				<td>${video.videoLocation }</td>
+				<td>${video.videoContent }</td>
+				<td>${video.videoDate }</td>
+				<td>${video.videoUserId }</td>
+				<td>${video.videoRegTime }</td>
+			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-
 </body>
 </html>

@@ -54,7 +54,7 @@ td {
 			<tr>
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
-				<td>${video.videoRink }</td>
+				<td>${video.videoLink }</td>
 				<td>${video.videoLocation }</td>
 				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>
