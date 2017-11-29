@@ -13,6 +13,9 @@ from PERFORMANCE p, (
 	) pl
 where p.performance_no = pl.performance_like_no(+);
 
+/*  공연정보 게시판 글 읽기 (디테일 뷰)*/
+select * from performance where performance_no = 99;
+
 /* 공연정보 검색 */
 select p.*, pl.like_count /* like_count = 좋아요 수 */
 from PERFORMANCE p, (

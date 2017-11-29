@@ -60,15 +60,16 @@ select {
 			</thead>
 			<tbody id="tbody">
 				<c:forEach items="${requestScope.list}" var="item">
-					<tr>
-						<td>${item.performanceNo}</td>
-						<td>${item.performanceTitle}</td>
-						<td>${item.performanceLocation}</td>
-						<td>${item.performanceDate}</td>
-						<td>${item.performanceUserId}</td>
-						<td>${item.performanceRegTime}</td>
-						<td>${item.performanceHits}</td>
-					</tr>
+						<tr style = "cursor:pointer;" onclick="document.location.href='${initParam.rootPath }/performanceDetailView.do?performanceNo=${item.performanceNo}'">
+							<td>${item.performanceNo}</td>
+							<td>${item.performanceTitle}</td>
+							<td>${item.performanceLocation}</td>
+							<td>${item.performanceDate}</td>
+							<td>${item.performanceUserId}</td>
+							<td>${item.performanceRegTime}</td>
+							<td>${item.performanceHits}</td>
+						</tr>
+					
 				</c:forEach>
 			</tbody>
 		</table>
