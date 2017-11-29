@@ -24,9 +24,9 @@ public class ArtistDaoImpl implements ArtistDao{
 	}
 
 
-	/*@Override
+	@Override
 	public Artist selectArtistByUserId(String userId) {
 		return session.selectOne(makeSqlId("selectArtistByUserId"), userId);
-	}*/
+	}
 	
 }

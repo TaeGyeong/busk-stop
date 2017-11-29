@@ -10,5 +10,5 @@ public interface ArtistDao {
 	 * @param userId
 	 * @return
 	 */
-	/*Artist selectArtistByUserId(String userId) ;*/
+	Artist selectArtistByUserId(String userId) ;
 }
