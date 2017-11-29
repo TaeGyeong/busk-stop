@@ -52,6 +52,7 @@ insert into ARTIST values('id1','busker','hiphop','첵첵 아임 더 코리안',
 insert into ARTIST values('id2','busker2','j-pop','혼모노데쓰','c://img/img6','', 'sns6');
 insert into ARTIST values('id3','동엽신','k-pop','소원을 말해봐~','c://img/img7','규석쓰, 태봉이, 수찬쓰', 'sns7');
 
+
 /* 공연장(공급자 게시물) */
 insert into STAGE values('1', '홍대 놀이터', '홍대 어딘가', '200000', '100', '베이스기타, 일렉기타, 드럼, 건반, 앰프', '매우 쾌적한 환경을 조성하고 있습니다.', 1, 0, 1, 0, 1, 'hong1653','2017-11-11');
 insert into STAGE values('2', '서현 라이브 카페', '서현역 5번 출구', '100000', '85', '드럼, 건반, 앰프', '쾌적한 환경을 조성.', 0, 0, 0, 0, 1, 'sim1','2017-11-12');
@@ -82,6 +83,7 @@ insert into STAGE_REVIEW values(5,'kim4845',4,'너무 구려요','2017-12-19');
 insert into STAGE_REVIEW values(3,'beck4848',5,'갓태경','2017-12-20');
 insert into STAGE_REVIEW values(5,'lee534',2,'동엽신','2017-12-21');
 
+/*
 /* 공연정보(아티스트 게시물) */
 insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'c://img/img1','kimp123', null,'2017-12-21');
 insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3','2017-12-22');
@@ -115,6 +117,8 @@ insert into PERFORMANCE_LIKE values('1', 'yunee33');
 insert into PERFORMANCE_LIKE values('2', 'kimjr322');
 insert into PERFORMANCE_LIKE values('2', 'kimm990');
 insert into PERFORMANCE_LIKE values('2', 'kimdo327');
+*/
+
 
 /* 동영상(게시물) */
 insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', '2017-10-12', '메기 매운탕','','kimm990','2017-12-24');
