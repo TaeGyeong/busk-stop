@@ -3,11 +3,13 @@ package com.buskstop.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.buskstop.dao.PerformanceCommentDao;
 import com.buskstop.service.PerformanceCommentService;
 import com.buskstop.vo.PerformanceComment;
 
+@Service
 public class PerformanceCommentServiceImpl implements PerformanceCommentService{
 	
 	@Autowired

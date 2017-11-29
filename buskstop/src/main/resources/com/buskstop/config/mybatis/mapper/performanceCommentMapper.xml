@@ -11,21 +11,23 @@
 	</resultMap>
 	
 	
-	<select id="listComment" resultType="performanceComment">
+	<select id="listComment" resultType="PerformanceComment">
 		select performance_comment_no, performance_comment_user_id, performance_comment,performance_comment_reg_time
 		from performanceComment
 		where performance_no=#{performanceNo}
 		order by performance_no
 	</select>
 	
-	
-	<insert id="InsertPerformanceComment">
+	<insert id="InsertPerformanceComment" parameterType="PerformanceComment">
+	<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
+			select PERFORMANCE_NO_SEQ.nextval from dual
+		</selectKey>
 	insert into performance_comment (performance_comment_no, performance_no,performance_comment_user_id, performance_comment, performance_comment_reg_time)
-	values(performanceCommentNo_seq.nextval,#{performanceNo},#{performanceCommentUserId},,#{performanceComment},sysdate)
+	values(#{performanceCommentNo},#{performanceNo},#{performanceCommentUserId},,#{performanceComment},sysdate)
 	</insert>
 	
 
-	<update id="updatePerformanceComment" parameterType="performanceComment">
+	<update id="updatePerformanceComment" parameterType="PerformanceComment">
 		update performanceComment
 		<set>
 			<if test="performanceComment != null">performance_comment = #{performanceComment}</if>
