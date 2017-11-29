@@ -21,7 +21,7 @@
 		FROM	VIDEO
 	</sql>
 	
-	<resultMap type="Video" id="video-resultmap">
+	<resultMap type="video" id="video-resultmap">
 		<id column="video_no" property="videoNo"/>
 		<result column="video_title" property="videoTitle"/>
 		<result column="video_link" property="videoLink"/>
@@ -32,6 +32,7 @@
 		<result column="video_category" property="videoCategory"/>
 		<result column="video_reg_time" property="videoRegTime"/>
 		<result column="video_user_id" property="videoUserId"/>
+		<result column="video_reg_time" property="videoRegTime"/>
 	</resultMap>
 	
 	<insert id="insertVideo" parameterType="Video">
@@ -56,4 +57,8 @@
 		WHERE	video_no = #{value}	
 	</select>
 
+	<select id="selectAllVideoByCategory" parameterType="string" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{value}
+	</select>
 </mapper>

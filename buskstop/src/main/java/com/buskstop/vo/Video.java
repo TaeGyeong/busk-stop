@@ -15,10 +15,10 @@ public class Video implements Serializable{
 	private Date videoDate;
 	private String videoArtist;
 	private String videoCategory;//아티스트 홍보영상, 공연영상, 연습영상
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date videoRegTime;
 	private String videoUserId;
-	
 	
 	public Video() {
 	}
@@ -26,7 +26,6 @@ public class Video implements Serializable{
 
 	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
 			Date videoDate, String videoArtist, String videoCategory, Date videoRegTime, String videoUserId) {
-		super();
 		this.videoNo = videoNo;
 		this.videoTitle = videoTitle;
 		this.videoLink = videoLink;
@@ -37,28 +36,24 @@ public class Video implements Serializable{
 		this.videoCategory = videoCategory;
 		this.videoRegTime = videoRegTime;
 		this.videoUserId = videoUserId;
+		this.videoRegTime = videoRegTime;
 	}
-
 
 	public int getVideoNo() {
 		return videoNo;
 	}
 
-
 	public void setVideoNo(int videoNo) {
 		this.videoNo = videoNo;
 	}
-
 
 	public String getVideoTitle() {
 		return videoTitle;
 	}
 
-
 	public void setVideoTitle(String videoTitle) {
 		this.videoTitle = videoTitle;
 	}
-
 
 	public String getVideoLink() {
 		return videoLink;
@@ -69,56 +64,45 @@ public class Video implements Serializable{
 		this.videoLink = videoLink;
 	}
 
-
 	public String getVideoLocation() {
 		return videoLocation;
 	}
-
 
 	public void setVideoLocation(String videoLocation) {
 		this.videoLocation = videoLocation;
 	}
 
-
 	public String getVideoContent() {
 		return videoContent;
 	}
-
 
 	public void setVideoContent(String videoContent) {
 		this.videoContent = videoContent;
 	}
 
-
 	public Date getVideoDate() {
 		return videoDate;
 	}
-
 
 	public void setVideoDate(Date videoDate) {
 		this.videoDate = videoDate;
 	}
 
-
 	public String getVideoArtist() {
 		return videoArtist;
 	}
-
 
 	public void setVideoArtist(String videoArtist) {
 		this.videoArtist = videoArtist;
 	}
 
-
 	public String getVideoCategory() {
 		return videoCategory;
 	}
 
-
 	public void setVideoCategory(String videoCategory) {
 		this.videoCategory = videoCategory;
 	}
-
 
 	public Date getVideoRegTime() {
 		return videoRegTime;
@@ -129,23 +113,11 @@ public class Video implements Serializable{
 		this.videoRegTime = videoRegTime;
 	}
 
-
 	public String getVideoUserId() {
 		return videoUserId;
 	}
-
-
 	public void setVideoUserId(String videoUserId) {
 		this.videoUserId = videoUserId;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoLink=" + videoLink
-				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
-				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoRegTime=" + videoRegTime
-				+ ", videoUserId=" + videoUserId + "]";
 	}
 
 
@@ -226,4 +198,14 @@ public class Video implements Serializable{
 		return true;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoLink=" + videoLink
+				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
+				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoRegTime=" + videoRegTime
+				+ ", videoUserId=" + videoUserId + "]";
+	}
+
+	
 }
