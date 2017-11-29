@@ -84,7 +84,7 @@ public class VideoController {
 			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
 		}else {
 			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("/readArtistAuthorityByUserId.do");
+			return new ModelAndView("/artist/readArtist.do");
 		}
 	}
 	
