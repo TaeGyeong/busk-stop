@@ -1,9 +1,10 @@
 package com.buskstop.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.PerformanceDao;
@@ -45,5 +46,28 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return session.selectList(makeSqlId("selectAllPerformance"));
 	}
 	
+	public List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceTitle"), performanceTitle);
+	}
+	
+	public List<Performance> selectPerformanceByPerformanceUserId(String performanceUserId){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceUserId"), performanceUserId);
+	}
+	
+	public List<Performance> selectPerformanceByPerformanceLocation(String performanceLocation){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceLocation"), performanceLocation);
+	}
+	
+	public List<Performance> selectPerformanceByPerformanceName(String performanceName){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceName"), performanceName);
+	}
+	
+	public List<Performance> selectPerformanceByPerformanceDate(Date performanceDate){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceDate"), performanceDate);
+	}
+	
+	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent){
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), performanceContent);
+	}
 }
 //com.buskstop.config.mybatis.mapper.

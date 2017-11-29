@@ -62,4 +62,41 @@
 	<select id="selectAllPerformance" resultMap="performance-resultmap">
 		select * from performance
 	</select>
+	
+	<!-- 공연정보 제목으로 검색 -->
+	<select id="selectPerformanceByPerformanceTitle" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_title like '%'||#{performanceTitle}||'%'
+	</select>
+	
+	<!-- 공연정보 작성자로 검색 -->
+	<select id="selectPerformanceByPerformanceUserId" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_user_id like '%'||#{performanceUserId}||'%'
+	</select>
+	
+	<!-- 공연정보 공연장소로 검색 -->
+	<select id="selectPerformanceByPerformanceLocation" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_location like '%'||#{performanceLocation}||'%'
+	</select>
+	
+	<!-- 공연정보 공연이름으로 검색 -->
+	<select id="selectPerformanceByPerformanceName" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_name like '%'||#{performanceName}||'%'
+	</select>
+	
+	<!-- 공연정보 공연날짜로 검색 -->
+	<select id="selectPerformanceByPerformanceDate" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_date like '%'||#{performanceDate}||'%'
+	</select>
+	
+	<!-- 공연정보 내용으로 검색 -->
+	<select id="selectPerformanceByPerformanceContent" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_content like '%'||#{performanceContent}||'%'
+	</select>
+	
 </mapper>

@@ -24,6 +24,8 @@
 	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
 	<mvc:view-controller path="/testpage.do" view-name="testpage.tiles"/>
 	<mvc:view-controller path="/update_performance.do" view-name="performance/update_performance.tiles"/>
+	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
+	<mvc:view-controller path="/videoSelectCategoryView.do" view-name="video/videoSelectCategoryView.tiles"/>
 	
 	<!-- test link -->
 	

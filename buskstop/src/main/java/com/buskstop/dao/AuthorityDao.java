@@ -22,6 +22,12 @@ public interface AuthorityDao {
 	List<Authority> selectAuthoritiesByUserId(String userId);
 
 	/**
+	 * 사용자id로 사용자가 가지는 권한 중 artist를 조회
+	 * @param userId
+	 * @return
+	 */
+	boolean selectArtistAuthoritiesByUserId(String userId);
+	/**
 	 * 사용자 권한 수정
 	 * @param authority
 	 * @return
