@@ -24,5 +24,5 @@ public interface VideoDao {
 	 * 모든 동영상 조회
 	 * @return
 	 */
-	List<Video> selectAllVideo (String category);
+	List<Video> selectAllVideoByCategory (String category);
 }

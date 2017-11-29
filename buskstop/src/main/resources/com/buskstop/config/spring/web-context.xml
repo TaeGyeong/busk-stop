@@ -37,5 +37,10 @@
 		</property>
 	</bean>
 	
-	<bean name="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+	<bean name="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="1"/>
+	</bean>
+	<bean name="internalViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"/>
+	</bean>
 </beans>

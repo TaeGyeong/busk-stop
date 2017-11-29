@@ -51,10 +51,12 @@
 			</sec:authorize>
 		</div>
 		
+		
 		<!-- 공연장 번호 -->
 		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/performanceView.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
+	
 	
 </body>
 </html>

@@ -84,12 +84,6 @@ public class PerformanceController {
 		}else if(category.equals("name")) {
 			List<Performance> list = service.selectPerformanceByPerformanceName(search);
 			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}else if(category.equals("date")) {
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date to = transFormat.parse(search);
-			
-			List<Performance> list = service.selectPerformanceByPerformanceDate(to);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
 		}else if(category.equals("content")) {
 			List<Performance> list = service.selectPerformanceByPerformanceContent(search);
 			return new ModelAndView("performance/performanceView.tiles", "list", list);

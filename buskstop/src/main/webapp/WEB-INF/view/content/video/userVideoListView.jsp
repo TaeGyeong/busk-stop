@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+table, td {
+	border: 1px solid black;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+td {
+	padding: 5px;
+	text-align: center;
+}
+
+</style>
 </head>
 <body>
 <sec:csrfInput/>
@@ -30,6 +46,7 @@
 			<th>내용</th>
 			<th>날짜</th>
 			<th>사용자 아이디</th>
+			<th>등록시간</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -38,10 +55,11 @@
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
 				<td>${video.videoRink }</td>
-				<td>${video.Location }</td>
-				<td>${video.Content }</td>
+				<td>${video.videoLocation }</td>
+				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>
 				<td>${video.videoUserId }</td>
+				<td>${video.videoRegTime }</td>
 			</tr>
 		</c:forEach>
 	</tbody>

@@ -30,7 +30,5 @@ public interface PerformanceDao {
 	
 	List<Performance> selectPerformanceByPerformanceName(String performanceName);
 	
-	List<Performance> selectPerformanceByPerformanceDate(Date performanceDate);
-	
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
 }

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="videoMapper">
+<mapper namespace="com.buskstop.config.mybatis.mapper.videoMapper">
 	
 	<!-- sql 설정 -->
 	<sql id="video-column-sql">
 		video_no,
 		video_title,
-		video_like,
+		video_link,
 		video_location,
 		video_content,
 		video_date,
 		video_artist,
 		video_category,
-		video_user_id
+		video_user_id,
+		video_reg_time
 	</sql>
 	
 	<sql id="video-select-sql">
@@ -20,16 +21,17 @@
 		FROM	VIDEO
 	</sql>
 	
-	<resultMap type="Video" id="video-resultmap">
+	<resultMap type="video" id="video-resultmap">
 		<id column="video_no" property="videoNo"/>
 		<result column="video_title" property="videoTitle"/>
-		<result column="video_like" property="videoRink"/>
+		<result column="video_link" property="videoRink"/>
 		<result column="video_location" property="videoLocation"/>
 		<result column="video_content" property="videoContent"/>
 		<result column="video_date" property="videoDate"/>
 		<result column="video_artist" property="videoArtist"/>
 		<result column="video_category" property="videoCategory"/>
 		<result column="video_user_id" property="videoUserId"/>
+		<result column="video_reg_time" property="videoRegTime"/>
 	</resultMap>
 	
 	<insert id="insertVideo" parameterType="Video">
@@ -43,7 +45,7 @@
 		WHERE	video_no = #{value}	
 	</select>
 
-	<select id="selectAllVideo" resultMap="video-resultmap">
+	<select id="selectAllVideoByCategory" parameterType="string" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE VIDEO_CATEGORY = #{value}
 	</select>

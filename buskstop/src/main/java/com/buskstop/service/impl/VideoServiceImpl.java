@@ -48,8 +48,8 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override // 모든 동영상 조회.
-	public List<Video> viewAllVideo(String category) {
-		return dao.selectAllVideo(category);
+	public List<Video> viewAllVideo (String category) {
+		return dao.selectAllVideoByCategory(category);
 	}
 	
 	

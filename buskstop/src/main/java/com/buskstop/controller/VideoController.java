@@ -80,12 +80,12 @@ public class VideoController {
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
 		String userId = ((User)authentication.getPrincipal()).getUserId();
-		
-		if(videoCategory == "user") {
-			return new ModelAndView("videoRegisterView.tiles", "userId", userId);
+		System.out.println(userId);
+		if(videoCategory.matches("user")) {
+			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
 		}else {
 			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("readAuthorityByUserId.do", "userId", userId);
+			return new ModelAndView("/readArtistAuthorityByUserId.do");
 		}
 	}
 	
@@ -93,6 +93,9 @@ public class VideoController {
 	public ModelAndView videoList(@RequestParam String category) {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
+		for(Video v : list) {
+			System.out.println(v);
+		}
 		
 		// response
 		if(category.equals("user")) {
@@ -100,6 +103,12 @@ public class VideoController {
 		}else {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
 		}
+	}
+	
+	@RequestMapping("/detailView")
+	public ModelAndView videoDetail() {
+		
+		return new ModelAndView("video/videoDetailView.tiles","",null);
 	}
 	
 }

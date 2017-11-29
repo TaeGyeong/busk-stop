@@ -10,7 +10,8 @@
 		performance_date,
 		performance_content,
 		performance_image,
-		performance_user_id
+		performance_user_id,
+		performance_reg_time
 	</sql>
 
 	<!-- ResultMap 등록 -->
@@ -24,6 +25,7 @@
 		<result column="performance_content" property="performanceContent"/>
 		<result column="performance_image" property="performanceImage"/>
 		<result column="performance_user_id" property="performanceUserId"/>
+		<result column="performance_reg_time" property="performanceRegTime"/>
 	</resultMap>
 	
 	<!-- 공연정보 insert -->
@@ -34,7 +36,7 @@
 		insert into PERFORMANCE (<include refid="column-performance"/>)
 		values(#{performanceNo}, #{performanceName}, #{performanceTitle}, 
 		#{performanceLocation}, #{performanceDate}, #{performanceContent}, 
-		#{performanceImage}, #{performanceUserId})
+		#{performanceImage}, #{performanceUserId}, sysdate)
 	</insert>
 	
 	<update id="updatePerformance" parameterType="Performance">
@@ -83,12 +85,6 @@
 	<select id="selectPerformanceByPerformanceName" parameterType="String" resultMap="performance-resultmap">
 		select * from performance
 		where performance_name like '%'||#{performanceName}||'%'
-	</select>
-	
-	<!-- 공연정보 공연날짜로 검색 -->
-	<select id="selectPerformanceByPerformanceDate" parameterType="String" resultMap="performance-resultmap">
-		select * from performance
-		where performance_date like '%'||#{performanceDate}||'%'
 	</select>
 	
 	<!-- 공연정보 내용으로 검색 -->

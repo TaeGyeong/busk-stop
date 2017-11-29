@@ -30,8 +30,8 @@ public class VideoDaoImpl implements VideoDao{
 	}
 
 	@Override
-	public List<Video> selectAllVideo(String category) {
-		return session.selectList(makeSqlId("selectAllVideo"),category);
+	public List<Video> selectAllVideoByCategory(String category) {
+		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
 	}
 	
 }
