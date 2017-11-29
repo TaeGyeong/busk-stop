@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("tr").on("click",function(){
+		document.getElementById("detailForm").submit();
+	});
+});
+</script>
 <style type="text/css">
 table, td {
 	border: 1px solid black;
@@ -20,7 +28,10 @@ td {
 	padding: 5px;
 	text-align: center;
 }
-
+tr:hover{
+	background-color : yellow;
+	
+}
 </style>
 </head>
 <body>
@@ -54,13 +65,17 @@ td {
 			<tr>
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
-				<td>${video.videoRink }</td>
+				<td>${video.videoLink }</td>
 				<td>${video.videoLocation }</td>
 				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>
 				<td>${video.videoUserId }</td>
 				<td>${video.videoRegTime }</td>
 			</tr>
+			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+				<sec:csrfInput/>
+				<input type="hidden" value="${video.videoNo }" name="videoNumber">
+			</form>
 		</c:forEach>
 	</tbody>
 </table>

@@ -175,12 +175,11 @@ CREATE TABLE PERFORMANCE_LIKE (
 	CONSTRAINT FK_USERS_TO_P_LIKE FOREIGN KEY (PERFORMANCE_LIKE_USER_ID) REFERENCES USERS (USER_ID)
 );
 /*------------------------------------------------------------------------------------*/
-select*from video;
 /* 동영상(게시물) */
 CREATE TABLE VIDEO (
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
 	VIDEO_TITLE VARCHAR2(100) NOT NULL, /* 제목 */
-	VIDEO_LINK VARCHAR2(80) NOT NULL, /* 링크 */
+	VIDEO_LINK VARCHAR2(400) NOT NULL, /* 링크 */
 	VIDEO_LOCATION VARCHAR2(30), /* 장소 */
 	VIDEO_CONTENT VARCHAR2(3000), /* 게시자 등록글 */
 	VIDEO_DATE DATE, /* 등록일자 */

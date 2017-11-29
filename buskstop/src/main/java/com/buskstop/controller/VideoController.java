@@ -93,10 +93,7 @@ public class VideoController {
 	public ModelAndView videoList(@RequestParam String category) {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
-		for(Video v : list) {
-			System.out.println(v);
-		}
-		
+	
 		// response
 		if(category.equals("user")) {
 			return new ModelAndView("video/userVideoListView.tiles","list",list);
@@ -106,9 +103,9 @@ public class VideoController {
 	}
 	
 	@RequestMapping("/detailView")
-	public ModelAndView videoDetail() {
-		
-		return new ModelAndView("video/videoDetailView.tiles","",null);
+	public ModelAndView videoDetail(@RequestParam int videoNumber) {
+		Video video = service.selectVideoByVideoNo(videoNumber);
+		return new ModelAndView("video/videoDetailView.tiles","video",video);
 	}
 	
 }

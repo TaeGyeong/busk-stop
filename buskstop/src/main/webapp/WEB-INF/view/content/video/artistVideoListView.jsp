@@ -67,15 +67,16 @@ tr:hover{
 				<tr>
 					<td>${video.videoNo }</td>
 					<td>${video.videoTitle }</td>
-					<td>${video.videoRink }</td>
+					<td>${video.videoLink }</td>
 					<td>${video.videoLocation }</td>
 					<td>${video.videoContent }</td>
 					<td>${video.videoDate }</td>
 					<td>${video.videoArtist }</td>
 					<td>${video.videoRegTime }</td>
 				</tr>
-			<form action="${initParam.rootPath }/videoDetailView.tiles" method="post" id="detailForm">
-				<input type="hidden" value="${video.videoNo }">
+			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+				<sec:csrfInput/>
+				<input type="hidden" value="${video.videoNo }" name="videoNumber">
 			</form>
 		</c:forEach>
 	</tbody>
