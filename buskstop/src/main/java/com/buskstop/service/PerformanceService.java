@@ -45,12 +45,6 @@ public interface PerformanceService {
 	 */
 	List<Performance> selectPerformanceByPerformanceName(String performanceName);
 	/**
-	 * 공연정보 날짜로 검색
-	 * @param performanceDate
-	 * @return
-	 */
-	List<Performance> selectPerformanceByPerformanceDate(Date performanceDate);
-	/**
 	 * 공연정보 내용으로 검색
 	 * @param performanceContent
 	 * @return

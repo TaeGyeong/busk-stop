@@ -60,6 +60,7 @@ DROP TABLE STAGE_REVIEW
 
 /*---공연정보(아티스트 게시물)---------------------------------------------------------------*/
 
+
 /* 공연정보(아티스트 게시물) */
 DROP TABLE PERFORMANCE 
 	CASCADE CONSTRAINTS;
@@ -70,6 +71,7 @@ DROP SEQUENCE PERFORMANCE_NO_SEQ;
 /* 공연정보 댓글 */
 DROP TABLE PERFORMANCE_COMMENT 
 	CASCADE CONSTRAINTS;
+	
 /*--- 공연정보 좋아요----------------------------------------------------------------------*/
 
 /* 공연정보 좋아요 */
