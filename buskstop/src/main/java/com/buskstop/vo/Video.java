@@ -1,7 +1,7 @@
 package com.buskstop.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Video implements Serializable{
 	private int videoNo;
@@ -12,6 +12,7 @@ public class Video implements Serializable{
 	private Date videoDate;
 	private String videoArtist;
 	private String videoCategory;//아티스트 홍보영상, 공연영상, 연습영상
+	private Date videoRegTime;
 	private int videoUserId;
 	
 	
@@ -20,7 +21,7 @@ public class Video implements Serializable{
 
 
 	public Video(int videoNo, String videoTitle, String videoRink, String videoLocation, String videoContent,
-			Date videoDate, String videoArtist, String videoCategory, int videoUserId) {
+			Date videoDate, String videoArtist, String videoCategory, Date videoRegTime, int videoUserId) {
 		super();
 		this.videoNo = videoNo;
 		this.videoTitle = videoTitle;
@@ -30,6 +31,7 @@ public class Video implements Serializable{
 		this.videoDate = videoDate;
 		this.videoArtist = videoArtist;
 		this.videoCategory = videoCategory;
+		this.videoRegTime = videoRegTime;
 		this.videoUserId = videoUserId;
 	}
 
@@ -114,6 +116,16 @@ public class Video implements Serializable{
 	}
 
 
+	public Date getVideoRegTime() {
+		return videoRegTime;
+	}
+
+
+	public void setVideoRegTime(Date videoRegTime) {
+		this.videoRegTime = videoRegTime;
+	}
+
+
 	public int getVideoUserId() {
 		return videoUserId;
 	}
@@ -128,8 +140,8 @@ public class Video implements Serializable{
 	public String toString() {
 		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoRink=" + videoRink
 				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
-				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoUserId=" + videoUserId
-				+ "]";
+				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoRegTime=" + videoRegTime
+				+ ", videoUserId=" + videoUserId + "]";
 	}
 
 
@@ -143,6 +155,7 @@ public class Video implements Serializable{
 		result = prime * result + ((videoDate == null) ? 0 : videoDate.hashCode());
 		result = prime * result + ((videoLocation == null) ? 0 : videoLocation.hashCode());
 		result = prime * result + videoNo;
+		result = prime * result + ((videoRegTime == null) ? 0 : videoRegTime.hashCode());
 		result = prime * result + ((videoRink == null) ? 0 : videoRink.hashCode());
 		result = prime * result + ((videoTitle == null) ? 0 : videoTitle.hashCode());
 		result = prime * result + videoUserId;
@@ -186,6 +199,11 @@ public class Video implements Serializable{
 			return false;
 		if (videoNo != other.videoNo)
 			return false;
+		if (videoRegTime == null) {
+			if (other.videoRegTime != null)
+				return false;
+		} else if (!videoRegTime.equals(other.videoRegTime))
+			return false;
 		if (videoRink == null) {
 			if (other.videoRink != null)
 				return false;
@@ -200,6 +218,5 @@ public class Video implements Serializable{
 			return false;
 		return true;
 	}
-	
 
 }

@@ -23,5 +23,10 @@ public class ArtistServiceImpl implements ArtistService{
 		artistDao.insertArtist(artist);
 		authorityDao.insertAuthority(new Authority(artist.getArtistId(),"ROLE_ARTIST"));
 	}
+
+	@Override
+	public Artist readArtistByUserId(String userId) {
+		return artistDao.selectArtistByUserId(userId);
+	}
 	
 }

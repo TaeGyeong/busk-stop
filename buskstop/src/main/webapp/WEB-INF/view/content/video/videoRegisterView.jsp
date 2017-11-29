@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h2>일반회원 동영상 등록</h2>
-<form action="${initParam.rootPath }/performanceRegister.do" method="post">
-
+<form action="${initParam.rootPath }/createVideo.do" method="post">
+	<sec:csrfInput/>
 	<div class="form-group">
 		<label for="videoTitle">영상 제목</label> <input type="text"
 			name="videoTitle" id="videoTitle" class="form-control"
@@ -29,13 +30,15 @@
 			required="required">
 	</div>
 	<div class="form-group">
-		<label for="videoCategory">카테고리</label> <input type="date"
-			name="videoCategory" id="videoCategory" class="form-control"
-			required="required">
+		<label for="videoCategory">카테고리</label> 
+		<select name="videoCategory">
+			<option value="performance">공연영상</option>
+			<option value="practice">연습영상</option>
+		</select>
 	</div>
 	<label>추가 정보 입력</label>
 	<div class="form-group">
 		<textarea rows="15" cols="150" name="videoContent"
 			placeholder="영상에 대한 정보를 입력하세요."></textarea>
 	</div>
-	
+</form>
