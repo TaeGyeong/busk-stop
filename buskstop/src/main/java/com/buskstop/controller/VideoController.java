@@ -64,14 +64,14 @@ public class VideoController {
 	@RequestMapping("/createVideo")
 	public ModelAndView createVideo(@ModelAttribute Video video) {
 		service.insertVideo(video);
-		return new ModelAndView("/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
+		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
 		
 	}
 	
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("/video/videoDetail.tiles", "readVideoByVideoNo", video);
+		return new ModelAndView("video/videoDetailView.tiles", "readVideoByVideoNo", video);
 	}
 	
 	@RequestMapping("/videoSelectCategory")
@@ -85,7 +85,7 @@ public class VideoController {
 			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
 		}else {
 			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("/readArtistAuthorityByUserId.do");
+			return new ModelAndView("/artist/readArtist.do");
 		}
 	}
 	

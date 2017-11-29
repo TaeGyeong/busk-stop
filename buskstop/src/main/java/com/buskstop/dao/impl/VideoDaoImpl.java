@@ -21,6 +21,8 @@ public class VideoDaoImpl implements VideoDao{
 
 	@Override//동영상 등록
 	public int insertVideo(Video video) {
+		System.out.println("insertVideo : before - "+video);
+		System.out.println(session.insert(makeSqlId("insertVideo"), video));
 		return session.insert(makeSqlId("insertVideo"), video);
 	}
 	
