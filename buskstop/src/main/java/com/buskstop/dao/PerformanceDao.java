@@ -15,4 +15,6 @@ public interface PerformanceDao {
 	
 	//모든 공연 정보 조회 (Mock)
 	List<Performance> selectAllPerformance();
+	
+	Performance selectPerformanceByPerformanceNo(int performanceNo);
 }

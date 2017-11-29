@@ -28,5 +28,16 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return session.selectList(makeSqlId("selectAllPerformance"));
 	}
 	
+	public Performance selectPerformanceByPerformanceNo(int performanceNo){
+		System.out.println("Dao 파라미터");
+		System.out.println(performanceNo);
+		
+		Performance i = session.selectOne(makeSqlId("selectPerformanceByPerformanceNo"),performanceNo);
+		
+		System.out.println("Dao 리턴");
+		System.out.println(i);
+		return i;
+	}
+	
 }
 //com.buskstop.config.mybatis.mapper.

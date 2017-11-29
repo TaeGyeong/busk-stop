@@ -13,4 +13,6 @@ public interface PerformanceService {
 	void insertPerformance(Performance performance);
 	
 	List<Performance> selectAllPerformance();
+	
+	Performance selectPerformanceByPerformanceNo(int performanceNo);
 }

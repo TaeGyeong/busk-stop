@@ -29,4 +29,15 @@ public class PerformanceServiceImpl implements PerformanceService {
 		List<Performance> list = dao.selectAllPerformance();
 		return list;
 	}
+	
+	public Performance selectPerformanceByPerformanceNo(int performanceNo){
+		System.out.println("서비스 파라미터");
+		System.out.println(performanceNo);
+		
+		Performance i = dao.selectPerformanceByPerformanceNo(performanceNo);
+		System.out.println("서비스 리턴");
+		System.out.println(i);
+		return i;
+		//return dao.selectPerformanceByPerformanceNo(performanceNo);
+	}
 }
