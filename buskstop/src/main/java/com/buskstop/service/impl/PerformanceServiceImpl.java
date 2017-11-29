@@ -45,9 +45,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 		List<Performance> list = dao.selectAllPerformance();
 		return list;
 	}
-<<<<<<< HEAD
 	
-	public Performance selectPerformanceByPerformanceNo(int performanceNo){
+	public Performance PerformanceByPerformanceNo(int performanceNo){
 		System.out.println("서비스 파라미터");
 		System.out.println(performanceNo);
 		
@@ -56,8 +55,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 		System.out.println(i);
 		return i;
 		//return dao.selectPerformanceByPerformanceNo(performanceNo);
-=======
-
+	}
+	
 	public List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle) {
 
 		List<Performance> list = dao.selectPerformanceByPerformanceTitle(performanceTitle);
@@ -86,6 +85,5 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 		List<Performance> list = dao.selectPerformanceByPerformanceContent(performanceContent);
 		return list;
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
 	}
 }

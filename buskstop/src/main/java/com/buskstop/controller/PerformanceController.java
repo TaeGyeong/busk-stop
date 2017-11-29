@@ -74,7 +74,7 @@ public class PerformanceController {
 		System.out.println("컨트롤러 파라미터");
 		System.out.println(performanceNo);
 		
-		Performance performance = service.selectPerformanceByPerformanceNo(performanceNo);
+		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
 		
 		System.out.println("컨트롤러 리턴");
 		System.out.println(performance);
