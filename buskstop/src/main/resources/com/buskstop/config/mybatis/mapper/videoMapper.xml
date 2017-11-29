@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="videoMapper">
+<mapper namespace="com.buskstop.config.mybatis.mapper.videoMapper">
 	
 	<!-- sql 설정 -->
 	<sql id="video-column-sql">
 		video_no,
 		video_title,
-		video_rink,
+		video_link,
 		video_location,
 		video_content,
 		video_date,
 		video_artist,
 		video_category,
-		vidoe_reg_time,
-		video_user_id
+		video_user_id,
+		video_reg_time
 	</sql>
 	
 	<sql id="video-select-sql">
@@ -24,7 +24,7 @@
 	<resultMap type="Video" id="video-resultmap">
 		<id column="video_no" property="videoNo"/>
 		<result column="video_title" property="videoTitle"/>
-		<result column="video_rink" property="videoRink"/>
+		<result column="video_rink" property="videoLink"/>
 		<result column="video_location" property="videoLocation"/>
 		<result column="video_content" property="videoContent"/>
 		<result column="video_date" property="videoDate"/>
@@ -35,16 +35,25 @@
 	</resultMap>
 	
 	<insert id="insertVideo" parameterType="Video">
+		<selectKey keyProperty="videoNo" resultType="_int" order="BEFORE">
+			select VIDEO_NO_SEQ.nextval from dual
+		</selectKey>
 		INSERT INTO video
-		SET			<include refid="video-column-sql"/>
-		VALUES		(#{videoNo}, #{videoTitle}, #{videoRink}, #{videoLocation}, #{videoContent}, #{videoDate}, #{videoArtist}, #{videoCategory}, #{videoRegTime}, #{videoUserId})
+		VALUES		(#{videoNo}, 
+					 #{videoTitle}, 
+					 #{videoLink}, 
+					 #{videoLocation}, 
+					 #{videoContent}, 
+					 #{videoDate}, 
+					 #{videoArtist}, 
+					 #{videoCategory}, 
+					 #{videoUserId},
+					 sysdate)
 	</insert>
 
 	<select id="selectVideoByVideoNo" parameterType="_int" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE	video_no = #{value}	
 	</select>
-
-
 
 </mapper>

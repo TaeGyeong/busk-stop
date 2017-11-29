@@ -63,7 +63,7 @@ public class VideoController {
 	@RequestMapping("/createVideo")
 	public ModelAndView createVideo(@ModelAttribute Video video) {
 		service.insertVideo(video);
-		return new ModelAndView("/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
+		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
 		
 	}
 	
