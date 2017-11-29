@@ -16,15 +16,17 @@ public class Performance implements Serializable{
 	private int performanceHits;
 	private String performanceContent;
 	private String performanceImage;
+	private MultipartFile multiImage;
 	private String performanceUserId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date performanceRegTime;
 	// TODO 공연장 번호 연결 해야함.
 	//private int StageNo;
 	
 	public Performance() {}
-
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
 			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
-			String performanceUserId) {
+			MultipartFile multiImage, String performanceUserId, Date performanceRegTime) {
 		this.performanceNo = performanceNo;
 		this.performanceName = performanceName;
 		this.performanceTitle = performanceTitle;
@@ -33,102 +35,85 @@ public class Performance implements Serializable{
 		this.performanceHits = performanceHits;
 		this.performanceContent = performanceContent;
 		this.performanceImage = performanceImage;
+		this.multiImage = multiImage;
 		this.performanceUserId = performanceUserId;
+		this.performanceRegTime = performanceRegTime;
 	}
-
-	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
-			Date performanceDate, String performanceContent, String performanceImage, String performanceUserId) {
-		this.performanceNo = performanceNo;
-		this.performanceName = performanceName;
-		this.performanceTitle = performanceTitle;
-		this.performanceLocation = performanceLocation;
-		this.performanceDate = performanceDate;
-		this.performanceContent = performanceContent;
-		this.performanceImage = performanceImage;
-		this.performanceUserId = performanceUserId;
-	}
-
-	public int getPerformanceNo() {
-		return performanceNo;
-	}
-
-	public void setPerformanceNo(int performanceNo) {
-		this.performanceNo = performanceNo;
-	}
-
-	public String getPerformanceName() {
-		return performanceName;
-	}
-
-	public void setPerformanceName(String performanceName) {
-		this.performanceName = performanceName;
-	}
-
-	public String getPerformanceTitle() {
-		return performanceTitle;
-	}
-
-	public void setPerformanceTitle(String performanceTitle) {
-		this.performanceTitle = performanceTitle;
-	}
-
-	public String getPerformanceLocation() {
-		return performanceLocation;
-	}
-
-	public void setPerformanceLocation(String performanceLocation) {
-		this.performanceLocation = performanceLocation;
-	}
-
-	public Date getPerformanceDate() {
-		return performanceDate;
-	}
-
-	public void setPerformanceDate(Date performanceDate) {
-		this.performanceDate = performanceDate;
-	}
-
-	public int getPerformanceHits() {
-		return performanceHits;
-	}
-
-	public void setPerformanceHits(int performanceHits) {
-		this.performanceHits = performanceHits;
-	}
-
-	public String getPerformanceContent() {
-		return performanceContent;
-	}
-
-	public void setPerformanceContent(String performanceContent) {
-		this.performanceContent = performanceContent;
-	}
-
-	public String getPerformanceImage() {
-		return performanceImage;
-	}
-
-	public void setPerformanceImage(String performanceImage) {
-		this.performanceImage = performanceImage;
-	}
-
-	public String getPerformanceUserId() {
-		return performanceUserId;
-	}
-
-	public void setPerformanceUserId(String performanceUserId) {
-		this.performanceUserId = performanceUserId;
-	}
-
 	@Override
 	public String toString() {
 		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
 				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
 				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
 				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
-				+ ", performanceUserId=" + performanceUserId + "]";
+				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceRegTime="
+				+ performanceRegTime + "]";
 	}
-
+	public int getPerformanceNo() {
+		return performanceNo;
+	}
+	public void setPerformanceNo(int performanceNo) {
+		this.performanceNo = performanceNo;
+	}
+	public String getPerformanceName() {
+		return performanceName;
+	}
+	public void setPerformanceName(String performanceName) {
+		this.performanceName = performanceName;
+	}
+	public String getPerformanceTitle() {
+		return performanceTitle;
+	}
+	public void setPerformanceTitle(String performanceTitle) {
+		this.performanceTitle = performanceTitle;
+	}
+	public String getPerformanceLocation() {
+		return performanceLocation;
+	}
+	public void setPerformanceLocation(String performanceLocation) {
+		this.performanceLocation = performanceLocation;
+	}
+	public Date getPerformanceDate() {
+		return performanceDate;
+	}
+	public void setPerformanceDate(Date performanceDate) {
+		this.performanceDate = performanceDate;
+	}
+	public int getPerformanceHits() {
+		return performanceHits;
+	}
+	public void setPerformanceHits(int performanceHits) {
+		this.performanceHits = performanceHits;
+	}
+	public String getPerformanceContent() {
+		return performanceContent;
+	}
+	public void setPerformanceContent(String performanceContent) {
+		this.performanceContent = performanceContent;
+	}
+	public String getPerformanceImage() {
+		return performanceImage;
+	}
+	public void setPerformanceImage(String performanceImage) {
+		this.performanceImage = performanceImage;
+	}
+	public MultipartFile getMultiImage() {
+		return multiImage;
+	}
+	public void setMultiImage(MultipartFile multiImage) {
+		this.multiImage = multiImage;
+	}
+	public String getPerformanceUserId() {
+		return performanceUserId;
+	}
+	public void setPerformanceUserId(String performanceUserId) {
+		this.performanceUserId = performanceUserId;
+	}
+	public Date getPerformanceRegTime() {
+		return performanceRegTime;
+	}
+	public void setPerformanceRegTime(Date performanceRegTime) {
+		this.performanceRegTime = performanceRegTime;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -140,11 +125,11 @@ public class Performance implements Serializable{
 		result = prime * result + ((performanceLocation == null) ? 0 : performanceLocation.hashCode());
 		result = prime * result + ((performanceName == null) ? 0 : performanceName.hashCode());
 		result = prime * result + performanceNo;
+		result = prime * result + ((performanceRegTime == null) ? 0 : performanceRegTime.hashCode());
 		result = prime * result + ((performanceTitle == null) ? 0 : performanceTitle.hashCode());
 		result = prime * result + ((performanceUserId == null) ? 0 : performanceUserId.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -183,6 +168,11 @@ public class Performance implements Serializable{
 			return false;
 		if (performanceNo != other.performanceNo)
 			return false;
+		if (performanceRegTime == null) {
+			if (other.performanceRegTime != null)
+				return false;
+		} else if (!performanceRegTime.equals(other.performanceRegTime))
+			return false;
 		if (performanceTitle == null) {
 			if (other.performanceTitle != null)
 				return false;
@@ -195,5 +185,8 @@ public class Performance implements Serializable{
 			return false;
 		return true;
 	}
+	
+
+	
 
 }

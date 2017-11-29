@@ -3,14 +3,15 @@
 <mapper namespace="com.buskstop.config.mybatis.mapper.performanceMapper">
 
 	<sql id="column-performance">
-		performance_no, 
-		performance_name, 
-		performance_title, 
-		performance_location, 
-		performance_date, 
-		performance_content, 
-		performance_image, 
-		performance_user_id
+		performance_no,
+		performance_name,
+		performance_title,
+		performance_location,
+		performance_date,
+		performance_content,
+		performance_image,
+		performance_user_id,
+		performance_reg_time
 	</sql>
 
 	<!-- ResultMap 등록 -->
@@ -24,17 +25,43 @@
 		<result column="performance_content" property="performanceContent"/>
 		<result column="performance_image" property="performanceImage"/>
 		<result column="performance_user_id" property="performanceUserId"/>
+		<result column="performance_reg_time" property="performanceRegTime"/>
 	</resultMap>
 	
 	<!-- 공연정보 insert -->
 	<insert id="insertPerformance" parameterType="Performance">
+		<selectKey keyProperty="performanceNo" resultType="_int" order="BEFORE">
+			select PERFORMANCE_NO_SEQ.nextval from dual
+		</selectKey>
 		insert into PERFORMANCE (<include refid="column-performance"/>)
 		values(#{performanceNo}, #{performanceName}, #{performanceTitle}, 
 		#{performanceLocation}, #{performanceDate}, #{performanceContent}, 
-		#{performanceImage}, #{performanceUserId})
+		#{performanceImage}, #{performanceUserId}, sysdate)
 	</insert>
 	
+<<<<<<< HEAD
 	<!-- 공연정보 리스트 조회 (뷰) select mock -->
+=======
+	<update id="updatePerformance" parameterType="Performance">
+		UPDATE performance
+		<set>
+			<if test="performanceName != null">performance_name=#{performanceName},</if>
+			<if test="performanceTitle != null">performance_title=#{performanceTitle},</if>
+			<if test="performanceLocation != null">performance_location=#{performanceLocation},</if>
+			<if test="performanceDate != null">performance_date=#{performanceDate},</if>
+			<if test="performanceContent != null">performance_content=#{performanceContent},</if>
+			<if test="performanceImage != null">performance_image=#{performanceImage},</if>
+			<if test="performanceUserId != null">performance_user_id = #{performanceUserId}</if>
+		</set>
+		WHERE performance_no=#{performanceNo}
+	</update>
+	
+	<delete id="deletePerformanceByPerformanceNo" parameterType="int">
+	delete from performance 
+	where performance_no=#{performanceNo}
+	</delete>
+
+	<!-- 공연정보 전체 조회 select mock -->
 	<select id="selectAllPerformance" resultMap="performance-resultmap">
 		select * from performance
 	</select>
@@ -43,13 +70,34 @@
 	<select id="selectPerformanceByPerformanceNo" parameterType="_int" resultMap="performance-resultmap">
 		select * from performance where performance_no = #{performanceNo}
 	</select>
+
+	<!-- 공연정보 제목으로 검색 -->
+	<select id="selectPerformanceByPerformanceTitle" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_title like '%'||#{performanceTitle}||'%'
+	</select>
 	
+	<!-- 공연정보 작성자로 검색 -->
+	<select id="selectPerformanceByPerformanceUserId" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_user_id like '%'||#{performanceUserId}||'%'
+	</select>
 	
+	<!-- 공연정보 공연장소로 검색 -->
+	<select id="selectPerformanceByPerformanceLocation" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_location like '%'||#{performanceLocation}||'%'
+	</select>
 	
+	<!-- 공연정보 공연이름으로 검색 -->
+	<select id="selectPerformanceByPerformanceName" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_name like '%'||#{performanceName}||'%'
+	</select>
 	
-	
-	
-	
-	
-	
+	<!-- 공연정보 내용으로 검색 -->
+	<select id="selectPerformanceByPerformanceContent" parameterType="String" resultMap="performance-resultmap">
+		select * from performance
+		where performance_content like '%'||#{performanceContent}||'%'
+	</select>
 </mapper>

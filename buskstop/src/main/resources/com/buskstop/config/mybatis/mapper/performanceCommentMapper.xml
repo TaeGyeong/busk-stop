@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="performanceCommentMapper"></mapper>
+<mapper namespace="performanceCommentMapper">
+
+
+	<insert id="performanceComment">
+		<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
+		select performance_comment_no_SEQ.nextval from dual
+		</selectKey>
+	
+	insert into performance_comment (performance_comment_no, performance_no,performance_comment_user_id, performance_comment)
+	values()
+	
+	</insert>
+
+
+
+
+
+
+
+
+</mapper>

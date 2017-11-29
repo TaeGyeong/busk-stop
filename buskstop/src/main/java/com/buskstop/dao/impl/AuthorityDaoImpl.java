@@ -14,6 +14,10 @@ public class AuthorityDaoImpl implements AuthorityDao{
 
 	@Autowired
 	private SqlSessionTemplate session;
+
+	private String makeSqlId(String id){
+		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
+	}
 	
 	@Override
 	public int insertAuthority(Authority authority) {
@@ -30,8 +34,15 @@ public class AuthorityDaoImpl implements AuthorityDao{
 		return session.selectList(makeSqlId("selectAuthoritiesByUserId"), userId);
 	}
 	
-	private String makeSqlId(String id){
-		return "com.buskstop.config.mybatis.mapper.authorityMapper."+id;
+	@Override
+	public boolean selectArtistAuthoritiesByUserId(String userId) {
+		Authority autority = new Authority(userId, "ROLE_ARTIST");
+		Authority result = session.selectOne(makeSqlId("selectArtistAuthoritiesByUserId"), autority);
+		if(result != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

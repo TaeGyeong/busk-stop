@@ -20,8 +20,14 @@
 	<mvc:view-controller path="/registerArtistView.do" view-name="user/registerArtistView.tiles"/>
 	<mvc:view-controller path="/registerSupplierView.do" view-name="user/registerSupplierView.tiles"/>
 	<mvc:view-controller path="/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
+	<mvc:view-controller path="/registerSuccessView.do" view-name="user/registerSuccessView.tiles"/>
+	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
+	<mvc:view-controller path="/testpage.do" view-name="testpage.tiles"/>
+	<mvc:view-controller path="/update_performance.do" view-name="performance/update_performance.tiles"/>
+	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
+	<mvc:view-controller path="/videoSelectCategoryView.do" view-name="video/videoSelectCategoryView.tiles"/>
 	
-	
+	<!-- test link -->
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
@@ -31,5 +37,10 @@
 		</property>
 	</bean>
 	
-	<bean name="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+	<bean name="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="1"/>
+	</bean>
+	<bean name="internalViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"/>
+	</bean>
 </beans>
