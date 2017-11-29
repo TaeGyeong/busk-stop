@@ -28,15 +28,14 @@ td {
 	padding: 5px;
 	text-align: center;
 }
-
 tr:hover{
 	background-color : yellow;
 	
 }
-
 </style>
 </head>
 <body>
+<sec:csrfInput/>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
@@ -57,36 +56,28 @@ tr:hover{
 			<th>장소</th>
 			<th>내용</th>
 			<th>날짜</th>
-			<th>아티스트</th>
+			<th>사용자 아이디</th>
 			<th>등록시간</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.list }" var="video">
-				<tr>
-					<td>${video.videoNo }</td>
-					<td>${video.videoTitle }</td>
-					<td>${video.videoLink }</td>
-					<td>${video.videoLocation }</td>
-					<td>${video.videoContent }</td>
-					<td>${video.videoDate }</td>
-					<td>${video.videoArtist }</td>
-					<td>${video.videoRegTime }</td>
-					<td>
-						<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
-						<input type="hidden" value="${video.videoNo }">
-						<button type="submit">상세보기</button>
-						<sec:csrfInput/>
-						</form>
-					</td>
-				</tr>
-			<%-- <form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+			<tr>
+				<td>${video.videoNo }</td>
+				<td>${video.videoTitle }</td>
+				<td>${video.videoLink }</td>
+				<td>${video.videoLocation }</td>
+				<td>${video.videoContent }</td>
+				<td>${video.videoDate }</td>
+				<td>${video.videoUserId }</td>
+				<td>${video.videoRegTime }</td>
+			</tr>
+			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
 				<sec:csrfInput/>
 				<input type="hidden" value="${video.videoNo }" name="videoNumber">
-			</form> --%>
+			</form>
 		</c:forEach>
 	</tbody>
 </table>
-
 </body>
 </html>

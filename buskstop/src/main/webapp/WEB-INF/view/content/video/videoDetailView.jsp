@@ -1,5 +1,6 @@
 <%@page import="com.buskstop.vo.Video"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+
 <div id="container">
 <hr>
 <h2>동영상 상세보기</h2>
@@ -46,6 +47,5 @@
 		</div>
 	</div>
 	<!-- Comment End-->
-	
 	
 </div>
