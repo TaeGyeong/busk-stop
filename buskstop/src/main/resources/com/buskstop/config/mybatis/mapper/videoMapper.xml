@@ -24,7 +24,7 @@
 	<resultMap type="Video" id="video-resultmap">
 		<id column="video_no" property="videoNo"/>
 		<result column="video_title" property="videoTitle"/>
-		<result column="video_rink" property="videoLink"/>
+		<result column="video_link" property="videoLink"/>
 		<result column="video_location" property="videoLocation"/>
 		<result column="video_content" property="videoContent"/>
 		<result column="video_date" property="videoDate"/>
