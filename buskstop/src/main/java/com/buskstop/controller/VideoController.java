@@ -74,19 +74,44 @@ public class VideoController {
 		return new ModelAndView("video/videoDetailView.tiles", "readVideoByVideoNo", video);
 	}
 	
-	@RequestMapping("/videoSelectCategory")
-	public ModelAndView videoSelectCategory(@RequestParam String videoCategory) {
+	/**
+	 * 영상등록에사 공연영상 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/member/selectPerformanceVideoCategory")
+	public ModelAndView selectPerformanceVideoCategory() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
 		String userId = ((User)authentication.getPrincipal()).getUserId();
-		System.out.println(userId);
-		if(videoCategory.matches("user")) {
-			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
-		}else {
-			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("/artist/readArtist.do");
-		}
+		return new ModelAndView("video/videoRegisterPerformanceView.tiles", "userId", userId);
+	}
+	
+	/**
+	 * 영상등록에서 개인연습영상 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/member/selectMemberVideoCategory")
+	public ModelAndView selectMemberVideoCategory() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
+		Authentication authentication = context.getAuthentication();
+		String userId = ((User)authentication.getPrincipal()).getUserId();
+		return new ModelAndView("video/videoRegisterPracticeView.tiles", "userId", userId);
+	}
+	
+	/**
+	 * 영상등록에서 아티스트 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/artist/selectArtistVideoCategory")
+	public ModelAndView selectArtistVideoCategory() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
+		Authentication authentication = context.getAuthentication();
+		
+		String userId = ((User)authentication.getPrincipal()).getUserId();
+		return new ModelAndView("video/videoRegisterArtistView.tiles", "userId", userId);
 	}
 	
 	@RequestMapping("/videoListCategory")

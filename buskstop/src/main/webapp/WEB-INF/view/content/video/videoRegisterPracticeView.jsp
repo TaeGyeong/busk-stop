@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<h2>일반회원 동영상 등록</h2>
+<h2>연습영상 등록</h2>
 <form action="${initParam.rootPath }/createVideo.do" method="post">
 	<sec:csrfInput />
 
@@ -38,10 +38,7 @@
 			required="required">
 	</div>
 	<div class="form-group">
-		<label for="videoCategory">카테고리</label> <select name="videoCategory">
-			<option value="videoCategory">공연영상</option>
-			<option value="practice">연습영상</option>
-		</select>
+		<input type="hidden" id ="videoCategory" name="videoCategory" value="연습영상" class="form-control">
 	</div>
 	<label>추가 정보 입력</label>
 	<div class="form-group">

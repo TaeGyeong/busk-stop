@@ -1,7 +1,7 @@
 update users
 set user_password = '$2a$10$9Mx5vV4LRJThJhqcxrwFL.CO64itUT387QxcBdv1m7hkae8oTQIlq'
 
-
+select*from authority;
 select * from performance;
 /*-----------------------------공연정보(아티스트 게시판)---------------------------------*/
 /* 공연정보 목록 조회 */
