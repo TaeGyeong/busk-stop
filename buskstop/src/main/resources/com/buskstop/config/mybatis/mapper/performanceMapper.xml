@@ -39,9 +39,8 @@
 		#{performanceImage}, #{performanceUserId}, sysdate)
 	</insert>
 	
-<<<<<<< HEAD
+
 	<!-- 공연정보 리스트 조회 (뷰) select mock -->
-=======
 	<update id="updatePerformance" parameterType="Performance">
 		UPDATE performance
 		<set>

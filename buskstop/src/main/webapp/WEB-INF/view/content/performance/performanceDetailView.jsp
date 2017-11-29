@@ -55,7 +55,7 @@
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="float:left;">
 			<div style="float:left; margin-right:5px;">공연장소</div> 
-			<div style="float:left; margin-right:20px;">홍대놀이터<%=performance.getPerformanceLocation() %></div>
+			<div style="float:left; margin-right:20px;"><%=performance.getPerformanceLocation() %></div>
 		</div>
 		<div>
 			<div style="float:left; margin-right:5px;">공연 시간</div>
