@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
+import com.buskstop.vo.PerformanceLike;
 
 public interface PerformanceService {
 
@@ -50,5 +51,4 @@ public interface PerformanceService {
 	 * @return
 	 */
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
-
 }

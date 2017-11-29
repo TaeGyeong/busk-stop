@@ -42,28 +42,33 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return session.delete(makeSqlId("deletePerformanceByPerformanceNo"),performanceNo);
 	}
 	
+	@Override
 	public List<Performance> selectAllPerformance(){
 		return session.selectList(makeSqlId("selectAllPerformance"));
 	}
 	
+	@Override
 	public List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceTitle"), performanceTitle);
 	}
 	
+	@Override
 	public List<Performance> selectPerformanceByPerformanceUserId(String performanceUserId){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceUserId"), performanceUserId);
 	}
 	
+	@Override
 	public List<Performance> selectPerformanceByPerformanceLocation(String performanceLocation){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceLocation"), performanceLocation);
 	}
 	
+	@Override
 	public List<Performance> selectPerformanceByPerformanceName(String performanceName){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceName"), performanceName);
 	}
 	
+	@Override
 	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), performanceContent);
 	}
 }
-//com.buskstop.config.mybatis.mapper.

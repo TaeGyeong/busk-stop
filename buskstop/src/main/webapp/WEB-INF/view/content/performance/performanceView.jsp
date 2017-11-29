@@ -54,6 +54,7 @@ select {
 					<td>작성자</td>
 					<td>작성 시간</td>
 					<td>조회</td>
+					<td>좋아요</td>
 					<!-- <td>좋아요</td> -->
 				</tr>
 			</thead>
@@ -67,6 +68,7 @@ select {
 						<td>${item.performanceUserId}</td>
 						<td>${item.performanceRegTime}</td>
 						<td>${item.performanceHits}</td>
+						<td><button onclick="location.href='${initParam.rootPath}/performanceLike.do?num=${item.performanceNo }'">좋아요</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
