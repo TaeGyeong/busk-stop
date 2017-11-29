@@ -31,18 +31,26 @@ public class VideoServiceImpl implements VideoService {
 	public Video selectVideoByVideoNo(int videoNo) {
 		return dao.selectVideoByVideoNo(videoNo);
 	}
-	@Override
+	
+	@Override // 좋아요 추가.
 	public void plusLike(VideoLike like) {
 		videoLikeDao.insertVideoLike(like);
 	}
 	
-	@Override
+	@Override // 좋아요 삭제.
 	public void deleteLike(VideoLike like) {
 		videoLikeDao.deleteVideoLike(like);
 	}
 	
-	@Override
+	@Override // 동영상 번호로 좋아요 누른 정보 조회.
 	public List<VideoLike> selectLikeUserByNum(int num){
 		return videoLikeDao.selectLikeUserByVideoNum(num);
 	}
+
+	@Override // 모든 동영상 조회.
+	public List<Video> viewAllVideo(String category) {
+		return dao.selectAllVideo(category);
+	}
+	
+	
 }

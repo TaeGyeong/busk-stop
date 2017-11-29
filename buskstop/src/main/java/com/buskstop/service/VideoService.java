@@ -29,5 +29,16 @@ public interface VideoService {
 	 */
 	int insertVideo(Video video);
 	
+	/**
+	 * 
+	 * @param videoNo
+	 * @return
+	 */
 	Video selectVideoByVideoNo(int videoNo);
+	
+	/**
+	 * 모든 공연영상을 조회.
+	 * @return
+	 */
+	List<Video> viewAllVideo(String category);
 }

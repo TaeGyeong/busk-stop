@@ -12,6 +12,8 @@ SELECT * FROM VIDEO_LIKE
 select * from artist
 select * from authority
 select * from stage_supplier
+select * from video
+
 		SELECT 
 			u.USER_ID,
 			u.USER_NAME,

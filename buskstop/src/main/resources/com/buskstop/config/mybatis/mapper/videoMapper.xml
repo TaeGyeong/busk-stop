@@ -43,6 +43,8 @@
 		WHERE	video_no = #{value}	
 	</select>
 
-
-
+	<select id="selectAllVideo" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{value}
+	</select>
 </mapper>

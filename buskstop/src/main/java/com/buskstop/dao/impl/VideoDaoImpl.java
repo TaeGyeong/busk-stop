@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,4 +29,9 @@ public class VideoDaoImpl implements VideoDao{
 		return session.selectOne(makeSqlId("selectVideoByVideoNo"), videoNo);
 	}
 
+	@Override
+	public List<Video> selectAllVideo(String category) {
+		return session.selectList(makeSqlId("selectAllVideo"),category);
+	}
+	
 }

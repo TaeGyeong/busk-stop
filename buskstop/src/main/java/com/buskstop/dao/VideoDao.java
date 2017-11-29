@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.Video;
 
 public interface VideoDao {
@@ -18,5 +20,9 @@ public interface VideoDao {
 	 */
 	Video selectVideoByVideoNo (int videoNo);	
 	
-	
+	/**
+	 * 모든 동영상 조회
+	 * @return
+	 */
+	List<Video> selectAllVideo (String category);
 }

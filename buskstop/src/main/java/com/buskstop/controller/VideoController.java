@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,7 +74,7 @@ public class VideoController {
 		return new ModelAndView("/video/videoDetail.tiles", "readVideoByVideoNo", video);
 	}
 	
-	@RequestMapping("videoSelectCategory")
+	@RequestMapping("/videoSelectCategory")
 	public ModelAndView videoSelectCategory(@RequestParam String videoCategory) {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
@@ -85,6 +86,19 @@ public class VideoController {
 		}else {
 			//사용자 권한 확인하러 AuthorityController한테 보냄
 			return new ModelAndView("readAuthorityByUserId.do", "userId", userId);
+		}
+	}
+	
+	@RequestMapping("/videoListCategory")
+	public ModelAndView videoList(@RequestParam String category) {
+		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
+		List<Video> list = service.viewAllVideo(category);
+		
+		// response
+		if(category.equals("user")) {
+			return new ModelAndView("video/userVideoListView.tiles","list",list);
+		}else {
+			return new ModelAndView("video/artistVideoListView.tiles","list",list);
 		}
 	}
 	
