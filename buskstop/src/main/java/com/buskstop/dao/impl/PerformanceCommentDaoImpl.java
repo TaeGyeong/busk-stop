@@ -1,5 +1,42 @@
 package com.buskstop.dao.impl;
 
-public class PerformanceCommentDaoImpl {
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.buskstop.dao.PerformanceCommentDao;
+import com.buskstop.vo.PerformanceComment;
+
+@Repository
+public class PerformanceCommentDaoImpl implements PerformanceCommentDao{
+
+	@Autowired
+	private SqlSessionTemplate session;
+	
+	private String makeSql(String id) {
+		return "com.buskstop.config.mybatis.mapper.performanceCommentMapper."+id;
+	}
+	
+	@Override
+	public List<PerformanceComment> selectListComment(int performanceNo){
+		return session.selectList(makeSql("selectListComment"),performanceNo);
+	}
+	
+	@Override
+	public int insertPerformanceComment(PerformanceComment performanceComment) {
+		return session.insert(makeSql("insertPerformanceComment"),performanceComment);
+	}
+	
+	@Override
+	public int updatePerformanceComment(PerformanceComment performanceComment) {
+		return session.update(makeSql("updatePerformanceComment"),performanceComment);
+	}
+	
+	@Override
+	public int deletePerformanceCommentByPerformanceCommentNo(int performanceCommentNo) {
+		return session.delete(makeSql("deletePerformaceCommentByPerformanceCommentNo"),performanceCommentNo);
+	}
+	
 }

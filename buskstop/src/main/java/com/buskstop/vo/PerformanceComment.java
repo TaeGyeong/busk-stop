@@ -1,6 +1,9 @@
 package com.buskstop.vo;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class PerformanceComment implements Serializable{
 	
@@ -8,22 +11,25 @@ public class PerformanceComment implements Serializable{
 	private int performanceNo;
 	private String performanceCommentUserId;
 	private String performanceComment;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date performanceCommentRegTime;
 	
 	public PerformanceComment() {}
-	
-	@Override
-	public String toString() {
-		return "PerformanceComment [performanceCommentNo=" + performanceCommentNo + ", performanceNo=" + performanceNo
-				+ ", performanceCommentUserId=" + performanceCommentUserId + ", performanceComment="
-				+ performanceComment + "]";
-	}
-	
+
 	public PerformanceComment(int performanceCommentNo, int performanceNo, String performanceCommentUserId,
-			String performanceComment) {
+			String performanceComment, Date performanceCommentRegTime) {
 		this.performanceCommentNo = performanceCommentNo;
 		this.performanceNo = performanceNo;
 		this.performanceCommentUserId = performanceCommentUserId;
 		this.performanceComment = performanceComment;
+		this.performanceCommentRegTime = performanceCommentRegTime;
+	}
+
+	@Override
+	public String toString() {
+		return "PerformanceComment [performanceCommentNo=" + performanceCommentNo + ", performanceNo=" + performanceNo
+				+ ", performanceCommentUserId=" + performanceCommentUserId + ", performanceComment="
+				+ performanceComment + ", performanceCommentRegTime=" + performanceCommentRegTime + "]";
 	}
 
 	public int getPerformanceCommentNo() {
@@ -58,12 +64,21 @@ public class PerformanceComment implements Serializable{
 		this.performanceComment = performanceComment;
 	}
 
+	public Date getPerformanceCommentRegTime() {
+		return performanceCommentRegTime;
+	}
+
+	public void setPerformanceCommentRegTime(Date performanceCommentRegTime) {
+		this.performanceCommentRegTime = performanceCommentRegTime;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((performanceComment == null) ? 0 : performanceComment.hashCode());
 		result = prime * result + performanceCommentNo;
+		result = prime * result + ((performanceCommentRegTime == null) ? 0 : performanceCommentRegTime.hashCode());
 		result = prime * result + ((performanceCommentUserId == null) ? 0 : performanceCommentUserId.hashCode());
 		result = prime * result + performanceNo;
 		return result;
@@ -85,6 +100,11 @@ public class PerformanceComment implements Serializable{
 			return false;
 		if (performanceCommentNo != other.performanceCommentNo)
 			return false;
+		if (performanceCommentRegTime == null) {
+			if (other.performanceCommentRegTime != null)
+				return false;
+		} else if (!performanceCommentRegTime.equals(other.performanceCommentRegTime))
+			return false;
 		if (performanceCommentUserId == null) {
 			if (other.performanceCommentUserId != null)
 				return false;
@@ -94,5 +114,8 @@ public class PerformanceComment implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
+	
 	
 }

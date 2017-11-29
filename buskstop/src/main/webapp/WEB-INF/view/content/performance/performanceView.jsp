@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공연 정보 리스트</title>
+
 <style type="text/css">
 table, td {
 	border: 1px solid black;
