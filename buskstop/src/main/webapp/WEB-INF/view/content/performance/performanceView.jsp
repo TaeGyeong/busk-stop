@@ -60,7 +60,7 @@ select {
 			</thead>
 			<tbody id="tbody">
 				<c:forEach items="${requestScope.list}" var="item">
-					<tr>
+					<tr style = "cursor:pointer;" onclick="document.location.href='${initParam.rootPath }/performanceDetailView.do?performanceNo=${item.performanceNo}'">
 						<td>${item.performanceNo}</td>
 						<td>${item.performanceTitle}</td>
 						<td>${item.performanceLocation}</td>

@@ -63,28 +63,28 @@ public class VideoController {
 	@RequestMapping("/createVideo")
 	public ModelAndView createVideo(@ModelAttribute Video video) {
 		service.insertVideo(video);
-		return new ModelAndView("/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
+		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
 		
 	}
 	
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("/video/videoDetail.tiles", "readVideoByVideoNo", video);
+		return new ModelAndView("video/videoDetailView.tiles", "readVideoByVideoNo", video);
 	}
 	
-	@RequestMapping("videoSelectCategory")
+	@RequestMapping("/videoSelectCategory")
 	public ModelAndView videoSelectCategory(@RequestParam String videoCategory) {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
 		String userId = ((User)authentication.getPrincipal()).getUserId();
-		
-		if(videoCategory == "user") {
-			return new ModelAndView("videoRegisterView.tiles", "userId", userId);
+		System.out.println(userId);
+		if(videoCategory.matches("user")) {
+			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
 		}else {
 			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("readAuthorityByUserId.do", "userId", userId);
+			return new ModelAndView("/artist/readArtist.do");
 		}
 	}
 	

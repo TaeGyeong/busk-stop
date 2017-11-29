@@ -65,10 +65,24 @@ public class PerformanceController {
 	@RequestMapping("/allSelectPerformance")
 	public ModelAndView allSelectPerformance() {
 		List<Performance> list = service.selectAllPerformance();
-		System.out.println(list);
 		return new ModelAndView("performance/performanceView.tiles","list", list);	
 	}
 	
+
+	@RequestMapping("/performanceDetailView")
+	public ModelAndView performanceDetailView(@RequestParam int performanceNo) {
+		System.out.println("컨트롤러 파라미터");
+		System.out.println(performanceNo);
+		
+		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
+		
+		System.out.println("컨트롤러 리턴");
+		System.out.println(performance);
+		return new ModelAndView("performance/performanceDetailView.tiles","performance", performance);
+			
+	}
+	
+
 	// 카테고리로 검색
 	@RequestMapping("/performanceSearch")
 	public ModelAndView selectPerformanceByCategory(@RequestParam String category, @RequestParam String search) throws ParseException {
@@ -90,4 +104,5 @@ public class PerformanceController {
 		}
 		return null;
 	}
+
 }

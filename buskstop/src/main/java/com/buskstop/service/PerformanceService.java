@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
-import com.buskstop.vo.PerformanceLike;
 
 public interface PerformanceService {
 
@@ -20,7 +19,10 @@ public interface PerformanceService {
 
 	void updatePerformance(Performance performance);
 	
+	Performance PerformanceByPerformanceNo(int performanceNo);
+	
 	List<Performance> selectAllPerformance();
+	
 	/**
 	 * 공연정보 제목으로 검색
 	 * @param performanceTitle
@@ -51,4 +53,5 @@ public interface PerformanceService {
 	 * @return
 	 */
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
+
 }

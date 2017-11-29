@@ -1,6 +1,5 @@
 package com.buskstop.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
@@ -15,7 +14,7 @@ public interface PerformanceDao {
 	int insertPerformance(Performance performance);
 
 	Performance selectPerformanceByPerformanceNo(int performanceNo);	
-
+	
 	int deletePerformanceByPerformanceNo(int performanceNo);
 
 	int updatePerformance(Performance performance);
@@ -31,4 +30,5 @@ public interface PerformanceDao {
 	List<Performance> selectPerformanceByPerformanceName(String performanceName);
 	
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
+
 }
