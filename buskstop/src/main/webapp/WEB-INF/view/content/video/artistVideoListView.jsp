@@ -9,10 +9,12 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("tr").on("click",function(){
-		document.getElementById("detailForm").submit();
+	$("#youtubeBtn").on("click",function(){
+		var txt = $("#url").val();
+		$("#result").html(txt);
 	});
 });
+
 </script>
 <style type="text/css">
 table, td {
@@ -37,7 +39,6 @@ tr:hover{
 </style>
 </head>
 <body>
-<sec:csrfInput/>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
@@ -73,6 +74,13 @@ tr:hover{
 					<td>${video.videoDate }</td>
 					<td>${video.videoArtist }</td>
 					<td>${video.videoRegTime }</td>
+					<%-- <td>
+						<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
+						<input type="hidden" value="${video.videoNo }" name="videoNo">
+						<button type="submit">상세보기</button>
+						<sec:csrfInput/>
+						</form>
+					</td> --%>
 				</tr>
 			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
 				<sec:csrfInput/>

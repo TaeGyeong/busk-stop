@@ -7,12 +7,15 @@
 	<%-- <button type="submit" onclick="location.href='${initParam.rootPath}/member/selectPerformanceVideoCategory.do'">공연 영상</button>
 	<button type="submit" onclick="location.href='${initParam.rootPath}/member/selectMemberVideoCategory.do'">개인 연습 영상</button> --%>
 </form>
+<p>
 <form action="${initParam.rootPath }/member/selectPerformanceVideoCategory.do" method="post">
 	<sec:csrfInput/>
 	<button type="submit">공연 영상</button>
 </form>
+<p>
 <form action="${initParam.rootPath }/member/selectMemberVideoCategory.do" method="post">
 	<sec:csrfInput/>
 	<button type="submit">개인 연습 영상</button>
 </form>
+<p>
 

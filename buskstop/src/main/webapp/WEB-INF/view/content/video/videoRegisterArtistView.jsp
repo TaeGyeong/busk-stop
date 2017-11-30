@@ -10,7 +10,7 @@
 	</div>
 	<div class="form-group">
 		<label for="videoRink">영상 링크</label> <input type="text"
-			name="videoRink" id="videoRink" class="form-control"
+			name="videoLink" id="videoLink" class="form-control"
 			required="required">
 	</div>
 	<div class="form-group">
@@ -30,12 +30,21 @@
 			required="required">
 	</div>
 	<div class="form-group">
-		<input type="hidden" id ="videoCategory" name="videoCategory" value="아티스트" class="form-control">
+		<input type="hidden" id ="videoCategory" name="videoCategory" value="artist" class="form-control">
 	</div>
 	<label>추가 정보 입력</label>
 	<div class="form-group">
 		<textarea rows="15" cols="150" name="videoContent"
 			placeholder="영상에 대한 정보를 입력하세요."></textarea>
+	</div>
+	
+	<%-- 사용자 id --%>
+	<div class="form-group">
+		<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="videoUserId" id="videoUserId"
+				class="form-control"
+				value='<sec:authentication property="principal.userId"/>'>
+		</sec:authorize>
 	</div>
 	<button type="submit" class="btn btn-default">등록</button>
 	<button type="button" class="btn btn-default"
