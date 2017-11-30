@@ -33,5 +33,15 @@ public class VideoDaoImpl implements VideoDao{
 	public List<Video> selectAllVideoByCategory(String category) {
 		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
 	}
+
+	@Override
+	public int updateVideo(Video video) {
+		return session.update(makeSqlId("updateVideo"), video);
+	}
+
+	@Override
+	public int deleteVideoByVideoNum(int videoNo) {
+		return session.delete(makeSqlId("deleteVideoByVideoNum"), videoNo);
+	}
 	
 }

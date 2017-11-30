@@ -26,6 +26,7 @@
 	<li><a href="${initParam.rootPath }/update_performance.do">공연정보 수정</a></li>
 	<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
 	<li><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상목록</a></li>
+	<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a>
 </sec:authorize>
 
 	<li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li>

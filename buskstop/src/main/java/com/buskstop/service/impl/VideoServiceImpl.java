@@ -51,6 +51,16 @@ public class VideoServiceImpl implements VideoService {
 	public List<Video> viewAllVideo (String category) {
 		return dao.selectAllVideoByCategory(category);
 	}
+
+	@Override
+	public int updateVideo(Video update) {
+		return dao.updateVideo(update);
+	}
+
+	@Override
+	public int deleteVideoByVideoNum(int videoNo) {
+		return dao.deleteVideoByVideoNum(videoNo);
+	}
 	
 	
 }
