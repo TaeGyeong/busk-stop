@@ -48,4 +48,11 @@ public interface VideoService {
 	 * @return
 	 */
 	int updateVideo(Video video);
+	
+	/**
+	 * 영상번호를 받아 동영상 정보를 제거한다.
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoByVideoNum(int videoNo);
 }

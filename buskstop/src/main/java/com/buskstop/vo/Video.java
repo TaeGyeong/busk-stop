@@ -65,95 +65,116 @@ public class Video implements Serializable{
 		this.videoUserId = videoUserId;
 		this.videoHits = videoHits;
 	}
-
-
+	
 	public int getVideoNo() {
 		return videoNo;
 	}
+
 
 	public void setVideoNo(int videoNo) {
 		this.videoNo = videoNo;
 	}
 
+
 	public String getVideoTitle() {
 		return videoTitle;
 	}
+
 
 	public void setVideoTitle(String videoTitle) {
 		this.videoTitle = videoTitle;
 	}
 
+
 	public String getVideoLink() {
 		return videoLink;
 	}
+
 
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
 
+
 	public String getVideoLocation() {
 		return videoLocation;
 	}
+
 
 	public void setVideoLocation(String videoLocation) {
 		this.videoLocation = videoLocation;
 	}
 
+
 	public String getVideoContent() {
 		return videoContent;
 	}
+
 
 	public void setVideoContent(String videoContent) {
 		this.videoContent = videoContent;
 	}
 
+
 	public Date getVideoDate() {
 		return videoDate;
 	}
+
 
 	public void setVideoDate(Date videoDate) {
 		this.videoDate = videoDate;
 	}
 
+
 	public String getVideoArtist() {
 		return videoArtist;
 	}
+
 
 	public void setVideoArtist(String videoArtist) {
 		this.videoArtist = videoArtist;
 	}
 
+
 	public String getVideoCategory() {
 		return videoCategory;
 	}
+
 
 	public void setVideoCategory(String videoCategory) {
 		this.videoCategory = videoCategory;
 	}
 
+
 	public Date getVideoRegTime() {
 		return videoRegTime;
 	}
+
 
 	public void setVideoRegTime(Date videoRegTime) {
 		this.videoRegTime = videoRegTime;
 	}
 
+
 	public String getVideoUserId() {
 		return videoUserId;
 	}
+
 
 	public void setVideoUserId(String videoUserId) {
 		this.videoUserId = videoUserId;
 	}
 
+
 	public int getVideoHits() {
 		return videoHits;
 	}
 
+
 	public void setVideoHits(int videoHits) {
 		this.videoHits = videoHits;
 	}
+
 
 	@Override
 	public String toString() {

@@ -146,7 +146,6 @@ public class VideoController {
 
 	@RequestMapping("/updateVideoInfo")
 	public ModelAndView updateArtistVideo(@ModelAttribute Video video) {
-		
 		// Artist 공연영상일 경우에는 artistVideo 정보수정 controller 로 보낸다.
 		if(video.getVideoCategory().equals("artist")) {
 			return new ModelAndView("redirect:/artist/updateVideoInfo.do","video",video);
@@ -170,5 +169,10 @@ public class VideoController {
 		return new ModelAndView("video/videoDetailView.tiles", "video",video);
 	}
 	
+	@RequestMapping("/deleteVideo")
+	public String deleteVideo(int videoNo) {
+		service.deleteVideoByVideoNum(videoNo);
+		return "index.tiles";
+	}
 	
 }

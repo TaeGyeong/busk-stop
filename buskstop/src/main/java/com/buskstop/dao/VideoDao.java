@@ -33,4 +33,13 @@ public interface VideoDao {
 	 * @return
 	 */
 	int updateVideo(Video video);
+	
+	/**
+	 * 영상등록번호로 동영상정보를 제거.
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoByVideoNum(int videoNo);
+	
+	
 }

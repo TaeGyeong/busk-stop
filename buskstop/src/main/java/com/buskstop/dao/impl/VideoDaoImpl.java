@@ -38,6 +38,10 @@ public class VideoDaoImpl implements VideoDao{
 	public int updateVideo(Video video) {
 		return session.update(makeSqlId("updateVideo"), video);
 	}
-	
+
+	@Override
+	public int deleteVideoByVideoNum(int videoNo) {
+		return session.delete(makeSqlId("deleteVideoByVideoNum"), videoNo);
+	}
 	
 }

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <h2>아티스트홍보영상 수정</h2>
 <form action="${initParam.rootPath }/updateVideoInfo.do" method="post">
@@ -13,8 +14,11 @@
 	<div class="form-group">
 		<input type="hidden" name="videoNo" value="${requestScope.video.videoNo }" class="form-control">
 		<input type="hidden" name="videoCategory" value="${requestScope.video.videoCategory }" class="form-control">
-		<input type="hidden" name="videoArtist" value="${requestScope.video.videoArtist }"  class="form-control">
-		<input type="hidden" name="videoRegTime" value="${requestScope.video.videoRegTime }" class="form-control">
+		<input type="hidden" name="videoArtist" value="${requestScope.video.videoArtist }" class="form-control">
+		<input type="hidden" name="videoRegTime" value=
+			"<fmt:formatDate value="${requestScope.video.videoRegTime }" pattern="yyyy-MM-dd HH:mm:ss"/>"
+		class="form-control">
+		<input type="hidden" name="videoHits" value="${requestScope.video.videoHits }" class="form-control">
 	</div>
 	<div class="form-group">
 		<label for="videoTitle">영상 제목</label> 
@@ -56,8 +60,10 @@
 </form> 
 
 <form action="${initParam.rootPath }/deleteVideo.do" method="post">
+	<sec:csrfInput/>
 	<h1>영상 삭제 폼</h1>
-	
+	<input type="hidden" name="videoNo" value="${requestScope.video.videoNo }">
+	<button>삭제</button>
 </form>
 </body>
 </html>

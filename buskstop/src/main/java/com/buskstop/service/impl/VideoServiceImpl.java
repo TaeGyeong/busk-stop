@@ -17,7 +17,7 @@ import com.buskstop.vo.VideoLike;
 public class VideoServiceImpl implements VideoService {
 	
 	@Autowired
-	VideoLikeDao videoLikeDao;
+	private VideoLikeDao videoLikeDao;
 	
 	@Autowired
 	private VideoDao dao;
@@ -54,9 +54,12 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public int updateVideo(Video update) {
-		
-		
-		return 0;
+		return dao.updateVideo(update);
+	}
+
+	@Override
+	public int deleteVideoByVideoNum(int videoNo) {
+		return dao.deleteVideoByVideoNum(videoNo);
 	}
 	
 	
