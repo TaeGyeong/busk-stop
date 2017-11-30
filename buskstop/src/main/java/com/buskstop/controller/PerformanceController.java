@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.Locale.Category;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,14 +26,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.PerformanceLikeService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.vo.Performance;
+import com.buskstop.vo.PerformanceLike;
 
 @Controller
 public class PerformanceController {
 	
 	@Autowired
 	private PerformanceService service;
+	
+	@Autowired
+	private PerformanceLikeService likeService;
 	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance,  HttpServletRequest request) throws IllegalStateException, IOException {
@@ -53,7 +60,7 @@ public class PerformanceController {
 	@RequestMapping("/performanceUpdate")
 	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
 		service.updatePerformance(performance);	
-		return new ModelAndView("redirect:/performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
+		return new ModelAndView("redirect:/performanceDetailView.do","performanceNo",performance.getPerformanceNo());
 	}
 	
 	@RequestMapping("/deletePerformance")
@@ -63,9 +70,23 @@ public class PerformanceController {
 	}
 	
 	@RequestMapping("/allSelectPerformance")
-	public ModelAndView allSelectPerformance() {
+	public ModelAndView updateLike() {
+		
 		List<Performance> list = service.selectAllPerformance();
-		return new ModelAndView("performance/performanceView.tiles","list", list);	
+		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
+		
+		int count = 0;
+		for(Performance pf : list) {
+			for(PerformanceLike pl : likeList) {
+				if(pf.getPerformanceNo() == pl.getPerformanceLikeNo()) {
+					count ++;
+					pf.setLikeCount(count);
+				}
+			}
+			count = 0;
+		}
+		
+		return new ModelAndView("performance/performanceView.tiles","list", list);
 	}
 	
 

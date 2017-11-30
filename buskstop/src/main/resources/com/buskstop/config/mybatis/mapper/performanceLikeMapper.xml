@@ -28,4 +28,16 @@
 		FROM PERFORMANCE_LIKE
 		WHERE PERFORMANCE_LIKE_NO = #{performanceLikeNo}
 	</select>
+	
+	<!-- 공연번호로 좋아요 수 조회 -->
+	<select id="countPerformanceLikeByPerformanceLikeNo" parameterType="_int" resultType="_int">
+		SELECT count(*)
+		FROM PERFORMANCE_LIKE
+		WHERE PERFORMANCE_LIKE_NO = #{performanceLikeNo};
+	</select>
+	
+	<select id="selectAllPerformanceLike" resultMap="performanceLike-resultMap">
+		select *
+		from PERFORMANCE_LIKE
+	</select>
 </mapper>

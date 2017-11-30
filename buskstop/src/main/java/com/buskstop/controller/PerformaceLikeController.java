@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.PerformanceLikeService;
+import com.buskstop.service.PerformanceService;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
 import com.buskstop.vo.User;
 
@@ -18,28 +20,70 @@ import com.buskstop.vo.User;
 public class PerformaceLikeController {
 
 	@Autowired
-	private PerformanceLikeService service;
+	private PerformanceService service;
+	
+	@Autowired
+	private PerformanceLikeService likeService;
 	
 	@RequestMapping("/performanceLike")
-	public ModelAndView performanceLike(@RequestParam int num) {
-		PerformanceLike like = new PerformanceLike(num, getUserId());
-		List<PerformanceLike> list = service.selectperformanceLikeByPerformanceLikeNo(num);
+	@ResponseBody
+	public String performanceLike(@RequestParam String num) {
+		int Cnum = Integer.parseInt(num);
+		int findNum = 0;
+		String findStr = null;
+		
+		PerformanceLike like = new PerformanceLike(Cnum, getUserId());
+		List<PerformanceLike> list = likeService.selectperformanceLikeByPerformanceLikeNo(Cnum);
 		for(PerformanceLike fl : list) {
 			if(fl.getPerformanceLikeUserId().equals(getUserId())) { //있다면 삭제
-				service.deletePerformanceLike(like);
+				likeService.deletePerformanceLike(like);
 				System.out.println("삭제됨");
-				return new ModelAndView("allSelectPerformance.tiles");
+				
+				findNum = findLikeCount(Cnum);
+				findStr = Integer.toString(findNum);
+				System.out.println(findStr);
+				
+				return findStr;
 			}
 		}
 	//없다면 추가한다
-	service.insertPerformanceLike(like);
+	likeService.insertPerformanceLike(like);
 	System.out.println("추가됨");
-	return new ModelAndView("allSelectPerformance.tiles");
+	
+	findNum = findLikeCount(Cnum);
+	findStr = Integer.toString(findNum);
+	System.out.println(findStr);
+	
+	return findStr;
 	}
-	
-	
 	
 	private String getUserId() {
 		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
+	
+	
+	public int findLikeCount(int num) {
+		List<Performance> list2 = service.selectAllPerformance();
+		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
+		int sendNum = 0;
+		
+		int count = 0;
+		for(Performance pf : list2) {
+			for(PerformanceLike pl : likeList) {
+				if(pf.getPerformanceNo() == pl.getPerformanceLikeNo()) {
+					count ++;
+					pf.setLikeCount(count);
+				}
+			}
+			count = 0;
+		}
+		for(Performance pf : list2) {
+			if(pf.getPerformanceNo() == num) {
+				sendNum = pf.getLikeCount();
+			}
+		}
+		
+		return sendNum;
+	}
+	
 }

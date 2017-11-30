@@ -94,5 +94,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		List<Performance> list = dao.selectPerformanceByPerformanceContent(performanceContent);
 		return list;
 	}
+	// 좋아요 조인 조회
+	@Override
+	public List<Performance> selectAllPerformanceJoin(){
+		List<Performance> list = dao.selectAllPerformanceJoin();
+		return list;
+	}
 	
 }

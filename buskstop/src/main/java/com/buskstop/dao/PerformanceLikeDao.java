@@ -20,4 +20,8 @@ public interface PerformanceLikeDao {
 	int deletePerformanceLike(PerformanceLike like);
 	
 	List<PerformanceLike> selectperformanceLikeByPerformanceLikeNo(int num);
+	
+	int countPerformanceLikeByPerformanceLikeNo(int num);
+	
+	List<PerformanceLike> selectAllPerformanceLike();
 }

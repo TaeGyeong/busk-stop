@@ -1,10 +1,35 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공연 정보 리스트</title>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script>
+	function goDetail(root, no){
+		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
+	}
+	
+	$(document).ready(function(){
+		$(".likeBtn").on("click",function(){  
+			$.ajax({
+				"type":"POST",
+				"url":"${initParam.rootPath}/performanceLike.do",
+				"context" : this,
+				"data":{
+					"num":$(this).parent().parent().children("td:eq(0)").text(),
+					'${_csrf.parameterName}':'${_csrf.token}'
+				},
+				"dataType":"text",
+				"success":function(count){
+					$(this).text("좋아요"+count);
+				}
+			});
+		});
+	});
+</script>
 <style type="text/css">
 table, td {
 	border: 1px solid black;
@@ -30,8 +55,12 @@ select {
 	margin: 0 auto;
 }
 </style>
+
+
 </head>
 <body>
+
+
 	<div id="container">
 		<h1>VIEW - 공연 정보 리스트</h1>
 		<hr>
@@ -60,15 +89,15 @@ select {
 			</thead>
 			<tbody id="tbody">
 				<c:forEach items="${requestScope.list}" var="item">
-					<tr style = "cursor:pointer;" onclick="document.location.href='${initParam.rootPath }/performanceDetailView.do?performanceNo=${item.performanceNo}'">
-						<td>${item.performanceNo}</td>
-						<td>${item.performanceTitle}</td>
-						<td>${item.performanceLocation}</td>
-						<td>${item.performanceDate}</td>
-						<td>${item.performanceUserId}</td>
-						<td>${item.performanceRegTime}</td>
-						<td>${item.performanceHits}</td>
-						<td><button onclick="location.href='${initParam.rootPath}/performanceLike.do?num=${item.performanceNo }'">좋아요</button></td>
+					<tr style = "cursor:pointer;">
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceDate}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceRegTime}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>
+						<td><button class="likeBtn">좋아요${item.likeCount }</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

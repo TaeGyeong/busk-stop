@@ -33,4 +33,14 @@ public class PerformanceLikeDaoImpl implements PerformanceLikeDao{
 	public List<PerformanceLike> selectperformanceLikeByPerformanceLikeNo(int num){
 		return session.selectList(makeSqlId("selectperformanceLikeByPerformanceLikeNo"), num);
 	}
+	
+	@Override
+	public int countPerformanceLikeByPerformanceLikeNo(int num) {
+		return session.selectOne(makeSqlId("countPerformanceLikeByPerformanceLikeNo"), num);
+	}
+	
+	@Override
+	public List<PerformanceLike>selectAllPerformanceLike(){
+		return session.selectList(makeSqlId("selectAllPerformanceLike"));
+	}
 }

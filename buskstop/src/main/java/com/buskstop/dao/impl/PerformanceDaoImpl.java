@@ -78,4 +78,10 @@ public class PerformanceDaoImpl implements PerformanceDao{
 	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent){
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), performanceContent);
 	}
+	
+	@Override
+	public List<Performance> selectAllPerformanceJoin(){
+		return session.selectList(makeSqlId("selectAllPerformanceJoin"));
+	}
+	
 }

@@ -24,4 +24,13 @@ public interface PerformanceLikeService {
 	 * @return
 	 */
 	List<PerformanceLike> selectperformanceLikeByPerformanceLikeNo(int num);
+	
+	/**
+	 * 공연번호를 받아서 좋아요 수 조회
+	 * @param num
+	 * @return
+	 */
+	int countPerformanceLikeByPerformanceLikeNo(int num);
+	
+	List<PerformanceLike> selectAllPerformanceLike();
 }

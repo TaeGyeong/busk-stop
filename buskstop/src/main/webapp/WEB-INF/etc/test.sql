@@ -332,3 +332,37 @@ select hc.*
 from HELP h, HELP_COMMENT hc
 where h.help_no = hc.help_no
 and h.help_no = 1; /* 조회갈 게시글 id */
+
+select * from performance;
+
+update performance
+set performance_hits = performance_hits+1
+where performance_no = #{performanceNo}
+
+
+
+
+
+select p.performance_no,
+			p.performance_name,
+			p.performance_title,
+			p.performance_location,
+			p.performance_date,
+			p.performance_content,
+			p.performance_image,
+			p.performance_user_id,
+			p.performance_reg_time,
+			pl.likecount
+		from PERFORMANCE p, (
+				select performance_like_no, count(*) likecount
+				from performance_like
+				group by performance_like_no
+		) pl
+		where p.performance_no = pl.performance_like_no(+)
+		
+		select performance_no from performance
+		
+select p.performance_no
+from performance p, performance_like pl
+group by pl.perfomance_like_no
+and p.performance_no = pl.performance_like_no(+)
