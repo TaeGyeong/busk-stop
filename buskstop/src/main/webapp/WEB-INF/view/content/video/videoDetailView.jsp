@@ -6,7 +6,22 @@
 <script type="text/javascript" src="${initParam.rootPath }/scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function{
-	$("enterVideoCommentBtn").on("click", function(){
+	 // ** 댓글 쓰기 버튼 클릭 이벤트 (ajax로 처리)
+    $("#btnReply").click(function(){
+        var replytext=$("#replytext").val();
+        var bno="${dto.bno}"
+        var param="replytext="+replytext+"&bno="+bno;
+        $.ajax({                
+            type: "post",
+            url: "${path}/reply/insert.do",
+            data: param,
+            success: function(){
+                alert("댓글이 등록되었습니다.");
+                listReply2();
+            }
+        });
+    });
+	$("#enterVideoCommentBtn").on("click", function(){
 		$.ajax({
 			"url":"${initParam}/member/enterVideoComment.do",
 			"type":"POST",
@@ -97,9 +112,9 @@ select {
 			<div style="float:right">
 				<textarea id="#videoContent" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
 				<button id="#enterVideoCommentBtn" type="button">등록</button>
-				<c:forEach items="${requestScope.videoCommnetList }" var='list'>
+				<%-- <c:forEach items="${requestScope.videoCommnetList }" var='list'>
 					${list }
-				</c:forEach>
+				</c:forEach> --%>
 			</div>
 		<div id="videoCommentList"></div> 
 		</div>
