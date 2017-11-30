@@ -19,8 +19,10 @@ public interface PerformanceService {
 
 	void updatePerformance(Performance performance);
 	
+	Performance PerformanceByPerformanceNo(int performanceNo);
+	
 	List<Performance> selectAllPerformance();
-
+	
 	/**
 	 * 공연정보 제목으로 검색
 	 * @param performanceTitle
@@ -52,5 +54,10 @@ public interface PerformanceService {
 	 */
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
 
-
+	/**
+	 * 모든 공연정보 좋아요와 조회
+	 * @return
+	 */
+	List<Performance> selectAllPerformanceJoin();
+	
 }
