@@ -75,11 +75,11 @@ public class VideoController {
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
 	
-	@RequestMapping("/detailView")
+	/*@RequestMapping("/detailView")
 	public ModelAndView videoDetail(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles","video",video);
-	}
+	}*/
 	
 	/**
 	 * 영상등록에사 공연영상 카테고리 선택
@@ -132,8 +132,6 @@ public class VideoController {
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
 		}else if (category.equals("artist")) {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
-		}else if (category.equals("user")) {
-			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}else {
 			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}

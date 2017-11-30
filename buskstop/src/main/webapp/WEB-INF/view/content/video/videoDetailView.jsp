@@ -1,70 +1,75 @@
+<%@page import="java.util.Date"%>
 <%@page import="com.buskstop.vo.Video"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#youtubeBtn").on("click",function(){
-		var txt = $("#url").val();
-		$("#result").html(txt);
-	});
-});
+<style type="text/css">
+table, td {
+	border: 1px solid black;
+}
 
-</script>
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+td {
+	padding: 5px;
+	text-align: center;
+}
+
+select {
+	width: 150px;
+	height: 30px;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+}
+</style>
 <div id="container">
 <hr>
 <h2>동영상 상세보기</h2>
 <hr>
-
-	<!-- Board Content -->
-	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
+<!-- youtube -->
+	<div style="float:left; ">
+			<div style="float:left; margin-right:5px;">${requestScope.video.videoNo}. ${requestScope.video.videoTitle}</div> 
+			<div style="float:right; margin-right:15px; ">조회수 : ${requestScope.video.videoHits}</div>
+			<div style="float:right; margin-right:15px; ">등록일자 : ${requestScope.video.videoRegTime}</div>
+			<div style="float:right; margin-right:15px; ">게시자 : ${requestScope.video.videoUserId} 님</div>
+			<div style="float:left; margin-right:20px;">${requestScope.video.videoLink }</div>
+	</div>
+<!-- youtube END -->
+<table id="product_tb" style="display: table;">
+	<thead id="thead">
+	</thead>
+	<tbody id="tbody">
+		<tr>
+			<td>아티스트</td> 
+			<td>${requestScope.video.videoArtist}</td>
+		</tr>
+		<tr>
+			<td>공연장소</td> 
+			<td>${requestScope.video.videoLocation }</td>
+		</tr>
+		<tr>
+			<td>영상 속 공연 시간</td>
+			<td>${requestScope.video.videoDate }</td>
+		</tr>
+	</tbody>
+</table>
 		<div>
-			<h3>${requestScope.video.videoNo}. ${requestScope.video.videoTitle}</h3>
+			<p style="border: 1px solid #e5e5e5; color:#515151; font-size: 16px; padding:20px;">
+			${requestScope.video.videoContent}
+			</p>
 		</div>
-		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
-			<%-- <div style="float:right; margin-left:5px;">${requestScope.조회수}</div> --%>
-			<div style="float:right; margin-left:20px;">조회</div>
-			<div style="float:right; margin-left:20px;">${requestScope.video.videoRegTime}<!--  [글쓴 날짜 들어갈 곳 2017-11-01 22:00]  --></div>
-			<div style="float:right;">${requestScope.video.videoUserId}<strong>님</strong></div>
-		</div>
-	</div> 
-
-	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
-		<div style="float:left;">
-			<div style="float:left; margin-right:5px;">아티스트</div> 
-			<div style="float:left; margin-right:20px;">${requestScope.video.videoArtist}</div>
-		</div>
-		<div style="float:left;">
-			<div style="float:left; margin-right:5px;">공연장소</div> 
-			<div style="float:left; margin-right:20px;">${requestScope.video.videoLocation }</div>
-		</div>
-		<%-- <div>
-			<div style="float:left; margin-right:5px;">공연시간</div>
-			<div style="float:left;">${requestScope.video.Date}</div>
-		</div> --%>
-	</div>
-
-	<%-- <div>
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-		${requestScope.video.videoContent}
-		</p>
-	</div> --%>
-	<!-- Board Content End-->
-	<!-- youtube -->
-	<input type="hidden" id="url" value="${requestScope.video.videoLink }">
-	<sec:csrfInput/>
-	<button id="youtubeBtn">url전송</button>
-
-	<div id="result">
 	
-	</div>
-	<!-- youtube END -->
 	<!-- Comment -->
-	<!-- <div>
+	<div>
 		<div style="border: 1px solid #e5e5e5; height: 100px; padding: 10px">
 		댓글은 이쯤에 구현하면 좋을듯?
 		</div>
-	</div> -->
+	</div>
 	<!-- Comment End-->
 	
 </div>

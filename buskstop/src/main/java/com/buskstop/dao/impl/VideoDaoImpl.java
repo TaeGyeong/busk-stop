@@ -21,8 +21,6 @@ public class VideoDaoImpl implements VideoDao{
 
 	@Override//동영상 등록
 	public int insertVideo(Video video) {
-		System.out.println("insertVideo : before - "+video);
-		System.out.println(session.insert(makeSqlId("insertVideo"), video));
 		return session.insert(makeSqlId("insertVideo"), video);
 	}
 	
@@ -31,7 +29,7 @@ public class VideoDaoImpl implements VideoDao{
 		return session.selectOne(makeSqlId("selectVideoByVideoNo"), videoNo);
 	}
 
-	@Override
+	@Override//카테고리로 영상 조회
 	public List<Video> selectAllVideoByCategory(String category) {
 		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
 	}
