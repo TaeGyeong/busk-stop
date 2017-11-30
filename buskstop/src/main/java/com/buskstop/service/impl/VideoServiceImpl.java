@@ -17,7 +17,7 @@ import com.buskstop.vo.VideoLike;
 public class VideoServiceImpl implements VideoService {
 	
 	@Autowired
-	VideoLikeDao videoLikeDao;
+	private VideoLikeDao videoLikeDao;
 	
 	@Autowired
 	private VideoDao dao;

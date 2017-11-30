@@ -1,7 +1,33 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.buskstop.vo.Video"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<script type="text/javascript" src="${initParam.rootPath }/scripts/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function{
+	$("enterVideoCommentBtn").on("click", function(){
+		$.ajax({
+			"url":"${initParam}/member/enterVideoComment.do",
+			"type":"POST",
+			"data":{"videoNo":"${requestScope.videoNo}".val(),
+					"videoComment":$("#videoComent").val()
+					},
+			"dataType":"json",
+			"success":function(list){
+				var txt = "";
+				$.each(list, function(){
+					txt +="<li>"+this+"</li>";
+				});
+				$("videoCommentList").html(txt);
+			},
+			"error":function(){
+				alert("오류 발생");
+			}
+		});		
+	});
+});
+</script>
 <style type="text/css">
 table, td {
 	border: 1px solid black;
@@ -67,7 +93,15 @@ select {
 	<!-- Comment -->
 	<div>
 		<div style="border: 1px solid #e5e5e5; height: 100px; padding: 10px">
-		댓글은 이쯤에 구현하면 좋을듯?
+		 <!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
+			<div style="float:right">
+				<textarea id="#videoContent" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+				<button id="#enterVideoCommentBtn" type="button">등록</button>
+				<c:forEach items="${requestScope.videoCommnetList }" var='list'>
+					${list }
+				</c:forEach>
+			</div>
+		<div id="videoCommentList"></div> 
 		</div>
 	</div>
 	<!-- Comment End-->

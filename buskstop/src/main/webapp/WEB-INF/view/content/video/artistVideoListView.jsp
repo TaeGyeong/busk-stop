@@ -74,7 +74,7 @@ tr:hover{
 						</form>
 					</td> --%>
 				</tr>
-			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+			<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
 				<sec:csrfInput/>
 				<input type="hidden" value="${video.videoNo }" name="videoNo">
 			</form>
