@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.buskstop.dao.AuthorityDao;
 import com.buskstop.service.AuthorityService;
- 
+import com.buskstop.vo.Authority;
 @Service
 public class AuthorityServiceImpl implements AuthorityService{
 

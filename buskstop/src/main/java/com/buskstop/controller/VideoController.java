@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,22 +71,70 @@ public class VideoController {
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoDetailView.tiles", "readVideoByVideoNo", video);
+		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
 	
-	@RequestMapping("/videoSelectCategory")
-	public ModelAndView videoSelectCategory(@RequestParam String videoCategory) {
+	/*@RequestMapping("/detailView")
+	public ModelAndView videoDetail(@RequestParam int videoNo) {
+		Video video = service.selectVideoByVideoNo(videoNo);
+		return new ModelAndView("video/videoDetailView.tiles","video",video);
+	}*/
+	
+	/**
+	 * 영상등록에사 공연영상 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/member/selectPerformanceVideoCategory")
+	public ModelAndView selectPerformanceVideoCategory() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
 		String userId = ((User)authentication.getPrincipal()).getUserId();
-		System.out.println(userId);
-		if(videoCategory.matches("user")) {
-			return new ModelAndView("video/videoRegisterView.tiles", "userId", userId);
+		return new ModelAndView("video/videoRegisterPerformanceView.tiles", "userId", userId);
+	}
+	
+	/**
+	 * 영상등록에서 개인연습영상 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/member/selectMemberVideoCategory")
+	public ModelAndView selectMemberVideoCategory() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
+		Authentication authentication = context.getAuthentication();
+		String userId = ((User)authentication.getPrincipal()).getUserId();
+		return new ModelAndView("video/videoRegisterPracticeView.tiles", "userId", userId);
+	}
+	
+	/**
+	 * 영상등록에서 아티스트 카테고리 선택
+	 * @return
+	 */
+	@RequestMapping("/artist/selectArtistVideoCategory")
+	public ModelAndView selectArtistVideoCategory() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
+		Authentication authentication = context.getAuthentication();
+		
+		String userId = ((User)authentication.getPrincipal()).getUserId();
+		return new ModelAndView("video/videoRegisterArtistView.tiles", "userId", userId);
+	}
+	
+	@RequestMapping("/videoListCategory")
+	public ModelAndView videoList(@RequestParam String category) {
+		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
+		List<Video> list = service.viewAllVideo(category);
+		System.out.println("category - "+category);
+		// response
+		if(category.equals("performance")) {
+			System.out.println("list - "+category);
+			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+		}else if (category.equals("artist")) {
+			return new ModelAndView("video/artistVideoListView.tiles","list",list);
 		}else {
-			//사용자 권한 확인하러 AuthorityController한테 보냄
-			return new ModelAndView("/artist/readArtist.do");
+			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}
 	}
+	
 	
 }

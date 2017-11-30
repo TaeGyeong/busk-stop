@@ -12,6 +12,26 @@ SELECT * FROM VIDEO_LIKE
 select * from artist
 select * from authority
 select * from stage_supplier
+select * from video
+
+UPDATE VIDEO SET VIDEO_LINK=
+'<div style="position:relative;height:0;padding-bottom:56.21%"><iframe src="https://www.youtube.com/embed/IsR5mcQRqjM?ecver=2" style="position:absolute;width:100%;height:100%;left:0" width="641" height="360" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>'
+WHERE video_user_id = 'id3';
+
+
+SELECT 
+video_no,
+		video_title,
+		video_link,
+		video_location,
+		video_content,
+		video_date,
+		video_artist,
+		video_category,
+		video_user_id
+FROM	VIDEO
+WHERE VIDEO_CATEGORY = 'user'
+
 		SELECT 
 			u.USER_ID,
 			u.USER_NAME,
