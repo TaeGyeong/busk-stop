@@ -7,27 +7,12 @@
 <script type="text/javascript">
 $(document).ready(function{
 	 // ** 댓글 쓰기 버튼 클릭 이벤트 (ajax로 처리)
-    $("#btnReply").click(function(){
-        var replytext=$("#replytext").val();
-        var bno="${dto.bno}"
-        var param="replytext="+replytext+"&bno="+bno;
-        $.ajax({                
-            type: "post",
-            url: "${path}/reply/insert.do",
-            data: param,
-            success: function(){
-                alert("댓글이 등록되었습니다.");
-                listReply2();
-            }
-        });
-    });
 	$("#enterVideoCommentBtn").on("click", function(){
-		var videoNo="${requestScope.videoNo}"
 		$.ajax({
 			"url":"${initParam}/member/enterVideoComment.do",
 			"type":"POST",
-			"data":{"videoNo":"${requestScope.videoNo}".val(),
-					"videoComment":$("#videoComent").val()
+			"data":{"videoNo":"${requestScope.video.videoNo}",
+					"videoComment":$("#videoComent")
 					},
 			"dataType":"json",
 			"success":function(list){
@@ -108,10 +93,10 @@ select {
 	
 	<!-- Comment -->
 	<div>
-		<div style="border: 1px solid #e5e5e5; height: 100px; padding: 10px">
+		<div style="border: 1px solid #e5e5e5; height: 30em; padding: 10px">
 		 <!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 			<div style="float:right">
-				<textarea id="#videoContent" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+				<textarea id="#videoContent" rows="15" cols="100" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
 				<button id="#enterVideoCommentBtn" type="button">등록</button>
 				<%-- <c:forEach items="${requestScope.videoCommnetList }" var='list'>
 					${list }
@@ -122,4 +107,15 @@ select {
 	</div>
 	<!-- Comment End-->
 	
+	<!-- button -->
+	<div style="float:right">
+		<form action="${initParam.rootPath }/videoListCategory.do">
+		<input type="hidden" name="category" value="${requestScope.video.videoCategory }">
+		<button style="padding:10px">목록으로</button>
+		</form>
+		<!-- <button style="padding:10px">이전 글로</button>
+		<button style="padding:10px">다음 글로</button> -->
+	</div>
+	<p><p><p>
 </div>
+

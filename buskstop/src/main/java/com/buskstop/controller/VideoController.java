@@ -69,17 +69,17 @@ public class VideoController {
 		
 	}
 	
+	/**
+	 * 영상 번호로 영상 상세보기
+	 * @param videoNo
+	 * @return
+	 */
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
 	
-	/*@RequestMapping("/detailView")
-	public ModelAndView videoDetail(@RequestParam int videoNo) {
-		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoDetailView.tiles","video",video);
-	}*/
 	
 	/**
 	 * 영상등록에사 공연영상 카테고리 선택
