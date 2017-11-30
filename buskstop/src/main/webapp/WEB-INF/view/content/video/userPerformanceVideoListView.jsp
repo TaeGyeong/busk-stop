@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("tr").on("click",function(){
+		document.getElementById("detailForm").submit();
+	});
+});
+</script>
 <style type="text/css">
 table, td {
 	border: 1px solid black;
@@ -21,15 +24,18 @@ td {
 	text-align: center;
 }
 
+tr:hover{
+	background-color : yellow;
+	
+}
+
 </style>
-</head>
-<body>
-<sec:csrfInput/>
+
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
 	VIDEO_TITLE VARCHAR2(100) NOT NULL, /* 제목 */
-	VIDEO_LINK VARCHAR2(80) NOT NULL, /* 링크 */
+	VIDEO_LINK VARCHAR2(400) NOT NULL, /* 링크 */
 	VIDEO_LOCATION VARCHAR2(30), /* 장소 */
 	VIDEO_CONTENT VARCHAR2(3000), /* 게시자 등록글 */
 	VIDEO_DATE DATE, /* 등록일자 */
@@ -61,8 +67,10 @@ td {
 				<td>${video.videoUserId }</td>
 				<td>${video.videoRegTime }</td>
 			</tr>
+			<form action="${initParam.rootPath }/detailView.do" method="post" id="detailForm">
+				<sec:csrfInput/>
+				<input type="hidden" value="${video.videoNo }" name="videoNo">
+			</form>
 		</c:forEach>
 	</tbody>
 </table>
-</body>
-</html>

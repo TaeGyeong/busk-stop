@@ -13,7 +13,8 @@
 		video_artist,
 		video_category,
 		video_user_id,
-		video_reg_time
+		video_reg_time,
+		video_hits
 	</sql>
 	
 	<sql id="video-select-sql">
@@ -33,6 +34,7 @@
 		<result column="video_reg_time" property="videoRegTime"/>
 		<result column="video_user_id" property="videoUserId"/>
 		<result column="video_reg_time" property="videoRegTime"/>
+		<result column="video_hits" property="videoHits"/>
 	</resultMap>
 	
 	<insert id="insertVideo" parameterType="Video">
@@ -49,7 +51,9 @@
 					 #{videoArtist}, 
 					 #{videoCategory}, 
 					 #{videoUserId},
-					 sysdate)
+					 sysdate,
+					 #{videoHits}
+					 )
 	</insert>
 
 	<select id="selectVideoByVideoNo" parameterType="_int" resultMap="video-resultmap">
