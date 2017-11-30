@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.Video;
 
 public interface VideoDao {
@@ -17,6 +19,27 @@ public interface VideoDao {
 	 * @return
 	 */
 	Video selectVideoByVideoNo (int videoNo);	
+	
+	/**
+	 * 모든 동영상 조회
+	 * @return
+	 */
+	List<Video> selectAllVideoByCategory (String category);
+	
+	
+	/**
+	 * 동영상의 정보를 수정
+	 * @param video
+	 * @return
+	 */
+	int updateVideo(Video video);
+	
+	/**
+	 * 영상등록번호로 동영상정보를 제거.
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoByVideoNum(int videoNo);
 	
 	
 }

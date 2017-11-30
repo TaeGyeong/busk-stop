@@ -28,6 +28,13 @@
 		<result column="performance_reg_time" property="performanceRegTime"/>
 	</resultMap>
 	
+	<resultMap type="Performance" id="performance-join-performanceLike-resultmap" extends="performance-resultmap">
+		<collection property="likeCount" ofType="PerformanceLike">
+			<id property="performanceLikeNo" column="performance_like_no"/>
+			<result property="performanceLikeUserId" column="performance_user_id"/>
+		</collection>
+	</resultMap>
+	
 	<!-- 공연정보 insert -->
 	<insert id="insertPerformance" parameterType="Performance">
 		<selectKey keyProperty="performanceNo" resultType="_int" order="BEFORE">
@@ -98,5 +105,25 @@
 	<select id="selectPerformanceByPerformanceContent" parameterType="String" resultMap="performance-resultmap">
 		select * from performance
 		where performance_content like '%'||#{performanceContent}||'%'
+	</select>
+	
+	<!-- 공연목록을 좋아요와 함께 조회 -->
+	<select id="selectAllPerformanceJoin" resultMap="performance-join-performanceLike-resultmap">
+		select p.performance_no,
+			p.performance_name,
+			p.performance_title,
+			p.performance_location,
+			p.performance_date,
+			p.performance_content,
+			p.performance_image,
+			p.performance_user_id,
+			p.performance_reg_time,
+			pl.likecount
+		from PERFORMANCE p, (
+				select performance_like_no, count(*) likecount
+				from performance_like
+				group by performance_like_no
+		) pl
+		where p.performance_no = pl.performance_like_no(+)
 	</select>
 </mapper>

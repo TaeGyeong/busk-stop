@@ -121,8 +121,8 @@ insert into PERFORMANCE_LIKE values('2', 'kimdo327');
 
 
 /* 동영상(게시물) */
-insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', '2017-10-12', '메기 매운탕','','kimm990','2017-12-24');
-insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하남시', '재밌는 공연이었습니다.', '2017-11-12', 'mc경','','kimbo88','2017-12-25');
+insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', '2017-10-12', '메기 매운탕','','hjyj4841','2017-12-24');
+insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하남시', '재밌는 공연이었습니다.', '2017-11-12', 'mc경','','','2017-12-25');
 insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부산시', '유쾌한 공연이었습니다.', '2017-09-02', '메기 매운탕, 노래 개잘핵','','no33432','2017-12-26');
 
 /* 동영상 댓글 */

@@ -3,6 +3,7 @@ package com.buskstop.dao;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
+import com.buskstop.vo.PerformanceLike;
 
 public interface PerformanceDao {
 	
@@ -31,4 +32,9 @@ public interface PerformanceDao {
 	
 	List<Performance> selectPerformanceByPerformanceContent(String performanceContent);
 
+	/**
+	 * 모든 공연정보 조회 좋아요 join
+	 * @return
+	 */
+	List<Performance> selectAllPerformanceJoin();
 }

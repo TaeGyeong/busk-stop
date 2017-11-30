@@ -2,6 +2,7 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,7 @@ public class Performance implements Serializable{
 	private Date performanceRegTime;
 	// TODO 공연장 번호 연결 해야함.
 	//private int StageNo;
+	private int likeCount;
 	
 	public Performance() {}
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
@@ -47,6 +49,14 @@ public class Performance implements Serializable{
 				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
 				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceRegTime="
 				+ performanceRegTime + "]";
+	}
+	
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 	public int getPerformanceNo() {
 		return performanceNo;

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.PerformanceLikeService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.vo.Performance;
+import com.buskstop.vo.PerformanceLike;
 
 @Controller
 public class PerformanceController {
@@ -24,9 +26,11 @@ public class PerformanceController {
 	@Autowired
 	private PerformanceService service;
 	
+	@Autowired
+	private PerformanceLikeService likeService;
+	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance,  HttpServletRequest request) throws IllegalStateException, IOException {
-		
 		//파일 업로드 처리
 		MultipartFile multiImage = performance.getMultiImage();
 		if(multiImage!=null && !multiImage.isEmpty()) {
@@ -44,7 +48,7 @@ public class PerformanceController {
 	@RequestMapping("/performanceUpdate")
 	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
 		service.updatePerformance(performance);	
-		return new ModelAndView("redirect:/performance/performanceView.tiles","performanceNo",performance.getPerformanceNo());
+		return new ModelAndView("redirect:/performanceDetailView.do","performanceNo",performance.getPerformanceNo());
 	}
 	
 	@RequestMapping("/deletePerformance")
@@ -54,9 +58,23 @@ public class PerformanceController {
 	}
 	
 	@RequestMapping("/allSelectPerformance")
-	public ModelAndView allSelectPerformance() {
+	public ModelAndView updateLike() {
+		
 		List<Performance> list = service.selectAllPerformance();
-		return new ModelAndView("performance/performanceView.tiles","list", list);	
+		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
+		
+		int count = 0;
+		for(Performance pf : list) {
+			for(PerformanceLike pl : likeList) {
+				if(pf.getPerformanceNo() == pl.getPerformanceLikeNo()) {
+					count ++;
+					pf.setLikeCount(count);
+				}
+			}
+			count = 0;
+		}
+		
+		return new ModelAndView("performance/performanceView.tiles","list", list);
 	}
 	
 

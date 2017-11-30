@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,8 +21,6 @@ public class VideoDaoImpl implements VideoDao{
 
 	@Override//동영상 등록
 	public int insertVideo(Video video) {
-		System.out.println("insertVideo : before - "+video);
-		System.out.println(session.insert(makeSqlId("insertVideo"), video));
 		return session.insert(makeSqlId("insertVideo"), video);
 	}
 	
@@ -29,4 +29,19 @@ public class VideoDaoImpl implements VideoDao{
 		return session.selectOne(makeSqlId("selectVideoByVideoNo"), videoNo);
 	}
 
+	@Override//카테고리로 영상 조회
+	public List<Video> selectAllVideoByCategory(String category) {
+		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
+	}
+
+	@Override
+	public int updateVideo(Video video) {
+		return session.update(makeSqlId("updateVideo"), video);
+	}
+
+	@Override
+	public int deleteVideoByVideoNum(int videoNo) {
+		return session.delete(makeSqlId("deleteVideoByVideoNum"), videoNo);
+	}
+	
 }
