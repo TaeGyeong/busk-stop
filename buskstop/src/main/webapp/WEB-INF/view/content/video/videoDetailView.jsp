@@ -22,6 +22,7 @@ $(document).ready(function{
         });
     });
 	$("#enterVideoCommentBtn").on("click", function(){
+		var videoNo="${requestScope.videoNo}"
 		$.ajax({
 			"url":"${initParam}/member/enterVideoComment.do",
 			"type":"POST",

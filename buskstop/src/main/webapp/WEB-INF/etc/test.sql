@@ -1,6 +1,6 @@
 update users
 set user_password = '$2a$10$9Mx5vV4LRJThJhqcxrwFL.CO64itUT387QxcBdv1m7hkae8oTQIlq'
-
+delete from VIDEO where video_no=61
 select*from authority;
 select*from video;
 select * from performance;

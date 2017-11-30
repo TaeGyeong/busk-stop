@@ -143,7 +143,7 @@ public class VideoController {
 		return new ModelAndView("video/videoChangeInfoView.tiles","video",video);
 	}
 	
-
+	
 	@RequestMapping("/updateVideoInfo")
 	public ModelAndView updateArtistVideo(@ModelAttribute Video video) {
 		// Artist 공연영상일 경우에는 artistVideo 정보수정 controller 로 보낸다.
@@ -159,7 +159,7 @@ public class VideoController {
 		video = service.selectVideoByVideoNo(video.getVideoNo());
 		
 		// response
-		return new ModelAndView("video/videoDetailView.tiles", "video",video);
+		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo",video.getVideoNo());
 	}
 	
 	@RequestMapping("/artist/updateVideoInfo")
