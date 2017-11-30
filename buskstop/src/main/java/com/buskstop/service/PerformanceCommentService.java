@@ -6,12 +6,11 @@ import com.buskstop.vo.PerformanceComment;
 
 public interface PerformanceCommentService {
 
-	List<PerformanceComment> selectListComment(int performanceNo);
-
 	void insertPerformanceComment(PerformanceComment performanceComment);
 
 	int deletePerformanceCommentByPerformanceCommentNo(int performanceCommentNo);
 
 	void updatePerformanceComment(PerformanceComment performanceComment);
-
+	
+	List<PerformanceComment> listComment(int performanceNo);
 }

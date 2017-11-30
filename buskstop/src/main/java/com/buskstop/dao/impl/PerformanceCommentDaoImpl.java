@@ -20,8 +20,9 @@ public class PerformanceCommentDaoImpl implements PerformanceCommentDao{
 	}
 	
 	@Override
-	public List<PerformanceComment> selectListComment(int performanceNo){
-		return session.selectList(makeSql("selectListComment"),performanceNo);
+	public List<PerformanceComment> listComment(int performanceNo){
+//		System.out.println("dao까지는 오냐");
+		return session.selectList(makeSql("listComment"),performanceNo);
 	}
 	
 	@Override

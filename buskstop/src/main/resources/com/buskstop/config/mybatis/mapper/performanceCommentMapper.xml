@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="performanceCommentMapper">
+<mapper namespace="com.buskstop.config.mybatis.mapper.performanceCommentMapper">
 	
 	<resultMap type="performanceComment" id="performanceComment-resultmap">
 		<id column="performance_comment_no" property="performanceCommentNo"/>
-		<result column="performance_no" property="performanceNo" />
+		<id column="performance_no" property="performanceNo" />
 		<result column="performance_comment_user_id" property="performanceCommentUserId"/>
 		<result column="performance_comment" property="performanceComment"/>
 		<result column="performance_comment_reg_time" property="performanceCommentRegTime"/>
 	</resultMap>
 	
 	
-	<select id="listComment" resultType="PerformanceComment">
-		select performance_comment_no, performance_comment_user_id, performance_comment,performance_comment_reg_time
-		from performanceComment
+	<select id="listComment" parameterType="_int" resultMap="performanceComment-resultmap">
+		select	performance_comment_no, 
+				performance_comment_user_id, 
+				performance_comment, 
+				performance_comment_reg_time
+		from performance_Comment 
 		where performance_no=#{performanceNo}
-		order by performance_no
+		order by performance_comment_no
 	</select>
-	
-	<insert id="InsertPerformanceComment" parameterType="PerformanceComment">
+	 
+	 
+	<insert id="insertPerformanceComment" parameterType="PerformanceComment">
 	<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
-			select PERFORMANCE_NO_SEQ.nextval from dual
+			select PERFORMANCE_COMMENT_NO_SEQ.nextval from dual
 		</selectKey>
-	insert into performance_comment (performance_comment_no, performance_no,performance_comment_user_id, performance_comment, performance_comment_reg_time)
-	values(#{performanceCommentNo},#{performanceNo},#{performanceCommentUserId},,#{performanceComment},sysdate)
+	insert into performance_comment
+	values(#{performanceCommentNo},#{performanceNo},#{performanceCommentUserId},#{performanceComment},sysdate)
 	</insert>
 	
 

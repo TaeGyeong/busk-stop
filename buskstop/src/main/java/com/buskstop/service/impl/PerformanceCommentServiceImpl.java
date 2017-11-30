@@ -16,12 +16,14 @@ public class PerformanceCommentServiceImpl implements PerformanceCommentService{
 	private PerformanceCommentDao dao;
 	
 	@Override
-	public List<PerformanceComment> selectListComment(int performanceNo){
-		return dao.selectListComment(performanceNo);
+	public List<PerformanceComment> listComment(int performanceNo){
+//		System.out.println("서비스까지는 오냐?");
+		return dao.listComment(performanceNo);
 	}
 	
 	@Override
 	public void insertPerformanceComment(PerformanceComment performanceComment) {
+		System.out.println("입력 여기까지 오나요");
 		dao.insertPerformanceComment(performanceComment);
 	}
 	

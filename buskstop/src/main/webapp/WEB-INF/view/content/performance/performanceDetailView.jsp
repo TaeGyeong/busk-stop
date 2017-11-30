@@ -1,10 +1,67 @@
 <%@page import="com.buskstop.vo.Performance"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	listComment();
+	$("#btnComment").on("click",function(){
+        var performanceComment=$("#performanceComment").val();
+		$.ajax({                
+            "url": "${initParam.rootPath }/performanceCommentInsert.do",
+            "type": "get",
+            "data" : {
+            	"performanceComment":"${performanceComment}",
+            	'${_csrf.parameterName}':'${_csrf.token}'
+            },
+            success: function(){
+                alert("댓글이 등록되었습니다.");
+                listComment();
+            },
+           	"error":function(){
+           		alert("오류 발생");
+           		
+           	}
+        });
+     });
+});	
+
+
+function listComment(){
+       $.ajax({
+           //"dataType":"json",
+           "url" : "/buskstop/performanceCommentList.do",
+           "type": "get",
+           "data" : {"performanceNo":"${param.performanceNo}"},
+           "success" : function(result){
+               var output = "<table>";
+               for(var i in result){
+                   output += "<tr>";
+                   output += "<td>("+result[i].performanceCommentNo+")";
+                   output += "("+result[i].performanceCommentUserId+")";
+                   output += "("+result[i].performanceRegTime+")<br>";
+                   output += result[i].performanceComment+"</td>";
+                   output += "<tr>";
+               }
+               output += "</table>";
+               $("#performanceCommentList").html(output);
+           },
+           "error":function(){
+          		alert("오류 발생");
+          	}
+       });
+   }
+
+
+</script>
+
 <style type="text/css">
 	table, td{
 		border: 1px solid black;
@@ -32,7 +89,7 @@
 <div id="container">
 <% Performance performance = (Performance)request.getAttribute("performance"); %>
 
-<h1>DETAIL VIEW - 공연 정보 글 읽기 Mock </h1>
+<h1>DETAIL VIEW - 공연 상세 정보 </h1>
 	
 <hr>
 
@@ -69,16 +126,21 @@
 		</p>
 	</div>
 	<!-- Board Content End-->
-	<!-- Comment -->
-	<div>
-		<div style="border: 1px solid #e5e5e5; height: 100px; padding: 10px">
-		댓글은 이쯤에 구현하면 좋을듯?
-		</div>
+	
+ 
+	<div id="performanceCommentList"> 
+	<c:forEach var="performanceComment" items="${sessionScope.list }">
+		${performanceComment.performanceCommentNo},
+		${performanceComment.performanceRegTime},	
+		${performanceComment.performanceCommentUserId},
+		${performanceComment.performanceComment},
+	</c:forEach>
 	</div>
-	<!-- Comment End-->
+	
+	<textarea name="content" id="performanceComment" 
+	cols="20" rows="5" placeholder="댓글을 쓰세요"></textarea>
+	<button type="button" id="btnComment">댓글 등록</button>
 	
 	
 </div>
-
 </body>
-</html>
