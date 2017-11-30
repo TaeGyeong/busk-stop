@@ -25,4 +25,12 @@ public interface VideoDao {
 	 * @return
 	 */
 	List<Video> selectAllVideoByCategory (String category);
+	
+	
+	/**
+	 * 동영상의 정보를 수정
+	 * @param video
+	 * @return
+	 */
+	int updateVideo(Video video);
 }

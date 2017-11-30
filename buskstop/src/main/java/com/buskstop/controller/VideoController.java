@@ -1,5 +1,6 @@
 package com.buskstop.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,39 @@ public class VideoController {
 		}else {
 			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}
+	}
+	
+	@RequestMapping("/videoChangeInfoView")
+	public ModelAndView changeInfoView(int videoNo) {
+		Video video = service.selectVideoByVideoNo(videoNo);
+		return new ModelAndView("video/videoChangeInfoView.tiles","video",video);
+	}
+	
+
+	@RequestMapping("/updateVideoInfo")
+	public ModelAndView updateArtistVideo(@ModelAttribute Video video) {
+		
+		// Artist 공연영상일 경우에는 artistVideo 정보수정 controller 로 보낸다.
+		if(video.getVideoCategory().equals("artist")) {
+			return new ModelAndView("redirect:/artist/updateVideoInfo.do","video",video);
+		}
+		
+		// test용 출력
+		System.out.println(video);
+		
+		// video정보를 수정하는 update service
+		service.updateVideo(video);
+		video = service.selectVideoByVideoNo(video.getVideoNo());
+		
+		// response
+		return new ModelAndView("video/videoDetailView.tiles", "video",video);
+	}
+	
+	@RequestMapping("/artist/updateVideoInfo")
+	public ModelAndView updatePerformanceVideo(@ModelAttribute Video video) {
+		service.updateVideo(video);
+		video = service.selectVideoByVideoNo(video.getVideoNo());
+		return new ModelAndView("video/videoDetailView.tiles", "video",video);
 	}
 	
 	

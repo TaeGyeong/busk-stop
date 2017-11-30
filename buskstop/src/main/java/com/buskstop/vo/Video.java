@@ -7,23 +7,49 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Video implements Serializable{
 	private int videoNo;
-	private String videoTitle;
-	private String videoLink;
-	private String videoLocation;//영상속 장소
+	private String videoTitle; 
+	private String videoLink; 
+	private String videoLocation; //영상속 장소
 	private String videoContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date videoDate;
+	private Date videoDate; 
 	private String videoArtist;
 	private String videoCategory;//아티스트 홍보영상, 공연영상, 연습영상
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date videoRegTime;
-	private String videoUserId;
+	private String videoUserId; 
 	
 	public Video() {
 	}
+	
+
+	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
+			Date videoDate) {
+		this.videoNo = videoNo;
+		this.videoTitle = videoTitle;
+		this.videoLink = videoLink;
+		this.videoLocation = videoLocation;
+		this.videoContent = videoContent;
+		this.videoDate = videoDate;
+	}
+	
+	
+	
+	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
+			Date videoDate, String videoArtist, String videoCategory) {
+		this.videoNo = videoNo;
+		this.videoTitle = videoTitle;
+		this.videoLink = videoLink;
+		this.videoLocation = videoLocation;
+		this.videoContent = videoContent;
+		this.videoDate = videoDate;
+		this.videoArtist = videoArtist;
+		this.videoCategory = videoCategory;
+	}
 
 
+	
 	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
 			Date videoDate, String videoArtist, String videoCategory, Date videoRegTime, String videoUserId) {
 		this.videoNo = videoNo;
@@ -36,8 +62,8 @@ public class Video implements Serializable{
 		this.videoCategory = videoCategory;
 		this.videoRegTime = videoRegTime;
 		this.videoUserId = videoUserId;
-		this.videoRegTime = videoRegTime;
 	}
+
 
 	public int getVideoNo() {
 		return videoNo;
