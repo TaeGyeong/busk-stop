@@ -13,11 +13,14 @@ public interface PerformanceDao {
 	 */
 	int insertPerformance(Performance performance);
 
-	Performance selectPerformanceByPerformanceNo(int performanceNo);	
+	Performance selectPerformanceByPerformanceNo(int performanceNo);
+	
+	int updatePerformanceCountByPerformanceNo(int performanceNo);
 	
 	int deletePerformanceByPerformanceNo(int performanceNo);
 
 	int updatePerformance(Performance performance);
+	
 	//모든 공연 정보 조회 (Mock)
 	List<Performance> selectAllPerformance();
 

@@ -1,6 +1,5 @@
 package com.buskstop.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
@@ -13,12 +12,21 @@ public interface PerformanceService {
 	 */
 	void insertPerformance(Performance performance);
 	
+	/* 공연정보 조회*/
 	Performance getPerformanceByPerformanceNo(int performanceNo);
+	/* 공연정보 조회 할 때 카운트 =+1 */
+	void updatePerformanceCountByPerformanceNo(int performanceNo);
 
+	/* 공연정보 삭제*/
 	int deletePerformanceByPerformance(int performanceNo);
 
+	/* 공연정보 수정*/
 	void updatePerformance(Performance performance);
 	
+	/** 공연 정보 게시판 리스트 조회용
+	 * @pram performance
+	 * @return
+	 */
 	List<Performance> selectAllPerformance();
 
 	/**

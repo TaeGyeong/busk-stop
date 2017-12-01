@@ -17,6 +17,11 @@ where p.performance_no = pl.performance_like_no(+);
 /*  공연정보 게시판 글 읽기 (디테일 뷰)*/
 select * from performance where performance_no = 99;
 
+/* 공연 정보 게시물 조회 조회수 1 증가 */
+update performance
+set performance_hits = performance_hits+1
+where performance_no = 1;
+
 /* 공연정보 검색 */
 select p.*, pl.like_count /* like_count = 좋아요 수 */
 from PERFORMANCE p, (
@@ -332,4 +337,4 @@ where help_no = 1; /* 조회할 게시글 id */
 select hc.*
 from HELP h, HELP_COMMENT hc
 where h.help_no = hc.help_no
-and h.help_no = 1; /* 조회갈 게시글 id */
+and h.help_no = 1; /* 조회갈 게시글 id */	
