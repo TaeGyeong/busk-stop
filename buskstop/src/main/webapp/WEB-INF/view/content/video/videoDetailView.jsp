@@ -66,8 +66,9 @@ $(document).ready(function(){
     	});
     });
     
-    $("#providerBtn").on("click",fucntion(){
-		if($("#providerBtn").text=='댓글보기'){
+    $("#providerBtn").on("click",function(){
+    	alert($("#providerBtn").text());
+		if($("#providerBtn").text()=='댓글보기'){
 			$.ajax({
 	    		"url":"${initParam.rootPath }/readVideoComment.do",
 	    		"type":"POST",
@@ -89,7 +90,7 @@ $(document).ready(function(){
 	    		}
 	    	});
 		} else {
-			$("#videoCommentList").html().remove();
+			$("#videoCommentList").html('');
 			$("#providerBtn").text("댓글보기");
 		}
     }); 
