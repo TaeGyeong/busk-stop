@@ -39,7 +39,7 @@
 	
 	<select id="selectVideoCommentByVideoNo" parameterType="_int" resultMap="videoComment-resultmap">
 		<include refid="videoComment-select-sql"/>
-		WHERE	video_no = #{videoNo}
+		WHERE	video_no = #{value}
 	</select>
 
 </mapper>
