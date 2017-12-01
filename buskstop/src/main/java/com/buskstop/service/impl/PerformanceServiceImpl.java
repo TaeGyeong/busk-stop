@@ -53,6 +53,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 		map.put("pageBean", pb);
 		List<Performance> list = dao.selectAllPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());		
+		
 		map.put("list", list);
 		
 		return map;
