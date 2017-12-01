@@ -28,6 +28,9 @@
 	<mvc:view-controller path="/videoSelectCategoryView.do" view-name="video/videoSelectCategoryView.tiles"/>
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
+	<mvc:view-controller path="/out_member_form.do" view-name="member/out_member_form.tiles"/>
+	
+	
 	<!-- test link -->
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

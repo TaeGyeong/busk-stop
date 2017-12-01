@@ -8,4 +8,10 @@
 <form action="${initParam.rootPath }/registerSupplierView.do">
 	<button>공연장공급자 등록.</button>
 </form>
+<form action="${initParam.rootPath }/updateMemberInfo.do">
+	<button>회원정보수정</button>
+</form>
+<form action="${initParam.rootPath }/out_member_form.do">
+	<button>회원탈퇴</button>
+</form>
 
