@@ -3,45 +3,106 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<script type="text/javascript" src="${initParam.rootPath }/scripts/jquery-3.2.1.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function{
-	 // ** 댓글 쓰기 버튼 클릭 이벤트 (ajax로 처리)
-    $("#btnReply").click(function(){
-        var replytext=$("#replytext").val();
-        var bno="${dto.bno}"
-        var param="replytext="+replytext+"&bno="+bno;
-        $.ajax({                
-            type: "post",
-            url: "${path}/reply/insert.do",
-            data: param,
-            success: function(){
-                alert("댓글이 등록되었습니다.");
-                listReply2();
-            }
-        });
-    });
+
+$(document).ready(function(){
+	
 	$("#enterVideoCommentBtn").on("click", function(){
-		var videoNo="${requestScope.videoNo}"
+		var videoNo= "${requestScope.video.videoNo }";
+		alert(videoNo);
+	
 		$.ajax({
-			"url":"${initParam}/member/enterVideoComment.do",
+			"url": "${initParam.rootPath}/member/enterVideoComment.do",
 			"type":"POST",
-			"data":{"videoNo":"${requestScope.videoNo}".val(),
-					"videoComment":$("#videoComent").val()
-					},
+			"data":{"videoNo":"${requestScope.video.videoNo }",
+					"videoComment":$("#videoComment").val(),
+					"${_csrf.parameterName}":"${_csrf.token}"
+			},
 			"dataType":"json",
+			"beforesend":function(){
+				alert("${requestScope.video.videoNo }");
+				if($("#videoComment").val()==null){
+					alert("댓글을 입력해주세요.");
+					document.getElementById("#videoComment").focus();
+				}
+			},
+			
 			"success":function(list){
 				var txt = "";
 				$.each(list, function(){
-					txt +="<li>"+this+"</li>";
+					txt+="<tr><td>"+this.videoCommentNo+"</td>";
+					txt+="<td>"+this.videoCommentUserId+"</td>";
+					txt+="<td>"+ this.videoComment +"</td>";
+					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
 				});
-				$("videoCommentList").html(txt);
-			},
-			"error":function(){
-				alert("오류 발생");
+				$("#videoCommentList").html(txt);
+				$("#videoCommentList").removeClass('hidden');		
+    			$("#providerBtn").text('댓글숨기기');
 			}
 		});		
 	});
+    
+   /*  $("#provider").on("click",function(){
+    	var VideoNo = "${requestScope.video.videoNo }";
+    	$.ajax({
+    		"url":"${initParam.rootPath }/readVideoComment.do",
+    		"type":"POST",
+    		"data":{
+    			"videoNo":"${requestScope.video.videoNo }",
+    			"${_csrf.parameterName}":"${_csrf.token}"
+    		},
+    		"dataType":"json",
+    		"success":function(list){
+    			var txt="";
+    			$.each(list,function(){
+					txt+="<tr><td>"+this.videoCommentNo+"</td>";
+    				txt+="<td>"+this.videoCommentUserId+"</td>";
+					txt+="<td>"+this.videoComment+"</td>";
+					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
+    			});
+    			$("#videoCommentList").html(txt);
+    			$("#videoCommentList").addClass('bold');
+    			$("#providerBtn").text('댓글숨기기');
+    		}
+    	});
+    });
+     */
+    $("#providerBtn").on("click",function(){
+    	alert($("#providerBtn").text());
+    	
+		if($("#providerBtn").text()=='댓글보기'){
+			$.ajax({
+	    		"url":"${initParam.rootPath }/readVideoComment.do",
+	    		"type":"POST",
+	    		"data":{
+	    			"videoNo":"${requestScope.video.videoNo }",
+	    			"${_csrf.parameterName}":"${_csrf.token}"
+	    		},
+	    		"dataType":"json",
+	    		"success":function(list){
+	    			var txt="";
+	    			$.each(list,function(){
+						txt+="<tr><td>"+this.videoCommentNo+"</td>";
+	    				txt+="<td>"+this.videoCommentUserId+"</td>";
+						txt+="<td>"+this.videoComment+"</td>";
+						txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
+	    			});
+	    			$("#videoCommentList").html(txt);
+	    			
+	    			$("#videoCommentList").removeClass("hidden");		
+	    			$("#providerBtn").text('댓글숨기기');
+	    		},
+	    		"error":function(a, b, c){
+	    			alert(c); 
+	    		}
+	    	});
+		} else {
+			$("#videoCommentList").addClass("hidden");
+			$("#providerBtn").text('댓글보기');
+		}
+    }); 
 });
 </script>
 <style type="text/css">
@@ -67,6 +128,19 @@ select {
 #container {
 	width: 960px;
 	margin: 0 auto;
+}
+
+#provider : hover{
+	cursor:point;
+	color:purple;
+}
+
+.hidden{
+	display:none;
+}
+
+.bold{
+	font-weight:bold;
 }
 </style>
 <div id="container">
@@ -109,17 +183,34 @@ select {
 	<!-- Comment -->
 	<div>
 		<div style="border: 1px solid #e5e5e5; height: 100px; padding: 10px">
-		 <!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-			<div style="float:right">
-				<textarea id="#videoContent" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
-				<button id="#enterVideoCommentBtn" type="button">등록</button>
-				<%-- <c:forEach items="${requestScope.videoCommnetList }" var='list'>
-					${list }
-				</c:forEach> --%>
+			<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
+			
+			<!-- 댓글을 펼치고 숨기기 위한 곳. -->
+			<div id="provider">
+				<button id="providerBtn">댓글보기</button>
 			</div>
-		<div id="videoCommentList"></div> 
+			
+			<!-- 댓글목록이 보여질 div -->
+			<div id="videoCommentList">
+			</div>
+			 
+			<div style="float:right">
+				<textarea id="videoComment" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+				<button id="enterVideoCommentBtn" type="button">등록</button>
+			</div>
+			
 		</div>
 	</div>
 	<!-- Comment End-->
+	
+	<!-- 수정 & 삭제 -->
+	<!-- 수정 -->
+	<form action="" method="post">
+		<button></button>
+	</form>
+	<!-- 삭제 -->
+	<form action="" method="post">
+		<button></button>
+	</form>
 	
 </div>

@@ -6,17 +6,27 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.buskstop.common.util.DateJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class VideoComment implements Serializable{
 	
 	private int videoNo;
 	private int videoCommentNo;
 	private String videoCommentUserId;
 	private String videoComment;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	
+	@JsonSerialize(using=DateJsonSerializer.class)
 	private Date videoCommentRegTime;
 	
 	public VideoComment() {
 	}
+
+	public VideoComment(int videoNo, String videoComment) {
+		this.videoNo = videoNo;
+		this.videoComment = videoComment;
+	}
+
 
 	public VideoComment(int videoNo, int videoCommentNo, String videoCommentUserId, String videoComment,
 			Date videoCommentRegTime) {
@@ -59,7 +69,7 @@ public class VideoComment implements Serializable{
 	public void setVideoComment(String videoComment) {
 		this.videoComment = videoComment;
 	}
-
+	
 	public Date getVideoCommentRegTime() {
 		return videoCommentRegTime;
 	}
