@@ -3,6 +3,8 @@ package com.buskstop.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,12 +27,12 @@ public class VideoController {
 
 	@Autowired
 	private VideoService service;
-	
+
 	@RequestMapping("/videoLike")
 	public @ResponseBody String videoLike(@RequestParam int isLike) {
 		System.out.println(isLike);
 		VideoLike like = new VideoLike(1, getUserId());
-		if(isLike==0) {
+		if (isLike == 0) {
 			service.plusLike(like);
 			return "1";
 		} else {
@@ -38,51 +40,50 @@ public class VideoController {
 			return "0";
 		}
 	}
-	
+
 	@RequestMapping("/likeCheck")
 	public ModelAndView likeCheck() {
 		// 좋아요한 회원정보 조회
 		List<VideoLike> list = service.selectLikeUserByNum(1); // 1은 영상번호
-		String num="0";
-		
-		
+		String num = "0";
+
 		// user-check
-		for(VideoLike vl : list) {
+		for (VideoLike vl : list) {
 			System.out.println(vl);
-			if(vl.getVideoLikeUserId().equals(getUserId())) {
-				num="1";
+			if (vl.getVideoLikeUserId().equals(getUserId())) {
+				num = "1";
 			}
 		}
-		
-		return new ModelAndView("testpage.tiles","userLike",num);
+
+		return new ModelAndView("testpage.tiles", "userLike", num);
 	}
-	
-	
+
 	private String getUserId() {
-		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
-	
+
 	@RequestMapping("/createVideo")
 	public ModelAndView createVideo(@ModelAttribute Video video) {
 		service.insertVideo(video);
 		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
-		
+
 	}
-	
+
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
-	
-	/*@RequestMapping("/detailView")
-	public ModelAndView videoDetail(@RequestParam int videoNo) {
-		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoDetailView.tiles","video",video);
-	}*/
-	
+
+	/*
+	 * @RequestMapping("/detailView") public ModelAndView videoDetail(@RequestParam
+	 * int videoNo) { Video video = service.selectVideoByVideoNo(videoNo); return
+	 * new ModelAndView("video/videoDetailView.tiles","video",video); }
+	 */
+
 	/**
 	 * 영상등록에사 공연영상 카테고리 선택
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/member/selectPerformanceVideoCategory")
@@ -90,12 +91,13 @@ public class VideoController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
-		String userId = ((User)authentication.getPrincipal()).getUserId();
+		String userId = ((User) authentication.getPrincipal()).getUserId();
 		return new ModelAndView("video/videoRegisterPerformanceView.tiles", "userId", userId);
 	}
-	
+
 	/**
 	 * 영상등록에서 개인연습영상 카테고리 선택
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/member/selectMemberVideoCategory")
@@ -103,12 +105,13 @@ public class VideoController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
-		String userId = ((User)authentication.getPrincipal()).getUserId();
+		String userId = ((User) authentication.getPrincipal()).getUserId();
 		return new ModelAndView("video/videoRegisterPracticeView.tiles", "userId", userId);
 	}
-	
+
 	/**
 	 * 영상등록에서 아티스트 카테고리 선택
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/artist/selectArtistVideoCategory")
@@ -116,63 +119,70 @@ public class VideoController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
-		
-		String userId = ((User)authentication.getPrincipal()).getUserId();
+
+		String userId = ((User) authentication.getPrincipal()).getUserId();
 		return new ModelAndView("video/videoRegisterArtistView.tiles", "userId", userId);
 	}
-	
+
 	@RequestMapping("/videoListCategory")
-	public ModelAndView videoList(@RequestParam String category) {
+	public ModelAndView videoList(@RequestParam String category, HttpServletRequest request) {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
-		System.out.println("category - "+category);
+		System.out.println("category - " + category);
+
+		// id 넘기기위해 request
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+
+		String userId = ((User) authentication.getPrincipal()).getUserId();
+		request.setAttribute("userId", userId);
+
 		// response
-		if(category.equals("performance")) {
-			System.out.println("list - "+category);
-			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
-		}else if (category.equals("artist")) {
-			return new ModelAndView("video/artistVideoListView.tiles","list",list);
-		}else {
-			return new ModelAndView("video/userVideoListView.tiles","list",list);
+		if (category.equals("performance")) {
+			System.out.println("list - " + category);
+			return new ModelAndView("video/userPerformanceVideoListView.tiles", "list", list);
+		} else if (category.equals("artist")) {
+			return new ModelAndView("video/artistVideoListView.tiles", "list", list);
+		} else {
+			return new ModelAndView("video/userVideoListView.tiles", "list", list);
 		}
 	}
-	
+
 	@RequestMapping("/videoChangeInfoView")
 	public ModelAndView changeInfoView(int videoNo) {
 		Video video = service.selectVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoChangeInfoView.tiles","video",video);
+		return new ModelAndView("video/videoChangeInfoView.tiles", "video", video);
 	}
-	
-	
+
 	@RequestMapping("/updateVideoInfo")
 	public ModelAndView updateArtistVideo(@ModelAttribute Video video) {
 		// Artist 공연영상일 경우에는 artistVideo 정보수정 controller 로 보낸다.
-		if(video.getVideoCategory().equals("artist")) {
-			return new ModelAndView("redirect:/artist/updateVideoInfo.do","video",video);
+		if (video.getVideoCategory().equals("artist")) {
+			return new ModelAndView("redirect:/artist/updateVideoInfo.do", "video", video);
 		}
-		
+
 		// test용 출력
 		System.out.println(video);
-		
+
 		// video정보를 수정하는 update service
 		service.updateVideo(video);
 		video = service.selectVideoByVideoNo(video.getVideoNo());
-		
+
 		// response
-		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo",video.getVideoNo());
+		return new ModelAndView("redirect:/readVideoByVideoNo.do", "videoNo", video.getVideoNo());
 	}
-	
+
 	@RequestMapping("/artist/updateVideoInfo")
 	public ModelAndView updatePerformanceVideo(@ModelAttribute Video video) {
 		service.updateVideo(video);
 		video = service.selectVideoByVideoNo(video.getVideoNo());
-		return new ModelAndView("video/videoDetailView.tiles", "video",video);
+		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
-	
+
 	@RequestMapping("/deleteVideo")
 	public String deleteVideo(int videoNo) {
 		service.deleteVideoByVideoNum(videoNo);
 		return "index.tiles";
 	}
-	
+
 }
