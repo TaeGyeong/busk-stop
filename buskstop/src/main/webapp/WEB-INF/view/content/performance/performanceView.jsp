@@ -115,52 +115,71 @@ select {
 			</select> <input type="text" placeholder="검색" name="search">
 		</form>
 		<%-- 페이징 처리 --%>
-		<p>
-			<%-- 첫페이지로 이동 --%>
-			<a href="${initParam.rootPath }/allSelectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
-			<%--
-				이전 페이지 그룹 처리
-				만약에 이전 페잊 그룹이 있으면 링크처리하고 없으면 화살표만 나오도록 처리
-			 --%>
-			<c:choose>
-				<c:when test="${requestScope.map.pageBean.previousPageGroup }">
-					<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
-				</c:when>
-				<c:otherwise>
-			 		◀
-			 	</c:otherwise>
-			</c:choose>
-			<%--
-			 	현재 page가 속한 page 그룹내의 페이지들 링크
-			 	현재 pageGroup의 시작 page ~ 끝 page
-			 	- 만약에 p가 현재페이지면 링크처리를 하지 않고 p가 현재 페이지가 아니라면 링크 처리.
-			  --%>
-			<c:forEach begin="${requestScope.map.pageBean.beginPage }"
-				end="${requestScope.map.pageBean.endPage }" var="num">
+		<p/>
+		<div style="text-align: center; width: 100%;">
+			<ul class="pagination">
+				<%-- 첫페이지로 이동 --%>
+				<li>
+					<a href="${initParam.rootPath }/allSelectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
+				</li>
+				<%--
+					이전 페이지 그룹 처리
+					만약에 이전 페잊 그룹이 있으면 링크처리하고 없으면 화살표만 나오도록 처리
+				 --%>
 				<c:choose>
-					<c:when test="${num == requestScope.map.pageBean.page }">
-			  			[${num }]
-			  		</c:when>
+					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
+						<li>
+							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
+						</li>
+					</c:when>
 					<c:otherwise>
-						<a href="${initParam.rootPath }/allSelectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
-					</c:otherwise>
+						<li class="disabled">
+				 			<a href="#">◀</a>
+				 		</li>
+				 	</c:otherwise>
 				</c:choose>
-			</c:forEach>
-			<%--
-			  	다음페이지 그룹으로 이동
-			  	만약에 다음페이지 그룹이 있으면 링크 처리 없으면 화살표만 나오도록 처리
-			  --%>
-			<c:choose>
-				<c:when test="${requestScope.map.pageBean.nextPageGroup }">
-					<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
-				</c:when>
-				<c:otherwise>
-			  		▶
-			  	</c:otherwise>
-			</c:choose>
-			<%-- 마지막 페이지로 이동 --%>
-			<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
-		</p>
+				<%--
+				 	현재 page가 속한 page 그룹내의 페이지들 링크
+				 	현재 pageGroup의 시작 page ~ 끝 page
+				 	- 만약에 p가 현재페이지면 링크처리를 하지 않고 p가 현재 페이지가 아니라면 링크 처리.
+				  --%>
+				<c:forEach begin="${requestScope.map.pageBean.beginPage }"
+					end="${requestScope.map.pageBean.endPage }" var="num">
+					<c:choose>
+						<c:when test="${num == requestScope.map.pageBean.page }">
+							<li class="active">
+				  				<a href="#">${num }</a>
+				  			</li>
+				  		</c:when>
+						<c:otherwise>
+							<li>
+								<a href="${initParam.rootPath }/allSelectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<%--
+				  	다음페이지 그룹으로 이동
+				  	만약에 다음페이지 그룹이 있으면 링크 처리 없으면 화살표만 나오도록 처리
+				  --%>
+				<c:choose>
+					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
+						<li>
+							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="disabled">
+				  			<a href="#">▶</a>
+				  		</li>
+				  	</c:otherwise>
+				</c:choose>
+				<%-- 마지막 페이지로 이동 --%>
+				<li>
+					<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
