@@ -11,18 +11,22 @@ import java.util.UUID;
 import java.util.Locale.Category;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,6 +44,9 @@ public class PerformanceController {
 	@Autowired
 	private PerformanceLikeService likeService;
 	
+	@Autowired(required=true)
+	private HttpServletRequest request;
+	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance,  HttpServletRequest request) throws IllegalStateException, IOException {
 		//파일 업로드 처리
@@ -47,10 +54,10 @@ public class PerformanceController {
 		if(multiImage!=null && !multiImage.isEmpty()) {
 			//디렉토리
 			String dir = request.getServletContext().getRealPath("/performanceImage");
-			String fileName = multiImage.getOriginalFilename();
-			File upImage = new File(dir, fileName);
+			String fileName = UUID.randomUUID().toString();
+			File upImage = new File(dir, fileName+".jpg");
 			multiImage.transferTo(upImage);
-			performance.setPerformanceImage(fileName);
+			performance.setPerformanceImage(fileName+".jpg");
 		}
 		
 		service.insertPerformance(performance);
@@ -68,11 +75,50 @@ public class PerformanceController {
 		return "performance/performanceView.tiles";
 	}
 	
+	// 조회하는 메서드
 	@RequestMapping("/allSelectPerformance")
-	public ModelAndView updateLike() {
+	public ModelAndView selectAllPerformance(@RequestParam(required=false) String category, @RequestParam(required=false) String search) throws ParseException ,IOException, ServletException{
+		List<Performance> list = null;
+		Map<String, Object> map = null;
+		int page = 1;
 		
-		List<Performance> list = service.selectAllPerformance();
-		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		}catch (Exception e) {
+			
+		}
+		if(category != null) { //검색 시 페이징
+			if(category.equals("title")) {
+				map = service.selectPerformanceByPerformanceTitle(page, search);
+			}else if(category.equals("user")){
+				map = service.selectPerformanceByPerformanceUserId(page, search);
+			}else if(category.equals("location")) {
+				map = service.selectPerformanceByPerformanceLocation(page, search);
+			}else if(category.equals("name")) {
+				map = service.selectPerformanceByPerformanceName(page, search);
+			}else if(category.equals("content")) {
+				map = service.selectPerformanceByPerformanceContent(page, search);
+			}
+		}else {
+			map = service.selectAllPerformance(page);
+			category = "title";
+			search = "";
+		}
+		list = (List<Performance>)map.get("list");
+		list = likeCounter(list);
+		map.put("list", list);
+		map.put("search", search);
+		map.put("category", category);
+		
+		return new ModelAndView("performance/performanceView.tiles", "map", map);
+	}
+	
+	
+	// 좋아요 조회하는 메서드
+	public List<Performance> likeCounter(List<Performance> list){
+		
+		 List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
 		
 		int count = 0;
 		for(Performance pf : list) {
@@ -85,9 +131,8 @@ public class PerformanceController {
 			count = 0;
 		}
 		
-		return new ModelAndView("performance/performanceView.tiles","list", list);
+		return list;
 	}
-	
 
 	@RequestMapping("/performanceDetailView")
 	public ModelAndView performanceDetailView(@RequestParam int performanceNo) {
@@ -100,29 +145,6 @@ public class PerformanceController {
 		System.out.println(performance);
 		return new ModelAndView("performance/performanceDetailView.tiles","performance", performance);
 			
-	}
-	
-
-	// 카테고리로 검색
-	@RequestMapping("/performanceSearch")
-	public ModelAndView selectPerformanceByCategory(@RequestParam String category, @RequestParam String search) throws ParseException {
-		if(category.equals("title")) {
-			List<Performance> list = service.selectPerformanceByPerformanceTitle(search);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}else if(category.equals("user")){
-			List<Performance> list = service.selectPerformanceByPerformanceUserId(search);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}else if(category.equals("location")) {
-			List<Performance> list = service.selectPerformanceByPerformanceLocation(search);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}else if(category.equals("name")) {
-			List<Performance> list = service.selectPerformanceByPerformanceName(search);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}else if(category.equals("content")) {
-			List<Performance> list = service.selectPerformanceByPerformanceContent(search);
-			return new ModelAndView("performance/performanceView.tiles", "list", list);
-		}
-		return null;
 	}
 
 }
