@@ -85,5 +85,4 @@ public class PerformaceLikeController {
 		
 		return sendNum;
 	}
-	
 }

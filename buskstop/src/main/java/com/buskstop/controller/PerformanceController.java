@@ -3,30 +3,20 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-import java.util.Locale.Category;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.tiles.request.Request;
+//github.com/um006500/busk-stop.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -107,6 +97,7 @@ public class PerformanceController {
 		}
 		list = (List<Performance>)map.get("list");
 		list = likeCounter(list);
+		
 		map.put("list", list);
 		map.put("search", search);
 		map.put("category", category);

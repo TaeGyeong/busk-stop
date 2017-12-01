@@ -2,13 +2,14 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공연 정보 리스트</title>
-<script type="text/javascript"
-	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 	function goDetail(root, no){
 		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
@@ -26,16 +27,13 @@
 				},
 				"dataType":"text",
 				"success":function(count){
-					$(this).text("좋아요"+count);
+					$(this).text("♥"+count);
 				}
 			});
 		});
 	});
 </script>
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-}
 
 table {
 	width: 100%;
@@ -56,6 +54,51 @@ select {
 	width: 960px;
 	margin: 0 auto;
 }
+
+#product_tb{
+	border: none;
+}
+#product_tb tr td{
+	font-weight: bold;
+	color: #888;
+}
+#product_tb tbody tr:nth-child(2n) td {
+	background-color: #337ab7;
+	color: #fff;
+}
+#product_tb tbody tr:nth-child(2n) td a{
+	color: #fff;
+}
+#product_tb tbody tr{
+	line-height: 30px;
+}
+#product_tb thead{
+	border-bottom: solid #ccc 1px;
+}
+#thead tr td{
+	color : #000;
+}
+.likeBtn{
+	color: red;
+}
+#product_tb tbody tr:nth-child(2n) .likeBtn{
+	color: red;
+}
+.likeBtn:hover{
+	color: #337ab7;
+	text-decoration: none;
+}
+#product_tb tbody tr:nth-child(2n) .likeBtn:hover{
+	color: #fff;
+}
+#product_tb img{
+	height : 100px;
+}
+
+#product_tb tbody tr td:nth-child(1) {
+	border-right: 2px #ccc solid;
+}
+
 </style>
 
 
@@ -79,6 +122,7 @@ select {
 			<thead id="thead">
 				<tr>
 					<td>번호</td>
+					<td>이미지</td>
 					<td>제목</td>
 					<td>공연장소</td>
 					<td>공연날짜</td>
@@ -93,13 +137,14 @@ select {
 				<c:forEach items="${requestScope.map.list}" var="item">
 					<tr style="cursor: pointer;">
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" alt="img"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceDate}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceRegTime}</td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>
-						<td><button class="likeBtn">좋아요${item.likeCount }</button></td>
+						<td><a class="likeBtn">♡${item.likeCount }</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,23 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="performanceCommentMapper">
-
-
-	<insert id="performanceComment">
-		<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
-		select performance_comment_no_SEQ.nextval from dual
+<mapper namespace="com.buskstop.config.mybatis.mapper.performanceCommentMapper">
+	
+	<resultMap type="performanceComment" id="performanceComment-resultmap">
+		<id column="performance_comment_no" property="performanceCommentNo"/>
+		<id column="performance_no" property="performanceNo" />
+		<result column="performance_comment_user_id" property="performanceCommentUserId"/>
+		<result column="performance_comment" property="performanceComment"/>
+		<result column="performance_comment_reg_time" property="performanceCommentRegTime"/>
+	</resultMap>
+	
+	
+	<select id="listComment" parameterType="_int" resultMap="performanceComment-resultmap">
+		select	performance_comment_no, 
+				performance_comment_user_id, 
+				performance_comment, 
+				performance_comment_reg_time
+		from performance_Comment 
+		where performance_no=#{performanceNo}
+		order by performance_comment_no
+	</select>
+	 
+	 
+	<insert id="insertPerformanceComment" parameterType="com.buskstop.vo.PerformanceComment">
+	<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
+			select PERFORMANCE_COMMENT_NO_SEQ.nextval from dual
 		</selectKey>
-	
-	insert into performance_comment (performance_comment_no, performance_no,performance_comment_user_id, performance_comment)
-	values()
-	
+	INSERT INTO PERFORMANCE_COMMENT
+	values( #{performanceCommentNo}, 
+			#{performanceNo}, 
+			#{performanceCommentUserId},
+			#{performanceComment},
+			sysdate)
 	</insert>
+	
+	<delete id="deletePerformanceCommentByPerformanceCommentNo" parameterType="_int">
+	DELETE FROM PERFORMANCE_COMMENT
+	where performance_comment_no=#{performanceCommentNo}
+	</delete>
+	
 
-
-
-
-
-
-
+	<update id="updatePerformanceComment" parameterType="PerformanceComment">
+		update performance_Comment
+		
+		set	performance_comment = #{performanceComment}
+		
+		where performance_comment_no = #{performanceCommentNo}
+	</update>
+	
+	
+	
 
 </mapper>
