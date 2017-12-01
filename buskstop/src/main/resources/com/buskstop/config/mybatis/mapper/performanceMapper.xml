@@ -8,6 +8,7 @@
 		performance_title,
 		performance_location,
 		performance_date,
+		performance_hits,
 		performance_content,
 		performance_image,
 		performance_user_id,
