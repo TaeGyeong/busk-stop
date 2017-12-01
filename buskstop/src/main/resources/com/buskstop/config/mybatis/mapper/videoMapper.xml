@@ -55,14 +55,64 @@
 					 #{videoHits}
 					 )
 	</insert>
-
+	
+	<update id="updateVideo" parameterType="video">
+		UPDATE 	video
+		SET		video_title = #{videoTitle},
+				video_link = #{videoLink},
+				video_location = #{videoLocation},
+				video_content = #{videoContent},
+				video_date = #{videoDate},
+				video_artist = #{videoArtist},
+				video_category = #{videoCategory},
+				video_user_id = #{videoUserId},
+				video_reg_time = #{videoRegTime},
+				video_hits = #{videoHits}
+		WHERE 	video_no = #{videoNo}
+	</update>
+	
+	<delete id="deleteVideoByVideoNum" parameterType="_int">
+		DELETE 
+		FROM	video 
+		WHERE 	video_no = #{value}
+	</delete>
+	
+	<!-- ######## 조회 ######### -->
+	
+	<!-- 영상 번호로 검색 -->
 	<select id="selectVideoByVideoNo" parameterType="_int" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE	video_no = #{value}	
 	</select>
 
+	<!-- 카테고리별 검색 -->
 	<select id="selectAllVideoByCategory" parameterType="string" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE VIDEO_CATEGORY = #{value}
 	</select>
+	
+	<!-- 제목으로 영상 검색 -->
+	<select id="selectVideoByTitleAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_TITLE like '%'||#{videoTitle}||'%'
+	</select>
+	
+	<!-- 아티스트로 영상 검색 -->
+	<select id="selectVideoByArtistAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_ARTIST like '%'||#{videoArtist}||'%'
+	</select>
+	
+	<!-- 게시자 Id로 영상 검색 -->
+	<select id="selectVideoByUserIdAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_USER_ID like '%'||#{videoUserId}||'%'
+	</select>
+	
+	<!-- 내용으로 영상 검색 -->
+	<select id="selectVideoByContentAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_USER_ID like '%'||#{videoContent}||'%'
+	</select>
+	
 </mapper>

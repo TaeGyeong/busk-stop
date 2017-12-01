@@ -14,7 +14,9 @@ public interface PerformanceDao {
 	 */
 	int insertPerformance(Performance performance);
 
-	Performance selectPerformanceByPerformanceNo(int performanceNo);	
+	Performance selectPerformanceByPerformanceNo(int performanceNo);
+	
+	int updatePerformanceCountByPerformanceNo(int performanceNo);
 	
 	int deletePerformanceByPerformanceNo(int performanceNo);
 

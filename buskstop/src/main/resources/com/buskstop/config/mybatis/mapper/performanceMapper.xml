@@ -92,8 +92,15 @@
 	
 	<!-- 공연정보 글 보기 (디테일 뷰)-->
 	<select id="selectPerformanceByPerformanceNo" parameterType="_int" resultMap="performance-resultmap">
-		select * from performance where performance_no = #{performanceNo}
+		select * from performance where performance_no = #{performanceNo}	
 	</select>
+	
+	<!-- 공연정보 글 보기 (디테일 뷰) 조회수 증가-->
+	<update id="updatePerformanceCountByPerformanceNo" parameterType="_int">
+	update performance
+	set performance_hits = NVL(performance_hits, 0) + 1
+	where performance_no = #{performanceNo}	
+	</update>
 
 	<!-- 공연정보 제목으로 검색 -->
 	<select id="selectPerformanceByPerformanceTitle" parameterType="map" resultMap="performance-resultmap">

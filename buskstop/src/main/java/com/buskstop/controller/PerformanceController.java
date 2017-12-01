@@ -136,15 +136,9 @@ public class PerformanceController {
 
 	@RequestMapping("/performanceDetailView")
 	public ModelAndView performanceDetailView(@RequestParam int performanceNo) {
-		System.out.println("컨트롤러 파라미터");
-		System.out.println(performanceNo);
-		
+		service.updatePerformanceCountByPerformanceNo(performanceNo); // 조회수+1 호출
 		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
-		
-		System.out.println("컨트롤러 리턴");
-		System.out.println(performance);
 		return new ModelAndView("performance/performanceDetailView.tiles","performance", performance);
-			
 	}
 
 }

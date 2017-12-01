@@ -7,26 +7,52 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Video implements Serializable{
 	private int videoNo;
-	private String videoTitle;
-	private String videoLink;
-	private String videoLocation;//영상속 장소
+	private String videoTitle; 
+	private String videoLink; 
+	private String videoLocation; //영상속 장소
 	private String videoContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date videoDate;
+	private Date videoDate; 
 	private String videoArtist;
 	private String videoCategory;//아티스트 홍보영상, 공연영상, 연습영상
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date videoRegTime;
+
 	private String videoUserId;
 	private int videoHits;//조회수
 	
 	public Video() {
 	}
 
+
+	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
+			Date videoDate) {
+		this.videoNo = videoNo;
+		this.videoTitle = videoTitle;
+		this.videoLink = videoLink;
+		this.videoLocation = videoLocation;
+		this.videoContent = videoContent;
+		this.videoDate = videoDate;
+	}
+	
+	
+	
+	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
+			Date videoDate, String videoArtist, String videoCategory) {
+		this.videoNo = videoNo;
+		this.videoTitle = videoTitle;
+		this.videoLink = videoLink;
+		this.videoLocation = videoLocation;
+		this.videoContent = videoContent;
+		this.videoDate = videoDate;
+		this.videoArtist = videoArtist;
+		this.videoCategory = videoCategory;
+	}
+
+
 	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
 			Date videoDate, String videoArtist, String videoCategory, Date videoRegTime, String videoUserId,
 			int videoHits) {
-		super();
 		this.videoNo = videoNo;
 		this.videoTitle = videoTitle;
 		this.videoLink = videoLink;
@@ -39,94 +65,116 @@ public class Video implements Serializable{
 		this.videoUserId = videoUserId;
 		this.videoHits = videoHits;
 	}
-
+	
 	public int getVideoNo() {
 		return videoNo;
 	}
+
 
 	public void setVideoNo(int videoNo) {
 		this.videoNo = videoNo;
 	}
 
+
 	public String getVideoTitle() {
 		return videoTitle;
 	}
+
 
 	public void setVideoTitle(String videoTitle) {
 		this.videoTitle = videoTitle;
 	}
 
+
 	public String getVideoLink() {
 		return videoLink;
 	}
+
 
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
 
+
 	public String getVideoLocation() {
 		return videoLocation;
 	}
+
 
 	public void setVideoLocation(String videoLocation) {
 		this.videoLocation = videoLocation;
 	}
 
+
 	public String getVideoContent() {
 		return videoContent;
 	}
+
 
 	public void setVideoContent(String videoContent) {
 		this.videoContent = videoContent;
 	}
 
+
 	public Date getVideoDate() {
 		return videoDate;
 	}
+
 
 	public void setVideoDate(Date videoDate) {
 		this.videoDate = videoDate;
 	}
 
+
 	public String getVideoArtist() {
 		return videoArtist;
 	}
+
 
 	public void setVideoArtist(String videoArtist) {
 		this.videoArtist = videoArtist;
 	}
 
+
 	public String getVideoCategory() {
 		return videoCategory;
 	}
+
 
 	public void setVideoCategory(String videoCategory) {
 		this.videoCategory = videoCategory;
 	}
 
+
 	public Date getVideoRegTime() {
 		return videoRegTime;
 	}
+
 
 	public void setVideoRegTime(Date videoRegTime) {
 		this.videoRegTime = videoRegTime;
 	}
 
+
 	public String getVideoUserId() {
 		return videoUserId;
 	}
+
 
 	public void setVideoUserId(String videoUserId) {
 		this.videoUserId = videoUserId;
 	}
 
+
 	public int getVideoHits() {
 		return videoHits;
 	}
 
+
 	public void setVideoHits(int videoHits) {
 		this.videoHits = videoHits;
 	}
+
 
 	@Override
 	public String toString() {

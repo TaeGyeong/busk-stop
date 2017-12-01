@@ -146,6 +146,7 @@ CREATE TABLE PERFORMANCE (
 
 CREATE SEQUENCE PERFORMANCE_NO_SEQ;
 CREATE SEQUENCE VIDEO_NO_SEQ;
+CREATE SEQUENCE VIDEO_COMMENT_NO_SEQ;
 /*------------------------------------------------------------------------------------*/
 
 /* 공연정보 댓글 */

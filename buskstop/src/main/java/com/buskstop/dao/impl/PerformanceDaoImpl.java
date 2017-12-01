@@ -28,14 +28,13 @@ public class PerformanceDaoImpl implements PerformanceDao{
 
 	@Override
 	public Performance selectPerformanceByPerformanceNo(int performanceNo) {
-		System.out.println("Dao 파라미터");
-		System.out.println(performanceNo);
-		
-		Performance i = session.selectOne(makeSqlId("selectPerformanceByPerformanceNo"),performanceNo);
-		
-		System.out.println("Dao 리턴");
-		System.out.println(i);
-		return i;
+		return session.selectOne(makeSqlId("selectPerformanceByPerformanceNo"),performanceNo);
+	}
+	
+	/*공연 정보 조회글 카운터 + 1, 공연글 정보 조회랑 세트로 호출*/
+	@Override
+	public int updatePerformanceCountByPerformanceNo(int performanceNo) {
+		return session.update(makeSqlId("updatePerformanceCountByPerformanceNo"),performanceNo);
 	}
 	
 	@Override

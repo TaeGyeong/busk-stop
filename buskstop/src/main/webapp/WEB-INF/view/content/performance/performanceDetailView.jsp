@@ -32,7 +32,7 @@
 <div id="container">
 <% Performance performance = (Performance)request.getAttribute("performance"); %>
 
-<h1>DETAIL VIEW - 공연 정보 글 읽기 Mock </h1>
+<h1>DETAIL VIEW - 공연 정보 글 읽기</h1>
 	
 <hr>
 
