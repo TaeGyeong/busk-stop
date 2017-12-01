@@ -52,11 +52,13 @@ $(document).ready(function(){
 					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
 				});
 				$("#videoCommentList").html(txt);
+				$("#videoCommentList").removeClass('hidden');		
+    			$("#providerBtn").text('댓글숨기기');
 			}
 		});		
 	});
     
-    $("#provider").on("click",function(){
+   /*  $("#provider").on("click",function(){
     	var VideoNo = "${requestScope.video.videoNo }";
     	$.ajax({
     		"url":"${initParam.rootPath }/readVideoComment.do",
@@ -75,13 +77,15 @@ $(document).ready(function(){
 					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
     			});
     			$("#videoCommentList").html(txt);
-    			$("#providerBtn").text("댓글숨기기");
+    			$("#videoCommentList").addClass('bold');
+    			$("#providerBtn").text('댓글숨기기');
     		}
     	});
     });
-    
+     */
     $("#providerBtn").on("click",function(){
     	alert($("#providerBtn").text());
+    	
 		if($("#providerBtn").text()=='댓글보기'){
 			$.ajax({
 	    		"url":"${initParam.rootPath }/readVideoComment.do",
@@ -100,12 +104,17 @@ $(document).ready(function(){
 						txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
 	    			});
 	    			$("#videoCommentList").html(txt);
-	    			$("#providerBtn").text("댓글숨기기");
+	    			
+	    			$("#videoCommentList").removeClass("hidden");		
+	    			$("#providerBtn").text('댓글숨기기');
+	    		},
+	    		"error":function(a, b, c){
+	    			alert(c); 
 	    		}
 	    	});
 		} else {
-			$("#videoCommentList").html('');
-			$("#providerBtn").text("댓글보기");
+			$("#videoCommentList").addClass("hidden");
+			$("#providerBtn").text('댓글보기');
 		}
     }); 
 });
