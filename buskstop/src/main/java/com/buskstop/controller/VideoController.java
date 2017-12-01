@@ -77,6 +77,7 @@ public class VideoController {
 	 */
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
+		System.out.println(videoNo);
 		Video video = service.viewVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
