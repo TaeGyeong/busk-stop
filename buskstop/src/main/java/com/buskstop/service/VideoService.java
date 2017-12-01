@@ -5,6 +5,8 @@ import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
 
 public interface VideoService {
+	
+	/* ####### 좋아요 ########*/
 	/**
 	 * 좋아요 정보를 저장
 	 * @param like
@@ -22,25 +24,13 @@ public interface VideoService {
 	 */
 	public List<VideoLike> selectLikeUserByNum(int num);
 	
+	
+	/*######## 동영상 ##########*/
 	/**
 	 * 동영상 등록
 	 * @param video
 	 */
 	int insertVideo(Video video);
-	
-	/**
-	 * 
-	 * 동영상 번호로 동영상 조회
-	 * @param videoNo
-	 * @return
-	 */
-	Video selectVideoByVideoNo(int videoNo);
-	
-	/**
-	 * 모든 공연영상을 조회.
-	 * @return
-	 */
-	List<Video> viewAllVideo(String category);
 	
 	/**
 	 * 동영상의 정보를 수정한다.
@@ -55,4 +45,28 @@ public interface VideoService {
 	 * @return
 	 */
 	int deleteVideoByVideoNum(int videoNo);
+	
+	/* -------- 동영상 조회 ----------*/
+	
+	/**
+	 * 모든 공연영상을 조회.
+	 * @return
+	 */
+	List<Video> viewAllVideo(String category);
+	
+	/**
+	 * 
+	 * 동영상 번호로 동영상 조회
+	 * @param videoNo
+	 * @return
+	 */
+	Video viewVideoByVideoNo(int videoNo);
+	
+	
+	List<Video> viewVideoByTitleAndCategory(String videoCategory, String videoTitle);
+	
+	List<Video> viewVideoByArtistAndCategory(String videoCategory, String videoArtist);
+	
+	List<Video> viewVideoByUserIdAndCategory(String videoCategory, String vodeUserId);
+	
 }

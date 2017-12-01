@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,19 +30,50 @@ public class VideoDaoImpl implements VideoDao{
 		return session.selectOne(makeSqlId("selectVideoByVideoNo"), videoNo);
 	}
 
-	@Override//카테고리로 영상 조회
-	public List<Video> selectAllVideoByCategory(String category) {
-		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
-	}
-
-	@Override
+	@Override//영상 수정
 	public int updateVideo(Video video) {
 		return session.update(makeSqlId("updateVideo"), video);
 	}
 
-	@Override
+	@Override//영상 삭제
 	public int deleteVideoByVideoNum(int videoNo) {
 		return session.delete(makeSqlId("deleteVideoByVideoNum"), videoNo);
+	}
+
+	
+	/****영상 조회*****/
+	
+	//카테고리로 영상 조회
+	@Override 
+	public List<Video> selectAllVideoByCategory(String category) {
+		return session.selectList(makeSqlId("selectAllVideoByCategory"),category);
+	}
+
+	//제목으로 영상 조회
+	@Override
+	public List<Video> selectVideoByTitleAndCategory(String videoCategory, String videoTitle) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("videoCategory", videoCategory);
+		map.put("videoTitle", videoTitle);
+		return session.selectList(makeSqlId("selectVideoByTitleAndCategory"), map);
+	}
+
+	//아티스트로 영상 조회
+	@Override
+	public List<Video> selectVideoByArtistAndCategory(String videoCategory, String videoArtist) {
+		HashMap<String, String>map = new HashMap<>();
+		map.put("videoCategory", videoCategory);
+		map.put("videoArtist", videoArtist);
+		return null;
+	}
+
+	//게시자 아이디로 영상 조회
+	@Override
+	public List<Video> selectVideoByUserIdAndCategory(String videoCategory, String videoUserId) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("videoCategory", videoCategory);
+		map.put("videoCategory", videoUserId);
+		return null;
 	}
 	
 }

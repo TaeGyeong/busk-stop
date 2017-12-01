@@ -208,7 +208,6 @@ select {
 	</div>
 	<!-- Comment End-->
 	
-<<<<<<< HEAD
 	<!-- button -->
 	<div style="float:right">
 		<form action="${initParam.rootPath }/videoListCategory.do">
@@ -221,16 +220,14 @@ select {
 	<p><p><p>
 </div>
 
-=======
 	<!-- 수정 & 삭제 -->
 	<!-- 수정 -->
 	<form action="" method="post">
-		<button></button>
+		<button>수정</button>
 	</form>
 	<!-- 삭제 -->
 	<form action="" method="post">
-		<button></button>
+		<button>삭제</button>
 	</form>
 	
 </div>
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
