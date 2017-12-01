@@ -1,6 +1,5 @@
 package com.buskstop.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,21 +41,17 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 	@Override
 	public List<Performance> selectAllPerformance() {
-
 		List<Performance> list = dao.selectAllPerformance();
 		return list;
 	}
 	
 	@Override
 	public Performance PerformanceByPerformanceNo(int performanceNo){
-		System.out.println("서비스 파라미터");
-		System.out.println(performanceNo);
-		
-		Performance i = dao.selectPerformanceByPerformanceNo(performanceNo);
-		System.out.println("서비스 리턴");
-		System.out.println(i);
-		return i;
-		//return dao.selectPerformanceByPerformanceNo(performanceNo);
+		return dao.selectPerformanceByPerformanceNo(performanceNo);
+	}
+	
+	public void updatePerformanceCountByPerformanceNo(int performanceNo){
+		dao.updatePerformanceCountByPerformanceNo(performanceNo);
 	}
 	
 	// 공연정보 검색
