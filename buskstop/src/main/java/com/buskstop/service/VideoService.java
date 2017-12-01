@@ -62,11 +62,35 @@ public interface VideoService {
 	 */
 	Video viewVideoByVideoNo(int videoNo);
 	
-	
+	/**
+	 * 제목으로 영상 조회
+	 * @param videoCategory
+	 * @param videoTitle
+	 * @return
+	 */
 	List<Video> viewVideoByTitleAndCategory(String videoCategory, String videoTitle);
 	
+	/**
+	 * 게시자 id로 영상조회
+	 * @param videoCategory
+	 * @param videoArtist
+	 * @return
+	 */
 	List<Video> viewVideoByArtistAndCategory(String videoCategory, String videoArtist);
 	
-	List<Video> viewVideoByUserIdAndCategory(String videoCategory, String vodeUserId);
+	/**
+	 * 아티스트명으로 영상조회
+	 * @param videoCategory
+	 * @param vodeUserId
+	 * @return
+	 */
+	List<Video> viewVideoByUserIdAndCategory(String videoCategory, String videoUserId);
 	
+	/**
+	 * 내용(추가글)으로 영상조회
+	 * @param videoCategory
+	 * @param videoContent
+	 * @return
+	 */
+	List<Video> viewVideoByContentAndCategory(String videoCategory, String videoContent);
 }

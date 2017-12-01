@@ -93,4 +93,10 @@ public class VideoServiceImpl implements VideoService {
 		return dao.selectVideoByUserIdAndCategory(videoCategory, videoUserId);
 	}
 
+	// 내용(추가글)으로 동영상 조회.
+	@Override
+	public List<Video> viewVideoByContentAndCategory(String videoCategory, String videoContent) {
+		return dao.selectVideoByContentAndCategory(videoCategory, videoContent);
+	}
+
 }

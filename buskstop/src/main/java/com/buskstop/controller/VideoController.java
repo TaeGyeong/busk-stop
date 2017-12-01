@@ -135,12 +135,11 @@ public class VideoController {
 		List<Video> list = service.viewAllVideo(category);
 		// response
 		if(category.equals("performance")) {
-			System.out.println("list - "+category);
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
 		}else if (category.equals("artist")) {
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
 		}else {
-			return new ModelAndView("video/userVideoListView.tiles","list",list);
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}
 	}
 	
@@ -188,17 +187,22 @@ public class VideoController {
 	//-------------영상 검색조건으로 조회 -----------------//
 	//제목으로 영상 조회
 	@RequestMapping("/viewVideoListByTitle")
-	public ModelAndView viewVideoListByTitle(@ModelAttribute Video video) {
-		String category = video.getVideoCategory();
-		String title = video.getVideoTitle();
-		List<Video> list = service.viewVideoByTitleAndCategory(category, title);
+	public ModelAndView viewVideoListByTitle(@RequestParam String category, 
+											 @RequestParam String filter, 
+											 @RequestParam String search) {
+		List<Video> list = null;
 		// response
-		if(category.equals("performance")) {
-			System.out.println("list - "+category);
+		if(filter.equals("title")) {
+			list = service.viewVideoByTitleAndCategory(category, search);
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
-		}else if (category.equals("artist")) {
+		}else if (filter.equals("userId")) {
+			list = service.viewVideoByUserIdAndCategory(category, search);
 			return new ModelAndView("video/artistVideoListView.tiles","list",list);
+		}else if (filter.equals("artist")) {
+			list = service.viewVideoByArtistAndCategory(category, search);
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}else {
+			list = service.viewVideoByContentAndCategory(category, search);
 			return new ModelAndView("video/userVideoListView.tiles","list",list);
 		}
 	}

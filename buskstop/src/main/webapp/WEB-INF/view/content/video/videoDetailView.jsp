@@ -6,34 +6,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-<<<<<<< HEAD
-$(document).ready(function{
-	 // ** 댓글 쓰기 버튼 클릭 이벤트 (ajax로 처리)
-=======
 
 $(document).ready(function(){
 	
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
 	$("#enterVideoCommentBtn").on("click", function(){
-<<<<<<< HEAD
-=======
 		var videoNo= "${requestScope.video.videoNo }";
 		alert(videoNo);
 	
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
 		$.ajax({
 			"url": "${initParam.rootPath}/member/enterVideoComment.do",
 			"type":"POST",
-<<<<<<< HEAD
-			"data":{"videoNo":"${requestScope.video.videoNo}",
-					"videoComment":$("#videoComent")
-					},
-=======
 			"data":{"videoNo":"${requestScope.video.videoNo }",
 					"videoComment":$("#videoComment").val(),
 					"${_csrf.parameterName}":"${_csrf.token}"
 			},
->>>>>>> branch 'master' of https://github.com/um006500/busk-stop.git
 			"dataType":"json",
 			"beforesend":function(){
 				alert("${requestScope.video.videoNo }");
@@ -209,7 +195,7 @@ select {
 			</div>
 			 
 			<div style="float:right">
-				<textarea id="videoComment" rows="15" cols="150" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+				<textarea id="videoComment" rows="10" cols="120" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
 				<button id="enterVideoCommentBtn" type="button">등록</button>
 			</div>
 			
@@ -219,7 +205,7 @@ select {
 	
 	<!-- button -->
 	<div style="float:right">
-		<form action="${initParam.rootPath }/videoListCategory.do">
+		<form action="${initParam.rootPath }/selectVideoCategory.do">
 		<input type="hidden" name="category" value="${requestScope.video.videoCategory }">
 		<button style="padding:10px">목록으로</button>
 		</form>
@@ -229,6 +215,7 @@ select {
 	<p><p><p>
 </div>
 
+<div>
 	<!-- 수정 & 삭제 -->
 	<!-- 수정 -->
 	<form action="" method="post">

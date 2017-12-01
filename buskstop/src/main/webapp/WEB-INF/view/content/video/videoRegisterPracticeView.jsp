@@ -22,12 +22,6 @@
 			required="required">
 	</div>
 	<div class="form-group">
-		<label for="videoLocation">공연장소</label> <input type="text"
-			name="videoLocation" id="videoLocation" class="form-control"
-			required="required">
-	</div>
-
-	<div class="form-group">
 		<label for="videoDate">공연날짜</label> <input type="date"
 			name="videoDate" id="videoDate" class="form-control"
 			required="required">

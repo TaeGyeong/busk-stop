@@ -64,7 +64,7 @@ public class VideoDaoImpl implements VideoDao{
 		HashMap<String, String>map = new HashMap<>();
 		map.put("videoCategory", videoCategory);
 		map.put("videoArtist", videoArtist);
-		return null;
+		return session.selectList(makeSqlId("selectVideoByArtistAndCategory"), map);
 	}
 
 	//게시자 아이디로 영상 조회
@@ -73,7 +73,16 @@ public class VideoDaoImpl implements VideoDao{
 		HashMap<String, String> map = new HashMap<>();
 		map.put("videoCategory", videoCategory);
 		map.put("videoCategory", videoUserId);
-		return null;
+		return session.selectList(makeSqlId("selectVideoByUserIdAndCategory"), map);
 	}
+	
+	//게시자 아이디로 영상 조회
+		@Override
+		public List<Video> selectVideoByContentAndCategory(String videoCategory, String videoUserId) {
+			HashMap<String, String> map = new HashMap<>();
+			map.put("videoCategory", videoCategory);
+			map.put("videoCategory", videoUserId);
+			return session.selectList(makeSqlId("selectVideoByContentAndCategory"), map);
+		}
 	
 }

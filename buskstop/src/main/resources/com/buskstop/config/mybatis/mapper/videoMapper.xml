@@ -94,19 +94,25 @@
 	<!-- 제목으로 영상 검색 -->
 	<select id="selectVideoByTitleAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
-		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_TITLE = #{videoTitle}
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_TITLE like '%'||#{videoTitle}||'%'
 	</select>
 	
 	<!-- 아티스트로 영상 검색 -->
 	<select id="selectVideoByArtistAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
-		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_ARTIST = #{videoArtist}
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_ARTIST like '%'||#{videoArtist}||'%'
 	</select>
 	
 	<!-- 게시자 Id로 영상 검색 -->
 	<select id="selectVideoByUserIdAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
-		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_USER_ID = #{videoUserId}
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_USER_ID like '%'||#{videoUserId}||'%'
+	</select>
+	
+	<!-- 내용으로 영상 검색 -->
+	<select id="selectVideoByContentAndCategory" parameterType="java.util.HashMap" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_USER_ID like '%'||#{videoContent}||'%'
 	</select>
 	
 </mapper>

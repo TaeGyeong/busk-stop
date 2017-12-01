@@ -65,4 +65,12 @@ public interface VideoDao {
 	 */
 	List<Video> selectVideoByUserIdAndCategory(String videoCategory, String videoUserId);
 	
+	/**
+	 * 내용(추가글)으로 영상 검색(카테고리 정보 자도 포함)
+	 * @param videoCategory
+	 * @param videoContent
+	 * @return
+	 */
+	List<Video> selectVideoByContentAndCategory(String videoCategory, String videoContent);
+	
 }
