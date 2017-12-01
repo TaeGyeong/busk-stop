@@ -30,7 +30,18 @@ tr:hover{
 }
 
 </style>
-
+<form action="${initParam.rootPath }/viewVideoListByTitle.do">
+	<sec:csrfInput/>
+	<select name="filter">
+		<option value="title">제목</option>
+		<option value="userId">작성자</option>
+		<option value="artist">아티스트명</option>
+		<option value="content">내용</option>
+	</select>
+	<input type="text" placeholder="검색" name="search">
+	<input type="hidden" id ="videoCategory" name="category" value="practice" class="form-control">
+	<button type="submit">검색</button>
+</form>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
@@ -66,13 +77,6 @@ tr:hover{
 					<td>${video.videoDate }</td>
 					<td>${video.videoArtist }</td>
 					<td>${video.videoRegTime }</td>
-					<%-- <td>
-						<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
-						<input type="hidden" value="${video.videoNo }" name="videoNo">
-						<button type="submit">상세보기</button>
-						<sec:csrfInput/>
-						</form>
-					</td> --%>
 				</tr>
 			<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
 				<sec:csrfInput/>

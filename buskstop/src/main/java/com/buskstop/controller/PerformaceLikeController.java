@@ -63,7 +63,7 @@ public class PerformaceLikeController {
 	
 	
 	public int findLikeCount(int num) {
-		List<Performance> list2 = service.selectAllPerformance();
+		List<Performance> list2 = service.selectAllPerfor();
 		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
 		int sendNum = 0;
 		
