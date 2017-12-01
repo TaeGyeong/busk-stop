@@ -45,4 +45,14 @@ public class VideoCommentController {
 		List<VideoComment> list = service.selectVideoCommentByVideoNo(videoNo);
 		return list;
 	}
+	
+	@RequestMapping("/member/editComment")
+	public void updateComment() {
+		
+	}
+	
+	@RequestMapping("/member/deleteCommnet")
+	public void deleteCommnet() {
+		
+	}
 }

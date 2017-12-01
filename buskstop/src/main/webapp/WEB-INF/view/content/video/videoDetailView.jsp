@@ -23,7 +23,7 @@ $(document).ready(function(){
 			"dataType":"json",
 			"beforesend":function(){
 				alert("${requestScope.video.videoNo }");
-				if($("#videoComment").val()==null){
+				if($("#videoComment").text()==null){
 					alert("댓글을 입력해주세요.");
 					document.getElementById("#videoComment").focus();
 				}
@@ -35,7 +35,7 @@ $(document).ready(function(){
 					txt+="<tr><td>"+this.videoCommentNo+"</td>";
 					txt+="<td>"+this.videoCommentUserId+"</td>";
 					txt+="<td>"+ this.videoComment +"</td>";
-					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
+					txt+="<td>"+this.videoCommentRegTime+"</td><td>수정</td><td>삭제</td></tr>";
 				});
 				$("#videoCommentList").html(txt);
 				$("#videoCommentList").removeClass('hidden');		
@@ -43,32 +43,7 @@ $(document).ready(function(){
 			}
 		});		
 	});
-    
-   /*  $("#provider").on("click",function(){
-    	var VideoNo = "${requestScope.video.videoNo }";
-    	$.ajax({
-    		"url":"${initParam.rootPath }/readVideoComment.do",
-    		"type":"POST",
-    		"data":{
-    			"videoNo":"${requestScope.video.videoNo }",
-    			"${_csrf.parameterName}":"${_csrf.token}"
-    		},
-    		"dataType":"json",
-    		"success":function(list){
-    			var txt="";
-    			$.each(list,function(){
-					txt+="<tr><td>"+this.videoCommentNo+"</td>";
-    				txt+="<td>"+this.videoCommentUserId+"</td>";
-					txt+="<td>"+this.videoComment+"</td>";
-					txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
-    			});
-    			$("#videoCommentList").html(txt);
-    			$("#videoCommentList").addClass('bold');
-    			$("#providerBtn").text('댓글숨기기');
-    		}
-    	});
-    });
-     */
+   
     $("#providerBtn").on("click",function(){
     	alert($("#providerBtn").text());
     	
@@ -84,10 +59,16 @@ $(document).ready(function(){
 	    		"success":function(list){
 	    			var txt="";
 	    			$.each(list,function(){
-						txt+="<tr><td>"+this.videoCommentNo+"</td>";
+						txt+="<div id='"+this.videoCommentUserId+"'><tr><td>"+this.videoCommentNo+"</td>";
 	    				txt+="<td>"+this.videoCommentUserId+"</td>";
 						txt+="<td>"+this.videoComment+"</td>";
-						txt+="<td>"+this.videoCommentRegTime+"</td></tr>";
+						txt+="<td>"+this.videoCommentRegTime+"</td>";
+						if(this.videoCommentUserId=='${requestScope.userId }'){
+							txt+="<td><button onclick=editComment();>수정</button></td>";
+							txt+="<td><form action='${initParam.rootPath }/member/deleteComment.do' method='post'><button>삭제</button>";
+							txt+="<input type='hidden' name='videoNo' value='${requestScope.video.videoNo}'></form></td></tr>";
+						}
+						txt+="</div>";
 	    			});
 	    			$("#videoCommentList").html(txt);
 	    			
@@ -102,8 +83,18 @@ $(document).ready(function(){
 			$("#videoCommentList").addClass("hidden");
 			$("#providerBtn").text('댓글보기');
 		}
-    }); 
+    });
+    
 });
+
+function editComment(){
+	$("#$(requestScope.userId)")
+	.remove()
+	.append('<form action="${initParam.rootPath }/member/editComment.do"><input type="text" name="videoComment">')
+	.append('<input type="hidden" name="videoNo" value="${requestScope.videoNo }"')
+	.append('<button>수정</button>')
+	.append('</form>');
+}
 </script>
 <style type="text/css">
 table, td {
@@ -141,6 +132,11 @@ select {
 
 .bold{
 	font-weight:bold;
+}
+
+div{
+	border: 1px solid black;
+	text-align:center;
 }
 </style>
 <div id="container">
@@ -193,12 +189,12 @@ select {
 			<!-- 댓글목록이 보여질 div -->
 			<div id="videoCommentList">
 			</div>
-			 
-			<div style="float:right">
-				<textarea id="videoComment" rows="10" cols="120" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
-				<button id="enterVideoCommentBtn" type="button">등록</button>
-			</div>
-			
+			<sec:authorize access="isAuthenticated()">			 
+				<div style="float:right">
+					<textarea id="videoComment" rows="10" cols="120" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+					<button id="enterVideoCommentBtn" type="button">등록</button>
+				</div>
+			</sec:authorize>
 		</div>
 	</div>
 	<!-- Comment End-->
@@ -218,12 +214,15 @@ select {
 <div>
 	<!-- 수정 & 삭제 -->
 	<!-- 수정 -->
-	<form action="" method="post">
-		<button>수정</button>
-	</form>
+	<div>
+		<form action="" method="post">
+			<button>수정</button>
+		</form>
+	</div>
 	<!-- 삭제 -->
-	<form action="" method="post">
-		<button>삭제</button>
-	</form>
-	
+	<div>
+		<form action="" method="post">
+			<button>삭제</button>
+		</form>
+	</div>
 </div>
