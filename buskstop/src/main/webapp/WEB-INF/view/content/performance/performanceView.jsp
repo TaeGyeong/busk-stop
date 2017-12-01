@@ -8,8 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공연 정보 리스트</title>
-<script type="text/javascript"
-	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 	function goDetail(root, no){
 		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
