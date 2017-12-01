@@ -5,13 +5,16 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.buskstop.common.util.DateJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class PerformanceComment implements Serializable{
 	
 	private int performanceCommentNo;
 	private int performanceNo;
 	private String performanceCommentUserId;
 	private String performanceComment;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonSerialize(using=DateJsonSerializer.class)
 	private Date performanceCommentRegTime;
 	
 	public PerformanceComment() {}
@@ -23,6 +26,19 @@ public class PerformanceComment implements Serializable{
 		this.performanceCommentUserId = performanceCommentUserId;
 		this.performanceComment = performanceComment;
 		this.performanceCommentRegTime = performanceCommentRegTime;
+	}
+	
+	
+
+	public PerformanceComment(int performanceCommentNo, int performanceNo, String performanceComment) {
+		this.performanceCommentNo = performanceCommentNo;
+		this.performanceNo = performanceNo;
+		this.performanceComment = performanceComment;
+	}
+
+	public PerformanceComment(int performanceNo, String performanceComment) {
+		this.performanceNo = performanceNo;
+		this.performanceComment = performanceComment;
 	}
 
 	@Override

@@ -22,28 +22,33 @@
 	</select>
 	 
 	 
-	<insert id="insertPerformanceComment" parameterType="PerformanceComment">
+	<insert id="insertPerformanceComment" parameterType="com.buskstop.vo.PerformanceComment">
 	<selectKey keyProperty="performanceCommentNo" resultType="_int" order="BEFORE">
 			select PERFORMANCE_COMMENT_NO_SEQ.nextval from dual
 		</selectKey>
-	insert into performance_comment
-	values(#{performanceCommentNo},#{performanceNo},#{performanceCommentUserId},#{performanceComment},sysdate)
+	INSERT INTO PERFORMANCE_COMMENT
+	values( #{performanceCommentNo}, 
+			#{performanceNo}, 
+			#{performanceCommentUserId},
+			#{performanceComment},
+			sysdate)
 	</insert>
+	
+	<delete id="deletePerformanceCommentByPerformanceCommentNo" parameterType="_int">
+	DELETE FROM PERFORMANCE_COMMENT
+	where performance_comment_no=#{performanceCommentNo}
+	</delete>
 	
 
 	<update id="updatePerformanceComment" parameterType="PerformanceComment">
-		update performanceComment
-		<set>
-			<if test="performanceComment != null">performance_comment = #{performanceComment}</if>
-		</set>
+		update performance_Comment
+		
+		set	performance_comment = #{performanceComment}
+		
 		where performance_comment_no = #{performanceCommentNo}
 	</update>
 	
-	<delete id="deletePerformanceCommentByPerformanceCommentNo" parameterType="_int">
-	delete from performnaceComment
-	where performance_comment_no=#{performanceCommentNo}
-	</delete>
-
+	
 	
 
 </mapper>

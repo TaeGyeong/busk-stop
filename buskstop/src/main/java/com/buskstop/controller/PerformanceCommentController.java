@@ -3,9 +3,9 @@ package com.buskstop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,30 +25,42 @@ public class PerformanceCommentController {
 //		System.out.println("들어오냐?");
 		List<PerformanceComment> list = service.listComment(performanceNo);
 //		System.out.println("컨트롤러 나오긴하냐");
+//		System.out.println(list);
 		return list;
 	}
 	
-//	@RequestMapping("/performanceCommentList")
-//	public ModelAndView performanceCommentList(@RequestParam int performanceNo,@ModelAttribute PerformanceComment performanceComment, HttpServletRequest request) throws Exception {
-//		System.out.println("들어오냐?");
-//		List<PerformanceComment> list = service.listComment(performanceNo);
-//		return new ModelAndView("performance/performanceDetailView.tiles","performanceCommentList",list);
-//	}
-	private String getUserId() {
-		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
-	}
-	
 	@RequestMapping("/performanceCommentInsert")
-	public void insertPerformanceComment(@RequestParam int performanceNo, @ModelAttribute PerformanceComment performanceComment) throws Exception {
+	@ResponseBody
+	public void insertPerformanceComment(int performanceNo, String performanceComment) throws Exception {
+		PerformanceComment pComment = new PerformanceComment(performanceNo,performanceComment);
 		
-		performanceComment.setPerformanceNo(performanceNo);
-		performanceComment.setPerformanceCommentUserId(getUserId());
+		// 인증해서 아이디값 세팅
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		pComment.setPerformanceCommentUserId(((User)authentication.getPrincipal()).getUserId());
 		
-		System.out.println(performanceNo+getUserId());
-		service.insertPerformanceComment(performanceComment);
+		service.insertPerformanceComment(pComment);
 	}
-//	System.out.println("퍼포먼스"+performanceComment);
-//	System.out.println("퍼포먼스 번호"+performanceNo);
 	
+	@RequestMapping("/performanceCommentUpdate")
+	@ResponseBody
+	public void updatePerformanceComment(int performanceCommentNo ,String UpdatePerformanceComment) {
+//		System.out.println(UpdatePerformanceComment);
+		PerformanceComment pComment2 = new PerformanceComment();
+		pComment2.setPerformanceCommentNo(performanceCommentNo);
+		pComment2.setPerformanceComment(UpdatePerformanceComment);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		pComment2.setPerformanceCommentUserId(((User)authentication.getPrincipal()).getUserId());
+		
+		service.updatePerformanceComment(pComment2);
+//		System.out.println(pComment2);
+	}
 	
+	@RequestMapping("/performanceCommentDelete")
+	@ResponseBody
+	public void deletePerformanceComment(int performanceCommentNo) {
+//		System.out.println(performanceCommentNo);
+		service.deletePerformanceCommentByPerformanceCommentNo(performanceCommentNo);
+//		System.out.println("완료됨 ?");
+	}
 }

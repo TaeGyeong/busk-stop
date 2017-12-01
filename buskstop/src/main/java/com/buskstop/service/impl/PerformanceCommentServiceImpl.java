@@ -23,17 +23,18 @@ public class PerformanceCommentServiceImpl implements PerformanceCommentService{
 	
 	@Override
 	public void insertPerformanceComment(PerformanceComment performanceComment) {
-		System.out.println("입력 여기까지 오나요");
 		dao.insertPerformanceComment(performanceComment);
 	}
 	
 	@Override
 	public int deletePerformanceCommentByPerformanceCommentNo(int performanceCommentNo) {
+//		System.out.println("서비스까지");
 		return dao.deletePerformanceCommentByPerformanceCommentNo(performanceCommentNo);
 	}
 	
 	@Override
 	public void updatePerformanceComment(PerformanceComment performanceComment) {
+//		System.out.println("서비스까지 오지");
 		dao.updatePerformanceComment(performanceComment);
 	}
 

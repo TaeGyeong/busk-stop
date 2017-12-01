@@ -1,6 +1,7 @@
 <%@page import="com.buskstop.vo.Performance"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 
 <head>
@@ -13,13 +14,13 @@ $(document).ready(function(){
 	
 	listComment();
 	$("#btnComment").on("click",function(){
-        var performanceComment=$("#performanceComment").val();
+        
 		$.ajax({                
             "url": "${initParam.rootPath }/performanceCommentInsert.do",
             "type": "get",
-            
             "data" : {
-            	"performanceNo":"${param.performanceNo}",
+            	"performanceNo":"${requestScope.performance.performanceNo}",
+            	"performanceComment":$("#performanceComment").val(),
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
             "dataType":"text",
@@ -35,31 +36,88 @@ $(document).ready(function(){
      });
 });	
 
-
 function listComment(){
-       $.ajax({
-           //"dataType":"json",
-           "url" : "/buskstop/performanceCommentList.do",
-           "type": "get",
-           "data" : {"performanceNo":"${param.performanceNo}"},
-           "success" : function(result){
-               var output = "<table>";
-               for(var i in result){
-                   output += "<tr>";
-                   output += "<td>("+result[i].performanceCommentNo+")";
-                   output += "("+result[i].performanceCommentUserId+")";
-                   output += "("+result[i].performanceRegTime+")<br>";
-                   output += result[i].performanceComment+"</td>";
-                   output += "<tr>";
-               }
-               output += "</table>";
-               $("#performanceCommentList").html(output);
-           },
-           "error":function(){
-          		alert("오류 발생");
-          	}
-       });
-   }
+    $.ajax({
+        //"dataType":"json",
+        "url" : "/buskstop/performanceCommentList.do",
+        "type": "get",
+        "data" : {"performanceNo":"${requestScope.performance.performanceNo}"},
+        "dataType" : "json",
+        "success" : function(result){
+            var output = "";
+            $.each(result, function(){ 
+            	output += '<div class="performanceComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                output += '<div class="listComment'+this.performanceCommentNo+'">'+'댓글번호 : '+this.performanceCommentNo+' / 작성자 : '+this.performanceCommentUserId+' / 등록 일자 : '+this.performanceCommentRegTime;
+                output += '<a onclick="updateCommentText('+this.performanceCommentNo+',\''+this.performanceComment+'\');"> 수정 </a>';
+                output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a> </div>';
+                output += '<div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
+                output += '</div></div>';
+            });
+            $("#performanceCommentList").html(output);
+        },
+        "error":function(){
+       		alert("오류 발생");
+       	}
+    });
+}
+   
+function deleteComment(performanceCommentNo){
+    
+	$.ajax({                
+        "url": "${initParam.rootPath }/performanceCommentDelete.do",
+        "type": "post",
+        "data" : {
+        	"performanceCommentNo":performanceCommentNo,
+        	'${_csrf.parameterName}':'${_csrf.token}'
+        },
+        "dataType":"text",
+        "success": function(){
+            alert("댓글이 삭제되었습니다.");
+            listComment();
+        },
+        "error":function(){
+        	alert("에러 뜸 ㅠㅠ");
+        }
+    });
+ }
+ 
+ 
+function updateCommentText(performanceCommentNo,performanceComment){
+	
+    var output ="";
+    	output += '<div class="input-group">';
+    	output += '<input type="text" class="form-control" name="pComment'+performanceCommentNo+'" value="'+performanceComment+'"/>';
+    	output += '<span class="input-group-btn">'
+    	output += '<button class="btn btn-default" type="button" onclick="updateComment('+performanceCommentNo+');">수정</button>';
+    	output += '<button class="btn btn-default" type="button" onclick="listComment();">수정 취소</button>';
+    	output += ' </span></div>';
+       
+       $(".pComment"+performanceCommentNo).html(output);
+}
+
+function updateComment(performanceCommentNo){
+		var UpdatePerformanceComment = $("[name=pComment"+performanceCommentNo+"]").val();
+	$.ajax({
+		"url": "${initParam.rootPath }/performanceCommentUpdate.do",
+	    "type": "get",
+	    "data" : {
+	    	"performanceCommentNo":performanceCommentNo,
+	    	"UpdatePerformanceComment":UpdatePerformanceComment,
+	    	'${_csrf.parameterName}':'${_csrf.token}'
+	    },
+	    "dataType":"text",
+	    "success" : function(){
+	    	alert("댓글이 수정되었습니다.");
+	    	listComment();
+	    },
+	    "error":function(){
+	    	alert("댓글을 입력해주세요.");
+	    }
+		
+	});
+	
+}
+   
 
 
 </script>
@@ -131,12 +189,16 @@ function listComment(){
 	
  
 	<div id="performanceCommentList"> 
-	<c:forEach var="performanceComment" items="${sessionScope.list }">
+	<!-- 
+	<c:forEach var="performanceComment" items="${requestScope.list }">
 		${performanceComment.performanceCommentNo},
 		${performanceComment.performanceRegTime},	
 		${performanceComment.performanceCommentUserId},
 		${performanceComment.performanceComment},
 	</c:forEach>
+	<button type="button" id="BtnUpdate">수정</button>
+	<button type="button" id="BtnDelete">삭제</button>
+	 -->
 	</div>
 	
 	<textarea name="content" id="performanceComment" 
