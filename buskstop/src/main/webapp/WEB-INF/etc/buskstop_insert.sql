@@ -121,11 +121,9 @@ insert into PERFORMANCE_LIKE values('2', 'kimdo327');
 
 
 /* 동영상(게시물) */
-insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', SYSDATE, null, 'user' , 'kimm990',SYSDATE);
-insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하남시', '재밌는 공연이었습니다.', SYSDATE, 'mc경', 'artist' ,'kimbo88',SYSDATE);
-insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부산시', '유쾌한 공연이었습니다.', SYSDATE, '메기 매운탕', 'artist' ,'no33432',SYSDATE);
-insert into VIDEO values(4, '공연영상4', 'www.youtube4.com', '경기도 성남시', '즐거운 공연이었습니다.', SYSDATE, NULL, 'user' ,'id3',SYSDATE);
-
+insert into VIDEO values(1, '공연영상1', 'www.youtube1.com', '경기도 성남시', '좋은 공연이었습니다.', '2017-10-12', '메기 매운탕','','hjyj4841','2017-12-24');
+insert into VIDEO values(2, '공연영상2', 'www.youtube2.com', '경기도 하남시', '재밌는 공연이었습니다.', '2017-11-12', 'mc경','','','2017-12-25');
+insert into VIDEO values(3, '공연영상3', 'www.youtube3.com', '경상도 부산시', '유쾌한 공연이었습니다.', '2017-09-02', '메기 매운탕, 노래 개잘핵','','no33432','2017-12-26');
 
 /* 동영상 댓글 */
 insert into VIDEO_COMMENT values(1,1,'id4','ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ','2017-10-20');

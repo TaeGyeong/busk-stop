@@ -1,5 +1,32 @@
 package com.buskstop.dao.impl;
 
-public class VideoCommentDaoImpl {
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.buskstop.dao.VideoCommentDao;
+import com.buskstop.vo.VideoComment;
+
+@Repository
+public class VideoCommentDaoImpl implements VideoCommentDao{
+
+	@Autowired
+	private SqlSessionTemplate session;
+	
+	private String makeSqlId(String id) {
+		return "com.buskstop.config.mybatis.mapper.videoCommentMapper."+id;
+	}
+	
+	@Override
+	public int insertVideoComment(VideoComment videoComment) {
+		return session.insert(makeSqlId("insertVideoComment"), videoComment);
+	}
+
+	@Override
+	public List<VideoComment> selectVideoCommentByVideoNo(int videoNo) {
+		return session.selectList(makeSqlId("selectVideoCommentByVideoNo"),videoNo);
+	}
+	
 }
