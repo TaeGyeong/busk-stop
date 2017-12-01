@@ -73,15 +73,19 @@ public class VideoDaoImpl implements VideoDao{
 		HashMap<String, String> map = new HashMap<>();
 		map.put("videoCategory", videoCategory);
 		map.put("videoCategory", videoUserId);
+		System.out.println(videoUserId);
+		System.out.println(session.selectList(makeSqlId("selectVideoByUserIdAndCategory"), map));
 		return session.selectList(makeSqlId("selectVideoByUserIdAndCategory"), map);
 	}
 	
-	//게시자 아이디로 영상 조회
+	//게시글 추가 입력내용으로 영상 조회
 		@Override
 		public List<Video> selectVideoByContentAndCategory(String videoCategory, String videoUserId) {
 			HashMap<String, String> map = new HashMap<>();
 			map.put("videoCategory", videoCategory);
 			map.put("videoCategory", videoUserId);
+			System.out.println(videoUserId);
+			System.out.println(session.selectList(makeSqlId("selectVideoByContentAndCategory"), map));
 			return session.selectList(makeSqlId("selectVideoByContentAndCategory"), map);
 		}
 	
