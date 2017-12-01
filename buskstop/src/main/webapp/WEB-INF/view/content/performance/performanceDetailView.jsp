@@ -17,10 +17,12 @@ $(document).ready(function(){
 		$.ajax({                
             "url": "${initParam.rootPath }/performanceCommentInsert.do",
             "type": "get",
+            
             "data" : {
-            	"performanceComment":"${performanceComment}",
+            	"performanceNo":"${param.performanceNo}",
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
+            "dataType":"text",
             success: function(){
                 alert("댓글이 등록되었습니다.");
                 listComment();
