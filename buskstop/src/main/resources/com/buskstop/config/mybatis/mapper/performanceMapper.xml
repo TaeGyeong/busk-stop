@@ -8,7 +8,6 @@
 		performance_title,
 		performance_location,
 		performance_date,
-		performance_hits,
 		performance_content,
 		performance_image,
 		performance_user_id,
@@ -68,9 +67,9 @@
 
 	<!-- 공연정보 전체 조회 select paging mock -->
 	<select id="selectAllPerformance" resultMap="performance-resultmap" parameterType="map">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
@@ -105,9 +104,9 @@
 
 	<!-- 공연정보 제목으로 검색 -->
 	<select id="selectPerformanceByPerformanceTitle" parameterType="map" resultMap="performance-resultmap">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
@@ -128,9 +127,9 @@
 	
 	<!-- 공연정보 작성자로 검색 -->
 	<select id="selectPerformanceByPerformanceUserId" parameterType="map" resultMap="performance-resultmap">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
@@ -151,9 +150,9 @@
 	
 	<!-- 공연정보 공연장소로 검색 -->
 	<select id="selectPerformanceByPerformanceLocation" parameterType="map" resultMap="performance-resultmap">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
@@ -173,9 +172,9 @@
 	
 	<!-- 공연정보 공연이름으로 검색 -->
 	<select id="selectPerformanceByPerformanceName" parameterType="map" resultMap="performance-resultmap">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
@@ -195,9 +194,9 @@
 	
 	<!-- 공연정보 내용으로 검색 -->
 	<select id="selectPerformanceByPerformanceContent" parameterType="map" resultMap="performance-resultmap">
-		select <include refid="column-performance"/>
+		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>
+			select rownum rn, <include refid="column-performance"/>, performance_hits
 			from (
 				select * 
 				from performance
