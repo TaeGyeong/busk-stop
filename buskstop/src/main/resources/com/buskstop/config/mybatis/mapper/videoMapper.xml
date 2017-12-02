@@ -112,7 +112,7 @@
 	<!-- 내용으로 영상 검색 -->
 	<select id="selectVideoByContentAndCategory" parameterType="map" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
-		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_CONTENT like '%잘%'
+		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_CONTENT like '%'||#{videoContent}||'%'
 	</select>
 	
 </mapper>
