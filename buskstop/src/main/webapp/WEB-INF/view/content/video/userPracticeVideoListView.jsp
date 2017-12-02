@@ -29,7 +29,7 @@ td {
 
 </style>
 
-<form action="${initParam.rootPath }/viewVideoListByTitle.do">
+<form action="${initParam.rootPath }/viewPracticeVideoListByTitle.do">
 	<sec:csrfInput/>
 	<select name="filter">
 		<option value="title">제목</option>

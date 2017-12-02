@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -96,6 +97,7 @@ public class PerformanceController {
 		}
 		list = (List<Performance>)map.get("list");
 		list = likeCounter(list);
+		
 		map.put("list", list);
 		map.put("search", search);
 		map.put("category", category);

@@ -2,8 +2,18 @@ update users
 set user_password = '$2a$10$9Mx5vV4LRJThJhqcxrwFL.CO64itUT387QxcBdv1m7hkae8oTQIlq'
 delete from VIDEO where video_no=61
 select*from authority;
-select*from video;
+select*from video
+WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_USER_ID like'%1%'
+select*from video
+WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like'%잘%'
 select * from performance;
+
+
+SELECT     video_no,   video_title,   video_link,   video_location,   video_content,   video_date,   
+video_artist,   video_category,   video_user_id,   video_reg_time,   video_hits      
+FROM VIDEO      WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like '%잘%'
+
+
 /*-----------------------------공연정보(아티스트 게시판)---------------------------------*/
 /* 공연정보 목록 조회 */
 select p.*, pl.like_count /* like_count = 좋아요 수 */

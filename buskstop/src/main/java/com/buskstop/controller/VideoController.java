@@ -77,7 +77,6 @@ public class VideoController {
 	 */
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
-		System.out.println(videoNo);
 		Video video = service.viewVideoByVideoNo(videoNo);
 		return new ModelAndView("video/videoDetailView.tiles", "video", video);
 	}
@@ -191,26 +190,70 @@ public class VideoController {
 	}
 	
 	//-------------영상 검색조건으로 조회 -----------------//
-	//제목으로 영상 조회
-	@RequestMapping("/viewVideoListByTitle")
-	public ModelAndView viewVideoListByTitle(@RequestParam String category, 
+	//개인연습영상 카테고리에서 제목으로 영상 조회
+	@RequestMapping("/viewPracticeVideoListByTitle")
+	public ModelAndView viewPracticeVideoListByTitle(@RequestParam String category, 
 											 @RequestParam String filter, 
 											 @RequestParam String search) {
 		List<Video> list = null;
 		// response
 		if(filter.equals("title")) {
 			list = service.viewVideoByTitleAndCategory(category, search);
-			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}else if (filter.equals("userId")) {
 			list = service.viewVideoByUserIdAndCategory(category, search);
-			return new ModelAndView("video/artistVideoListView.tiles","list",list);
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}else if (filter.equals("artist")) {
 			list = service.viewVideoByArtistAndCategory(category, search);
 			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}else {
 			list = service.viewVideoByContentAndCategory(category, search);
-			return new ModelAndView("video/userVideoListView.tiles","list",list);
+			return new ModelAndView("video/userPracticeVideoListView.tiles","list",list);
 		}
 	}
+	
+	//개인연습영상 카테고리에서 제목으로 영상 조회
+		@RequestMapping("/viewArtistVideoListByTitle")
+		public ModelAndView viewArtistVideoListByTitle(@RequestParam String category, 
+												 @RequestParam String filter, 
+												 @RequestParam String search) {
+			List<Video> list = null;
+			// response
+			if(filter.equals("title")) {
+				list = service.viewVideoByTitleAndCategory(category, search);
+				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+			}else if (filter.equals("userId")) {
+				list = service.viewVideoByUserIdAndCategory(category, search);
+				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+			}else if (filter.equals("artist")) {
+				list = service.viewVideoByArtistAndCategory(category, search);
+				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+			}else {
+				list = service.viewVideoByContentAndCategory(category, search);
+				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+			}
+		}
+		
+		//공연 카테고리에서 제목으로 영상 조회
+		@RequestMapping("/viewPerformanceVideoListByTitle")
+		public ModelAndView viewPerformanceVideoListByTitle(@RequestParam String category, 
+												 @RequestParam String filter, 
+												 @RequestParam String search) {
+			List<Video> list = null;
+			// response
+			if(filter.equals("title")) {
+				list = service.viewVideoByTitleAndCategory(category, search);
+				return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+			}else if (filter.equals("userId")) {
+				list = service.viewVideoByUserIdAndCategory(category, search);
+				return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+			}else if (filter.equals("artist")) {
+				list = service.viewVideoByArtistAndCategory(category, search);
+				return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+			}else {
+				list = service.viewVideoByContentAndCategory(category, search);
+				return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
+			}
+		}
 	
 }
