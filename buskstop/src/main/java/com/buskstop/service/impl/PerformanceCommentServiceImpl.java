@@ -1,5 +1,41 @@
 package com.buskstop.service.impl;
 
-public class PerformanceCommentServiceImpl {
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.buskstop.dao.PerformanceCommentDao;
+import com.buskstop.service.PerformanceCommentService;
+import com.buskstop.vo.PerformanceComment;
+
+@Service
+public class PerformanceCommentServiceImpl implements PerformanceCommentService{
+	
+	@Autowired
+	private PerformanceCommentDao dao;
+	
+	@Override
+	public List<PerformanceComment> listComment(int performanceNo){
+//		System.out.println("서비스까지는 오냐?");
+		return dao.listComment(performanceNo);
+	}
+	
+	@Override
+	public void insertPerformanceComment(PerformanceComment performanceComment) {
+		dao.insertPerformanceComment(performanceComment);
+	}
+	
+	@Override
+	public int deletePerformanceCommentByPerformanceCommentNo(int performanceCommentNo) {
+//		System.out.println("서비스까지");
+		return dao.deletePerformanceCommentByPerformanceCommentNo(performanceCommentNo);
+	}
+	
+	@Override
+	public void updatePerformanceComment(PerformanceComment performanceComment) {
+//		System.out.println("서비스까지 오지");
+		dao.updatePerformanceComment(performanceComment);
+	}
 
 }

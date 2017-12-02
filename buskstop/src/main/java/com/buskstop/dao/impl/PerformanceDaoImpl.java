@@ -1,9 +1,10 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;import org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.PerformanceDao;
@@ -47,40 +48,105 @@ public class PerformanceDaoImpl implements PerformanceDao{
 		return session.delete(makeSqlId("deletePerformanceByPerformanceNo"),performanceNo);
 	}
 	
+	// 전체 조회
 	@Override
-	public List<Performance> selectAllPerformance(){
-		return session.selectList(makeSqlId("selectAllPerformance"));
+	public List<Performance> selectAllPerfor(){
+		return session.selectList(makeSqlId("selectAllPerfor"));
 	}
 	
+	// 전체 조회 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceTitle"), performanceTitle);
+	public List<Performance> selectAllPerformance(int beginItemNum, int endItemNum){
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		
+		return session.selectList(makeSqlId("selectAllPerformance"), map);
+	}
+	//전체 조회 카운트
+	@Override
+	public int selectPerformanceCount() {
+		return session.selectOne(makeSqlId("selectPerformanceCount"));
 	}
 	
+	// 제목으로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceUserId(String performanceUserId){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceUserId"), performanceUserId);
+	public List<Performance> selectPerformanceByPerformanceTitle(int beginItemNum, int endItemNum, String performanceTitle){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceTitle", performanceTitle);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceTitle"), map);
+	}
+	//제목으로 검색 count
+	@Override
+	public int selectPerformanceCountByTitle(String performanceTitle) {
+		return session.selectOne(makeSqlId("selectPerformanceCountByTitle"), performanceTitle);
 	}
 	
+	// 작성자로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceLocation(String performanceLocation){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceLocation"), performanceLocation);
+	public List<Performance> selectPerformanceByPerformanceUserId(int beginItemNum, int endItemNum, String performanceUserId){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceUserId", performanceUserId);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceUserId"), map);
+	}
+	//작성자로 검색 count
+	@Override
+	public int selectPerformanceCountByUserId(String userId) {
+		return session.selectOne(makeSqlId("selectPerformanceCountByUserId"), userId);
 	}
 	
+	//공연장소로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceName(String performanceName){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceName"), performanceName);
+	public List<Performance> selectPerformanceByPerformanceLocation(int beginItemNum, int endItemNum, String performanceLocation){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceLocation", performanceLocation);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceLocation"), map);
+	}
+	//공연장소로 검색 count
+	@Override
+	public int selectPerformanceCountByLocation(String location) {
+		return session.selectOne(makeSqlId("selectPerformanceCountByLocation"), location);
 	}
 	
+	//공연이름으로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent){
-		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), performanceContent);
+	public List<Performance> selectPerformanceByPerformanceName(int beginItemNum, int endItemNum, String performanceName){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceName", performanceName);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceName"), map);
+	}
+	//공연이름으로 검색 count
+	@Override
+	public int selectPerformanceCountByPerformanceName(String performanceName) {
+		return session.selectOne(makeSqlId("selectPerformanceCountByPerformanceName"), performanceName);
 	}
 	
+	//공연내용으로 검색 페이징
 	@Override
-	public List<Performance> selectAllPerformanceJoin(){
-		return session.selectList(makeSqlId("selectAllPerformanceJoin"));
+	public List<Performance> selectPerformanceByPerformanceContent(int beginItemNum, int endItemNum, String performanceContent){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceContent", performanceContent);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceContent"), map);
+	}
+	//공연이름으로 검색 count
+	@Override
+	public int selectPerformanceCountByPerformanceContent(String content) {
+		return session.selectOne(makeSqlId("selectPerformanceCountByPerformanceContent"), content);
 	}
 	
 }
-//com.buskstop.config.mybatis.mapper.

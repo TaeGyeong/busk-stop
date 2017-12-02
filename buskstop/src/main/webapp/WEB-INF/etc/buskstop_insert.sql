@@ -83,9 +83,141 @@ insert into STAGE_REVIEW values(5,'kim4845',4,'너무 구려요','2017-12-19');
 insert into STAGE_REVIEW values(3,'beck4848',5,'갓태경','2017-12-20');
 insert into STAGE_REVIEW values(5,'lee534',2,'동엽신','2017-12-21');
 
-/*
+
 /* 공연정보(아티스트 게시물) */
-insert into PERFORMANCE values('1', '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 5, '많이 놀러오세요.', 'c://img/img1','kimp123', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '야탑 공연', '야탑으로 오세요!', '야탑역 2번 출구', '2017-12-20', 0, '많이 오세요.', 'c://img/img2','aaa', null,'2017-10-01');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+insert into PERFORMANCE values(performance_no_seq.nextVal , '서현 공연', '서현으로 오세요!', '서현역 5번 출구', '2017-11-23', 0, '많이 놀러오세요.', 'c://img/img1','hjyj4841', null,'2017-12-21');
+
+
+
+
+/*
 insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3','2017-12-22');
 insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 놀이터', '2017-12-22', 30, '보러오세요.', 'c://img/img1','yunee33', '4','2017-12-23');
 insert into PERFORMANCE values(4,'컬투쇼','안녕하세요','홍대입구','2017/12/12',3,'안녕하시오','c://img/img1','id1',1,'2017-12-24');
@@ -93,8 +225,6 @@ insert into PERFORMANCE values(5,'리버풀쇼','리버풀 수비 할줄 몰라'
 insert into PERFORMANCE values(6,'맨유쇼','맹9','홍대입구','2017/12/12',2,'안녕하시오','c://img/img1','id3',3,'2017-12-26');
 insert into PERFORMANCE (performance_no, performance_name, performance_title, performance_location, performance_date, performance_content, performance_image, performance_user_id, performance_reg_time)
 values(99, '99', '99', '99', '2017-12-12', '111111', 'img', 'id1','2017-12-20');
-
-select * from PERFORMANCE where PERFORMANCE_no = 12
 
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values(1,1,'id4','푸하하하하하','2017-12-22');
@@ -105,7 +235,7 @@ insert into PERFORMANCE_COMMENT values(4,1,'id6','안녕하세요','2017-12-26')
 insert into PERFORMANCE_COMMENT values(5,1,'id5','와... 역시 갓버풀 멋집니다... 우승할거 같네요','2017-12-27');
 insert into PERFORMANCE_COMMENT values(6,1,'id6','ㅋㅋㅋㅋㅋ허더스필드한테 짐 ㅋㅋㅋㅋㅋ','2017-12-28');
 
-
+select * from PERFORMANCE_COMMENT
 
 /* 공연정보 좋아요 */
 insert into PERFORMANCE_LIKE values('1', 'hong1653');
@@ -117,7 +247,7 @@ insert into PERFORMANCE_LIKE values('1', 'yunee33');
 insert into PERFORMANCE_LIKE values('2', 'kimjr322');
 insert into PERFORMANCE_LIKE values('2', 'kimm990');
 insert into PERFORMANCE_LIKE values('2', 'kimdo327');
-*/
+
 
 
 /* 동영상(게시물) */

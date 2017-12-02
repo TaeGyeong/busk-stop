@@ -1,11 +1,15 @@
 package com.buskstop.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.PerformanceDao;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.vo.Performance;
@@ -40,9 +44,24 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public List<Performance> selectAllPerformance() {
-		List<Performance> list = dao.selectAllPerformance();
-		return list;
+	public Map<String, Object> selectAllPerformance(int page) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCount(), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectAllPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());		
+		
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	@Override
+	public List<Performance> selectAllPerfor(){
+		return dao.selectAllPerfor();
 	}
 	
 	@Override
@@ -55,45 +74,77 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 	
 	// 공연정보 검색
+	// 제목으로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceTitle(String performanceTitle) {
+	public Map<String, Object> selectPerformanceByPerformanceTitle(int page,String performanceTitle) {
 
-		List<Performance> list = dao.selectPerformanceByPerformanceTitle(performanceTitle);
-		return list;
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByTitle(performanceTitle), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceTitle(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceTitle);		
+		map.put("list", list);
+		
+		return map;
+	}
+
+	// 작성자로 검색 페이징
+	@Override
+	public Map<String, Object> selectPerformanceByPerformanceUserId(int page, String userId) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByUserId(userId), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceUserId(pb.getBeginItemInPage(), pb.getEndItemInPage(), userId);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	//공연장소로 검색 페이징
+	@Override
+	public Map<String, Object> selectPerformanceByPerformanceLocation(int page, String performanceLocation) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByLocation(performanceLocation), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceLocation);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	//공연이름으로 검색 페이징
+	@Override
+	public Map<String, Object> selectPerformanceByPerformanceName(int page, String performanceName) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByPerformanceName(performanceName), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceName(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceName);
+		map.put("list", list);
+		
+		return map;
 	}
 
 	@Override
-	public List<Performance> selectPerformanceByPerformanceUserId(String performanceUserId) {
+	public Map<String, Object> selectPerformanceByPerformanceContent(int page, String performanceContent) {
 
-		List<Performance> list = dao.selectPerformanceByPerformanceUserId(performanceUserId);
-		return list;
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByPerformanceContent(performanceContent), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceContent(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceContent);
+		map.put("list", list);
+		
+		return map;
 	}
-
-	@Override
-	public List<Performance> selectPerformanceByPerformanceLocation(String performanceLocation) {
-
-		List<Performance> list = dao.selectPerformanceByPerformanceLocation(performanceLocation);
-		return list;
-	}
-
-	@Override
-	public List<Performance> selectPerformanceByPerformanceName(String performanceName) {
-
-		List<Performance> list = dao.selectPerformanceByPerformanceName(performanceName);
-		return list;
-	}
-
-	@Override
-	public List<Performance> selectPerformanceByPerformanceContent(String performanceContent) {
-
-		List<Performance> list = dao.selectPerformanceByPerformanceContent(performanceContent);
-		return list;
-	}
-	// 좋아요 조인 조회
-	@Override
-	public List<Performance> selectAllPerformanceJoin(){
-		List<Performance> list = dao.selectAllPerformanceJoin();
-		return list;
-	}
-	
 }

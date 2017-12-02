@@ -3,11 +3,14 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+	function goDetail(root, no){
+			document.location.href= root+'/readVideoByVideoNo.do?videoNo='+no
+	}
+/* $(document).ready(function(){
 	$("tr").on("click",function(){
-		document.getElementById("detailForm").submit();
+		document.getAttribute('value').submit();
 	});
-});
+}); */
 </script>
 <style type="text/css">
 table, td {
@@ -26,6 +29,19 @@ td {
 
 </style>
 
+<form action="${initParam.rootPath }/viewPracticeVideoListByTitle.do">
+	<sec:csrfInput/>
+	<select name="filter">
+		<option value="title">제목</option>
+		<option value="userId">작성자</option>
+		<option value="artist">아티스트명</option>
+		<option value="content">내용</option>
+	</select>
+	<input type="text" placeholder="검색" name="search">
+	<input type="hidden" id ="videoCategory" name="category" value="practice" class="form-control">
+	<button type="submit">검색</button>
+</form>
+<p><p>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
@@ -43,7 +59,7 @@ td {
 			<th>동영상번호</th>
 			<th>제목</th>
 			<th>링크</th>
-			<th>장소</th>
+			<th>아티스트</th>
 			<th>내용</th>
 			<th>날짜</th>
 			<th>사용자 아이디</th>
@@ -52,20 +68,20 @@ td {
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.list }" var="video">
-			<tr>
+			<tr onclick="goDetail('${initParam.rootPath }', ${video.videoNo})">
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
 				<td>${video.videoLink }</td>
-				<td>${video.videoLocation }</td>
+				<td>${video.videoArtist }</td>
 				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>
 				<td>${video.videoUserId }</td>
 				<td>${video.videoRegTime }</td>
 			</tr>
-			<form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
+			<%-- <form action="${initParam.rootPath }/readVideoByVideoNo.do" method="post" id="detailForm">
 				<sec:csrfInput/>
 				<input type="hidden" value="${video.videoNo }" name="videoNo">
-			</form>
+			</form> --%>
 		</c:forEach>
 	</tbody>
 </table>
