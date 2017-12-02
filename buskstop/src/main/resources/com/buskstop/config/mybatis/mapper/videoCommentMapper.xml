@@ -37,6 +37,17 @@
 					)
 	</insert>
 	
+	<update id="updateVideoCommentByVideoCommentNo" parameterType="VideoComment">
+	UPDATE	video_comment
+	SET		video_comment = #{videoComment}
+	WHERE	video_comment_no = #{videoCommentNo}	
+	</update>
+	
+	<delete id="deleteVideoCommentByVideoCommentNo" parameterType="_int">
+	DELETE FROM video_comment
+	WHERE		video_comment_no = #{videoCommentNo}
+	</delete>
+	
 	<select id="selectVideoCommentByVideoNo" parameterType="_int" resultMap="videoComment-resultmap">
 		<include refid="videoComment-select-sql"/>
 		WHERE	video_no = #{value}

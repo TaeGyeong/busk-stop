@@ -73,8 +73,6 @@ public class VideoDaoImpl implements VideoDao{
 		HashMap<String, String> map = new HashMap<>();
 		map.put("videoCategory", videoCategory);
 		map.put("videoUserId", videoUserId);
-		System.out.println(videoUserId);
-		System.out.println(session.selectList(makeSqlId("selectVideoByUserIdAndCategory"), map));
 		return session.selectList(makeSqlId("selectVideoByUserIdAndCategory"), map);
 	}
 	
@@ -84,9 +82,6 @@ public class VideoDaoImpl implements VideoDao{
 			HashMap<String, String> map = new HashMap<>();
 			map.put("videoCategory", videoCategory);
 			map.put("videoContent", videoContent);
-			System.out.println(videoCategory);
-			System.out.println(videoContent);
-			System.out.println(session.selectList(makeSqlId("selectVideoByContentAndCategory"), map));
 			return session.selectList(makeSqlId("selectVideoByContentAndCategory"), map);
 		}
 	

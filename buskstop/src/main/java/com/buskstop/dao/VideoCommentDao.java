@@ -19,4 +19,14 @@ public interface VideoCommentDao {
 	 * @return
 	 */
 	List<VideoComment> selectVideoCommentByVideoNo(int videoNo);
+	
+	/**
+	 * 비디오 번호로 비디오 수정
+	 * @param videoComment
+	 * @return
+	 */
+	int updateVideoCommentByVideoCommentNo(VideoComment videoComment);
+
+	int deleteVideoCommentByVideoCommentNo(int videoCommentNo);
+	
 }
