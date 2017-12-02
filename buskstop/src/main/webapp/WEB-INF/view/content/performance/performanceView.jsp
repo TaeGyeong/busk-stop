@@ -62,8 +62,10 @@ select {
 	font-weight: bold;
 	color: #888;
 }
-#product_tb tbody tr:nth-child(2n) td {
-	background-color: #337ab7;
+#product_tb tbody tr:nth-child(2n){
+	background-color: #47a3d2;
+}
+#product_tb tbody tr:nth-child(2n) td{
 	color: #fff;
 }
 #product_tb tbody tr:nth-child(2n) td a{
@@ -85,7 +87,7 @@ select {
 	color: red;
 }
 .likeBtn:hover{
-	color: #337ab7;
+	color: #47a3d2;
 	text-decoration: none;
 }
 #product_tb tbody tr:nth-child(2n) .likeBtn:hover{
@@ -99,6 +101,14 @@ select {
 	border-right: 2px #ccc solid;
 }
 
+#product_tb tbody tr:hover{
+	background-color: #ddd;
+}
+
+#product_tb tbody tr:nth-child(2n):hover{
+	background-color: #337ab7;
+}
+
 </style>
 
 
@@ -108,15 +118,6 @@ select {
 
 	<div id="container">
 		<h1>VIEW - 공연 정보 리스트</h1>
-		<hr>
-		주석<br> 작성자 : 장길웅<br> 작성일 : 2017-11-17<br> 나중에 해야 할 것들
-		<ol>
-			<li>게시판에 글쓴 날짜 추가 해야 하나요?</li>
-			<li>좋아요 Join 실행해서 붙이기</li>
-			<li>공연날짜 시간 포맷 맞추기</li>
-		</ol>
-		주석 끝<br>
-
 		<hr>
 		<table id="product_tb" style="display: table;">
 			<thead id="thead">
@@ -137,14 +138,14 @@ select {
 				<c:forEach items="${requestScope.map.list}" var="item">
 					<tr style="cursor: pointer;">
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" alt="img"></td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>
-						<td><a class="likeBtn">♡${item.likeCount }</a></td>
+						<td><a class="likeBtn">♥${item.likeCount }</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

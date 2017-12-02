@@ -1,6 +1,7 @@
 <%@page import="com.buskstop.vo.Performance"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -56,7 +57,7 @@ function listComment(){
             $("#performanceCommentList").html(output);
         },
         "error":function(){
-       		alert("오류 발생");
+       		//alert("오류 발생");
        	}
     });
 }
@@ -162,8 +163,8 @@ function updateComment(performanceCommentNo){
 		</div>
 		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
 			<div style="float:right; margin-left:5px;">${requestScope.performance.performanceHits}</div>
-			<div style="float:right; margin-left:20px;">조회</div>
-			<div style="float:right; margin-left:20px;">${requestScope.performance.performanceRegTime} [글쓴 날짜 들어갈 곳 2017-11-01 22:00] </div>
+			<div style="float:right; margin-left:20px;">조회
+			<div style="float:right; margin-left:20px;"></div><fmt:formatDate value="${requestScope.performance.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </div>
 			<div style="float:right;">${requestScope.performance.performanceUserId}<strong>님</strong></div>
 		</div>
 	</div>
@@ -175,13 +176,13 @@ function updateComment(performanceCommentNo){
 		</div>
 		<div>
 			<div style="float:left; margin-right:5px;">공연 시간</div>
-			<div style="float:left;">${requestScope.performance.performanceDate }</div>
+			<div style="float:left;"><fmt:formatDate value="${requestScope.performance.performanceDate }" pattern="yyyy-MM-dd HH:mm:ss"/></div>
 		</div>
 	</div>
 
 	<div>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.performance.performanceImage }" alt="img">
+			<img src="${initParam.rootPath }/performanceImage/${requestScope.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
 		${requestScope.performance.performanceContent}
