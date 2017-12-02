@@ -9,9 +9,11 @@
 	<button>공연장공급자 등록.</button>
 </form>
 <form action="${initParam.rootPath }/updateMemberInfo.do">
+	<sec:csrfInput/>
 	<button>회원정보수정</button>
 </form>
 <form action="${initParam.rootPath }/out_member_form.do">
+	<sec:csrfInput/>
 	<button>회원탈퇴</button>
 </form>
 

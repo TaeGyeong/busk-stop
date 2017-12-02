@@ -32,9 +32,9 @@ function nameCheck(){
 	var str = $("#name").val();
 	
 	var pattern1 = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-	
-	if(!pattern1.test(str)){
-		alert("이름은 한글로만 입력해주세요.");
+	var pattern2 = /[a-z]/;
+	if(!(pattern1.test(str)||pattern1.test(str))){
+		alert("이름은 한글과 영문으로만 입력해주세요.");
 		$("#name").val("");
 	}
 }

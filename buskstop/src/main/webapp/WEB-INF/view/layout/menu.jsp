@@ -32,7 +32,6 @@
 	<li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li>
 <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
 	<%-- 임시용 --%>
-	
 </ul>
 
 

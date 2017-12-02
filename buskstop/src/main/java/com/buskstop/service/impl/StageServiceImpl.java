@@ -2,6 +2,7 @@ package com.buskstop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.dao.AuthorityDao;
 import com.buskstop.dao.StageSupplierDao;
@@ -16,15 +17,30 @@ public class StageServiceImpl implements StageService{
 
 	@Autowired
 	private UserDao userDao;
+	
 	@Autowired
 	private AuthorityDao authorDao;
+	
 	@Autowired
 	private StageSupplierDao supplierDao;
 	
 	@Override
+	@Transactional
 	public void registerSupplier(StageSupplier supplier) {
 		supplierDao.insertStageSupplier(supplier);
 		authorDao.insertAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
 	}
+	
+	@Override
+	public int updateSupplier(StageSupplier supplier) {
+		return supplierDao.updateStageSupplier(supplier);
+	}
+
+	@Override
+	public StageSupplier selectSupplierById(String userId) {
+		return supplierDao.selectSupplierById(userId);
+	}
+	
+	
 	
 }

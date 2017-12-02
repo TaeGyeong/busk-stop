@@ -19,11 +19,18 @@ public class UserDaoImpl implements UserDao{
 		return session.insert(makeSqlId("insertUser"),user);
 	}
 	
+	@Override
 	public User selectUserById(String id) {
-		User user = session.selectOne(makeSqlId("selectUserById"), id);
 		return session.selectOne(makeSqlId("selectUserById"), id);
 	}
 	
+	
+	@Override
+	public int updateUser(User user) {
+		System.out.println(user+"%n :daoimpl");
+		return session.update(makeSqlId("updateUser"), user);
+	}
+
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.userMapper."+id;
 	}

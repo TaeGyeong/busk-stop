@@ -10,4 +10,21 @@
 			#{establishNum},#{userId},#{operatorNum},#{stageName},#{stageLocation},#{stageArea},#{stageImage}
 		)
 	</insert>
+	
+	<update id="updateStageSupplier" parameterType="stageSupplier">
+		UPDATE	STAGE_SUPPLIER
+		SET		OPERATOR_USER_ID = #{userId},
+				OPERATOR_NO = #{operatorNum},
+				STAGE_NAME = #{stageName},
+				STAGE_LOCATION = #{stageLocation},
+				STAGE_AREA = #{stageArea},
+				STAGE_IMAGE = #{stageImage}
+		WHERE 	ESTABLISH_NO = #{establishNum}				
+	</update>
+	
+	<select id="selectSupplierById" parameterType="string" resultType="stageSupplier">
+		SELECT	*
+		FROM	STAGE_SUPPLIER
+		WHERE	OPERATOR_USER_ID = #{userId}
+	</select>
 </mapper>

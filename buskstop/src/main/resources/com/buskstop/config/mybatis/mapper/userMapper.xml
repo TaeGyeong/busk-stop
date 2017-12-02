@@ -27,6 +27,16 @@
 		VALUES (#{userId}, #{userName}, #{password}, #{userAddress}, #{userPhoneNum},#{email})
 	</insert>
 	
+	<update id="updateUser" parameterType="user">
+		UPDATE	USERS 
+		SET		USER_PASSWORD = #{password},
+				USER_NAME = #{userName},
+				USER_ADDRESS = #{userAddress},
+				USER_PHONE_NUM = #{userPhoneNum},
+				USER_EMAIL = #{email}
+		WHERE	USER_ID = #{userId}
+	</update>
+	
 	<select id="selectUserById" parameterType="string" resultMap="user-resultmap">
 		<include refid="user-select-sql"/>
 		WHERE user_id = #{value}
