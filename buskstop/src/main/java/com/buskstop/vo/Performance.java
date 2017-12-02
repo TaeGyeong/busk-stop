@@ -12,7 +12,7 @@ public class Performance implements Serializable{
 	private String performanceName;
 	private String performanceTitle;
 	private String performanceLocation;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date performanceDate;
 	private int performanceHits;
 	private String performanceContent;

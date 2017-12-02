@@ -9,39 +9,42 @@
 <body>
 	<form action="${initParam.rootPath }/performanceUpdate.do"
 		method="post">
-
+	
+		<!-- 
 		<div class="form-group">
+		<input type="hidden"
+				name="performanceNo" id="performanceNo" class="form-control">
+		</div>
+ 		-->
+ 		<div class="form-group">
 			<label for="no">공연 번호 </label> <input type="text"
-				name="performanceNo" id="no" class="form-control"
-				<%--value="${Performance.performanceNo}" --%> 
+				name="performanceNo" id="no" class="form-control" required="required">
+				<!-- value="${requestScope.Performance.performanceNo}" -->
+				
+		</div>
+		<div class="form-group">
+			<label for="id">수정할 공연 이름 </label> <input type="text"
+				name="performanceName" id="name" class="form-control"
 				required="required">
 		</div>
-
 		<div class="form-group">
-			<label for="id">공연 이름 </label> <input type="text"
-				name="performanceName" id="name" class="form-control"
-				<%-- value="Performance.performanceName"--%> required="required">
-		</div>
-		<div class="form-group">
-			<label for="title">게시글 제목 </label> <input type="text"
+			<label for="title">수정할 게시글 제목 </label> <input type="text"
 				name="performanceTitle" id="title" class="form-control"
-				<%--value="Performance.performanceTitle"--%> required="required">
+				required="required">
 		</div>
 		<div class="form-group">
-			<label for="location">공연 위치 </label> <input type="text"
+			<label for="location">수정할 공연 위치 </label> <input type="text"
 				name="performanceLocation" id="location" class="form-control"
-				<%--value="Performance.performanceLocation"--%> required="required">
+				required="required">
 		</div>
 		<div class="form-group">
-			<label for="date">공연 날짜 </label> <input type="date"
+			<label for="date">수정할 공연 날짜 </label> <input type="date"
 				name="performanceDate" id="name" class="form-control"
-				<%--value="Performance.performanceDate"--%> required="required">
+				required="required">
 		</div>
 		<div class="form-group">
-			<label for="content">공연 내용 </label>
-			<textarea rows="15" cols="150" name="performanceContent">
-			<%--${Performance.performanceContent}  --%>
-			</textarea>
+			<label for="content">수정할 공연 내용 </label>
+			<textarea rows="15" cols="150" name="performanceContent" placeholder="수정할 내용을 입력하세요"></textarea>
 		</div>
 		<%--
 	<div class="row">
@@ -64,9 +67,14 @@
 		</div>
 
 		<div class="form-group">
-			<label for="userId">사용자 id </label> <input type="text"
-				name="performanceUserId" id="uesrId" class="form-control"
-				<%-- value="Performance.performanceUserId"--%> required="required">
+			 <label for="userId">사용자 id </label> 
+			<input type="text"
+				name="performanceUserId" id="performanceUserId" class="form-control"
+				value="<sec:authentication property="principal.userId"/>" readonly>
+			<!--			
+			 <input type="hidden" name="performanceUserId" id="performanceUserId" class="form-control" value='<sec:authentication property="principal.userId"/>'>
+			
+			 -->
 		</div>
 
 

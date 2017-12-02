@@ -24,6 +24,12 @@ public class VideoCommentController {
 	@Autowired
 	private VideoCommentService service;
 	
+	/**
+	 * 댓글입력
+	 * @param videoNo
+	 * @param videoComment
+	 * @return
+	 */
 	@RequestMapping("/member/enterVideoComment")
 	public @ResponseBody List<VideoComment> enterVideoComment(int videoNo,String videoComment){
 		// 댓글 객체 생성
@@ -40,19 +46,29 @@ public class VideoCommentController {
 		return service.selectVideoCommentByVideoNo(videoNo);
 	}
 	
+	/**
+	 * 댓글 조회
+	 * @param videoNo
+	 * @return
+	 */
 	@RequestMapping("/readVideoComment")
 	public @ResponseBody List<VideoComment> readVideoComment(@RequestParam int videoNo){
 		List<VideoComment> list = service.selectVideoCommentByVideoNo(videoNo);
 		return list;
 	}
 	
-	@RequestMapping("/member/editComment")
-	public void updateComment() {
-		
+	@RequestMapping("/member/editVideoComment")
+	@ResponseBody
+	public void updateVideoComment(@ModelAttribute VideoComment videoComment) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		videoComment.setVideoCommentUserId(((User)authentication.getPrincipal()).getUserId());
+		service.updateVideoCommentByVideoCommentNo(videoComment);
 	}
 	
-	@RequestMapping("/member/deleteCommnet")
-	public void deleteCommnet() {
-		
+	@RequestMapping("/member/deleteComment")
+	@ResponseBody
+	public void deleteComment(@RequestParam int videoCommentNo) {
+		System.out.println("삭제 들어옴?");
+		service.deleteVideoCommentByVideoCommentNo(videoCommentNo);
 	}
 }

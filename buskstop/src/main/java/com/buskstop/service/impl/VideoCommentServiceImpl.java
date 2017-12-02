@@ -25,4 +25,14 @@ public class VideoCommentServiceImpl implements VideoCommentService{
 		return dao.selectVideoCommentByVideoNo(videoNo);
 	}
 
+	@Override
+	public int updateVideoCommentByVideoCommentNo(VideoComment videoComment) {
+		return dao.updateVideoCommentByVideoCommentNo(videoComment);
+	}
+
+	@Override
+	public int deleteVideoCommentByVideoCommentNo(int videoCommentNo) {
+		return dao.deleteVideoCommentByVideoCommentNo(videoCommentNo);
+	}
+
 }

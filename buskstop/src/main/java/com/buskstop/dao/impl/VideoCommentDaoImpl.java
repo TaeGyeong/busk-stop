@@ -28,5 +28,15 @@ public class VideoCommentDaoImpl implements VideoCommentDao{
 	public List<VideoComment> selectVideoCommentByVideoNo(int videoNo) {
 		return session.selectList(makeSqlId("selectVideoCommentByVideoNo"),videoNo);
 	}
+
+	@Override
+	public int updateVideoCommentByVideoCommentNo(VideoComment videoComment) {
+		return session.update(makeSqlId("updateVideoCommentByVideoCommentNo"), videoComment);
+	}
+
+	@Override
+	public int deleteVideoCommentByVideoCommentNo(int videoCommentNo) {
+		return session.delete(makeSqlId("deleteVideoCommentByVideoCommentNo"), videoCommentNo);
+	}
 	
 }

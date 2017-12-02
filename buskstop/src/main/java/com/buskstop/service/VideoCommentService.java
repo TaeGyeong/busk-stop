@@ -6,7 +6,11 @@ import com.buskstop.vo.VideoComment;
 
 public interface VideoCommentService {
 
-	public void insertVideoComment(VideoComment videoComment);
+	void insertVideoComment(VideoComment videoComment);
 	
-	public List<VideoComment> selectVideoCommentByVideoNo(int videoNo);
+	List<VideoComment> selectVideoCommentByVideoNo(int videoNo);
+	
+	int updateVideoCommentByVideoCommentNo(VideoComment videoComment);
+	
+	int deleteVideoCommentByVideoCommentNo(int videoCommentNo);
 }

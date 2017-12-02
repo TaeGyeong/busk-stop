@@ -226,10 +226,6 @@ insert into PERFORMANCE values(6,'맨유쇼','맹9','홍대입구','2017/12/12',
 insert into PERFORMANCE (performance_no, performance_name, performance_title, performance_location, performance_date, performance_content, performance_image, performance_user_id, performance_reg_time)
 values(99, '99', '99', '99', '2017-12-12', '111111', 'img', 'id1','2017-12-20');
 
-
-/*
-select * from PERFORMANCE where PERFORMANCE_no = 12
-
 /* 공연정보 댓글 */
 insert into PERFORMANCE_COMMENT values(1,1,'id4','푸하하하하하','2017-12-22');
 insert into PERFORMANCE_COMMENT values(1,2,'id4','푸하하하하하ㅋㅋㅋㅋ','2017-12-23');
@@ -239,7 +235,7 @@ insert into PERFORMANCE_COMMENT values(4,1,'id6','안녕하세요','2017-12-26')
 insert into PERFORMANCE_COMMENT values(5,1,'id5','와... 역시 갓버풀 멋집니다... 우승할거 같네요','2017-12-27');
 insert into PERFORMANCE_COMMENT values(6,1,'id6','ㅋㅋㅋㅋㅋ허더스필드한테 짐 ㅋㅋㅋㅋㅋ','2017-12-28');
 
-
+select * from PERFORMANCE_COMMENT
 
 /* 공연정보 좋아요 */
 insert into PERFORMANCE_LIKE values('1', 'hong1653');
@@ -251,7 +247,7 @@ insert into PERFORMANCE_LIKE values('1', 'yunee33');
 insert into PERFORMANCE_LIKE values('2', 'kimjr322');
 insert into PERFORMANCE_LIKE values('2', 'kimm990');
 insert into PERFORMANCE_LIKE values('2', 'kimdo327');
-*/
+
 
 
 /* 동영상(게시물) */

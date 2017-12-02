@@ -72,6 +72,7 @@ DROP SEQUENCE PERFORMANCE_NO_SEQ;
 DROP TABLE PERFORMANCE_COMMENT 
 	CASCADE CONSTRAINTS;
 	
+DROP SEQUENCE PERFORMANCE_COMMENT_NO_SEQ;
 /*--- 공연정보 좋아요----------------------------------------------------------------------*/
 
 /* 공연정보 좋아요 */
