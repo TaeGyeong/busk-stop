@@ -57,9 +57,9 @@ public class VideoCommentController {
 		return list;
 	}
 	
-	@RequestMapping("/member/editComment")
+	@RequestMapping("/member/editVideoComment")
 	@ResponseBody
-	public void updateComment(@ModelAttribute VideoComment videoComment) {
+	public void updateVideoComment(@ModelAttribute VideoComment videoComment) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		videoComment.setVideoCommentUserId(((User)authentication.getPrincipal()).getUserId());
 		service.updateVideoCommentByVideoCommentNo(videoComment);
