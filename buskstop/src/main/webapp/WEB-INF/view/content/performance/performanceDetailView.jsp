@@ -47,7 +47,7 @@ function listComment(){
             var output = "";
             $.each(result, function(){ 
             	output += '<div class="performanceComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                output += '<div class="listComment'+this.performanceCommentNo+'">'+'댓글번호 : '+this.performanceCommentNo+' / 작성자 : '+this.performanceCommentUserId+' / 등록 일자 : '+this.performanceCommentRegTime;
+                output += '<div class="listComment'+this.performanceCommentNo+'">'+'작성자 : '+this.performanceCommentUserId+' / 등록 일자 : '+this.performanceCommentRegTime;
                 output += '<a onclick="updateCommentText('+this.performanceCommentNo+',\''+this.performanceComment+'\');"> 수정 </a>';
                 output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a> </div>';
                 output += '<div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
@@ -190,18 +190,7 @@ function updateComment(performanceCommentNo){
 	<!-- Board Content End-->
 	
  
-	<div id="performanceCommentList"> 
-	<!-- 
-	<c:forEach var="performanceComment" items="${requestScope.list }">
-		${performanceComment.performanceCommentNo},
-		${performanceComment.performanceRegTime},	
-		${performanceComment.performanceCommentUserId},
-		${performanceComment.performanceComment},
-	</c:forEach>
-	<button type="button" id="BtnUpdate">수정</button>
-	<button type="button" id="BtnDelete">삭제</button>
-	 -->
-	</div>
+	<div id="performanceCommentList"></div>
 	
 	<textarea name="content" id="performanceComment" 
 	cols="20" rows="5" placeholder="댓글을 쓰세요"></textarea>
