@@ -28,6 +28,7 @@ $(document).ready(function(){
             success: function(){
                 alert("댓글이 등록되었습니다.");
                 listComment();
+                document.getElementById("performanceComment").value="";
             },
            	"error":function(){
            		alert("오류 발생");
