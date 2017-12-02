@@ -159,6 +159,7 @@ select {
 				<option value="name">공연이름</option>
 				<option value="content">내용</option>
 			</select> <input type="text" placeholder="검색" name="search">
+			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
 		</form>
 		<%-- 페이징 처리 --%>
 		<p/>

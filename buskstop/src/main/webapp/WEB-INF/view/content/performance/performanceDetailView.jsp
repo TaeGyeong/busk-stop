@@ -35,6 +35,21 @@ $(document).ready(function(){
            	}
         });
      });
+	
+	$("#updatePerformance").on("click",function(){
+		// location.href='${initParam.rootPath }/update_performance.do';
+		//location.href='${initParam.rootPath }/update_performance.do?performanceNo='+$(this.performaceNo).text();
+		
+	});
+	
+	$("#deletePerformance").on("click",function(){
+		
+		
+		
+	});
+	
+	
+	
 });	
 
 function listComment(){
@@ -189,8 +204,12 @@ function updateComment(performanceCommentNo){
 		</p>
 	</div>
 	<!-- Board Content End-->
-	
- 
+	<div>
+		<button type="button" onclick="location.href='${initParam.rootPath }/update_performance.do'">수정</button>
+		<button type="button" onclick="location.href='${initParam.rootPath }/deletePerformance.do'">삭제</button>
+		<button type="button" onclick="location.href='${initParam.rootPath }/allSelectPerformance..do'">목록</button>
+	</div>
+ 	<p><p><p>
 	<div id="performanceCommentList"></div>
 	
 	<textarea name="content" id="performanceComment" 
