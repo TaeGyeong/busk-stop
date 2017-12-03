@@ -17,5 +17,24 @@ public interface UserDao {
 	 */
 	User selectUserById(String id);
 	
+	/**
+	 * user table update
+	 * @param user
+	 * @return
+	 */
 	int updateUser(User user);
+	
+	/**
+	 * user의 DROP_CHECK UPDATE
+	 * @param id
+	 * @return
+	 */
+	int dropUpdateUserById(String id);
+	
+	/**
+	 * user의 drop_check column 조회
+	 * @param id
+	 * @return
+	 */
+	int selectDropById(String id);
 }

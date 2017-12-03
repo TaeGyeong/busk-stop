@@ -3,11 +3,15 @@ package com.buskstop.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
@@ -42,6 +46,8 @@ public class UserController {
 		service.joinMember(user, new Authority(user.getUserId(), "ROLE_MEMBER"));
 		return "index.tiles";
 	}
+	
+	/************************ 회원수정 전 비밀번호 체크 컨트롤러 ************************/
 	
 	@RequestMapping("/checkUserPassword")
 	public ModelAndView checkPassword(String userId, String password,@RequestParam String category) {
@@ -80,5 +86,34 @@ public class UserController {
 		default :
 			return new ModelAndView("/index.do","",null);
 		}
+	}
+	
+	/************************ id중복체크 컨트롤러 ************************/
+	
+	@RequestMapping("/idDuplicatedCheck")
+	public @ResponseBody String DuplicatedCheck(String id) {
+		System.out.println(id);
+		if(service.selectMemberById(id)==null) {
+			return "new";
+		} else {
+			return "duplicated";
+		}
+	}
+	
+	/************************ 회원탈퇴 컨트롤러 ************************/
+	
+	@RequestMapping("/member/dropUser")
+	public String dropUser() {
+		/*
+		 * 	회원탈퇴 controller
+		 * 	id로 user의 회원탈퇴 여부 컬럼 넣는다.
+		 * 	session 끊기
+		 */
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		String id = ((User)authentication.getPrincipal()).getUserId();
+		service.dropMember(id);
+		context.setAuthentication(null);
+		return "redirect:/index.do";
 	}
 }

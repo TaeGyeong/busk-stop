@@ -27,8 +27,17 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public int updateUser(User user) {
-		System.out.println(user+"%n :daoimpl");
 		return session.update(makeSqlId("updateUser"), user);
+	}
+	
+	@Override
+	public int dropUpdateUserById(String id) {
+		return session.update(makeSqlId("dropUserById"),id);
+	}
+	
+	@Override
+	public int selectDropById(String id) {
+		return session.selectOne(makeSqlId("selectDropById"), id);
 	}
 
 	private String makeSqlId(String id) {

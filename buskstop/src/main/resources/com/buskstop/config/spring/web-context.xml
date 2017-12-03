@@ -38,7 +38,11 @@
 	<mvc:view-controller path="/updateMemberInfo.do" view-name="myPage/updateMemberCategory.tiles"/>
 	<mvc:view-controller path="/updateMemberView.do" view-name="myPage/updateMemberView.tiles"/>
 	<mvc:view-controller path="/updateSuccess.do" view-name="myPage/updateSuccess.tiles"/>
+	
+	<!-- 회원탈퇴 링크 -->
+	<mvc:view-controller path="/member/out_member_form.do" view-name="member/out_member_form.tiles"/>
 	<!-- test link -->
+	
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

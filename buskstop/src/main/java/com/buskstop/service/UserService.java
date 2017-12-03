@@ -25,4 +25,11 @@ public interface UserService {
 	 * @return
 	 */
 	int updateMember(User user);
+	
+	/**
+	 * user의 탈퇴를 update
+	 * @param id
+	 * @return
+	 */
+	void dropMember(String id);
 }

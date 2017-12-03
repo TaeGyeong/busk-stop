@@ -36,7 +36,12 @@ public class UserServiceImpl implements UserService{
 	public int updateMember(User user) {
 		return userDao.updateUser(user);
 	}
-	
-	
+
+	@Override
+	@Transactional
+	public void dropMember(String id) {
+		userDao.dropUpdateUserById(id);
+		authorDao.deleteAuthorityById(id);
+	}
 	
 }
