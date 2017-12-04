@@ -54,6 +54,7 @@
 	</sec:authorize>
 	
 		<!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
+		<li><a href="${initParam.rootPath }/mapTest3.do">공연장소 다음지도 테스트2</a></li>
 		<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
 		<%-- 임시용 --%>	
 </ul>

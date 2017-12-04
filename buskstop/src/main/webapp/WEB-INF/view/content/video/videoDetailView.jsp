@@ -273,14 +273,28 @@ div{
 				<td>아티스트</td> 
 				<td>${requestScope.video.videoArtist}</td>
 			</tr>
-			<tr>
-				<td>공연장소</td> 
-				<td>${requestScope.video.videoLocation }</td>
-			</tr>
-			<tr>
-				<td>영상 속 공연 시간</td>
-				<td>${requestScope.video.videoDate }</td>
-			</tr>
+			<c:choose>
+				<c:when test="${requestScope.video.videoCategory=='practice' }">
+					<tr>
+						<td>연습장소</td> 
+						<td>${requestScope.video.videoLocation }</td>
+					</tr>
+					<tr>
+						<td>연습 날짜</td>
+						<td>${requestScope.video.videoDate }</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td>공연장소</td> 
+						<td>${requestScope.video.videoLocation }</td>
+					</tr>
+					<tr>
+						<td>공연 날짜</td>
+						<td>${requestScope.video.videoDate }</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 		</tbody>
 	</table>
 	<div>
@@ -304,7 +318,7 @@ div{
 			</div>
 			<sec:authorize access="isAuthenticated()">			 
 				<div style="float:right">
-					<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+					<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요.">
 					<button id="enterVideoCommentBtn" type="button">등록</button>
 				</div>
 			</sec:authorize>

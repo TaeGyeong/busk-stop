@@ -13,6 +13,17 @@ $(document).ready(function(){
 		alert($("#performanceTime").val());
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 	});
+	
+	$("#selectStage").on("click", function(){
+		
+	});
+	
+	$("#searchStage").on("click", function(){
+		var address = "/buskstop/performance/searchStage.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 500) / 2;
+		top1 = (screen.availHeight - 200) / 2;
+		window.open(address, "newWin", 'width=500 ,height=200 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
 });
 </script>
 	<h2>공연정보 등록</h2>
@@ -33,7 +44,9 @@ $(document).ready(function(){
 		</div>
 		<div class="form-group">
 			<label for="performanceLocation">공연장소</label>
-			<input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required">
+			<!-- <input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required"> -->
+			<button id="selectStage" class="btn btn-default col-sm-1" onclick="getStage()">대관한 장소 선택</button>
+			<button id="searchStage" class="btn btn-default col-sm-1" onclick="getStageBySearch()">직접 검색</button>
 		</div>
 		<label>공연날짜</label><br>
 		<div class="form-group">
