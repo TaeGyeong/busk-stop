@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 //github.com/um006500/busk-stop.git
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.buskstop.service.PerformanceLikeService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
+import com.buskstop.vo.User;
 
 @Controller
 public class PerformanceController {
@@ -38,6 +40,10 @@ public class PerformanceController {
 	
 	@Autowired(required=true)
 	private HttpServletRequest request;
+	
+	private String getUserId() {
+		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+	}
 	
 	// 공연 정보 입력
 	@RequestMapping("/performanceRegister")
@@ -57,16 +63,43 @@ public class PerformanceController {
 		
 		return new ModelAndView("redirect:/allSelectPerformance.do");
 	}
-	@RequestMapping("/performanceUpdate")
-	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) {
-		service.updatePerformance(performance);	
-		return new ModelAndView("redirect:/performanceDetailView.do","performanceNo",performance.getPerformanceNo());
+	// 이건 수정 화면에서 그 전에 입력 했던 내용들 불러오는거고
+	@RequestMapping("/performanceUpdate3")
+	public ModelAndView updatePerformance2(@RequestParam int performanceNo) {
+		if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
+		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
+		return new ModelAndView("update_performance.do","Performance",performance);
+		} else return new ModelAndView("performanceDetailView.do?performanceNo="+performanceNo);
+			
+	}
+	
+	// 이건 수정하는 부분
+	@RequestMapping("/performanceUpdate2")
+	public ModelAndView updatePerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws Exception {
+		MultipartFile multiImage = performance.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			//디렉토리
+			String dir = request.getServletContext().getRealPath("/performanceImage");
+			String fileName = UUID.randomUUID().toString();
+			File upImage = new File(dir, fileName+".jpg");
+			multiImage.transferTo(upImage);
+			performance.setPerformanceImage(fileName+".jpg");
+		}
+		service.updatePerformance(performance);
+		int performanceNo = performance.getPerformanceNo();
+		return new ModelAndView("performanceDetailView.do?performanceNo="+performanceNo,"performance",performance);
+		
 	}
 	
 	@RequestMapping("/deletePerformance")
 	public String deletePerformance(@RequestParam int performanceNo) {
-		service.deletePerformanceByPerformance(performanceNo);
-		return "performance/performanceView.tiles";
+		if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
+			service.deletePerformanceByPerformance(performanceNo);
+			return "allSelectPerformance.do";
+			} else {
+				String error="performanceDetailView.do?performanceNo="+performanceNo; 
+				return error;
+			}
 	}
 	
 	// 공연정보 목록 조회
@@ -75,7 +108,6 @@ public class PerformanceController {
 		List<Performance> list = null;
 		Map<String, Object> map = null;
 		int page = 1;
-		
 		
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
