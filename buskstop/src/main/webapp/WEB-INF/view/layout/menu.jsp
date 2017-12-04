@@ -88,10 +88,10 @@
    <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
    <div class="main_menu col-sm-12">
       <ul class="col-sm-12">
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보</a>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연정보</a>
             <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-               <li class="col-sm-12" style="padding: 0;"><a href="#">일반공연정보</a></li>
-               <li class="col-sm-12" style="padding: 0;"><a href="#">아티스트공연정보</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectPerformance.do">일반공연정보</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectArtistPerformance.do">아티스트공연정보</a></li>
             </ul>
          </li>
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연장대관</a></li>

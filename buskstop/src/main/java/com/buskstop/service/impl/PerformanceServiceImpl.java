@@ -43,8 +43,9 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return dao.deletePerformanceByPerformanceNo(performanceNo);
 	}
 
-	@Override
-	public Map<String, Object> selectAllPerformance(int page) {
+	/********************************************************************************************/
+	@Override 
+	public Map<String, Object> selectPerformance(int page) {
 
 		HashMap<String, Object> map = new HashMap<>();
 		
@@ -52,13 +53,30 @@ public class PerformanceServiceImpl implements PerformanceService {
 		PagingBean pb = new PagingBean(dao.selectPerformanceCount(), page);
 		
 		map.put("pageBean", pb);
-		List<Performance> list = dao.selectAllPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());		
+		List<Performance> list = dao.selectPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());		
 		
 		map.put("list", list);
 		
 		return map;
 	}
 	
+	@Override 
+	public Map<String, Object> selectArtistPerformance(int page) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCount(), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());		
+		
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	/********************************************************************************************/
 	@Override
 	public List<Performance> selectAllPerfor(){
 		return dao.selectAllPerfor();
@@ -147,4 +165,83 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 		return map;
 	}
+	
+	/****************************************************
+	 * 	Artist Performance Select Service & Paging
+	 ****************************************************/
+	
+	// 공연정보 검색
+		// 제목으로 검색 페이징
+		@Override
+		public Map<String, Object> selectArtistPerformanceByPerformanceTitle(int page,String performanceTitle) {
+
+			HashMap<String, Object> map = new HashMap<>();
+			//PagingBean 생성
+			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByTitle(performanceTitle), page);
+			
+			map.put("pageBean", pb);
+			List<Performance> list = dao.selectArtistPerformanceByPerformanceTitle(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceTitle);		
+			map.put("list", list);
+			
+			return map;
+		}
+
+		// 작성자로 검색 페이징
+		@Override
+		public Map<String, Object> selectArtistPerformanceByPerformanceUserId(int page, String userId) {
+
+			HashMap<String, Object> map = new HashMap<>();
+			//PagingBean 생성
+			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByUserId(userId), page);
+			
+			map.put("pageBean", pb);
+			List<Performance> list = dao.selectArtistPerformanceByPerformanceUserId(pb.getBeginItemInPage(), pb.getEndItemInPage(), userId);
+			map.put("list", list);
+			
+			return map;
+		}
+
+		//공연장소로 검색 페이징
+		@Override
+		public Map<String, Object> selectArtistPerformanceByPerformanceLocation(int page, String performanceLocation) {
+
+			HashMap<String, Object> map = new HashMap<>();
+			//PagingBean 생성
+			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByLocation(performanceLocation), page);
+			
+			map.put("pageBean", pb);
+			List<Performance> list = dao.selectArtistPerformanceByPerformanceLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceLocation);
+			map.put("list", list);
+			
+			return map;
+		}
+
+		//공연이름으로 검색 페이징
+		@Override
+		public Map<String, Object> selectArtistPerformanceByPerformanceName(int page, String performanceName) {
+
+			HashMap<String, Object> map = new HashMap<>();
+			//PagingBean 생성
+			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceName(performanceName), page);
+			
+			map.put("pageBean", pb);
+			List<Performance> list = dao.selectArtistPerformanceByPerformanceName(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceName);
+			map.put("list", list);
+			
+			return map;
+		}
+
+		@Override
+		public Map<String, Object> selectArtistPerformanceByPerformanceContent(int page, String performanceContent) {
+
+			HashMap<String, Object> map = new HashMap<>();
+			//PagingBean 생성
+			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceContent(performanceContent), page);
+			
+			map.put("pageBean", pb);
+			List<Performance> list = dao.selectArtistPerformanceByPerformanceContent(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceContent);
+			map.put("list", list);
+			
+			return map;
+		}
 }

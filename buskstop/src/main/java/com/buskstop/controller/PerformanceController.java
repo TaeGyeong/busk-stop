@@ -45,7 +45,8 @@ public class PerformanceController {
 		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
 	
-	// 공연 정보 입력
+	/**************************** 공연정보 등록 ****************************/
+	
 	@RequestMapping("/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws IllegalStateException, IOException {
 		//파일 업로드 처리
@@ -58,11 +59,31 @@ public class PerformanceController {
 			multiImage.transferTo(upImage);
 			performance.setPerformanceImage(fileName+".jpg");
 		}
-		
+		performance.setPerformanceCode(0);
 		service.insertPerformance(performance);
 		
-		return new ModelAndView("redirect:/allSelectPerformance.do");
+		return new ModelAndView("redirect:/selectPerformance.do");
 	}
+	
+	@RequestMapping("/artist/performanceRegister")
+	public ModelAndView insertArtistPerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws IllegalStateException, IOException {
+		//파일 업로드 처리
+		MultipartFile multiImage = performance.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			//디렉토리
+			String dir = request.getServletContext().getRealPath("/performanceImage");
+			String fileName = UUID.randomUUID().toString();
+			File upImage = new File(dir, fileName+".jpg");
+			multiImage.transferTo(upImage);
+			performance.setPerformanceImage(fileName+".jpg");
+		}
+		performance.setPerformanceCode(1);
+		service.insertPerformance(performance);
+		
+		return new ModelAndView("redirect:/selectArtistPerformance.do");
+	}
+	
+	
 	// 이건 수정 화면에서 그 전에 입력 했던 내용들 불러오는거고
 	@RequestMapping("/performanceUpdate3")
 	public ModelAndView updatePerformance2(@RequestParam int performanceNo) {
@@ -95,15 +116,16 @@ public class PerformanceController {
 	public String deletePerformance(@RequestParam int performanceNo) {
 		if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
 			service.deletePerformanceByPerformance(performanceNo);
-			return "allSelectPerformance.do";
+			return "selectPerformance.do";
 			} else {
 				String error="performanceDetailView.do?performanceNo="+performanceNo; 
 				return error;
 			}
 	}
 	
-	// 공연정보 목록 조회
-	@RequestMapping("/allSelectPerformance")
+	/*********************** 공연정보 조회 Controller ***********************/
+	
+	@RequestMapping("/selectPerformance")
 	public ModelAndView selectAllPerformance(@RequestParam(required=false) String category, @RequestParam(required=false) String search) throws ParseException ,IOException, ServletException{
 		List<Performance> list = null;
 		Map<String, Object> map = null;
@@ -127,7 +149,7 @@ public class PerformanceController {
 				map = service.selectPerformanceByPerformanceContent(page, search);
 			}
 		}else {
-			map = service.selectAllPerformance(page);
+			map = service.selectPerformance(page);
 			category = "title";
 			search = "";
 		}
@@ -141,6 +163,45 @@ public class PerformanceController {
 		return new ModelAndView("performance/performanceView.tiles", "map", map);
 	}
 	
+	@RequestMapping("/selectArtistPerformance")
+	public ModelAndView selectArtistPerformance(@RequestParam(required=false) String category, @RequestParam(required=false) String search) throws ParseException ,IOException, ServletException{
+		List<Performance> list = null;
+		Map<String, Object> map = null;
+		int page = 1;
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		}catch (Exception e) {
+			
+		}
+		if(category != null) { //검색 시 페이징
+			if(category.equals("title")) {
+				map = service.selectPerformanceByPerformanceTitle(page, search);
+			}else if(category.equals("user")){
+				map = service.selectPerformanceByPerformanceUserId(page, search);
+			}else if(category.equals("location")) {
+				map = service.selectPerformanceByPerformanceLocation(page, search);
+			}else if(category.equals("name")) {
+				map = service.selectPerformanceByPerformanceName(page, search);
+			}else if(category.equals("content")) {
+				map = service.selectPerformanceByPerformanceContent(page, search);
+			}
+		}else {
+			map = service.selectArtistPerformance(page);
+			category = "title";
+			search = "";
+		}
+		list = (List<Performance>)map.get("list");
+		list = likeCounter(list);
+		
+		map.put("list", list);
+		map.put("search", search);
+		map.put("category", category);
+		
+		return new ModelAndView("performance/artistPerformanceView.tiles", "map", map);
+	}
+	
+	/*********************** 아티스트 공연정보 조회 Controller ***********************/
 	
 	// 좋아요 갯수 조회하는 메서드
 	public List<Performance> likeCounter(List<Performance> list){

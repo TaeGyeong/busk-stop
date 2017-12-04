@@ -31,11 +31,17 @@ public interface PerformanceService {
 	Performance PerformanceByPerformanceNo(int performanceNo);
 	
 	/**
-	 * 조회처리하는 메소드 페이징
+	 * 일반공연정보 조회처리하는 메소드 페이징
 	 * @param page
 	 * @return
 	 */
-	Map<String, Object> selectAllPerformance(int page);
+	Map<String, Object> selectPerformance(int page);
+	/**
+	 * 아티스트 공연정보 메소드 페이징
+	 * @param page
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformance(int page);
 	
 	/**
 	 * 조회처리
@@ -73,4 +79,44 @@ public interface PerformanceService {
 	 * @return
 	 */
 	Map<String, Object> selectPerformanceByPerformanceContent(int page, String performanceContent);
+	
+	/**
+	 * 아티스트공연정보 제목으로 검색페이징
+	 * @param page
+	 * @param performanceTitle
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceTitle(int page,String performanceTitle);
+
+	/**
+	 * 아티스트공연정보 유저id로 검색페이징
+	 * @param page
+	 * @param userId
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceUserId(int page, String userId);
+
+	/**
+	 * 아티스트 공연정보 공연장소로 검색페이징
+	 * @param page
+	 * @param performanceLocation
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceLocation(int page, String performanceLocation);
+
+	/**
+	 * 아티스트 공연정보 공연이름으로 검색페이징
+	 * @param page
+	 * @param performanceName
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceName(int page, String performanceName);
+	
+	/**
+	 * 아티스트 공연정보 공연내용으로 검색페이징
+	 * @param page
+	 * @param performanceContent
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceContent(int page, String performanceContent);
 }

@@ -19,6 +19,7 @@ public class Performance implements Serializable{
 	private String performanceImage;
 	private MultipartFile multiImage;
 	private String performanceUserId;
+	private int performanceCode;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date performanceRegTime;
 	// TODO 공연장 번호 연결 해야함.
@@ -41,17 +42,16 @@ public class Performance implements Serializable{
 		this.performanceUserId = performanceUserId;
 		this.performanceRegTime = performanceRegTime;
 	}
-	@Override
-	public String toString() {
-		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
-				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
-				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
-				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
-				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceRegTime="
-				+ performanceRegTime + "]";
+
+	
+	
+	
+	public int getPerformanceCode() {
+		return performanceCode;
 	}
-	
-	
+	public void setPerformanceCode(int performanceCode) {
+		this.performanceCode = performanceCode;
+	}
 	public int getLikeCount() {
 		return likeCount;
 	}
@@ -128,6 +128,8 @@ public class Performance implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + likeCount;
+		result = prime * result + performanceCode;
 		result = prime * result + ((performanceContent == null) ? 0 : performanceContent.hashCode());
 		result = prime * result + ((performanceDate == null) ? 0 : performanceDate.hashCode());
 		result = prime * result + performanceHits;
@@ -149,6 +151,10 @@ public class Performance implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Performance other = (Performance) obj;
+		if (likeCount != other.likeCount)
+			return false;
+		if (performanceCode != other.performanceCode)
+			return false;
 		if (performanceContent == null) {
 			if (other.performanceContent != null)
 				return false;
@@ -195,8 +201,16 @@ public class Performance implements Serializable{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
+				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
+				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
+				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
+				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceCode="
+				+ performanceCode + ", performanceRegTime=" + performanceRegTime + ", likeCount=" + likeCount + "]";
+	}
 	
-
 	
 
 }

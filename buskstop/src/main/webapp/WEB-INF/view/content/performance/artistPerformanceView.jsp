@@ -107,7 +107,7 @@ select {
 </style>
 
 	<div id="container">
-		<h1>VIEW - 일반공연 정보 리스트</h1>
+		<h1>VIEW - 아티스트공연 정보 리스트</h1>
 		<hr>
 		<table id="product_tb" style="display: table;">
 			<thead id="thead">
@@ -141,7 +141,7 @@ select {
 			</tbody>
 		</table>
 		<br>
-		<form action="${initParam.rootPath }/selectPerformance.do">
+		<form action="${initParam.rootPath }/selectArtistPerformance.do">
 			<select name="category">
 				<option value="title">제목</option>
 				<option value="user">작성자</option>
@@ -150,7 +150,7 @@ select {
 				<option value="content">내용</option>
 			</select> <input type="text" placeholder="검색" name="search">
 			<button type="submit">검색</button>
-			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
+			<button type="button" onclick="location.href='${initParam.rootPath}/artist/performanceRegisterView.do'">글쓰기</button>
 		</form>
 		<%-- 페이징 처리 --%>
 		<p/>
@@ -158,7 +158,7 @@ select {
 			<ul class="pagination">
 				<%-- 첫페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
+					<a href="${initParam.rootPath }/selectArtistPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
 				</li>
 				<%--
 					이전 페이지 그룹 처리
@@ -167,7 +167,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
+							<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -191,7 +191,7 @@ select {
 				  		</c:when>
 						<c:otherwise>
 							<li>
-								<a href="${initParam.rootPath }/selectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
+								<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -203,7 +203,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
+							<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -214,7 +214,7 @@ select {
 				</c:choose>
 				<%-- 마지막 페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
+					<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
 				</li>
 			</ul>
 		</div>
