@@ -2,8 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#registBtn").on("click",function(){
+			var txt = rink($("#videoLink").val());
+			$("#videoLink").val(txt);
+			document.getElementById("registForm").submit();
+		});
+	});
+	
+	function rink(txt){
+		var video_id = txt.split('v=')[1];
+	    var ampersandPosition = video_id.indexOf('&');
+	    if(ampersandPosition != -1) {
+	      video_id = video_id.substring(0, ampersandPosition);
+	    }
+	    return video_id;
+	}
+</script>
+
 <h2>공연영상 등록</h2>
-<form action="${initParam.rootPath }/createVideo.do" method="post">
+<form action="${initParam.rootPath }/createVideo.do" id="registForm" method="post">
 	<sec:csrfInput />
 
 	<%-- id hidden --%>
@@ -54,7 +75,7 @@
 				value='<sec:authentication property="principal.userId"/>'>
 		</sec:authorize>
 	</div>
-	<button type="submit" class="btn btn-default">등록</button>
+	<button id="registBtn" class="btn btn-default">등록</button>
 	<button type="button" class="btn btn-default"
 		onclick="location.href='${initParam.rootPath}/index.do'">취소</button>
 </form> 

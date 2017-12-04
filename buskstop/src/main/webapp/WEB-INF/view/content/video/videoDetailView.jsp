@@ -260,10 +260,41 @@ div{
 			<div style="float:right; margin-right:15px; ">게시자 : ${requestScope.video.videoUserId} 님</div>
 			<div style="float:left; margin-right:20px; width:800 px">
 			<%-- <iframe width="800" height="750" src="${requestScope.video.videoLink }" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> --%>
-			<div> ${requestScope.video.videoLink }</div> 
+			<div id="player"><input type="hidden" id="link" value="${requestScope.video.videoLink }"></div> 
 			</div>
-			
 	</div>
+	<!-- youtube iframe api -->
+	<script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '400',
+          width: '600',
+          videoId: document.getElementById("link").value,
+          events: {
+            'onReady': onPlayerReady,
+            
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+    </script>
+    
+    
 	<!-- youtube END -->
 	<table id="product_tb" style="display: table;">
 		<thead id="thead">
