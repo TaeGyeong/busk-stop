@@ -74,7 +74,7 @@ tr:hover{
 			<tr onclick="goDetail('${initParam.rootPath }', ${video.videoNo})">
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
-				<td>${video.videoLink }</td>
+				<td><img src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg"></td>
 				<td>${video.videoLocation }</td>
 				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>

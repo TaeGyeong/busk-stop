@@ -230,8 +230,10 @@ function deletePerformance(performanceNo){
 		</div>
 	<!-- Board Content End-->
 	<div>
+	<sec:authorize access="isAuthenticated()">
 		<input type="submit" value="수정" onclick="updatePerformance();">
 		<input type="submit" value="삭제" onclick="deletePerformance();">
+		</sec:authorize>
 		<button type="button" onclick="location.href='${initParam.rootPath }/allSelectPerformance..do'">목록</button>
 
 	</div>
