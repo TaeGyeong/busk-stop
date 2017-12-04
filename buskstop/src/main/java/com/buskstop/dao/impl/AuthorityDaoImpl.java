@@ -45,4 +45,11 @@ public class AuthorityDaoImpl implements AuthorityDao{
 		}
 	}
 
+	@Override
+	public int deleteAuthorityById(String id) {
+		return session.delete(makeSqlId("deleteAuthorityById"), id);
+	}
+	
+	
+
 }

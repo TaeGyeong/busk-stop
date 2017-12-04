@@ -6,7 +6,8 @@ CREATE TABLE USERS (
 	USER_PASSWORD VARCHAR2(100) NOT NULL, /* 비밀번호 */
 	USER_ADDRESS VARCHAR2(100) NOT NULL, /* 주소 */
 	USER_PHONE_NUM VARCHAR2(11) NOT NULL, /* 연락처 */
-	USER_EMAIL VARCHAR2(100) NOT NULL /* 이메일 */
+	USER_EMAIL VARCHAR2(100) NOT NULL, /* 이메일 */
+	DROP_CHECK NUMBER(1) DEFAULT 0 /* 회원탈퇴유무 */
 );
 
 /*------------------------------------------------------------------------------------*/

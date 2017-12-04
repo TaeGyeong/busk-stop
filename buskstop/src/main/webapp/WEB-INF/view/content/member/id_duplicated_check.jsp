@@ -6,10 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	등록성공!
-	
-	${requestScope.artist }
-	
-	<img src="${initParam.rootPath }/artistImage/${requestScope.artist.artistImage }">
+
 </body>
 </html>

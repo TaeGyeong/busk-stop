@@ -8,12 +8,16 @@
 회원정보조회 - 회원 / 아티스트/ 대관공급자 정보 수정
 기존회원에서 아티스트 / 대관공급자 등록
 */
+
+select * from users
 SELECT * FROM VIDEO_LIKE 
 select * from artist
 select * from authority
 select * from stage_supplier
 select * from video
 select * from video_comment
+
+delete from authority where user_id = 'id-10';
 
 UPDATE VIDEO SET VIDEO_LINK=
 '<div style="position:relative;height:0;padding-bottom:56.21%"><iframe src="https://www.youtube.com/embed/IsR5mcQRqjM?ecver=2" style="position:absolute;width:100%;height:100%;left:0" width="641" height="360" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>'

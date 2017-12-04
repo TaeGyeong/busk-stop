@@ -11,4 +11,6 @@ public interface ArtistDao {
 	 * @return
 	 */
 	Artist selectArtistByUserId(String userId) ;
+	
+	int updateArtist(Artist artist);
 }

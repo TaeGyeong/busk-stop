@@ -27,4 +27,21 @@ public class UserServiceImpl implements UserService{
 		authorDao.insertAuthority(authority);
 	}
 	
+	@Override
+	public User selectMemberById(String id) {
+		return userDao.selectUserById(id);
+	}
+
+	@Override
+	public int updateMember(User user) {
+		return userDao.updateUser(user);
+	}
+
+	@Override
+	@Transactional
+	public void dropMember(String id) {
+		userDao.dropUpdateUserById(id);
+		authorDao.deleteAuthorityById(id);
+	}
+	
 }

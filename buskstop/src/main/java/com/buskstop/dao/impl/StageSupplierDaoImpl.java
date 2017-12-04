@@ -18,6 +18,16 @@ public class StageSupplierDaoImpl implements StageSupplierDao{
 		return session.insert(makeSqlId("insertStageSupplier"), supplier);
 	}
 	
+	@Override
+	public int updateStageSupplier(StageSupplier supplier) {
+		return session.update(makeSqlId("updateStageSupplier"), supplier);
+	}
+	
+	@Override
+	public StageSupplier selectSupplierById(String userId) {
+		return session.selectOne(makeSqlId("selectSupplierById"), userId);
+	}
+
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.stageSupplierMapper."+id;
 	}

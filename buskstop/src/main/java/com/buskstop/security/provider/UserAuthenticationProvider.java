@@ -32,13 +32,18 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// ID CHECK
+		// id를 통해 User 조회
 		String id = authentication.getName();
-		System.out.println(id);
 		User user = userDao.selectUserById(id);
-		System.out.println(user);
+		
+		// ID CHECK
 		if (user == null) {
 			throw new UsernameNotFoundException("ID를 확인해주세요.");
+		}
+		
+		// 탈퇴유무 확인
+		if(userDao.selectDropById(user.getUserId())==1) {
+			throw new UsernameNotFoundException("탈퇴한 회원입니다. 재가입해주세요.");
 		}
 
 		// PASSWORD CHECK

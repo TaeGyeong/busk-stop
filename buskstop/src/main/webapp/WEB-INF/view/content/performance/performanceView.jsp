@@ -27,7 +27,7 @@
 				},
 				"dataType":"text",
 				"success":function(count){
-					$(this).text("♥"+count);
+					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
 				}
 			});
 		});
@@ -141,11 +141,11 @@ select {
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd"/></td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH시mm분"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>
-						<td><a class="likeBtn">♥${item.likeCount }</a></td>
+						<td><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -171,7 +171,7 @@ select {
 				</li>
 				<%--
 					이전 페이지 그룹 처리
-					만약에 이전 페잊 그룹이 있으면 링크처리하고 없으면 화살표만 나오도록 처리
+					만약에 이전 페이지 그룹이 있으면 링크처리하고 없으면 화살표만 나오도록 처리
 				 --%>
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">

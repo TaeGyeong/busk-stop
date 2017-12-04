@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 
@@ -28,6 +30,7 @@ $(document).ready(function(){
             success: function(){
                 alert("댓글이 등록되었습니다.");
                 listComment();
+                document.getElementById("performanceComment").value="";
             },
            	"error":function(){
            		alert("오류 발생");
@@ -38,7 +41,20 @@ $(document).ready(function(){
 	
 	
 	
-	
+	$(".likeBtn").on("click", function(){
+		$.ajax({
+			"type":"POST",
+			"url":"${initParam.rootPath}/performanceLike.do",
+			"data":{
+				"num":"${requestScope.performance.performanceNo}",
+				'${_csrf.parameterName}':'${_csrf.token}'
+			},
+			"dataType":"text",
+			"success":function(count){
+				$(".likeBtn").html("<span class='glyphicon glyphicon-heart'></span>"+count);
+			}
+		});
+	});
 	
 });	
 
@@ -161,12 +177,14 @@ function deletePerformance(performanceNo){
 		width:960px;
 		margin : 0 auto;
 	}
+	.likeBtn{
+		cursor: pointer;
+	}
 
 </style>
 </head>
 <body>
 <div id="container">
-<% Performance performance = (Performance)request.getAttribute("performance"); %>
 
 <h1>DETAIL VIEW - 공연 정보 글 읽기</h1>
 <hr>
@@ -194,7 +212,7 @@ function deletePerformance(performanceNo){
 		</div>
 		<div>
 			<div style="float:left; margin-right:5px;">공연 시간</div>
-			<div style="float:left;"><fmt:formatDate value="${requestScope.performance.performanceDate }" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+			<div style="float:left;"><fmt:formatDate value="${requestScope.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
 		</div>
 	</div>
 
@@ -206,19 +224,24 @@ function deletePerformance(performanceNo){
 		${requestScope.performance.performanceContent}
 		</p>
 	</div>
+	<div class="button_box" style="width: 100%;">
+		<div style="float: left;">
+			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none"><span class='glyphicon glyphicon-heart'></span>${requestScope.performance.likeCount }</a>
+		</div>
 	<!-- Board Content End-->
 	<div>
 		<input type="submit" value="수정" onclick="updatePerformance();">
 		<input type="submit" value="삭제" onclick="deletePerformance();">
 		<button type="button" onclick="location.href='${initParam.rootPath }/allSelectPerformance..do'">목록</button>
+
 	</div>
- 	<p><p><p>
-	<div id="performanceCommentList"></div>
-	
-	<textarea name="content" id="performanceComment" 
-	cols="20" rows="5" placeholder="댓글을 쓰세요"></textarea>
-	<button type="button" id="btnComment">댓글 등록</button>
-	
+	<p/><p/><p/>
+	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
+	<div style="float: left; width: 100%;">
+		<textarea name="content" id="performanceComment" 
+		cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
+		<button type="button" id="btnComment">댓글 등록</button>
+	</div>
 	
 </div>
 </body>

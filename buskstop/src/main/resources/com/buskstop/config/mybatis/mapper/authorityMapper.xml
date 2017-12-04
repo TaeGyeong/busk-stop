@@ -30,6 +30,12 @@
 		WHERE user_id = #{userId}
 	</update>
 	
+	<delete id="deleteAuthorityById" parameterType="string">
+		DELETE 
+		FROM AUTHORITY
+		WHERE	user_id = #{value}
+	</delete>
+	
 	<select id="selectAuthoritiesByUserId" parameterType="string" resultMap="authority-resultmap">
 		<include refid="authority-select-sql"/>
 		WHERE USER_ID = #{value}

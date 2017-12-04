@@ -28,5 +28,12 @@ public class ArtistServiceImpl implements ArtistService{
 	public Artist readArtistByUserId(String userId) {
 		return artistDao.selectArtistByUserId(userId);
 	}
+
+	@Override
+	public int updateArtist(Artist artist) {
+		return artistDao.updateArtist(artist);
+	}
+	
+	
 	
 }

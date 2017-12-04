@@ -2,6 +2,8 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StageSupplier implements Serializable{
 	private int establishNum; // 사업장번호
 	private int operatorNum; // 사업자번호
@@ -10,6 +12,8 @@ public class StageSupplier implements Serializable{
 	private String stageLocation; // 주소
 	private int stageArea; // 면적
 	private String stageImage; // 대표사진
+	
+	private MultipartFile multiImage; 
 	
 	private String userId; // 사용자 정보
 
@@ -24,6 +28,32 @@ public class StageSupplier implements Serializable{
 		this.stageLocation = stageLocation;
 		this.stageArea = stageArea;
 		this.stageImage = stageImage;
+		this.userId = userId;
+	}
+	
+	
+	
+
+	public StageSupplier(int establishNum, int operatorNum, String stageName, String stageLocation, int stageArea,
+			MultipartFile multiImage, String userId) {
+		this.establishNum = establishNum;
+		this.operatorNum = operatorNum;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.multiImage = multiImage;
+		this.userId = userId;
+	}
+
+	public StageSupplier(int establishNum, int operatorNum, String stageName, String stageLocation, int stageArea,
+			String stageImage, MultipartFile multiImage, String userId) {
+		this.establishNum = establishNum;
+		this.operatorNum = operatorNum;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageImage = stageImage;
+		this.multiImage = multiImage;
 		this.userId = userId;
 	}
 
@@ -83,11 +113,20 @@ public class StageSupplier implements Serializable{
 		this.userId = userId;
 	}
 
+	public MultipartFile getMultiImage() {
+		return multiImage;
+	}
+
+	public void setMultiImage(MultipartFile multiImage) {
+		this.multiImage = multiImage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + establishNum;
+		result = prime * result + ((multiImage == null) ? 0 : multiImage.hashCode());
 		result = prime * result + operatorNum;
 		result = prime * result + stageArea;
 		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
@@ -107,6 +146,11 @@ public class StageSupplier implements Serializable{
 			return false;
 		StageSupplier other = (StageSupplier) obj;
 		if (establishNum != other.establishNum)
+			return false;
+		if (multiImage == null) {
+			if (other.multiImage != null)
+				return false;
+		} else if (!multiImage.equals(other.multiImage))
 			return false;
 		if (operatorNum != other.operatorNum)
 			return false;
@@ -139,9 +183,8 @@ public class StageSupplier implements Serializable{
 	public String toString() {
 		return "StageSupplier [establishNum=" + establishNum + ", operatorNum=" + operatorNum + ", stageName="
 				+ stageName + ", stageLocation=" + stageLocation + ", stageArea=" + stageArea + ", stageImage="
-				+ stageImage + ", userId=" + userId + "]";
+				+ stageImage + ", multiImage=" + multiImage + ", userId=" + userId + "]";
 	}
 
-	
 	
 }

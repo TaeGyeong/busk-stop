@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-</script>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#dateBtn").on("click", function(){
+		alert($("#performanceTime").val());
+		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
+	});
+});
+</script>
 	<h2>공연정보 등록</h2>
 	<form action="${initParam.rootPath }/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
 		
@@ -29,12 +35,18 @@
 			<label for="performanceLocation">공연장소</label>
 			<input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required">
 		</div>
+		<label>공연날짜</label><br>
 		<div class="form-group">
-			<label for="performanceDate">공연날짜</label>
-			<input type="date" name="performanceDate" id="performanceDate" class="form-control" required="required">
+			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
 		</div>
-
-		<label>추가 정보 입력</label>
+		<div class="form-group">
+			<label class="col-sm-2">공연시간</label><input type="time" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
+		</div>
+		<div class="form-group">
+			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="performanceDate" id="performanceDate" class="form-control col-sm-3" required="required">
+		</div>
+		<label class="col-sm-12">추가 정보 입력</label> 
 		<div class="form-group">
 			<textarea rows="15" cols="150" name="performanceContent" placeholder="공연에 대한 정보를 입력하세요."></textarea>
 		</div>
@@ -53,7 +65,8 @@
 		
 		
 		<!-- 공연장 번호 -->
-		<button type="submit" class="btn btn-default">등록</button> <button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/performanceView.do'">취소</button>
+		<button type="submit" class="btn btn-default">등록</button> 
+		<button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/performanceView.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	

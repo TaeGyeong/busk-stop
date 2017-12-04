@@ -36,6 +36,17 @@
       )
    </insert>
    
+	<update id="updateArtist" parameterType="artist">
+   		UPDATE 	ARTIST
+   		SET		ARTIST_NAME = #{artistName},
+   				ARTIST_PERFORMANCE = #{performance},
+				ARTIST_PROFILE = #{profile},
+				ARTIST_IMAGE = #{artistImage},
+				ARTIST_MEMBERS = #{artistMembers},
+				ARTIST_SNS = #{artistSns}
+		WHERE 	ARTIST_USER_ID = #{artistId}   					
+	</update>
+   
    <select id="selectArtistByUserId" parameterType="string" resultMap="artist-resultmap">
    		<include refid="artist-select-sql"/>
    		WHERE	artist_user_id = #{value}

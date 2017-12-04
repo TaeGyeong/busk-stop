@@ -33,4 +33,11 @@ public interface AuthorityDao {
 	 * @return
 	 */
 	int updateAuthority(Authority authority);
+	
+	/**
+	 * id로 Authority row delete
+	 * @param id
+	 * @return int
+	 */
+	int deleteAuthorityById(String id);
 }
