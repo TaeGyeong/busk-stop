@@ -43,11 +43,7 @@
 	<sec:authorize access="isAuthenticated()">
 		<li><a id="logout" style="cursor: pointer;">로그아웃</a>
 		<li><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
-		<li><a href="${initParam.rootPath }/likeCheck.do">좋아요테스트</a></li>
-		<li><a href="${initParam.rootPath }/performanceRegisterView.do">공연정보 등록</a></li>
 		<li><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보 목록</a></li>
-		<li><a href="${initParam.rootPath }/performanceDetailView.do?performanceNo=1">공연정보 1번 글 조회</a>
-		<li><a href="${initParam.rootPath }/update_performance.do">공연정보 수정</a></li>
 		<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
 		<li><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상목록</a></li>
 		<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a></li>

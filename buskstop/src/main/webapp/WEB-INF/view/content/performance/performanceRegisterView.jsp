@@ -10,7 +10,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
-		alert($("#performanceTime").val());
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 	});
 });
