@@ -41,6 +41,11 @@
 	
 	<!-- 회원탈퇴 링크 -->
 	<mvc:view-controller path="/member/out_member_form.do" view-name="member/out_member_form.tiles"/>
+	
+	<!-- 공연장관련 링크 -->
+	<mvc:view-controller path="/stageUpdateView.do" view-name="stage/stageUpdateView.tiles"/>
+	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
+	
 	<!-- test link -->
 	
 	

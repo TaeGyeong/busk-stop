@@ -20,3 +20,5 @@
 		<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
 		<li><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상목록</a></li>
 		<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a></li>
+		<li><a href="${initParam.rootPath }/stageUpdateView.do">공연장수정</a></li>
+		<li><a href="${initParam.rootPath }/stageUpdateView.do">공연장수정테스트</a></li>
