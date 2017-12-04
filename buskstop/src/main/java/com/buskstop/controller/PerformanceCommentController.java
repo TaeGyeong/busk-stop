@@ -58,9 +58,10 @@ public class PerformanceCommentController {
 	
 	@RequestMapping("/performanceCommentDelete")
 	@ResponseBody
-	public void deletePerformanceComment(int performanceCommentNo) {
+	public String deletePerformanceComment(int performanceCommentNo) {
 //		System.out.println(performanceCommentNo);
 		service.deletePerformanceCommentByPerformanceCommentNo(performanceCommentNo);
 //		System.out.println("완료됨 ?");
+		return "redirect:/allSelectPerformance.do";
 	}
 }

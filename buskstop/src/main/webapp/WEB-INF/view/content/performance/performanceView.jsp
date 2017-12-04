@@ -141,7 +141,7 @@ select {
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>

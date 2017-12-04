@@ -7,40 +7,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${initParam.rootPath }/performanceUpdate.do"
-		method="post">
+	<form action="${initParam.rootPath }/performanceUpdate2.do">
 	
-		<!-- 
-		<div class="form-group">
-		<input type="hidden"
-				name="performanceNo" id="performanceNo" class="form-control">
-		</div>
- 		-->
  		<div class="form-group">
 			<label for="no">공연 번호 </label> <input type="text"
-				name="performanceNo" id="no" class="form-control" required="required">
-				<!-- value="${requestScope.Performance.performanceNo}" -->
+				name="performanceNo" id="no" class="form-control"
+				value="${param.performanceNo}" readonly>
 				
 		</div>
 		<div class="form-group">
 			<label for="id">수정할 공연 이름 </label> <input type="text"
 				name="performanceName" id="name" class="form-control"
-				required="required">
+				value="${requestScope.Performance.performanceName }">
 		</div>
 		<div class="form-group">
 			<label for="title">수정할 게시글 제목 </label> <input type="text"
 				name="performanceTitle" id="title" class="form-control"
-				required="required">
+				value="${requestScope.Performance.performanceTitle }">
 		</div>
 		<div class="form-group">
 			<label for="location">수정할 공연 위치 </label> <input type="text"
 				name="performanceLocation" id="location" class="form-control"
-				required="required">
+				value="${requestScope.Performance.performanceLocation }">
 		</div>
 		<div class="form-group">
 			<label for="date">수정할 공연 날짜 </label> <input type="date"
 				name="performanceDate" id="name" class="form-control"
-				required="required">
+				value="${requestScope.Performance.performanceDate }">
 		</div>
 		<div class="form-group">
 			<label for="content">수정할 공연 내용 </label>
