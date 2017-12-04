@@ -1,5 +1,6 @@
 package com.buskstop.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -73,4 +74,12 @@ public interface PerformanceService {
 	 * @return
 	 */
 	Map<String, Object> selectPerformanceByPerformanceContent(int page, String performanceContent);
+	/**
+	 * 공연정보 날짜로 검색 페이징
+	 * @param page
+	 * @param sDate
+	 * @param eDate
+	 * @return
+	 */
+	Map<String, Object> selectPerformanceByPerformanceDate(int page, Date sDate, Date eDate);
 }

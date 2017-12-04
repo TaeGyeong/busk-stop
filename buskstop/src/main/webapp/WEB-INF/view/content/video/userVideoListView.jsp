@@ -13,6 +13,7 @@ $(document).ready(function(){
 		document.getElementById("detailForm").submit();
 	});
 });
+
 </script>
 <style type="text/css">
 table, td {
@@ -32,6 +33,7 @@ tr:hover{
 	background-color : yellow;
 	
 }
+
 </style>
 </head>
 <body>
@@ -61,11 +63,14 @@ tr:hover{
 		</tr>
 	</thead>
 	<tbody>
+
 		<c:forEach items="${requestScope.list }" var="video">
 			<tr>
 				<td>${video.videoNo }</td>
 				<td>${video.videoTitle }</td>
-				<td>${video.videoLink }</td>
+				<td>
+					<img src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg">
+				</td>
 				<td>${video.videoLocation }</td>
 				<td>${video.videoContent }</td>
 				<td>${video.videoDate }</td>

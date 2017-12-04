@@ -50,7 +50,7 @@
 
 #sub_menu li {
 	text-align: center;
-	background-color: #fff;
+	background-color: GhostWhite;
 	border-bottom: 1px solid #999;
 	transition: 0.5s;
 	position: relative;
@@ -82,14 +82,8 @@
 	<%-- 임시용 --%>
 
 	<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
-	<sec:authorize access="isAuthenticated()">
-		<li><a id="logout" style="cursor: pointer;">로그아웃</a>
-		<li><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
-		<li><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보 목록</a></li>
-		<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
-		<li><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상목록</a></li>
-		<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a></li>
-	</sec:authorize>
+	
+	
 	<!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
 	<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
 	<div class="main_menu col-sm-12">
