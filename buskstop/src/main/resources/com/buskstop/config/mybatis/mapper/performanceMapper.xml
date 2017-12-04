@@ -213,4 +213,28 @@
 		from performance
 		where performance_content like '%'||#{performanceContent}||'%'
 	</select>
+	
+	<!-- 공연정보 날짜로 검색 -->
+	<select id="selectPerformanceByPerformanceDate" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_date &gt;= #{sDate}
+				and performance_date &lt;= #{eDate}
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectPerformanceCountByPerformanceDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
+	</select>
 </mapper>

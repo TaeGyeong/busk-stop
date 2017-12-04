@@ -147,4 +147,18 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 		return map;
 	}
+	
+	@Override
+	public Map<String, Object> selectPerformanceByPerformanceDate(int page, Date sDate, Date eDate){
+		
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectPerformanceCountByPerformanceDate(sDate, eDate), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectPerformanceByPerformanceDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), sDate, eDate);
+		map.put("list", list);
+		
+		return map;
+	}
 }

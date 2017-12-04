@@ -50,7 +50,7 @@
 
 #sub_menu li {
 	text-align: center;
-	background-color: #fff;
+	background-color: GhostWhite;
 	border-bottom: 1px solid #999;
 	transition: 0.5s;
 	position: relative;
