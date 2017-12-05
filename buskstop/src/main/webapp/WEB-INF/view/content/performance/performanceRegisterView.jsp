@@ -7,12 +7,31 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 	});
 });
+
+$(function(){
+	$("#multiImage").on("change", function(){
+		readURL(this);
+	});
+});
+
+function readURL(input){
+	if (input.files && input.files[0]){
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			$("#imgView").attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
 </script>
 	<h2>공연정보 등록</h2>
 	<form action="${initParam.rootPath }/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
@@ -53,6 +72,10 @@ $(document).ready(function(){
 		<div class="form-group">
 			<label for="multiImage">이미지</label>
 			<input type="file" name="multiImage" id="multiImage" class="form-control">
+			<div style="text-align: center;">
+				<label>이미지 미리보기</label><br>
+				<img id="imgView" src="#" alt="img" style="height: 300px;"/>
+			</div>
 		</div>
 		
 		<%-- 사용자 id hidden --%>
