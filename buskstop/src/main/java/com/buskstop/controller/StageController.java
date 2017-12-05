@@ -28,6 +28,13 @@ public class StageController {
 	@Autowired
 	private StageService service;
 	
+	
+	@RequestMapping("/stageReservation")
+	public ModelAndView selectStage(@ModelAttribute Stage stage) {
+		
+		return new ModelAndView("stageView.do","stage",stage);
+	}
+	
 	private String getUserId() {
 		return ((User) SecurityContextHolder.getContext().getAuthentication()).getUserId();
 	}

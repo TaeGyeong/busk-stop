@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Stage implements Serializable{
 	private int stageNo;
@@ -11,37 +12,51 @@ public class Stage implements Serializable{
 	private String stageLocation;
 	private int stageCost;
 	private int stageArea;
+	private String stageImage;
+	private MultipartFile multiImage;
 	private String instrument;
 	private String stageContent;
 	private int stageParking;
 	private int stageDrinking;
 	private int stageFoodSell;
 	private int stageFoodRestriction;
-	private int stageResurvation;
-	private String seller;
+	private int stageReservation;
+	private User stageSellerId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRegTime;
 	
 	public Stage() {
 	}
 
-	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String instrument,
-			String stageContent, int stageParking, int stageDrinking, int stageFoodSell, int stageFoodRestriction,
-			int stageResurvation, String seller, Date stageRegTime) {
+	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String stageImage,
+			MultipartFile multiImage, String instrument, String stageContent, int stageParking, int stageDrinking,
+			int stageFoodSell, int stageFoodRestriction, int stageReservation, User stageSellerId, Date stageRegTime) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
 		this.stageCost = stageCost;
 		this.stageArea = stageArea;
+		this.stageImage = stageImage;
+		this.multiImage = multiImage;
 		this.instrument = instrument;
 		this.stageContent = stageContent;
 		this.stageParking = stageParking;
 		this.stageDrinking = stageDrinking;
 		this.stageFoodSell = stageFoodSell;
 		this.stageFoodRestriction = stageFoodRestriction;
-		this.stageResurvation = stageResurvation;
-		this.seller = seller;
+		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
+				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", stageImage=" + stageImage
+				+ ", multiImage=" + multiImage + ", instrument=" + instrument + ", stageContent=" + stageContent
+				+ ", stageParking=" + stageParking + ", stageDrinking=" + stageDrinking + ", stageFoodSell="
+				+ stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction + ", stageReservation="
+				+ stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime=" + stageRegTime + "]";
 	}
 
 	public int getStageNo() {
@@ -82,6 +97,22 @@ public class Stage implements Serializable{
 
 	public void setStageArea(int stageArea) {
 		this.stageArea = stageArea;
+	}
+
+	public String getStageImage() {
+		return stageImage;
+	}
+
+	public void setStageImage(String stageImage) {
+		this.stageImage = stageImage;
+	}
+
+	public MultipartFile getMultiImage() {
+		return multiImage;
+	}
+
+	public void setMultiImage(MultipartFile multiImage) {
+		this.multiImage = multiImage;
 	}
 
 	public String getInstrument() {
@@ -132,20 +163,20 @@ public class Stage implements Serializable{
 		this.stageFoodRestriction = stageFoodRestriction;
 	}
 
-	public int getStageResurvation() {
-		return stageResurvation;
+	public int getStageReservation() {
+		return stageReservation;
 	}
 
-	public void setStageResurvation(int stageResurvation) {
-		this.stageResurvation = stageResurvation;
+	public void setStageReservation(int stageReservation) {
+		this.stageReservation = stageReservation;
 	}
 
-	public String getSeller() {
-		return seller;
+	public User getStageSellerId() {
+		return stageSellerId;
 	}
 
-	public void setSeller(String seller) {
-		this.seller = seller;
+	public void setStageSellerId(User stageSellerId) {
+		this.stageSellerId = stageSellerId;
 	}
 
 	public Date getStageRegTime() {
@@ -157,33 +188,24 @@ public class Stage implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
-				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
-				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
-				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", stageResurvation=" + stageResurvation + ", seller=" + seller + ", stageRegTime=" + stageRegTime
-				+ "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((instrument == null) ? 0 : instrument.hashCode());
-		result = prime * result + ((seller == null) ? 0 : seller.hashCode());
 		result = prime * result + stageArea;
 		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
 		result = prime * result + stageCost;
 		result = prime * result + stageDrinking;
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
+		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
 		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
 		result = prime * result + stageNo;
 		result = prime * result + stageParking;
 		result = prime * result + ((stageRegTime == null) ? 0 : stageRegTime.hashCode());
-		result = prime * result + stageResurvation;
+		result = prime * result + stageReservation;
+		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
 		return result;
 	}
 
@@ -201,11 +223,6 @@ public class Stage implements Serializable{
 				return false;
 		} else if (!instrument.equals(other.instrument))
 			return false;
-		if (seller == null) {
-			if (other.seller != null)
-				return false;
-		} else if (!seller.equals(other.seller))
-			return false;
 		if (stageArea != other.stageArea)
 			return false;
 		if (stageContent == null) {
@@ -220,6 +237,11 @@ public class Stage implements Serializable{
 		if (stageFoodRestriction != other.stageFoodRestriction)
 			return false;
 		if (stageFoodSell != other.stageFoodSell)
+			return false;
+		if (stageImage == null) {
+			if (other.stageImage != null)
+				return false;
+		} else if (!stageImage.equals(other.stageImage))
 			return false;
 		if (stageLocation == null) {
 			if (other.stageLocation != null)
@@ -240,11 +262,16 @@ public class Stage implements Serializable{
 				return false;
 		} else if (!stageRegTime.equals(other.stageRegTime))
 			return false;
-		if (stageResurvation != other.stageResurvation)
+		if (stageReservation != other.stageReservation)
+			return false;
+		if (stageSellerId == null) {
+			if (other.stageSellerId != null)
+				return false;
+		} else if (!stageSellerId.equals(other.stageSellerId))
 			return false;
 		return true;
 	}
 	
-
+	
 	
 }
