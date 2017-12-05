@@ -31,6 +31,10 @@ $(document).ready(function(){
 		$(this).parent().remove();
 	});
 });
+
+function cancel(){
+	document.location.href= "${initParam.rootPath}/stageView.do";
+}
 </script>
 
 <h2>공연장 대관 등록(stageRegisterView.do)</h2>
@@ -121,5 +125,6 @@ $(document).ready(function(){
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<button type="submit" class="btn btn-default">등록</button>
+		<button type="button" class="btn btn-default" onclick="cancel()">취소</button>
 	</form>
 </div>

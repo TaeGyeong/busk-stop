@@ -36,6 +36,10 @@
 	function goDetail(root, no){
 		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
 	}
+	
+	function goRegister(){
+		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
+	}
 
 </script>
 <style type="text/css">
@@ -116,7 +120,9 @@ select {
 		
 		
 	</table>
-	
+	<div style="width: 100%;">
+		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
+	</div>
 
 
 </html>
