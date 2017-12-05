@@ -24,7 +24,6 @@ insert into USERS values('id7','호날두','RJ4848','분당','01029123929','ae2b
 insert into USERS values('id8','로이스','QL2222','인천','01029999829','a32b@anb.com');
 
 
-
 /* 권한 */
 insert into AUTHORITY values('', '');
 

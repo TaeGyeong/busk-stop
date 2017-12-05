@@ -36,7 +36,7 @@
 <div style="width:960px; margin:auto;">
 	<h1>대관 공연장 등록하기</h1>
 	
-	<form action="/stageRegister" method="post" enctype="multipart/form-data">
+	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data">
 		<%-- 공연장 번호 hidden --%>
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
@@ -71,7 +71,7 @@
 			
 		<div class="form-group">
 			<label>이미지</label>
-			<input type="file" name="multiImage" class="form-control">
+			<input type="file" name="stageImage" class="form-control" multiple="multiple">
 		</div>
 			
 		<div class="form-group">
@@ -81,34 +81,35 @@
 		
 		<div class="form-group">
 			<label>주차장 유무</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="yes">주차장 완비</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="no">주차장 미비</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="1">주차장 완비</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="0">주차장 미비</label>
 		</div>
 			
 		<div class="form-group">
 			<label>음주가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="yes">음주 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="no">음주 불가</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="1">음주 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="0">음주 불가</label>
 		</div>
 			
 		<div class="form-group">
 			<label>음식 (유료)제공 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="yes">음식 제공</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="no">음식 미제공</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="1">음식 제공</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="0">음식 미제공</label>
 		</div>
 			
 		<div class="form-group">
 			<label>외부음식 반입 가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="yes">반입 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="no">반입 불가</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="1">반입 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="0">반입 불가</label>
 		</div>
 			
 		<div class="form-group">
 			<label>예약가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="yes">예약 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="no">예약 불가</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageReservation" value="1">예약 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageReservation" value="0">예약 불가</label>
 		</div>
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>
+		<button type="submit" class="btn btn-default">등록</button>
 	</form>
 </div>

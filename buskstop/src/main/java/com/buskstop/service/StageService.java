@@ -1,6 +1,7 @@
 package com.buskstop.service;
 
 import com.buskstop.vo.Stage;
+import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageSupplier;
 
 public interface StageService {
@@ -29,4 +30,10 @@ public interface StageService {
 	 * @param stage
 	 */
 	void insertStage(Stage stage);
+	
+	/**
+	 * 공연장 사진 등록
+	 * @param stageImage
+	 */
+	void insertStageImage(StageImage stageImage);
 }

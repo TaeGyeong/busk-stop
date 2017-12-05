@@ -1,3 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="stageImageMapper"></mapper>
+<mapper namespace="com.buskstop.config.mybatis.mapper.stageImageMapper">
+
+	<sql id="column-stageImage">
+		STAGE_IMAGE_NO,
+		STAGE_IMAGE_LOCATION,
+		STAGE_NO
+	</sql>
+
+	<resultMap type="StageImage" id="stageImage-resultmap">
+		<id column="stage_image_no" property="stageImageNo"/>
+		<result column="stage_image_location" property="stageImageLocation"/>
+		<result column="stage_no" property="stageNo"/>
+	</resultMap>
+	
+	<!-- 공연장 사진 insert -->
+	<insert id="insertStageImage" parameterType="StageImage">
+		<selectKey keyProperty="stageNo" resultType="_int" order="BEFORE">
+			select STAGE_IMAGE_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into STAGEIMAGE (<include refid="column-stageImage"/>)
+		values(#{stageImageNo}, #{stageImageLocation}, #{stageNo})
+	</insert>
+</mapper>

@@ -3,6 +3,8 @@ package com.buskstop.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Stage implements Serializable{
 	private int stageNo;
 	private String stageName;
@@ -15,16 +17,17 @@ public class Stage implements Serializable{
 	private int stageDrinking;
 	private int stageFoodSell;
 	private int stageFoodRestriction;
-	private int stageReservation;
+	private int stageResurvation;
 	private String seller;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRegTime;
 	
 	public Stage() {
 	}
-	
+
 	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String instrument,
 			String stageContent, int stageParking, int stageDrinking, int stageFoodSell, int stageFoodRestriction,
-			int stageReservation, Date stageRegTime, String seller) {
+			int stageResurvation, String seller, Date stageRegTime) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
@@ -36,9 +39,9 @@ public class Stage implements Serializable{
 		this.stageDrinking = stageDrinking;
 		this.stageFoodSell = stageFoodSell;
 		this.stageFoodRestriction = stageFoodRestriction;
-		this.stageReservation = stageReservation;
-		this.stageRegTime = stageRegTime;
+		this.stageResurvation = stageResurvation;
 		this.seller = seller;
+		this.stageRegTime = stageRegTime;
 	}
 
 	public int getStageNo() {
@@ -129,20 +132,12 @@ public class Stage implements Serializable{
 		this.stageFoodRestriction = stageFoodRestriction;
 	}
 
-	public int getStageReservation() {
-		return stageReservation;
+	public int getStageResurvation() {
+		return stageResurvation;
 	}
 
-	public void setStageReservation(int stageReservation) {
-		this.stageReservation = stageReservation;
-	}
-
-	public Date getStageRegTime() {
-		return stageRegTime;
-	}
-
-	public void setStageRegTime(Date stageRegTime) {
-		this.stageRegTime = stageRegTime;
+	public void setStageResurvation(int stageResurvation) {
+		this.stageResurvation = stageResurvation;
 	}
 
 	public String getSeller() {
@@ -153,13 +148,21 @@ public class Stage implements Serializable{
 		this.seller = seller;
 	}
 
+	public Date getStageRegTime() {
+		return stageRegTime;
+	}
+
+	public void setStageRegTime(Date stageRegTime) {
+		this.stageRegTime = stageRegTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
 				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
 				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
 				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", stageReservation=" + stageReservation + ", stageRegTime=" + stageRegTime + ", seller=" + seller
+				+ ", stageResurvation=" + stageResurvation + ", seller=" + seller + ", stageRegTime=" + stageRegTime
 				+ "]";
 	}
 
@@ -180,7 +183,7 @@ public class Stage implements Serializable{
 		result = prime * result + stageNo;
 		result = prime * result + stageParking;
 		result = prime * result + ((stageRegTime == null) ? 0 : stageRegTime.hashCode());
-		result = prime * result + stageReservation;
+		result = prime * result + stageResurvation;
 		return result;
 	}
 
@@ -237,11 +240,11 @@ public class Stage implements Serializable{
 				return false;
 		} else if (!stageRegTime.equals(other.stageRegTime))
 			return false;
-		if (stageReservation != other.stageReservation)
+		if (stageResurvation != other.stageResurvation)
 			return false;
 		return true;
 	}
-
 	
+
 	
 }
