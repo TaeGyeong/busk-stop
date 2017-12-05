@@ -3,6 +3,7 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,4 +69,42 @@ public class StageController {
 		}
 		return new ModelAndView("redirect:/stage/stageView.tiles");
 	}
+	
+	@RequestMapping("selectAllStage")
+	public ModelAndView selectAllStage(@RequestParam String category, @RequestParam String search, @RequestParam String stageDate) throws Exception{
+		List<Stage> list = null;
+		Map<String, Object> map = null;
+		int page=1;
+		
+//		try {
+//			page = Integer.parseInt(request.getParameter("page"));
+//		}catch (Exception e) {
+//			
+//		}
+		
+		map = service.selectAllStage(page);
+		category="title";
+		search="";
+		stageDate = "";
+		
+		list = (List<Stage>)map.get("list");
+		
+		map.put("list", list);
+		map.put("search", search);
+		
+		return new ModelAndView("stage/stageView.tiles","map",map);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -14,7 +14,7 @@
 		STAGE_DRINKING,
 		STAGE_FOOD_SELL,
 		STAGE_FOOD_RESTRICTION,
-		STAGE_RESURVATION,
+		STAGE_RESERVATION,
 		STAGE_SELLER_ID,
 		STAGE_REG_TIME
 	</sql>
@@ -31,8 +31,8 @@
 		<result column="STAGE_DRINKING" property="stageDrinking"/>
 		<result column="STAGE_FOOD_SELL" property="stageFoodSell"/>
 		<result column="STAGE_FOOD_RESTRICTION" property="stageFoodRestriction"/>
-		<result column="STAGE_RESURVATION" property="stageResurvation"/>
-		<result column="STAGE_SELLER_ID" property="seller"/>
+		<result column="STAGE_RESURVATION" property="stageReservation"/>
+		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
 	</resultMap>
 	
@@ -47,4 +47,33 @@
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
 		#{stageResurvation}, #{seller}, sysdate)
 	</insert>
+	
+	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+	from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+	) where rownum >= #{begin}	 
+	</select>
+	
+	<select id="selectStageByStageNo" parameterType="_int" resultMap="stage-resultmap">
+	select *
+	from stage
+	where stage_no=#{stageNo}
+	</select>
+	
+	<select id="selectStage" resultMap="stage-resultmap">
+	select *
+	from stage
+	</select>
+	
+	<select id="selectStageCount" resultType="_int">
+		select count(*) from stage
+	</select>
+	
+	
 </mapper>
