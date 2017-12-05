@@ -45,7 +45,7 @@
 		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
 		#{stageArea}, #{instrument}, #{stageContent}, #{stageParking}, 
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
-		#{stageResurvation}, #{seller}, sysdate)
+		#{stageReservation}, #{stageSellerId}, sysdate)
 	</insert>
 	
 	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">

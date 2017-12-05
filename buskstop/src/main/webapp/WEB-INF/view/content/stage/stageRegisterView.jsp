@@ -22,6 +22,20 @@
 				margin: 10px 0;
 				}
 </style>
+<script>
+$(document).ready(function(){
+	$(document).on("click", "#addImage", function() {
+		$('<div><input type="file" name="stageImage" class="form-control"><button id="addImage" type="button" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default">삭제</button></div>').appendTo("#imgs");
+	});
+	$(document).on("click", "#deleteImage", function() {
+		$(this).parent().remove();
+	});
+});
+
+function cancel(){
+	document.location.href= "${initParam.rootPath}/stageView.do";
+}
+</script>
 
 <h2>공연장 대관 등록(stageRegisterView.do)</h2>
 <div class="demand">
@@ -41,7 +55,7 @@
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
 		<sec:authorize access="isAuthenticated()">
-			<input type="hidden" name="seller" value='<sec:authentication property="principal.userId"/>'>
+			<input type="hidden" name="stageSellerId" value='<sec:authentication property="principal.userId"/>'>
 		</sec:authorize>
 		
 		<div class="form-group">
@@ -69,9 +83,9 @@
 			<input type="text" name="instrument" class="form-control">
 		</div>
 			
-		<div class="form-group">
+		<div class="form-group" id="imgs">
 			<label>이미지</label>
-			<input type="file" name="stageImage" class="form-control" multiple="multiple">
+			<input type="file" name="stageImage" class="form-control"><button id="addImage" class="btn btn-default" type="button">추가</button>
 		</div>
 			
 		<div class="form-group">
@@ -111,5 +125,6 @@
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<button type="submit" class="btn btn-default">등록</button>
+		<button type="button" class="btn btn-default" onclick="cancel()">취소</button>
 	</form>
 </div>

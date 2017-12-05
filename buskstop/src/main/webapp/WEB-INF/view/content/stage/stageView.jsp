@@ -36,6 +36,10 @@
 	function goDetail(root, no){
 		document.location.href= root+'/stageDetailView.do?stageNo='+no
 	}
+	
+	function goRegister(){
+		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
+	}
 
 </script>
 <style type="text/css">
@@ -117,26 +121,9 @@ select {
 			</tbody>
 		</tbody>
 	</table>
-	
-	<button type="button" onclick="location.href='${initParam.rootPath}/stageRegisterView.do'">등록하기</button>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<div style="width: 100%;">
+		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
+	</div>
 
 
 </html>

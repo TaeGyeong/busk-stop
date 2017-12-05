@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 public class Stage implements Serializable{
 	private int stageNo;
@@ -44,17 +43,6 @@ public class Stage implements Serializable{
 		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
 	}
-
-	@Override
-	public String toString() {
-		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
-				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
-				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
-				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
-				+ stageRegTime + "]";
-	}
-
 	public int getStageNo() {
 		return stageNo;
 	}
@@ -168,6 +156,16 @@ public class Stage implements Serializable{
 	}
 
 	@Override
+	public String toString() {
+		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
+				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
+				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
+				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
+				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
+				+ stageRegTime + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -245,8 +243,4 @@ public class Stage implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 }
