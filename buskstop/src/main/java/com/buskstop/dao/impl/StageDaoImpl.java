@@ -37,11 +37,9 @@ public class StageDaoImpl implements StageDao{
 	
 	@Override
 	public List<Stage> selectAllStage(int beginNum, int endNum) {
-		System.out.println("dao까지");
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("begin", beginNum);
 		map.put("end",endNum);
-		System.out.println(beginNum);
 		return session.selectList(makeSqlId("selectAllStage"),map);
 	}
 	

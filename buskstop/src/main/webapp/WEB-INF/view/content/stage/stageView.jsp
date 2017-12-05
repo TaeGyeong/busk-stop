@@ -121,7 +121,8 @@ select {
 	<hr>
 	<form class="stageReservation" action="${initParam.rootPath}/stageReservation.do">
 		<input type="text" name="searchName" id="searchName" placeholder="팀명으로 검색">
-		<input type="date" name="stageReservation" class="calendar" id="stageReservation" >
+		<input type="date" name="stageReservationStart" class="calendar" id="stageReservationStart" >
+		<input type="date" name="stageReservationEnd" class="calendar" id="stageReservationEnd" >
 		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소로 검색">
 		<input type="text" name="searchInstrument" id="searchInstrument" placeholder="악기로 검색">
 		<br>
@@ -133,7 +134,7 @@ select {
 		<input type="button" name="search" class="submit" value="검색">
 	</form>
 	<hr>
-	<h1>대관한 목록</h1>
+	<h1>대관 목록</h1>
 	<hr>
 	<table id="stageReservation" style="display: table;">
 		<thead id="thead">
@@ -143,28 +144,19 @@ select {
 			<td>공연장소</td>
 			<td>공연날짜</td>
 			<td>공급자</td>
-			<td>예약 가능</td>
+			<td>예약 여부</td>
 		</tr>
 		</thead>
 		<tbody id="tbody">
 		<c:forEach items="${requestScope.map.list}" var="item">
 					<tr style="cursor: pointer;">
-					<td>${item.stageNo }</td>
-					<td>${item.stageName }</td>
-					<td>${item.stageLocation }</td>
-					<td>${item.stageRegTime }</td>
-					<td>${item.stageSellerId }</td>
-					<td>${item.stageNo }</td>
-					<!-- 
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><img src="${initParam.rootPath }/performanceImage/${item.stageImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.Name} </td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageInstrument }</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageReservation}</td>
-					-->
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRegTime }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><c:if test="${item.stageReservation==0}">예약불가</c:if>
+					<c:if test="${item.stageReservation==1}">예약가능</c:if></td>
 					</tr>
 				</c:forEach>
 		</tbody>

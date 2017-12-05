@@ -65,21 +65,14 @@ public class StageController {
 			}
 		}
 
-		return new ModelAndView("redirect:/stageView.do");
+		return new ModelAndView("redirect:/selectAllStage.do");
 	}
 	
 	@RequestMapping("selectAllStage")
 	public ModelAndView selectAllStage(@RequestParam(required=false) String category, @RequestParam(required=false) String search, @RequestParam(required=false) String stageDate) throws Exception{
-		System.out.println("오냐");
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
-		
-//		try {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}catch (Exception e) {
-//			
-//		}
 		
 		map = service.selectAllStage(page);
 		category="title";
@@ -92,9 +85,8 @@ public class StageController {
 		map.put("search", search);
 		map.put("category", category);
 		map.put("sDate", stageDate);
-		System.out.println(list);
 		
-		return new ModelAndView("stage/stageView.tiles","map",map);
+		return new ModelAndView("stageView.do","map",map);
 		
 	}
 }
