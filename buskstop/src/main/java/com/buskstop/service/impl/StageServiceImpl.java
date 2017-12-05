@@ -77,6 +77,7 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	public Map<String, Object> selectAllStage(int page){
+		System.out.println("서비스"+page);
 		HashMap<String, Object> map = new HashMap<>();
 		
 		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
@@ -85,6 +86,7 @@ public class StageServiceImpl implements StageService{
 		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(),pb.getEndItemInPage());
 		
 		map.put("list",list);
+		System.out.println("서비스ㅎㅎㅎ"+list);
 		
 		return map;
 		

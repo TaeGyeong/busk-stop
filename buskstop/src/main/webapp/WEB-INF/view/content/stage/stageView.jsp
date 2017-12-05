@@ -61,6 +61,61 @@ select {
 	width: 960px;
 	margin: 0 auto;
 }
+
+#product_tb{
+	border: none;
+}
+#product_tb tr td{
+	font-weight: bold;
+	color: #888;
+}
+#product_tb tbody tr:nth-child(2n){
+	background-color: #47a3d2;
+}
+#product_tb tbody tr:nth-child(2n) td{
+	color: #fff;
+}
+#product_tb tbody tr:nth-child(2n) td a{
+	color: #fff;
+}
+#product_tb tbody tr{
+	line-height: 30px;
+}
+#product_tb thead{
+	border-bottom: solid #ccc 1px;
+}
+#thead tr td{
+	color : #000;
+}
+.likeBtn{
+	color: red;
+}
+#product_tb tbody tr:nth-child(2n) .likeBtn{
+	color: red;
+}
+.likeBtn:hover{
+	color: #47a3d2;
+	text-decoration: none;
+}
+#product_tb tbody tr:nth-child(2n) .likeBtn:hover{
+	color: #fff;
+}
+#product_tb img{
+	height : 100px;
+}
+
+#product_tb tbody tr td:nth-child(1) {
+	border-right: 2px #ccc solid;
+}
+
+#product_tb tbody tr:hover{
+	background-color: #ddd;
+}
+
+#product_tb tbody tr:nth-child(2n):hover{
+	background-color: #337ab7;
+}
+
 </style>
 <div id="container">
 	<hr>
@@ -80,7 +135,7 @@ select {
 	<hr>
 	<h1>대관한 목록</h1>
 	<hr>
-	<table id="stageReservation">
+	<table id="stageReservation" style="display: table;">
 		<thead id="thead">
 		<tr>
 			<td>번호 </td>
@@ -96,7 +151,7 @@ select {
 					<tr style="cursor: pointer;">
 					<td>${item.stageNo }</td>
 					<td>${item.stageName }</td>
-					<td>${item.stageNLocation }</td>
+					<td>${item.stageLocation }</td>
 					<td>${item.stageRegTime }</td>
 					<td>${item.stageSellerId }</td>
 					<td>${item.stageNo }</td>
@@ -112,7 +167,6 @@ select {
 					-->
 					</tr>
 				</c:forEach>
-			</tbody>
 		</tbody>
 	</table>
 	<div style="width: 100%;">
