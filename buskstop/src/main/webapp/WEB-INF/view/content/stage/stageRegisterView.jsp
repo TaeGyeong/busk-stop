@@ -22,6 +22,16 @@
 				margin: 10px 0;
 				}
 </style>
+<script>
+$(document).ready(function(){
+	$(document).on("click", "#addImage", function() {
+		$('<div><input type="file" name="stageImage" class="form-control"><button id="addImage" type="button" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default">삭제</button></div>').appendTo("#imgs");
+	});
+	$(document).on("click", "#deleteImage", function() {
+		$(this).parent().remove();
+	});
+});
+</script>
 
 <h2>공연장 대관 등록(stageRegisterView.do)</h2>
 <div class="demand">
@@ -69,9 +79,9 @@
 			<input type="text" name="instrument" class="form-control">
 		</div>
 			
-		<div class="form-group">
+		<div class="form-group" id="imgs">
 			<label>이미지</label>
-			<input type="file" name="stageImage" class="form-control" multiple="multiple">
+			<input type="file" name="stageImage" class="form-control"><button id="addImage" class="btn btn-default" type="button">추가</button>
 		</div>
 			
 		<div class="form-group">
