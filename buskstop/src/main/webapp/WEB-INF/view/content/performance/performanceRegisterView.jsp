@@ -18,10 +18,10 @@ $(document).ready(function(){
 	});
 	
 	$("#searchStage").on("click", function(){
-		var address = "/buskstop/performance/searchStage.do"; //doGet()방식으로 요청
-		left1 = (screen.availWidth - 500) / 2;
-		top1 = (screen.availHeight - 200) / 2;
-		window.open(address, "newWin", 'width=500 ,height=200 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+		var address = "/buskstop/searchStage.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 400) / 2;
+		window.open(address, "newWin", 'width=600 ,height=400 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 });
 </script>
@@ -43,15 +43,14 @@ $(document).ready(function(){
 		</div>
 		<div class="form-group">
 			<label for="performanceLocation">공연장소</label>
+			<input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required" readonly="readonly">  
 			<!-- <input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required"> -->
-			<button id="selectStage" class="btn btn-default col-sm-1" onclick="getStage()">대관한 장소 선택</button>
-			<button id="searchStage" class="btn btn-default col-sm-1" onclick="getStageBySearch()">직접 검색</button>
+			<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-1">
+			<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 		</div>
-		<label>공연날짜</label><br>
 		<div class="form-group">
+			<label>공연날짜</label><br>
 			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
-		</div>
-		<div class="form-group">
 			<label class="col-sm-2">공연시간</label><input type="time" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">

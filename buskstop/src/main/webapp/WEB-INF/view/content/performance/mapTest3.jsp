@@ -37,6 +37,9 @@ var geocoder = new daum.maps.services.Geocoder();
 
 var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
     infowindow = new daum.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    
+//사용자가 지정한 정확한 위치를 저장 할 변수
+var location = "";
 
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -47,6 +50,7 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
         if (status === daum.maps.services.Status.OK) {
         	
         	alert(result[0].road_address.address_name);
+        	location = result[0].road_address.address_name;
         	
             var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
             detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
@@ -123,11 +127,19 @@ function geocodeAddress(geocoder, map){
 	    } 
 	}); 
 }
+$(document).ready(function(){
+	//사용자가 공연장소 확정(확인버튼) 선택
+	$("#confirm").on("click", function(){
+		opener.document.performanceLocation.value = location;
+		window.close();
+	});
+});
+
 </script>
 <div id="floating-panel">
 	<input id="address" type="text">
 	<input id="submit" type="button" value="Geocode" onclick="geocodeAddress(geocoder, map)"><br>
-	<input id="confirm" type="button" value="" onclick="confirmStage()">  
+	<button id="confirm" type="button" value="" class="btn btn-default col-sm-1">확인</button>
 </div>
 </body>
 </html>
