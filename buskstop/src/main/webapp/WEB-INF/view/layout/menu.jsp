@@ -89,6 +89,7 @@
 		<li><a href="${initParam.rootPath }/videoSelectCategoryView.do">영상등록</a></li>
 		<li><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상목록</a></li>
 		<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a></li>
+		<li><a href="${initParam.rootPath }/stageView.do">공연장 목록</a></li>
 	</sec:authorize>
 	<!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
 	<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>

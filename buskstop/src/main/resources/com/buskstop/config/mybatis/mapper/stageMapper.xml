@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stageMapper">
+
+	<sql id="column-stage">
+	stage_no,
+	stage_name,
+	stage_location,
+	stage_cost,
+	stage_area,
+	stage_instrument,
+	stage_content,
+	stage_parking,
+	stage_drinking,
+	stage_food_sell,
+	stage_food_restriction,
+	stage_reservation,
+	stage_seller_id,
+	stage_reg_time
+	</sql>
+
+	<resultMap type="stage" id="stage-performance">
+		<id column="stage_no" property="stageNo"/>
+		<result column="stage_name" property="stage"/>
+		<result column="stage_location" property="stageLocation"/>
+		<result column="stage_cost" property="stageCost"/>
+		<result column="stage_area" property="stageArea"/>
+		<result column="stage_instrument" property="stageInstrument"/>
+		<result column="stage_content" property="stageContent"/>
+		<result column="stage_parking" property="stageParking"/>
+		<result column="stage_drinking" property="stageDrinking"/>
+		<result column="stage_food_sell" property="stageFoodSell"/>
+		<result column="stage_food_restriction" property="stageFoodRestriction"/>
+		<result column="stage_reservation" property="stageReservation"/>
+		<result column="stage_seller_id" property="stageSellerId"/>
+		<result column="stage_reg_time" property="stageRegTime"/>
+	</resultMap>
+	
+	<select id="selectStage" resultMap="stage-resultmap" parameterType="map">
+	select stage_no, stage_name, stage_location, stage_Instrument, stage_reservation
+	from stage
+	where stage_no = #{stageNo}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
