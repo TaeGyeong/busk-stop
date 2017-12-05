@@ -34,7 +34,7 @@
 	});
 	
 	function goDetail(root, no){
-		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
+		document.location.href= root+'/stageDetailView.do?stageNo='+no
 	}
 	
 	function goRegister(){
@@ -90,19 +90,23 @@ select {
 		<thead id="thead">
 		<tr>
 			<td>번호 </td>
-			<td>이미지</td>
 			<td>제목</td>
 			<td>공연장소</td>
 			<td>공연날짜</td>
-			<td>작성자</td>
-			<td>작성 시간</td>
-			<td>조회</td>
-			<td>좋아요</td>	
+			<td>공급자</td>
+			<td>예약 가능</td>
 		</tr>
 		</thead>
 		<tbody id="tbody">
 		<c:forEach items="${requestScope.map.list}" var="item">
 					<tr style="cursor: pointer;">
+					<td>${item.stageNo }</td>
+					<td>${item.stageName }</td>
+					<td>${item.stageNLocation }</td>
+					<td>${item.stageRegTime }</td>
+					<td>${item.stageSellerId }</td>
+					<td>${item.stageNo }</td>
+					<!-- 
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><img src="${initParam.rootPath }/performanceImage/${item.stageImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.Name} </td>
@@ -111,14 +115,11 @@ select {
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageReservation}</td>
+					-->
 					</tr>
 				</c:forEach>
 			</tbody>
-		
 		</tbody>
-		
-		
-		
 	</table>
 	<div style="width: 100%;">
 		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>

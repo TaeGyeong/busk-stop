@@ -1,5 +1,8 @@
 package com.buskstop.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageSupplier;
@@ -36,4 +39,10 @@ public interface StageService {
 	 * @param stageImage
 	 */
 	void insertStageImage(StageImage stageImage);
+
+	Stage selectStageByStageNo(int stageNo);
+
+	List<Stage> selectStage();
+
+	Map<String, Object> selectAllStage(int page);
 }

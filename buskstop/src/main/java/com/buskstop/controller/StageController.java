@@ -3,6 +3,7 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,33 @@ public class StageController {
 				service.insertStageImage(uploadImage);
 			}
 		}
+
 		return new ModelAndView("redirect:/stageView.do");
+	}
+	
+	@RequestMapping("selectAllStage")
+	public ModelAndView selectAllStage(@RequestParam String category, @RequestParam String search, @RequestParam String stageDate) throws Exception{
+		List<Stage> list = null;
+		Map<String, Object> map = null;
+		int page=1;
+		
+//		try {
+//			page = Integer.parseInt(request.getParameter("page"));
+//		}catch (Exception e) {
+//			
+//		}
+		
+		map = service.selectAllStage(page);
+		category="title";
+		search="";
+		stageDate = "";
+		
+		list = (List<Stage>)map.get("list");
+		
+		map.put("list", list);
+		map.put("search", search);
+		
+		return new ModelAndView("stage/stageView.tiles","map",map);
+		
 	}
 }

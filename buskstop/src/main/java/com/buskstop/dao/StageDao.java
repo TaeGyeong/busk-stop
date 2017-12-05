@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.Stage;
 
 public interface StageDao {
@@ -10,4 +12,13 @@ public interface StageDao {
 	 * @return
 	 */
 	int insertStage(Stage stage);
+
+	Stage selectStageByStageNo(int stageNo);
+
+	List<Stage> selectStage();
+
+	List<Stage> selectAllStage(int beginNum, int endNum);
+
+	int selectStageCount();
+
 }

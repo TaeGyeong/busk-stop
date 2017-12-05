@@ -1,5 +1,8 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,5 +23,29 @@ public class StageDaoImpl implements StageDao{
 	@Override
 	public int insertStage(Stage stage) {
 		return session.insert(makeSqlId("insertStage"), stage);
+	}
+	
+	@Override
+	public Stage selectStageByStageNo(int stageNo) {
+		return session.selectOne(makeSqlId("selectStageByStageNo"),stageNo);
+	}
+	
+	@Override
+	public List<Stage> selectStage() {
+		return session.selectOne(makeSqlId("selectStage"));
+	}
+	
+	@Override
+	public List<Stage> selectAllStage(int beginNum, int endNum) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("begin", beginNum);
+		map.put("end",endNum);
+		
+		return session.selectOne(makeSqlId("selectAllStage"));
+	}
+	
+	@Override
+	public int selectStageCount() {
+		return session.selectOne(makeSqlId("selectStageCount"));
 	}
 }
