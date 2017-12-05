@@ -25,12 +25,29 @@
 <script>
 $(document).ready(function(){
 	$(document).on("click", "#addImage", function() {
-		$('<div><input type="file" name="stageImage" class="form-control"><button id="addImage" type="button" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default">삭제</button></div>').appendTo("#imgs");
+		$('<div><input type="file" name="stageImage" class="form-control" id="inputImage"><button id="addImage" type="button" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default">삭제</button><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div></div>').appendTo("#imgs");
 	});
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
 	});
 });
+
+$(function(){
+	$(document).on("change", "#inputImage", function(){
+		readURL(this);
+	});
+})
+
+function readURL(input){
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+		
+		reader.onload = function(e){
+			$(input).next().next().next().children().last().attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 
 function cancel(){
 	document.location.href= "${initParam.rootPath}/stageView.do";
@@ -85,7 +102,13 @@ function cancel(){
 			
 		<div class="form-group" id="imgs">
 			<label>이미지</label>
-			<input type="file" name="stageImage" class="form-control"><button id="addImage" class="btn btn-default" type="button">추가</button>
+			<input type="file" name="stageImage" class="form-control" id="inputImage">
+			<button id="addImage" class="btn btn-default" type="button">추가</button>
+			<div></div>
+			<div style="text-align: center;">
+				<label>이미지 미리보기</label><br>
+				<img id="imgView" src="#" alt="img" style="height: 300px;"/>
+			</div>
 		</div>
 			
 		<div class="form-group">
