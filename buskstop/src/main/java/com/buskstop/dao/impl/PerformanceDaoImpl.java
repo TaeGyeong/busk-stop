@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -279,5 +280,26 @@ public class PerformanceDaoImpl implements PerformanceDao {
 		public int selectArtistPerformanceCountByPerformanceContent(String content) {
 			return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceContent"), content);
 		}
+	
+	//공연날짜로 검색 페이징
+	@Override
+	public List<Performance> selectPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate, Date eDate){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
+		
+		return session.selectList(makeSqlId("selectPerformanceByPerformanceDate"), map);
+	}
+	//공연날짜로 검색 count
+	@Override
+	public int selectPerformanceCountByPerformanceDate(Date sDate, Date eDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
+		
+		return session.selectOne(makeSqlId("selectPerformanceCountByPerformanceDate"), map);
+	}
 	
 }

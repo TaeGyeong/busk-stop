@@ -3,6 +3,7 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -126,7 +127,7 @@ public class PerformanceController {
 	/*********************** 공연정보 조회 Controller ***********************/
 	
 	@RequestMapping("/selectPerformance")
-	public ModelAndView selectAllPerformance(@RequestParam(required=false) String category, @RequestParam(required=false) String search) throws ParseException ,IOException, ServletException{
+	public ModelAndView selectAllPerformance(@RequestParam(required=false) String category, @RequestParam(required=false) String search,@RequestParam(required=false) String sDate, @RequestParam(required=false) String eDate) throws ParseException ,IOException, ServletException{
 		List<Performance> list = null;
 		Map<String, Object> map = null;
 		int page = 1;
@@ -147,11 +148,20 @@ public class PerformanceController {
 				map = service.selectPerformanceByPerformanceName(page, search);
 			}else if(category.equals("content")) {
 				map = service.selectPerformanceByPerformanceContent(page, search);
+			}else if(category.equals("date")) {
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+				Date startDate = transFormat.parse(sDate);
+				Date endDate = transFormat.parse(eDate);
+
+				map = service.selectPerformanceByPerformanceDate(page, startDate, endDate);
 			}
 		}else {
 			map = service.selectPerformance(page);
 			category = "title";
 			search = "";
+			sDate = "";
+			eDate = "";
 		}
 		list = (List<Performance>)map.get("list");
 		list = likeCounter(list);
@@ -159,6 +169,8 @@ public class PerformanceController {
 		map.put("list", list);
 		map.put("search", search);
 		map.put("category", category);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
 		
 		return new ModelAndView("performance/performanceView.tiles", "map", map);
 	}

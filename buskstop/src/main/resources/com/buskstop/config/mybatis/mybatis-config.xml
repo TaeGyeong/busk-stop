@@ -32,6 +32,7 @@
 		<mapper resource="com/buskstop/config/mybatis/mapper/stageSupplierMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/performanceCommentMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/performanceLikeMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/stageMapper.xml"/>
 
 	</mappers>
 </configuration>

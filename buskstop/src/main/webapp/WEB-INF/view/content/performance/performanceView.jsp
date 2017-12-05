@@ -26,6 +26,17 @@
 				}
 			});
 		});
+		
+		$("#category").change(function(){
+			val = $(this).val();
+			if(val=='date'){
+				$(".search").css('display', 'none');
+				$(".date_search").css('display', 'block');
+			}else{
+				$(".search").css('display', 'block');
+				$(".date_search").css('display', 'none');
+			}
+		});
 	});
 </script>
 <style type="text/css">
@@ -148,7 +159,13 @@ select {
 				<option value="location">공연장소</option>
 				<option value="name">공연이름</option>
 				<option value="content">내용</option>
-			</select> <input type="text" placeholder="검색" name="search">
+				<option value="date" id="option">공연날짜</option>
+			</select> 
+			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
+			시작일 : <input type="date" name="sDate">
+			종료일 : <input type="date" name="eDate">
+			</div>
+			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
 			<button type="submit">검색</button>
 			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
 		</form>

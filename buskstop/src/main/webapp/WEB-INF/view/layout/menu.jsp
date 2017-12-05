@@ -6,64 +6,64 @@
 <style type="text/css">
 
 .main_menu {
-   position: relative;
-   z-index: 1;
-   margin-top: 10px;
-   height: 49.9px;
+	position: relative;
+	z-index: 1;
+	margin-top: 10px;
+	height: 49.9px;
 }
 
 .main_menu>ul>li {
-   float: left;
-   transition: 0.5s;
+	float: left;
+	transition: 0.5s;
 }
 
 .main_menu>ul>li>a {
-   font-size: 16px;
+	font-size: 16px;
 }
 
 .main_menu>ul>li:hover {
-   background-color: #999;
+	background-color: #999;
 }
 
 .main_menu>ul>li:hover>a {
-   color: #fff;
+	color: #fff;
 }
 
 .main_menu a {
-   font-weight: bold;
-   color: #000;
-   text-decoration: none;
-   width: 100%;
-   height: 100%;
-   transition: 0.5s;
+	font-weight: bold;
+	color: #000;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	transition: 0.5s;
 }
 
 .main_menu li {
-   text-align: center;
-   line-height: 50px;
-   height: 50px;
+	text-align: center;
+	line-height: 50px;
+	height: 50px;
 }
 
 #sub_menu {
-   display: none;
+	display: none;
 }
 
 #sub_menu li {
-   text-align: center;
-   background-color: GhostWhite;
-   border-bottom: 1px solid #999;
-   transition: 0.5s;
-   position: relative;
-   z-index: 2;
+	text-align: center;
+	background-color: GhostWhite;
+	border-bottom: 1px solid #999;
+	transition: 0.5s;
+	position: relative;
+	z-index: 2;
 }
 #sub_menu li:hover {
-   background-color: #eee;
+	background-color: #eee;
 }
 #sub_menu li a{
-   color : #aaa;
+	color : #aaa;
 }
 #sub_menu li:hover > a {
-   color: #000;
+	color: #000;
 }
 
 </style>
@@ -73,13 +73,13 @@
 
 <%--
    <sec:authorize> : 태그 하위 내용을 볼 수 있는 사용자인지 인증/권한 체크
-    속성 -  access="Spring Security EL"  : 볼수 있는 권한 설정                                 
+    속성 -  access="Spring Security EL"  : 볼수 있는 권한 설정											
  --%>
 
 <!--원래 UL CSS <ul class="nav nav-stacked"> -->
-   <!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
+	<!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
 <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
-   <%-- 임시용 --%>
+	<%-- 임시용 --%>
 
    <%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
    
@@ -133,25 +133,26 @@
       <sec:csrfInput/>
       <input type="hidden" name="category" value="practice"/>
    </form>
+
 <script>
 $(document).ready(function(){
-   $("#goArtistVideo").on("click", function(){
-      $("#goArtistVideoForm").submit();
-   });
-   
-   $("#goPerformanceVideo").on("click", function(){
-      $("#goPerformanceVideoForm").submit();
-   });
-   
-   $("#goPracticeVideo").on("click", function(){
-      $("#goPracticeVideoForm").submit();
-   });
-   
-   <%-- 메뉴 드롭다운 --%>
-   $(".main_menu li").hover(function(){
-      $("ul:first", this).stop().slideDown();
-   }, function(){
-      $("ul:first", this).stop().slideUp();
-   });
+	$("#goArtistVideo").on("click", function(){
+		$("#goArtistVideoForm").submit();
+	});
+	
+	$("#goPerformanceVideo").on("click", function(){
+		$("#goPerformanceVideoForm").submit();
+	});
+	
+	$("#goPracticeVideo").on("click", function(){
+		$("#goPracticeVideoForm").submit();
+	});
+	
+	<%-- 메뉴 드롭다운 --%>
+	$(".main_menu li").hover(function(){
+		$("ul:first", this).stop().slideDown();
+	}, function(){
+		$("ul:first", this).stop().slideUp();
+	});
 });
 </script>

@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
@@ -69,6 +70,11 @@ public interface PerformanceDao {
 	List<Performance> selectPerformanceByPerformanceContent(int beginItemNum, int endItemNum, String performanceContent);
 	//공연내용으로 검색 count
 	int selectPerformanceCountByPerformanceContent(String content);
+	
+	//공연날짜로 검색 페이징
+	List<Performance> selectPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate, Date eDate);
+	//공연날짜로 검색 count
+	int selectPerformanceCountByPerformanceDate(Date sDate, Date eDate);
 	
 	
 	/*************************************************************************************
@@ -154,4 +160,5 @@ public interface PerformanceDao {
 	 * @return
 	 */
 	int selectArtistPerformanceCountByPerformanceContent(String content);
+	
 }
