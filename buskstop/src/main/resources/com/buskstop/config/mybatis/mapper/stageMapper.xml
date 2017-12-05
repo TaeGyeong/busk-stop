@@ -14,7 +14,7 @@
 		STAGE_DRINKING,
 		STAGE_FOOD_SELL,
 		STAGE_FOOD_RESTRICTION,
-		STAGE_RESURVATION,
+		STAGE_RESERVATION,
 		STAGE_SELLER_ID,
 		STAGE_REG_TIME
 	</sql>
@@ -31,7 +31,7 @@
 		<result column="STAGE_DRINKING" property="stageDrinking"/>
 		<result column="STAGE_FOOD_SELL" property="stageFoodSell"/>
 		<result column="STAGE_FOOD_RESTRICTION" property="stageFoodRestriction"/>
-		<result column="STAGE_RESURVATION" property="stageReservation"/>
+		<result column="STAGE_RESERVATION" property="stageReservation"/>
 		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
 	</resultMap>
