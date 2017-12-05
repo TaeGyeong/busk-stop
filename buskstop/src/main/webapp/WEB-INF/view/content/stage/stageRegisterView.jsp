@@ -55,7 +55,7 @@ function cancel(){
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
 		<sec:authorize access="isAuthenticated()">
-			<input type="hidden" name="seller" value='<sec:authentication property="principal.userId"/>'>
+			<input type="hidden" name="stageSellerId" value='<sec:authentication property="principal.userId"/>'>
 		</sec:authorize>
 		
 		<div class="form-group">

@@ -31,8 +31,8 @@
 		<result column="STAGE_DRINKING" property="stageDrinking"/>
 		<result column="STAGE_FOOD_SELL" property="stageFoodSell"/>
 		<result column="STAGE_FOOD_RESTRICTION" property="stageFoodRestriction"/>
-		<result column="STAGE_RESURVATION" property="stageResurvation"/>
-		<result column="STAGE_SELLER_ID" property="seller"/>
+		<result column="STAGE_RESURVATION" property="stageReservation"/>
+		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
 	</resultMap>
 	
@@ -45,6 +45,6 @@
 		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
 		#{stageArea}, #{instrument}, #{stageContent}, #{stageParking}, 
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
-		#{stageResurvation}, #{seller}, sysdate)
+		#{stageReservation}, #{stageSellerId}, sysdate)
 	</insert>
 </mapper>
