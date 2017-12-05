@@ -16,10 +16,10 @@
 	
 	<!-- 공연장 사진 insert -->
 	<insert id="insertStageImage" parameterType="StageImage">
-		<selectKey keyProperty="stageNo" resultType="_int" order="BEFORE">
+		<selectKey keyProperty="stageImageNo" resultType="_int" order="BEFORE">
 			select STAGE_IMAGE_NO_SEQ.nextval from dual
 		</selectKey>
-		insert into STAGEIMAGE (<include refid="column-stageImage"/>)
+		insert into STAGE_IMAGE (<include refid="column-stageImage"/>)
 		values(#{stageImageNo}, #{stageImageLocation}, #{stageNo})
 	</insert>
 </mapper>
