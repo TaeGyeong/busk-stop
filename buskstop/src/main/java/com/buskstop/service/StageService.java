@@ -1,5 +1,6 @@
 package com.buskstop.service;
 
+import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageSupplier;
 
 public interface StageService {
@@ -22,4 +23,10 @@ public interface StageService {
 	 * @return
 	 */
 	StageSupplier selectSupplierById(String userId);
+	
+	/**
+	 * 공연장 등록
+	 * @param stage
+	 */
+	void insertStage(Stage stage);
 }
