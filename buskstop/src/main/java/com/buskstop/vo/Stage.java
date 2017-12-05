@@ -43,7 +43,6 @@ public class Stage implements Serializable{
 		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
 	}
-
 	public int getStageNo() {
 		return stageNo;
 	}
@@ -244,5 +243,4 @@ public class Stage implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

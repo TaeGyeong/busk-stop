@@ -47,4 +47,33 @@
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
 		#{stageReservation}, #{stageSellerId}, sysdate)
 	</insert>
+	
+	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+	from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+	) where rownum >= #{begin}	 
+	</select>
+	
+	<select id="selectStageByStageNo" parameterType="_int" resultMap="stage-resultmap">
+	select *
+	from stage
+	where stage_no=#{stageNo}
+	</select>
+	
+	<select id="selectStage" resultMap="stage-resultmap">
+	select *
+	from stage
+	</select>
+	
+	<select id="selectStageCount" resultType="_int">
+		select count(*) from stage
+	</select>
+	
+	
 </mapper>

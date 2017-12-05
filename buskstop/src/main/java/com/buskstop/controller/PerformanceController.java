@@ -142,7 +142,7 @@ public class PerformanceController {
 		}
 		list = (List<Performance>)map.get("list");
 		list = likeCounter(list);
-		
+	
 		map.put("list", list);
 		map.put("search", search);
 		map.put("category", category);

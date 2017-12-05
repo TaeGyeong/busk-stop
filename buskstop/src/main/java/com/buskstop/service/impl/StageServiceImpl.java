@@ -1,9 +1,14 @@
 package com.buskstop.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.AuthorityDao;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
@@ -14,7 +19,6 @@ import com.buskstop.vo.Authority;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageSupplier;
-import com.buskstop.vo.User;
 
 @Service
 public class StageServiceImpl implements StageService{
@@ -60,5 +64,31 @@ public class StageServiceImpl implements StageService{
 	public void insertStageImage(StageImage stageImage) {
 		stageImageDao.insertStageImage(stageImage);
 	}
+	
+	@Override
+	public Stage selectStageByStageNo(int stageNo) {
+		return stageDao.selectStageByStageNo(stageNo);
+	}
+	
+	@Override
+	public List<Stage> selectStage() {
+		return stageDao.selectStage();
+	}
+	
+	@Override
+	public Map<String, Object> selectAllStage(int page){
+		HashMap<String, Object> map = new HashMap<>();
+		
+		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
+		
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(),pb.getEndItemInPage());
+		
+		map.put("list",list);
+		
+		return map;
+		
+	}
+	
 	
 }
