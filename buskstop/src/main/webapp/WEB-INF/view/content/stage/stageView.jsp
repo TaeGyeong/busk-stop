@@ -119,11 +119,10 @@ select {
 </style>
 <div id="container">
 	<hr>
-	<form class="stageReservation" action="${initParam.rootPath}/stageReservation.do">
-		<input type="text" name="searchName" id="searchName" placeholder="팀명으로 검색">
+	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
+		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소명으로 검색">
 		<input type="date" name="stageReservationStart" class="calendar" id="stageReservationStart" >
 		<input type="date" name="stageReservationEnd" class="calendar" id="stageReservationEnd" >
-		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소로 검색">
 		<input type="text" name="searchInstrument" id="searchInstrument" placeholder="악기로 검색">
 		<br>
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
@@ -131,7 +130,8 @@ select {
 		<input type="checkbox" name="box" value="식사">식사 가능
 		<input type="checkbox" name="box" value="외부음식">외부음식 반입 가능
 		
-		<input type="button" name="search" class="submit" value="검색">
+		<button type="submit" name="search" class="submit">검색</button>
+		
 	</form>
 	<hr>
 	<h1>대관 목록</h1>

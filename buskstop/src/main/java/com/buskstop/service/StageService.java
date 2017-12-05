@@ -1,5 +1,6 @@
 package com.buskstop.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,4 +46,10 @@ public interface StageService {
 	List<Stage> selectStage();
 
 	Map<String, Object> selectAllStage(int page);
+
+	Map<String, Object> selectStageByStageLocation(int page, String stageLocation);
+
+	Map<String, Object> selectStageByInstrument(int page, String instrumentSearch);
+
+	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 }

@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.Stage;
@@ -20,5 +21,17 @@ public interface StageDao {
 	List<Stage> selectAllStage(int beginNum, int endNum);
 
 	int selectStageCount();
+
+	int selectStageCountByLocation(String stageLocation);
+
+	List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation);
+
+	List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument);
+
+	int selectStageCountByStageDate(Date startDate, Date endDate);
+
+	List<Stage> selectStageByStgeDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
+
+	int selectStageCountByInstrument(String instrument);
 
 }

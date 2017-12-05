@@ -1,5 +1,6 @@
 package com.buskstop.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,59 @@ public class StageServiceImpl implements StageService{
 		return map;
 		
 	}
+	
+	@Override
+	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation){
+		
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation),page);
+		
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation);
+		map.put("list",list);
+		
+		return map;
+		
+	}
+
+	@Override
+	public Map<String, Object> selectStageByInstrument(int page, String instrument) {
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument),page);
+		
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument);
+		map.put("list",list);
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByStageDate(startDate,endDate),page);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByStgeDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), startDate, endDate);
+		
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
