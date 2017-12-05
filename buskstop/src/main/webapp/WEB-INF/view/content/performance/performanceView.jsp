@@ -26,6 +26,17 @@
 				}
 			});
 		});
+		
+		$("#category").change(function(){
+			val = $(this).val();
+			if(val=='date'){
+				$(".search").css('display', 'none');
+				$(".date_search").css('display', 'block');
+			}else{
+				$(".search").css('display', 'block');
+				$(".date_search").css('display', 'none');
+			}
+		});
 	});
 </script>
 <style type="text/css">
@@ -143,22 +154,29 @@ select {
 		</table>
 		<br>
 		<form action="${initParam.rootPath }/allSelectPerformance.do">
-			<select name="category">
-				<option value="title">제목</option>
-				<option value="user">작성자</option>
-				<option value="location">공연장소</option>
-				<option value="name">공연이름</option>
-				<option value="content">내용</option>
-			</select> <input type="text" placeholder="검색" name="search">
-			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
+			<select name="category" id="category" style="float: left;">
+				<option value="title" id="option">제목</option>
+				<option value="user" id="option">작성자</option>
+				<option value="location" id="option">공연장소</option>
+				<option value="name" id="option">공연이름</option>
+				<option value="content" id="option">내용</option>
+				<option value="date" id="option">공연날짜</option>
+			</select> 
+			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
+			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
+			시작일 : <input type="date" name="sDate">
+			종료일 : <input type="date" name="eDate">
+			</div>
+			<button type="submit">검색</button>
 		</form>
+		<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'" style="float: right;">글쓰기</button>
 		<%-- 페이징 처리 --%>
 		<p/>
 		<div style="text-align: center; width: 100%;">
 			<ul class="pagination">
 				<%-- 첫페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/allSelectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
+					<a href="${initParam.rootPath }/allSelectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}&sDate=${requestScope.map.sDate}&eDate=${requestScope.map.eDate}">&lt;&lt;</a>
 				</li>
 				<%--
 					이전 페이지 그룹 처리
@@ -167,7 +185,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
+							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&sDate=${requestScope.map.sDate}&eDate=${requestScope.map.eDate}">◀</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -191,7 +209,7 @@ select {
 				  		</c:when>
 						<c:otherwise>
 							<li>
-								<a href="${initParam.rootPath }/allSelectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
+								<a href="${initParam.rootPath }/allSelectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}&sDate=${requestScope.map.sDate}&eDate=${requestScope.map.eDate}">${num }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -203,7 +221,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
+							<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&sDate=${requestScope.map.sDate}&eDate=${requestScope.map.eDate}">▶</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -214,7 +232,7 @@ select {
 				</c:choose>
 				<%-- 마지막 페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
+					<a href="${initParam.rootPath }/allSelectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}&sDate=${requestScope.map.sDate}&eDate=${requestScope.map.eDate}">&gt;&gt;</a>
 				</li>
 			</ul>
 		</div>

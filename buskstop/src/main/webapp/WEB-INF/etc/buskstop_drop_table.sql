@@ -35,6 +35,8 @@ DROP TABLE ARTIST
 /* 공연장(공급자 게시물) */
 DROP TABLE STAGE 
 	CASCADE CONSTRAINTS;
+	
+DROP SEQUENCE STAGE_NO_SEQ;
 /*----대관 예약(주문)--------------------------------------------------------------------*/
 
 /* 대관 예약(주문) */
@@ -47,6 +49,7 @@ DROP TABLE STAGE_RESERVATION
 DROP TABLE STAGE_IMAGE 
 	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE STAGE_IMAGE_NO_SEQ;
 /*-공연장 리뷰----------------------------------------------------------------------*/
 
 /* 공연장 리뷰 */

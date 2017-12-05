@@ -28,13 +28,6 @@
 		<result column="performance_reg_time" property="performanceRegTime"/>
 	</resultMap>
 	
-	<resultMap type="Performance" id="performance-join-performanceLike-resultmap" extends="performance-resultmap">
-		<collection property="likeCount" ofType="PerformanceLike">
-			<id property="performanceLikeNo" column="performance_like_no"/>
-			<result property="performanceLikeUserId" column="performance_user_id"/>
-		</collection>
-	</resultMap>
-	
 	<!-- 공연정보 insert -->
 	<insert id="insertPerformance" parameterType="Performance">
 		<selectKey keyProperty="performanceNo" resultType="_int" order="BEFORE">
@@ -212,5 +205,29 @@
 		select count(*) 
 		from performance
 		where performance_content like '%'||#{performanceContent}||'%'
+	</select>
+	
+	<!-- 공연정보 날짜로 검색 -->
+	<select id="selectPerformanceByPerformanceDate" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_date &gt;= #{sDate}
+				and performance_date &lt;= #{eDate}
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectPerformanceCountByPerformanceDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
 	</select>
 </mapper>

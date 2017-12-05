@@ -5,10 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.dao.AuthorityDao;
+import com.buskstop.dao.StageDao;
+import com.buskstop.dao.StageImageDao;
 import com.buskstop.dao.StageSupplierDao;
 import com.buskstop.dao.UserDao;
 import com.buskstop.service.StageService;
 import com.buskstop.vo.Authority;
+import com.buskstop.vo.Stage;
+import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageSupplier;
 import com.buskstop.vo.User;
 
@@ -23,6 +27,12 @@ public class StageServiceImpl implements StageService{
 	
 	@Autowired
 	private StageSupplierDao supplierDao;
+	
+	@Autowired
+	private StageDao stageDao;
+	
+	@Autowired
+	private StageImageDao stageImageDao;
 	
 	@Override
 	@Transactional
@@ -41,6 +51,14 @@ public class StageServiceImpl implements StageService{
 		return supplierDao.selectSupplierById(userId);
 	}
 	
+	@Override
+	public void insertStage(Stage stage) {
+		stageDao.insertStage(stage);
+	}
 	
+	@Override
+	public void insertStageImage(StageImage stageImage) {
+		stageImageDao.insertStageImage(stageImage);
+	}
 	
 }

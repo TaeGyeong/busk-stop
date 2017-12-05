@@ -171,11 +171,11 @@ public class Stage implements Serializable{
 		this.stageReservation = stageReservation;
 	}
 
-	public User getstageSellerId() {
+	public User getStageSellerId() {
 		return stageSellerId;
 	}
 
-	public void setstageSellerId(User stageSellerId) {
+	public void setStageSellerId(User stageSellerId) {
 		this.stageSellerId = stageSellerId;
 	}
 
@@ -192,7 +192,6 @@ public class Stage implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((instrument == null) ? 0 : instrument.hashCode());
-		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
 		result = prime * result + stageArea;
 		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
 		result = prime * result + stageCost;
@@ -206,6 +205,7 @@ public class Stage implements Serializable{
 		result = prime * result + stageParking;
 		result = prime * result + ((stageRegTime == null) ? 0 : stageRegTime.hashCode());
 		result = prime * result + stageReservation;
+		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
 		return result;
 	}
 
@@ -222,11 +222,6 @@ public class Stage implements Serializable{
 			if (other.instrument != null)
 				return false;
 		} else if (!instrument.equals(other.instrument))
-			return false;
-		if (stageSellerId == null) {
-			if (other.stageSellerId != null)
-				return false;
-		} else if (!stageSellerId.equals(other.stageSellerId))
 			return false;
 		if (stageArea != other.stageArea)
 			return false;
@@ -269,9 +264,13 @@ public class Stage implements Serializable{
 			return false;
 		if (stageReservation != other.stageReservation)
 			return false;
+		if (stageSellerId == null) {
+			if (other.stageSellerId != null)
+				return false;
+		} else if (!stageSellerId.equals(other.stageSellerId))
+			return false;
 		return true;
 	}
-
 	
 	
 	
