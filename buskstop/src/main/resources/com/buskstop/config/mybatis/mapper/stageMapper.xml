@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buskstop.config.mybatis.mapper.stageMapper">
+	<sql id="column-stage">
+		STAGE_NO,
+		STAGE_NAME,
+		STAGE_LOCATION,
+		STAGE_COST,
+		STAGE_AREA,
+		STAGE_INSTRUMENT,
+		STAGE_CONTENT,
+		STAGE_PARKING,
+		STAGE_DRINKING,
+		STAGE_FOOD_SELL,
+		STAGE_FOOD_RESTRICTION,
+		STAGE_RESERVATION,
+		STAGE_SELLER_ID,
+		STAGE_REG_TIME
+	</sql>
+	
+	<resultMap type="Stage" id="stage-resultmap">
+		<id column="STAGE_NO" property="stageNo"/>
+		<result column="STAGE_NAME" property="stageName"/>
+		<result column="STAGE_LOCATION" property="stageLocation"/>
+		<result column="STAGE_COST" property="stageCost"/>
+		<result column="STAGE_AREA" property="stageArea"/>
+		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
+		<result column="STAGE_CONTENT" property="stageContent"/>
+		<result column="STAGE_PARKING" property="stageParking"/>
+		<result column="STAGE_DRINKING" property="stageDrinking"/>
+		<result column="STAGE_FOOD_SELL" property="stageFoodSell"/>
+		<result column="STAGE_FOOD_RESTRICTION" property="stageFoodRestriction"/>
+		<result column="STAGE_RESERVATION" property="stageReservation"/>
+		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
+		<result column="STAGE_REG_TIME" property="stageRegTime"/>
+	</resultMap>
+	
+	<!-- 공연장 insert -->
+	<insert id="insertStage" parameterType="Stage">
+		<selectKey keyProperty="stageNo" resultType="_int" order="BEFORE">
+			SELECT STAGE_NO_SEQ.nextval FROM dual
+		</selectKey>
+		insert into STAGE (<include refid="column-stage"/>)
+		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
+		#{stageArea}, #{instrument}, #{stageContent}, #{stageParking}, 
+		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
+		#{stageReservation}, #{stageSellerId}, sysdate)
+	</insert>
+	
+	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+	from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+	) where rownum >= #{begin}	 
+	</select>
+	
+	<select id="selectStageByStageNo" parameterType="_int" resultMap="stage-resultmap">
+		select *
+		from stage
+		where stage_no=#{stageNo}
+	</select>
+	
+	<select id="selectStage" resultMap="stage-resultmap">
+		select *
+		from stage
+	</select>
+	
+	<select id="selectStageCount" resultType="_int">
+		select count(*) from stage
+	</select>
+	
+	<!-- 공연정보 수정 -->
+	<update id="updateStage" parameterType="Stage">
+		UPDATE stage
+		<set>
+			<if test="stageName != null">STAGE_NAME = #{stageName},</if>
+			<if test="stageLocation != null">STAGE_LOCATION = #{stageLocation},</if>
+			<if test="stageCost != null">STAGE_COST = #{stageCost},</if>
+			<if test="stageArea != null">STAGE_AREA = #{stageArea},</if>
+			<if test="instrument != null">STAGE_INSTRUMENT = #{instrument},</if>
+			<if test="stageContent != null">STAGE_CONTENT = #{stageContent},</if>
+			<if test="stageParking != null">STAGE_PARKING = #{stageParking},</if>
+			<if test="stageDrinking != null">STAGE_DRINKING = #{stageDrinking},</if>
+			<if test="stageFoodSell != null">STAGE_FOOD_SELL = #{stageFoodSell},</if>
+			<if test="stageFoodRestriction != null">STAGE_FOOD_RESTRICTION = ${stageFoodRestriction},</if>
+			<if test="stageReservation != null">STAGE_RESERVATION = #{stageReservation},</if>
+			<if test="stageSellerId != null">STAGE_SELLER_ID = #{stageSellerId}</if>
+		</set>
+		WHERE STAGE_NO = #{stageNo}
+	</update>
+	
+	<select id="selectStageCountByLocation" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_location like '%'||#{stageLocation}||'%'
+	</select>
+	
+	<select id="selectStageByStageLocation" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_location like '%'||#{stageLocation}||'%'
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}	 
+	</select>
+	
+	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+		and stage_date &lt;= #{eDate}
+	</select>
+	
+	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
+	</select>
+	
+	<select id="selectStageCountByDate" resultMap="stage-resultmap" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
+	</select>
+	
+	<select id="selectStageByDate" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
+	
+	</select>
+</mapper>

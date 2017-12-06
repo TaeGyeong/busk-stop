@@ -1,7 +1,5 @@
 package com.buskstop.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -15,11 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
-import com.buskstop.service.StageService;
+import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.Artist;
 import com.buskstop.vo.Authority;
-import com.buskstop.vo.StageSupplier;
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.User;
 
 @Controller
@@ -32,7 +30,7 @@ public class UserController {
 	ArtistService artistService;
 	
 	@Autowired
-	StageService stageService;
+	PremiumStageService stageService;
 	
 	/**
 	 * 회원가입 컨트롤러
@@ -77,7 +75,7 @@ public class UserController {
 				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
 			}
 		case "supplier":
-			StageSupplier supplier = stageService.selectSupplierById(user.getUserId());
+			PremiumStage supplier = stageService.selectSupplierById(user.getUserId());
 			if(encoder.matches(password, user.getPassword())) {
 				return new ModelAndView("myPage/updateSupplierView.tiles","supplier",supplier);
 			}else {

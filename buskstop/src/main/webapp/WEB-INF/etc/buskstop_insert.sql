@@ -23,8 +23,6 @@ insert into USERS values('id6','토레스','2495','대구','01012347269','ad2b@a
 insert into USERS values('id7','호날두','RJ4848','분당','01029123929','ae2b@anb.com');
 insert into USERS values('id8','로이스','QL2222','인천','01029999829','a32b@anb.com');
 
-
-
 /* 권한 */
 insert into AUTHORITY values('', '');
 
@@ -63,6 +61,7 @@ insert into STAGE values(6,'홍대 홍대관','홍대',100000,300,'guitar','hell
 insert into STAGE values(7,'리쌍 광대관','강남',200000,200,'guitar1','hello1',0,1,1,0,1,'id2','2017-11-17');
 insert into STAGE values(8,'군대 부대관','군대',300000,100,'guitar2','hello2',1,0,0,1,1,'id3','2017-11-18');
 
+insert into STAGE values(1, '테스트용', 'kosta', 200000, 100, '드럼, 건반, 앰프 3개, 스탠딩마이크 3개', '좋습니다.', 1, 1, 1, 1, 1, 'hjyj4841', '2017-01-01');
 /* 대관 예약(주문) */
 insert into STAGE_RESERVATION values(1,'id1',1,'2017-11-11',1,'2017-11-18');
 insert into STAGE_RESERVATION values(2,'id2',2,'2018-03-10',1,'2017-11-19');
@@ -70,6 +69,16 @@ insert into STAGE_RESERVATION values(3,'id3',3,'2018-07-19',1,'2017-12-11');
 
 /* 공연장 사진 */
 insert into STAGE_IMAGE values();
+
+delete from STAGE_IMAGE;
+delete from STAGE;
+DROP SEQUENCE STAGE_IMAGE_NO_SEQ;
+DROP SEQUENCE STAGE_NO_SEQ;
+CREATE SEQUENCE STAGE_IMAGE_NO_SEQ;
+CREATE SEQUENCE STAGE_NO_SEQ;
+
+select * from stage
+select * from STAGE_IMAGE order by stage_image_no
 
 /* 공연장 리뷰 */
 insert into STAGE_REVIEW values(1,'id1',5,'너무 멋져요','2017-12-12');

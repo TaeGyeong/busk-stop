@@ -4,27 +4,27 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.buskstop.dao.StageSupplierDao;
-import com.buskstop.vo.StageSupplier;
+import com.buskstop.dao.PremiumStageDao;
+import com.buskstop.vo.PremiumStage;
 
 @Repository
-public class StageSupplierDaoImpl implements StageSupplierDao{
+public class PremiumStageDaoImpl implements PremiumStageDao{
 
 	@Autowired
 	SqlSessionTemplate session;
 	
 	@Override
-	public int insertStageSupplier(StageSupplier supplier) {
+	public int insertStageSupplier(PremiumStage supplier) {
 		return session.insert(makeSqlId("insertStageSupplier"), supplier);
 	}
 	
 	@Override
-	public int updateStageSupplier(StageSupplier supplier) {
+	public int updateStageSupplier(PremiumStage supplier) {
 		return session.update(makeSqlId("updateStageSupplier"), supplier);
 	}
 	
 	@Override
-	public StageSupplier selectSupplierById(String userId) {
+	public PremiumStage selectSupplierById(String userId) {
 		return session.selectOne(makeSqlId("selectSupplierById"), userId);
 	}
 
