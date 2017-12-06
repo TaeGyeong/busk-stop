@@ -2,6 +2,7 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -21,6 +22,7 @@ public class Stage implements Serializable{
 	private String stageSellerId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRegTime;
+	private List<StageImage> stageImage;
 	
 	public Stage() {
 	}
@@ -43,6 +45,26 @@ public class Stage implements Serializable{
 		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
 	}
+	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String instrument,
+			String stageContent, int stageParking, int stageDrinking, int stageFoodSell, int stageFoodRestriction,
+			int stageReservation, String stageSellerId, Date stageRegTime, List<StageImage> stageImage) {
+		this.stageNo = stageNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageCost = stageCost;
+		this.stageArea = stageArea;
+		this.instrument = instrument;
+		this.stageContent = stageContent;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
+		this.stageRegTime = stageRegTime;
+		this.stageImage = stageImage;
+	}
+
 	public int getStageNo() {
 		return stageNo;
 	}
@@ -155,14 +177,12 @@ public class Stage implements Serializable{
 		this.stageRegTime = stageRegTime;
 	}
 
-	@Override
-	public String toString() {
-		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
-				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
-				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
-				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
-				+ stageRegTime + "]";
+	public List<StageImage> getStageImage() {
+		return stageImage;
+	}
+
+	public void setStageImage(List<StageImage> stageImage) {
+		this.stageImage = stageImage;
 	}
 
 	@Override
@@ -176,6 +196,7 @@ public class Stage implements Serializable{
 		result = prime * result + stageDrinking;
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
+		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
 		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
 		result = prime * result + stageNo;
@@ -215,6 +236,11 @@ public class Stage implements Serializable{
 			return false;
 		if (stageFoodSell != other.stageFoodSell)
 			return false;
+		if (stageImage == null) {
+			if (other.stageImage != null)
+				return false;
+		} else if (!stageImage.equals(other.stageImage))
+			return false;
 		if (stageLocation == null) {
 			if (other.stageLocation != null)
 				return false;
@@ -243,4 +269,15 @@ public class Stage implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
+				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
+				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
+				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
+				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
+				+ stageRegTime + ", stageImage=" + stageImage + "]";
+	}
+
 }

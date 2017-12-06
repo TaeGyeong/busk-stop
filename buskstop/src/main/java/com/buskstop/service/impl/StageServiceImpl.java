@@ -90,5 +90,18 @@ public class StageServiceImpl implements StageService{
 		
 	}
 	
+	@Override
+	public void updateStage(Stage stage) {
+		stageDao.updateStage(stage);
+	}
 	
+	@Override
+	public List<StageImage> selectStageImageByStageNo(int stageNo) {
+		return stageImageDao.selectStageImageByStageNo(stageNo);
+	}
+	
+	@Override
+	public void deleteStageImageByStageNo(int stageNo) {
+		stageImageDao.deleteStageImageByStageNo(stageNo);
+	}
 }

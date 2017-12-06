@@ -45,4 +45,23 @@ public interface StageService {
 	List<Stage> selectStage();
 
 	Map<String, Object> selectAllStage(int page);
+	
+	/**
+	 * 공연장 수정
+	 * @param stage
+	 */
+	void updateStage(Stage stage);
+	
+	/**
+	 * 공연장이미지 공연장 번호로 조회
+	 * @param StageNo
+	 * @return
+	 */
+	List<StageImage> selectStageImageByStageNo(int stageNo);
+	
+	/**
+	 * 공연장이미지 공연장 번호로 삭제
+	 * @param stageNo
+	 */
+	void deleteStageImageByStageNo(int stageNo);
 }

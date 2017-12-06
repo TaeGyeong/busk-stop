@@ -22,4 +22,20 @@
 		insert into STAGE_IMAGE (<include refid="column-stageImage"/>)
 		values(#{stageImageNo}, #{stageImageLocation}, #{stageNo})
 	</insert>
+	
+	<!-- 공연장 번호 받아서 공연장사진 모두 delete -->
+	<delete id="deleteStageImageByStageNo" parameterType="_int">
+		delete from stage_image
+		where stage_no = #{stageNo}
+	</delete>
+	
+	<!-- 공연장 번호 받아서 공연장사진 select -->
+	<select id="selectStageImageByStageNo" parameterType="_int" resultMap="stageImage-resultmap">
+		select <include refid="column-stageImage"/>
+		from STAGE_IMAGE
+		where stage_no = #{stageNo}
+		order by stage_image_no
+	</select>
+	
+	
 </mapper>

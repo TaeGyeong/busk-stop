@@ -70,6 +70,16 @@ insert into STAGE_RESERVATION values(3,'id3',3,'2018-07-19',1,'2017-12-11');
 /* 공연장 사진 */
 insert into STAGE_IMAGE values();
 
+delete from STAGE_IMAGE;
+delete from STAGE;
+DROP SEQUENCE STAGE_IMAGE_NO_SEQ;
+DROP SEQUENCE STAGE_NO_SEQ;
+CREATE SEQUENCE STAGE_IMAGE_NO_SEQ;
+CREATE SEQUENCE STAGE_NO_SEQ;
+
+select * from stage
+select * from STAGE_IMAGE order by stage_image_no
+
 /* 공연장 리뷰 */
 insert into STAGE_REVIEW values(1,'id1',5,'너무 멋져요','2017-12-12');
 insert into STAGE_REVIEW values(4,'id2',4,'괘찮네','2017-12-13');

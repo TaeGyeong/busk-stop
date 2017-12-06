@@ -21,4 +21,10 @@ public interface StageDao {
 
 	int selectStageCount();
 
+	/**
+	 * 공연장 수정
+	 * @param stage
+	 * @return
+	 */
+	int updateStage(Stage stage);
 }

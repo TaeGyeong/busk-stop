@@ -61,19 +61,37 @@
 	</select>
 	
 	<select id="selectStageByStageNo" parameterType="_int" resultMap="stage-resultmap">
-	select *
-	from stage
-	where stage_no=#{stageNo}
+		select *
+		from stage
+		where stage_no=#{stageNo}
 	</select>
 	
 	<select id="selectStage" resultMap="stage-resultmap">
-	select *
-	from stage
+		select *
+		from stage
 	</select>
 	
 	<select id="selectStageCount" resultType="_int">
 		select count(*) from stage
 	</select>
 	
-	
+	<!-- 공연정보 수정 -->
+	<update id="updateStage" parameterType="Stage">
+		UPDATE stage
+		<set>
+			<if test="stageName != null">STAGE_NAME = #{stageName},</if>
+			<if test="stageLocation != null">STAGE_LOCATION = #{stageLocation},</if>
+			<if test="stageCost != null">STAGE_COST = #{stageCost},</if>
+			<if test="stageArea != null">STAGE_AREA = #{stageArea},</if>
+			<if test="instrument != null">STAGE_INSTRUMENT = #{instrument},</if>
+			<if test="stageContent != null">STAGE_CONTENT = #{stageContent},</if>
+			<if test="stageParking != null">STAGE_PARKING = #{stageParking},</if>
+			<if test="stageDrinking != null">STAGE_DRINKING = #{stageDrinking},</if>
+			<if test="stageFoodSell != null">STAGE_FOOD_SELL = #{stageFoodSell},</if>
+			<if test="stageFoodRestriction != null">STAGE_FOOD_RESTRICTION = ${stageFoodRestriction},</if>
+			<if test="stageReservation != null">STAGE_RESERVATION = #{stageReservation},</if>
+			<if test="stageSellerId != null">STAGE_SELLER_ID = #{stageSellerId}</if>
+		</set>
+		WHERE STAGE_NO = #{stageNo}
+	</update>
 </mapper>
