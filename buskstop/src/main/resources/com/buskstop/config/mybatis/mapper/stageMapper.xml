@@ -97,7 +97,8 @@
 	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
 		select count(*) 
 		from stage
-		where stage_instrument like '%'||#{instrument}||'%'
+		where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+		and stage_date &lt;= #{eDate}
 	</select>
 	
 	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
@@ -107,23 +108,33 @@
 			from (
 					select *
 					from stage
-					where stage_instrument like '%'||#{instrument}||'%'
+					where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
 					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
 	</select>
 	
-	
-	<!-- 이 부분은 동엽이가 따로 뽑아서 한다고 해서 일단 주석
-	<select id="selectStageCountByStageDate" resultType="">
-	
+	<select id="selectStageCountByDate" resultMap="stage-resultmap" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
 	</select>
 	
-	<select id="selectStageByStgeDate" parameterType="map" resultType="_int">
-	select count(*)
-	from stage
-	where stage_
+	<select id="selectStageByDate" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
+	
 	</select>
-	 -->
 	
 </mapper>

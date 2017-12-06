@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,22 +73,28 @@ public class StageController {
 	
 	@RequestMapping("selectAllStage")
 	public ModelAndView selectAllStage(@RequestParam(required=false) String locationSearch, @RequestParam(required=false) String instrumentSearch, @RequestParam(required=false) String sDate, @RequestParam(required=false) String eDate) throws Exception{
+		System.out.println(sDate+eDate);
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
-		
-		if(locationSearch!=null) {
-			map = service.selectStageByStageLocation(page,locationSearch);
-		} else if(instrumentSearch!=null) {
-			map = service.selectStageByInstrument(page,instrumentSearch);
-		} else if(sDate!=null && eDate!=null) {
+		System.out.println(locationSearch+instrumentSearch);
+		if(locationSearch==null && instrumentSearch==null) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			
 			Date startDate = transFormat.parse(sDate);
 			Date endDate = transFormat.parse(eDate);
+			map = service.selectStageByStageLocation(page,locationSearch,sDate,eDate);
 			
+		} else if(locationSearch==null && instrumentSearch!=null) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = transFormat.parse(sDate);
+			Date endDate = transFormat.parse(eDate);
+			map = service.selectStageByInstrument(page,instrumentSearch,sDate,eDate);
+			
+		} else if(locationSearch!=null && instrumentSearch==null) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = transFormat.parse(sDate);
+			Date endDate = transFormat.parse(eDate);
 			map = service.selectStageByStageDate(page,startDate,endDate);
-			
 		}
 		
 		map = service.selectAllStage(page);
@@ -95,8 +102,8 @@ public class StageController {
 		list = (List<Stage>)map.get("list");
 		
 		map.put("list", list);
-		map.put("search", locationSearch);
-		map.put("category", instrumentSearch);
+		map.put("stageLocation", locationSearch);
+		map.put("instruemtn", instrumentSearch);
 		map.put("sDate", sDate);
 		map.put("eDate", eDate);
 		

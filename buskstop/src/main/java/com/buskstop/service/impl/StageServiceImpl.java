@@ -23,9 +23,6 @@ import com.buskstop.vo.StageSupplier;
 
 @Service
 public class StageServiceImpl implements StageService{
-
-	@Autowired
-	private UserDao userDao;
 	
 	@Autowired
 	private AuthorityDao authorDao;
@@ -78,42 +75,32 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	public Map<String, Object> selectAllStage(int page){
-		System.out.println("서비스"+page);
 		HashMap<String, Object> map = new HashMap<>();
-		
 		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
-		
 		map.put("pageBean", pb);
 		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(),pb.getEndItemInPage());
-		
-		map.put("list",list);
-		System.out.println("서비스ㅎㅎㅎ"+list);
-		
+		map.put("list",list);		
 		return map;
-		
 	}
 	
 	@Override
-	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation){
-		
+	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, String startDate, String endDate){
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation),page);
-		
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
+		System.out.println("위치:"+stageLocation);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation);
+		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation,startDate,endDate);
 		map.put("list",list);
-		
 		return map;
-		
 	}
 
 	@Override
-	public Map<String, Object> selectStageByInstrument(int page, String instrument) {
+	public Map<String, Object> selectStageByInstrument(int page, String instrument, String startDate, String endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument),page);
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
 		
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument);
+		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,startDate,endDate);
 		map.put("list",list);
 		
 		return map;
@@ -122,11 +109,10 @@ public class StageServiceImpl implements StageService{
 	@Override
 	public Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByStageDate(startDate,endDate),page);
 		map.put("pageBean", pb);
 		List<Stage> list = stageDao.selectStageByStgeDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), startDate, endDate);
-		
+		map.put("list", list);
 		return map;
 	}
 	

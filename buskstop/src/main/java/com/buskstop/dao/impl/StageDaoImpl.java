@@ -50,30 +50,34 @@ public class StageDaoImpl implements StageDao{
 	}
 
 	@Override
-	public int selectStageCountByLocation(String stageLocation) {
+	public int selectStageCountByLocation(String stageLocation, String sDate, String eDate) {
 		return session.selectOne(makeSqlId("selectStageCountByLocation"), stageLocation);
 	}
 
 	@Override
-	public List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation) {
+	public List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation, String sDate, String eDate) {
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("begin", beginItemInPage);
 		map.put("end", endItemInPage);
 		map.put("stageLocation", stageLocation);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
 		return session.selectList(makeSqlId("selectStageByStageLocation"),map);
 	}
 
 	@Override
-	public int selectStageCountByInstrument(String instrument) {
+	public int selectStageCountByInstrument(String instrument, String sDate, String eDate) {
 		return session.selectOne(makeSqlId("selectStageCountByInstrument"),instrument);
 	}
 
 	@Override
-	public List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument) {
+	public List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument, String sDate, String eDate) {
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("begin", beginItemInPage);
 		map.put("end", endItemInPage);
 		map.put("stageLocation", instrument);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
 		return session.selectList(makeSqlId("selectStageByInstrument"),map);
 	}
 
@@ -96,3 +100,4 @@ public class StageDaoImpl implements StageDao{
 	}
 
 }
+
