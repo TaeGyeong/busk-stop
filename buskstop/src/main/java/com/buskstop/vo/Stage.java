@@ -3,6 +3,8 @@ package com.buskstop.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Stage implements Serializable{
 	private int stageNo;
 	private String stageName;
@@ -16,15 +18,16 @@ public class Stage implements Serializable{
 	private int stageFoodSell;
 	private int stageFoodRestriction;
 	private int stageReservation;
-	private String seller;
+	private String stageSellerId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRegTime;
 	
 	public Stage() {
 	}
-	
+
 	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String instrument,
 			String stageContent, int stageParking, int stageDrinking, int stageFoodSell, int stageFoodRestriction,
-			int stageReservation, Date stageRegTime, String seller) {
+			int stageReservation, String stageSellerId, Date stageRegTime) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
@@ -37,10 +40,9 @@ public class Stage implements Serializable{
 		this.stageFoodSell = stageFoodSell;
 		this.stageFoodRestriction = stageFoodRestriction;
 		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
-		this.seller = seller;
 	}
-
 	public int getStageNo() {
 		return stageNo;
 	}
@@ -137,6 +139,14 @@ public class Stage implements Serializable{
 		this.stageReservation = stageReservation;
 	}
 
+	public String getStageSellerId() {
+		return stageSellerId;
+	}
+
+	public void setStageSellerId(String stageSellerId) {
+		this.stageSellerId = stageSellerId;
+	}
+
 	public Date getStageRegTime() {
 		return stageRegTime;
 	}
@@ -145,22 +155,14 @@ public class Stage implements Serializable{
 		this.stageRegTime = stageRegTime;
 	}
 
-	public String getSeller() {
-		return seller;
-	}
-
-	public void setSeller(String seller) {
-		this.seller = seller;
-	}
-
 	@Override
 	public String toString() {
 		return "Stage [stageNo=" + stageNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation
 				+ ", stageCost=" + stageCost + ", stageArea=" + stageArea + ", instrument=" + instrument
 				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
 				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", stageReservation=" + stageReservation + ", stageRegTime=" + stageRegTime + ", seller=" + seller
-				+ "]";
+				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
+				+ stageRegTime + "]";
 	}
 
 	@Override
@@ -168,7 +170,6 @@ public class Stage implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((instrument == null) ? 0 : instrument.hashCode());
-		result = prime * result + ((seller == null) ? 0 : seller.hashCode());
 		result = prime * result + stageArea;
 		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
 		result = prime * result + stageCost;
@@ -181,6 +182,7 @@ public class Stage implements Serializable{
 		result = prime * result + stageParking;
 		result = prime * result + ((stageRegTime == null) ? 0 : stageRegTime.hashCode());
 		result = prime * result + stageReservation;
+		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
 		return result;
 	}
 
@@ -197,11 +199,6 @@ public class Stage implements Serializable{
 			if (other.instrument != null)
 				return false;
 		} else if (!instrument.equals(other.instrument))
-			return false;
-		if (seller == null) {
-			if (other.seller != null)
-				return false;
-		} else if (!seller.equals(other.seller))
 			return false;
 		if (stageArea != other.stageArea)
 			return false;
@@ -239,9 +236,11 @@ public class Stage implements Serializable{
 			return false;
 		if (stageReservation != other.stageReservation)
 			return false;
+		if (stageSellerId == null) {
+			if (other.stageSellerId != null)
+				return false;
+		} else if (!stageSellerId.equals(other.stageSellerId))
+			return false;
 		return true;
 	}
-
-	
-	
 }

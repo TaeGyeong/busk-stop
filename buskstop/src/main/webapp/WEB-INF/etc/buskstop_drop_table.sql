@@ -49,6 +49,7 @@ DROP TABLE STAGE_RESERVATION
 DROP TABLE STAGE_IMAGE 
 	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE STAGE_IMAGE_NO_SEQ;
 /*-공연장 리뷰----------------------------------------------------------------------*/
 
 /* 공연장 리뷰 */

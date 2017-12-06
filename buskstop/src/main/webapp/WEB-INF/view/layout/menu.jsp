@@ -94,7 +94,7 @@
                <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectArtistPerformance.do">아티스트공연정보</a></li>
             </ul>
          </li>
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연장대관</a></li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectAllStage.do">공연장대관</a></li>
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상</a>
             <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goArtistVideo">홍보영상</a></li>

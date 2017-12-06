@@ -65,7 +65,7 @@
 	<select id="selectPerformance" resultMap="performance-resultmap" parameterType="map">
 		select <include refid="column-performance"/>, performance_hits
 		from(
-			select rownum rn, <include refid="column-performance"/>, performance_hits
+			select rownum rn, <include refid="column-performance"/>, performance_hits,(SELECT COUNT(*) FROM performance_comment WHERE performance_no=#{performanceNo}) AS commentCount
 			from (
 				select * 
 				from performance

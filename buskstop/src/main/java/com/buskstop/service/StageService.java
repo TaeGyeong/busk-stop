@@ -1,6 +1,11 @@
 package com.buskstop.service;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import com.buskstop.vo.Stage;
+import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageSupplier;
 
 public interface StageService {
@@ -29,4 +34,22 @@ public interface StageService {
 	 * @param stage
 	 */
 	void insertStage(Stage stage);
+	
+	/**
+	 * 공연장 사진 등록
+	 * @param stageImage
+	 */
+	void insertStageImage(StageImage stageImage);
+
+	Stage selectStageByStageNo(int stageNo);
+
+	List<Stage> selectStage();
+
+	Map<String, Object> selectAllStage(int page);
+
+	Map<String, Object> selectStageByStageLocation(int page, String stageLocation);
+
+	Map<String, Object> selectStageByInstrument(int page, String instrumentSearch);
+
+	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 }
