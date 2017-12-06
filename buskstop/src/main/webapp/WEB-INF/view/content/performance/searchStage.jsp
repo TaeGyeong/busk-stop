@@ -135,13 +135,7 @@ function confirmStage(){
 		window.close();
 	}
 }
-/* $(document).ready(function(){
-//사용자가 공연장소 확정(확인버튼) 선택
-$("#confirm").on("click", function(){
-	opener.document.getElementById("performanceLocation").value = location;
-	window.close();
-});
-}); */
+
 </script>
 <div id="floating-panel">
 	<input id="address" type="text">
