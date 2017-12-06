@@ -17,8 +17,9 @@
 	</definition>
 	
 	<definition name="template_pop" template="/WEB-INF/view/layout/emptyTemplate.jsp">
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menuForPopup.jsp" />
 	</definition>
 	<definition name="*/*.tiles2" extends="template_pop">
-		<put-attribute name="content2" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>		

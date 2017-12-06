@@ -13,10 +13,10 @@ $(document).ready(function(){
 	});
 	
 	$("#searchStage").on("click", function(){
-		var address = "/buskstop/searchStage.do"; //doGet()방식으로 요청
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
 		left1 = (screen.availWidth - 600) / 2;
-		top1 = (screen.availHeight - 400) / 2;
-		window.open(address, "newWin", 'width=600 ,height=400 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 });
 </script>

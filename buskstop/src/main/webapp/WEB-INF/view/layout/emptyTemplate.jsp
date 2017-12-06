@@ -21,9 +21,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<header>
+		<div class="header-container">
+			<%-- 메뉴 --%>
+			<nav>
+				<tiles:insertAttribute name="menu"/>
+			</nav>
+		</div>
+	</header>
 	<div class="container">
 		<section class="content">
-			<tiles:insertAttribute name="content2" />
+			<tiles:insertAttribute name="content" />
 		</section>
 		
 	</div>
