@@ -64,4 +64,10 @@ public interface StageService {
 	 * @param stageNo
 	 */
 	void deleteStageImageByStageNo(int stageNo);
+
+	Map<String, Object> selectStageByStageLocation(int page, String stageLocation);
+
+	Map<String, Object> selectStageByInstrument(int page, String instrumentSearch);
+
+	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 }

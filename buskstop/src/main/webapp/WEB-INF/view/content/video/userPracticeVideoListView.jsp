@@ -12,7 +12,6 @@
 	});
 }); */
 
-
 </script>
 <style type="text/css">
 table, td {
@@ -43,6 +42,11 @@ td {
 	<input type="hidden" id ="videoCategory" name="category" value="practice" class="form-control">
 	<button type="submit">검색</button>
 </form>
+<form action="${initParam.rootPath }//member/selectMemberVideoCategory.do" method="post">
+	<sec:csrfInput/>
+	<button class="btn btn-default">글쓰기</button>
+</form>
+
 <p><p>
 
 <!-- 

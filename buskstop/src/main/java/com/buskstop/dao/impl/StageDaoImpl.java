@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,8 +41,7 @@ public class StageDaoImpl implements StageDao{
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("begin", beginNum);
 		map.put("end",endNum);
-		
-		return session.selectOne(makeSqlId("selectAllStage"));
+		return session.selectList(makeSqlId("selectAllStage"),map);
 	}
 	
 	@Override
@@ -53,4 +53,51 @@ public class StageDaoImpl implements StageDao{
 	public int updateStage(Stage stage) {
 		return session.update(makeSqlId("updateStage"), stage);
 	}
+
+	@Override
+	public int selectStageCountByLocation(String stageLocation) {
+		return session.selectOne(makeSqlId("selectStageCountByLocation"), stageLocation);
+	}
+
+	@Override
+	public List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation) {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("begin", beginItemInPage);
+		map.put("end", endItemInPage);
+		map.put("stageLocation", stageLocation);
+		return session.selectList(makeSqlId("selectStageByStageLocation"),map);
+	}
+
+	@Override
+	public int selectStageCountByInstrument(String instrument) {
+		return session.selectOne(makeSqlId("selectStageCountByInstrument"),instrument);
+	}
+
+	@Override
+	public List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument) {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("begin", beginItemInPage);
+		map.put("end", endItemInPage);
+		map.put("stageLocation", instrument);
+		return session.selectList(makeSqlId("selectStageByInstrument"),map);
+	}
+
+	@Override
+	public int selectStageCountByStageDate(Date startDate, Date endDate) {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("sDate", startDate);
+		map.put("eDate",endDate);
+		return session.selectOne(makeSqlId("selectStageCountByStageDate"),map);
+	}
+
+	@Override
+	public List<Stage> selectStageByStgeDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate) {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("begin", beginItemInPage);
+		map.put("end", endItemInPage);
+		map.put("sDate",startDate);
+		map.put("eDate",endDate);		
+		return session.selectList(makeSqlId("selectStageByStageDate"),map);
+	}
+
 }

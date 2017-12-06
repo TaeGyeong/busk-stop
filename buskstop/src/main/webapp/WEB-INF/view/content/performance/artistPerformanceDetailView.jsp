@@ -13,6 +13,40 @@
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
+window.onload = function followSearch(){
+	$.ajax({
+		"type":"post",
+		"url":"${initParam.rootPath }/searchFollow.do",
+		"data":{
+			'${_csrf.parameterName}':'${_csrf.token}',
+			'userId':'${requestScope.map.userId }',
+			'artistId':'${requestScope.map.artist.artistId }'
+		},
+		"dataType":"text",
+		"success":function(txt){
+			if(txt=='follow'){
+				$("#follow").html('');
+				// follow 했으면 follow 버튼
+				txt='<button type="button" id="followBtn" class="btn btn-default">팔로우취소</button>';
+				$("#follow").html(txt);
+			} else if (txt=='notFollow'){
+				
+				// follow 하지 않으면 unfollow 버튼
+				txt='<button type="button" id="followBtn" class="btn btn-primary">팔로우</button>';					
+				$("#follow").html(txt);
+			}
+		},
+		'error':function(a,b,c){
+			alert(a);
+			alert(b);
+			alert(c);
+		}
+	});
+	
+	
+	
+}
+
 $(document).ready(function(){
 	
 	listComment();
@@ -56,6 +90,81 @@ $(document).ready(function(){
 		});
 	});
 	
+	//####################################################
+	// 	팔로우 정보 조회, 팔로우, 팔로우 취소
+	//####################################################
+	
+	
+	$("#follow").on("click","#followBtn", function(){
+		if($("#followBtn").text()=='팔로우취소'){
+			$.ajax({
+				"type":"post",
+				"url":"${initParam.rootPath }/member/unfollow.do",
+				"data":{
+					'${_csrf.parameterName}':'${_csrf.token}',
+					'userId':'${requestScope.map.userId }',
+					'artistId':'${requestScope.map.artist.artistId }'
+				},
+				"dataType":"text",
+				"success":function(txt){
+					alert(txt);
+					txt='<button id="followBtn" class="btn btn-primary">팔로우</button>';
+					$("#follow").html(txt);
+				},
+				"error":function(a,b,c){
+					alert(a);
+					alert(b);
+					alert(c);
+				}
+				
+			});
+		} else {
+			$.ajax({
+				"type":"post",
+				"url":"${initParam.rootPath }/member/follow.do",
+				"data":{
+					'${_csrf.parameterName}':'${_csrf.token}',
+					'userId':'${requestScope.map.userId }',
+					'artistId':'${requestScope.map.artist.artistId }'
+				},
+				"dataType":"text",
+				"success":function(txt){
+					alert(txt);
+					txt='<button id="followBtn" class="btn btn-default">팔로우취소</button>';
+					$("#follow").html(txt);
+				},
+				"error":function(a,b,c){
+					alert(a);
+					alert(b);
+					alert(c);
+				}
+			});
+		}
+	});
+	
+	$("#artistImage").on("click",function(){
+		var form = document.createElement("form");
+		form.setAttribute("charset","UTF-8");
+		form.setAttribute("method","post");
+		form.setAttribute("action","${initParam.rootPath }/artistInfo.do");
+		
+		var token = document.createElement("input");
+		token.setAttribute("type","hidden");
+		token.setAttribute("name","${_csrf.parameterName}");
+		token.setAttribute("value","${_csrf.token}");
+		
+		var field = document.createElement("input");
+		field.setAttribute("type","hidden");
+		field.setAttribute("name","artistId");
+		field.setAttribute("value","${requestScope.map.artist.artistId }");
+		
+		
+		form.appendChild(field);
+		form.appendChild(token);
+		document.body.appendChild(form);
+		
+		form.submit();
+	});
 });	
 
 function listComment(){
@@ -180,17 +289,37 @@ function deletePerformance(performanceNo){
 	.likeBtn{
 		cursor: pointer;
 	}
+	
+	#artistImage{
+		cursor : pointer;
+	}
 
 </style>
 </head>
 <body>
-<div id="container">
+<div id="container" style="top-margin:10px">
 
-<h1>DETAIL VIEW - 공연 정보 글 읽기</h1>
+<h1>DETAIL VIEW - 아티스트 공연 정보 글 읽기</h1>
 <hr>
 
 <h2>공연정보 게시판</h2>
 <hr>
+
+	<!-- 아티스트 정보 -->
+	<div class="container-inline">
+		<h3>아티스트 정보</h3>
+		<div>
+			<img src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
+			<div class="text-center">
+				<span>${requestScope.map.artist.artistName }</span>
+				<span>${requestScope.map.artist.performance }</span>
+				<span>${requestScope.map.artistSns }</span>
+			</div>
+			<div class="text-right" id="follow" style="overflow:hidden">
+				<button type="button" id="followBtn"></button>
+			</div>
+		</div>
+	</div>
 
 	<!-- Board Content -->
 	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
@@ -221,32 +350,32 @@ function deletePerformance(performanceNo){
 			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			${requestScope.map.performance.performanceContent}
+		${requestScope.map.performance.performanceContent}
 		</p>
 	</div>
 	<div class="button_box" style="width: 100%;">
 		<div style="float: left;">
-			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none"><span class='glyphicon glyphicon-heart'></span>${requestScope.performance.likeCount }</a>
+			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
-		<!-- Board Content End-->
-		<div>
-			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updatePerformance();">
-					<input type="submit" value="삭제" onclick="deletePerformance();">
-				</c:if>
-			</sec:authorize>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
-		</div>
-		
-		<p/><p/><p/>
-		
-		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
-		<div style="float: left; width: 100%;">
-			<textarea name="content" id="performanceComment" 
-			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
-			<button type="button" id="btnComment">댓글 등록</button>
-		</div>
+	<!-- Board Content End-->
+	<div>
+	<sec:authorize access="isAuthenticated()">
+		<c:if test="${requestScope.map.userId eq requestScope.map.performance.performanceUserId }">
+			<input type="submit" value="수정" onclick="updatePerformance();">
+			<input type="submit" value="삭제" onclick="deletePerformance();">
+		</c:if>
+	</sec:authorize>
+		<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
+
+	</div>
+	<p/><p/><p/>
+	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
+	<div style="float: left; width: 100%;">
+		<textarea name="content" id="performanceComment" 
+		cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
+		<button type="button" id="btnComment">댓글 등록</button>
+	</div>
+	
 	</div>
 </div>
 </body>

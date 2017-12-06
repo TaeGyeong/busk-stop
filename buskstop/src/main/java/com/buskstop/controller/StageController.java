@@ -3,6 +3,8 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,6 +32,7 @@ public class StageController {
 	@Autowired
 	private StageService service;
 	
+	
 	@RequestMapping("/stageReservation")
 	public ModelAndView selectStage(@ModelAttribute Stage stage) {
 		
@@ -43,9 +46,7 @@ public class StageController {
 	//공연장 등록
 	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
-		
 		service.insertStage(stage);
-		
 		//파일 경로
 		String dir = request.getServletContext().getRealPath("/stageImage");
 		
@@ -67,32 +68,40 @@ public class StageController {
 			}
 		}
 
-		return new ModelAndView("redirect:/stageView.do");
+		return new ModelAndView("redirect:/selectAllStage.do");
 	}
 	
 	@RequestMapping("selectAllStage")
-	public ModelAndView selectAllStage(@RequestParam String category, @RequestParam String search, @RequestParam String stageDate) throws Exception{
+	public ModelAndView selectAllStage(@RequestParam(required=false) String locationSearch, @RequestParam(required=false) String instrumentSearch, @RequestParam(required=false) String sDate, @RequestParam(required=false) String eDate) throws Exception{
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
 		
-//		try {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}catch (Exception e) {
-//			
-//		}
+		if(locationSearch!=null) {
+			map = service.selectStageByStageLocation(page,locationSearch);
+		} else if(instrumentSearch!=null) {
+			map = service.selectStageByInstrument(page,instrumentSearch);
+		} else if(sDate!=null && eDate!=null) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date startDate = transFormat.parse(sDate);
+			Date endDate = transFormat.parse(eDate);
+			
+			map = service.selectStageByStageDate(page,startDate,endDate);
+			
+		}
 		
 		map = service.selectAllStage(page);
-		category="title";
-		search="";
-		stageDate = "";
 		
 		list = (List<Stage>)map.get("list");
 		
 		map.put("list", list);
-		map.put("search", search);
+		map.put("search", locationSearch);
+		map.put("category", instrumentSearch);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
 		
-		return new ModelAndView("stage/stageView.tiles","map",map);
+		return new ModelAndView("stageView.do","map",map);
 		
 	}
 	

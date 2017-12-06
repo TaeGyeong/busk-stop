@@ -1,7 +1,7 @@
 /*-------------------- 공연장  ------------------------------------------------*/
 /* 공연장 목록조회  */
 	select STAGE_NO, STAGE_NAME,STAGE_LOCATION from STAGE; /* 별점도 넣어야하나? */ 
-
+	select * from stage;
 /* 공연장 검색 후 조회수 */
 
 	select * from performance

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buskstop.config.mybatis.mapper.stageMapper">
-	
 	<sql id="column-stage">
 		STAGE_NO,
 		STAGE_NAME,
@@ -94,4 +93,55 @@
 		</set>
 		WHERE STAGE_NO = #{stageNo}
 	</update>
+	
+	<select id="selectStageCountByLocation" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_location like '%'||#{stageLocation}||'%'
+	</select>
+	
+	<select id="selectStageByStageLocation" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_location like '%'||#{stageLocation}||'%'
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}	 
+	</select>
+	
+	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_instrument like '%'||#{instrument}||'%'
+	</select>
+	
+	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_instrument like '%'||#{instrument}||'%'
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
+	</select>
+	
+	
+	<!-- 이 부분은 동엽이가 따로 뽑아서 한다고 해서 일단 주석
+	<select id="selectStageCountByStageDate" resultType="">
+	
+	</select>
+	
+	<select id="selectStageByStgeDate" parameterType="map" resultType="_int">
+	select count(*)
+	from stage
+	where stage_
+	</select>
+	 -->
 </mapper>

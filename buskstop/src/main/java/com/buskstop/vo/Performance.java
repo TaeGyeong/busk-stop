@@ -19,6 +19,7 @@ public class Performance implements Serializable{
 	private String performanceImage;
 	private MultipartFile multiImage;
 	private String performanceUserId;
+	private int performanceCode;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date performanceRegTime;
 	// TODO 공연장 번호 연결 해야함.
@@ -50,14 +51,11 @@ public class Performance implements Serializable{
 	
 	
 	
-	@Override
-	public String toString() {
-		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
-				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
-				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
-				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
-				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceRegTime="
-				+ performanceRegTime + ", likeCount=" + likeCount + ", commentCount=" + commentCount + "]";
+	public int getPerformanceCode() {
+		return performanceCode;
+	}
+	public void setPerformanceCode(int performanceCode) {
+		this.performanceCode = performanceCode;
 	}
 
 	public int getPerformanceNo() {
@@ -164,12 +162,15 @@ public class Performance implements Serializable{
 		this.commentCount = commentCount;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + commentCount;
 		result = prime * result + likeCount;
+		result = prime * result + ((multiImage == null) ? 0 : multiImage.hashCode());
+		result = prime * result + performanceCode;
 		result = prime * result + ((performanceContent == null) ? 0 : performanceContent.hashCode());
 		result = prime * result + ((performanceDate == null) ? 0 : performanceDate.hashCode());
 		result = prime * result + performanceHits;
@@ -195,6 +196,13 @@ public class Performance implements Serializable{
 		if (commentCount != other.commentCount)
 			return false;
 		if (likeCount != other.likeCount)
+			return false;
+		if (multiImage == null) {
+			if (other.multiImage != null)
+				return false;
+		} else if (!multiImage.equals(other.multiImage))
+			return false;
+		if (performanceCode != other.performanceCode)
 			return false;
 		if (performanceContent == null) {
 			if (other.performanceContent != null)
@@ -243,6 +251,16 @@ public class Performance implements Serializable{
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Performance [performanceNo=" + performanceNo + ", performanceName=" + performanceName
+				+ ", performanceTitle=" + performanceTitle + ", performanceLocation=" + performanceLocation
+				+ ", performanceDate=" + performanceDate + ", performanceHits=" + performanceHits
+				+ ", performanceContent=" + performanceContent + ", performanceImage=" + performanceImage
+				+ ", multiImage=" + multiImage + ", performanceUserId=" + performanceUserId + ", performanceCode="
+				+ performanceCode + ", performanceRegTime=" + performanceRegTime + ", likeCount=" + likeCount + "]";
+	}
+	
 	
 
 }
