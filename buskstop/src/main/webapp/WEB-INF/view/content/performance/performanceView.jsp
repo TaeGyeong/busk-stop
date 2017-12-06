@@ -28,7 +28,7 @@
 		});
 		
 		$("#category").change(function(){
-			val = $(this).val();
+			var val = $(this).val();
 			if(val=='date'){
 				$(".search").css('display', 'none');
 				$(".date_search").css('display', 'block');
@@ -153,7 +153,7 @@ select {
 		</table>
 		<br>
 		<form action="${initParam.rootPath }/selectPerformance.do">
-			<select name="category">
+			<select name="category" id="category" style="float: left;">
 				<option value="title">제목</option>
 				<option value="user">작성자</option>
 				<option value="location">공연장소</option>
@@ -161,11 +161,11 @@ select {
 				<option value="content">내용</option>
 				<option value="date" id="option">공연날짜</option>
 			</select> 
+			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
 			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
 			시작일 : <input type="date" name="sDate">
 			종료일 : <input type="date" name="eDate">
 			</div>
-			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
 			<button type="submit">검색</button>
 			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
 		</form>

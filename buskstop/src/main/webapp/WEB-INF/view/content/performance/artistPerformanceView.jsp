@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 	function goDetail(root, no){
-		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
+		document.location.href= root+'/artistPerformanceDetailView.do?performanceNo='+no
 	}
 	
 	$(document).ready(function(){
@@ -25,6 +25,16 @@
 					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
 				}
 			});
+		});
+		$("#category").change(function(){
+			var val = $(this).val();
+			if(val=='date'){
+				$(".search").css('display', 'none');
+				$(".date_search").css('display', 'block');
+			}else{
+				$(".search").css('display', 'block');
+				$(".date_search").css('display', 'none');
+			}
 		});
 	});
 </script>
@@ -142,13 +152,19 @@ select {
 		</table>
 		<br>
 		<form action="${initParam.rootPath }/selectArtistPerformance.do">
-			<select name="category">
+			<select name="category" id="category" style="float: left;">
 				<option value="title">제목</option>
 				<option value="user">작성자</option>
 				<option value="location">공연장소</option>
 				<option value="name">공연이름</option>
 				<option value="content">내용</option>
-			</select> <input type="text" placeholder="검색" name="search">
+				<option value="date" id="option">공연날짜</option>
+			</select> 
+			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
+			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
+			시작일 : <input type="date" name="sDate">
+			종료일 : <input type="date" name="eDate">
+			</div>
 			<button type="submit">검색</button>
 			<button type="button" onclick="location.href='${initParam.rootPath}/artist/performanceRegisterView.do'">글쓰기</button>
 		</form>

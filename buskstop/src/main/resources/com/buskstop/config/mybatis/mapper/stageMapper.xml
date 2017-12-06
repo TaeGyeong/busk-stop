@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.buskstop.config.mybatis.mapper.stageMapper">
+	<sql id="column-stage">
+		STAGE_NO,
+		STAGE_NAME,
+		STAGE_LOCATION,
+		STAGE_COST,
+		STAGE_AREA,
+		STAGE_INSTRUMENT,
+		STAGE_CONTENT,
+		STAGE_PARKING,
+		STAGE_DRINKING,
+		STAGE_FOOD_SELL,
+		STAGE_FOOD_RESTRICTION,
+		STAGE_RESURVATION,
+		STAGE_SELLER_ID,
+		STAGE_REG_TIME
+	</sql>
 	
+	<resultMap type="Stage" id="stage-resultmap">
+		<id column="stage_no" property="stageNo"/>
+		<result column="stage_name" property="stageName"/>
+		<result column="stage_location" property="stageLocation"/>
+		<result column="stage_cost" property="stageCost"/>
+		<result column="stage_area" property="stageArea"/>
+		<result column="stage_instrument" property="instrument"/>
+		<result column="stage_content" property="stageContent"/>
+		<result column="stage_parking" property="stageParking"/>
+		<result column="stage_drinking" property="stageDrinking"/>
+		<result column="stage_food_sell" property="stageFoodSell"/>
+		<result column="stage_food_restriction" property="stageFoodRestriction"/>
+		<result column="stage_resurvation" property="stageReservation"/>
+		<result column="stage_seller_id" property="seller"/>
+		<result column="stage_reg_time" property="stageRegTime"/>
+	</resultMap>
 	
+	<!-- 공연장 insert -->
+	<insert id="insertStage" parameterType="Stage">
+		<selectKey keyProperty="stageNo" resultType="_int" order="BEFORE">
+			select SEQUENCE STAGE_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into STAGE (<include refid="column-stage"/>)
+		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
+		#{stageArea}, #{instrument}, #{stageContent}, #{stageParking}, 
+		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
+		#{stageReservation}, #{seller}, sysdate)
+	</insert>
 </mapper>

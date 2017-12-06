@@ -166,6 +166,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return map;
 	}
 	
+	
+	/******************************** Date 로 검색 페이징 ********************************/
+	
+	
 	@Override
 	public Map<String, Object> selectPerformanceByPerformanceDate(int page, Date sDate, Date eDate){
 		
@@ -175,6 +179,20 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 		map.put("pageBean", pb);
 		List<Performance> list = dao.selectPerformanceByPerformanceDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), sDate, eDate);
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceDate(int page, Date sDate, Date eDate){
+		
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceDate(sDate, eDate), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), sDate, eDate);
 		map.put("list", list);
 		
 		return map;
@@ -258,5 +276,14 @@ public class PerformanceServiceImpl implements PerformanceService {
 			
 			return map;
 		}
+		
+		//############################# id를 이용해서 공연정보 조회 ###########################//
+
+		@Override
+		public List<Performance> selectPerformanceById(String id) {
+			return dao.selectArtistPerformanceById(id);
+		}
+		
+		
 	
 }

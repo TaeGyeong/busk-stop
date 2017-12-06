@@ -76,6 +76,11 @@ public interface PerformanceDao {
 	//공연날짜로 검색 count
 	int selectPerformanceCountByPerformanceDate(Date sDate, Date eDate);
 	
+	// 공연날짜로 아티스트공연 검색 페이징.
+	List<Performance> selectArtistPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate, Date eDate);
+	// 공연날짜로 아티스트공연 카운트.
+	int selectArtistPerformanceCountByPerformanceDate(Date sDate, Date eDate);
+	
 	
 	/*************************************************************************************
 	 * 	Artist Performance Search Paging
@@ -161,4 +166,8 @@ public interface PerformanceDao {
 	 */
 	int selectArtistPerformanceCountByPerformanceContent(String content);
 	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	List<Performance> selectArtistPerformanceById(String id);
 }

@@ -29,13 +29,6 @@
 		<result column="performance_reg_time" property="performanceRegTime"/>
 	</resultMap>
 	
-	<resultMap type="Performance" id="performance-join-performanceLike-resultmap" extends="performance-resultmap">
-		<collection property="likeCount" ofType="PerformanceLike">
-			<id property="performanceLikeNo" column="performance_like_no"/>
-			<result property="performanceLikeUserId" column="performance_user_id"/>
-		</collection>
-	</resultMap>
-	
 	<!-- 공연정보 insert -->
 	<insert id="insertPerformance" parameterType="Performance">
 		<selectKey keyProperty="performanceNo" resultType="_int" order="BEFORE">
@@ -368,6 +361,7 @@
 				from performance
 				where performance_date &gt;= #{sDate}
 				and performance_date &lt;= #{eDate}
+				and performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -380,5 +374,48 @@
 		from performance
 		where performance_date &gt;= #{sDate}
 		and performance_date &lt;= #{eDate}
+		and performance_code = 0
+	</select>
+	
+	<select id="selectArtistPerformanceByPerformanceDate" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_date &gt;= #{sDate}
+				and performance_date &lt;= #{eDate}
+				and performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByPerformanceDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
+		and performance_code = 1
+	</select>
+	
+	<select id="selectArtistPerformanceById" parameterType="string" resultMap="performance-resultmap">
+		SELECT	PERFORMANCE_NO,
+				PERFORMANCE_NAME,
+				PERFORMANCE_TITLE,
+				PERFORMANCE_LOCATION,
+				PERFORMANCE_DATE,
+				PERFORMANCE_HITS,
+				PERFORMANCE_CONTENT,
+				PERFORMANCE_IMAGE,
+				PERFORMANCE_USER_ID,
+				PERFORMANCE_REG_TIME
+		FROM 	PERFORMANCE
+		WHERE 	PERFORMANCE_USER_ID = #{value} AND PERFORMANCE_DATE &gt; SYSDATE
+				AND PERFORMANCE_CODE = 1
+		ORDER BY PERFORMANCE_DATE DESC	
 	</select>
 </mapper>

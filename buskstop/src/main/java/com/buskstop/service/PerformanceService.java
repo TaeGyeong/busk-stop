@@ -129,4 +129,20 @@ public interface PerformanceService {
 	 * @return
 	 */
 	Map<String, Object> selectPerformanceByPerformanceDate(int page, Date sDate, Date eDate);
+	
+	/**
+	 * 아티스트공연 날짜로 검색 페이징.
+	 * @param page
+	 * @param sDate
+	 * @param eDate
+	 * @return
+	 */
+	Map<String, Object> selectArtistPerformanceByPerformanceDate(int page, Date sDate, Date eDate);
+	
+	/**
+	 * id 를 매개변수로 등록한 공연정보 조회.
+	 * @param id
+	 * @return
+	 */
+	List<Performance> selectPerformanceById(String id);
 }

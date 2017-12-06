@@ -16,15 +16,15 @@ public class Stage implements Serializable{
 	private int stageFoodSell;
 	private int stageFoodRestriction;
 	private int stageReservation;
+	private String seller;
 	private Date stageRegTime;
-	private User seller;
 	
 	public Stage() {
 	}
-
+	
 	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea, String instrument,
 			String stageContent, int stageParking, int stageDrinking, int stageFoodSell, int stageFoodRestriction,
-			int stageReservation, Date stageRegTime, User seller) {
+			int stageReservation, Date stageRegTime, String seller) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
@@ -145,11 +145,11 @@ public class Stage implements Serializable{
 		this.stageRegTime = stageRegTime;
 	}
 
-	public User getSeller() {
+	public String getSeller() {
 		return seller;
 	}
 
-	public void setSeller(User seller) {
+	public void setSeller(String seller) {
 		this.seller = seller;
 	}
 

@@ -187,119 +187,157 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	public int selectPerformanceCountByPerformanceContent(String content) {
 		return session.selectOne(makeSqlId("selectPerformanceCountByPerformanceContent"), content);
 	}
+
 	/*****************************************************************************************
-	 * 	Artist Performance Search
+	 * Artist Performance Search
 	 *****************************************************************************************/
 
 	// 제목으로 검색 페이징
-		@Override
-		public List<Performance> selectArtistPerformanceByPerformanceTitle(int beginItemNum, int endItemNum,
-				String performanceTitle) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("begin", beginItemNum);
-			map.put("end", endItemNum);
-			map.put("performanceTitle", performanceTitle);
-
-			return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceTitle"), map);
-		}
-
-		// 제목으로 검색 count
-		@Override
-		public int selectArtistPerformanceCountByTitle(String performanceTitle) {
-			return session.selectOne(makeSqlId("selectArtistPerformanceCountByTitle"), performanceTitle);
-		}
-
-		// 작성자로 검색 페이징
-		@Override
-		public List<Performance> selectArtistPerformanceByPerformanceUserId(int beginItemNum, int endItemNum,
-				String performanceUserId) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("begin", beginItemNum);
-			map.put("end", endItemNum);
-			map.put("performanceUserId", performanceUserId);
-
-			return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceUserId"), map);
-		}
-
-		// 작성자로 검색 count
-		@Override
-		public int selectArtistPerformanceCountByUserId(String userId) {
-			return session.selectOne(makeSqlId("selectArtistPerformanceCountByUserId"), userId);
-		}
-
-		// 공연장소로 검색 페이징
-		@Override
-		public List<Performance> selectArtistPerformanceByPerformanceLocation(int beginItemNum, int endItemNum,
-				String performanceLocation) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("begin", beginItemNum);
-			map.put("end", endItemNum);
-			map.put("performanceLocation", performanceLocation);
-
-			return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceLocation"), map);
-		}
-
-		// 공연장소로 검색 count
-		@Override
-		public int selectArtistPerformanceCountByLocation(String location) {
-			return session.selectOne(makeSqlId("selectArtistPerformanceCountByLocation"), location);
-		}
-
-		// 공연이름으로 검색 페이징
-		@Override
-		public List<Performance> selectArtistPerformanceByPerformanceName(int beginItemNum, int endItemNum,
-				String performanceName) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("begin", beginItemNum);
-			map.put("end", endItemNum);
-			map.put("performanceName", performanceName);
-
-			return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceName"), map);
-		}
-
-		// 공연이름으로 검색 count
-		@Override
-		public int selectArtistPerformanceCountByPerformanceName(String performanceName) {
-			return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceName"), performanceName);
-		}
-
-		// 공연내용으로 검색 페이징
-		@Override
-		public List<Performance> selectArtistPerformanceByPerformanceContent(int beginItemNum, int endItemNum,
-				String performanceContent) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("begin", beginItemNum);
-			map.put("end", endItemNum);
-			map.put("performanceContent", performanceContent);
-
-			return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceContent"), map);
-		}
-
-		// 공연이름으로 검색 count
-		@Override
-		public int selectArtistPerformanceCountByPerformanceContent(String content) {
-			return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceContent"), content);
-		}
-	
-	//공연날짜로 검색 페이징
 	@Override
-	public List<Performance> selectPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate, Date eDate){
+	public List<Performance> selectArtistPerformanceByPerformanceTitle(int beginItemNum, int endItemNum,
+			String performanceTitle) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceTitle", performanceTitle);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceTitle"), map);
+	}
+
+	// 제목으로 검색 count
+	@Override
+	public int selectArtistPerformanceCountByTitle(String performanceTitle) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByTitle"), performanceTitle);
+	}
+
+	// 작성자로 검색 페이징
+	@Override
+	public List<Performance> selectArtistPerformanceByPerformanceUserId(int beginItemNum, int endItemNum,
+			String performanceUserId) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceUserId", performanceUserId);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceUserId"), map);
+	}
+
+	// 작성자로 검색 count
+	@Override
+	public int selectArtistPerformanceCountByUserId(String userId) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByUserId"), userId);
+	}
+
+	// 공연장소로 검색 페이징
+	@Override
+	public List<Performance> selectArtistPerformanceByPerformanceLocation(int beginItemNum, int endItemNum,
+			String performanceLocation) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceLocation", performanceLocation);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceLocation"), map);
+	}
+
+	// 공연장소로 검색 count
+	@Override
+	public int selectArtistPerformanceCountByLocation(String location) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByLocation"), location);
+	}
+
+	// 공연이름으로 검색 페이징
+	@Override
+	public List<Performance> selectArtistPerformanceByPerformanceName(int beginItemNum, int endItemNum,
+			String performanceName) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceName", performanceName);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceName"), map);
+	}
+
+	// 공연이름으로 검색 count
+	@Override
+	public int selectArtistPerformanceCountByPerformanceName(String performanceName) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceName"), performanceName);
+	}
+
+	// 공연내용으로 검색 페이징
+	@Override
+	public List<Performance> selectArtistPerformanceByPerformanceContent(int beginItemNum, int endItemNum,
+			String performanceContent) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("performanceContent", performanceContent);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceContent"), map);
+	}
+
+	// 공연이름으로 검색 count
+	@Override
+	public int selectArtistPerformanceCountByPerformanceContent(String content) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceContent"), content);
+	}
+
+	/***********
+	 * Date
+	 ***********/
+
+	// 공연날짜로 검색 페이징
+	@Override
+	public List<Performance> selectPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate,
+			Date eDate) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("begin", beginItemNum);
 		map.put("end", endItemNum);
 		map.put("sDate", sDate);
 		map.put("eDate", eDate);
-		
+
 		return session.selectList(makeSqlId("selectPerformanceByPerformanceDate"), map);
 	}
-	//공연날짜로 검색 count
+
+	// 공연날짜로 검색 count
 	@Override
 	public int selectPerformanceCountByPerformanceDate(Date sDate, Date eDate) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("sDate", sDate);
 		map.put("eDate", eDate);
-		
+
 		return session.selectOne(makeSqlId("selectPerformanceCountByPerformanceDate"), map);
+	}
+
+	// 아티스트공연 검색 paging
+	@Override
+	public List<Performance> selectArtistPerformanceByPerformanceDate(int beginItemNum, int endItemNum, Date sDate,
+			Date eDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
+
+		return session.selectList(makeSqlId("selectArtistPerformanceByPerformanceDate"), map);
+	}
+	// 아티스트 공연 검색 카운트.
+	@Override
+	public int selectArtistPerformanceCountByPerformanceDate(Date sDate, Date eDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
+
+		return session.selectOne(makeSqlId("selectArtistPerformanceCountByPerformanceDate"), map);
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	// ID로 공연정보 조회.
+	@Override
+	public List<Performance> selectArtistPerformanceById(String id) {
+		return session.selectList(makeSqlId("selectArtistPerformanceById"), id);
 	}
 	
 }

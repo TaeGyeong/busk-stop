@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <style type="text/css">
 	/* 	
 		공연장 대관 등록 개발용 CSS
@@ -22,74 +23,92 @@
 				}
 </style>
 
-  <h2>공연장 대관 등록(stageRegisterView.do)</h2>
-   <div class="demand">
-	   <p><b>요구사항 :</b> 한 개의 공연장 대관정보 글을 등록한다.<br>
+<h2>공연장 대관 등록(stageRegisterView.do)</h2>
+<div class="demand">
+	<p><b>요구사항 :</b> 한 개의 공연장 대관정보 글을 등록한다.<br>
 		 - 내용 : 공연장 이름, 주소(지도확인), 면적, 대관가능 날짜(시간), 시간당가격, 사진, 공급자 정보(이름, 연락처)를 필수로 입력받고<br> 주차장 유무, 음주가능여부, 식사판매여부, 외부음식 반입가능여부를 선택적으로 입력한다.<br>
 		 - 프리미엄 공급자의 경우 글을 등록 할 시 자동으로 등록글에 프리미엄 표시를 붙여준다.<br>
 		 + 등록 후에는 글 상세보기 페이지와 같은 페이지를 제공하여 자신의 글을 확인시켜준다.
 		</p>
    </div>
    <hr>
+   
 <div style="width:960px; margin:auto;">
-<h1>대관 공연장 등록하기</h1>
-<div style="font-size: 17px; font-weight: normal; ">
-※ 별(*) 표시는 필수 입력 사항입니다.
-</div>
-<form action="./URL" method="post">
-   <table style="border-collapse: collapse; width:100%;">
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*공연장 이름</td>
-		   <td style="border: 1px solid #888; padding:10px" ><input type="text" name="text" required placeholder="공연장의 이름을 써 주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box; "></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*공연장 주소</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" required placeholder="공연장을 찾아갈 수 있는 주소를 써 주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*공연장 면적</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" required placeholder="공연장의 크기를 알 수 있는 면적을 알려주세요" style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*대관가능 날짜(시간)</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="date" name="text" required placeholder="대관이 가능 한 날짜를 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*사진</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" required placeholder="공연장의 자세한 사진을 올려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*공연장 담당자 이름</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" required placeholder="공연장에 대해 문의 할 수 있는분의 성함을 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">*공연장 연락처</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" required placeholder="공연장에 대한 문의 할 수 있는 연락처를 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">주차가능 여부</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" placeholder="공연장에 주차장이 있거나 혹은 가까운 곳에 주차가 가능한 공간이 있는지 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">음주 가능 여부</td>
-		   <td style="border: 1px solid #888; padding:10px;;"><input type="text" name="text" placeholder="주류를 판매하거나 혹은 주류를 마실 수 있는지 여부를 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">식사 판매 여부</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" placeholder="식사를 판매 하는지 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr style="padding:10px">
-		   <td style="border: 1px solid #888; padding:5px; width:25%; font-size: 17px;">외부 음식물 반입 가능 여부</td>
-		   <td style="border: 1px solid #888; padding:10px;"><input type="text" name="text" placeholder="외부 음식물을 가져와서 먹을 수 있는지 알려주세요." style="width:100%; vertical-align:middle; font-size: 15px; margin:auto; padding:5px; box-sizing: border-box;"></td>
-	   </tr>
-	   <tr>
-		   <td colspan="2" align="center" style="padding:5px; width:25%; font-size: 17px;">
-				<div style="margin:auto;">
-					<button type="submit" formtarget="_blank" style="padding:10px 20px">등록</button>
-					<button type="reset" style="padding:10px 20px">취소</button>
-				</div>
-		   </td>
-       </tr>
-   </table>   
-</form>
+	<h1>대관 공연장 등록하기</h1>
+	
+	<form action="/stageRegister" method="post" enctype="multipart/form-data">
+		<%-- 공연장 번호 hidden --%>
+		<input type="hidden" name="stageNo" value="0">
+		<%-- 등록자 id hidden --%>
+		<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="seller" value='<sec:authentication property="principal.userId"/>'>
+		</sec:authorize>
+		
+		<div class="form-group">
+			<label>공연장 이름</label>
+			<input type="text" name="stageName" class="form-control" required="required">
+		</div>
+			
+		<div class="form-group">
+			<label>공연장 주소</label>
+			<input type="text" name="stageLocation" class="form-control" required="required">
+		</div>
+			
+		<div class="form-group">
+			<label>가격</label>
+			<input type="number" name="stageCost" class="form-control" required="required">
+		</div>
+			
+		<div class="form-group">
+			<label>면적</label>
+			<input type="number" name="stageArea" class="form-control" required="required">
+		</div>
+			
+		<div class="form-group">
+			<label>구비된 악기</label>
+			<input type="text" name="instrument" class="form-control">
+		</div>
+			
+		<div class="form-group">
+			<label>이미지</label>
+			<input type="file" name="multiImage" class="form-control">
+		</div>
+			
+		<div class="form-group">
+			<label>추가 내용 입력</label>
+			<textarea rows="15" cols="150" name="stageContent"></textarea>
+		</div>
+		
+		<div class="form-group">
+			<label>주차장 유무</label><br>
+			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="yes">주차장 완비</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="no">주차장 미비</label>
+		</div>
+			
+		<div class="form-group">
+			<label>음주가능 여부</label><br>
+			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="yes">음주 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="no">음주 불가</label>
+		</div>
+			
+		<div class="form-group">
+			<label>음식 (유료)제공 여부</label><br>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="yes">음식 제공</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="no">음식 미제공</label>
+		</div>
+			
+		<div class="form-group">
+			<label>외부음식 반입 가능 여부</label><br>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="yes">반입 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="no">반입 불가</label>
+		</div>
+			
+		<div class="form-group">
+			<label>예약가능 여부</label><br>
+			<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="yes">예약 가능</label>
+			<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="no">예약 불가</label>
+		</div>
+		
+		<sec:csrfInput/><%-- csrf 토큰 --%>
+	</form>
 </div>
