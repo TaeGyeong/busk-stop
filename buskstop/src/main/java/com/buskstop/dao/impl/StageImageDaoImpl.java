@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,5 +22,15 @@ public class StageImageDaoImpl implements StageImageDao{
 	@Override
 	public int insertStageImage(StageImage stageImage) {
 		return session.insert(makeSqlId("insertStageImage"), stageImage);
+	}
+	
+	@Override
+	public int deleteStageImageByStageNo(int stageNo) {
+		return session.delete(makeSqlId("deleteStageImageByStageNo"), stageNo);
+	}
+	
+	@Override
+	public List<StageImage> selectStageImageByStageNo(int stageNo) {
+		return session.selectList(makeSqlId("selectStageImageByStageNo"), stageNo);
 	}
 }

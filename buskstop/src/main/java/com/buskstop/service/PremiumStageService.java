@@ -4,30 +4,30 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
-import com.buskstop.vo.StageSupplier;
 
-public interface StageService {
+public interface PremiumStageService {
 	/**
 	 * 공급자 등록
 	 * @param supplier
 	 */
-	void registerSupplier(StageSupplier supplier);
+	void registerSupplier(PremiumStage supplier);
 	
 	/**
 	 * 공급자 정보 수정
 	 * @param supplier
 	 * @return
 	 */
-	int updateSupplier(StageSupplier supplier);
+	int updateSupplier(PremiumStage supplier);
 	
 	/**
 	 * Id로 공급자 정보 가져오기.
 	 * @param userId
 	 * @return
 	 */
-	StageSupplier selectSupplierById(String userId);
+	PremiumStage selectSupplierById(String userId);
 	
 	/**
 	 * 공연장 등록
@@ -46,6 +46,25 @@ public interface StageService {
 	List<Stage> selectStage();
 
 	Map<String, Object> selectAllStage(int page);
+	
+	/**
+	 * 공연장 수정
+	 * @param stage
+	 */
+	void updateStage(Stage stage);
+	
+	/**
+	 * 공연장이미지 공연장 번호로 조회
+	 * @param StageNo
+	 * @return
+	 */
+	List<StageImage> selectStageImageByStageNo(int stageNo);
+	
+	/**
+	 * 공연장이미지 공연장 번호로 삭제
+	 * @param stageNo
+	 */
+	void deleteStageImageByStageNo(int stageNo);
 
 	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 

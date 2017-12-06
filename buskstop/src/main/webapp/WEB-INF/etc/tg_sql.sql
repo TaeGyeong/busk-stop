@@ -8,7 +8,7 @@
 회원정보조회 - 회원 / 아티스트/ 대관공급자 정보 수정
 기존회원에서 아티스트 / 대관공급자 등록
 */
-
+SELECT * FROM PERFORMANCE
 select * from users
 SELECT * FROM VIDEO_LIKE 
 select * from artist

@@ -11,7 +11,8 @@
 		performance_content,
 		performance_image,
 		performance_user_id,
-		performance_reg_time
+		performance_reg_time,
+		performance_code
 	</sql>
 
 	<!-- ResultMap 등록 -->
@@ -36,7 +37,7 @@
 		insert into PERFORMANCE (<include refid="column-performance"/>)
 		values(#{performanceNo}, #{performanceName}, #{performanceTitle}, 
 		#{performanceLocation}, #{performanceDate}, #{performanceContent}, 
-		#{performanceImage}, #{performanceUserId}, sysdate)
+		#{performanceImage}, #{performanceUserId}, sysdate, #{performanceCode})
 	</insert>
 	
 	<update id="updatePerformance" parameterType="Performance">
@@ -54,34 +55,60 @@
 	</update>
 	
 	<delete id="deletePerformanceByPerformanceNo" parameterType="int">
-	delete from performance 
-	where performance_no=#{performanceNo}
+		delete from performance 
+		where performance_no = #{performanceNo}
 	</delete>
-
-	<!-- 공연정보 전체 조회 -->
-	<select id="selectAllPerformance" resultMap="performance-resultmap" parameterType="map">
-		select <include refid="column-performance"/>, performance_hits, commentCount 
+	
+	<!-- ****************************************************************************** -->
+	
+	<!-- 공연정보 전체 조회 select paging mock -->
+	<select id="selectPerformance" resultMap="performance-resultmap" parameterType="map">
+		select <include refid="column-performance"/>, performance_hits
 		from(
 			select rownum rn, <include refid="column-performance"/>, performance_hits,(SELECT COUNT(*) FROM performance_comment WHERE performance_no=#{performanceNo}) AS commentCount
 			from (
 				select * 
 				from performance
+				where performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
 		)
 		where rn >= #{begin}
 	</select>
+	<!-- 공연정보 전체 조회 count -->
+	<select id="selectPerformanceCount" resultType="_int">
+		select count(*) from performance where performance_code = 0
+	</select>
+	
+	<!-- 아티스트 공연정보 전체조회 -->
+	<select id="selectArtistPerformance" resultMap="performance-resultmap" parameterType="map">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 아티스트공연정보 카운트 -->
+	<select id="selectArtistPerformanceCount" resultType="_int">
+		select count(*) from performance where performance_code = 1
+	</select>
+	
+	<!-- ****************************************************************************** -->
+	
 	<!-- 공연정보 조회 -->
 	<select id="selectAllPerfor" resultMap="performance-resultmap">
 		select *
 		from performance
 	</select>
 	
-	<!-- 공연정보 전체 조회 count -->
-	<select id="selectPerformanceCount" resultType="_int">
-		select count(*) from performance
-	</select>
 	
 	<!-- 공연정보 글 보기 (디테일 뷰)-->
 	<select id="selectPerformanceByPerformanceNo" parameterType="_int" resultMap="performance-resultmap">
@@ -95,6 +122,8 @@
 	where performance_no = #{performanceNo}	
 	</update>
 
+
+<!-- ************************************************************************************************************************* -->
 	<!-- 공연정보 제목으로 검색 -->
 	<select id="selectPerformanceByPerformanceTitle" parameterType="map" resultMap="performance-resultmap">
 		select <include refid="column-performance"/>, performance_hits
@@ -103,7 +132,7 @@
 			from (
 				select * 
 				from performance
-				where performance_title like '%'||#{performanceTitle}||'%'
+				where performance_title like '%'||#{performanceTitle}||'%' AND performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -115,7 +144,7 @@
 	<select id="selectPerformanceCountByTitle" resultType="_int" parameterType="String">
 		select count(*) 
 		from performance
-		where performance_title like '%'||#{performanceTitle}||'%'
+		where performance_title like '%'||#{performanceTitle}||'%' AND performance_code = 0
 	</select>
 	
 	<!-- 공연정보 작성자로 검색 -->
@@ -126,7 +155,7 @@
 			from (
 				select * 
 				from performance
-				where performance_user_id like '%'||#{performanceUserId}||'%'
+				where performance_user_id like '%'||#{performanceUserId}||'%' AND performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -138,7 +167,7 @@
 	<select id="selectPerformanceCountByUserId" resultType="_int" parameterType="String">
 		select count(*) 
 		from performance
-		where performance_user_id like '%'||#{performanceUserId}||'%'
+		where performance_user_id like '%'||#{performanceUserId}||'%' AND performance_code = 0
 	</select>
 	
 	<!-- 공연정보 공연장소로 검색 -->
@@ -149,7 +178,7 @@
 			from (
 				select * 
 				from performance
-				where performance_location like '%'||#{performanceLocation}||'%'
+				where performance_location like '%'||#{performanceLocation}||'%' AND performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -160,7 +189,7 @@
 	<select id="selectPerformanceCountByLocation" resultType="_int" parameterType="String">
 		select count(*) 
 		from performance
-		where performance_location like '%'||#{performanceLocation}||'%'
+		where performance_location like '%'||#{performanceLocation}||'%' AND performance_code = 0
 	</select>
 	
 	<!-- 공연정보 공연이름으로 검색 -->
@@ -171,7 +200,7 @@
 			from (
 				select * 
 				from performance
-				where performance_name like '%'||#{performanceName}||'%'
+				where performance_name like '%'||#{performanceName}||'%' AND performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -182,7 +211,7 @@
 	<select id="selectPerformanceCountByPerformanceName" resultType="_int" parameterType="String">
 		select count(*) 
 		from performance
-		where performance_name like '%'||#{performanceName}||'%'
+		where performance_name like '%'||#{performanceName}||'%' AND performance_code = 0
 	</select>
 	
 	<!-- 공연정보 내용으로 검색 -->
@@ -193,7 +222,7 @@
 			from (
 				select * 
 				from performance
-				where performance_content like '%'||#{performanceContent}||'%'
+				where performance_content like '%'||#{performanceContent}||'%' AND performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -204,9 +233,124 @@
 	<select id="selectPerformanceCountByPerformanceContent" resultType="_int" parameterType="String">
 		select count(*) 
 		from performance
-		where performance_content like '%'||#{performanceContent}||'%'
+		where performance_content like '%'||#{performanceContent}||'%' AND performance_code = 0
 	</select>
 	
+	<!-- #################################################################################################################### -->
+	
+	<!-- 공연정보 제목으로 검색 -->
+	<select id="selectArtistPerformanceByPerformanceTitle" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_title like '%'||#{performanceTitle}||'%' AND performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	
+	<!-- 공연정보 제목으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByTitle" resultType="_int" parameterType="String">
+		select count(*) 
+		from performance
+		where performance_title like '%'||#{performanceTitle}||'%' AND performance_code = 1
+	</select>
+	
+	<!-- 공연정보 작성자로 검색 -->
+	<select id="selectArtistPerformanceByPerformanceUserId" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_user_id like '%'||#{performanceUserId}||'%' AND performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	
+	<!-- 공연정보 작성자으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByUserId" resultType="_int" parameterType="String">
+		select count(*) 
+		from performance
+		where performance_user_id like '%'||#{performanceUserId}||'%' AND performance_code = 1
+	</select>
+	
+	<!-- 공연정보 공연장소로 검색 -->
+	<select id="selectArtistPerformanceByPerformanceLocation" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_location like '%'||#{performanceLocation}||'%' AND performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연장소로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByLocation" resultType="_int" parameterType="String">
+		select count(*) 
+		from performance
+		where performance_location like '%'||#{performanceLocation}||'%' AND performance_code = 1
+	</select>
+	
+	<!-- 공연정보 공연이름으로 검색 -->
+	<select id="selectArtistPerformanceByPerformanceName" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_name like '%'||#{performanceName}||'%' AND performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByPerformanceName" resultType="_int" parameterType="String">
+		select count(*) 
+		from performance
+		where performance_name like '%'||#{performanceName}||'%' AND performance_code = 1
+	</select>
+	
+	<!-- 공연정보 내용으로 검색 -->
+	<select id="selectArtistPerformanceByPerformanceContent" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_content like '%'||#{performanceContent}||'%' AND performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByPerformanceContent" resultType="_int" parameterType="String">
+		select count(*) 
+		from performance
+		where performance_content like '%'||#{performanceContent}||'%' AND performance_code = 0
+	</select>
+	
+<!-- ************************************************************************************************************************* -->
 	<!-- 공연정보 날짜로 검색 -->
 	<select id="selectPerformanceByPerformanceDate" parameterType="map" resultMap="performance-resultmap">
 		select <include refid="column-performance"/>, performance_hits
@@ -217,6 +361,7 @@
 				from performance
 				where performance_date &gt;= #{sDate}
 				and performance_date &lt;= #{eDate}
+				and performance_code = 0
 				order by performance_no desc
 				)
 			where rownum &lt;= #{end}
@@ -229,5 +374,48 @@
 		from performance
 		where performance_date &gt;= #{sDate}
 		and performance_date &lt;= #{eDate}
+		and performance_code = 0
+	</select>
+	
+	<select id="selectArtistPerformanceByPerformanceDate" parameterType="map" resultMap="performance-resultmap">
+		select <include refid="column-performance"/>, performance_hits
+		from(
+			select rownum rn, <include refid="column-performance"/>, performance_hits
+			from (
+				select * 
+				from performance
+				where performance_date &gt;= #{sDate}
+				and performance_date &lt;= #{eDate}
+				and performance_code = 1
+				order by performance_no desc
+				)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	<!-- 공연정보 공연이름으로 검색 카운트 -->
+	<select id="selectArtistPerformanceCountByPerformanceDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
+		and performance_code = 1
+	</select>
+	
+	<select id="selectArtistPerformanceById" parameterType="string" resultMap="performance-resultmap">
+		SELECT	PERFORMANCE_NO,
+				PERFORMANCE_NAME,
+				PERFORMANCE_TITLE,
+				PERFORMANCE_LOCATION,
+				PERFORMANCE_DATE,
+				PERFORMANCE_HITS,
+				PERFORMANCE_CONTENT,
+				PERFORMANCE_IMAGE,
+				PERFORMANCE_USER_ID,
+				PERFORMANCE_REG_TIME
+		FROM 	PERFORMANCE
+		WHERE 	PERFORMANCE_USER_ID = #{value} AND PERFORMANCE_DATE &gt; SYSDATE
+				AND PERFORMANCE_CODE = 1
+		ORDER BY PERFORMANCE_DATE DESC	
 	</select>
 </mapper>

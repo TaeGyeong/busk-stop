@@ -1,3 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="followMapper"></mapper>
+<mapper namespace="com.buskstop.config.mybatis.mapper.followMapper">
+	<sql id="follow-column">
+		FOLLOWING_ID , FOLLOWER_ID
+	</sql>
+	
+	<sql id="select-follow-sql">
+		SELECT
+		<include refid="follow-column"/>
+		FROM FOLLOW
+	</sql>
+	
+	<resultMap type="follow" id="follow-resultmap">
+		<id column="FOLLOWING_ID" property="userId"/>
+		<result column="FOLLOWER_ID" property="followerId"/>
+	</resultMap>
+	
+	<insert id="insertFollow" parameterType="follow">
+		INSERT INTO FOLLOW
+			(<include refid="follow-column"/>)
+		VALUES (
+			#{userId} , #{followerId}
+		)
+	</insert>
+	
+	<delete id="deleteFollow" parameterType="follow">
+		DELETE FROM FOLLOW
+		WHERE FOLLOWING_ID = #{userId} AND FOLLOWER_ID = #{followerId}
+	</delete>
+	
+	<select id="selectFollowByUserId" parameterType="string" resultMap="follow-resultmap">
+		<include refid="select-follow-sql"/>
+		WHERE FOLLOWING_ID = #{value}
+	</select>
+
+</mapper>

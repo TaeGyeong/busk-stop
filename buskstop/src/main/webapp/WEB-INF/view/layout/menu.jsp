@@ -81,58 +81,59 @@
 <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
 	<%-- 임시용 --%>
 
+   <%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
+   
+   
+   <!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
+   <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
+   <div class="main_menu col-sm-12">
+      <ul class="col-sm-12">
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연정보</a>
+            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
+               <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectPerformance.do">일반공연정보</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectArtistPerformance.do">아티스트공연정보</a></li>
+            </ul>
+         </li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectAllStage.do">공연장대관</a></li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상</a>
+            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
+               <li class="col-sm-12" style="padding: 0;"><a href="#" id="goArtistVideo">홍보영상</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="#" id="goPerformanceVideo">공연영상</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="#" id="goPracticeVideo">연습영상</a></li>
+            </ul>
+         </li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#" style="padding: 0;">재능거래</a>
+            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
+               <li class="col-sm-12" style="padding: 0;"><a href="#">멤버구인</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="#">레슨구인</a></li>
+            </ul>
+         </li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">중고거래</a>
+            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
+               <li class="col-sm-12" style="padding: 0;"><a href="#">판매목록</a></li>
+               <li class="col-sm-12" style="padding: 0;"><a href="#">구매희망</a></li>
+            </ul>
+         </li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">고객센터</a></li>
+      </ul>
+   </div>
+   <%-- 임시용 --%>
+   <!-- 아티스트 홍보 영상 페이지로 이동하는 폼 hidden -->
+   <form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goArtistVideoForm">
+      <sec:csrfInput/>
+      <input type="hidden" name="category" value="artist"/>
+   </form>   
+   <!-- 공연영상 페이지로 이동하는 폼 hidden -->
+   <form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goPerformanceVideoForm">
+      <sec:csrfInput/>
+      <input type="hidden" name="category" value="performance"/>
+   </form>
+   <!-- 연습영상 페이지로 이동하는 폼 hidden -->
+   <form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goPracticeVideoForm">
+      <sec:csrfInput/>
+      <input type="hidden" name="category" value="practice"/>
+   </form>
 
-	<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
-	
-	<!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
-	<%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
-	<div class="main_menu col-sm-12">
-		<ul class="col-sm-12">
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/allSelectPerformance.do">공연정보</a>
-				<ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-					<li class="col-sm-12" style="padding: 0;"><a href="#">일반공연정보</a></li>
-					<li class="col-sm-12" style="padding: 0;"><a href="#">아티스트공연정보</a></li>
-				</ul>
-			</li>
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectAllStage.do">공연장대관</a></li>
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상</a>
-				<ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-					<li class="col-sm-12" style="padding: 0;"><a href="#" id="goArtistVideo">홍보영상</a></li>
-					<li class="col-sm-12" style="padding: 0;"><a href="#" id="goPerformanceVideo">공연영상</a></li>
-					<li class="col-sm-12" style="padding: 0;"><a href="#" id="goPracticeVideo">연습영상</a></li>
-				</ul>
-			</li>
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#" style="padding: 0;">재능거래</a>
-				<ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-					<li class="col-sm-12" style="padding: 0;"><a href="#">멤버구인</a></li>
-					<li class="col-sm-12" style="padding: 0;"><a href="#">레슨구인</a></li>
-				</ul>
-			</li>
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">중고거래</a>
-				<ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-					<li class="col-sm-12" style="padding: 0;"><a href="#">판매목록</a></li>
-					<li class="col-sm-12" style="padding: 0;"><a href="#">구매희망</a></li>
-				</ul>
-			</li>
-			<li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">고객센터</a></li>
-		</ul>
-	</div>
-	<%-- 임시용 --%>
-	<!-- 아티스트 홍보 영상 페이지로 이동하는 폼 hidden -->
-	<form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goArtistVideoForm">
-		<sec:csrfInput/>
-		<input type="hidden" name="category" value="artist"/>
-	</form>	
-	<!-- 공연영상 페이지로 이동하는 폼 hidden -->
-	<form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goPerformanceVideoForm">
-		<sec:csrfInput/>
-		<input type="hidden" name="category" value="performance"/>
-	</form>
-	<!-- 연습영상 페이지로 이동하는 폼 hidden -->
-	<form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goPracticeVideoForm">
-		<sec:csrfInput/>
-		<input type="hidden" name="category" value="practice"/>
-	</form>
 <script>
 $(document).ready(function(){
 	$("#goArtistVideo").on("click", function(){

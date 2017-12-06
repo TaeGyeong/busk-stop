@@ -25,7 +25,7 @@
 <script>
 $(document).ready(function(){
 	$(document).on("click", "#addImage", function() {
-		$('<div><input type="file" name="stageImage" class="form-control" id="inputImage"><button id="addImage" type="button" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default">삭제</button><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div></div>').appendTo("#imgs");
+		$('<div><input type="file" name="imgs" class="form-control" id="inputImage"><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div><button type="button" id="addImage" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default" type="button">삭제</button></div>').appendTo("#img_box");
 	});
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
@@ -36,21 +36,17 @@ $(function(){
 	$(document).on("change", "#inputImage", function(){
 		readURL(this);
 	});
-})
+});
 
 function readURL(input){
 	if(input.files && input.files[0]){
 		var reader = new FileReader();
 		
 		reader.onload = function(e){
-			$(input).next().next().next().children().last().attr('src', e.target.result);
+			$(input).next().children().last().attr('src', e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
-}
-
-function cancel(){
-	document.location.href= "${initParam.rootPath}/stageView.do";
 }
 </script>
 
@@ -100,14 +96,13 @@ function cancel(){
 			<input type="text" name="instrument" class="form-control">
 		</div>
 			
-		<div class="form-group" id="imgs">
+		<div class="form-group" id="img_box">
 			<label>이미지</label>
-			<input type="file" name="stageImage" class="form-control" id="inputImage">
 			<button id="addImage" class="btn btn-default" type="button">추가</button>
-			<div></div>
+			<input type="file" name="imgs" class="form-control" id="inputImage">
 			<div style="text-align: center;">
 				<label>이미지 미리보기</label><br>
-				<img id="imgView" src="#" alt="img" style="height: 300px;"/>
+				<img id="imgView" src="#" alt="img" style="height: 300px;"/>				
 			</div>
 		</div>
 			
@@ -148,6 +143,6 @@ function cancel(){
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<button type="submit" class="btn btn-default">등록</button>
-		<button type="button" class="btn btn-default" onclick="cancel()">취소</button>
+		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
 	</form>
 </div>

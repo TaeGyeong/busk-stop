@@ -2,6 +2,7 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +24,7 @@ public class Stage implements Serializable{
 	private Date stageRegTime;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRentalDate;
+	private List<StageImage> stageImage;
 	
 	public Stage() {
 	}
@@ -30,7 +32,7 @@ public class Stage implements Serializable{
 	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea,
 			String stageInstrument, String stageContent, int stageParking, int stageDrinking, int stageFoodSell,
 			int stageFoodRestriction, int stageReservation, String stageSellerId, Date stageRegTime,
-			Date stageRentalDate) {
+			Date stageRentalDate, List<StageImage> stageImage) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
@@ -46,6 +48,7 @@ public class Stage implements Serializable{
 		this.stageSellerId = stageSellerId;
 		this.stageRegTime = stageRegTime;
 		this.stageRentalDate = stageRentalDate;
+		this.stageImage = stageImage;
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class Stage implements Serializable{
 				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
 				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
 				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
-				+ stageRegTime + ", stageRentalDate=" + stageRentalDate + "]";
+				+ stageRegTime + ", stageRentalDate=" + stageRentalDate + ", stageImage=" + stageImage + "]";
 	}
 
 	public int getStageNo() {
@@ -178,6 +181,14 @@ public class Stage implements Serializable{
 		this.stageRentalDate = stageRentalDate;
 	}
 
+	public List<StageImage> getStageImage() {
+		return stageImage;
+	}
+
+	public void setStageImage(List<StageImage> stageImage) {
+		this.stageImage = stageImage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -188,6 +199,7 @@ public class Stage implements Serializable{
 		result = prime * result + stageDrinking;
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
+		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
 		result = prime * result + ((stageInstrument == null) ? 0 : stageInstrument.hashCode());
 		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
@@ -223,6 +235,11 @@ public class Stage implements Serializable{
 		if (stageFoodRestriction != other.stageFoodRestriction)
 			return false;
 		if (stageFoodSell != other.stageFoodSell)
+			return false;
+		if (stageImage == null) {
+			if (other.stageImage != null)
+				return false;
+		} else if (!stageImage.equals(other.stageImage))
 			return false;
 		if (stageInstrument == null) {
 			if (other.stageInstrument != null)
@@ -262,8 +279,6 @@ public class Stage implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
 }

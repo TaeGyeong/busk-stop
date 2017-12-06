@@ -48,6 +48,11 @@ public class StageDaoImpl implements StageDao{
 	public int selectStageCount() {
 		return session.selectOne(makeSqlId("selectStageCount"));
 	}
+	
+	@Override
+	public int updateStage(Stage stage) {
+		return session.update(makeSqlId("updateStage"), stage);
+	}
 
 	@Override
 	public int selectStageCountByLocation(String stageLocation, String sDate, String eDate) {

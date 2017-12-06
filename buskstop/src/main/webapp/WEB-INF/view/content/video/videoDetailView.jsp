@@ -244,7 +244,6 @@ select {
 }
 
 div{
-	border: 1px solid black;
 	text-align:center;
 }
 </style>
@@ -335,7 +334,7 @@ div{
 			</div>
 			<sec:authorize access="isAuthenticated()">			 
 				<div style="float:right">
-					<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요."></textarea>
+					<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요.">
 					<button id="enterVideoCommentBtn" type="button">등록</button>
 				</div>
 			</sec:authorize>

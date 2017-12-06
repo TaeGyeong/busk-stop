@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<h2>카테고리 선택</h2>
+<h2>영상등록 카테고리 선택</h2>
 <form action="${initParam.rootPath }/artist/selectArtistVideoCategory.do" method="post">
 	<sec:csrfInput/>
 	<button type="submit">아티스트 홍보 영상</button>

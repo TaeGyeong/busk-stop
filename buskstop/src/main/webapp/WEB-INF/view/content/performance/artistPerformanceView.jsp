@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 	function goDetail(root, no){
-		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
+		document.location.href= root+'/artistPerformanceDetailView.do?performanceNo='+no
 	}
 	
 	$(document).ready(function(){
@@ -26,7 +26,6 @@
 				}
 			});
 		});
-		
 		$("#category").change(function(){
 			var val = $(this).val();
 			if(val=='date'){
@@ -118,7 +117,7 @@ select {
 </style>
 
 	<div id="container">
-		<h1>VIEW - 일반공연 정보 리스트</h1>
+		<h1>VIEW - 아티스트공연 정보 리스트</h1>
 		<hr>
 		<table id="product_tb" style="display: table;">
 			<thead id="thead">
@@ -140,8 +139,7 @@ select {
 					<tr style="cursor: pointer;">
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle} </td>
-						<!-- <c:if test="${item.commentCount > 0}"><span style="color: red;">(${item.commentCount>0})</span></c:if></td> -->
+						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH시mm분"/></td>
 						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
@@ -153,7 +151,7 @@ select {
 			</tbody>
 		</table>
 		<br>
-		<form action="${initParam.rootPath }/selectPerformance.do">
+		<form action="${initParam.rootPath }/selectArtistPerformance.do">
 			<select name="category" id="category" style="float: left;">
 				<option value="title">제목</option>
 				<option value="user">작성자</option>
@@ -168,7 +166,7 @@ select {
 			종료일 : <input type="date" name="eDate">
 			</div>
 			<button type="submit">검색</button>
-			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
+			<button type="button" onclick="location.href='${initParam.rootPath}/artist/performanceRegisterView.do'">글쓰기</button>
 		</form>
 		<%-- 페이징 처리 --%>
 		<p/>
@@ -176,7 +174,7 @@ select {
 			<ul class="pagination">
 				<%-- 첫페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
+					<a href="${initParam.rootPath }/selectArtistPerformance.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}">&lt;&lt;</a>
 				</li>
 				<%--
 					이전 페이지 그룹 처리
@@ -185,7 +183,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
+							<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">◀</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -209,7 +207,7 @@ select {
 				  		</c:when>
 						<c:otherwise>
 							<li>
-								<a href="${initParam.rootPath }/selectPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
+								<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}">${num }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -221,7 +219,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
+							<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}">▶</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -232,7 +230,7 @@ select {
 				</c:choose>
 				<%-- 마지막 페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
+					<a href="${initParam.rootPath }/selectArtistPerformance.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}">&gt;&gt;</a>
 				</li>
 			</ul>
 		</div>

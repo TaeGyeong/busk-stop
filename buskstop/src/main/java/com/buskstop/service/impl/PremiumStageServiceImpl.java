@@ -11,24 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.AuthorityDao;
+import com.buskstop.dao.PremiumStageDao;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
-import com.buskstop.dao.StageSupplierDao;
-import com.buskstop.dao.UserDao;
-import com.buskstop.service.StageService;
+import com.buskstop.service.PremiumStageService;
 import com.buskstop.vo.Authority;
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
-import com.buskstop.vo.StageSupplier;
 
 @Service
-public class StageServiceImpl implements StageService{
+public class PremiumStageServiceImpl implements PremiumStageService{
 	
 	@Autowired
 	private AuthorityDao authorDao;
 	
 	@Autowired
-	private StageSupplierDao supplierDao;
+	private PremiumStageDao supplierDao;
 	
 	@Autowired
 	private StageDao stageDao;
@@ -38,18 +37,18 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	@Transactional
-	public void registerSupplier(StageSupplier supplier) {
+	public void registerSupplier(PremiumStage supplier) {
 		supplierDao.insertStageSupplier(supplier);
 		authorDao.insertAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
 	}
 	
 	@Override
-	public int updateSupplier(StageSupplier supplier) {
+	public int updateSupplier(PremiumStage supplier) {
 		return supplierDao.updateStageSupplier(supplier);
 	}
 
 	@Override
-	public StageSupplier selectSupplierById(String userId) {
+	public PremiumStage selectSupplierById(String userId) {
 		return supplierDao.selectSupplierById(userId);
 	}
 	
@@ -116,21 +115,18 @@ public class StageServiceImpl implements StageService{
 		return map;
 	}
 	
+	@Override
+	public void updateStage(Stage stage) {
+		stageDao.updateStage(stage);
+	}
 	
+	@Override
+	public List<StageImage> selectStageImageByStageNo(int stageNo) {
+		return stageImageDao.selectStageImageByStageNo(stageNo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public void deleteStageImageByStageNo(int stageNo) {
+		stageImageDao.deleteStageImageByStageNo(stageNo);
+	}
 }
