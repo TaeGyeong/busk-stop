@@ -45,6 +45,10 @@ tr:hover{
 	<input type="hidden" id ="videoCategory" name="category" value="performance" class="form-control">
 	<button type="submit">검색</button>
 </form>
+<form action="${initParam.rootPath }/member/selectPerformanceVideoCategory.do" method="post">
+	<sec:csrfInput/>
+	<button class="btn btn-default">글쓰기</button>
+</form>
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */
