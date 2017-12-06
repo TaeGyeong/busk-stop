@@ -39,7 +39,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	@Transactional
 	public void registerSupplier(PremiumStage supplier) {
 		supplierDao.insertStageSupplier(supplier);
-		authorDao.insertAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
+		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
 	}
 	
 	@Override
