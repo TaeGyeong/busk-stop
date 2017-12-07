@@ -2,7 +2,10 @@ package com.buskstop.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,32 +69,56 @@ public class MyPageController {
 		// response
 		return "redirect:/registerSuccessView.do";
 	}
+	
+	/***************************************
+	 * 대관공급자로 등록한다.
+	 * @param supplier
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 ***************************************/
 
 	@RequestMapping("/member/registSupplier")
-	public String registSupplier(@ModelAttribute PremiumStage supplier, BindingResult r, HttpServletRequest request)
+	public ModelAndView registSupplier(@ModelAttribute PremiumStage supplier,BindingResult r, HttpServletRequest request)
 			throws IllegalStateException, IOException {
+		// binding test
 		System.out.println(r);
 		System.out.println(r.getErrorCount());
-
-		System.out.println(supplier);
+		
 		// Image 설정
-		MultipartFile multiImage = supplier.getMultiImage();
-		if (multiImage != null && !multiImage.isEmpty()) {
-			// 디렉토리 지정
+		List<MultipartFile> list = supplier.getMultiImage();
+		// 공연장 사진테이블에 넣을 사진의 directory를 저장하는 list
+		List<String> imageList = new ArrayList<>(); 
+		
+		// 반복문으로 여러개의 이미지를 업로드 시킨다. 이미지는 suppierImage 폴더에 저장
+		for(MultipartFile image : list) {
+			int i=0; // 첫번째 사진은 VO에 설정할 stageImage 파일명. (대표사진)
 			String dir = request.getServletContext().getRealPath("/supplierImage");
 			String fileName = UUID.randomUUID().toString();
-			File upImage = new File(dir, fileName + ".jpg");
-			multiImage.transferTo(upImage);
-			supplier.setPremiumStageImage(fileName + ".jpg");
+			File upImage = new File(dir,fileName+".jpg");
+			image.transferTo(upImage);
+			if(i==0) {
+				// 첫번째 사진은 premium supplier의 대표사진으로 등록한다.
+				supplier.setStageImage(fileName+".jpg");
+				i=1;
+			}
+			imageList.add(fileName+".jpg");
 		}
-
-		System.out.println(supplier);
+		
+		// 프리미엄 공연장 사진을 등록
+		// 매개변수로는 사진의 파일명 list, 사업장 번호. (사진번호는 sequence로 보낸다)
+		stageService.registStageImage(supplier.getEstablishNum(), imageList);
 
 		// business service
 		stageService.registerSupplier(supplier);
+		
+		// ModelAndView 로 보낼 map
+		Map<String,Object> map = new HashMap<>();
+		map.put("premiumStage", supplier);
+		map.put("imageList", imageList);
 
 		// response
-		return "redirect:/registerSuccessView.do";
+		return new ModelAndView("stage/premiumStageDetailView.tiles","map",map);
 	}
 
 	/**************************************
@@ -170,14 +197,14 @@ public class MyPageController {
 	@RequestMapping("/producer/updateSupplier")
 	public String updateSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request) throws IllegalStateException, IOException {
 		// 파일처리.
-		MultipartFile multiImage = supplier.getMultiImage();
+		List<MultipartFile> multiImage = supplier.getMultiImage();
 		if (multiImage != null && !multiImage.isEmpty()) {
 			// 디렉토리 지정
 			String dir = request.getServletContext().getRealPath("/supplierImage");
 			String fileName = UUID.randomUUID().toString();
 			File upImage = new File(dir, fileName + ".jpg");
-			multiImage.transferTo(upImage);
-			supplier.setPremiumStageImage(fileName+".jpg");
+			((MultipartFile) multiImage).transferTo(upImage);
+			supplier.setStageImage(fileName+".jpg");
 		}
 		
 		stageService.updateSupplier(supplier);

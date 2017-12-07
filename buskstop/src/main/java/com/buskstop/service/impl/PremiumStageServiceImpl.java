@@ -129,4 +129,13 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	public void deleteStageImageByStageNo(int stageNo) {
 		stageImageDao.deleteStageImageByStageNo(stageNo);
 	}
+
+	@Override
+	@Transactional
+	public void registStageImage(int establishNum, List<String> imageList) {
+		for(String stageImage : imageList) {
+			stageImageDao.insertStageImage(new StageImage(1, stageImage, establishNum));
+		}
+	}
+	
 }

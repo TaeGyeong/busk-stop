@@ -1,5 +1,7 @@
 package com.buskstop.service;
 
+import java.util.List;
+
 import com.buskstop.vo.Authority;
 import com.buskstop.vo.User;
 
@@ -46,4 +48,6 @@ public interface UserService {
 	 * @return
 	 */
 	int findPasswordByEmail(String email);
+	
+	
 }
