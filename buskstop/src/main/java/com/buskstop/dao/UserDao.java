@@ -37,4 +37,11 @@ public interface UserDao {
 	 * @return
 	 */
 	int selectDropById(String id);
+	
+	/**
+	 * Email로 User 정보 select
+	 * @param email
+	 * @return
+	 */
+	String selectUserIdByEmail(String email);
 }

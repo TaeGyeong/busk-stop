@@ -32,4 +32,18 @@ public interface UserService {
 	 * @return
 	 */
 	void dropMember(String id);
+	
+	/**
+	 * Email 로 User를 찾는 select service.
+	 * @param email
+	 * @return
+	 */
+	String selectMemberByEmail(String email);
+	
+	/**
+	 * Email로 User 정보 찾은 후 메일링 하는 service.
+	 * @param email
+	 * @return
+	 */
+	int findPasswordByEmail(String email);
 }

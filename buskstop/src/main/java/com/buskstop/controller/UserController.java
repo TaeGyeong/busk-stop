@@ -114,4 +114,34 @@ public class UserController {
 		context.setAuthentication(null);
 		return "redirect:/index.do";
 	}
+	
+	/************************ ID/PASSWORD 찾기 컨트롤러 ************************/
+	
+	@RequestMapping(value="/findIdByEmail", produces="application/String;charset=utf8")
+	public @ResponseBody String findUserIdByEmail(String email) {
+		System.out.println(email);
+		String userId=service.selectMemberByEmail(email);
+		System.out.println(userId);
+		if(userId==null) {
+			return "등록된 id가 없습니다.";
+		}
+		return "ID는 "+userId+" 입니다";
+	}
+	
+	// Mailing controller
+	@RequestMapping(value="/findPasswordByEmail", produces="application/String;charset=utf8")
+	public @ResponseBody String findPasswordByEmail(String id,String email) {
+		
+		// id로 존재하는 member인지 확인
+		if(service.selectMemberById(id)==null) {
+			return "idNotFound";
+		}
+		// 비밀번호 찾기 mailing 하고서 결과값 int 로 return.
+		int flagNum = service.findPasswordByEmail(email);
+		if(flagNum==0) {
+			return "emailNotFound";
+		} else {
+			return "success";
+		}
+	}
 }
