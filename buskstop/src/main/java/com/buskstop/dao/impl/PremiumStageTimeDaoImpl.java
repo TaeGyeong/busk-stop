@@ -21,8 +21,7 @@ public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
 
 	@Override
 	public int insertPremiumStageTime(PremiumStageTime premiumStageTime) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert(makeSqlId("insertPremiumStageTime"), premiumStageTime);
 	}
 
 	@Override

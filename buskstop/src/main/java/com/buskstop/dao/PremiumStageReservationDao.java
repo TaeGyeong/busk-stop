@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.PremiumStageReservation;
@@ -33,7 +34,15 @@ public interface PremiumStageReservationDao {
 	 * @param stageState
 	 * @return
 	 */
-	int updatePremiumStageReservationState(int stageState);
+	int updatePremiumStageReservationState(int reservationNo, int stageState);
+	
+	/**
+	 * 프리미엄 공연장 시간옵션 예약상태 수락대기(1)로 변경
+	 * 신청시간도 함께 등록
+	 * @param stageState
+	 * @return
+	 */
+	int updatePremiumStageReservationStateToOne(int reservationNo, Date reservationRegTime);
 	
 	/**
 	 * 사업장번호로 사업장이 가지는 시간옵션 전체조회
@@ -48,7 +57,7 @@ public interface PremiumStageReservationDao {
 	 * @param stageState
 	 * @return
 	 */
-	List<PremiumStageReservation> selectPremiumStageReservationByStageState(int stageState, int establishNo);
+	List<PremiumStageReservation> selectPremiumStageReservationByStageState(PremiumStageReservation reservation);
 	
 	/**
 	 * 대관신청자 아이디로 예약옵션 조회

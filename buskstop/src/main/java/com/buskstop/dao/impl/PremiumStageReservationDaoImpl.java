@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,8 +22,7 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 
 	@Override
 	public int insertPremiumStageReservation(PremiumStageReservation reservation) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert(makeSqlId("insertPremiumStageReservation"), reservation);
 	}
 
 	@Override
@@ -38,7 +38,13 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 	}
 
 	@Override
-	public int updatePremiumStageReservationState(int stageState) {
+	public int updatePremiumStageReservationStateToOne(int reservationNo, Date reservationRegTime) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int updatePremiumStageReservationState(int reservationNo, int stageState) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -50,7 +56,7 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 	}
 
 	@Override
-	public List<PremiumStageReservation> selectPremiumStageReservationByStageState(int stageState, int establishNo) {
+	public List<PremiumStageReservation> selectPremiumStageReservationByStageState(PremiumStageReservation reservation) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -60,5 +66,6 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
