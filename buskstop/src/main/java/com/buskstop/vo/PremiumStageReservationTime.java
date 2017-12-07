@@ -4,22 +4,17 @@ import java.util.Date;
 
 public class PremiumStageReservationTime {
 
-	private int timeCode;
-	private Date stageRentalDate;
-	private int establishNo;
+	private int timeCode; //0~24시를 1~24로 정함
+	private Date stageRentalDate; //시간 아닌 날짜만
+	private int reservationNo; //사업장 번호
 	
 	public PremiumStageReservationTime() {}
-	
-	public PremiumStageReservationTime(int timeCode, Date stageRentalDate, int establishNo) {
+
+	public PremiumStageReservationTime(int timeCode, Date stageRentalDate, int reservationNo) {
+		super();
 		this.timeCode = timeCode;
 		this.stageRentalDate = stageRentalDate;
-		this.establishNo = establishNo;
-	}
-
-	@Override
-	public String toString() {
-		return "PremiumStageReservationTime [timeCode=" + timeCode + ", stageRentalDate=" + stageRentalDate
-				+ ", establishNo=" + establishNo + "]";
+		this.reservationNo = reservationNo;
 	}
 
 	public int getTimeCode() {
@@ -38,19 +33,25 @@ public class PremiumStageReservationTime {
 		this.stageRentalDate = stageRentalDate;
 	}
 
-	public int getEstablishNo() {
-		return establishNo;
+	public int getReservationNo() {
+		return reservationNo;
 	}
 
-	public void setEstablishNo(int establishNo) {
-		this.establishNo = establishNo;
+	public void setReservationNo(int reservationNo) {
+		this.reservationNo = reservationNo;
+	}
+
+	@Override
+	public String toString() {
+		return "PremiumStageReservationTime [timeCode=" + timeCode + ", stageRentalDate=" + stageRentalDate
+				+ ", reservationNo=" + reservationNo + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + establishNo;
+		result = prime * result + reservationNo;
 		result = prime * result + ((stageRentalDate == null) ? 0 : stageRentalDate.hashCode());
 		result = prime * result + timeCode;
 		return result;
@@ -65,7 +66,7 @@ public class PremiumStageReservationTime {
 		if (getClass() != obj.getClass())
 			return false;
 		PremiumStageReservationTime other = (PremiumStageReservationTime) obj;
-		if (establishNo != other.establishNo)
+		if (reservationNo != other.reservationNo)
 			return false;
 		if (stageRentalDate == null) {
 			if (other.stageRentalDate != null)
@@ -76,8 +77,5 @@ public class PremiumStageReservationTime {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 }
