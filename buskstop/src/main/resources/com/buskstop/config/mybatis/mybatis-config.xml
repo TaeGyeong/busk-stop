@@ -35,5 +35,7 @@
 		<mapper resource="com/buskstop/config/mybatis/mapper/stageMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/followMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/stageImageMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/premiumStageReservationMapper.xml"/>
+		<mapper resource="com/buskstop/config/mybatis/mapper/premiumStageTimeMapper.xml"/>
 	</mappers>
 </configuration>

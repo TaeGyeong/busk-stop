@@ -2,15 +2,15 @@ package com.buskstop.vo;
 
 import java.util.Date;
 
-public class PremiumStageReservationTime {
+public class PremiumStageTime {
 
 	private int timeCode; //0~24시를 1~24로 정함
 	private Date stageRentalDate; //시간 아닌 날짜만
 	private int reservationNo; //사업장 번호
 	
-	public PremiumStageReservationTime() {}
+	public PremiumStageTime() {}
 
-	public PremiumStageReservationTime(int timeCode, Date stageRentalDate, int reservationNo) {
+	public PremiumStageTime(int timeCode, Date stageRentalDate, int reservationNo) {
 		super();
 		this.timeCode = timeCode;
 		this.stageRentalDate = stageRentalDate;
@@ -65,7 +65,7 @@ public class PremiumStageReservationTime {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PremiumStageReservationTime other = (PremiumStageReservationTime) obj;
+		PremiumStageTime other = (PremiumStageTime) obj;
 		if (reservationNo != other.reservationNo)
 			return false;
 		if (stageRentalDate == null) {
