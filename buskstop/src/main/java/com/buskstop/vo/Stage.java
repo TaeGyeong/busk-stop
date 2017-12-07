@@ -22,7 +22,7 @@ public class Stage implements Serializable{
 	private String stageSellerId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date stageRegTime;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date stageRentalDate;
 	private List<StageImage> stageImage;
 	
