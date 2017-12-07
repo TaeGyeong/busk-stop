@@ -1,53 +1,100 @@
 package com.buskstop.vo;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-public class PremiumStage {
-	
+public class PremiumStage implements Serializable {
+
 	private int establishNum; // 사업장번호
 	private String operatorUserId;
 	private int operatorNo;
-	private String premiumStageName; // 장소명
-	private String premiumStageLocation; // 주소
-	private int premiumStageArea; // 면적
-	private int premiumStageCost; 
-	private int premiumStageParking;
-	private int premiumStageDrinking;
-	private int premiumStageFoodSell;
-	private int premiumStageFoodRestriction;
-	private MultipartFile multiImage; 
-	private String premiumStageImage; // 대표사진
+	private String stageName; // 장소명
+	private String stageLocation; // 주소
+	private int stageArea; // 면적
+	private int stageCost;
+	private String stageInstrument;
+	private String stageContent;
+	private int stageParking;
+	private int stageDrinking;
+	private int stageFoodSell;
+	private int stageFoodRestriction;
+	private List<MultipartFile> multiImage;
+	private String stageImage; // 대표사진
 
-	public PremiumStage() {}
+	public PremiumStage() {
+	}
 
-	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String premiumStageName,
-			String premiumStageLocation, int premiumStageArea, int premiumStageCost, int premiumStageParking,
-			int premiumStageDrinking, int premiumStageFoodSell, int premiumStageFoodRestriction,
-			MultipartFile multiImage, String premiumStageImage) {
+	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
+			int stageArea, int stageCost, String stageImage) {
 		this.establishNum = establishNum;
 		this.operatorUserId = operatorUserId;
 		this.operatorNo = operatorNo;
-		this.premiumStageName = premiumStageName;
-		this.premiumStageLocation = premiumStageLocation;
-		this.premiumStageArea = premiumStageArea;
-		this.premiumStageCost = premiumStageCost;
-		this.premiumStageParking = premiumStageParking;
-		this.premiumStageDrinking = premiumStageDrinking;
-		this.premiumStageFoodSell = premiumStageFoodSell;
-		this.premiumStageFoodRestriction = premiumStageFoodRestriction;
-		this.multiImage = multiImage;
-		this.premiumStageImage = premiumStageImage;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageCost = stageCost;
+		this.stageImage = stageImage;
 	}
 
-	@Override
-	public String toString() {
-		return "PremiumStage [establishNum=" + establishNum + ", operatorUserId=" + operatorUserId + ", operatorNo="
-				+ operatorNo + ", premiumStageName=" + premiumStageName + ", premiumStageLocation="
-				+ premiumStageLocation + ", premiumStageArea=" + premiumStageArea + ", premiumStageCost="
-				+ premiumStageCost + ", premiumStageParking=" + premiumStageParking + ", premiumStageDrinking="
-				+ premiumStageDrinking + ", premiumStageFoodSell=" + premiumStageFoodSell
-				+ ", premiumStageFoodRestriction=" + premiumStageFoodRestriction + ", multiImage=" + multiImage
-				+ ", premiumStageImage=" + premiumStageImage + "]";
+	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
+			int stageArea, int stageCost, int stageParking, int stageDrinking, int stageFoodSell,
+			int stageFoodRestriction, List<MultipartFile> multiImage, String stageImage) {
+		this.establishNum = establishNum;
+		this.operatorUserId = operatorUserId;
+		this.operatorNo = operatorNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageCost = stageCost;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.multiImage = multiImage;
+		this.stageImage = stageImage;
+	}
+	
+	
+
+	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
+			int stageArea, int stageCost, String stageInstrument, String stageContent, int stageParking,
+			int stageDrinking, int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage,
+			String stageImage) {
+		this.establishNum = establishNum;
+		this.operatorUserId = operatorUserId;
+		this.operatorNo = operatorNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageCost = stageCost;
+		this.stageInstrument = stageInstrument; // 악기
+		this.stageContent = stageContent; // 내용
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.multiImage = multiImage;
+		this.stageImage = stageImage;
+	}
+	
+	
+
+	public String getStageInstrument() {
+		return stageInstrument;
+	}
+
+	public void setStageInstrument(String stageInstrument) {
+		this.stageInstrument = stageInstrument;
+	}
+
+	public String getStageContent() {
+		return stageContent;
+	}
+
+	public void setStageContent(String stageContent) {
+		this.stageContent = stageContent;
 	}
 
 	public int getEstablishNum() {
@@ -74,84 +121,84 @@ public class PremiumStage {
 		this.operatorNo = operatorNo;
 	}
 
-	public String getPremiumStageName() {
-		return premiumStageName;
+	public String getStageName() {
+		return stageName;
 	}
 
-	public void setPremiumStageName(String premiumStageName) {
-		this.premiumStageName = premiumStageName;
+	public void setStageName(String stageName) {
+		this.stageName = stageName;
 	}
 
-	public String getPremiumStageLocation() {
-		return premiumStageLocation;
+	public String getStageLocation() {
+		return stageLocation;
 	}
 
-	public void setPremiumStageLocation(String premiumStageLocation) {
-		this.premiumStageLocation = premiumStageLocation;
+	public void setStageLocation(String stageLocation) {
+		this.stageLocation = stageLocation;
 	}
 
-	public int getPremiumStageArea() {
-		return premiumStageArea;
+	public int getStageArea() {
+		return stageArea;
 	}
 
-	public void setPremiumStageArea(int premiumStageArea) {
-		this.premiumStageArea = premiumStageArea;
+	public void setStageArea(int stageArea) {
+		this.stageArea = stageArea;
 	}
 
-	public int getPremiumStageCost() {
-		return premiumStageCost;
+	public int getStageCost() {
+		return stageCost;
 	}
 
-	public void setPremiumStageCost(int premiumStageCost) {
-		this.premiumStageCost = premiumStageCost;
+	public void setStageCost(int stageCost) {
+		this.stageCost = stageCost;
 	}
 
-	public int getPremiumStageParking() {
-		return premiumStageParking;
+	public int getStageParking() {
+		return stageParking;
 	}
 
-	public void setPremiumStageParking(int premiumStageParking) {
-		this.premiumStageParking = premiumStageParking;
+	public void setStageParking(int stageParking) {
+		this.stageParking = stageParking;
 	}
 
-	public int getPremiumStageDrinking() {
-		return premiumStageDrinking;
+	public int getStageDrinking() {
+		return stageDrinking;
 	}
 
-	public void setPremiumStageDrinking(int premiumStageDrinking) {
-		this.premiumStageDrinking = premiumStageDrinking;
+	public void setStageDrinking(int stageDrinking) {
+		this.stageDrinking = stageDrinking;
 	}
 
-	public int getPremiumStageFoodSell() {
-		return premiumStageFoodSell;
+	public int getStageFoodSell() {
+		return stageFoodSell;
 	}
 
-	public void setPremiumStageFoodSell(int premiumStageFoodSell) {
-		this.premiumStageFoodSell = premiumStageFoodSell;
+	public void setStageFoodSell(int stageFoodSell) {
+		this.stageFoodSell = stageFoodSell;
 	}
 
-	public int getPremiumStageFoodRestriction() {
-		return premiumStageFoodRestriction;
+	public int getStageFoodRestriction() {
+		return stageFoodRestriction;
 	}
 
-	public void setPremiumStageFoodRestriction(int premiumStageFoodRestriction) {
-		this.premiumStageFoodRestriction = premiumStageFoodRestriction;
+	public void setStageFoodRestriction(int stageFoodRestriction) {
+		this.stageFoodRestriction = stageFoodRestriction;
 	}
 
-	public MultipartFile getMultiImage() {
+	public List<MultipartFile> getMultiImage() {
 		return multiImage;
 	}
 
-	public void setMultiImage(MultipartFile multiImage) {
+	public void setMultiImage(List<MultipartFile> multiImage) {
 		this.multiImage = multiImage;
 	}
 
-	public String getPremiumStageImage() {
-		return premiumStageImage;
+	public String getStageImage() {
+		return stageImage;
 	}
 
-	public void setPremiumStageImage(String premiumStageImage) {
-		this.premiumStageImage = premiumStageImage;
+	public void setStageImage(String stageImage) {
+		this.stageImage = stageImage;
 	}
 
 	@Override
@@ -159,17 +206,18 @@ public class PremiumStage {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + establishNum;
+		result = prime * result + ((multiImage == null) ? 0 : multiImage.hashCode());
 		result = prime * result + operatorNo;
 		result = prime * result + ((operatorUserId == null) ? 0 : operatorUserId.hashCode());
-		result = prime * result + premiumStageArea;
-		result = prime * result + premiumStageCost;
-		result = prime * result + premiumStageDrinking;
-		result = prime * result + premiumStageFoodRestriction;
-		result = prime * result + premiumStageFoodSell;
-		result = prime * result + ((premiumStageImage == null) ? 0 : premiumStageImage.hashCode());
-		result = prime * result + ((premiumStageLocation == null) ? 0 : premiumStageLocation.hashCode());
-		result = prime * result + ((premiumStageName == null) ? 0 : premiumStageName.hashCode());
-		result = prime * result + premiumStageParking;
+		result = prime * result + stageArea;
+		result = prime * result + stageCost;
+		result = prime * result + stageDrinking;
+		result = prime * result + stageFoodRestriction;
+		result = prime * result + stageFoodSell;
+		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
+		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
+		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
+		result = prime * result + stageParking;
 		return result;
 	}
 
@@ -184,6 +232,11 @@ public class PremiumStage {
 		PremiumStage other = (PremiumStage) obj;
 		if (establishNum != other.establishNum)
 			return false;
+		if (multiImage == null) {
+			if (other.multiImage != null)
+				return false;
+		} else if (!multiImage.equals(other.multiImage))
+			return false;
 		if (operatorNo != other.operatorNo)
 			return false;
 		if (operatorUserId == null) {
@@ -191,36 +244,44 @@ public class PremiumStage {
 				return false;
 		} else if (!operatorUserId.equals(other.operatorUserId))
 			return false;
-		if (premiumStageArea != other.premiumStageArea)
+		if (stageArea != other.stageArea)
 			return false;
-		if (premiumStageCost != other.premiumStageCost)
+		if (stageCost != other.stageCost)
 			return false;
-		if (premiumStageDrinking != other.premiumStageDrinking)
+		if (stageDrinking != other.stageDrinking)
 			return false;
-		if (premiumStageFoodRestriction != other.premiumStageFoodRestriction)
+		if (stageFoodRestriction != other.stageFoodRestriction)
 			return false;
-		if (premiumStageFoodSell != other.premiumStageFoodSell)
+		if (stageFoodSell != other.stageFoodSell)
 			return false;
-		if (premiumStageImage == null) {
-			if (other.premiumStageImage != null)
+		if (stageImage == null) {
+			if (other.stageImage != null)
 				return false;
-		} else if (!premiumStageImage.equals(other.premiumStageImage))
+		} else if (!stageImage.equals(other.stageImage))
 			return false;
-		if (premiumStageLocation == null) {
-			if (other.premiumStageLocation != null)
+		if (stageLocation == null) {
+			if (other.stageLocation != null)
 				return false;
-		} else if (!premiumStageLocation.equals(other.premiumStageLocation))
+		} else if (!stageLocation.equals(other.stageLocation))
 			return false;
-		if (premiumStageName == null) {
-			if (other.premiumStageName != null)
+		if (stageName == null) {
+			if (other.stageName != null)
 				return false;
-		} else if (!premiumStageName.equals(other.premiumStageName))
+		} else if (!stageName.equals(other.stageName))
 			return false;
-		if (premiumStageParking != other.premiumStageParking)
+		if (stageParking != other.stageParking)
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PremiumStage [establishNum=" + establishNum + ", operatorUserId=" + operatorUserId + ", operatorNo="
+				+ operatorNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation + ", stageArea="
+				+ stageArea + ", stageCost=" + stageCost + ", stageParking=" + stageParking + ", stageDrinking="
+				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
+				+ ", multiImage=" + multiImage + ", stageImage=" + stageImage + "]";
+	}
+
 	
 }

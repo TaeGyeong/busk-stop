@@ -13,7 +13,7 @@ public interface PremiumStageService {
 	 * 공급자 등록
 	 * @param supplier
 	 */
-	void registerSupplier(PremiumStage supplier);
+	void registerSupplier(PremiumStage supplier, List<String> imageList);
 	
 	/**
 	 * 공급자 정보 수정
@@ -68,7 +68,15 @@ public interface PremiumStageService {
 
 	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 
-	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, String startDate, String endDate);
 
-	Map<String, Object> selectStageByInstrument(int page, String instrument, String startDate, String endDate);
+	Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate);
+	
+	/**
+	 * 프리미엄공연장 사진등록.
+	 * @param establishNum
+	 * @param imageList
+	 */
+	void registStageImage(int establishNum, List<String> imageList);
+
+	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate);
 }

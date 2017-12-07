@@ -12,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.AuthorityDao;
 import com.buskstop.dao.PremiumStageDao;
+import com.buskstop.dao.PremiumStageImageDao;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.vo.Authority;
 import com.buskstop.vo.PremiumStage;
+import com.buskstop.vo.PremiumStageImage;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 
@@ -30,17 +32,15 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	private PremiumStageDao supplierDao;
 	
 	@Autowired
+	private PremiumStageImageDao premiumImageDao;
+	
+	@Autowired
 	private StageDao stageDao;
 	
 	@Autowired
 	private StageImageDao stageImageDao;
 	
-	@Override
-	@Transactional
-	public void registerSupplier(PremiumStage supplier) {
-		supplierDao.insertStageSupplier(supplier);
-		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
-	}
+	
 	
 	@Override
 	public int updateSupplier(PremiumStage supplier) {
@@ -74,6 +74,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	
 	@Override
 	public Map<String, Object> selectAllStage(int page){
+		System.out.println("서비스");
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
 		map.put("pageBean", pb);
@@ -83,7 +84,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	}
 	
 	@Override
-	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, String startDate, String endDate){
+	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate){
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
 		System.out.println("위치:"+stageLocation);
@@ -94,7 +95,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	}
 
 	@Override
-	public Map<String, Object> selectStageByInstrument(int page, String instrument, String startDate, String endDate) {
+	public Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
 		
@@ -129,4 +130,26 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	public void deleteStageImageByStageNo(int stageNo) {
 		stageImageDao.deleteStageImageByStageNo(stageNo);
 	}
+	
+	/********************************* 공급자 등록 *********************************/
+	@Override
+	@Transactional
+	public void registerSupplier(PremiumStage supplier, List<String> imageList) {
+		// 공급자 정보 넣기
+		supplierDao.insertPremiumStage(supplier);
+		// 권한 넣기
+		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
+		// 이미지 db에 넣기
+		for(String s : imageList) {
+			premiumImageDao.insertImage(new PremiumStageImage(1, s, supplier.getEstablishNum()));
+		}
+	}
+
+	// 왜 추가했나요? 답변 해주시면 내공 100
+	@Override
+	public void registStageImage(int establishNum, List<String> imageList) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
