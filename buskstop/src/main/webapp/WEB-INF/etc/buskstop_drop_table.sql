@@ -32,6 +32,8 @@ DROP TABLE PREMIUM_STAGE
 DROP TABLE PREMIUM_STAGE_RESERVATION 
 	CASCADE CONSTRAINTS;
 	
+DROP SEQUENCE PREMIUM_RESERVATION_NO_SEQ;
+	
 /*--------프리미엄 공급장 예약 시간코드---------------------------------------------------------------------------*/
 
 /* 프리미엄 공급장 예약 시간코드 */
@@ -44,6 +46,8 @@ DROP TABLE PREMIUM_STAGE_RESERVATION_TIME
 /* 프리미엄 공연장 사진 */
 DROP TABLE PREMIUM_STAGE_IMAGE 
 	CASCADE CONSTRAINTS;
+	
+DROP SEQUENCE PREMIUM_STAGE_IMAGE_NO_SEQ;
 
 /*------공연장(공급자 게시물)-----------------------------------------------------------------*/
 
@@ -74,7 +78,7 @@ DROP TABLE STAGE_REVIEW
 /*-------공연장 대관 시간코드--------------------------------------------------------------------------*/
 
 /* 공연장 대관 시간코드 */
-DROP TABLE TABLE 
+DROP TABLE STAGE_RESERVATION_TIME 
 	CASCADE CONSTRAINTS;
 
 
@@ -108,12 +112,15 @@ DROP TABLE PERFORMANCE_LIKE
 /* 동영상(게시물) */
 DROP TABLE VIDEO 
 	CASCADE CONSTRAINTS;
+
+DROP SEQUENCE VIDEO_NO_SEQ;
 /*---동영상 댓글-------------------------------------------------------------------*/
 
 /* 동영상 댓글 */
 DROP TABLE VIDEO_COMMENT 
 	CASCADE CONSTRAINTS;
 
+DROP SEQUENCE VIDEO_COMMENT_NO_SEQ;
 /*-동영상 좋아요-----------------------------------------------------------------------*/
 
 /* 동영상 좋아요 */
@@ -189,8 +196,6 @@ DROP TABLE STUDENTS
 	CASCADE CONSTRAINTS;
 
 /*------------------------------------------------------------------------------------*/
-
-
 
 
 /*---고객센터----------------------------------------------------------------------*/
