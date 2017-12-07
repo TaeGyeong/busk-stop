@@ -93,7 +93,7 @@ function readURL(input){
 			
 		<div class="form-group">
 			<label>구비된 악기</label>
-			<input type="text" name="instrument" class="form-control">
+			<input type="text" name="stageInstrument" class="form-control">
 		</div>
 			
 		<div class="form-group" id="img_box">
@@ -136,9 +136,8 @@ function readURL(input){
 		</div>
 			
 		<div class="form-group">
-			<label>예약가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageReservation" value="1">예약 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageReservation" value="0">예약 불가</label>
+			<label>대관일</label>
+			<input type="Date" name="stageRentalDate" class="form-control">
 		</div>
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>

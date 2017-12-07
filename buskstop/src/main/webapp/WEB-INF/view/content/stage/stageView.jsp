@@ -11,8 +11,8 @@
 	$(document).ready(function(){
 		
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
-		$("#sDate").val(nowDate);
-		$("#eDate").val(nowDate);
+		$("#startDate").val(nowDate);
+		$("#endDate").val(nowDate);
 			
 		$(".submit").click(function(){
 			
@@ -143,8 +143,8 @@ select {
 	--%>
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do" method="post">
 		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소명으로 검색">
-		<input type="date" name="sDate" id="sDate" >
-		<input type="date" name="eDate" id="eDate" >
+		<input type="date" name="startDate" id="startDate" >
+		<input type="date" name="endDate" id="endDate" >
 		<input type="text" name="searchInstrument" id="searchInstrument" placeholder="악기로 검색">
 		<br>
 		<%--

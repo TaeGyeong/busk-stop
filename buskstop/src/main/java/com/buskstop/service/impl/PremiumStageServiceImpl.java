@@ -74,6 +74,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	
 	@Override
 	public Map<String, Object> selectAllStage(int page){
+		System.out.println("서비스");
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
 		map.put("pageBean", pb);
@@ -83,7 +84,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	}
 	
 	@Override
-	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, String startDate, String endDate){
+	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate){
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
 		System.out.println("위치:"+stageLocation);
@@ -94,7 +95,7 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	}
 
 	@Override
-	public Map<String, Object> selectStageByInstrument(int page, String instrument, String startDate, String endDate) {
+	public Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
 		
