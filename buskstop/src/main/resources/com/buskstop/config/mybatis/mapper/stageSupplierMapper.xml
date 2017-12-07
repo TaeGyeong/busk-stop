@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.buskstop.config.mybatis.mapper.stageSupplierMapper">
 	
-	<insert id="insertStageSupplier" parameterType="stageSupplier">
+	<insert id="insertStageSupplier" parameterType="PremiumStage">
 		INSERT INTO STAGE_SUPPLIER
 		(ESTABLISH_NO, OPERATOR_USER_ID, OPERATOR_NO, STAGE_NAME, STAGE_LOCATION, STAGE_AREA, STAGE_IMAGE)
 		VALUES(
@@ -11,7 +11,7 @@
 		)
 	</insert>
 	
-	<update id="updateStageSupplier" parameterType="stageSupplier">
+	<update id="updateStageSupplier" parameterType="PremiumStage">
 		UPDATE	STAGE_SUPPLIER
 		SET		OPERATOR_USER_ID = #{userId},
 				OPERATOR_NO = #{operatorNum},
@@ -22,7 +22,7 @@
 		WHERE 	ESTABLISH_NO = #{establishNum}				
 	</update>
 	
-	<select id="selectSupplierById" parameterType="string" resultType="stageSupplier">
+	<select id="selectSupplierById" parameterType="string" resultType="PremiumStage">
 		SELECT	*
 		FROM	STAGE_SUPPLIER
 		WHERE	OPERATOR_USER_ID = #{userId}

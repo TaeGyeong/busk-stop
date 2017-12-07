@@ -22,10 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
-import com.buskstop.service.StageService;
+import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.Artist;
-import com.buskstop.vo.StageSupplier;
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.User;
 
 @Controller
@@ -38,7 +38,7 @@ public class MyPageController {
 	private ArtistService artistService;
 
 	@Autowired
-	private StageService stageService;
+	private PremiumStageService stageService;
 
 	/**************************************
 	 * 아티스트 & 공급자 등록 controller
@@ -68,7 +68,7 @@ public class MyPageController {
 	}
 
 	@RequestMapping("/member/registSupplier")
-	public String registSupplier(@ModelAttribute StageSupplier supplier, BindingResult r, HttpServletRequest request)
+	public String registSupplier(@ModelAttribute PremiumStage supplier, BindingResult r, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 		System.out.println(r);
 		System.out.println(r.getErrorCount());
@@ -82,7 +82,7 @@ public class MyPageController {
 			String fileName = UUID.randomUUID().toString();
 			File upImage = new File(dir, fileName + ".jpg");
 			multiImage.transferTo(upImage);
-			supplier.setStageImage(fileName + ".jpg");
+			supplier.setPremiumStageImage(fileName + ".jpg");
 		}
 
 		System.out.println(supplier);
@@ -168,7 +168,7 @@ public class MyPageController {
 	 **************************************/
 
 	@RequestMapping("/producer/updateSupplier")
-	public String updateSupplier(@ModelAttribute StageSupplier supplier, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String updateSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request) throws IllegalStateException, IOException {
 		// 파일처리.
 		MultipartFile multiImage = supplier.getMultiImage();
 		if (multiImage != null && !multiImage.isEmpty()) {
@@ -177,7 +177,7 @@ public class MyPageController {
 			String fileName = UUID.randomUUID().toString();
 			File upImage = new File(dir, fileName + ".jpg");
 			multiImage.transferTo(upImage);
-			supplier.setStageImage(fileName+".jpg");
+			supplier.setPremiumStageImage(fileName+".jpg");
 		}
 		
 		stageService.updateSupplier(supplier);

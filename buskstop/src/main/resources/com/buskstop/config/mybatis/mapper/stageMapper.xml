@@ -24,7 +24,7 @@
 		<result column="STAGE_LOCATION" property="stageLocation"/>
 		<result column="STAGE_COST" property="stageCost"/>
 		<result column="STAGE_AREA" property="stageArea"/>
-		<result column="STAGE_INSTRUMENT" property="instrument"/>
+		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
 		<result column="STAGE_CONTENT" property="stageContent"/>
 		<result column="STAGE_PARKING" property="stageParking"/>
 		<result column="STAGE_DRINKING" property="stageDrinking"/>
@@ -60,19 +60,39 @@
 	</select>
 	
 	<select id="selectStageByStageNo" parameterType="_int" resultMap="stage-resultmap">
-	select *
-	from stage
-	where stage_no=#{stageNo}
+		select *
+		from stage
+		where stage_no=#{stageNo}
 	</select>
 	
 	<select id="selectStage" resultMap="stage-resultmap">
-	select *
-	from stage
+		select *
+		from stage
 	</select>
 	
 	<select id="selectStageCount" resultType="_int">
 		select count(*) from stage
 	</select>
+	
+	<!-- 공연정보 수정 -->
+	<update id="updateStage" parameterType="Stage">
+		UPDATE stage
+		<set>
+			<if test="stageName != null">STAGE_NAME = #{stageName},</if>
+			<if test="stageLocation != null">STAGE_LOCATION = #{stageLocation},</if>
+			<if test="stageCost != null">STAGE_COST = #{stageCost},</if>
+			<if test="stageArea != null">STAGE_AREA = #{stageArea},</if>
+			<if test="instrument != null">STAGE_INSTRUMENT = #{instrument},</if>
+			<if test="stageContent != null">STAGE_CONTENT = #{stageContent},</if>
+			<if test="stageParking != null">STAGE_PARKING = #{stageParking},</if>
+			<if test="stageDrinking != null">STAGE_DRINKING = #{stageDrinking},</if>
+			<if test="stageFoodSell != null">STAGE_FOOD_SELL = #{stageFoodSell},</if>
+			<if test="stageFoodRestriction != null">STAGE_FOOD_RESTRICTION = ${stageFoodRestriction},</if>
+			<if test="stageReservation != null">STAGE_RESERVATION = #{stageReservation},</if>
+			<if test="stageSellerId != null">STAGE_SELLER_ID = #{stageSellerId}</if>
+		</set>
+		WHERE STAGE_NO = #{stageNo}
+	</update>
 	
 	<select id="selectStageCountByLocation" resultType="_int" parameterType="String">
 		select count(*) 
@@ -96,7 +116,8 @@
 	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
 		select count(*) 
 		from stage
-		where stage_instrument like '%'||#{instrument}||'%'
+		where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+		and stage_date &lt;= #{eDate}
 	</select>
 	
 	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
@@ -106,23 +127,32 @@
 			from (
 					select *
 					from stage
-					where stage_instrument like '%'||#{instrument}||'%'
+					where stage_instrument like '%'||#{instrument}||'%' and stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
 					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
 	</select>
 	
-	
-	<!-- 이 부분은 동엽이가 따로 뽑아서 한다고 해서 일단 주석
-	<select id="selectStageCountByStageDate" resultType="">
-	
+	<select id="selectStageCountByDate" resultMap="stage-resultmap" parameterType="map">
+		select count(*) 
+		from performance
+		where performance_date &gt;= #{sDate}
+		and performance_date &lt;= #{eDate}
 	</select>
 	
-	<select id="selectStageByStgeDate" parameterType="map" resultType="_int">
-	select count(*)
-	from stage
-	where stage_
-	</select>
-	 -->
+	<select id="selectStageByDate" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_date &gt;= #{sDate}
+					and stage_date &lt;= #{eDate}
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
 	
+	</select>
 </mapper>

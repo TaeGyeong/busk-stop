@@ -22,4 +22,5 @@
 		<li><a href="${initParam.rootPath }/changeInfoCategoryView.do">영상수정/삭제</a></li>
 		<li><a href="${initParam.rootPath }/stage/stageRegisterView.do">공연장 등록</a></li>
 		<li><a href="${initParam.rootPath }/stageUpdateView.do">공연장수정</a></li>
-		<li><a href="${initParam.rootPath }/stageUpdateView.do">공연장수정테스트</a></li>
+		<li><a href="${initParam.rootPath }/updateStage.do?stageNo=1">공연장수정테스트</a></li>
+			

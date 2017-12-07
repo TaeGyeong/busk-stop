@@ -25,7 +25,6 @@
 	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
 	<mvc:view-controller path="/testpage.do" view-name="testpage.tiles"/>
 	<mvc:view-controller path="/update_performance.do" view-name="performance/update_performance.tiles"/>
-	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
 	<mvc:view-controller path="/videoSelectCategoryView.do" view-name="video/videoSelectCategoryView.tiles"/>
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
@@ -53,6 +52,10 @@
 	<mvc:view-controller path="/findId.do" view-name="user/FindIdByEmail.tiles"/>
 	<mvc:view-controller path="/findPassword.do" view-name="user/FindPasswordByEmail.tiles"/>
 	<!-- test link -->
+	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
+	<mvc:view-controller path="/mapTest3.do" view-name="performance/mapTest3.tiles"/>
+	<mvc:view-controller path="/searchStageByAddress.do" view-name="performance/searchStageByAddress.tiles2"/>
+	<mvc:view-controller path="/searchStageByKeyword.do" view-name="performance/searchStageByKeyword.tiles2"/>
 	
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

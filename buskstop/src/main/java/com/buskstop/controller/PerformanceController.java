@@ -95,9 +95,9 @@ public class PerformanceController {
 	// 이건 수정 화면에서 그 전에 입력 했던 내용들 불러오는거고
 	@RequestMapping("/performanceUpdate3")
 	public ModelAndView updatePerformance2(@RequestParam int performanceNo) {
-		if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
-		Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
-		return new ModelAndView("update_performance.do","Performance",performance);
+			if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
+			Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
+			return new ModelAndView("update_performance.do","Performance",performance);
 		} else return new ModelAndView("performanceDetailView.do?performanceNo="+performanceNo);
 			
 	}

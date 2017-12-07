@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
@@ -23,27 +23,17 @@
 <body>
 	<header>
 		<div class="header-container">
-			<div class="header-top">
-				<tiles:insertAttribute name="header"/>
-			</div>
 			<%-- 메뉴 --%>
 			<nav>
 				<tiles:insertAttribute name="menu"/>
 			</nav>
 		</div>
 	</header>
-	<hr>
-	
 	<div class="container">
 		<section class="content">
 			<tiles:insertAttribute name="content" />
 		</section>
 		
 	</div>
-	<footer>
-		<div class="footer-container">
-			<tiles:insertAttribute name="footer"/>
-		</div>
-	</footer>
 </body>
 </html>

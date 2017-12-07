@@ -11,27 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.AuthorityDao;
+import com.buskstop.dao.PremiumStageDao;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
-import com.buskstop.dao.StageSupplierDao;
-import com.buskstop.dao.UserDao;
-import com.buskstop.service.StageService;
+import com.buskstop.service.PremiumStageService;
 import com.buskstop.vo.Authority;
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
-import com.buskstop.vo.StageSupplier;
 
 @Service
-public class StageServiceImpl implements StageService{
-
-	@Autowired
-	private UserDao userDao;
+public class PremiumStageServiceImpl implements PremiumStageService{
 	
 	@Autowired
 	private AuthorityDao authorDao;
 	
 	@Autowired
-	private StageSupplierDao supplierDao;
+	private PremiumStageDao supplierDao;
 	
 	@Autowired
 	private StageDao stageDao;
@@ -41,18 +37,18 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	@Transactional
-	public void registerSupplier(StageSupplier supplier) {
+	public void registerSupplier(PremiumStage supplier) {
 		supplierDao.insertStageSupplier(supplier);
-		authorDao.insertAuthority(new Authority(supplier.getUserId(), "ROLE_PRODUCER"));
+		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
 	}
 	
 	@Override
-	public int updateSupplier(StageSupplier supplier) {
+	public int updateSupplier(PremiumStage supplier) {
 		return supplierDao.updateStageSupplier(supplier);
 	}
 
 	@Override
-	public StageSupplier selectSupplierById(String userId) {
+	public PremiumStage selectSupplierById(String userId) {
 		return supplierDao.selectSupplierById(userId);
 	}
 	
@@ -78,42 +74,32 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	public Map<String, Object> selectAllStage(int page){
-		System.out.println("서비스"+page);
 		HashMap<String, Object> map = new HashMap<>();
-		
 		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
-		
 		map.put("pageBean", pb);
 		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(),pb.getEndItemInPage());
-		
-		map.put("list",list);
-		System.out.println("서비스ㅎㅎㅎ"+list);
-		
+		map.put("list",list);		
 		return map;
-		
 	}
 	
 	@Override
-	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation){
-		
+	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, String startDate, String endDate){
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation),page);
-		
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
+		System.out.println("위치:"+stageLocation);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation);
+		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation,startDate,endDate);
 		map.put("list",list);
-		
 		return map;
-		
 	}
 
 	@Override
-	public Map<String, Object> selectStageByInstrument(int page, String instrument) {
+	public Map<String, Object> selectStageByInstrument(int page, String instrument, String startDate, String endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument),page);
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
 		
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument);
+		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,startDate,endDate);
 		map.put("list",list);
 		
 		return map;
@@ -122,29 +108,25 @@ public class StageServiceImpl implements StageService{
 	@Override
 	public Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByStageDate(startDate,endDate),page);
 		map.put("pageBean", pb);
 		List<Stage> list = stageDao.selectStageByStgeDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), startDate, endDate);
-		
+		map.put("list", list);
 		return map;
 	}
 	
+	@Override
+	public void updateStage(Stage stage) {
+		stageDao.updateStage(stage);
+	}
 	
+	@Override
+	public List<StageImage> selectStageImageByStageNo(int stageNo) {
+		return stageImageDao.selectStageImageByStageNo(stageNo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public void deleteStageImageByStageNo(int stageNo) {
+		stageImageDao.deleteStageImageByStageNo(stageNo);
+	}
 }
