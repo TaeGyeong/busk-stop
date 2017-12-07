@@ -10,47 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.common.util.PagingBean;
-import com.buskstop.dao.AuthorityDao;
-import com.buskstop.dao.PremiumStageDao;
-import com.buskstop.dao.PremiumStageImageDao;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
-import com.buskstop.service.PremiumStageService;
-import com.buskstop.vo.Authority;
-import com.buskstop.vo.PremiumStage;
-import com.buskstop.vo.PremiumStageImage;
+import com.buskstop.service.StageService;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 
 @Service
-public class PremiumStageServiceImpl implements PremiumStageService{
+public class StageServiceImpl implements StageService{
 	
-	@Autowired
-	private AuthorityDao authorDao;
-	
-	@Autowired
-	private PremiumStageDao supplierDao;
-	
-	@Autowired
-	private PremiumStageImageDao premiumImageDao;
 	
 	@Autowired
 	private StageDao stageDao;
 	
 	@Autowired
 	private StageImageDao stageImageDao;
-	
-	
-	
-	@Override
-	public int updateSupplier(PremiumStage supplier) {
-		return supplierDao.updateStageSupplier(supplier);
-	}
-
-	@Override
-	public PremiumStage selectSupplierById(String userId) {
-		return supplierDao.selectSupplierById(userId);
-	}
 	
 	@Override
 	public void insertStage(Stage stage) {
@@ -130,26 +104,13 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	public void deleteStageImageByStageNo(int stageNo) {
 		stageImageDao.deleteStageImageByStageNo(stageNo);
 	}
-	
-	/********************************* 공급자 등록 *********************************/
+
 	@Override
 	@Transactional
-	public void registerSupplier(PremiumStage supplier, List<String> imageList) {
-		// 공급자 정보 넣기
-		supplierDao.insertPremiumStage(supplier);
-		// 권한 넣기
-		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
-		// 이미지 db에 넣기
-		for(String s : imageList) {
-			premiumImageDao.insertImage(new PremiumStageImage(1, s, supplier.getEstablishNum()));
-		}
-	}
-
-	// 왜 추가했나요? 답변 해주시면 내공 100
-	@Override
 	public void registStageImage(int establishNum, List<String> imageList) {
-		// TODO Auto-generated method stub
-		
+		for(String stageImage : imageList) {
+			stageImageDao.insertStageImage(new StageImage(1, stageImage, establishNum));
+		}
 	}
 	
 }
