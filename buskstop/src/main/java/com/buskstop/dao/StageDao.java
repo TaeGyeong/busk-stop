@@ -40,4 +40,11 @@ public interface StageDao {
 	 * @return
 	 */
 	int updateStage(Stage stage);
+	
+	/**
+	 * 공연장 번호를 받아서 삭제
+	 * @param stageNo
+	 * @return
+	 */
+	int deleteStageByStageNo(int stageNo);
 }

@@ -99,5 +99,10 @@ public class StageDaoImpl implements StageDao{
 		map.put("eDate",endDate);		
 		return session.selectList(makeSqlId("selectStageByStageDate"),map);
 	}
+	
+	@Override
+	public int deleteStageByStageNo(int stageNo) {
+		return session.delete(makeSqlId("deleteStageByStageNo"), stageNo);
+	}
 
 }

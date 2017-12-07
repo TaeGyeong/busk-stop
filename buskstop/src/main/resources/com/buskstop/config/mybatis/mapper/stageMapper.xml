@@ -132,6 +132,12 @@
 		) where rownum >= #{begin}
 	</select>
 	
+	<!-- 공연장 번호를 받아서 delete -->
+	<delete id="deleteStageByStageNo" parameterType="_int">
+		delete from STAGE
+		where stage_no = #{stageNo}
+	</delete>
+	
 	
 	<!-- 이 부분은 동엽이가 따로 뽑아서 한다고 해서 일단 주석
 	<select id="selectStageCountByStageDate" resultType="">
