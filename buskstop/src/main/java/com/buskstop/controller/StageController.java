@@ -2,7 +2,6 @@ package com.buskstop.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.buskstop.service.StageService;
+import com.buskstop.service.PremiumStageService;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.User;
@@ -30,7 +29,7 @@ import com.buskstop.vo.User;
 public class StageController {
 
 	@Autowired
-	private StageService service;
+	private PremiumStageService service;
 	
 	
 	@RequestMapping("/stageReservation")
@@ -71,24 +70,20 @@ public class StageController {
 		return new ModelAndView("redirect:/selectAllStage.do");
 	}
 	
-	@RequestMapping("selectAllStage")
-	public ModelAndView selectAllStage(@RequestParam(required=false) String locationSearch, @RequestParam(required=false) String instrumentSearch, @RequestParam(required=false) String sDate, @RequestParam(required=false) String eDate) throws Exception{
+	@RequestMapping("/selectAllStage")
+	public ModelAndView selectAllStage(@RequestParam(required=false) String locationSearch, @RequestParam(required=false) String instrumentSearch, @RequestParam Date startDate, @RequestParam Date endDate) throws Exception{
+		System.out.println("컨트롤러"+startDate+endDate);
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
+		System.out.println(locationSearch+instrumentSearch);
 		
-		if(locationSearch!=null) {
-			map = service.selectStageByStageLocation(page,locationSearch);
-		} else if(instrumentSearch!=null) {
-			map = service.selectStageByInstrument(page,instrumentSearch);
-		} else if(sDate!=null && eDate!=null) {
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			
-			Date startDate = transFormat.parse(sDate);
-			Date endDate = transFormat.parse(eDate);
-			
+		if(locationSearch==null && instrumentSearch==null) {
+			map = service.selectStageByStageLocation(page,locationSearch,startDate,endDate);
+		} else if(locationSearch==null && instrumentSearch!=null) {
+			map = service.selectStageByInstrument(page,instrumentSearch,startDate,endDate);
+		} else if(locationSearch!=null && instrumentSearch==null) {
 			map = service.selectStageByStageDate(page,startDate,endDate);
-			
 		}
 		
 		map = service.selectAllStage(page);
@@ -96,17 +91,17 @@ public class StageController {
 		list = (List<Stage>)map.get("list");
 		
 		map.put("list", list);
-		map.put("search", locationSearch);
-		map.put("category", instrumentSearch);
-		map.put("sDate", sDate);
-		map.put("eDate", eDate);
+		map.put("stageLocation", locationSearch);
+		map.put("instruemtn", instrumentSearch);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
 		
 		return new ModelAndView("stageView.do","map",map);
 		
 	}
 	
 	// 공연장 정보 공연장 수정에 빼와서 뿌려주기
-	@RequestMapping("updateStage")
+	@RequestMapping("/updateStage")
 	public ModelAndView updateStageByStageNo(@RequestParam int stageNo) {
 		Stage stage = null;
 		
@@ -118,7 +113,7 @@ public class StageController {
 	}
 	
 	//공연정보 받아서 수정
-	@RequestMapping("updateStageChange")
+	@RequestMapping("/updateStageChange")
 	public ModelAndView updateStageChange(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
 		//공연장 변경
 		service.updateStage(stage);

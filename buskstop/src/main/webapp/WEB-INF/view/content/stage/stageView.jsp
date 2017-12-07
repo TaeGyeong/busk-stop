@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -9,25 +10,28 @@
 
 	$(document).ready(function(){
 		
+		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
+		$("#startDate").val(nowDate);
+		$("#endDate").val(nowDate);
+			
 		$(".submit").click(function(){
-			if($("#searchName").val()=="" && $("#searchLocation").val()=="" && $("#searchInstrument").val()==""){
+			
+			if($("#searchLocation").val()=="" 
+					&& $("#searchInstrument").val()==""){
 				alert("검색할 키워드를 입력해주세요.");
-			} else if ( $("#reservationStart").val()==""){
-				alert("대관 날짜를 선택해주세요.")	
-			} else if ( $("restervationEnd").val()==""){
-				alert("날짜를 선택하세유.")	
-			}
+				return false;
+			} 
 		})
 		
-		
-	});
-	
-	$(function() {
-
-		$(".calendar").datepicker({
-			buttonImageOnly : true,
-			numberOfMonths : 2,
-			dateFormat : "yymmdd"
+		$("#category").change(function(){
+			val = $(this).val();
+			if(val=='date'){
+				$(".search").css('display', 'none');
+				$(".date_search").css('display', 'block');
+			}else{
+				$(".search").css('display', 'block');
+				$(".date_search").css('display', 'none');
+			}
 		});
 	});
 	
@@ -119,20 +123,40 @@ select {
 </style>
 <div id="container">
 	<hr>
-	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
+	 <%--
+	<form action="${initParam.rootPath }/selectAllStage.do">
+			<select name="category" id="category" style="float: left;">
+				<option value="title" id="option">제목</option>
+				<option value="user" id="option">작성자</option>
+				<option value="location" id="option">공연장소</option>
+				<option value="name" id="option">공연이름</option>
+				<option value="content" id="option">내용</option>
+				<option value="date" id="option">공연날짜</option>
+			</select> 
+			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
+			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
+			시작일 : <input type="date" name="sDate">
+			종료일 : <input type="date" name="eDate">
+			</div>
+			<button type="submit">검색</button>
+		</form>
+	--%>
+	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do" method="post">
 		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소명으로 검색">
-		<input type="date" name="stageReservationStart" class="calendar" id="stageReservationStart" >
-		<input type="date" name="stageReservationEnd" class="calendar" id="stageReservationEnd" >
+		<input type="date" name="startDate" id="startDate" >
+		<input type="date" name="endDate" id="endDate" >
 		<input type="text" name="searchInstrument" id="searchInstrument" placeholder="악기로 검색">
 		<br>
+		<%--
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
 		<input type="checkbox" name="box" value="음주">음주 가능
 		<input type="checkbox" name="box" value="식사">식사 가능
 		<input type="checkbox" name="box" value="외부음식">외부음식 반입 가능
-		
+		 --%>
 		<button type="submit" name="search" class="submit">검색</button>
-		
+		<sec:csrfInput/>
 	</form>
+	
 	<hr>
 	<h1>대관 목록</h1>
 	<hr>
@@ -161,6 +185,7 @@ select {
 				</c:forEach>
 		</tbody>
 	</table>
+	
 	<div style="width: 100%;">
 		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
 	</div>

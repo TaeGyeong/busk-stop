@@ -38,6 +38,7 @@
 		<section class="content">
 			<tiles:insertAttribute name="content" />
 		</section>
+		
 	</div>
 	<footer>
 		<div class="footer-container">

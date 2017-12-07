@@ -17,19 +17,17 @@
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
 	<mvc:view-controller path="/myPageView.do" view-name="myPage/myPageView.tiles"/>
-	<mvc:view-controller path="/registerArtistView.do" view-name="user/registerArtistView.tiles"/>
-	<mvc:view-controller path="/registerSupplierView.do" view-name="user/registerSupplierView.tiles"/>
 	<mvc:view-controller path="/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
 	<mvc:view-controller path="/artist/performanceRegisterView.do" view-name="performance/artistPerformanceRegisterView.tiles"/>
 	<mvc:view-controller path="/registerSuccessView.do" view-name="user/registerSuccessView.tiles"/>
 	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
 	<mvc:view-controller path="/testpage.do" view-name="testpage.tiles"/>
 	<mvc:view-controller path="/update_performance.do" view-name="performance/update_performance.tiles"/>
-	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
 	<mvc:view-controller path="/videoSelectCategoryView.do" view-name="video/videoSelectCategoryView.tiles"/>
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
+	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>
 	<!-- 회원탈퇴링크 (아직 만든게없음 지워도 ㄱㅊ) -->
 	<mvc:view-controller path="/out_member_form.do" view-name="member/out_member_form.tiles"/>
 	<!-- password check link -->
@@ -48,7 +46,15 @@
 	<mvc:view-controller path="/stageUpdateView.do" view-name="stage/stageUpdateView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
 	<mvc:view-controller path="/stage/stageRegisterView.do" view-name="stage/stageRegisterView.tiles"/>
+	
+	<!-- 아이디 비밀번호 찾기 -->
+	<mvc:view-controller path="/findId.do" view-name="user/FindIdByEmail.tiles"/>
+	<mvc:view-controller path="/findPassword.do" view-name="user/FindPasswordByEmail.tiles"/>
 	<!-- test link -->
+	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
+	<mvc:view-controller path="/mapTest3.do" view-name="performance/mapTest3.tiles"/>
+	<mvc:view-controller path="/searchStageByAddress.do" view-name="performance/searchStageByAddress.tiles2"/>
+	<mvc:view-controller path="/searchStageByKeyword.do" view-name="performance/searchStageByKeyword.tiles2"/>
 	
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

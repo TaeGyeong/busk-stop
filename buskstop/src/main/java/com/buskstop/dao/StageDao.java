@@ -24,22 +24,25 @@ public interface StageDao {
 
 	int selectStageCountByLocation(String stageLocation);
 
-	List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation);
-
-	List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument);
-
 	int selectStageCountByStageDate(Date startDate, Date endDate);
 
 	List<Stage> selectStageByStgeDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
-
-	int selectStageCountByInstrument(String instrument);
+	int selectStageCountByLocation(String stageLocation, Date startDate, Date endDate);
 	
+	List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation,
+			Date startDate, Date endDate);
+
+	int selectStageCountByInstrument(String instrument, Date startDate, Date endDate);
+
 	/**
 	 * 공연장 수정
 	 * @param stage
 	 * @return
 	 */
 	int updateStage(Stage stage);
+	
+	List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument, Date sDate,
+			Date eDate);
 	
 	/**
 	 * 공연장 번호를 받아서 삭제

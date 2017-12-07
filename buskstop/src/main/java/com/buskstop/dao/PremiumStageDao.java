@@ -1,26 +1,27 @@
 package com.buskstop.dao;
 
-import com.buskstop.vo.StageSupplier;
+import com.buskstop.vo.PremiumStage;
 
-public interface StageSupplierDao {
+public interface PremiumStageDao {
 	/**
 	 * 공급자 insert
 	 * @param supplier
 	 * @return
 	 */
-	int insertStageSupplier(StageSupplier supplier);
+	int insertPremiumStage(PremiumStage supplier);
 	
 	/**
 	 * 공급자 정보 update
 	 * @param supplier
 	 * @return
 	 */
-	int updateStageSupplier(StageSupplier supplier);
+	int updateStageSupplier(PremiumStage supplier);
 	
 	/**
 	 * id로 공급자 정보 찾아오기.
 	 * @param userId
 	 * @return
 	 */
-	StageSupplier selectSupplierById(String userId);
+	PremiumStage selectSupplierById(String userId);
+	
 }

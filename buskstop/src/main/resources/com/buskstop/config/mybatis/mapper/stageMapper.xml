@@ -15,7 +15,8 @@
 		STAGE_FOOD_RESTRICTION,
 		STAGE_RESERVATION,
 		STAGE_SELLER_ID,
-		STAGE_REG_TIME
+		STAGE_REG_TIME,
+		STAGE_RENTAL_DATE
 	</sql>
 	
 	<resultMap type="Stage" id="stage-resultmap">
@@ -24,7 +25,7 @@
 		<result column="STAGE_LOCATION" property="stageLocation"/>
 		<result column="STAGE_COST" property="stageCost"/>
 		<result column="STAGE_AREA" property="stageArea"/>
-		<result column="STAGE_INSTRUMENT" property="instrument"/>
+		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
 		<result column="STAGE_CONTENT" property="stageContent"/>
 		<result column="STAGE_PARKING" property="stageParking"/>
 		<result column="STAGE_DRINKING" property="stageDrinking"/>
@@ -33,6 +34,7 @@
 		<result column="STAGE_RESERVATION" property="stageReservation"/>
 		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
+		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
 	</resultMap>
 	
 	<!-- 공연장 insert -->
@@ -42,9 +44,9 @@
 		</selectKey>
 		insert into STAGE (<include refid="column-stage"/>)
 		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
-		#{stageArea}, #{instrument}, #{stageContent}, #{stageParking}, 
+		#{stageArea}, #{stageInstrument}, #{stageContent}, #{stageParking}, 
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
-		#{stageReservation}, #{stageSellerId}, sysdate)
+		#{stageReservation}, #{stageSellerId}, sysdate, #{stageRentalDate})
 	</insert>
 	
 	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">
@@ -96,8 +98,13 @@
 	
 	<select id="selectStageCountByLocation" resultType="_int" parameterType="String">
 		select count(*) 
-		from stage
+		from (	select *
+					 		from stage
+					 		where stage_rental_date &gt;= #{sDate}  
+					 		and stage_rental_date &lt;= #{eDate}
+					 		)
 		where stage_location like '%'||#{stageLocation}||'%'
+		
 	</select>
 	
 	<select id="selectStageByStageLocation" parameterType="map" resultMap="stage-resultmap">
@@ -106,7 +113,11 @@
 			select rownum, <include refid="column-stage"/>
 			from (
 					select *
-					from stage
+					from (	select *
+					 		from stage
+					 		where stage_rental_date &gt;= #{sDate}  
+					 		and stage_rental_date &lt;= #{eDate}
+					 		)
 					where stage_location like '%'||#{stageLocation}||'%'
 					order by stage_no desc
 			) where rownum &lt; = #{end}
@@ -115,8 +126,12 @@
 	
 	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
 		select count(*) 
-		from stage
-		where stage_instrument like '%'||#{instrument}||'%'
+		from (	select *
+					 		from stage
+					 		where stage_rental_date &gt;= #{sDate}  
+					 		and stage_rental_date &lt;= #{eDate}
+					 		)
+		where stage_instrument like '%'||#{stageInstrument}||'%'
 	</select>
 	
 	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
@@ -125,11 +140,23 @@
 			select rownum, <include refid="column-stage"/>
 			from (
 					select *
-					from stage
+					from (	select *
+					 		from stage
+					 		where stage_rental_date &gt;= #{sDate}  
+					 		and stage_rental_date &lt;= #{eDate}
+					 		)
 					where stage_instrument like '%'||#{instrument}||'%'
+					 
 					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
+	</select>
+	
+	<select id="selectStageCountByDate" resultMap="stage-resultmap" parameterType="map">
+		select count(*) 
+		from performance
+		where stage_rental_date &gt;= #{sDate}
+		and stage_rental_date &lt;= #{eDate}
 	</select>
 	
 	<!-- 공연장 번호를 받아서 delete -->
@@ -139,15 +166,18 @@
 	</delete>
 	
 	
-	<!-- 이 부분은 동엽이가 따로 뽑아서 한다고 해서 일단 주석
-	<select id="selectStageCountByStageDate" resultType="">
+	<select id="selectStageByDate" resultMap="stage-resultmap" parameterType="map">
+	select <include refid="column-stage"/>
+		from (
+			select rownum, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_rental_date &gt;= #{sDate}
+					and stage_rental_date &lt;= #{eDate}
+					order by stage_no desc
+			) where rownum &lt; = #{end}
+		) where rownum >= #{begin}
 	
 	</select>
-	
-	<select id="selectStageByStgeDate" parameterType="map" resultType="_int">
-	select count(*)
-	from stage
-	where stage_
-	</select>
-	 -->
 </mapper>

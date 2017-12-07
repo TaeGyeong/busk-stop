@@ -16,3 +16,6 @@
 	
 	<button type="submit" class="btn-primary">로그인</button>
 </form>
+
+<span><a href="${initParam.rootPath }/findId.do">ID 찾기</a></span>
+<span><a href="${initParam.rootPath }/findPassword.do">비밀번호 찾기</a></span>
