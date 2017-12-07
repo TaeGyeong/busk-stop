@@ -48,6 +48,10 @@
 	<mvc:view-controller path="/stageUpdateView.do" view-name="stage/stageUpdateView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
 	<mvc:view-controller path="/stage/stageRegisterView.do" view-name="stage/stageRegisterView.tiles"/>
+	
+	<!-- 아이디 비밀번호 찾기 -->
+	<mvc:view-controller path="/findId.do" view-name="user/FindIdByEmail.tiles"/>
+	<mvc:view-controller path="/findPassword.do" view-name="user/FindPasswordByEmail.tiles"/>
 	<!-- test link -->
 	
 	

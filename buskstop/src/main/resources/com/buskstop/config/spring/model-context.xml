@@ -35,4 +35,20 @@
 		- Spring Security 적용하지 않는 경우 name="multipartResolver" 로 등록
 	-->
 	<bean name="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<!-- Eamil Sender -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="jisumongo@gmail.com" />
+		<property name="password" value="dlwltn123"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocal">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

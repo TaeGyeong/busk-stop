@@ -40,6 +40,14 @@ public class UserDaoImpl implements UserDao{
 		return session.selectOne(makeSqlId("selectDropById"), id);
 	}
 
+	@Override
+	public String selectUserIdByEmail(String email) {
+		return session.selectOne(makeSqlId("selectUserIdByEmail"), email);
+	}
+	
+	
+	
+
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.userMapper."+id;
 	}
