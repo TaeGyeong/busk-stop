@@ -29,6 +29,7 @@
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
+	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>
 	<!-- 회원탈퇴링크 (아직 만든게없음 지워도 ㄱㅊ) -->
 	<mvc:view-controller path="/out_member_form.do" view-name="member/out_member_form.tiles"/>
 	<!-- password check link -->
