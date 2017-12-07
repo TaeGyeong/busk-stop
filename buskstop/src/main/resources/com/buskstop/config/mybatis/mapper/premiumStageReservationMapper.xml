@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.buskstop.config.mybatis.mapper.premiumStageReservationMapper">
+<mapper namespace="com.buskstop.config.mybatis.mapper.premiumStageReservationMapper">
+	
+	<!--  sql 설정 -->
+	<sql id="premiumReservation-column-sql">
+		RESERVATION_NO,
+		STAGE_STATE,
+		USER_ID,
+		ESTABLISH_NO,
+		RESERVATION_REG_TIME
+	</sql>
+	
+	<sql id="premiumReservation-select-sql">
+		SELECT <include refid="premiumReservation-column-sql"/>
+		FROM	PREMIUM_STAGE_RESERVATION
+	</sql>
+	
+	<resultMap type="PremiumStageReservation" id="premiumReservation-resultMap">
+		<id column="RESERVATION_NO" property="reservationNo"/>
+		<result column="STAGE_STATE" property="stageState"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="ESTABLISH_NO" property="establishNo"/>
+		<result column="RESERVATION_REG_TIME" property="reservationRegTime"/>
+	</resultMap>
+	
+	<insert id="insertPremiumStageReservation" parameterType="PremiumStageReservation">
+		<selectKey keyProperty="RESERVATION_NO" resultType="_int" order="BEFORE">
+			select PREMIUM_STAGE_RESERVATION_NO_SEQ.nextval from dual
+		</selectKey>
+		INSERT INTO	PREMIUM_STAGE_RESERVATION
+		VALUES		(#{reservationNo},
+					 #{stageState},
+					 #{establishNo})
+	</insert>
+	
+	<delete id="deletePremiumStageReservation" parameterType="_int">
+		DELETE FROM PREMIUM_STAGE_RESERVATION
+		WHERE reservation_no = #{value}
+	</delete>
+	
+	<update id="updatePremiumStageReservation" parameterType="PremiumStageReservation">
+		UPDATE	PREMIUM_STAGE_RESERVATION
+		SET		reservation_no,
+				stage_state,
+				establish_no
+		WHERE	reservation_no = #{reservationNo}
+	</update>
+	
+	<select id="selectPremiumStageReservationByEstablishNo" parameterType="_int" resultMap="premiumReservation-resultMap">
+		<include refid="premiumReservation-select-sql"/>
+		WHERE	establish_no = #{value}
+	</select>
+	
+	
 </mapper>

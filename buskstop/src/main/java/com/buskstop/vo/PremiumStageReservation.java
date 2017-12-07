@@ -1,22 +1,30 @@
 package com.buskstop.vo;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PremiumStageReservation {
 
 		private int reservationNo; //옵션 번호
 		private int stageState; //예약상태 : 0 - 신청가능(거절), 1 - 신청중(수락대기), 2 - 대관완료(수락)
 		private String UserId; //예약신청자 ID
 		private int establishNo; //사업장번호
+		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		private Date reservationRegTime;//예약 신청자 신청시간
 		
 		
 		public PremiumStageReservation() {}
 
 
-		public PremiumStageReservation(int reservationNo, int stageState, String userId, int establishNo) {
+		public PremiumStageReservation(int reservationNo, int stageState, String userId, int establishNo,
+				Date reservationRegTime) {
 			super();
 			this.reservationNo = reservationNo;
 			this.stageState = stageState;
 			UserId = userId;
 			this.establishNo = establishNo;
+			this.reservationRegTime = reservationRegTime;
 		}
 
 
@@ -60,10 +68,21 @@ public class PremiumStageReservation {
 		}
 
 
+		public Date getReservationRegTime() {
+			return reservationRegTime;
+		}
+
+
+		public void setReservationRegTime(Date reservationRegTime) {
+			this.reservationRegTime = reservationRegTime;
+		}
+
+
 		@Override
 		public String toString() {
 			return "PremiumStageReservation [reservationNo=" + reservationNo + ", stageState=" + stageState
-					+ ", UserId=" + UserId + ", establishNo=" + establishNo + "]";
+					+ ", UserId=" + UserId + ", establishNo=" + establishNo + ", reservationRegTime="
+					+ reservationRegTime + "]";
 		}
 
 
@@ -74,6 +93,7 @@ public class PremiumStageReservation {
 			result = prime * result + ((UserId == null) ? 0 : UserId.hashCode());
 			result = prime * result + establishNo;
 			result = prime * result + reservationNo;
+			result = prime * result + ((reservationRegTime == null) ? 0 : reservationRegTime.hashCode());
 			result = prime * result + stageState;
 			return result;
 		}
@@ -96,6 +116,11 @@ public class PremiumStageReservation {
 			if (establishNo != other.establishNo)
 				return false;
 			if (reservationNo != other.reservationNo)
+				return false;
+			if (reservationRegTime == null) {
+				if (other.reservationRegTime != null)
+					return false;
+			} else if (!reservationRegTime.equals(other.reservationRegTime))
 				return false;
 			if (stageState != other.stageState)
 				return false;
