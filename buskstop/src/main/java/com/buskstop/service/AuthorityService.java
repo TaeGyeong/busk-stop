@@ -15,4 +15,11 @@ public interface AuthorityService {
 	 * @return
 	 */
 	boolean readArtistAutoritiesByUserId(String userId);
+	
+	/**
+	 * 사용자 id로 공급자 권한이 있는지 조회
+	 * @param userId
+	 * @return
+	 */
+	boolean checkStageAuthorityByUserId(String userId);
 }

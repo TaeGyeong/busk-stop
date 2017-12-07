@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
+import com.buskstop.service.AuthorityService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.Artist;
@@ -39,9 +40,32 @@ public class MyPageController {
 
 	@Autowired
 	private ArtistService artistService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 
 	@Autowired
 	private PremiumStageService stageService;
+	
+	/**************************************
+	 * 	아티스트 & 공급자 권한 조회 controller
+	 **************************************/
+	@RequestMapping("/registerSupplierView")
+	public String premiumAuthorityCheck() {
+		if(authorityService.checkStageAuthorityByUserId(getUserId())) {
+			return "/myPageView.do";
+		}
+		
+		return "user/registerSupplierView.tiles";
+	}
+	
+	@RequestMapping("/registerArtistView")
+	public String artistAuthorityCheck() {
+		if(authorityService.readArtistAutoritiesByUserId(getUserId())) {
+			return "/myPageView.do";
+		}
+		return "user/registerArtistView.tiles";
+	}
 
 	/**************************************
 	 * 아티스트 & 공급자 등록 controller
@@ -79,11 +103,14 @@ public class MyPageController {
 	 ***************************************/
 
 	@RequestMapping("/member/registSupplier")
-	public ModelAndView registSupplier(@ModelAttribute PremiumStage supplier,BindingResult r, HttpServletRequest request)
+	public ModelAndView registSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request)
 			throws IllegalStateException, IOException {
-		// binding test
-		System.out.println(r);
-		System.out.println(r.getErrorCount());
+		
+		System.out.println(authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId()));
+		// 권한 조회하자.
+		if(authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId())) {
+			return new ModelAndView("/myPageView.do","errorMsg","이미 공급자로 등록하셨네요~");
+		}
 		
 		// Image 설정
 		List<MultipartFile> list = supplier.getMultiImage();
@@ -107,10 +134,9 @@ public class MyPageController {
 		
 		// 프리미엄 공연장 사진을 등록
 		// 매개변수로는 사진의 파일명 list, 사업장 번호. (사진번호는 sequence로 보낸다)
-		stageService.registStageImage(supplier.getEstablishNum(), imageList);
-
 		// business service
-		stageService.registerSupplier(supplier);
+		supplier.setOperatorUserId(getUserId());
+		stageService.registerSupplier(supplier,imageList);
 		
 		// ModelAndView 로 보낼 map
 		Map<String,Object> map = new HashMap<>();
@@ -196,8 +222,10 @@ public class MyPageController {
 
 	@RequestMapping("/producer/updateSupplier")
 	public String updateSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request) throws IllegalStateException, IOException {
-		// 파일처리.
+		
+		//파일처리.
 		List<MultipartFile> multiImage = supplier.getMultiImage();
+		
 		if (multiImage != null && !multiImage.isEmpty()) {
 			// 디렉토리 지정
 			String dir = request.getServletContext().getRealPath("/supplierImage");
@@ -206,7 +234,6 @@ public class MyPageController {
 			((MultipartFile) multiImage).transferTo(upImage);
 			supplier.setStageImage(fileName+".jpg");
 		}
-		
 		stageService.updateSupplier(supplier);
 		return "redirect:/updateSuccess.do";
 	}

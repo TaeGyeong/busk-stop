@@ -16,5 +16,11 @@ public class AuthorityServiceImpl implements AuthorityService{
 	public boolean readArtistAutoritiesByUserId(String userId) {
 		return dao.selectArtistAuthoritiesByUserId(userId);
 	}
+
+	@Override
+	public boolean checkStageAuthorityByUserId(String userId) {
+		return dao.selectPremiumAuthorityByUserId(userId);
+	}
+	
 	
 }

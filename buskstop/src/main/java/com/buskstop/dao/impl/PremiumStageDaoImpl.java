@@ -14,8 +14,8 @@ public class PremiumStageDaoImpl implements PremiumStageDao{
 	SqlSessionTemplate session;
 	
 	@Override
-	public int insertStageSupplier(PremiumStage supplier) {
-		return session.insert(makeSqlId("insertStageSupplier"), supplier);
+	public int insertPremiumStage(PremiumStage supplier) {
+		return session.insert(makeSqlId("insertPremiumStage"), supplier);
 	}
 	
 	@Override
@@ -27,8 +27,9 @@ public class PremiumStageDaoImpl implements PremiumStageDao{
 	public PremiumStage selectSupplierById(String userId) {
 		return session.selectOne(makeSqlId("selectSupplierById"), userId);
 	}
+	
 
 	private String makeSqlId(String id) {
-		return "com.buskstop.config.mybatis.mapper.stageSupplierMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.premiumStageMapper."+id;
 	}
 }

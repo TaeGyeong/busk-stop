@@ -8,7 +8,7 @@ public interface PremiumStageDao {
 	 * @param supplier
 	 * @return
 	 */
-	int insertStageSupplier(PremiumStage supplier);
+	int insertPremiumStage(PremiumStage supplier);
 	
 	/**
 	 * 공급자 정보 update
@@ -23,4 +23,5 @@ public interface PremiumStageDao {
 	 * @return
 	 */
 	PremiumStage selectSupplierById(String userId);
+	
 }

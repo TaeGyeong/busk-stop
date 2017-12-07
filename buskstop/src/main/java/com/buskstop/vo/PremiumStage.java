@@ -14,6 +14,8 @@ public class PremiumStage implements Serializable {
 	private String stageLocation; // 주소
 	private int stageArea; // 면적
 	private int stageCost;
+	private String stageInstrument;
+	private String stageContent;
 	private int stageParking;
 	private int stageDrinking;
 	private int stageFoodSell;
@@ -52,6 +54,47 @@ public class PremiumStage implements Serializable {
 		this.stageFoodRestriction = stageFoodRestriction;
 		this.multiImage = multiImage;
 		this.stageImage = stageImage;
+	}
+	
+	
+
+	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
+			int stageArea, int stageCost, String stageInstrument, String stageContent, int stageParking,
+			int stageDrinking, int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage,
+			String stageImage) {
+		this.establishNum = establishNum;
+		this.operatorUserId = operatorUserId;
+		this.operatorNo = operatorNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageCost = stageCost;
+		this.stageInstrument = stageInstrument; // 악기
+		this.stageContent = stageContent; // 내용
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.multiImage = multiImage;
+		this.stageImage = stageImage;
+	}
+	
+	
+
+	public String getStageInstrument() {
+		return stageInstrument;
+	}
+
+	public void setStageInstrument(String stageInstrument) {
+		this.stageInstrument = stageInstrument;
+	}
+
+	public String getStageContent() {
+		return stageContent;
+	}
+
+	public void setStageContent(String stageContent) {
+		this.stageContent = stageContent;
 	}
 
 	public int getEstablishNum() {
