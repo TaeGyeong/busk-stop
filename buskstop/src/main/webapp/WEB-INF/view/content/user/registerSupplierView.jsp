@@ -9,12 +9,19 @@ function addPicture(){
 	$("#image").append(txt);
 }
 
+function submitChk(){
+
+	
+	document.getElementById("registerForm").submit();
+}
+
+
 </script>
 
 <body>
 	<div>
 		<form action="${initParam.rootPath }/member/registSupplier.do"
-			method="post" enctype="multipart/form-data">
+			method="post" enctype="multipart/form-data" id="registerForm">
 			<sec:csrfInput />
 			
 			<!-- ######################## 필수입력 칸 ######################## -->
@@ -35,6 +42,12 @@ function addPicture(){
 			
 			<span>가격 (시간 당)</span><br>
 			<input type="number" name="stageCost" id="stageCost" required="required"><br>
+			
+			<span>구비된 악기</span>
+			<input type="text" name="stageInstrument" id="instrument">
+			
+			<span>글 내용</span>
+			<input type="text" name="stageContent" id="content">
 			
 			<!-- ################################################################### -->
 			<p><hr><p>
@@ -72,6 +85,6 @@ function addPicture(){
 			<hr>
 			<button class="btn btn-primary" type="button" onclick=addPicture(); >사진 추가 등록</button>
 			<hr>
-			<button class="btn btn-primary" type="submit">등록</button>
+			<button class="btn btn-primary" type="submit" onclick=submitChk(); >등록</button>
 		</form>
 	</div>

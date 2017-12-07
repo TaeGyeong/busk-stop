@@ -37,7 +37,7 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	@Override
 	public boolean selectArtistAuthoritiesByUserId(String userId) {
 		Authority autority = new Authority(userId, "ROLE_ARTIST");
-		Authority result = session.selectOne(makeSqlId("selectArtistAuthoritiesByUserId"), autority);
+		Authority result = session.selectOne(makeSqlId("selectAuthority"), autority);
 		if(result != null) {
 			return true;
 		}else {
@@ -48,6 +48,16 @@ public class AuthorityDaoImpl implements AuthorityDao{
 	@Override
 	public int deleteAuthorityById(String id) {
 		return session.delete(makeSqlId("deleteAuthorityById"), id);
+	}
+
+	@Override
+	public boolean selectPremiumAuthorityByUserId(String userId) {
+		Authority authority =  session.selectOne(makeSqlId("selectAuthority"), new Authority(userId, "ROLE_PRODUCER"));
+		if(authority==null) {
+			return false;
+		} else { 
+			return true;
+		}
 	}
 	
 	

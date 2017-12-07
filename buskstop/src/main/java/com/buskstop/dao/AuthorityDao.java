@@ -40,4 +40,11 @@ public interface AuthorityDao {
 	 * @return int
 	 */
 	int deleteAuthorityById(String id);
+	
+	/**
+	 * id로 프리미엄공급자 권한을 조회한다.
+	 * @param userId
+	 * @return
+	 */
+	boolean selectPremiumAuthorityByUserId(String userId);
 }

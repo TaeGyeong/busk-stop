@@ -13,7 +13,7 @@ public interface PremiumStageService {
 	 * 공급자 등록
 	 * @param supplier
 	 */
-	void registerSupplier(PremiumStage supplier);
+	void registerSupplier(PremiumStage supplier, List<String> imageList);
 	
 	/**
 	 * 공급자 정보 수정
@@ -77,5 +77,4 @@ public interface PremiumStageService {
 	 * @param establishNum
 	 * @param imageList
 	 */
-	void registStageImage(int establishNum, List<String> imageList);
 }
