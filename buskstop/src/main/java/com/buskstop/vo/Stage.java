@@ -1,6 +1,7 @@
 package com.buskstop.vo;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,18 @@ public class Stage implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date stageRentalDate;
 	private List<StageImage> stageImage;
+	private Time stageStartTime;
+	private Time stageEndTime;
+	
 	
 	public Stage() {
 	}
 
+
 	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea,
 			String stageInstrument, String stageContent, int stageParking, int stageDrinking, int stageFoodSell,
 			int stageFoodRestriction, int stageReservation, String stageSellerId, Date stageRegTime,
-			Date stageRentalDate, List<StageImage> stageImage) {
+			Date stageRentalDate, List<StageImage> stageImage, Time stageStartTime, Time stageEndTime) {
 		this.stageNo = stageNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
@@ -49,7 +54,10 @@ public class Stage implements Serializable{
 		this.stageRegTime = stageRegTime;
 		this.stageRentalDate = stageRentalDate;
 		this.stageImage = stageImage;
+		this.stageStartTime = stageStartTime;
+		this.stageEndTime = stageEndTime;
 	}
+
 
 	@Override
 	public String toString() {
@@ -58,136 +66,190 @@ public class Stage implements Serializable{
 				+ ", stageContent=" + stageContent + ", stageParking=" + stageParking + ", stageDrinking="
 				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
 				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
-				+ stageRegTime + ", stageRentalDate=" + stageRentalDate + ", stageImage=" + stageImage + "]";
+				+ stageRegTime + ", stageRentalDate=" + stageRentalDate + ", stageImage=" + stageImage
+				+ ", stageStartTime=" + stageStartTime + ", stageEndTime=" + stageEndTime + "]";
 	}
+
 
 	public int getStageNo() {
 		return stageNo;
 	}
 
-	public void setStageNo(int stageNo) {
-		this.stageNo = stageNo;
-	}
 
 	public String getStageName() {
 		return stageName;
 	}
 
-	public void setStageName(String stageName) {
-		this.stageName = stageName;
-	}
 
 	public String getStageLocation() {
 		return stageLocation;
 	}
 
-	public void setStageLocation(String stageLocation) {
-		this.stageLocation = stageLocation;
-	}
 
 	public int getStageCost() {
 		return stageCost;
 	}
 
-	public void setStageCost(int stageCost) {
-		this.stageCost = stageCost;
-	}
 
 	public int getStageArea() {
 		return stageArea;
 	}
 
-	public void setStageArea(int stageArea) {
-		this.stageArea = stageArea;
-	}
 
 	public String getStageInstrument() {
 		return stageInstrument;
 	}
 
-	public void setStageInstrument(String stageInstrument) {
-		this.stageInstrument = stageInstrument;
-	}
 
 	public String getStageContent() {
 		return stageContent;
 	}
 
-	public void setStageContent(String stageContent) {
-		this.stageContent = stageContent;
-	}
 
 	public int getStageParking() {
 		return stageParking;
 	}
 
-	public void setStageParking(int stageParking) {
-		this.stageParking = stageParking;
-	}
 
 	public int getStageDrinking() {
 		return stageDrinking;
 	}
 
-	public void setStageDrinking(int stageDrinking) {
-		this.stageDrinking = stageDrinking;
-	}
 
 	public int getStageFoodSell() {
 		return stageFoodSell;
 	}
 
-	public void setStageFoodSell(int stageFoodSell) {
-		this.stageFoodSell = stageFoodSell;
-	}
 
 	public int getStageFoodRestriction() {
 		return stageFoodRestriction;
 	}
 
-	public void setStageFoodRestriction(int stageFoodRestriction) {
-		this.stageFoodRestriction = stageFoodRestriction;
-	}
 
 	public int getStageReservation() {
 		return stageReservation;
 	}
 
-	public void setStageReservation(int stageReservation) {
-		this.stageReservation = stageReservation;
-	}
 
 	public String getStageSellerId() {
 		return stageSellerId;
 	}
 
-	public void setStageSellerId(String stageSellerId) {
-		this.stageSellerId = stageSellerId;
-	}
 
 	public Date getStageRegTime() {
 		return stageRegTime;
 	}
 
-	public void setStageRegTime(Date stageRegTime) {
-		this.stageRegTime = stageRegTime;
-	}
 
 	public Date getStageRentalDate() {
 		return stageRentalDate;
 	}
 
-	public void setStageRentalDate(Date stageRentalDate) {
-		this.stageRentalDate = stageRentalDate;
-	}
 
 	public List<StageImage> getStageImage() {
 		return stageImage;
 	}
 
+
+	public Time getStageStartTime() {
+		return stageStartTime;
+	}
+
+
+	public Time getStageEndTime() {
+		return stageEndTime;
+	}
+
+
+	public void setStageNo(int stageNo) {
+		this.stageNo = stageNo;
+	}
+
+
+	public void setStageName(String stageName) {
+		this.stageName = stageName;
+	}
+
+
+	public void setStageLocation(String stageLocation) {
+		this.stageLocation = stageLocation;
+	}
+
+
+	public void setStageCost(int stageCost) {
+		this.stageCost = stageCost;
+	}
+
+
+	public void setStageArea(int stageArea) {
+		this.stageArea = stageArea;
+	}
+
+
+	public void setStageInstrument(String stageInstrument) {
+		this.stageInstrument = stageInstrument;
+	}
+
+
+	public void setStageContent(String stageContent) {
+		this.stageContent = stageContent;
+	}
+
+
+	public void setStageParking(int stageParking) {
+		this.stageParking = stageParking;
+	}
+
+
+	public void setStageDrinking(int stageDrinking) {
+		this.stageDrinking = stageDrinking;
+	}
+
+
+	public void setStageFoodSell(int stageFoodSell) {
+		this.stageFoodSell = stageFoodSell;
+	}
+
+
+	public void setStageFoodRestriction(int stageFoodRestriction) {
+		this.stageFoodRestriction = stageFoodRestriction;
+	}
+
+
+	public void setStageReservation(int stageReservation) {
+		this.stageReservation = stageReservation;
+	}
+
+
+	public void setStageSellerId(String stageSellerId) {
+		this.stageSellerId = stageSellerId;
+	}
+
+
+	public void setStageRegTime(Date stageRegTime) {
+		this.stageRegTime = stageRegTime;
+	}
+
+
+	public void setStageRentalDate(Date stageRentalDate) {
+		this.stageRentalDate = stageRentalDate;
+	}
+
+
 	public void setStageImage(List<StageImage> stageImage) {
 		this.stageImage = stageImage;
 	}
+
+
+	public void setStageStartTime(Time stageStartTime) {
+		this.stageStartTime = stageStartTime;
+	}
+
+
+	public void setStageEndTime(Time stageEndTime) {
+		this.stageEndTime = stageEndTime;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -197,6 +259,7 @@ public class Stage implements Serializable{
 		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
 		result = prime * result + stageCost;
 		result = prime * result + stageDrinking;
+		result = prime * result + ((stageEndTime == null) ? 0 : stageEndTime.hashCode());
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
 		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
@@ -209,8 +272,10 @@ public class Stage implements Serializable{
 		result = prime * result + ((stageRentalDate == null) ? 0 : stageRentalDate.hashCode());
 		result = prime * result + stageReservation;
 		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
+		result = prime * result + ((stageStartTime == null) ? 0 : stageStartTime.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -231,6 +296,11 @@ public class Stage implements Serializable{
 		if (stageCost != other.stageCost)
 			return false;
 		if (stageDrinking != other.stageDrinking)
+			return false;
+		if (stageEndTime == null) {
+			if (other.stageEndTime != null)
+				return false;
+		} else if (!stageEndTime.equals(other.stageEndTime))
 			return false;
 		if (stageFoodRestriction != other.stageFoodRestriction)
 			return false;
@@ -277,8 +347,15 @@ public class Stage implements Serializable{
 				return false;
 		} else if (!stageSellerId.equals(other.stageSellerId))
 			return false;
+		if (stageStartTime == null) {
+			if (other.stageStartTime != null)
+				return false;
+		} else if (!stageStartTime.equals(other.stageStartTime))
+			return false;
 		return true;
 	}
+	
+	
 
 	
 }

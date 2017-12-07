@@ -26,7 +26,7 @@ public interface StageDao {
 
 	int selectStageCountByStageDate(Date startDate, Date endDate);
 
-	List<Stage> selectStageByStgeDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
+	List<Stage> selectStageByStageDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
 	int selectStageCountByLocation(String stageLocation, Date startDate, Date endDate);
 	
 	List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation,
