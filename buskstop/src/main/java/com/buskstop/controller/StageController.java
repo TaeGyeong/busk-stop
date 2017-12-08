@@ -2,7 +2,7 @@ package com.buskstop.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -38,15 +38,10 @@ public class StageController {
 	}
 	//공연장 등록
 	@RequestMapping("/stageRegister")
-	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException, ParseException {
-		System.out.println(stage);
+	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
+		System.out.println("넘어오냐"+stage.getStageStartTime());
+		System.out.println("넘어오냐"+stage.getStageEndTime());
 		
-		String startTime = stage.getStageStartTime() + ":00";
-		String endTime = stage.getStageEndTime() + ":00";
-		
-		SimpleDateFormat transFormat = new SimpleDateFormat("HH:mm:ss");
-		Date start = transFormat.parse(startTime);
-		Date end = transFormat.parse(endTime);
 		
 		service.insertStage(stage);
 		//파일 경로
