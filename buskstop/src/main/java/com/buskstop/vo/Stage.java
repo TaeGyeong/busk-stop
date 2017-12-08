@@ -26,8 +26,8 @@ public class Stage implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date stageRentalDate;
 	private List<StageImage> stageImage;
-	private Time stageStartTime;
-	private Time stageEndTime;
+	private Date stageStartTime;
+	private Date stageEndTime;
 	
 	
 	public Stage() {
@@ -151,12 +151,12 @@ public class Stage implements Serializable{
 	}
 
 
-	public Time getStageStartTime() {
+	public Date getStageStartTime() {
 		return stageStartTime;
 	}
 
 
-	public Time getStageEndTime() {
+	public Date getStageEndTime() {
 		return stageEndTime;
 	}
 
@@ -241,13 +241,15 @@ public class Stage implements Serializable{
 	}
 
 
-	public void setStageStartTime(Time stageStartTime) {
-		this.stageStartTime = stageStartTime;
+	@DateTimeFormat(pattern = "HH:mm")
+	public void setStageStartTime(Date stageStartTime) {
+		this.stageStartTime = new Time(stageStartTime.getTime());
 	}
 
 
-	public void setStageEndTime(Time stageEndTime) {
-		this.stageEndTime = stageEndTime;
+	@DateTimeFormat(pattern = "HH:mm")
+	public void setStageEndTime(Date stageEndTime) {
+		this.stageEndTime = new Time(stageEndTime.getTime());
 	}
 
 
@@ -354,8 +356,8 @@ public class Stage implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+
 
 	
 }

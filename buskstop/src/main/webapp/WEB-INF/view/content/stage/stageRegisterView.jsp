@@ -30,6 +30,12 @@ $(document).ready(function(){
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
 	});
+	$("#dateBtn").on("click", function(){
+		$("#stageSDate").val($("#stageRentalDate").val() + " " + $("#stageStartTime").val());
+	});
+	$("#dateBtn2").on("click", function(){
+		$("#stageEDate").val($("#stageRentalDate").val() + " " + $("#stageEndTime").val());
+	});
 });
 
 $(function(){
@@ -68,7 +74,7 @@ function readURL(input){
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
 		<sec:authorize access="isAuthenticated()">
-			<input type="hidden" name="stageSellerId" value='<sec:authentication property="principal.userId"/>'>
+			<input type="hidden" name="stageSellerId" id="stageSellerId" value='<sec:authentication property="principal.userId"/>'>
 		</sec:authorize>
 		
 		<div class="form-group">
@@ -137,11 +143,21 @@ function readURL(input){
 		
 		<div class="form-group">
 			<label>대관일</label>
-			<input type="Date" name="stageRentalDate">
-			<label>시작 시간</label> <input type="Time" name="stageStartTime"> 
-			<label>끝나는 시간</label> <input type="Time" name="stageEndTime"/>
+			<input type="Date" name="stageRentalDate" id="stageRentalDate">
 		</div>
-		
+		<div>
+			<label>시작 시간</label> 
+			<input type="time" name="stageStartTime" id="stageStartTime" required="required">
+			<button type="button" id="dateBtn">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required">
+		</div>
+		<div>
+			<label>끝나는 시간</label> 
+			<input type="time" name="stageEndTime" id="stageEndTime" required="required">
+			<button type="button" id="dateBtn2">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required">
+		</div>
+		<br>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<button type="submit" class="btn btn-default">등록</button>
 		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
