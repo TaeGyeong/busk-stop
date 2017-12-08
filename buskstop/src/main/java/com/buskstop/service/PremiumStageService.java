@@ -16,6 +16,13 @@ public interface PremiumStageService {
 	void registerSupplier(PremiumStage supplier, List<String> imageList);
 	
 	/**
+	 * PremiumStage 추가등록 service. (권한 등록 X)
+	 * @param stage
+	 * @param imageList
+	 */
+	void addRegistStage(PremiumStage stage,List<String> imageList);
+	
+	/**
 	 * 공급자 정보 수정
 	 * @param supplier
 	 * @return
@@ -27,7 +34,7 @@ public interface PremiumStageService {
 	 * @param userId
 	 * @return
 	 */
-	PremiumStage selectSupplierById(String userId);
+	List<PremiumStage> selectSupplierById(String userId);
 	
 	/**
 	 * 공연장 등록
@@ -79,4 +86,45 @@ public interface PremiumStageService {
 	void registStageImage(int establishNum, List<String> imageList);
 
 	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate);
+	
+	/*#################################################
+	 * 	PremiumStage Service By 태경 ★
+	 ##################################################*/
+	
+	/**
+	 * PremiumStageㅇ의 공연장 이름 리스트 가져오기.
+	 * @param userId
+	 * @return
+	 */
+	List<String> viewMyStage(String userId);
+	
+	/**
+	 * 사업장 번호로 공연장 정보 제공 service.
+	 * @param establishNum
+	 * @return
+	 */
+	PremiumStage viewByEstablishNum(int establishNum);
+	
+	/**
+	 * 프리미엄공급장 이미지 목록을 불러오기.
+	 * @param establishNum
+	 * @return
+	 */
+	List<String> selectImageLocation(int establishNum);
+	
+	
+	/**
+	 * 공연장 정보를 update. 이미지 테이블 수정.  & 프리미엄스테이지 정보 수정.
+	 * @param establishNum
+	 * @param imageList
+	 * @param stage
+	 */
+	PremiumStage updatePremiumStage(int establishNum,List<String> imageList, PremiumStage stage);
+	
+	/**
+	 * 사업장번호로 프리미엄스테이지 삭제 service.
+	 * @param establishNum
+	 */
+	void deletePremiumStage(int establishNum, String userId);
+	
 }

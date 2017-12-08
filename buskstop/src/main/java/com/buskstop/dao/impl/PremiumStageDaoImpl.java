@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,10 +26,25 @@ public class PremiumStageDaoImpl implements PremiumStageDao{
 	}
 	
 	@Override
-	public PremiumStage selectSupplierById(String userId) {
-		return session.selectOne(makeSqlId("selectSupplierById"), userId);
+	public List<PremiumStage> selectSupplierById(String userId) {
+		return session.selectList(makeSqlId("selectSupplierById"), userId);
 	}
-	
+
+
+	@Override
+	public List<String> selectStageNameById(String userId) {
+		return session.selectList(makeSqlId("selectStageNameById"), userId);
+	}
+
+	@Override
+	public PremiumStage selectStageByEstablishNum(int establishNum) {
+		return session.selectOne(makeSqlId("selectStageByEstablishNum"), establishNum);
+	}
+
+	@Override
+	public int deleteStageByEstablishNum(int establishNum) {
+		return session.delete(makeSqlId("deleteStageByEstablishNum"), establishNum);
+	}
 
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.premiumStageMapper."+id;

@@ -74,13 +74,13 @@ public class UserController {
 			}else {
 				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
 			}
-		case "supplier":
+		/*case "supplier":
 			PremiumStage supplier = stageService.selectSupplierById(user.getUserId());
 			if(encoder.matches(password, user.getPassword())) {
 				return new ModelAndView("myPage/updateSupplierView.tiles","supplier",supplier);
 			}else {
 				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
-			}
+			}*/
 		default :
 			return new ModelAndView("/index.do","",null);
 		}

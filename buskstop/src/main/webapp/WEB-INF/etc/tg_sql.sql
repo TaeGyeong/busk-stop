@@ -16,6 +16,8 @@ select * from authority
 select * from stage_supplier
 select * from video
 select * from video_comment
+select * from premium_stage
+select * from premium_stage_image
 
 delete from authority where user_id = 'id-10';
 
