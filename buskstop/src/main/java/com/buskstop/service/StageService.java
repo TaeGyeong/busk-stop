@@ -59,4 +59,6 @@ public interface StageService {
 	void registStageImage(int establishNum, List<String> imageList);
 
 	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate);
+
+	void deleteStageByStageNo(int stageNo);
 }

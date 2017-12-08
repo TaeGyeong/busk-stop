@@ -137,4 +137,17 @@ public class StageController {
 		}
 		return new ModelAndView("redirect:/stageView.do");
 	}
+	
+	public ModelAndView deleteStage(@RequestParam int stageNo) {
+		service.deleteStageByStageNo(stageNo);
+		
+		String msg = null;
+		
+		if(service.selectStageByStageNo(stageNo) == null) {
+			msg = "삭제가 완료되었습니다.";
+		}else {
+			msg = "삭제가 실패되었습니다.";
+		}
+		return new ModelAndView("/stageView.do", "msg", msg);
+	}
 }
