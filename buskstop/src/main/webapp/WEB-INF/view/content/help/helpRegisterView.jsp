@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style type="text/css">
 	body{ 
@@ -58,7 +59,8 @@
 	}
 	.ServiceCenterTable textarea {
 		width: 100%; 
-		height: 300px; 
+		height: 300px;
+		padding:5px;
 		color: rgb(0, 0, 0);
 	} 
 	#ButtonTd {
@@ -91,7 +93,7 @@
 
 <div class="ServiceCenter">
 	<h1  id="head1">고객센터 문의하기</h1>
-	<form action="./URL" method="post">
+	<form action="./helpRegister.do" method="post">
 	   <table class="ServiceCenterTable">
 		   <tr>
 			   <td>ID</td>
@@ -113,6 +115,7 @@
 					</div>
 			   </td>
 	       </tr>
-	   </table>   
+	   </table> 
+	   <sec:csrfInput/><%-- csrf 토큰 --%>  
 	</form>
 </div>
