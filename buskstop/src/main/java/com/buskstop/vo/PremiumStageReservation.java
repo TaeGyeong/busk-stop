@@ -6,85 +6,63 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class PremiumStageReservation {
 
-		private int reservationNo; //옵션 번호
-		private int stageState; //예약상태 : 0 - 신청가능(거절), 1 - 신청중(수락대기), 2 - 대관완료(수락)
+		private int reservationNo; //예약신청 번호
 		private String UserId; //예약신청자 ID
 		private int establishNo; //사업장번호
 		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 		private Date reservationRegTime;//예약 신청자 신청시간
-		
+		private int optionNo;//예약옵션번호
 		
 		public PremiumStageReservation() {}
 
-
-		public PremiumStageReservation(int reservationNo, int stageState, String userId, int establishNo,
-				Date reservationRegTime) {
-			super();
+		public PremiumStageReservation(int reservationNo, String userId, int establishNo, Date reservationRegTime,
+				int optionNo) {
 			this.reservationNo = reservationNo;
-			this.stageState = stageState;
 			UserId = userId;
 			this.establishNo = establishNo;
 			this.reservationRegTime = reservationRegTime;
+			this.optionNo = optionNo;
 		}
-
 
 		public int getReservationNo() {
 			return reservationNo;
 		}
 
-
 		public void setReservationNo(int reservationNo) {
 			this.reservationNo = reservationNo;
 		}
-
-
-		public int getStageState() {
-			return stageState;
-		}
-
-
-		public void setStageState(int stageState) {
-			this.stageState = stageState;
-		}
-
 
 		public String getUserId() {
 			return UserId;
 		}
 
-
 		public void setUserId(String userId) {
 			UserId = userId;
 		}
-
 
 		public int getEstablishNo() {
 			return establishNo;
 		}
 
-
 		public void setEstablishNo(int establishNo) {
 			this.establishNo = establishNo;
 		}
-
 
 		public Date getReservationRegTime() {
 			return reservationRegTime;
 		}
 
-
 		public void setReservationRegTime(Date reservationRegTime) {
 			this.reservationRegTime = reservationRegTime;
 		}
 
-
-		@Override
-		public String toString() {
-			return "PremiumStageReservation [reservationNo=" + reservationNo + ", stageState=" + stageState
-					+ ", UserId=" + UserId + ", establishNo=" + establishNo + ", reservationRegTime="
-					+ reservationRegTime + "]";
+		public int getOptionNo() {
+			return optionNo;
 		}
 
+		public void setOptionNo(int optionNo) {
+			this.optionNo = optionNo;
+		}
 
 		@Override
 		public int hashCode() {
@@ -92,12 +70,11 @@ public class PremiumStageReservation {
 			int result = 1;
 			result = prime * result + ((UserId == null) ? 0 : UserId.hashCode());
 			result = prime * result + establishNo;
+			result = prime * result + optionNo;
 			result = prime * result + reservationNo;
 			result = prime * result + ((reservationRegTime == null) ? 0 : reservationRegTime.hashCode());
-			result = prime * result + stageState;
 			return result;
 		}
-
 
 		@Override
 		public boolean equals(Object obj) {
@@ -115,6 +92,8 @@ public class PremiumStageReservation {
 				return false;
 			if (establishNo != other.establishNo)
 				return false;
+			if (optionNo != other.optionNo)
+				return false;
 			if (reservationNo != other.reservationNo)
 				return false;
 			if (reservationRegTime == null) {
@@ -122,9 +101,12 @@ public class PremiumStageReservation {
 					return false;
 			} else if (!reservationRegTime.equals(other.reservationRegTime))
 				return false;
-			if (stageState != other.stageState)
-				return false;
 			return true;
 		}
-		
+
+		@Override
+		public String toString() {
+			return "PremiumStageReservation [reservationNo=" + reservationNo + ", UserId=" + UserId + ", establishNo="
+					+ establishNo + ", reservationRegTime=" + reservationRegTime + ", optionNo=" + optionNo + "]";
+		}
 }
