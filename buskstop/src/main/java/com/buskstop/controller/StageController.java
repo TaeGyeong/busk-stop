@@ -17,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.SystemPropertyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,9 +46,8 @@ public class StageController {
 	//공연장 등록
 	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println("넘어오냐"+stage.getStageStartTime());
-		System.out.println("넘어오냐"+stage.getStageEndTime());
-		
+//		System.out.println("넘어오냐"+stage.getStageStartTime());
+//		System.out.println("넘어오냐"+stage.getStageEndTime());
 		
 		service.insertStage(stage);
 		//파일 경로
@@ -76,25 +77,25 @@ public class StageController {
 		Map<String, Object> map = null;
 		int page=1;
 		System.out.println(locationSearch+instrumentSearch);
-		/*
+		
 		if(locationSearch==null && instrumentSearch==null) {
-			map = service.selectStageByStageLocation(page,locationSearch,startDate,endDate);
+			map = service.selectStageByStageDate(page,startDate,endDate);
 		} else if(locationSearch==null && instrumentSearch!=null) {
 			map = service.selectStageByInstrument(page,instrumentSearch,startDate,endDate);
 		} else if(locationSearch!=null && instrumentSearch==null) {
-			map = service.selectStageByStageDate(page,startDate,endDate);
+			map = service.selectStageByStageLocation(page,locationSearch,startDate,endDate);
 		}
-		*/
+		
 		map = service.selectAllStage(page);
 		
 		list = (List<Stage>)map.get("list");
 		
 		map.put("list", list);
 		
-//		map.put("stageLocation", locationSearch);
-//		map.put("instruemtn", instrumentSearch);
-//		map.put("startDate", startDate);
-//		map.put("endDate", endDate);
+		map.put("stageLocation", locationSearch);
+		map.put("instruemtn", instrumentSearch);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
 		
 		return new ModelAndView("stageView.do","map",map);
 		

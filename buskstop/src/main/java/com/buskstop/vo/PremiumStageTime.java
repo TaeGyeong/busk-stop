@@ -1,20 +1,24 @@
 package com.buskstop.vo;
 
-import java.util.Date;
-
 public class PremiumStageTime {
 
-	private int timeCode; //0~24시를 1~24로 정함
-	private Date stageRentalDate; //시간 아닌 날짜만
-	private int reservationNo; //사업장 번호
+	private int optionNo;//공연장 대관 옵션번호
+	private int timeCode;//1~24 - 0~24시를 한시간 단위로 숫자로 표현.
 	
 	public PremiumStageTime() {}
 
-	public PremiumStageTime(int timeCode, Date stageRentalDate, int reservationNo) {
+	public PremiumStageTime(int optionNo, int timeCode) {
 		super();
+		this.optionNo = optionNo;
 		this.timeCode = timeCode;
-		this.stageRentalDate = stageRentalDate;
-		this.reservationNo = reservationNo;
+	}
+
+	public int getOptionNo() {
+		return optionNo;
+	}
+
+	public void setOptionNo(int optionNo) {
+		this.optionNo = optionNo;
 	}
 
 	public int getTimeCode() {
@@ -25,34 +29,16 @@ public class PremiumStageTime {
 		this.timeCode = timeCode;
 	}
 
-	public Date getStageRentalDate() {
-		return stageRentalDate;
-	}
-
-	public void setStageRentalDate(Date stageRentalDate) {
-		this.stageRentalDate = stageRentalDate;
-	}
-
-	public int getReservationNo() {
-		return reservationNo;
-	}
-
-	public void setReservationNo(int reservationNo) {
-		this.reservationNo = reservationNo;
-	}
-
 	@Override
 	public String toString() {
-		return "PremiumStageReservationTime [timeCode=" + timeCode + ", stageRentalDate=" + stageRentalDate
-				+ ", reservationNo=" + reservationNo + "]";
+		return "PremiumStageTime [optionNo=" + optionNo + ", timeCode=" + timeCode + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + reservationNo;
-		result = prime * result + ((stageRentalDate == null) ? 0 : stageRentalDate.hashCode());
+		result = prime * result + optionNo;
 		result = prime * result + timeCode;
 		return result;
 	}
@@ -66,12 +52,7 @@ public class PremiumStageTime {
 		if (getClass() != obj.getClass())
 			return false;
 		PremiumStageTime other = (PremiumStageTime) obj;
-		if (reservationNo != other.reservationNo)
-			return false;
-		if (stageRentalDate == null) {
-			if (other.stageRentalDate != null)
-				return false;
-		} else if (!stageRentalDate.equals(other.stageRentalDate))
+		if (optionNo != other.optionNo)
 			return false;
 		if (timeCode != other.timeCode)
 			return false;

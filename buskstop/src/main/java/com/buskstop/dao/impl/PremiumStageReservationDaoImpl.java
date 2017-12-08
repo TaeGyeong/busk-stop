@@ -32,31 +32,7 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 	}
 
 	@Override
-	public int updatePremiumStageReservation(PremiumStageReservation reservation) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updatePremiumStageReservationStateToOne(int reservationNo, Date reservationRegTime) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public int updatePremiumStageReservationState(int reservationNo, int stageState) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<PremiumStageReservation> selectPremiumStageReservationByEstablishNo(int EstablishNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<PremiumStageReservation> selectPremiumStageReservationByStageState(PremiumStageReservation reservation) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,15 +8,20 @@ import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.PremiumStageReservationDao;
 import com.buskstop.dao.PremiumStageTimeDao;
+import com.buskstop.dao.PremiumStageOptionDao;
 import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.vo.PremiumStageReservation;
 import com.buskstop.vo.PremiumStageTime;
+import com.buskstop.vo.PremiumStageOption;
 
 @Repository
 public class PremiumStageReservationServiceImpl implements PremiumStageReservationService{
 	
 	@Autowired
 	private PremiumStageReservationDao reservationDao;
+	
+	@Autowired
+	private PremiumStageOptionDao optionDao;
 	
 	@Autowired
 	private PremiumStageTimeDao timeDao;
@@ -33,31 +38,7 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	}
 
 	@Override
-	public int updatePremiumStageReservation(PremiumStageReservation reservation) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updatePremiumStageReservationState(int reservationNo, int stageState) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public int updatePremiumStageReservationStateToOne(int reservationNo, Date reservationRegTime) {
-		// TODO Auto-generated method stub
-				return 0;
-	}
-
-	@Override
 	public List<PremiumStageReservation> selectPremiumStageReservationByEstablishNo(int establishNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<PremiumStageReservation> selectPremiumStageReservationByStageState(PremiumStageReservation reservation) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,31 +52,33 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public int createPremiumStageTime(List<PremiumStageTime> list) {
-		int result = 0;
-		for(PremiumStageTime time : list) {
-			timeDao.insertPremiumStageTime(time);
-			result ++;
-		}
-		return result;
+	public int createPremiumStageOption(PremiumStageOption option) {
+		// TODO Auto-generated method stub
+				return 0;
 	}
 
 	@Override
-	public int removePremiumStageTime(int reservationNo) {
+	public int removePremiumStageOption(int reservationNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int updatePremiumStageTime(PremiumStageTime premiumStageTime) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<PremiumStageTime> selectPremiumStageTimeByReservationNo(int reservationNo) {
+	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public int createPremiumStageTime(PremiumStageTime time) {
+		return timeDao.insertPremiumStageTime(time);
+	}
+
+	@Override
+	public List<Integer> selectPremiumStageTimeByByStageRentalDate(Date date) {
+		return timeDao.selectPremiumStageTimeByStageRentalDate(date);
 	}
 
 }

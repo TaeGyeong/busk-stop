@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buskstop.config.mybatis.mapper.premiumStageOptionMapper">
+	
+	<!--  sql 설정 -->
+	<sql id="premiumOption-column-sql">
+		OPTION_NO,
+		STAGE_RENTAL_DATE,
+		STAGE_STATE,
+		ESTABLISH_NO
+	</sql>
+	
+	<sql id="premiumOption-select-sql">
+		SELECT	<include refid="premiumOption-column-sql"/>
+		FROM	PREMIUM_STAGE_RESERVATION_TIME
+	</sql>
+	
+	<resultMap type="PremiumStageOption" id="premiumOption-resultMap">
+		<id column="OPTION_NO" property="optionNo"/>
+		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
+		<result column="STAGE_STATE" property="stageState"/>
+		<result column="ESTABLISH_NO" property="establishNo"/>
+	</resultMap>
+	
+	<insert id="insertPremiumStageOption">
+		INSERT INTO PREMIUM_STAGE_RESERVATION_TIME
+		VALUES		(#{optionNo},
+					 #{stageRentalDate},
+					 #{stageState},
+					 #{establishNo})
+	</insert>
+	
+	
+	<select id="selectPremiumStageOptionByEstablishNo" parameterType="PremiumStageOption" resultMap="premiumOption-resultMap">
+		<include refid="premiumOption-select-sql"/>
+		WHERE establish_no = #{value}
+	</select>
+</mapper>
