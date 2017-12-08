@@ -59,6 +59,7 @@ public class StageServiceImpl implements StageService{
 	
 	@Override
 	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate){
+		System.out.println("장소 검색");
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
 		System.out.println("위치:"+stageLocation);
@@ -70,6 +71,7 @@ public class StageServiceImpl implements StageService{
 
 	@Override
 	public Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate) {
+		System.out.println("악기 검색");
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
 		
@@ -82,6 +84,7 @@ public class StageServiceImpl implements StageService{
 
 	@Override
 	public Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate) {
+		System.out.println("날짜 검색");
 		HashMap<String, Object> map = new HashMap<>();
 		PagingBean pb= new PagingBean(stageDao.selectStageCountByStageDate(startDate,endDate),page);
 		map.put("pageBean", pb);

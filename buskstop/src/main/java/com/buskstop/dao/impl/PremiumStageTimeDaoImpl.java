@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,9 +12,9 @@ import com.buskstop.vo.PremiumStageTime;
 
 @Repository
 public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
-	
+
 	@Autowired
-	private SqlSessionTemplate session;
+	SqlSessionTemplate session;
 	
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.PremiumStageTimeMapper."+id;
@@ -25,21 +26,8 @@ public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
 	}
 
 	@Override
-	public int deletePremiumStageTime(int reservationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Integer> selectPremiumStageTimeByStageRentalDate(Date date) {
+		return session.selectList(makeSqlId("selectPremiumStageTimeByOptionNo"), date);
 	}
-
-	@Override
-	public int updatePremiumStageTime(PremiumStageTime premiumStageTime) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<PremiumStageTime> selectPremiumStageTimeByReservationNo(int reservationNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

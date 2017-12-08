@@ -12,12 +12,14 @@
 		
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
 		$("#startDate").val(nowDate);
+		alert($("#startDate"));
 		$("#endDate").val(nowDate);
 			
 		$(".submit").click(function(){
-			
 			if($("#searchLocation").val()=="" 
-					&& $("#searchInstrument").val()==""){
+					&& $("#searchInstrument").val()=="" 
+					&& $("#startDate").val()==""
+					&& $("#endDate").val()=="" ){
 				alert("검색할 키워드를 입력해주세요.");
 				return false;
 			} 
@@ -34,6 +36,10 @@
 			}
 		});
 	});
+	
+	function nowTime(){
+		
+	}
 	
 	function goDetail(root, no){
 		document.location.href= root+'/stageDetailView.do?stageNo='+no
@@ -123,30 +129,11 @@ select {
 </style>
 <div id="container">
 	<hr>
-	 <%--
-	<form action="${initParam.rootPath }/selectAllStage.do">
-			<select name="category" id="category" style="float: left;">
-				<option value="title" id="option">제목</option>
-				<option value="user" id="option">작성자</option>
-				<option value="location" id="option">공연장소</option>
-				<option value="name" id="option">공연이름</option>
-				<option value="content" id="option">내용</option>
-				<option value="date" id="option">공연날짜</option>
-			</select> 
-			<input type="text" placeholder="검색" name="search" class="search" style="float: left; margin-left: 5px;">
-			<div class="date_search" style="display:none; float: left; margin-left: 5px;">
-			시작일 : <input type="date" name="sDate">
-			종료일 : <input type="date" name="eDate">
-			</div>
-			<button type="submit">검색</button>
-		</form>
-	--%>
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do" method="post">
-		<input type="text" name="searchLocation" id="searchLocation" placeholder="장소명으로 검색">
-		<input type="date" name="startDate" id="startDate" >
-		<input type="date" name="endDate" id="endDate" >
-		<input type="text" name="searchInstrument" id="searchInstrument" placeholder="악기로 검색">
-		<br>
+		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
+		<input type="date" name="startDate" id="startDate">
+		<input type="date" name="endDate" id="endDate">
+		<input type="text" name="instrumentSearch" id="instrumentSearch" placeholder="악기로 검색">
 		<%--
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
 		<input type="checkbox" name="box" value="음주">음주 가능
@@ -167,19 +154,22 @@ select {
 			<td>제목</td>
 			<td>공연장소</td>
 			<td>공연날짜</td>
+			<td>등록 시간</td>
 			<td>공급자</td>
 			<td>예약 여부</td>
 		</tr>
 		</thead>
 		<tbody id="tbody">
-		<c:forEach items="${requestScope.map.list}" var="item">
+				<c:forEach items="${requestScope.map.list}" var="item">
 					<tr style="cursor: pointer;">
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRentalDate }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRegTime }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><c:if test="${item.stageReservation==0}">예약불가</c:if>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+					<c:if test="${item.stageReservation==0}">예약불가</c:if>
 					<c:if test="${item.stageReservation==1}">예약가능</c:if></td>
 					</tr>
 				</c:forEach>
