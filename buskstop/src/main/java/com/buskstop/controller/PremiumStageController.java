@@ -207,6 +207,12 @@ public class PremiumStageController {
 		return new ModelAndView("premiumStage/myStageDetailView.tiles","map",map);
 	}
 	
+	@RequestMapping("/selectPremiumStage")
+	public ModelAndView viewPremiumStageList() {
+		
+		return new ModelAndView("","null",null);
+	}
+	
 	private String getUserId() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();

@@ -97,7 +97,7 @@
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectAllStage.do">공연장대관</a>
          	<ul id="sub_menu" class="col-sm-12" style="padding: 0;">
          		<li class="col-sm-12" style="padding: 0;"><a href="#" id="goStage">일반공연장</a></li>
-         		<li class="col-sm-12" style="padding: 0;"><a href="#" id="goPremiumStage">프리미엄공연장</a></li>
+         		<li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectPremiumStage.do" id="goPremiumStage">프리미엄공연장</a></li>
          	</ul>
          </li>
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상</a>
