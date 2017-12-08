@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.buskstop.vo.PremiumStageReservation;
+import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.PremiumStageOption;
 
 public interface PremiumStageReservationService {
@@ -57,4 +58,20 @@ public interface PremiumStageReservationService {
 	 * @return
 	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo);
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * 옵션추가시 추가될 시간코드들 등록
+	 * @param time
+	 * @return
+	 */
+	int createPremiumStageTime(PremiumStageTime time);
+	
+	/**
+	 * 옵션번호로 해당 시간코드들 조회
+	 * @param optionNo
+	 * @return
+	 */
+	List<Integer> selectPremiumStageTimeByByStageRentalDate(Date date);
 }

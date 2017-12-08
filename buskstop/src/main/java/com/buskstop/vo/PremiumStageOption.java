@@ -2,9 +2,12 @@ package com.buskstop.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PremiumStageOption {
 
 	private int optionNo; //예약옵션
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date stageRentalDate; //시간 아닌 날짜만
 	private int stageState;//옵션의 예약 상태 - 0:신청대기, 1:수락대기, 2:대관완료
 	private int establishNo; //사업장 번호

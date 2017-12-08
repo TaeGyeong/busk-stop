@@ -1,13 +1,27 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	
 $(document).ready(function(){
-	$.ajax({
-		"url":"${initParam.rootPath}/readPremiumStageReservationTimeCode.do",
-		"type":"post",
-		"data":{"stageRentalDate":$("#reservationDate").val(),
-				"reservationNo":}
+	$("").on("click",function(){
+		$.ajax({
+			"url":"${initParam.rootPath}/readPremiumStageReservationTimeByStageRentalDate.do",
+			"type":"post",
+			"data":{"stageRentalDate":$("#reservationDate").val()
+			},
+			"dataType":"json",
+			"success":function(list){
+				var txt="";
+				$.each(function(){
+					
+				});
+				<label>시간<input type="checkbox" id="timeCode" name="timeCode" value=""></label>
+			},
+			"error":function(){
+				alert("error");
+			}
+		});
 	});
 });
 	

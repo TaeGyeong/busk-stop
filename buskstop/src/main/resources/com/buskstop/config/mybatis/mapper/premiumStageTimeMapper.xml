@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.buskstop.config.mybatis.mapper.premiumStageTimeMapper">
+	
+	<sql id="premiumTime-column-sql">
+		OPTION_NO,
+		TIME_CODE
+	</sql>
+	
+	<sql id="premiumTime-select-sql">
+		SELECT	<include refid="premiumTime-column-sql"/>
+	</sql>
+	
+	<resultMap type="PremiumStageTime" id="premiumTime-resultMqp">
+		<id column="OPTION_NO" property="optionNo"/>
+		<result column="TIME_CODE" property="timeCode"/>
+	</resultMap>
+	
+	<insert id="insertPremiumStageTime">
+		INSERT	INTO PREMIUM_STAGE_TIME
+		VALUES	(#{optionNo}, #{timeCode})
+	</insert>
+	
+	<select id="selectPremiumStageTimeByStageRentalDate" parameterType="date" resultType="_int">
+		SELECT	PREMIUM_STAGE_TIME.TIME_CODE
+		FROM	PREMIUM_STAGE_OPTION option, PREMIUM_STAGE_TIME time
+		WHERE	option.option_no = time.option_no
+			AND	option.stage_rental_date = #{value}
+	</select>
 </mapper>

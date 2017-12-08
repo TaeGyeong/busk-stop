@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.PremiumStageReservationDao;
+import com.buskstop.dao.PremiumStageTimeDao;
 import com.buskstop.dao.PremiumStageOptionDao;
 import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.vo.PremiumStageReservation;
+import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.PremiumStageOption;
 
 @Repository
@@ -19,7 +21,10 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	private PremiumStageReservationDao reservationDao;
 	
 	@Autowired
-	private PremiumStageOptionDao timeDao;
+	private PremiumStageOptionDao optionDao;
+	
+	@Autowired
+	private PremiumStageTimeDao timeDao;
 
 	@Override
 	public int createPremiumStageReservation(PremiumStageReservation reservation) {
@@ -62,6 +67,18 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public int createPremiumStageTime(PremiumStageTime time) {
+		return timeDao.insertPremiumStageTime(time);
+	}
+
+	@Override
+	public List<Integer> selectPremiumStageTimeByByStageRentalDate(Date date) {
+		return timeDao.selectPremiumStageTimeByStageRentalDate(date);
 	}
 
 }
