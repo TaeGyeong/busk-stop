@@ -19,6 +19,23 @@
 		STAGE_FOOD_RESTRICTION,
 		STAGE_IMAGE
 	</sql>
+	
+	<resultMap type="PremiumStage" id="premiumStage-resultmap">
+		<id column="ESTABLISH_NO" property="establishNum"/>
+		<result column="OPERATOR_USER_ID" property="operatorUserId"/>
+		<result column="OPERATOR_NO" property="operatorNo"/>
+		<result column="STAGE_NAME" property="stageName"/>
+		<result column="STAGE_LOCATION" property="stageLocation"/>
+		<result column="STAGE_AREA" property="stageArea"/>
+		<result column="STAGE_COST" property="stageCost"/>
+		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
+		<result column="STAGE_CONTENT" property=""/>
+		<result column="STAGE_PARKING" property=""/>
+		<result column="STAGE_DRINKING" property=""/>
+		<result column="STAGE_FOOD_SELL" property=""/>
+		<result column="STAGE_FOOD_RESTRICTION" property=""/>
+		<result column="STAGE_IMAGE" property=""/>
+	</resultMap>
 		
 	<insert id="insertPremiumStage" parameterType="PremiumStage">
 		INSERT INTO PREMIUM_STAGE
@@ -53,8 +70,8 @@
 	</update>
 	
 	<select id="selectSupplierById" parameterType="string" resultType="PremiumStage">
-		SELECT	*
-		FROM	STAGE_SUPPLIER
+		SELECT	<include refid="premiumStage-column-sql"/>
+		FROM	PREMIUM_STAGE
 		WHERE	OPERATOR_USER_ID = #{userId}
 	</select>
 </mapper>
