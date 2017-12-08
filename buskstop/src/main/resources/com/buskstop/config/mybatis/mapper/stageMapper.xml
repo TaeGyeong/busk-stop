@@ -102,7 +102,7 @@
 	
 	<select id="selectStageCountByLocation" resultType="_int" parameterType="map">
 		select count(*) 
-		from (	select *
+		from (	select <include refid="column-stage"/>
 					 		from stage
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
@@ -114,7 +114,7 @@
 	<select id="selectStageByStageLocation" parameterType="map" resultMap="stage-resultmap">
 		select <include refid="column-stage"/>
 		from (
-			select rownum, <include refid="column-stage"/>
+			select rownum rn, <include refid="column-stage"/>
 			from (
 					select *
 					from (	select *
@@ -125,23 +125,23 @@
 					where stage_location like '%'||#{stageLocation}||'%'
 					order by stage_no desc
 			) where rownum &lt; = #{end}
-		) where rownum >= #{begin}	 
+		) where rn >= #{begin}	 
 	</select>
 	
 	<select id="selectStageCountByInstrument" resultType="_int" parameterType="map">
 		select count(*) 
-		from (	select *
-					 		from stage
-					 		where stage_rental_date &gt;= #{startDate}  
-					 		and stage_rental_date &lt;= #{endDate}
-					 		)
-		where stage_instrument like '%'||#{stageInstrument}||'%'
-	</select>
+		from (	select <include refid="column-stage"/>
+				from stage
+				where STAGE_RENTAL_DATE &gt;= #{startDate}  
+				and STAGE_RENTAL_DATE &lt;= #{endDate}
+		)
+		where STAGE_INSTRUMENT like '%'||#{stageInstrument}||'%'
+		</select>
 	
 	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
 		select <include refid="column-stage"/>
 		from (
-			select rownum, <include refid="column-stage"/>
+			select rownum rn, <include refid="column-stage"/>
 			from (
 					select *
 					from (	select *
@@ -149,11 +149,35 @@
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
 					 		)
-					where stage_instrument like '%'||#{instrument}||'%'
-					 
-					order by stage_no desc
+					where stage_instrument like '%'||#{stageInstrument}||'%'
 			) where rownum &lt; = #{end}
-		) where rownum >= #{begin}
+		) where rn >= #{begin}
+	</select>
+	
+	<select id="selectStageCountById" resultType="_int" parameterType="map">
+		select count(*) 
+		from (	select <include refid="column-stage"/>
+				from stage
+				where STAGE_RENTAL_DATE &gt;= #{startDate}  
+				and STAGE_RENTAL_DATE &lt;= #{endDate}
+		)
+		where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+		</select>
+	
+	<select id="selectStageById" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from (	select *
+					 		from stage
+					 		where stage_rental_date &gt;= #{startDate}  
+					 		and stage_rental_date &lt;= #{endDate}
+					 		)
+					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
 	</select>
 	
 	<select id="selectStageCountByStageDate" resultType="_int" parameterType="map">
@@ -168,13 +192,82 @@
 		from (
 			select rownum, <include refid="column-stage"/>
 			from (
-					select *
+					select <include refid="column-stage"/>
 					from stage
 					where stage_rental_date &gt;= #{startDate}
 					and stage_rental_date &lt;= #{endDate}
-					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
 	
 	</select>
+	
+	<select id="selectStageCountOnlyId" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+		</select>
+	
+	<select id="selectStageOnlyId" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
+	
+	<select id="selectStageCountOnlyLocation" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_location like '%'||#{stageLocation}||'%'
+		</select>
+	
+	<select id="selectStageOnlyLocation" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_location like '%'||#{stageLocation}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
+	
+	<select id="selectStageCountOnlyInstrument" resultType="_int" parameterType="String">
+		select count(*) 
+		from stage
+		where stage_instrument like '%'||#{stageInstrument}||'%'
+		</select>
+	
+	<select id="selectStageOnlyInstrument" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from stage
+					where stage_instrument like '%'||#{stageInstrument}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

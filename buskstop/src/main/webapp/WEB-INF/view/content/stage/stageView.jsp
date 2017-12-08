@@ -10,36 +10,21 @@
 
 	$(document).ready(function(){
 		
+		<%--
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
 		$("#startDate").val(nowDate);
-		alert($("#startDate"));
-		$("#endDate").val(nowDate);
-			
+		--%>
 		$(".submit").click(function(){
-			if($("#searchLocation").val()=="" 
-					&& $("#searchInstrument").val()=="" 
-					&& $("#startDate").val()==""
-					&& $("#endDate").val()=="" ){
+		if($("#locationSearch").val()=="" 
+			&& $("#instrumentSearch").val()==""
+			&& $("#idSearch").val()==""
+			&& $("#endDate").val()==""){
 				alert("검색할 키워드를 입력해주세요.");
 				return false;
 			} 
+			
 		})
-		
-		$("#category").change(function(){
-			val = $(this).val();
-			if(val=='date'){
-				$(".search").css('display', 'none');
-				$(".date_search").css('display', 'block');
-			}else{
-				$(".search").css('display', 'block');
-				$(".date_search").css('display', 'none');
-			}
-		});
 	});
-	
-	function nowTime(){
-		
-	}
 	
 	function goDetail(root, no){
 		document.location.href= root+'/stageDetailView.do?stageNo='+no
@@ -129,11 +114,12 @@ select {
 </style>
 <div id="container">
 	<hr>
-	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do" method="post">
+	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
 		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
 		<input type="date" name="startDate" id="startDate">
 		<input type="date" name="endDate" id="endDate">
 		<input type="text" name="instrumentSearch" id="instrumentSearch" placeholder="악기로 검색">
+		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
 		<%--
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
 		<input type="checkbox" name="box" value="음주">음주 가능
