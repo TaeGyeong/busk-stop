@@ -25,7 +25,7 @@
 <script>
 $(document).ready(function(){
 	$(document).on("click", "#addImage", function() {
-		$('<div><input type="file" name="imgs" class="form-control" id="inputImage"><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div><button type="button" id="addImage" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default" type="button">삭제</button></div>').appendTo("#img_box");
+		$('<div><input type="file" name="imgs" class="form-control"id="inputImage"><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div><button type="button" id="addImage" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default" type="button">삭제</button></div>').appendTo("#img_box");
 	});
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
@@ -50,10 +50,10 @@ function readURL(input){
 }
 </script>
 
-<h2>공연장 대관 등록(stageRegisterView.do)</h2>
+<h2>공연장 대관 등록</h2>
 <div class="demand">
 	<p><b>요구사항 :</b> 한 개의 공연장 대관정보 글을 등록한다.<br>
-		 - 내용 : 공연장 이름, 주소(지도확인), 면적, 대관가능 날짜(시간), 시간당가격, 사진, 공급자 정보(이름, 연락처)를 필수로 입력받고<br> 주차장 유무, 음주가능여부, 식사판매여부, 외부음식 반입가능여부를 선택적으로 입력한다.<br>
+		 - 내용 : 공연장 이름, 주소(지도확인), 면적, 대관가능 날짜, 시작 시간, 끝나는 시간, 시간당가격, 사진, 공급자 정보(이름, 연락처)를 필수로 입력받고<br> 주차장 유무, 음주가능여부, 식사판매여부, 외부음식 반입가능여부를 선택적으로 입력한다.<br>
 		 - 프리미엄 공급자의 경우 글을 등록 할 시 자동으로 등록글에 프리미엄 표시를 붙여준다.<br>
 		 + 등록 후에는 글 상세보기 페이지와 같은 페이지를 제공하여 자신의 글을 확인시켜준다.
 		</p>
@@ -112,32 +112,34 @@ function readURL(input){
 		</div>
 		
 		<div class="form-group">
-			<label>주차장 유무</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="1">주차장 완비</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageParking" value="0">주차장 미비</label>
-		</div>
+			&nbsp;&nbsp;<label>주차장 유무</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<label>음주</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<label>식사 판매</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<label>외부음식 반입 </label>
+			<br><label style="font-weight: normal;">
+			<input type="radio" name="stageParking" value="1">주차장 완비</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageDrinking" value="1">음주 가능</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageFoodSell" value="1">식사 판매</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageFoodRestriction" value="1">반입 가능</label>
 			
-		<div class="form-group">
-			<label>음주가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="1">음주 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="0">음주 불가</label>
+			<br><label style="font-weight: normal;">
+			<input type="radio" name="stageParking" value="0">주차장 없음</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageDrinking" value="0">음주 불가</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageFoodSell" value="0">식사 미판매</label>
+			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="stageFoodRestriction" value="0">반입 불가</label>
 		</div>
-			
-		<div class="form-group">
-			<label>음식 (유료)제공 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="1">음식 제공</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="0">음식 미제공</label>
-		</div>
-			
-		<div class="form-group">
-			<label>외부음식 반입 가능 여부</label><br>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="1">반입 가능</label>
-			<label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="0">반입 불가</label>
-		</div>
-			
+		
 		<div class="form-group">
 			<label>대관일</label>
-			<input type="Date" name="stageRentalDate" class="form-control">
+			<input type="Date" name="stageRentalDate">
+			<label>시작 시간</label> <input type="Time" name="stageStartTime"> 
+			<label>끝나는 시간</label> <input type="Time" name="stageEndTime"/>
 		</div>
 		
 		<sec:csrfInput/><%-- csrf 토큰 --%>

@@ -89,14 +89,11 @@ public class StageDaoImpl implements StageDao{
 
 	@Override
 	public int selectStageCountByStageDate(Date startDate, Date endDate) {
-		HashMap<String,Object> map = new HashMap<>();
-		map.put("sDate", startDate);
-		map.put("eDate",endDate);
-		return session.selectOne(makeSqlId("selectStageCountByStageDate"),map);
+		return session.selectOne(makeSqlId("selectStageCountByStageDate"));
 	}
 
 	@Override
-	public List<Stage> selectStageByStgeDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate) {
+	public List<Stage> selectStageByStageDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate) {
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("begin", beginItemInPage);
 		map.put("end", endItemInPage);
