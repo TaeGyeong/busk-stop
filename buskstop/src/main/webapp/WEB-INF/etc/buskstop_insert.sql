@@ -1,4 +1,5 @@
 /* 프리미엄 공연장 대관가능 시간*/
+insert into premium_stage_reser
 insert into premium_stage_time values(0, 3);
 
 
