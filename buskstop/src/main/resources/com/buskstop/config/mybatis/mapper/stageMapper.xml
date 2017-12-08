@@ -16,7 +16,9 @@
 		STAGE_RESERVATION,
 		STAGE_SELLER_ID,
 		STAGE_REG_TIME,
-		STAGE_RENTAL_DATE
+		STAGE_RENTAL_DATE,
+		STAGE_START_TIME,
+		STAGE_END_TIME
 	</sql>
 	
 	<resultMap type="Stage" id="stage-resultmap">
@@ -46,7 +48,7 @@
 		values(#{stageNo}, #{stageName}, #{stageLocation}, #{stageCost},
 		#{stageArea}, #{stageInstrument}, #{stageContent}, #{stageParking}, 
 		#{stageDrinking}, #{stageFoodSell}, #{stageFoodRestriction}, 
-		#{stageReservation}, #{stageSellerId}, sysdate, #{stageRentalDate})
+		#{stageReservation}, #{stageSellerId}, sysdate, #{stageRentalDate}, #{stageStartTime}, #{stageEndTime})
 	</insert>
 	
 	<select id="selectAllStage" resultMap="stage-resultmap" parameterType="map">

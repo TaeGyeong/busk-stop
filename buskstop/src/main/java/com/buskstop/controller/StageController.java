@@ -2,6 +2,7 @@ package com.buskstop.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,9 +40,10 @@ public class StageController {
 	//공연장 등록
 	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println(stage);
-		new SimpleDateFormat("hh:mm:ss").format(stage.getStageStartTime());
-		new SimpleDateFormat("hh:mm:ss").format(stage.getStageEndTime());
+		System.out.println("넘어오냐"+stage.getStageStartTime());
+		System.out.println("넘어오냐"+stage.getStageEndTime());
+		
+		
 		service.insertStage(stage);
 		//파일 경로
 		String dir = request.getServletContext().getRealPath("/stageImage");
@@ -59,7 +62,7 @@ public class StageController {
 			}
 		}
 
-		return new ModelAndView("stage/selectAllStage.tiles");
+		return new ModelAndView("redirect:/selectAllStage.do");
 	}
 	
 	@RequestMapping("/selectAllStage")
