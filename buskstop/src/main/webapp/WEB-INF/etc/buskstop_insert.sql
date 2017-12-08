@@ -1,3 +1,7 @@
+/* 프리미엄 공연장 대관가능 시간*/
+insert into premium_stage_time values(0, 3);
+
+
 /* 사용자 */
 insert into USERS values('hong1653', '홍길동', 'ewwe12345', '경기도 안산시', '01011112222', 'hong448@naver.com');
 insert into USERS values('kim4845', '김경민', 'fdsf84848', '경상도 부산시', '01015849584', 'kim4852@naver.com');
