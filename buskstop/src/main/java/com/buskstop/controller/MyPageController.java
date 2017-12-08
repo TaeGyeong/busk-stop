@@ -238,6 +238,10 @@ public class MyPageController {
 		return "redirect:/updateSuccess.do";
 	}
 
+	/*******************************************
+	 * 	대관공급자 정보 조회 & 수정 controller
+	 *******************************************/
+	
 	// Security context 값을 받아서 userId 를 받는 method
 	private String getUserId() {
 		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
