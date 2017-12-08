@@ -137,11 +137,12 @@ function readURL(input){
 		
 		<div class="form-group">
 			<label>대관일</label>
-			<input type="Date" name="stageRentalDate">
-			<label>시작 시간</label> <input type="Time" name="stageStartTime"> 
-			<label>끝나는 시간</label> <input type="Time" name="stageEndTime"/>
+			<input type="date" name="stageRentalDate">
+			<label>시작 시간</label> <input type="time" name="stageStartTime"> 
+			<label>끝나는 시간</label> <input type="time" name="stageEndTime"/>
 		</div>
-		
+		<!-- 예약가능 여부 -->
+		<input type="hidden" name="stageReservation" value="1">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<button type="submit" class="btn btn-default">등록</button>
 		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
