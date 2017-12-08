@@ -37,6 +37,8 @@
 		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
 		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
+		<result column="STAGE_START_Time" property="stageStartTime"/>
+		<result column="STAGE_END_Time" property="stageEndTime"/>
 	</resultMap>
 	
 	<!-- 공연장 insert -->
@@ -98,12 +100,12 @@
 		WHERE STAGE_NO = #{stageNo}
 	</update>
 	
-	<select id="selectStageCountByLocation" resultType="_int" parameterType="String">
+	<select id="selectStageCountByLocation" resultType="_int" parameterType="map">
 		select count(*) 
 		from (	select *
 					 		from stage
-					 		where stage_rental_date &gt;= #{sDate}  
-					 		and stage_rental_date &lt;= #{eDate}
+					 		where stage_rental_date &gt;= #{startDate}  
+					 		and stage_rental_date &lt;= #{endDate}
 					 		)
 		where stage_location like '%'||#{stageLocation}||'%'
 		
@@ -117,8 +119,8 @@
 					select *
 					from (	select *
 					 		from stage
-					 		where stage_rental_date &gt;= #{sDate}  
-					 		and stage_rental_date &lt;= #{eDate}
+					 		where stage_rental_date &gt;= #{startDate}  
+					 		and stage_rental_date &lt;= #{endDate}
 					 		)
 					where stage_location like '%'||#{stageLocation}||'%'
 					order by stage_no desc
@@ -126,12 +128,12 @@
 		) where rownum >= #{begin}	 
 	</select>
 	
-	<select id="selectStageCountByInstrument" resultType="_int" parameterType="String">
+	<select id="selectStageCountByInstrument" resultType="_int" parameterType="map">
 		select count(*) 
 		from (	select *
 					 		from stage
-					 		where stage_rental_date &gt;= #{sDate}  
-					 		and stage_rental_date &lt;= #{eDate}
+					 		where stage_rental_date &gt;= #{startDate}  
+					 		and stage_rental_date &lt;= #{endDate}
 					 		)
 		where stage_instrument like '%'||#{stageInstrument}||'%'
 	</select>
@@ -144,8 +146,8 @@
 					select *
 					from (	select *
 					 		from stage
-					 		where stage_rental_date &gt;= #{sDate}  
-					 		and stage_rental_date &lt;= #{eDate}
+					 		where stage_rental_date &gt;= #{startDate}  
+					 		and stage_rental_date &lt;= #{endDate}
 					 		)
 					where stage_instrument like '%'||#{instrument}||'%'
 					 
@@ -154,22 +156,22 @@
 		) where rownum >= #{begin}
 	</select>
 	
-	<select id="selectStageCountByDate" resultMap="stage-resultmap" parameterType="map">
+	<select id="selectStageCountByStageDate" resultType="_int" parameterType="map">
 		select count(*) 
-		from performance
-		where stage_rental_date &gt;= #{sDate}
-		and stage_rental_date &lt;= #{eDate}
+		from stage
+		where stage_rental_date &gt;= #{startDate}
+		and stage_rental_date &lt;= #{endDate}
 	</select>
 	
-	<select id="selectStageByDate" resultMap="stage-resultmap" parameterType="map">
+	<select id="selectStageByStageDate" resultMap="stage-resultmap" parameterType="map">
 	select <include refid="column-stage"/>
 		from (
 			select rownum, <include refid="column-stage"/>
 			from (
 					select *
 					from stage
-					where stage_rental_date &gt;= #{sDate}
-					and stage_rental_date &lt;= #{eDate}
+					where stage_rental_date &gt;= #{startDate}
+					and stage_rental_date &lt;= #{endDate}
 					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
