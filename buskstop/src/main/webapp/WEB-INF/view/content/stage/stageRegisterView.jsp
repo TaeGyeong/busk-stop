@@ -36,6 +36,17 @@ $(document).ready(function(){
 	$("#dateBtn2").on("click", function(){
 		$("#stageEDate").val($("#stageRentalDate").val() + " " + $("#stageEndTime").val());
 	});
+	
+	$("#selectStage").on("click", function(){
+		
+	});
+	
+	$("#searchStage").on("click", function(){
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
 });
 
 $(function(){
@@ -84,7 +95,9 @@ function readURL(input){
 			
 		<div class="form-group">
 			<label>공연장 주소</label>
-			<input type="text" name="stageLocation" class="form-control" required="required">
+			<input type="text" id="performanceLocation" name="stageLocation" class="form-control" required="required" readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">
+			<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
+			<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 		</div>
 			
 		<div class="form-group">
@@ -148,14 +161,14 @@ function readURL(input){
 		<div>
 			<label>시작 시간</label> 
 			<input type="time" name="stageStartTime" id="stageStartTime" required="required">
-			<button type="button" id="dateBtn">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required">
+		<!--	<button type="button" id="dateBtn">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
 		</div>
 		<div>
 			<label>끝나는 시간</label> 
 			<input type="time" name="stageEndTime" id="stageEndTime" required="required">
-			<button type="button" id="dateBtn2">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required">
+		<!--	<button type="button" id="dateBtn2">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
 		</div>
 		<br>
 		<!-- 예약가능 여부 -->

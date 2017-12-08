@@ -36,7 +36,7 @@
 	});
 	
 	function goDetail(root, no){
-		document.location.href= root+'/stageDetailView.do?stageNo='+no
+		document.location.href= root+'/stageDetail.do?stageNo='+no
 	}
 	
 	function goRegister(){

@@ -57,7 +57,7 @@ function readURL(input){
 		<label for="performanceLocation">공연장소</label>
 		<input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required" readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">  
 		<!-- <input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required"> -->
-		<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-1">
+		<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
 		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 	</div>
 		<div class="form-group">

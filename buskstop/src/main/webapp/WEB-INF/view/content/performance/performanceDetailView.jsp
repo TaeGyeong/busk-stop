@@ -225,7 +225,7 @@ function deletePerformance(performanceNo){
 				var geocoder = new daum.maps.services.Geocoder();
 		
 				// 주소로 좌표를 검색합니다
-				geocoder.addressSearch('${requestScope.performance.performanceLocation}', function(result, status) {
+				geocoder.addressSearch('${requestScope.map.performance.performanceLocation}', function(result, status) {
 		
 				    // 정상적으로 검색이 완료됐으면 
 				     if (status === daum.maps.services.Status.OK) {
