@@ -41,7 +41,7 @@ public class HelpController {
 	
 	@RequestMapping("/helpRegister")
 	public ModelAndView insertHelp(@ModelAttribute Help help, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println("Log : HelpController.java /helpRegister 호출 성공");
+		System.out.println("Log : HelpController.java /helpRegister 호출");
 		service.insertHelp();
 		return null;
 	}	
