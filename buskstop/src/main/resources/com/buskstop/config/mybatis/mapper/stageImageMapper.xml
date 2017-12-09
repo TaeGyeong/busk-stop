@@ -37,5 +37,9 @@
 		order by stage_image_no
 	</select>
 	
-	
+	<!-- 이미지번호를 받아서 이미지 삭제 -->
+	<delete id="deleteStageImageByStageImageNo" parameterType="_int">
+		delete from stage_image
+		where stage_image_no = #{stageImageNo}
+	</delete>
 </mapper>

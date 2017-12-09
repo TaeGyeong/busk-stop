@@ -16,6 +16,4 @@
 		<sec:csrfInput/>
 		<button id="dropBtn" class="btn-default">회원탈퇴</button>
 	</form>
-	
-	
 </div>

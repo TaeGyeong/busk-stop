@@ -163,4 +163,14 @@ public class StageServiceImpl implements StageService{
 		}
 	}
 	
+	@Override
+	public void deleteStageByStageNo(int stageNo) {
+		stageDao.deleteStageByStageNo(stageNo);
+	}
+	
+	@Override
+	public void deleteStageImageByStageImageNo(int stageImageNo) {
+		stageImageDao.deleteStageImageByStageImageNo(stageImageNo);
+	}
+	
 }

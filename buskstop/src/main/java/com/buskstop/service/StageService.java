@@ -60,6 +60,18 @@ public interface StageService {
 
 	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate);
 
+	/**
+	 * 공연장 공연장 번호로 삭제
+	 * @param stageNo
+	 */
+	void deleteStageByStageNo(int stageNo);
+	
+	/**
+	 * 공연장사진 공연장사진 번호로 삭제
+	 * @param stageImageNo
+	 */
+	void deleteStageImageByStageImageNo(int stageImageNo);
+
 	Map<String, Object> selectStageByStageSellerId(int page, String idSearch, Date startDate, Date endDate);
 
 	Map<String, Object> selectStageOnlyId(int page, String idSearch);

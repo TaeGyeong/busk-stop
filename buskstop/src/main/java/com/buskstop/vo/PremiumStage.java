@@ -22,6 +22,8 @@ public class PremiumStage implements Serializable {
 	private int stageFoodRestriction;
 	private List<MultipartFile> multiImage;
 	private String stageImage; // 대표사진
+	
+	private List<String> oldImage;
 
 	public PremiumStage() {
 	}
@@ -80,6 +82,40 @@ public class PremiumStage implements Serializable {
 	}
 	
 	
+	
+	
+
+	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
+			int stageArea, int stageCost, String stageInstrument, String stageContent, int stageParking,
+			int stageDrinking, int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage,
+			String stageImage, List<String> oldImage) {
+		this.establishNum = establishNum;
+		this.operatorUserId = operatorUserId;
+		this.operatorNo = operatorNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageArea = stageArea;
+		this.stageCost = stageCost;
+		this.stageInstrument = stageInstrument;
+		this.stageContent = stageContent;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.multiImage = multiImage;
+		this.stageImage = stageImage;
+		this.oldImage = oldImage;
+	}
+	
+	
+
+	public List<String> getOldImage() {
+		return oldImage;
+	}
+
+	public void setOldImage(List<String> oldImage) {
+		this.oldImage = oldImage;
+	}
 
 	public String getStageInstrument() {
 		return stageInstrument;
@@ -207,14 +243,17 @@ public class PremiumStage implements Serializable {
 		int result = 1;
 		result = prime * result + establishNum;
 		result = prime * result + ((multiImage == null) ? 0 : multiImage.hashCode());
+		result = prime * result + ((oldImage == null) ? 0 : oldImage.hashCode());
 		result = prime * result + operatorNo;
 		result = prime * result + ((operatorUserId == null) ? 0 : operatorUserId.hashCode());
 		result = prime * result + stageArea;
+		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
 		result = prime * result + stageCost;
 		result = prime * result + stageDrinking;
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
 		result = prime * result + ((stageImage == null) ? 0 : stageImage.hashCode());
+		result = prime * result + ((stageInstrument == null) ? 0 : stageInstrument.hashCode());
 		result = prime * result + ((stageLocation == null) ? 0 : stageLocation.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
 		result = prime * result + stageParking;
@@ -237,6 +276,11 @@ public class PremiumStage implements Serializable {
 				return false;
 		} else if (!multiImage.equals(other.multiImage))
 			return false;
+		if (oldImage == null) {
+			if (other.oldImage != null)
+				return false;
+		} else if (!oldImage.equals(other.oldImage))
+			return false;
 		if (operatorNo != other.operatorNo)
 			return false;
 		if (operatorUserId == null) {
@@ -245,6 +289,11 @@ public class PremiumStage implements Serializable {
 		} else if (!operatorUserId.equals(other.operatorUserId))
 			return false;
 		if (stageArea != other.stageArea)
+			return false;
+		if (stageContent == null) {
+			if (other.stageContent != null)
+				return false;
+		} else if (!stageContent.equals(other.stageContent))
 			return false;
 		if (stageCost != other.stageCost)
 			return false;
@@ -258,6 +307,11 @@ public class PremiumStage implements Serializable {
 			if (other.stageImage != null)
 				return false;
 		} else if (!stageImage.equals(other.stageImage))
+			return false;
+		if (stageInstrument == null) {
+			if (other.stageInstrument != null)
+				return false;
+		} else if (!stageInstrument.equals(other.stageInstrument))
 			return false;
 		if (stageLocation == null) {
 			if (other.stageLocation != null)
@@ -278,10 +332,12 @@ public class PremiumStage implements Serializable {
 	public String toString() {
 		return "PremiumStage [establishNum=" + establishNum + ", operatorUserId=" + operatorUserId + ", operatorNo="
 				+ operatorNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation + ", stageArea="
-				+ stageArea + ", stageCost=" + stageCost + ", stageParking=" + stageParking + ", stageDrinking="
-				+ stageDrinking + ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", multiImage=" + multiImage + ", stageImage=" + stageImage + "]";
+				+ stageArea + ", stageCost=" + stageCost + ", stageInstrument=" + stageInstrument + ", stageContent="
+				+ stageContent + ", stageParking=" + stageParking + ", stageDrinking=" + stageDrinking
+				+ ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
+				+ ", multiImage=" + multiImage + ", stageImage=" + stageImage + ", oldImage=" + oldImage + "]";
 	}
-
+	
+	
 	
 }

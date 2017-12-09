@@ -22,6 +22,7 @@ public interface StageDao {
 
 	int selectStageCount();
 
+	int selectStageCountByLocation(String stageLocation);
 
 	int selectStageCountByStageDate(Date startDate, Date endDate);
 
@@ -59,5 +60,11 @@ public interface StageDao {
 	int selectStageCountOnlyInstrument(String instrumentSearch);
 
 	List<Stage> selectStageOnlyInstrument(int beginItemInPage, int endItemInPage, String instrumentSearch);
-
+	
+	/**
+	 * 공연장 번호를 받아서 삭제
+	 * @param stageNo
+	 * @return
+	 */
+	int deleteStageByStageNo(int stageNo);
 }

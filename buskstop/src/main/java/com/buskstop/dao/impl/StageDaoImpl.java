@@ -138,6 +138,17 @@ public class StageDaoImpl implements StageDao{
 		map.put("endDate",endDate);		
 		return session.selectList(makeSqlId("selectStageByStageDate"),map);
 	}
+	
+	@Override
+	public int deleteStageByStageNo(int stageNo) {
+		return session.delete(makeSqlId("deleteStageByStageNo"), stageNo);
+	}
+
+	@Override
+	public int selectStageCountByLocation(String stageLocation) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public int selectStageCountOnlyId(String stageSellerId){
