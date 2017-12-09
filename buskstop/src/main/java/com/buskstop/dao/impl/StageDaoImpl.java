@@ -208,8 +208,7 @@ public class StageDaoImpl implements StageDao{
 
 	@Override
 	public int deleteStageByStageNo(int stageNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.delete(makeSqlId("deleteStageByStageNo"), stageNo);
 	}
 	
 }
