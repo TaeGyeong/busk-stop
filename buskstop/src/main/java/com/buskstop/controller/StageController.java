@@ -88,7 +88,15 @@ public class StageController {
 		else {
 		if(locationSearch=="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="" ) {
 			map = service.selectStageByStageDate(page,startDate,endDate);
-		} else if(locationSearch=="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch=="") {
+		} /* 날짜 없이 2개 검색 */
+		else if(locationSearch!="" && nameSearch!="" && startDate==null && endDate==null && idSearch=="") {
+			map = service.selectStageByLocationAndNameNoDate(page,locationSearch,nameSearch);
+		} else if(locationSearch!="" && nameSearch=="" && startDate==null && endDate==null && idSearch!="") {
+			map = service.selectStageByLocationAndIDNoDate(page,locationSearch,idSearch);
+		}else if(locationSearch=="" && nameSearch!="" && startDate==null && endDate==null && idSearch!="") {
+			map = service.selectStageByNameAndIdNoDate(page,nameSearch,idSearch);
+		}	/* 날짜 있이 2개 검색 */ 
+		else if(locationSearch=="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch=="") {
 			map = service.selectStageByName(page,nameSearch,startDate,endDate);
 		} else if(locationSearch!="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="") {
 			map = service.selectStageByStageLocation(page,locationSearch,startDate,endDate);
@@ -101,7 +109,8 @@ public class StageController {
 			map = service.selectStageOnlyLocation(page,locationSearch);
 		} else if(idSearch=="" && locationSearch=="" && nameSearch!="" && startDate==null && endDate==null) {
 			map = service.selectStageOnlyName(page,nameSearch);
-		} else if(locationSearch!="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch==""){
+		} /* 3개 검색 */
+		  else if(locationSearch!="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch==""){
 			map = service.selectStageByLocationAndName(page,locationSearch,startDate,endDate,nameSearch);
 		}	}
 		
@@ -179,14 +188,14 @@ public class StageController {
 		Stage stage = service.selectStageByStageNo(stageNo);
 		List<StageImage> stageImage = service.selectStageImageByStageNo(stageNo);
 		
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		String id = ((User)authentication.getPrincipal()).getUserId();
+//		SecurityContext context = SecurityContextHolder.getContext();
+//		Authentication authentication = context.getAuthentication();
+//		String id = ((User)authentication.getPrincipal()).getUserId();
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("stage", stage);
 		map.put("stageImage", stageImage);
-		map.put("userId", id);
+//		map.put("userId", id);
 		
 		return new ModelAndView("stage/stageDetailView.tiles", "map", map);
 	}
