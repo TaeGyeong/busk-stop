@@ -1,6 +1,7 @@
 package com.buskstop.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.common.util.DateJsonSerializer;
 import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.vo.PremiumStageOption;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Controller
 public class PremiumStageReservationController {
@@ -40,7 +43,7 @@ public class PremiumStageReservationController {
 		view.addObject("reservationDate", reservationDate);
 		view.addObject("timeCode", timeCode);*/
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("reservationDate", reservationDate);
+		map.put("reservationDate",new SimpleDateFormat("yyyy-MM-dd").format(reservationDate));
 		map.put("timeCode", timeCode);
 		return map;
 	}

@@ -87,7 +87,6 @@ insert into STAGE_REVIEW values(5,'kim4845',4,'너무 구려요','2017-12-19');
 insert into STAGE_REVIEW values(3,'beck4848',5,'갓태경','2017-12-20');
 insert into STAGE_REVIEW values(5,'lee534',2,'동엽신','2017-12-21');
 
-
 /* 공연정보(아티스트 게시물) */
 insert into PERFORMANCE values('2', '야탑 공연', '야탑 정기 공연','야탑 라이브', '2017-11-28', 125, '많이 놀러오세요.', 'c://img/img1','kim4845', '3','2017-12-22');
 insert into PERFORMANCE values('3', '부산 공연', '붓산 사나이','부산 놀이터', '2017-12-22', 30, '보러오세요.', 'c://img/img1','yunee33', '4','2017-12-23');

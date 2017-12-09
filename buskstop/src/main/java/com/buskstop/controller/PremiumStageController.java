@@ -208,9 +208,25 @@ public class PremiumStageController {
 	}
 	
 	@RequestMapping("/selectPremiumStage")
-	public ModelAndView viewPremiumStageList() {
+	public ModelAndView viewPremiumStageList(HttpServletRequest request) {
+		List<PremiumStage> list = null;
+		Map<String, Object> map = null;
 		
-		return new ModelAndView("","null",null);
+		int page = 1;
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		// PremiumStage 정보를 모두 가져온다. (페이징? : 페이징을 하게되면 한줄에 3개씩해서 9개를 보여주자.)
+		map = service.selectPremiumStage(page);
+		list = (List<PremiumStage>)map.get("list");
+		
+		map.put("list", list);
+		
+		
+		return new ModelAndView("premiumStage/premiumStageListView.tiles","map",map);
 	}
 	
 	private String getUserId() {
