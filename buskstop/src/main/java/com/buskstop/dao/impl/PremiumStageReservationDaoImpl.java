@@ -17,7 +17,7 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 	private SqlSessionTemplate session;
 	
 	private String makeSqlId(String id) {
-		return "com.buskstop.config.mybatis.mapper.PremiumStageReservationMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.premiumStageReservationMapper."+id;
 	}
 
 	@Override

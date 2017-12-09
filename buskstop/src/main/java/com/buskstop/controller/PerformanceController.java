@@ -55,7 +55,7 @@ public class PerformanceController {
 	
 	/**************************** 공연정보 등록 ****************************/
 	
-	@RequestMapping("/performanceRegister")
+	@RequestMapping("/member/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws IllegalStateException, IOException {
 		//파일 업로드 처리
 		MultipartFile multiImage = performance.getMultiImage();
@@ -268,14 +268,14 @@ public class PerformanceController {
 		performance = list.get(0);
 		
 		// 접속한 사용자의 id값 조회
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		String id = ((User)authentication.getPrincipal()).getUserId();
+//		SecurityContext context = SecurityContextHolder.getContext();
+//		Authentication authentication = context.getAuthentication();
+//		String id = ((User)authentication.getPrincipal()).getUserId();
 		
 		// 값으로 보낼 map
 		Map<String,Object> map = new HashMap<>();
 		map.put("performance", performance);
-		map.put("userId", id);
+//		map.put("userId", id);
 		
 		return new ModelAndView("performance/performanceDetailView.tiles","map", map);
 	}

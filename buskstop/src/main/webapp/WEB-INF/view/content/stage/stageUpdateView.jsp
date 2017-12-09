@@ -1,13 +1,30 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script>
 $(document).ready(function(){
 	$(document).on("click", "#addImage", function(){
-		$('<div><input type="file" name="imgs" class="form-control" id="inputImage"><div style="text-align: center;"><label>이미지 미리보기</label><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div><button type="button" id="addImage" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default" type="button">삭제</button></div>').appendTo("#img_box");
+		$('<div><div style="text-align: center;"><br><img id="imgView" src="#" alt="img" style="height: 300px;"/></div><input type="file" name="imgs" class="form-control" id="inputImage"><button type="button" id="addImage" class="btn btn-default">추가</button><button id="deleteImage" class="btn btn-default" type="button">삭제</button></div>').appendTo("#img_box");
 	});
 	$(document).on("click", "#deleteImage", function(){
+		$(this).parent().remove();
+	});
+
+	$("#selectStage").on("click", function(){
+		
+	});
+	
+	$("#searchStage").on("click", function(){
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
+	
+	$(document).on("click", "#delBtn", function(){
+		$(this).parent().prev().attr("name", "delImage");
 		$(this).parent().remove();
 	});
 });
@@ -23,7 +40,7 @@ function readURL(input){
 		var reader = new FileReader();
 		
 		reader.onload = function(e){
-			$(input).next().children().last().attr('src', e.target.result);
+			$(input).prev().children().attr('src', e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
@@ -49,7 +66,9 @@ function readURL(input){
 		
 	<div class="form-group">
 		<label>공연장 주소</label>
-		<input type="text" name="stageLocation" class="form-control" value="${requestScope.stage.stageLocation }">
+		<input type="text" id="performanceLocation" name="stageLocation" class="form-control" value="${requestScope.stage.stageLocation }" readonly="readonly">
+		<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
+		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 	</div>
 		
 	<div class="form-group">
@@ -64,17 +83,20 @@ function readURL(input){
 		
 	<div class="form-group">
 		<label>구비된 악기</label>
-		<input type="text" name="instrument" class="form-control" value="${requestScope.stage.instrument }">
+		<input type="text" name="instrument" class="form-control" value="${requestScope.stage.stageInstrument }">
 	</div>
-
 	<div class="form-group" id="img_box">
-		<label>이미지</label>
-		<button type="button" id="addImage" class="btn btn-default">추가</button><h6 style="color: red;">* 이미지는 다시 입력하여야 합니다.</h6>
-			<input type="file" name="imgs" class="form-control" id="inputImage">
-			<div style="text-align: center;">
-				<label>이미지 미리보기</label><br>
-				<img alt="img" src="#" id="imgView" style="height: 300px;">
-			</div>
+		<label>이미지</label><br><button type="button" id="addImage" class="btn btn-default">추가</button>
+			<c:forEach var="img" items="${requestScope.stage.stageImage }">
+				<input type="hidden" class="form-control" value="${img.stageImageNo }">
+				<div>					
+					<div style="text-align: center;">
+						<img src="${initParam.rootPath }/stageImage/${img.stageImageLocation}.jpg" id="imgView" style="height: 300px;" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+					</div>
+					<button type="button" id="addImage" class="btn btn-default">추가</button>
+					<button type="button" class="btn btn-default" id="delBtn">삭제</button>
+				</div>
+		</c:forEach>
 	</div>
 	
 	<div class="form-group">
@@ -145,22 +167,24 @@ function readURL(input){
 			</c:otherwise>
 		</c:choose>
 	</div>
-		
+	
 	<div class="form-group">
-		<label>예약가능 여부</label><br>
-		
-		<c:set var="reservation" value="${requestScope.stage.stageReservation }"/>
-		<c:choose>
-			<c:when test="${reservation eq 1}">
-				<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="1" checked="checked">예약 가능</label>
-				<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="0">예약 불가</label>
-			</c:when>
-			<c:otherwise>
-				<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="1">예약 가능</label>
-				<label style="font-weight: normal;"><input type="radio" name="stageResurvation" value="0" checked="checked">예약 불가</label>
-			</c:otherwise>
-		</c:choose>	
+		<label>대관일</label>
+		<input type="Date" name="stageRentalDate" id="stageRentalDate" value='<fmt:formatDate value="${requestScope.stage.stageRentalDate }" pattern="yyyy-MM-dd"/>'>
 	</div>
+	<div>
+		<label>시작 시간</label> 
+		<input type="time" name="stageStartTime" id="stageStartTime" required="required" value="${requestScope.stage.stageStartTime }">
+		<!--	<button type="button" id="dateBtn">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
+	</div>
+	<div>
+		<label>끝나는 시간</label> 
+		<input type="time" name="stageEndTime" id="stageEndTime" required="required" value="${requestScope.stage.stageEndTime }">
+		<!--	<button type="button" id="dateBtn2">날짜 확인</button>
+			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
+	</div>
+	<br>
 	
 	<button type="submit" class="btn btn-default">수정완료</button>
 	<button type="button" class="btn btn-default" onclick="history.back();">취소</button>

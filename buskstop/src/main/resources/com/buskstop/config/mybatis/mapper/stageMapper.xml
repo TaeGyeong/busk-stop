@@ -37,8 +37,8 @@
 		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
 		<result column="STAGE_REG_TIME" property="stageRegTime"/>
 		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
-		<result column="STAGE_START_Time" property="stageStartTime"/>
-		<result column="STAGE_END_Time" property="stageEndTime"/>
+		<result column="STAGE_START_TIME" property="stageStartTime"/>
+		<result column="STAGE_END_TIME" property="stageEndTime"/>
 	</resultMap>
 	
 	<!-- 공연장 insert -->
@@ -88,13 +88,16 @@
 			<if test="stageLocation != null">STAGE_LOCATION = #{stageLocation},</if>
 			<if test="stageCost != null">STAGE_COST = #{stageCost},</if>
 			<if test="stageArea != null">STAGE_AREA = #{stageArea},</if>
-			<if test="instrument != null">STAGE_INSTRUMENT = #{instrument},</if>
+			<if test="stageInstrument != null">STAGE_INSTRUMENT = #{stageInstrument},</if>
 			<if test="stageContent != null">STAGE_CONTENT = #{stageContent},</if>
 			<if test="stageParking != null">STAGE_PARKING = #{stageParking},</if>
 			<if test="stageDrinking != null">STAGE_DRINKING = #{stageDrinking},</if>
 			<if test="stageFoodSell != null">STAGE_FOOD_SELL = #{stageFoodSell},</if>
 			<if test="stageFoodRestriction != null">STAGE_FOOD_RESTRICTION = ${stageFoodRestriction},</if>
 			<if test="stageReservation != null">STAGE_RESERVATION = #{stageReservation},</if>
+			<if test="stageRentalDate != null">STAGE_RENTAL_DATE = #{stageRentalDate},</if>
+			<if test="stageStartTime != null">STAGE_START_TIME = #{stageStartTime},</if>
+			<if test="stageEndTime != null">STAGE_END_TIME = #{stageEndTime},</if>
 			<if test="stageSellerId != null">STAGE_SELLER_ID = #{stageSellerId}</if>
 		</set>
 		WHERE STAGE_NO = #{stageNo}
@@ -128,17 +131,17 @@
 		) where rn >= #{begin}	 
 	</select>
 	
-	<select id="selectStageCountByInstrument" resultType="_int" parameterType="map">
+	<select id="selectStageCountByName" resultType="_int" parameterType="map">
 		select count(*) 
 		from (	select <include refid="column-stage"/>
 				from stage
 				where STAGE_RENTAL_DATE &gt;= #{startDate}  
 				and STAGE_RENTAL_DATE &lt;= #{endDate}
 		)
-		where STAGE_INSTRUMENT like '%'||#{stageInstrument}||'%'
+		where STAGE_NAME like '%'||#{stageName}||'%'
 		</select>
 	
-	<select id="selectStageByInstrument" parameterType="map" resultMap="stage-resultmap">
+	<select id="selectStageByName" parameterType="map" resultMap="stage-resultmap">
 		select <include refid="column-stage"/>
 		from (
 			select rownum rn, <include refid="column-stage"/>
@@ -148,8 +151,9 @@
 					 		from stage
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
+					 		order by stage_no desc
 					 		)
-					where stage_instrument like '%'||#{stageInstrument}||'%'
+					where STAGE_NAME like '%'||#{stageName}||'%'
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
@@ -174,6 +178,7 @@
 					 		from stage
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
+					 		order by stage_no desc
 					 		)
 					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
 			) where rownum &lt; = #{end}
@@ -187,6 +192,13 @@
 		and stage_rental_date &lt;= #{endDate}
 	</select>
 	
+	<!-- 공연장 번호를 받아서 delete -->
+	<delete id="deleteStageByStageNo" parameterType="_int">
+		delete from STAGE
+		where stage_no = #{stageNo}
+	</delete>
+	
+	
 	<select id="selectStageByStageDate" resultMap="stage-resultmap" parameterType="map">
 	select <include refid="column-stage"/>
 		from (
@@ -196,6 +208,7 @@
 					from stage
 					where stage_rental_date &gt;= #{startDate}
 					and stage_rental_date &lt;= #{endDate}
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
 	
@@ -215,6 +228,7 @@
 					select *
 					from stage
 					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
@@ -233,40 +247,61 @@
 					select *
 					from stage
 					where stage_location like '%'||#{stageLocation}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
 	
-	<select id="selectStageCountOnlyInstrument" resultType="_int" parameterType="String">
+	<select id="selectStageCountOnlyName" resultType="_int" parameterType="String">
 		select count(*) 
 		from stage
-		where stage_instrument like '%'||#{stageInstrument}||'%'
+		where STAGE_NAME like '%'||#{stageName}||'%'
 		</select>
 	
-	<select id="selectStageOnlyInstrument" parameterType="map" resultMap="stage-resultmap">
+	<select id="selectStageOnlyName" parameterType="map" resultMap="stage-resultmap">
 		select <include refid="column-stage"/>
 		from (
 			select rownum rn, <include refid="column-stage"/>
 			from (
 					select *
 					from stage
-					where stage_instrument like '%'||#{stageInstrument}||'%'
+					where STAGE_NAME like '%'||#{stageName}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
 	
+	<select id="selectStageCountByLocationAndName" resultType="_int" parameterType="map">
+		select count(*) 
+		from( 
+			select *
+			from	(	select <include refid="column-stage"/>
+					from stage
+					where STAGE_RENTAL_DATE &gt;= #{startDate}  
+					and STAGE_RENTAL_DATE &lt;= #{endDate}
+			) 
+			where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+		)
+		where STAGE_NAME like '%'||#{stageName}||'%'
+		</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="selectStageByLocationAndName" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from ( 
+							select *
+							from	(	select <include refid="column-stage"/>
+										from stage
+										where STAGE_RENTAL_DATE &gt;= #{startDate} and STAGE_RENTAL_DATE &lt;= #{endDate}
+										order by stage_no desc
+							) where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+					) where STAGE_NAME like '%'||#{stageName}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
 	
 	
 	

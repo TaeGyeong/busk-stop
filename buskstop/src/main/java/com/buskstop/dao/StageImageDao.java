@@ -26,4 +26,11 @@ public interface StageImageDao {
 	 * @return
 	 */
 	List<StageImage> selectStageImageByStageNo(int stageNo);
+	
+	/**
+	 * 공연장사진 공연장사진 번호로 삭제
+	 * @param stageImageNo
+	 * @return
+	 */
+	int deleteStageImageByStageImageNo(int stageImageNo);
 }

@@ -71,12 +71,12 @@ public class StageServiceImpl implements StageService{
 	}
 
 	@Override
-	public Map<String, Object> selectStageByInstrument(int page, String instrumentSearch, Date startDate, Date endDate) {
+	public Map<String, Object> selectStageByName(int page, String nameSearch, Date startDate, Date endDate) {
 		System.out.println("악기 검색");
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrumentSearch,startDate,endDate),page);
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByName(nameSearch,startDate,endDate),page);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrumentSearch,startDate,endDate);
+		List<Stage> list = stageDao.selectStageByName(pb.getBeginItemInPage(), pb.getEndItemInPage(), nameSearch,startDate,endDate);
 		map.put("list",list);
 		System.out.println("악기 검색하고 뽑아온 리스트 : "+list);
 		return map;
@@ -128,14 +128,27 @@ public class StageServiceImpl implements StageService{
 	}
 	
 	@Override
-	public Map<String,Object> selectStageOnlyInstrument(int page, String instrumentSearch){
+	public Map<String,Object> selectStageOnlyName(int page, String nameSearch){
 		System.out.println("단일 악기 검색");
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb = new PagingBean(stageDao.selectStageCountOnlyInstrument(instrumentSearch),page);
+		PagingBean pb = new PagingBean(stageDao.selectStageCountOnlyName(nameSearch),page);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageOnlyInstrument(pb.getBeginItemInPage(),pb.getEndItemInPage(),instrumentSearch);
+		List<Stage> list = stageDao.selectStageOnlyName(pb.getBeginItemInPage(),pb.getEndItemInPage(),nameSearch);
 		map.put("list",list);
 		System.out.println("단일 악기 서비스까지 나오는 리스트"+list);
+		return map;
+	}
+	
+	@Override
+	public Map<String,Object> selectStageByLocationAndName(int page, String locationSearch, Date startDate, Date endDate, String nameSearch){
+		System.out.println("장소 검색");
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocationAndName(locationSearch,startDate,endDate,nameSearch),page);
+		System.out.println("페이징 : "+pb);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByLocationAndName(pb.getBeginItemInPage(), pb.getEndItemInPage(), locationSearch,startDate,endDate,nameSearch);
+		map.put("list",list);
+		System.out.println("장소 검색하고 뽑아온 리스트 : "+list);
 		return map;
 	}
 	
@@ -161,6 +174,17 @@ public class StageServiceImpl implements StageService{
 		for(String stageImage : imageList) {
 			stageImageDao.insertStageImage(new StageImage(1, stageImage, establishNum));
 		}
+	}
+	
+	@Override
+	public void deleteStageImageByStageImageNo(int stageImageNo) {
+		stageImageDao.deleteStageImageByStageImageNo(stageImageNo);
+	}
+
+	@Override
+	public void deleteStageByStageNo(int stageNo) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

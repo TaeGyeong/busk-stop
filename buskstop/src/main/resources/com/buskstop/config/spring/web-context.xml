@@ -17,7 +17,7 @@
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
 	<mvc:view-controller path="/myPageView.do" view-name="myPage/myPageView.tiles"/>
-	<mvc:view-controller path="/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
+	<mvc:view-controller path="/member/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
 	<mvc:view-controller path="/artist/performanceRegisterView.do" view-name="performance/artistPerformanceRegisterView.tiles"/>
 	<mvc:view-controller path="/registerSuccessView.do" view-name="user/registerSuccessView.tiles"/>
 	<mvc:view-controller path="/performanceView.do" view-name="performance/performanceView.tiles"/>
@@ -55,13 +55,15 @@
 	<mvc:view-controller path="/findId.do" view-name="user/FindIdByEmail.tiles"/>
 	<mvc:view-controller path="/findPassword.do" view-name="user/FindPasswordByEmail.tiles"/>
 	
+	<!-- 403 권한 없음 에러 페이지 -->
+	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
 	
 	<!-- test link -->
 	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
 	<mvc:view-controller path="/mapTest3.do" view-name="performance/mapTest3.tiles"/>
 	<mvc:view-controller path="/searchStageByAddress.do" view-name="performance/searchStageByAddress.tiles2"/>
 	<mvc:view-controller path="/searchStageByKeyword.do" view-name="performance/searchStageByKeyword.tiles2"/>
-	
+	<mvc:view-controller path="/premiumStageEnterDate.do" view-name="premiumStage/premiumStageEnterDate.tiles"/>
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

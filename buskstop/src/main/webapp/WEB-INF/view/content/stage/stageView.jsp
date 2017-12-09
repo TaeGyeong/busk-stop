@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -9,16 +10,16 @@
 <script>
 
 	$(document).ready(function(){
-		
 		<%--
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
 		$("#startDate").val(nowDate);
 		--%>
 		$(".submit").click(function(){
 		if($("#locationSearch").val()=="" 
-			&& $("#instrumentSearch").val()==""
+			&& $("#nameSearch").val()==""
 			&& $("#idSearch").val()==""
-			&& $("#endDate").val()==""){
+			&& ($("#startDate").val()==""
+			&& $("#endDate").val()=="")){
 				alert("검색할 키워드를 입력해주세요.");
 				return false;
 			} 
@@ -27,7 +28,7 @@
 	});
 	
 	function goDetail(root, no){
-		document.location.href= root+'/stageDetailView.do?stageNo='+no
+		document.location.href= root+'/stageDetail.do?stageNo='+no
 	}
 	
 	function goRegister(){
@@ -115,10 +116,10 @@ select {
 <div id="container">
 	<hr>
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
+		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
 		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
 		<input type="date" name="startDate" id="startDate">
 		<input type="date" name="endDate" id="endDate">
-		<input type="text" name="instrumentSearch" id="instrumentSearch" placeholder="악기로 검색">
 		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
 		<%--
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
@@ -138,8 +139,8 @@ select {
 		<tr>
 			<td>번호 </td>
 			<td>제목</td>
-			<td>공연장소</td>
-			<td>공연날짜</td>
+			<td>대관장소</td>
+			<td>대관날짜</td>
 			<td>등록 시간</td>
 			<td>공급자</td>
 			<td>예약 여부</td>
@@ -151,8 +152,8 @@ select {
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRentalDate }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRegTime }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"/></td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"/></td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 					<c:if test="${item.stageReservation==0}">예약불가</c:if>

@@ -49,8 +49,6 @@ public interface StageService {
 	Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate);
 
 
-	Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate);
-	
 	/**
 	 * 프리미엄공연장 사진등록.
 	 * @param establishNum
@@ -60,11 +58,29 @@ public interface StageService {
 
 	Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate);
 
+	/**
+	 * 공연장 공연장 번호로 삭제
+	 * @param stageNo
+	 */
+	void deleteStageByStageNo(int stageNo);
+	
+	/**
+	 * 공연장사진 공연장사진 번호로 삭제
+	 * @param stageImageNo
+	 */
+	void deleteStageImageByStageImageNo(int stageImageNo);
+
 	Map<String, Object> selectStageByStageSellerId(int page, String idSearch, Date startDate, Date endDate);
 
 	Map<String, Object> selectStageOnlyId(int page, String idSearch);
 
 	Map<String, Object> selectStageOnlyLocation(int page, String locationSearch);
+	
+	Map<String, Object> selectStageOnlyName(int page, String nameSearch);
 
-	Map<String, Object> selectStageOnlyInstrument(int page, String instrumentSearch);
+	Map<String, Object> selectStageByLocationAndName(int page, String locationSearch, Date startDate, Date endDate,
+			String nameSearch);
+
+	Map<String, Object> selectStageByName(int page, String nameSearch, Date startDate, Date endDate);
+
 }

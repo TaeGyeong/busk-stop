@@ -27,4 +27,6 @@
 		<h5>고객센터</h5>
 		<li><a href="${initParam.rootPath }/helpView.do">고객센터 게시물 목록</a></li>
 		<li><a href="${initParam.rootPath }/helpRegisterView.do">고객센터 게시글 등록</a></li>
+		<h5>premiumStage</h5>
+		<li><a href="${initParam.rootPath }/premiumStageEnterDate.do">프리미엄 공연장 대관일 등록</a></li>
 			
