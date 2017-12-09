@@ -93,14 +93,14 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 		map.put("list", list);
 		return map;
 	}
-
+	
 	@Override
 	public Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb = new PagingBean(stageDao.selectStageCountByInstrument(instrument, startDate, endDate), page);
+		PagingBean pb = new PagingBean(stageDao.selectStageCountByName(instrument, startDate, endDate), page);
 
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,
+		List<Stage> list = stageDao.selectStageByName(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,
 				startDate, endDate);
 		map.put("list", list);
 
