@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -44,6 +45,21 @@ public class PremiumStageDaoImpl implements PremiumStageDao{
 	@Override
 	public int deleteStageByEstablishNum(int establishNum) {
 		return session.delete(makeSqlId("deleteStageByEstablishNum"), establishNum);
+	}
+	
+	/******************** 전체목록보기 ********************/
+	
+	@Override
+	public int selectAllPremiumStageCount() {
+		return session.selectOne(makeSqlId("selectAllPremiumStageCount"));
+	}
+
+	@Override
+	public List<PremiumStage> selectAllPremiumStage(int start, int end) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("begin", start);
+		map.put("end", end);
+		return session.selectList(makeSqlId("selectAllPremiumStage"), map);
 	}
 
 	private String makeSqlId(String id) {

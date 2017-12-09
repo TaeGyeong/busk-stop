@@ -47,4 +47,17 @@ public interface PremiumStageDao {
 	 * @return
 	 */
 	int deleteStageByEstablishNum(int establishNum);
+	
+	/*********************** 목록조회 & 검색 시 페이징 위한 Dao ***********************/
+	/**
+	 * 모든 프리미엄스테이지의 개수.
+	 * @return
+	 */
+	int selectAllPremiumStageCount();
+	
+	/**
+	 * 프리미엄 스테이지를 시작넘버부터 끝넘버까지 불러오는 dao
+	 * @return
+	 */
+	List<PremiumStage> selectAllPremiumStage(int start, int end);
 }

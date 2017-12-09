@@ -268,14 +268,14 @@ public class PerformanceController {
 		performance = list.get(0);
 		
 		// 접속한 사용자의 id값 조회
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		String id = ((User)authentication.getPrincipal()).getUserId();
+//		SecurityContext context = SecurityContextHolder.getContext();
+//		Authentication authentication = context.getAuthentication();
+//		String id = ((User)authentication.getPrincipal()).getUserId();
 		
 		// 값으로 보낼 map
 		Map<String,Object> map = new HashMap<>();
 		map.put("performance", performance);
-		map.put("userId", id);
+//		map.put("userId", id);
 		
 		return new ModelAndView("performance/performanceDetailView.tiles","map", map);
 	}
