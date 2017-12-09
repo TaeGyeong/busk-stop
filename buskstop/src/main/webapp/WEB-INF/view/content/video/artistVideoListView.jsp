@@ -45,10 +45,9 @@ tr:hover{
 	<input type="hidden" id ="videoCategory" name="category" value="artist" class="form-control">
 	<button type="submit">검색</button>
 </form>
-<form action="${initParam.rootPath }/artist/selectArtistVideoCategory.do" method="post">
-	<sec:csrfInput/>
-	<button class="btn btn-default">글쓰기</button>
-</form>
+
+<a class="btn btn-default" href="${initParam.rootPath }/artist/selectArtistVideoCategory.do" role="button">글쓰기</a>
+	
 <table>
 <!-- 
 	VIDEO_NO NUMBER(10), /* 동영상번호 */

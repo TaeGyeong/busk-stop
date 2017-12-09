@@ -14,8 +14,8 @@ $(document).ready(function(){
 			"dataType":"json",
 		    "async": "false",
 			"success":function(list){
-				alert("일단 성공으로");
-				alert(list.length);
+				/* alert("일단 성공으로");
+				alert(list.length); */
 				$("#timeCodeList").remove();
 				if(list.length != 0){
 					for(var i=0; i<24; i++){
@@ -27,7 +27,7 @@ $(document).ready(function(){
 						}
 					}
 				}else{
-					alert("list가 null");
+					/* alert("list가 null"); */
 					$("#reservationTime").append('<div id="timeCodeList"></div>');
 					var n = 1;
 					for(var i=0; i<24; i++){
