@@ -183,7 +183,7 @@ public class StageServiceImpl implements StageService{
 
 	@Override
 	public void deleteStageByStageNo(int stageNo) {
-		// TODO Auto-generated method stub
+		stageDao.deleteStageByStageNo(stageNo);
 		
 	}
 	
