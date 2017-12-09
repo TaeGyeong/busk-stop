@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buskstop.common.util.DateJsonSerializer;
 import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.vo.PremiumStageOption;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Controller
 public class PremiumStageReservationController {
@@ -28,9 +27,9 @@ public class PremiumStageReservationController {
 	PremiumStageReservationService service;
 	
 	@RequestMapping("/enterPremiumStageOption")
-	public ModelAndView enterPremiumStageOption(@ModelAttribute PremiumStageOption premiumStageOption) {
-		service.createPremiumStageOption(premiumStageOption);
-		return new ModelAndView("redirect:/readPremiumStageReservation.do","establishNo",premiumStageOption.getEstablishNo());
+	public ModelAndView enterPremiumStageOption(@RequestParam(value="dateList[]") List<Date> dateList,
+												@RequestParam(value="timeList[]") List<Object> timeList) {
+		return new ModelAndView("redirect:/producer/myStageDetail.do","establishNo","");
 	}
 	
 	@RequestMapping("/addPremiumStageOptionBasket")
@@ -38,10 +37,6 @@ public class PremiumStageReservationController {
 					@RequestParam(value="reservationDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date reservationDate, 
 					@RequestParam(value="timeCode[]") List<Integer> timeCode) {
 		System.out.println(reservationDate+" - "+timeCode+" - test");
-		/*ModelAndView view = new ModelAndView();
-		view.setViewName("/premiumStage/premiumStageEnterDate.tiles");
-		view.addObject("reservationDate", reservationDate);
-		view.addObject("timeCode", timeCode);*/
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("reservationDate",new SimpleDateFormat("yyyy-MM-dd").format(reservationDate));
 		map.put("timeCode", timeCode);

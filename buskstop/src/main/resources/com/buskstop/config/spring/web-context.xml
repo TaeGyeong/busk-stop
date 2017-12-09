@@ -32,8 +32,6 @@
 	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>
 	<mvc:view-controller path="/helpRegisterView.do" view-name="help/helpRegisterView.tiles"/>
 	
-	<!-- 회원탈퇴링크 (아직 만든게없음 지워도 ㄱㅊ) -->
-	<mvc:view-controller path="/out_member_form.do" view-name="member/out_member_form.tiles"/>
 	<!-- password check link -->
 	<mvc:view-controller path="/member/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
 	<mvc:view-controller path="/artist/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
