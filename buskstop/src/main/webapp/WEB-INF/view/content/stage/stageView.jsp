@@ -9,7 +9,6 @@
 <script>
 
 	$(document).ready(function(){
-		
 		<%--
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
 		$("#startDate").val(nowDate);
@@ -18,7 +17,8 @@
 		if($("#locationSearch").val()=="" 
 			&& $("#instrumentSearch").val()==""
 			&& $("#idSearch").val()==""
-			&& $("#endDate").val()==""){
+			&& ($("#startDate").val()==""
+			&& $("#endDate").val()=="")){
 				alert("검색할 키워드를 입력해주세요.");
 				return false;
 			} 
