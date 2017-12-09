@@ -151,6 +151,7 @@
 					 		from stage
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
+					 		order by stage_no desc
 					 		)
 					where stage_instrument like '%'||#{stageInstrument}||'%'
 			) where rownum &lt; = #{end}
@@ -177,6 +178,7 @@
 					 		from stage
 					 		where stage_rental_date &gt;= #{startDate}  
 					 		and stage_rental_date &lt;= #{endDate}
+					 		order by stage_no desc
 					 		)
 					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
 			) where rownum &lt; = #{end}
@@ -206,6 +208,7 @@
 					from stage
 					where stage_rental_date &gt;= #{startDate}
 					and stage_rental_date &lt;= #{endDate}
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rownum >= #{begin}
 	
@@ -225,6 +228,7 @@
 					select *
 					from stage
 					where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
@@ -243,6 +247,7 @@
 					select *
 					from stage
 					where stage_location like '%'||#{stageLocation}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
@@ -261,11 +266,42 @@
 					select *
 					from stage
 					where stage_instrument like '%'||#{stageInstrument}||'%'
+					order by stage_no desc
 			) where rownum &lt; = #{end}
 		) where rn >= #{begin}
 	</select>
 	
+	<select id="selectStageCountByLocationAndInstrument" resultType="_int" parameterType="map">
+		select count(*) 
+		from( 
+			select *
+			from	(	select <include refid="column-stage"/>
+					from stage
+					where STAGE_RENTAL_DATE &gt;= #{startDate}  
+					and STAGE_RENTAL_DATE &lt;= #{endDate}
+			) 
+			where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+		)
+		where STAGE_INSTRUMENT like '%'||#{stageInstrument}||'%'
+		</select>
 	
+	<select id="selectStageByLocationAndInstrument" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from ( 
+							select *
+							from	(	select <include refid="column-stage"/>
+										from stage
+										where STAGE_RENTAL_DATE &gt;= #{startDate} and STAGE_RENTAL_DATE &lt;= #{endDate}
+										order by stage_no desc
+							) where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+					) where stage_instrument like '%'||#{stageInstrument}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
 	
 	
 	

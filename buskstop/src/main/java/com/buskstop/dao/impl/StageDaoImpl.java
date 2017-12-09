@@ -138,17 +138,6 @@ public class StageDaoImpl implements StageDao{
 		map.put("endDate",endDate);		
 		return session.selectList(makeSqlId("selectStageByStageDate"),map);
 	}
-	
-	@Override
-	public int deleteStageByStageNo(int stageNo) {
-		return session.delete(makeSqlId("deleteStageByStageNo"), stageNo);
-	}
-
-	@Override
-	public int selectStageCountByLocation(String stageLocation) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int selectStageCountOnlyId(String stageSellerId){
@@ -191,6 +180,36 @@ public class StageDaoImpl implements StageDao{
 		map.put("end",endItemInPage);
 		map.put("stageInstrument",instrumentSearch);
 		return session.selectList(makeSqlId("selectStageOnlyInstrument"),map);
+	}
+	
+	@Override
+	public int selectStageCountByLocationAndInstrument(String instrumentSearch, Date startDate, Date endDate, String locationSearch) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("stageInstrument", instrumentSearch);
+		map.put("startDate",startDate);
+		map.put("endDate",endDate);
+		map.put("stageLocation", locationSearch);
+		return session.selectOne(makeSqlId("selectStageCountByLocationAndInstrument"),map);
+	}
+
+	@Override
+	public List<Stage> selectStageByLocationAndInstrument(int beginItemInPage, int endItemInPage, String instrumentSearch, Date startDate, Date endDate, String locationSearch) {
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("begin", beginItemInPage);
+		map.put("end", endItemInPage);
+		map.put("stageInstrument", instrumentSearch);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("stageLocation", locationSearch);
+		System.out.println("dao까지 가져온 것"+ map);
+		return session.selectList(makeSqlId("selectStageByLocationAndInstrument"),map);
+	}
+
+
+	@Override
+	public int deleteStageByStageNo(int stageNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

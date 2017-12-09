@@ -139,6 +139,19 @@ public class StageServiceImpl implements StageService{
 		return map;
 	}
 	
+	@Override
+	public Map<String,Object> selectStageByLocationAndInstrument(int page, String locationSearch, Date startDate, Date endDate, String instrumentSearch){
+		System.out.println("장소 검색");
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocationAndInstrument(locationSearch,startDate,endDate,instrumentSearch),page);
+		System.out.println("페이징 : "+pb);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByLocationAndInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), locationSearch,startDate,endDate,instrumentSearch);
+		map.put("list",list);
+		System.out.println("장소 검색하고 뽑아온 리스트 : "+list);
+		return map;
+	}
+	
 	
 	@Override
 	public void updateStage(Stage stage) {

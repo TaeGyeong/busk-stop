@@ -101,7 +101,11 @@ public class StageController {
 			map = service.selectStageOnlyLocation(page,locationSearch);
 		} else if(idSearch=="" && locationSearch=="" && instrumentSearch!="" && startDate==null && endDate==null) {
 			map = service.selectStageOnlyInstrument(page,instrumentSearch);
-		} }
+		} else if(locationSearch!="" && instrumentSearch!="" && startDate!=null && endDate!=null && idSearch==""){
+			map = service.selectStageByLocationAndInstrument(page,locationSearch,startDate,endDate,instrumentSearch);
+		}	
+		  
+		}
 		
 		
 		list = (List<Stage>)map.get("list");

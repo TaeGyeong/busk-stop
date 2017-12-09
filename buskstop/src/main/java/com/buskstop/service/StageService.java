@@ -79,4 +79,8 @@ public interface StageService {
 	Map<String, Object> selectStageOnlyLocation(int page, String locationSearch);
 
 	Map<String, Object> selectStageOnlyInstrument(int page, String instrumentSearch);
+
+	Map<String, Object> selectStageByLocationAndInstrument(int page, String locationSearch, Date startDate,
+			Date endDate, String instrumentSearch);
+
 }

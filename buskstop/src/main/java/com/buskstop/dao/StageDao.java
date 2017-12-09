@@ -22,8 +22,6 @@ public interface StageDao {
 
 	int selectStageCount();
 
-	int selectStageCountByLocation(String stageLocation);
-
 	int selectStageCountByStageDate(Date startDate, Date endDate);
 
 	List<Stage> selectStageByStageDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
@@ -67,4 +65,10 @@ public interface StageDao {
 	 * @return
 	 */
 	int deleteStageByStageNo(int stageNo);
+
+	int selectStageCountByLocationAndInstrument(String locationSearch, Date startDate, Date endDate,
+			String instrumentSearch);
+
+	List<Stage> selectStageByLocationAndInstrument(int beginItemInPage, int endItemInPage, String locationSearch,
+			Date startDate, Date endDate, String instrumentSearch);
 }
