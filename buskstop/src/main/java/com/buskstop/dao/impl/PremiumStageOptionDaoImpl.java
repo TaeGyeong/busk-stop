@@ -16,7 +16,7 @@ public class PremiumStageOptionDaoImpl implements PremiumStageOptionDao{
 	private SqlSessionTemplate session;
 	
 	private String makeSqlId(String id) {
-		return "com.buskstop.config.mybatis.mapper.PremiumStageOptionMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.premiumStageOptionMapper."+id;
 	}
 
 	@Override

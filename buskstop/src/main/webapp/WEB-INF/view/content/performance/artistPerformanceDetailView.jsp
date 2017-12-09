@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
 <script type="text/javascript">
 
 window.onload = function followSearch(){
@@ -335,10 +336,52 @@ function deletePerformance(performanceNo){
 	</div>
 
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
-		<div style="float:left;">
-			<div style="float:left; margin-right:5px;">공연장소</div> 
-			<div style="float:left; margin-right:20px;">${requestScope.map.performance.performanceLocation }</div>
+		<div style="position:static; float:left;">
+			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
+			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
+			<div id="map" style="position:static; width:800px; height:400px"></div>
+			<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
+			<script type="text/javascript">
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			        level: 3 // 지도의 확대 레벨
+			    };  
+	
+				// 지도를 생성합니다    
+				var map = new daum.maps.Map(mapContainer, mapOption); 
+		
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new daum.maps.services.Geocoder();
+		
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch('${requestScope.map.performance.performanceLocation}', function(result, status) {
+		
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === daum.maps.services.Status.OK) {
+		
+				        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+		
+				        // 결과값으로 받은 위치를 마커로 표시합니다
+				        var marker = new daum.maps.Marker({
+				            map: map,
+				            position: coords
+				        });
+		
+				        // 인포윈도우로 장소에 대한 설명을 표시합니다
+				        var infowindow = new daum.maps.InfoWindow({
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">${requestScope.map.performance.performanceName}</div>'
+				        });
+				        infowindow.open(map, marker);
+		
+				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				        map.setCenter(coords);
+				    } 
+				});    
+			</script>
 		</div>
+		<hr>
 		<div>
 			<div style="float:left; margin-right:5px;">공연 시간</div>
 			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>

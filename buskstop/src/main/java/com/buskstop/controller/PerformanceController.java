@@ -55,7 +55,7 @@ public class PerformanceController {
 	
 	/**************************** 공연정보 등록 ****************************/
 	
-	@RequestMapping("/performanceRegister")
+	@RequestMapping("/member/performanceRegister")
 	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws IllegalStateException, IOException {
 		//파일 업로드 처리
 		MultipartFile multiImage = performance.getMultiImage();

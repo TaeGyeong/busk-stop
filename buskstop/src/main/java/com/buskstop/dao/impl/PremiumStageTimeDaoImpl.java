@@ -17,7 +17,7 @@ public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
 	SqlSessionTemplate session;
 	
 	private String makeSqlId(String id) {
-		return "com.buskstop.config.mybatis.mapper.PremiumStageTimeMapper."+id;
+		return "com.buskstop.config.mybatis.mapper.premiumStageTimeMapper."+id;
 	}
 
 	@Override
@@ -27,7 +27,8 @@ public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
 
 	@Override
 	public List<Integer> selectPremiumStageTimeByStageRentalDate(Date date) {
-		return session.selectList(makeSqlId("selectPremiumStageTimeByOptionNo"), date);
+		System.out.println("timeDat"+session.selectList(makeSqlId("selectPremiumStageTimeByStageRentalDate"), date));
+		return session.selectList(makeSqlId("selectPremiumStageTimeByStageRentalDate"), date);
 	}
 	
 }
