@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -138,8 +139,8 @@ select {
 		<tr>
 			<td>번호 </td>
 			<td>제목</td>
-			<td>공연장소</td>
-			<td>공연날짜</td>
+			<td>대관장소</td>
+			<td>대관날짜</td>
 			<td>등록 시간</td>
 			<td>공급자</td>
 			<td>예약 여부</td>
@@ -151,8 +152,8 @@ select {
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRentalDate }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageRegTime }</td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"/></td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"/></td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 					<c:if test="${item.stageReservation==0}">예약불가</c:if>
