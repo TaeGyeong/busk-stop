@@ -111,32 +111,29 @@ function deletePerformance(performanceNo){
 		</c:forEach>
 	</div>
 	
-	
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			구비된 악기 : 
-			${requestScope.map.stage.stageInstrument}
-		</p>
-		<hr>
-	</div>
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>예약 날짜 : </label>
-			${requestScope.map.stage.stageRentalDate} <br>
-			<label>예약 시간 : </label> <br>
-			<label>시작 시간 - </label> ${requestScope.map.stage.stageStartTime} <br>
-			<label>끝 시간 - </label> ${requestScope.map.stage.stageEndTime}
-		</p>
-		<hr>
-	</div>
 	<div>
 		<hr style="float:bottom">
 		<p style="color:#515151; font-size: 16px; padding:20px;">
 			${requestScope.map.stage.stageContent}
 		</p>
-		<hr>
+	</div>
+	
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<label>구비된 악기 : </label>
+			${requestScope.map.stage.stageInstrument}
+		</p>
+	</div>
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<label>예약 날짜 : </label>
+			<fmt:formatDate value="${requestScope.map.stage.stageRentalDate}" pattern="yyyy-MM-dd"/> <br>
+			<label>예약 시간 : </label> <br>
+			<label>시작 시간 - </label> <fmt:formatDate value="${requestScope.map.stage.stageStartTime}" pattern="HH시 mm분"/> <br>
+			<label>끝 시간 - </label> <fmt:formatDate value="${requestScope.map.stage.stageEndTime}" pattern="HH시 mm분"/>
+		</p>
 	</div>
 	
 	<div>
@@ -191,14 +188,15 @@ function deletePerformance(performanceNo){
 			<c:choose>
 				<c:when test="${reservation eq 1}">
 					예약 가능
+					<button type="button" class="btn btn-success">예약하기</button>
 				</c:when>
 				<c:otherwise>
 					예약 불가
+					<button type="button" class="btn btn-danger" onclick="alert('예약 불가능한 공연장 입니다.');">예약불가</button>
 				</c:otherwise>
 			</c:choose>
 			<br>
 		</p>
-		<hr>
 	</div>
 	
 	<div class="button_box" style="width: 100%;">
@@ -207,11 +205,11 @@ function deletePerformance(performanceNo){
 		<div>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updatePerformance();">
-					<input type="submit" value="삭제" onclick="deletePerformance();">
+					<input type="submit" value="수정" onclick="updatePerformance();" class="btn btn-default">
+					<input type="submit" value="삭제" onclick="deletePerformance();" class="btn btn-default">
 				</c:if>
 			</sec:authorize>
-			<button type="button" onclick="history.back();">목록</button>
+			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
 	</div>
 </div>

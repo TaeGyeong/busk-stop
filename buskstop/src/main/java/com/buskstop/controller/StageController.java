@@ -158,9 +158,11 @@ public class StageController {
 		int delImageInt = 0;
 		//삭제한 이미지 삭제
 		String[] delImage = request.getParameterValues("delImage");
-		for(int i=0; i<delImage.length; i++) {
-			delImageInt = Integer.parseInt(delImage[i]);
-			service.deleteStageImageByStageImageNo(delImageInt);
+		if(delImage!=null) {
+			for(int i=0; i<delImage.length; i++) {
+				delImageInt = Integer.parseInt(delImage[i]);
+				service.deleteStageImageByStageImageNo(delImageInt);
+			}
 		}
 		
 		return new ModelAndView("redirect:/selectAllStage.do");
