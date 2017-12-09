@@ -16,6 +16,7 @@ $(document).ready(function(){
 			"success":function(list){
 				alert("일단 성공으로");
 				alert(list.length);
+				$("#timeCode").remove();
 				if(list.length != 0){
 					for(var i=0; i<24; i++){
 						for(var j=0; j<list.length; j++){
@@ -40,27 +41,36 @@ $(document).ready(function(){
 	
 	$("#addOption").on("click", function(){
 		var reservationDate = $("#reservationDate").val();
-		var selectTimes = $("input[name='timeCode']:checked").each(function(i){
-			selectTimes.push($(this).val());
+		var timeCode = new Array();
+		$("input[name='timeCode']:checked").each(function(){
+			timeCode.push($(this).val());
 		});
-		var optionBasket = {"reservationDate":reservationDate, "timeCode":selectTime};
-		
+		alert(timeCode.join(","));
 		$.ajax({
 			"url":"${initParam.rootPath}/addPremiumStageOptionBasket.do",
 			"type":"get",
 			"data":{
-				"optionBasket":optionBasket
+				"reservationDate":reservationDate,
+				"timeCode":timeCode
 			},
 			"dataType":"json",
 		    "async": "false",
-		    "success":function(txt){
-		    	/* $.each(list,function(){
-		    		$("#reservationOption").append("날짜"+this.stageRentalDate);
-		    	}); */
-		    	$("#reservationOption").append("옵션 : 날짜"+txt);
+		    "beforesend":function(){
+		    	if(timeCode.length == 0){
+		    		alert("시간을 선택해주세요");
+		    	}
 		    },
-		    "error":function(){
-		    	alert("error");
+		    "success":function(map){
+		    	alert(map.timeCode);
+		    	$("#timeCode").remove();
+		    	var date = "날짜 : "+(map.reservationDate);
+		    	date += "/ 시간 : "+(map.timeCode);
+		    	date += "<input type='hidden' id='registerDate' name='registerDate' value="+map.reservationDate+"/>"
+		    	date += "<input type='hidden' id='registerTime' name='registerTime' value="+map.timeCode+"/><hr>"
+		    	$("#reservationOption").append(date);
+		    },
+		    "error":function(a,b,c){
+		    	alert(c);
 		    }
 		});
 	});

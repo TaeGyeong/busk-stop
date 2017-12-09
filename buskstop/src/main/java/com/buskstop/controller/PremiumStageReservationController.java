@@ -2,7 +2,9 @@ package com.buskstop.controller;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,13 +33,18 @@ public class PremiumStageReservationController {
 	}
 	
 	@RequestMapping("/addPremiumStageOptionBasket")
-	public @ResponseBody String addPremiumStageOptionBasket(@RequestParam(value="reservationDate") Date reservationDate, 
-															@RequestParam(value="selectTime[]") List<Integer> selectTime) {
-		String result = reservationDate+" - ";
-		for(Integer time : selectTime) {
-			result += time;
-		}
-		return result;
+	public @ResponseBody Map<String, Object> addPremiumStageOptionBasket(
+					@RequestParam(value="reservationDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date reservationDate, 
+					@RequestParam(value="timeCode[]") List<Integer> timeCode) {
+		System.out.println(reservationDate+" - "+timeCode+" - test");
+		/*ModelAndView view = new ModelAndView();
+		view.setViewName("/premiumStage/premiumStageEnterDate.tiles");
+		view.addObject("reservationDate", reservationDate);
+		view.addObject("timeCode", timeCode);*/
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("reservationDate", reservationDate);
+		map.put("timeCode", timeCode);
+		return map;
 	}
 	
 	@RequestMapping("/readPremiumStageOption")
@@ -48,7 +55,7 @@ public class PremiumStageReservationController {
 	
 	@RequestMapping("/readPremiumStageReservationTimeByStageRentalDate")
 	public @ResponseBody List<Integer> readPremiumStageReservationTimeByStageRentalDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date stageRentalDate){
-		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate));
+		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");
 		return service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate);
 	}
 	
