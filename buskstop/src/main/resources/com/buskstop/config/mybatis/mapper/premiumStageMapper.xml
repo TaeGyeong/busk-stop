@@ -102,4 +102,23 @@
 		<include refid="premium-select-sql"/>
 		WHERE 	ESTABLISH_NO = #{value}
 	</select>
+	
+	<!-- 모든 프리미엄스테이지의 개수 -->
+	<select id="selectAllPremiumStageCount" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	PREMIUM_STAGE
+	</select>
+	
+	<select id="selectAllPremiumStage" parameterType="map" resultMap="premiumStage-resultmap">
+		SELECT <include refid="premiumStage-column-sql"/>
+		FROM(
+			SELECT ROWNUM RN, <include refid="premiumStage-column-sql"/>
+			FROM(
+				SELECT 	<include refid="premiumStage-column-sql"/>
+				FROM	PREMIUM_STAGE
+				)
+			WHERE	ROWNUM &lt;= #{end}
+		)
+		WHERE RN >= #{begin}
+	</select>
 </mapper>

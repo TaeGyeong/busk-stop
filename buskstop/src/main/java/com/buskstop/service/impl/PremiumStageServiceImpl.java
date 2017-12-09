@@ -219,5 +219,22 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 		
 		
 	}
+	
+	// 모든 프리미엄 공연장 목록 보여주는 페이징.
+	@Override
+	public Map<String,Object> selectPremiumStage(int page){
+		HashMap<String, Object> map = new HashMap<>();
+		
+		// PagingBean 생성
+		PagingBean pb = new PagingBean(supplierDao.selectAllPremiumStageCount(),page);
+		
+		// Performance list 불러오기
+		List<PremiumStage> list = supplierDao.selectAllPremiumStage(pb.getBeginItemInPage(), pb.getEndItemInPage());
+		
+		map.put("pageBean", pb);
+		map.put("list", list);
+		
+		return map;
+	}
 
 }

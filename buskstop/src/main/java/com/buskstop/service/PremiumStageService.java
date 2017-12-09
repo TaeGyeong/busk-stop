@@ -127,4 +127,12 @@ public interface PremiumStageService {
 	 */
 	void deletePremiumStage(int establishNum, String userId);
 	
+	/**
+	 * 모든 공연정보 페이징 처리 service.
+	 * @param page
+	 * @return
+	 */
+	Map<String,Object> selectPremiumStage(int page);
+	
+	
 }
