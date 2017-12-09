@@ -12,6 +12,13 @@ $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 	});
+	
+	$("#searchStage").on("click", function(){
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
 });
 </script>
 	<h2>공연정보 등록</h2>
