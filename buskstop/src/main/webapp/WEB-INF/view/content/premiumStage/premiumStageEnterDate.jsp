@@ -28,8 +28,9 @@ $(document).ready(function(){
 					}
 				}else{
 					alert("list가 null");
+					$("#reservationTime").append('<div id="timeCodeList"></div>');
 					for(var i=0; i<24; i++){
-						$("#reservationTime").append('<label>'+i+'<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label>');
+						$("#timeCodeList").append('<label>'+i+'<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label>');
 					}
 				}
 			},
@@ -39,7 +40,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#addOption").on("click", function(){
+	$("#addOption").on("click",function(){
 		var reservationDate = $("#reservationDate").val();
 		var timeCode = new Array();
 		$("input[name='timeCode']:checked").each(function(){
@@ -62,7 +63,7 @@ $(document).ready(function(){
 		    },
 		    "success":function(map){
 		    	alert(map.timeCode);
-		    	$("#timeCode").remove();
+		    	$("#timeCodeList").remove();
 		    	var date = "날짜 : "+(map.reservationDate);
 		    	date += "/ 시간 : "+(map.timeCode);
 		    	date += "<input type='hidden' id='registerDate' name='registerDate' value="+map.reservationDate+"/>"

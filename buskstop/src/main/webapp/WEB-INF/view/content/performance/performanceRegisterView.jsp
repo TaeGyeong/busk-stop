@@ -38,7 +38,7 @@ function readURL(input){
 
 </script>
 <h2>공연정보 등록</h2>
-<form action="${initParam.rootPath }/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
+<form action="${initParam.rootPath }/member/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
 	
 	<%-- 공연id hidden --%>
 	<div class="form-group">
