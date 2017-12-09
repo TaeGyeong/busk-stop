@@ -9,7 +9,7 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/buskstop/config/mybatis/mapper/applicantMapper.xml"/>
-		<mapper resource="com/buskstop/config/mybatis/mapper/authorityMapper.xml"/> <!-- /authorityMapper.xml ??  -->
+		<mapper resource="com/buskstop/config/mybatis/mapper/authorityMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/basketMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/employMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/orderDetailMapper.xml"/>
@@ -26,7 +26,6 @@
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoCommentMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoLikeMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/videoMapper.xml"/>
-		<mapper resource="com/buskstop/config/mybatis/mapper/authorityMapper.xml"/> <!-- /authorityMapper.xml ??  -->
 		<mapper resource="com/buskstop/config/mybatis/mapper/performanceMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/artistMapper.xml"/>
 		<mapper resource="com/buskstop/config/mybatis/mapper/premiumStageMapper.xml"/>

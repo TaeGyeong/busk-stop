@@ -12,6 +12,17 @@ $(document).ready(function(){
 		alert($("#performanceTime").val());
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 	});
+	
+	$("#selectStage").on("click", function(){
+		
+	});
+	
+	$("#searchStage").on("click", function(){
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
 });
 </script>
 <body>
@@ -36,8 +47,10 @@ $(document).ready(function(){
 		</div>
 		<div class="form-group">
 			<label for="location">수정할 공연 위치 </label> <input type="text"
-				name="performanceLocation" id="location" class="form-control"
-				value="${requestScope.Performance.performanceLocation }">
+				name="performanceLocation" id="performanceLocation" class="form-control"
+				value="${requestScope.Performance.performanceLocation }"  readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">
+			<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
+		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 		</div>
 		<div class="form-group">
 			<label for="date">수정할 공연 날짜 </label> <input type="date"

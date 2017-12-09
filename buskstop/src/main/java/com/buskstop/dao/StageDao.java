@@ -22,7 +22,6 @@ public interface StageDao {
 
 	int selectStageCount();
 
-
 	int selectStageCountByStageDate(Date startDate, Date endDate);
 
 	List<Stage> selectStageByStageDate(int beginItemInPage, int endItemInPage, Date startDate, Date endDate);
@@ -43,4 +42,33 @@ public interface StageDao {
 	List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument, Date sDate,
 			Date eDate);
 
+	int selectStageCountById(String stageSellerId, Date startDate, Date endDate);
+
+
+	List<Stage> selectStageById(int beginItemInPage, int endItemInPage, String idSearch, Date startDate, Date endDate);
+
+	List<Stage> selectStageOnlyId(int beginItemInPage, int endItemInPage, String idSearch);
+
+	int selectStageCountOnlyId(String idSearch);
+
+	int selectStageCountOnlyLocation(String locationSearch);
+
+	List<Stage> selectStageOnlyLocation(int beginItemInPage, int endItemInPage, String locationSearch);
+
+	int selectStageCountOnlyInstrument(String instrumentSearch);
+
+	List<Stage> selectStageOnlyInstrument(int beginItemInPage, int endItemInPage, String instrumentSearch);
+	
+	/**
+	 * 공연장 번호를 받아서 삭제
+	 * @param stageNo
+	 * @return
+	 */
+	int deleteStageByStageNo(int stageNo);
+
+	int selectStageCountByLocationAndInstrument(String locationSearch, Date startDate, Date endDate,
+			String instrumentSearch);
+
+	List<Stage> selectStageByLocationAndInstrument(int beginItemInPage, int endItemInPage, String locationSearch,
+			Date startDate, Date endDate, String instrumentSearch);
 }

@@ -33,4 +33,9 @@ public class StageImageDaoImpl implements StageImageDao{
 	public List<StageImage> selectStageImageByStageNo(int stageNo) {
 		return session.selectList(makeSqlId("selectStageImageByStageNo"), stageNo);
 	}
+	
+	@Override
+	public int deleteStageImageByStageImageNo(int stageImageNo) {
+		return session.delete(makeSqlId("deleteStageImageByStageImageNo"), stageImageNo);
+	}
 }
