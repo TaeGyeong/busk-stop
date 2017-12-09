@@ -23,114 +23,116 @@ import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 
 @Service
-public class PremiumStageServiceImpl implements PremiumStageService{
-	
+public class PremiumStageServiceImpl implements PremiumStageService {
+
 	@Autowired
 	private AuthorityDao authorDao;
-	
+
 	@Autowired
 	private PremiumStageDao supplierDao;
-	
+
 	@Autowired
 	private PremiumStageImageDao premiumImageDao;
-	
+
 	@Autowired
 	private StageDao stageDao;
-	
+
 	@Autowired
 	private StageImageDao stageImageDao;
-	
-	
-	
+
 	@Override
 	public int updateSupplier(PremiumStage supplier) {
 		return supplierDao.updateStageSupplier(supplier);
 	}
 
 	@Override
-	public PremiumStage selectSupplierById(String userId) {
+	public List<PremiumStage> selectSupplierById(String userId) {
 		return supplierDao.selectSupplierById(userId);
 	}
-	
+
 	@Override
 	public void insertStage(Stage stage) {
 		stageDao.insertStage(stage);
 	}
-	
+
 	@Override
 	public void insertStageImage(StageImage stageImage) {
 		stageImageDao.insertStageImage(stageImage);
 	}
-	
+
 	@Override
 	public Stage selectStageByStageNo(int stageNo) {
 		return stageDao.selectStageByStageNo(stageNo);
 	}
-	
+
 	@Override
 	public List<Stage> selectStage() {
 		return stageDao.selectStage();
 	}
-	
+
 	@Override
-	public Map<String, Object> selectAllStage(int page){
+	public Map<String, Object> selectAllStage(int page) {
 		System.out.println("서비스");
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb = new PagingBean(stageDao.selectStageCount(),page);
+		PagingBean pb = new PagingBean(stageDao.selectStageCount(), page);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(),pb.getEndItemInPage());
-		map.put("list",list);		
+		List<Stage> list = stageDao.selectAllStage(pb.getBeginItemInPage(), pb.getEndItemInPage());
+		map.put("list", list);
 		return map;
 	}
-	
+
 	@Override
-	public Map<String,Object> selectStageByStageLocation(int page, String stageLocation, Date startDate, Date endDate){
+	public Map<String, Object> selectStageByStageLocation(int page, String stageLocation, Date startDate,
+			Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocation(stageLocation,startDate,endDate),page);
-		System.out.println("위치:"+stageLocation);
+		PagingBean pb = new PagingBean(stageDao.selectStageCountByLocation(stageLocation, startDate, endDate), page);
+		System.out.println("위치:" + stageLocation);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), stageLocation,startDate,endDate);
-		map.put("list",list);
+		List<Stage> list = stageDao.selectStageByStageLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(),
+				stageLocation, startDate, endDate);
+		map.put("list", list);
 		return map;
 	}
 
 	@Override
 	public Map<String, Object> selectStageByInstrument(int page, String instrument, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByInstrument(instrument,startDate,endDate),page);
-		
+		PagingBean pb = new PagingBean(stageDao.selectStageCountByInstrument(instrument, startDate, endDate), page);
+
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,startDate,endDate);
-		map.put("list",list);
-		
+		List<Stage> list = stageDao.selectStageByInstrument(pb.getBeginItemInPage(), pb.getEndItemInPage(), instrument,
+				startDate, endDate);
+		map.put("list", list);
+
 		return map;
 	}
 
 	@Override
 	public Map<String, Object> selectStageByStageDate(int page, Date startDate, Date endDate) {
 		HashMap<String, Object> map = new HashMap<>();
-		PagingBean pb= new PagingBean(stageDao.selectStageCountByStageDate(startDate,endDate),page);
+		PagingBean pb = new PagingBean(stageDao.selectStageCountByStageDate(startDate, endDate), page);
 		map.put("pageBean", pb);
-		List<Stage> list = stageDao.selectStageByStageDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), startDate, endDate);
+		List<Stage> list = stageDao.selectStageByStageDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), startDate,
+				endDate);
 		map.put("list", list);
 		return map;
 	}
-	
+
 	@Override
 	public void updateStage(Stage stage) {
 		stageDao.updateStage(stage);
 	}
-	
+
 	@Override
 	public List<StageImage> selectStageImageByStageNo(int stageNo) {
 		return stageImageDao.selectStageImageByStageNo(stageNo);
 	}
-	
+
 	@Override
 	public void deleteStageImageByStageNo(int stageNo) {
 		stageImageDao.deleteStageImageByStageNo(stageNo);
 	}
-	
+
 	/********************************* 공급자 등록 *********************************/
 	@Override
 	@Transactional
@@ -140,8 +142,16 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 		// 권한 넣기
 		authorDao.insertAuthority(new Authority(supplier.getOperatorUserId(), "ROLE_PRODUCER"));
 		// 이미지 db에 넣기
-		for(String s : imageList) {
+		for (String s : imageList) {
 			premiumImageDao.insertImage(new PremiumStageImage(1, s, supplier.getEstablishNum()));
+		}
+	}
+
+	@Override
+	public void addRegistStage(PremiumStage stage, List<String> imageList) {
+		supplierDao.insertPremiumStage(stage);
+		for (String s : imageList) {
+			premiumImageDao.insertImage(new PremiumStageImage(1, s, stage.getEstablishNum()));
 		}
 	}
 
@@ -149,7 +159,65 @@ public class PremiumStageServiceImpl implements PremiumStageService{
 	@Override
 	public void registStageImage(int establishNum, List<String> imageList) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<String> viewMyStage(String userId) {
+		return supplierDao.selectStageNameById(userId);
+	}
+
+	@Override
+	public PremiumStage viewByEstablishNum(int establishNum) {
+		return supplierDao.selectStageByEstablishNum(establishNum);
+	}
+
+	@Override
+	public List<String> selectImageLocation(int establishNum) {
+		return premiumImageDao.selectImageByEstablishNum(establishNum);
+	}
+
+	@Override
+	@Transactional
+	public PremiumStage updatePremiumStage(int establishNum, List<String> imageList, PremiumStage stage) {
+		// image 삭제 (establishNum을 받아서 지운다)
+		premiumImageDao.deleteImageByEstablishNum(establishNum);
+
+		// stage update (supplierDao로 update)
+		System.out.println(stage+" : stageService");
+		supplierDao.updateStageSupplier(stage);
+
+		// image 등록 (imageList의 이미지들을 dao로 저장)
+		for (String image : imageList) {
+			premiumImageDao.insertImage(new PremiumStageImage(1, image, stage.getEstablishNum()));
+		}
+
+		return stage;
+	}
+
+	@Override
+	@Transactional
+	public void deletePremiumStage(int establishNum, String userId) {
+		
+		// test
+		System.out.println(establishNum);
+		System.out.println(userId);
+		
+		// image를 삭제하고
+		premiumImageDao.deleteImageByEstablishNum(establishNum);
+		
+		// user의 공연장 소유 개수 확인.
+		List<PremiumStage> stageList =  supplierDao.selectSupplierById(userId);
+		if(stageList.size()==1) {
+			// 현재 삭제하려는 공연장이 마지막 공연장이면? 권한 삭제. 그리고 index로 보낸다 
+			supplierDao.deleteStageByEstablishNum(establishNum);
+			authorDao.deleteAuthorityById(userId);
+		} else {
+			// 아니라면 establishNum 으로 공연장만 삭제한다.
+			supplierDao.deleteStageByEstablishNum(establishNum);
+		}
+		
 		
 	}
-	
+
 }

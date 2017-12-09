@@ -40,28 +40,28 @@ public class MyPageController {
 
 	@Autowired
 	private ArtistService artistService;
-	
+
 	@Autowired
 	private AuthorityService authorityService;
 
 	@Autowired
 	private PremiumStageService stageService;
-	
+
 	/**************************************
-	 * 	아티스트 & 공급자 권한 조회 controller
+	 * 아티스트 & 공급자 권한 조회 controller
 	 **************************************/
 	@RequestMapping("/registerSupplierView")
 	public String premiumAuthorityCheck() {
-		if(authorityService.checkStageAuthorityByUserId(getUserId())) {
+		if (authorityService.checkStageAuthorityByUserId(getUserId())) {
 			return "/myPageView.do";
 		}
-		
+
 		return "user/registerSupplierView.tiles";
 	}
-	
+
 	@RequestMapping("/registerArtistView")
 	public String artistAuthorityCheck() {
-		if(authorityService.readArtistAutoritiesByUserId(getUserId())) {
+		if (authorityService.readArtistAutoritiesByUserId(getUserId())) {
 			return "/myPageView.do";
 		}
 		return "user/registerArtistView.tiles";
@@ -70,10 +70,15 @@ public class MyPageController {
 	/**************************************
 	 * 아티스트 & 공급자 등록 controller
 	 **************************************/
-
+	
 	@RequestMapping("/member/registArtist")
 	public String registArtist(@ModelAttribute Artist artist, HttpServletRequest request)
 			throws IllegalStateException, IOException {
+
+		// artist 권한 정보 수정 용도.
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+
 		// 파일 업로드 처리
 		MultipartFile multiImage = artist.getMultiImage();
 		if (multiImage != null && !multiImage.isEmpty()) {
@@ -90,12 +95,22 @@ public class MyPageController {
 		// business logic
 		artistService.registerArtist(artist);
 
+		// 권한정보수정
+		List<GrantedAuthority> list = (List<GrantedAuthority>) authentication.getAuthorities();
+
+		// token 재생성 및 권한정보 재수정
+		UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(
+				userService.selectMemberById(getUserId()), null, list);
+
+		context.setAuthentication(null);
+
 		// response
 		return "redirect:/registerSuccessView.do";
 	}
-	
+
 	/***************************************
 	 * 대관공급자로 등록한다.
+	 * 
 	 * @param supplier
 	 * @return
 	 * @throws IllegalStateException
@@ -106,45 +121,57 @@ public class MyPageController {
 	public ModelAndView registSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 		
-		System.out.println(authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId()));
 		// 권한 조회하자.
-		if(authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId())) {
-			return new ModelAndView("/myPageView.do","errorMsg","이미 공급자로 등록하셨네요~");
+		if (authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId())) {
+			return new ModelAndView("/myPageView.do", "errorMsg", "이미 공급자로 등록하셨네요~");
 		}
 		
 		// Image 설정
 		List<MultipartFile> list = supplier.getMultiImage();
-		// 공연장 사진테이블에 넣을 사진의 directory를 저장하는 list
-		List<String> imageList = new ArrayList<>(); 
 		
+		// 공연장 사진테이블에 넣을 사진의 directory를 저장하는 list
+		List<String> imageList = new ArrayList<>();
+
 		// 반복문으로 여러개의 이미지를 업로드 시킨다. 이미지는 suppierImage 폴더에 저장
-		for(MultipartFile image : list) {
-			int i=0; // 첫번째 사진은 VO에 설정할 stageImage 파일명. (대표사진)
+		for (MultipartFile image : list) {
+			int i = 0; // 첫번째 사진은 VO에 설정할 stageImage 파일명. (대표사진)
 			String dir = request.getServletContext().getRealPath("/supplierImage");
 			String fileName = UUID.randomUUID().toString();
-			File upImage = new File(dir,fileName+".jpg");
+			File upImage = new File(dir, fileName + ".jpg");
 			image.transferTo(upImage);
-			if(i==0) {
+			if (i == 0) {
 				// 첫번째 사진은 premium supplier의 대표사진으로 등록한다.
-				supplier.setStageImage(fileName+".jpg");
-				i=1;
+				supplier.setStageImage(fileName + ".jpg");
+				i = 1;
 			}
-			imageList.add(fileName+".jpg");
+			imageList.add(fileName + ".jpg");
 		}
-		
+
 		// 프리미엄 공연장 사진을 등록
 		// 매개변수로는 사진의 파일명 list, 사업장 번호. (사진번호는 sequence로 보낸다)
 		// business service
 		supplier.setOperatorUserId(getUserId());
-		stageService.registerSupplier(supplier,imageList);
+		stageService.registerSupplier(supplier, imageList);
+
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
 		
+		// 권한정보수정
+		List<GrantedAuthority> list2 = (List<GrantedAuthority>) authentication.getAuthorities();
+		System.out.println(list2);
+		// token 재생성 및 권한정보 재수정
+		UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(
+				userService.selectMemberById(getUserId()), null, list2);
+		
+		context.setAuthentication(null);
+
 		// ModelAndView 로 보낼 map
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("premiumStage", supplier);
 		map.put("imageList", imageList);
 
 		// response
-		return new ModelAndView("stage/premiumStageDetailView.tiles","map",map);
+		return new ModelAndView("stage/premiumStageDetailView.tiles", "map", map);
 	}
 
 	/**************************************
@@ -174,10 +201,7 @@ public class MyPageController {
 
 		// 권한정보수정
 		List<GrantedAuthority> list = (List<GrantedAuthority>) authentication.getAuthorities();
-		// test
-		for (GrantedAuthority authority : list) {
-			System.out.println(authority);
-		}
+
 		// token 재생성 및 권한정보 재수정
 		UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(
 				userService.selectMemberById(getUserId()), null, list);
@@ -189,7 +213,7 @@ public class MyPageController {
 	}
 
 	/**************************************
-	 * 아티스트정보 수정 controller
+	 *	 아티스트정보 수정 controller
 	 **************************************/
 
 	@RequestMapping("/artist/updateArtist")
@@ -199,6 +223,7 @@ public class MyPageController {
 		// 파일처리.
 		MultipartFile multiImage = artist.getMultiImage();
 		if (multiImage != null && !multiImage.isEmpty()) {
+			
 			// 디렉토리 지정
 			String dir = request.getServletContext().getRealPath("/artistImage");
 			String fileName = UUID.randomUUID().toString();
@@ -209,39 +234,41 @@ public class MyPageController {
 
 		// 아티스트 서비스를 통해 정보를 update 해준다.
 		artistService.updateArtist(artist);
-
+	
 		// response.
 		return "redirect:/updateSuccess.do";
 	}
 
 	/**************************************
 	 * 대관공급자 정보 수정 controller
-	 * @throws IOException 
-	 * @throws IllegalStateException 
+	 * 
+	 * @throws IOException
+	 * @throws IllegalStateException
 	 **************************************/
 
 	@RequestMapping("/producer/updateSupplier")
-	public String updateSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request) throws IllegalStateException, IOException {
-		
-		//파일처리.
+	public String updateSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+
+		// 파일처리.
 		List<MultipartFile> multiImage = supplier.getMultiImage();
-		
+
 		if (multiImage != null && !multiImage.isEmpty()) {
 			// 디렉토리 지정
 			String dir = request.getServletContext().getRealPath("/supplierImage");
 			String fileName = UUID.randomUUID().toString();
 			File upImage = new File(dir, fileName + ".jpg");
 			((MultipartFile) multiImage).transferTo(upImage);
-			supplier.setStageImage(fileName+".jpg");
+			supplier.setStageImage(fileName + ".jpg");
 		}
 		stageService.updateSupplier(supplier);
 		return "redirect:/updateSuccess.do";
 	}
 
 	/*******************************************
-	 * 	대관공급자 정보 조회 & 수정 controller
+	 * 		대관공급자 정보 조회 & 수정 controller
 	 *******************************************/
-	
+
 	// Security context 값을 받아서 userId 를 받는 method
 	private String getUserId() {
 		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();

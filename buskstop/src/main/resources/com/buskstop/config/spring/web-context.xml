@@ -54,6 +54,8 @@
 	<!-- 아이디 비밀번호 찾기 -->
 	<mvc:view-controller path="/findId.do" view-name="user/FindIdByEmail.tiles"/>
 	<mvc:view-controller path="/findPassword.do" view-name="user/FindPasswordByEmail.tiles"/>
+	
+	
 	<!-- test link -->
 	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
 	<mvc:view-controller path="/mapTest3.do" view-name="performance/mapTest3.tiles"/>

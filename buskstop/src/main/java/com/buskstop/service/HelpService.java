@@ -1,5 +1,10 @@
 package com.buskstop.service;
 
-public interface HelpService {
+import com.buskstop.vo.Help;
 
+public interface HelpService {
+	
+	void insertHelp();
+	
+	void insertHelp(Help help);
 }

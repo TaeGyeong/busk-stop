@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,16 @@ public class PremiumStageImageDaoImpl implements PremiumStageImageDao{
 		return session.insert(makeSqlId("insertImage"), image );
 	}
 	
+	@Override
+	public List<String> selectImageByEstablishNum(int establishNum) {
+		return session.selectList(makeSqlId("selectImageByEstablishNum"), establishNum);
+	}
+
+	@Override
+	public int deleteImageByEstablishNum(int establishNum) {
+		return session.delete(makeSqlId("deleteImageByEstablishNum"), establishNum);
+	}
+
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.premiumStageImageMapper."+id;
 	}

@@ -2,6 +2,21 @@
 /* 공연장 목록조회  */
 	select STAGE_NO, STAGE_NAME,STAGE_LOCATION from STAGE; /* 별점도 넣어야하나? */ 
 	select * from stage;
+	
+	select count(*) 
+		from stage
+		where stage_rental_date >= '2017-12-10'
+		and stage_rental_date <= '2017-12-20'
+		
+	select *
+			from (	select *
+					from stage
+					where stage_rental_date >= '2017-12-10'
+					and stage_rental_date <= '2017-12-20'
+					)
+	where stage_instrument like '%기타%'
+					 	
+	
 /* 공연장 검색 후 조회수 */
 
 	select * from performance
@@ -18,7 +33,7 @@
 	select * from STAGE where STAGE_PARKING=1 and not STAGE_DRINKING=1 and not STAGE_FOOD_SELL=1 and STAGE_FOOD_RESTRICTION=1;
 	
 	/* 구비된 악기로 검색(기타가 구비된 공연장) */
-	select * from STAGE where STAGE_INSTRUMENT like '%guitar%';
+	select * from STAGE where STAGE_INSTRUMENT like '%기타%';
 
 	/* 별점이 높은 순서대로 목록 조회 */
 	select SS.SS_AVG, STAGE.STAGE_NO, STAGE.STAGE_NAME, STAGE.STAGE_LOCATION

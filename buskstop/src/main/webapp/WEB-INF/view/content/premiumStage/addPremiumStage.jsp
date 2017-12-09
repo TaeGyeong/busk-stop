@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=utf-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -17,9 +17,9 @@ function submitChk(){
 </script>
 
 <div>
-	<form action="${initParam.rootPath }/member/registSupplier.do"
-		method="post" enctype="multipart/form-data" id="registerForm">
+	<form action="${initParam.rootPath }/producer/addPremiumStage.do" method="post" enctype="multipart/form-data" id="registerForm">
 		<sec:csrfInput />
+		<input type="hidden" name="operatorUserId" value="${requestScope.userId }">
 		
 		<!-- ######################## 필수입력 칸 ######################## -->
 		<span>사업장번호</span><br>
