@@ -168,7 +168,7 @@ select {
 			종료일 : <input type="date" name="eDate">
 			</div>
 			<button type="submit">검색</button>
-			<button type="button" onclick="location.href='${initParam.rootPath}/performanceRegisterView.do'">글쓰기</button>
+			<button type="button" onclick="location.href='${initParam.rootPath}/member/performanceRegisterView.do'">글쓰기</button>
 		</form>
 		<%-- 페이징 처리 --%>
 		<p/>
