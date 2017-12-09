@@ -30,7 +30,6 @@ public interface StageDao {
 	List<Stage> selectStageByStageLocation(int beginItemInPage, int endItemInPage, String stageLocation,
 			Date startDate, Date endDate);
 
-	int selectStageCountByInstrument(String instrument, Date startDate, Date endDate);
 
 	/**
 	 * 공연장 수정
@@ -39,8 +38,6 @@ public interface StageDao {
 	 */
 	int updateStage(Stage stage);
 
-	List<Stage> selectStageByInstrument(int beginItemInPage, int endItemInPage, String instrument, Date sDate,
-			Date eDate);
 
 	int selectStageCountById(String stageSellerId, Date startDate, Date endDate);
 
@@ -55,20 +52,21 @@ public interface StageDao {
 
 	List<Stage> selectStageOnlyLocation(int beginItemInPage, int endItemInPage, String locationSearch);
 
-	int selectStageCountOnlyInstrument(String instrumentSearch);
 
-	List<Stage> selectStageOnlyInstrument(int beginItemInPage, int endItemInPage, String instrumentSearch);
-	
-	/**
-	 * 공연장 번호를 받아서 삭제
-	 * @param stageNo
-	 * @return
-	 */
+	List<Stage> selectStageByLocationAndName(int beginItemInPage, int endItemInPage, String nameSearch, Date startDate,
+			Date endDate, String locationSearch);
+
+	int selectStageCountByLocationAndName(String nameSearch, Date startDate, Date endDate, String locationSearch);
+
+	List<Stage> selectStageOnlyName(int beginItemInPage, int endItemInPage, String nameSearch);
+
+	int selectStageCountOnlyName(String stageName);
+
+	List<Stage> selectStageByName(int beginItemInPage, int endItemInPage, String nameSearch, Date startDate,
+			Date endDate);
+
+	int selectStageCountByName(String name, Date startDate, Date endDate);
+
 	int deleteStageByStageNo(int stageNo);
 
-	int selectStageCountByLocationAndInstrument(String locationSearch, Date startDate, Date endDate,
-			String instrumentSearch);
-
-	List<Stage> selectStageByLocationAndInstrument(int beginItemInPage, int endItemInPage, String locationSearch,
-			Date startDate, Date endDate, String instrumentSearch);
 }

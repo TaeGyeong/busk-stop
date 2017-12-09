@@ -74,38 +74,36 @@ public class StageController {
 	@RequestMapping("/selectAllStage")
 	public ModelAndView selectAllStage(@RequestParam(required=false) String locationSearch, 
 									   @RequestParam(required=false) String idSearch,
-									   @RequestParam(required=false) String instrumentSearch, 
+									   @RequestParam(required=false) String nameSearch, 
 									   @RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, 
 									   @RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception{
-		System.out.println("컨트롤러"+idSearch+startDate+endDate+locationSearch+instrumentSearch);
+		System.out.println("컨트롤러"+idSearch+startDate+endDate+locationSearch+nameSearch);
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
 		
-		if(locationSearch==null && instrumentSearch==null && startDate==null && endDate==null && idSearch==null ) {
+		if(locationSearch==null && nameSearch==null && startDate==null && endDate==null && idSearch==null ) {
 			map = service.selectAllStage(page);
 		}
 		else {
-		if(locationSearch=="" && instrumentSearch=="" && startDate!=null && endDate!=null && idSearch=="" ) {
+		if(locationSearch=="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="" ) {
 			map = service.selectStageByStageDate(page,startDate,endDate);
-		} else if(locationSearch=="" && instrumentSearch!="" && startDate!=null && endDate!=null && idSearch=="") {
-			map = service.selectStageByInstrument(page,instrumentSearch,startDate,endDate);
-		} else if(locationSearch!="" && instrumentSearch=="" && startDate!=null && endDate!=null && idSearch=="") {
+		} else if(locationSearch=="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch=="") {
+			map = service.selectStageByName(page,nameSearch,startDate,endDate);
+		} else if(locationSearch!="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="") {
 			map = service.selectStageByStageLocation(page,locationSearch,startDate,endDate);
-		} else if(locationSearch=="" && instrumentSearch=="" && startDate!=null && endDate!=null && idSearch!="") {
+		} else if(locationSearch=="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch!="") {
 			map = service.selectStageByStageSellerId(page,idSearch,startDate,endDate);
 		} /* 위는 중복 검색 아래는 단일 검색 */
-		  else if(idSearch!="" && locationSearch=="" && instrumentSearch=="" && startDate==null && endDate==null) {
+		  else if(idSearch!="" && locationSearch=="" && nameSearch=="" && startDate==null && endDate==null) {
 			map = service.selectStageOnlyId(page,idSearch);
-		} else if(idSearch=="" && locationSearch!="" && instrumentSearch=="" && startDate==null && endDate==null) {
+		} else if(idSearch=="" && locationSearch!="" && nameSearch=="" && startDate==null && endDate==null) {
 			map = service.selectStageOnlyLocation(page,locationSearch);
-		} else if(idSearch=="" && locationSearch=="" && instrumentSearch!="" && startDate==null && endDate==null) {
-			map = service.selectStageOnlyInstrument(page,instrumentSearch);
-		} else if(locationSearch!="" && instrumentSearch!="" && startDate!=null && endDate!=null && idSearch==""){
-			map = service.selectStageByLocationAndInstrument(page,locationSearch,startDate,endDate,instrumentSearch);
-		}	
-		  
-		}
+		} else if(idSearch=="" && locationSearch=="" && nameSearch!="" && startDate==null && endDate==null) {
+			map = service.selectStageOnlyName(page,nameSearch);
+		} else if(locationSearch!="" && nameSearch!="" && startDate!=null && endDate!=null && idSearch==""){
+			map = service.selectStageByLocationAndName(page,locationSearch,startDate,endDate,nameSearch);
+		}	}
 		
 		
 		list = (List<Stage>)map.get("list");
@@ -113,7 +111,7 @@ public class StageController {
 		map.put("list", list);
 		
 		map.put("stageLocation", locationSearch);
-		map.put("instruemtn", instrumentSearch);
+		map.put("nameSearch", nameSearch);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
 		map.put("idSearch", idSearch);

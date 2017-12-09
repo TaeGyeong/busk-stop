@@ -15,7 +15,7 @@
 		--%>
 		$(".submit").click(function(){
 		if($("#locationSearch").val()=="" 
-			&& $("#instrumentSearch").val()==""
+			&& $("#nameSearch").val()==""
 			&& $("#idSearch").val()==""
 			&& ($("#startDate").val()==""
 			&& $("#endDate").val()=="")){
@@ -115,10 +115,10 @@ select {
 <div id="container">
 	<hr>
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
+		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
 		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
 		<input type="date" name="startDate" id="startDate">
 		<input type="date" name="endDate" id="endDate">
-		<input type="text" name="instrumentSearch" id="instrumentSearch" placeholder="악기로 검색">
 		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
 		<%--
 		<input type="checkbox" name="box" value="주차장">주차장 유무 
