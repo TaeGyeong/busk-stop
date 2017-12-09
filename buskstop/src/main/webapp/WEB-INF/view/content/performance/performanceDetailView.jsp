@@ -271,7 +271,7 @@ function deletePerformance(performanceNo){
 	</div>
 	<div class="button_box" style="width: 100%;">
 		<div style="float: left;">
-			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none"><span class='glyphicon glyphicon-heart'></span>${requestScope.performance.likeCount }</a>
+			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
 		<!-- Board Content End-->
 		<div>
