@@ -16,12 +16,12 @@ $(document).ready(function(){
 			"success":function(list){
 				alert("일단 성공으로");
 				alert(list.length);
-				$("#timeCode").remove();
+				$("#timeCodeList").remove();
 				if(list.length != 0){
 					for(var i=0; i<24; i++){
 						for(var j=0; j<list.length; j++){
 							if(i != this.val()){
-								alert("if문");
+								alert("list가 null아님");
 								$("#reservationTime").append('<label>'+i+'<input type="checkbox" id="timeCode" name="timeCode" value="'+this.val()+'"></label>');
 							}
 						}
@@ -29,8 +29,10 @@ $(document).ready(function(){
 				}else{
 					alert("list가 null");
 					$("#reservationTime").append('<div id="timeCodeList"></div>');
+					var n = 1;
 					for(var i=0; i<24; i++){
-						$("#timeCodeList").append('<label>'+i+'<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label>');
+						n = 1 + i;
+						$("#timeCodeList").append('<label>'+i+' ~ '+n+'시<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label><br>');
 					}
 				}
 			},
@@ -46,6 +48,9 @@ $(document).ready(function(){
 		$("input[name='timeCode']:checked").each(function(){
 			timeCode.push($(this).val());
 		});
+		if(timeCode.length==0){
+    		return;
+    	}
 		alert(timeCode.join(","));
 		$.ajax({
 			"url":"${initParam.rootPath}/addPremiumStageOptionBasket.do",
@@ -57,12 +62,12 @@ $(document).ready(function(){
 			"dataType":"json",
 		    "async": "false",
 		    "beforesend":function(){
-		    	if(timeCode.length == 0){
+		    	alert("가기전");
+		    	if(timeCode.length==0){
 		    		alert("시간을 선택해주세요");
 		    	}
 		    },
 		    "success":function(map){
-		    	alert(map.timeCode);
 		    	$("#timeCodeList").remove();
 		    	var date = "날짜 : "+(map.reservationDate);
 		    	date += "/ 시간 : "+(map.timeCode);
