@@ -1,6 +1,7 @@
 package com.buskstop.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +42,8 @@ public class HelpController {
 	
 	@RequestMapping("/helpRegister")
 	public ModelAndView insertHelp(@ModelAttribute Help help, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println("Log : HelpController.java /helpRegister 호출");
+		System.out.println("Log: @RequestMapping(\"/helpRegister\") public ModelAndView insertHelp() 호출");
+		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
 		service.insertHelp();
 		return null;
 	}	

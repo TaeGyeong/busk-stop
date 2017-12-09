@@ -1,5 +1,10 @@
 package com.buskstop.dao;
 
-public interface HelpDao {
+import com.buskstop.vo.Help;
 
+public interface HelpDao {
+	
+	void insertHelp();
+	
+	int insertHelp(Help help);
 }

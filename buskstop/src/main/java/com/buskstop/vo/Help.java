@@ -1,6 +1,10 @@
 package com.buskstop.vo;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Help implements Serializable{
 	private int helpNum;
@@ -10,6 +14,8 @@ public class Help implements Serializable{
 	private String helpImage1;
 	private String helpImage2;
 	private User user;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date helpRegTime;
 	public Help() {
 	}
 	public Help(int helpNum, String helpCategory, String helpTitle, String helpContent, String helpImage1,
