@@ -3,6 +3,7 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -226,6 +229,22 @@ public class PremiumStageController {
 		map.put("list", list);
 		
 		
+		return new ModelAndView("premiumStage/premiumStageListView.tiles","map",map);
+	}
+	
+	@RequestMapping("/searchPremiumStage")
+	public ModelAndView searchPremiumStage(
+			@RequestParam(required=false) String nameSearch, 
+			@RequestParam(required=false) String locationSearch,
+			@RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+			@RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate,
+			@RequestParam(required=false) String idSearch ) {
+		
+		List<PremiumStage> list = null;
+		Map<String, Object> map = null;
+		
+		int page=1;
+		map = service.searchPremiumStage(nameSearch, locationSearch, startDate, endDate, idSearch, page); // service를 통해 받는다. (searchPremiumStage)
 		return new ModelAndView("premiumStage/premiumStageListView.tiles","map",map);
 	}
 	
