@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
+import com.buskstop.dao.StageReservationDao;
 import com.buskstop.service.StageService;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
+import com.buskstop.vo.StageReservation;
 
 @Service
 public class StageServiceImpl implements StageService{
@@ -26,6 +28,9 @@ public class StageServiceImpl implements StageService{
 	@Autowired
 	private StageImageDao stageImageDao;
 	
+	@Autowired
+	private StageReservationDao stageReservationDao;
+	
 	@Override
 	public void insertStage(Stage stage) {
 		stageDao.insertStage(stage);
@@ -34,6 +39,11 @@ public class StageServiceImpl implements StageService{
 	@Override
 	public void insertStageImage(StageImage stageImage) {
 		stageImageDao.insertStageImage(stageImage);
+	}
+	
+	@Override
+	public void insertStageReservation(StageReservation stageReservation) {
+		stageReservationDao.insertStageReservation(stageReservation);
 	}
 	
 	@Override
@@ -217,4 +227,19 @@ public class StageServiceImpl implements StageService{
 		return map;
 	}
 	
+	@Override
+	public StageReservation selectStageReservationByStageNoforRentalStateCode(int stageNo) {
+		return stageReservationDao.selectStageReservationByStageNoforRentalStateCode(stageNo);
+	}
+	
+	@Override
+	public Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("stageNo", stageNo);
+		map.put("stageReservation", stageReservation);
+		
+		stageDao.updateStageForStageReservation(stageNo, stageReservation);
+		
+		return map;
+	}
 }

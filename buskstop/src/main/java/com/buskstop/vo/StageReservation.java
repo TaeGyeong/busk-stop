@@ -12,7 +12,7 @@ public class StageReservation {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date rentalDate;
 	private int rentalStateCode;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date rentalRegTime;
 	
 	public StageReservation() {}
