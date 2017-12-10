@@ -69,6 +69,39 @@
 		</tr>
 	</tbody>
 </table>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>대관날짜</th>
+			<th>대관시간</th>
+			<th>예약상태</th>
+			<th>신청자ID</th>
+			<th> </th>
+			<th> </th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${requestScope.map.dateList }" var="dList">
+			<tr>
+				<td>${dList.PremiumStageOption.stageRentalDate }</td>
+				<td>
+					<c:forEach items="${requestScope.map.dateList }" var="tList">
+					<c:choose>
+						<c:when test="${requestScope.map.dateList.PremiumStageOption.optionNo eq requestScope.map.timeList.PremiumStageTime.optionNo }">
+							${tList.PremiumStageTime.timeCode}
+						</c:when>
+					</c:choose>
+					</c:forEach>
+				</td>
+				<td>${dList.PremiumStageOption.stageState }</td>
+				<td>${requestScope.map.premiumStage.stageLocation }</td>
+				<td>${requestScope.map.premiumStage.stageArea }</td>
+				<td>${requestScope.map.premiumStage.stageCost }</td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
 <form action="${initParam.rootPath }/goPremiumStageEnterDate.do" method="get">
 	<input type="hidden" name="establishNo" value="${requestScope.map.premiumStage.establishNum }">
 	<button class="btn btn-default" type="submit">대관일 등록으로 이동</button>

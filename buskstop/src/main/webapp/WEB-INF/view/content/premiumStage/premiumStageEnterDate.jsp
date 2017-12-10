@@ -6,10 +6,11 @@
 var optionNo = 0;
 $(document).ready(function(){
 	$("#selectTime").on("click",function(){
+		alert($("#reservationDate").val());
 		$.ajax({
 			"url":"${initParam.rootPath}/readPremiumStageReservationTimeByStageRentalDate.do",
 			"type":"get",
-			"data":{"stageRentalDate":$("#reservationDate").val()
+			"data":{"reservationDate":$("#reservationDate").val()
 			},
 			"dataType":"json",
 		    "async": "false",

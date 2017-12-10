@@ -37,6 +37,14 @@ public class PremiumStageReservationController {
 		return new ModelAndView("premiumStageEnterDate.do", "establishNo", establishNo);
 	}
 	
+	/**
+	 * 대관일 옵션 추가
+	 * @param dateList
+	 * @param timeList
+	 * @param establishNo
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping("/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
 												@RequestParam(value="timeList") List<List<Integer>> timeList,
@@ -55,7 +63,7 @@ public class PremiumStageReservationController {
 			}
 		}
 		
-		return new ModelAndView("redirect:/producer/myStageDetailConfirm.do","establishNum",establishNo);
+		return new ModelAndView("redirect:/producer/myStageDetailConfirm","establishNum",establishNo);
 	}
 	
 	@RequestMapping("/addPremiumStageOptionBasket")
@@ -69,15 +77,35 @@ public class PremiumStageReservationController {
 		return map;
 	}
 	
+	/**
+	 * 사업장 번호로 옵션과 해당 시간코드까지 조회
+	 * @param establishNo
+	 * @return
+	 */
 	@RequestMapping("/readPremiumStageOption")
 	public ModelAndView readPremiumStageOption(int establishNo) {
-		List<PremiumStageOption> list = service.selectPremiumStageOptionByEstablishNo(establishNo);
-		return new ModelAndView("","premiumStageOption", list);
+		List<PremiumStageOption> dateList = service.selectPremiumStageOptionByEstablishNo(establishNo);
+		List<PremiumStageTime> timeList = null;
+		for(PremiumStageOption o : dateList) {
+			timeList = service.selectPremiumStageTimeByOptionNo(o.getOptionNo());
+		}
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("dateList", dateList);
+		map.put("timeList", timeList);
+		return new ModelAndView("","map", map);
 	}
 	
+	/**
+	 * 프리미엄 공연장 대관일 추가할때 날짜 선택하면 그 날짜에 이미 추가되어있는 시간코드를 읽어온다.
+	 * jsp에서 추가되어있는 시간코드인지 확인하고 추가되어있다면 아예 뿌려주지 않는다.
+	 * @param stageRentalDate
+	 * @return
+	 */
 	@RequestMapping("/readPremiumStageReservationTimeByStageRentalDate")
-	public @ResponseBody List<Integer> readPremiumStageReservationTimeByStageRentalDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date stageRentalDate){
-		/*System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");*/
+	public @ResponseBody List<Integer> readPremiumStageReservationTimeByStageRentalDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date reservationDate){
+		Date stageRentalDate = reservationDate;
+		System.out.println("선택한 대관일 - "+stageRentalDate);
+		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");
 		return service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate);
 	}
 	

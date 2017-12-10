@@ -25,10 +25,21 @@
 		VALUES	(#{optionNo}, #{timeCode})
 	</insert>
 	
-	<select id="selectPremiumStageTimeByStageRentalDate" parameterType="date" resultType="_int">
+	<!-- <select id="selectPremiumStageTimeByStageRentalDate" parameterType="date" resultType="_int">
 		SELECT	PREMIUM_STAGE_TIME.TIME_CODE
 		FROM	PREMIUM_STAGE_OPTION, PREMIUM_STAGE_TIME
 		WHERE	PREMIUM_STAGE_OPTION.option_no = PREMIUM_STAGE_TIME.option_no
 			AND	PREMIUM_STAGE_OPTION.stage_rental_date = sysdate
+	</select> -->
+	<select id="selectPremiumStageTimeByStageRentalDate" parameterType="date" resultType="_int">
+		SELECT	PREMIUM_STAGE_TIME.TIME_CODE
+		FROM	PREMIUM_STAGE_OPTION, PREMIUM_STAGE_TIME
+		WHERE	PREMIUM_STAGE_OPTION.option_no = PREMIUM_STAGE_TIME.option_no
+			AND	(select to_char(sysdate,'yyyy-mm-dd') stage_rental_date from dual)= sysdate
+	</select>
+	
+	<select id="selectPremiumStageTimeByOptionNo" parameterType="_int" resultMap="premiumTime-resultMqp">
+		<include refid="premiumTime-select-sql"/>
+		FROM	PREMIUM_STAGE_TIME
 	</select>
 </mapper>

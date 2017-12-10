@@ -20,4 +20,11 @@ public interface PremiumStageTimeDao {
 	 * @return
 	 */
 	List<Integer> selectPremiumStageTimeByStageRentalDate(Date date);
+	
+	/**
+	 * 옵션번호로 시간코드 조회
+	 * @param optionNo
+	 * @return
+	 */
+	List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo);
 }

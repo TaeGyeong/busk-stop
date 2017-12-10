@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.PremiumStage;
+import com.buskstop.vo.PremiumStageOption;
+import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.User;
 
 @Controller
@@ -35,6 +38,9 @@ public class PremiumStageController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PremiumStageReservationService reservationService;
 
 	// service.selectSupplierById 는 id로 프리미엄공연장 리스트를 부르는 service인데 이름수정하기 귀찮아서 그냥함.★
 
@@ -81,18 +87,15 @@ public class PremiumStageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("imageList", imageList);
 		map.put("premiumStage", stage);
+		
+		List<PremiumStageOption> dateList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
+		List<PremiumStageTime> timeList = null;
+		for(PremiumStageOption o : dateList) {
+			timeList = reservationService.selectPremiumStageTimeByOptionNo(o.getOptionNo());
+		}
+		map.put("dateList", dateList);
+		map.put("timeList", timeList);
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
-	}
-
-	/********************** premiumStage 정보수정 페이지로 이동 **********************/
-	@RequestMapping("/producer/goStageUpdateView")
-	public ModelAndView goUpdateView(int establishNum) {
-		List<String> imageList = service.selectImageLocation(establishNum);
-		PremiumStage stage = service.viewByEstablishNum(establishNum);
-		Map<String, Object> map = new HashMap<>();
-		map.put("imageList", imageList);
-		map.put("premiumStage", stage);
-		return new ModelAndView("premiumStage/updateStageView.tiles", "map", map);
 	}
 
 	/************************

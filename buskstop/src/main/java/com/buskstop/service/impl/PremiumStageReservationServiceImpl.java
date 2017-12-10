@@ -79,4 +79,9 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 		return timeDao.selectPremiumStageTimeByStageRentalDate(date);
 	}
 
+	@Override
+	public List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo) {
+		return timeDao.selectPremiumStageTimeByOptionNo(optionNo);
+	}
+
 }
