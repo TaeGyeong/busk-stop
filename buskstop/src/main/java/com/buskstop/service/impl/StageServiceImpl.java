@@ -196,6 +196,36 @@ public class StageServiceImpl implements StageService{
 		stageDao.deleteStageByStageNo(stageNo);
 		
 	}
+
+	@Override
+	public Map<String, Object> selectStageByLocationAndNameNoDate(int page, String locationSearch, String nameSearch) {
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocationAndNameNoDate(locationSearch,nameSearch),page);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByLocationAndNameNoDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), locationSearch,nameSearch);
+		map.put("list",list);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectStageByLocationAndIDNoDate(int page, String locationSearch, String idSearch) {
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByLocationAndIDNoDate(locationSearch,idSearch),page);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByLocationAndIDNoDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), locationSearch,idSearch);
+		map.put("list",list);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectStageByNameAndIdNoDate(int page, String nameSearch, String idSearch) {
+		HashMap<String, Object> map = new HashMap<>();
+		PagingBean pb= new PagingBean(stageDao.selectStageCountByNameAndIdNoDate(nameSearch,idSearch),page);
+		map.put("pageBean", pb);
+		List<Stage> list = stageDao.selectStageByNameAndIdNoDate(pb.getBeginItemInPage(), pb.getEndItemInPage(), nameSearch,idSearch);
+		map.put("list",list);
+		return map;
+	}
 	
 	@Override
 	public StageReservation selectStageReservationByStageNoforRentalStateCode(int stageNo) {

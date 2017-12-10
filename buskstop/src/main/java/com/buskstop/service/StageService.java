@@ -104,4 +104,11 @@ public interface StageService {
 	 * @return
 	 */
 	Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation);
+	
+	Map<String, Object> selectStageByLocationAndNameNoDate(int page, String locationSearch, String nameSearch);
+
+	Map<String, Object> selectStageByLocationAndIDNoDate(int page, String locationSearch, String idSearch);
+
+	Map<String, Object> selectStageByNameAndIdNoDate(int page, String nameSearch, String idSearch);
+
 }

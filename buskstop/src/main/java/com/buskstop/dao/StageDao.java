@@ -78,4 +78,19 @@ public interface StageDao {
 
 	int deleteStageByStageNo(int stageNo);
 
+	List<Stage> selectStageByNameAndIdNoDate(int beginItemInPage, int endItemInPage, String nameSearch,
+			String idSearch);
+
+	int selectStageCountByNameAndIdNoDate(String nameSearch, String idSearch);
+
+	List<Stage> selectStageByLocationAndIDNoDate(int beginItemInPage, int endItemInPage, String locationSearch,
+			String idSearch);
+
+	int selectStageCountByLocationAndIDNoDate(String locationSearch, String idSearch);
+
+	List<Stage> selectStageByLocationAndNameNoDate(int beginItemInPage, int endItemInPage, String locationSearch,
+			String nameSearch);
+
+	int selectStageCountByLocationAndNameNoDate(String locationSearch, String nameSearch);
+
 }

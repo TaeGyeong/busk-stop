@@ -25,6 +25,9 @@
 			} 
 			
 		})
+		
+		
+
 	});
 	
 	function goDetail(root, no){
@@ -152,8 +155,8 @@ select {
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"/></td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"/></td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"></fmt:formatDate></td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
 					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 					<c:if test="${item.stageReservation==0}">예약불가</c:if>

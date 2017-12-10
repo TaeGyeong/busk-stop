@@ -12,7 +12,7 @@
 	
 	<sql id="premiumOption-select-sql">
 		SELECT	<include refid="premiumOption-column-sql"/>
-		FROM	PREMIUM_STAGE_RESERVATION_TIME
+		FROM	PREMIUM_STAGE_OPTION
 	</sql>
 	
 	<resultMap type="PremiumStageOption" id="premiumOption-resultMap">
@@ -23,13 +23,15 @@
 	</resultMap>
 	
 	<insert id="insertPremiumStageOption">
-		INSERT INTO PREMIUM_STAGE_RESERVATION_TIME
+		<selectKey keyProperty="optionNo" resultType="_int" order="BEFORE">
+			select PREMIUM_OPTION_NO_SEQ.nextval from dual
+		</selectKey>
+		INSERT INTO PREMIUM_STAGE_OPTION
 		VALUES		(#{optionNo},
 					 #{stageRentalDate},
 					 #{stageState},
 					 #{establishNo})
 	</insert>
-	
 	
 	<select id="selectPremiumStageOptionByEstablishNo" parameterType="PremiumStageOption" resultMap="premiumOption-resultMap">
 		<include refid="premiumOption-select-sql"/>

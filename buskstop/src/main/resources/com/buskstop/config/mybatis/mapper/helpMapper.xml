@@ -1,3 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="helpMapper"></mapper>
+<mapper namespace="helpMapper">
+
+	<!-- Help 테이블 -->
+	<sql id="column-help">
+		help_no,
+		help_category,
+		help_title,
+		help_content,
+		help_image,
+		help_image2,
+		help_user_id,
+		help_reg_time
+	</sql>
+	
+	<!-- ResultMap 등록 -->
+	<resultMap type="help" id="help-resultmap">
+		<id column="help_no" property="helpNum"/>
+		<result column="help_category" property="helpCategory"/>
+		<result column="help_title" property="helpTitle"/>
+		<result column="help_content" property="helpContent"/>
+		<result column="help_image" property="helpImage1"/>
+		<result column="help_image2" property="helpImage2"/>
+		<result column="help_user_id" property="user"/>
+		<result column="help_reg_time" property="helpRegTime"/>
+	</resultMap>
+	
+	<!-- 고객센터 게시판 글 insert -->
+	<insert id="insertHelp" parameterType="Help">
+		<selectKey keyProperty="helpNo" resultType="_int" order="BEFORE">
+			select HELP_NO_SEQ.nextval from dual
+		</selectKey>
+		insert into HELP (<include refid="column-help"/>)
+		values(#{helpNum}, 
+			   #{helpCategoty}, 
+			   #{helpTitle}, 
+			   #{helpContentent}, 
+			   #{helpImage1},
+			   #{helpImage2}, 
+			   #{user},
+			   sysdate)
+	</insert>
+</mapper>

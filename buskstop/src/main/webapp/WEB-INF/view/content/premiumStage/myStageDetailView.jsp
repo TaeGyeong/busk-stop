@@ -69,3 +69,7 @@
 		</tr>
 	</tbody>
 </table>
+<form action="${initParam.rootPath }/goPremiumStageEnterDate.do" method="get">
+	<input type="hidden" name="establishNo" value="${requestScope.map.premiumStage.establishNum }">
+	<button class="btn btn-default" type="submit">대관일 등록으로 이동</button>
+</form>

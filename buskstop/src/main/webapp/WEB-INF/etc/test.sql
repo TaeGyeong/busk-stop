@@ -8,7 +8,8 @@ select*from video
 WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like'%잘%'
 select * from performance;
 
-
+select*from premium_stage_option;
+select*from premium_stage_Time;
 SELECT     video_no,   video_title,   video_link,   video_location,   video_content,   video_date,   
 video_artist,   video_category,   video_user_id,   video_reg_time,   video_hits      
 FROM VIDEO      WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like '%잘%'

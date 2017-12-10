@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
 <style type="text/css">
 	/* 	
 		공연장 대관 등록 개발용 CSS
@@ -46,6 +48,16 @@ $(document).ready(function(){
 		left1 = (screen.availWidth - 600) / 2;
 		top1 = (screen.availHeight - 500) / 2;
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
+	
+	$("#stageStartTime").timepicker({
+		step: 120,            //시간간격 : 5분
+		timeFormat: "H:i"    //시간:분 으로표시
+	});
+	
+	$("#stageEndTime").timepicker({
+		step: 120,            //시간간격 : 5분
+		timeFormat: "H:i"    //시간:분 으로표시
 	});
 });
 
@@ -160,14 +172,18 @@ function readURL(input){
 		</div>
 		<div>
 			<label>시작 시간</label> 
-			<input type="time" name="stageStartTime" id="stageStartTime" required="required">
-		<!--	<button type="button" id="dateBtn">날짜 확인</button>
+			
+			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required">
+		<!--<input type="time" name="stageStartTime" id="stageStartTime" required="required">
+			<button type="button" id="dateBtn">날짜 확인</button>
 			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
 		</div>
 		<div>
 			<label>끝나는 시간</label> 
-			<input type="time" name="stageEndTime" id="stageEndTime" required="required">
-		<!--	<button type="button" id="dateBtn2">날짜 확인</button>
+			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required">
+
+		<!--<input type="time" name="stageEndTime" id="stageEndTime" required="required">	
+			<button type="button" id="dateBtn2">날짜 확인</button>
 			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
 		</div>
 		<br>

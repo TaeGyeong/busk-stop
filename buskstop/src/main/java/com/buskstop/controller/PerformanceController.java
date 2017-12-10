@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,7 +57,11 @@ public class PerformanceController {
 	/**************************** 공연정보 등록 ****************************/
 	
 	@RequestMapping("/member/performanceRegister")
-	public ModelAndView insertPerformance(@ModelAttribute Performance performance, HttpServletRequest request) throws IllegalStateException, IOException {
+	public ModelAndView insertPerformance(@ModelAttribute Performance performance,BindingResult r, HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		System.out.println(r);
+		System.out.println(r.getErrorCount());
+		
 		//파일 업로드 처리
 		MultipartFile multiImage = performance.getMultiImage();
 		if(multiImage!=null && !multiImage.isEmpty()) {

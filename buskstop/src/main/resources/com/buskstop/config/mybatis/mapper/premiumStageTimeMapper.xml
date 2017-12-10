@@ -18,6 +18,9 @@
 	</resultMap>
 	
 	<insert id="insertPremiumStageTime">
+		<selectKey keyProperty="optionNo" resultType="_int" order="BEFORE">
+			select PREMIUM_OPTION_NO_SEQ.currval from dual
+		</selectKey>
 		INSERT	INTO PREMIUM_STAGE_TIME
 		VALUES	(#{optionNo}, #{timeCode})
 	</insert>

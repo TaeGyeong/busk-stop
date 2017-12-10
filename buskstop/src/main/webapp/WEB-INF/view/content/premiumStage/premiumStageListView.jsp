@@ -4,50 +4,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
 <div id="container">
 	<h2>리스트 View</h2>
 	<hr>
+	<form class="stageReservation" action="${initParam.rootPath}/searchPremiumStage.do">
+		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
+		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
+		<input type="date" name="startDate" id="startDate">
+		<input type="date" name="endDate" id="endDate">
+		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
+		<button type="submit" name="search" class="submit">검색</button>
+		<sec:csrfInput/>
+	</form>
 	
-	<div class="row">
-		<h3>검색바</h3><br>
-		<div class="col-sm-2">
-		</div>
-		<div class="col-sm-2">
-			<input type="date">
-		</div>
-		<div class="col-sm-2">
-			<select name="category">
-				<option>날짜</option>
-				<option>지역</option>
-				<option>체크박스</option>
-				<option></option>
-			</select>
-		</div>
-		<div class="col-sm-2">
-			<input type="text" name="search" placeholder="검색어">		
-		</div>
-		<div class="col-sm-2">
-			<input type="date">
-		</div>
-		<div class="col-sm-2">
-		</div>
-	</div>
-	<br>
-	<p>
-	<div class="row">
-		<div class="col-sm-3">
-			주차 가능 여부 : <input type="checkbox" name="parking">
-		</div>
-		<div class="col-sm-3">
-			음주 가능 여부 : <input type="checkbox" name="drinking">
-		</div>
-		<div class="col-sm-3">
-			음식(주류) 판매 여부 : <input type="checkbox" name="foodSell">
-		</div>
-		<div class="col-sm-3">
-			외부음식제한여부 : <input type="checkbox" name="foodRestriction">
-		</div>
-	</div>
 	
 	<hr>
 	<div class="row">

@@ -16,10 +16,19 @@ select * from authority
 select * from stage_supplier
 select * from video
 select * from video_comment
-select * from premium_stage
+select * from premium_stage --189291
+select * from premium_stage_option
 select * from premium_stage_image
 
+-- 검색 TEST
+insert into PREMIUM_STAGE_OPTION (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO) values (1,'2017-12-10',0,189291);
+insert into premium_stage_option (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO)values(2,'2017-12-12',0,398719);
+
+
+
 delete from authority where user_id = 'id-10';
+
+
 
 UPDATE VIDEO SET VIDEO_LINK=
 '<div style="position:relative;height:0;padding-bottom:56.21%"><iframe src="https://www.youtube.com/embed/IsR5mcQRqjM?ecver=2" style="position:absolute;width:100%;height:100%;left:0" width="641" height="360" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>'
