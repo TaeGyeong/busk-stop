@@ -8,8 +8,8 @@
 			<option value="${stage.establishNum }">${stage.stageName }</option>	
 		</c:forEach>
 	</select>
-	<sec:csrfInput/>
 	<button>공연장 선택</button> --%>
+	<sec:csrfInput/>
 	<div id="establishList">
 		<c:forEach items="${requestScope.list }" var="stage">
 			<button class="btn btn-default" id="establishNum" name="establishNum" value="${stage.establishNum }">선택</button>

@@ -53,8 +53,7 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	
 	@Override
 	public int createPremiumStageOption(PremiumStageOption option) {
-		// TODO Auto-generated method stub
-				return 0;
+		return optionDao.insertPremiumStageOption(option);
 	}
 
 	@Override
@@ -65,8 +64,7 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 
 	@Override
 	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return optionDao.selectPremiumStageOptionByEstablishNo(establishNo);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////

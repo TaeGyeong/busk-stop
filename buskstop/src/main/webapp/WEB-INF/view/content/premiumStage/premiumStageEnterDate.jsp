@@ -89,8 +89,8 @@ function addOption(){
 		$("#timeCodeList").remove();
 		var date = "날짜 : "+(reservationDate);
     	date += "/ 시간 : "+(timeCode);
-		date += "<input type='hidden' id='registerDate' name='registerDate' value="+reservationDate+"/>"
-		date += "<input type='hidden' id='registerTime' name='registerTime' value="+timeCode+"/><hr>"
+		date += "<input type='hidden' id='registerDate' name='registerDate' value="+reservationDate+">"
+		date += "<input type='hidden' id='registerTime' name='registerTime' value="+timeCode+"><hr>"
 		$("#reservationOption").append(date);
 	}
 }
@@ -107,11 +107,6 @@ function enterOption(){
 		alert("선택된 옵션이 없습니다");
 		return;
 	}else{
-		var x = document.createElement("FORM");
-	    x.setAttribute("id", "registerOption");
-	    x.setAttribute("action", "")
-	    document.body.appendChild(x);
-
 	    var y = document.createElement("INPUT");
 	    y.setAttribute("type", "hidden");
 	    y.setAttribute("name", "dateList");
@@ -123,10 +118,6 @@ function enterOption(){
 	    z.setAttribute("name", "timeList");
 	    z.setAttribute("value", timeList);
 	    document.getElementById("registerOption").appendChild(z);
-	    
-	    /* var z = document.createElement("BUTTON");
-	    z.setAttribute("name", "submitOption");
-	    document.getElementById("registerOption").prependChild(z); */
 	}
 	document.getElementById("registerOption").submit();
 }
@@ -153,7 +144,8 @@ function enterOption(){
 	<div id="reservationOption">
 	</div>
 </div>
-<button id="enterOption" class="btn btn-default" onclick="enterOption()">등록</button>
-<div id="registerOption">
-
-</div>
+<button id="enterOption" type="button" class="btn btn-default" onclick="enterOption()">등록</button>
+<form action="${initParam.rootPath }/enterPremiumStageOption.do" id="registerOption">
+	<input type="hidden" id="establishNo" name="establishNo" value="${requestScope.establishNo }">
+	
+</form>

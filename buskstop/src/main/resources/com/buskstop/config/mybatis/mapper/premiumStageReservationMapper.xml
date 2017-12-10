@@ -29,7 +29,7 @@
 	</resultMap>
 	
 	<insert id="insertPremiumStageReservation" parameterType="PremiumStageReservation">
-		<selectKey keyProperty="RESERVATION_NO" resultType="_int" order="BEFORE">
+		<selectKey keyProperty="reservationNo" resultType="_int" order="BEFORE">
 			select PREMIUM_STAGE_RESERVATION_NO_SEQ.nextval from dual
 		</selectKey>
 		INSERT INTO	PREMIUM_STAGE_RESERVATION
