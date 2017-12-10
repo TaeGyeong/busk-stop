@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
@@ -16,6 +17,11 @@ $(document).ready(function(){
 		left1 = (screen.availWidth - 600) / 2;
 		top1 = (screen.availHeight - 500) / 2;
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
+	
+	$("#performanceTime").timepicker({
+		step: 120,            //시간간격 : 5분
+		timeFormat: "H:i"    //시간:분 으로표시
 	});
 });
 
@@ -64,7 +70,7 @@ function readURL(input){
 			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2">공연시간</label><input type="time" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
+			<label class="col-sm-2">공연시간</label><input type="text" name="performanceTime" value="" placeholder="시간선택" id="performanceTime" required size="8" maxlength="5" required="required">
 		</div>
 		<div class="form-group">
 			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>

@@ -237,4 +237,33 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> searchPremiumStage(String nameSearch, String locationSearch, Date startDate,
+			Date endDate, String idSearch,int page) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("nameSearch", nameSearch);
+		map.put("locationSearch", locationSearch);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		if(!(idSearch.equals("")) && !(idSearch==null) ) {
+			map.put("idSearch",idSearch);
+		}
+		
+		// Paging Bean 객체생성.
+		PagingBean pb = new PagingBean(supplierDao.selectSearchStageCount(map) , page);
+		
+		// Performance list 불러오기.
+		List<PremiumStage> list = supplierDao.selectSearchStage(map,pb.getBeginItemInPage(),pb.getEndItemInPage());
+		
+		System.out.println("---------------------------------------");
+		HashMap<String, Object> returnMap = new HashMap<>();
+		returnMap.put("pageBean", pb);
+		returnMap.put("list", list);
+		
+		return returnMap;
+	}
+	
+	
+
 }

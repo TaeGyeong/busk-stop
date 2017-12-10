@@ -169,7 +169,7 @@ public class MyPageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("premiumStage", supplier);
 		map.put("imageList", imageList);
-
+		
 		// response
 		return new ModelAndView("stage/premiumStageDetailView.tiles", "map", map);
 	}

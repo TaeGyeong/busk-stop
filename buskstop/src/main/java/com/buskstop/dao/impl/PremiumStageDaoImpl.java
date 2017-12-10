@@ -62,6 +62,19 @@ public class PremiumStageDaoImpl implements PremiumStageDao{
 		return session.selectList(makeSqlId("selectAllPremiumStage"), map);
 	}
 
+	@Override
+	public int selectSearchStageCount(HashMap<String, Object> map) {
+		return session.selectOne(makeSqlId("selectSearchStageCount"), map);
+	}
+
+	@Override
+	public List<PremiumStage> selectSearchStage(HashMap<String, Object> map, int start, int end) {
+		map.put("begin", start);
+		map.put("end", end);
+		return session.selectList(makeSqlId("selectSearchStage"), map);
+	}
+	
+	
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.premiumStageMapper."+id;
 	}

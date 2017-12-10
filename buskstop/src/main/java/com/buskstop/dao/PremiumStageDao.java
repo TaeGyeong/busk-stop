@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.buskstop.vo.PremiumStage;
@@ -60,4 +61,21 @@ public interface PremiumStageDao {
 	 * @return
 	 */
 	List<PremiumStage> selectAllPremiumStage(int start, int end);
+
+	
+	/**
+	 * 검색한 공연장 결과의 수를 select
+	 * @param map
+	 * @return
+	 */
+	int selectSearchStageCount(HashMap<String, Object> map);
+	
+	/**
+	 * 검색 조건들을 비교해서 공연장 list return select dao.
+	 * @param map
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	List<PremiumStage> selectSearchStage(HashMap<String, Object> map ,int start, int end);
 }

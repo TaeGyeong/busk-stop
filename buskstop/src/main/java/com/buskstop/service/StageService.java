@@ -83,4 +83,10 @@ public interface StageService {
 
 	Map<String, Object> selectStageByName(int page, String nameSearch, Date startDate, Date endDate);
 
+	Map<String, Object> selectStageByLocationAndNameNoDate(int page, String locationSearch, String nameSearch);
+
+	Map<String, Object> selectStageByLocationAndIDNoDate(int page, String locationSearch, String idSearch);
+
+	Map<String, Object> selectStageByNameAndIdNoDate(int page, String nameSearch, String idSearch);
+
 }

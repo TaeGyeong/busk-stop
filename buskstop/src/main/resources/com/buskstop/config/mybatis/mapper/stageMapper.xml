@@ -303,6 +303,80 @@
 		) where rn >= #{begin}
 	</select>
 	
+	<select id="selectStageCountByLocationAndNameNoDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from( 
+			select *
+			from stage
+			where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+		)
+		where STAGE_NAME like '%'||#{stageName}||'%'
+		</select>
+	
+	<select id="selectStageByLocationAndNameNoDate" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from ( 
+							select *
+							from stage
+							where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+					) where STAGE_NAME like '%'||#{stageName}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
+	
+	<select id="selectStageCountByLocationAndIDNoDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from( 
+			select *
+			from stage
+			where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+		)
+		where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+		</select>
+	
+	<select id="selectStageByLocationAndIDNoDate" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from ( 
+							select *
+							from stage
+							where STAGE_LOCATION like '%'||#{stageLocation}||'%'
+					) where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
+	
+	<select id="selectStageCountByNameAndIdNoDate" resultType="_int" parameterType="map">
+		select count(*) 
+		from( 
+			select *
+			from stage
+			where STAGE_NAME like '%'||#{stageName}||'%'
+		)
+		where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+		</select>
+	
+	<select id="selectStageByNameAndIdNoDate" parameterType="map" resultMap="stage-resultmap">
+		select <include refid="column-stage"/>
+		from (
+			select rownum rn, <include refid="column-stage"/>
+			from (
+					select *
+					from ( 
+							select *
+							from stage
+							where STAGE_NAME like '%'||#{stageName}||'%'
+					) where STAGE_SELLER_ID like '%'||#{stageSellerId}||'%'
+			) where rownum &lt; = #{end}
+		) where rn >= #{begin}
+	</select>
 	
 	
 </mapper>
