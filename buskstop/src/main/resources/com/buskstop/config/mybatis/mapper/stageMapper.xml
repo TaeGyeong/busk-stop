@@ -80,7 +80,7 @@
 		select count(*) from stage
 	</select>
 	
-	<!-- 공연정보 수정 -->
+	<!-- 공연장 수정 -->
 	<update id="updateStage" parameterType="Stage">
 		UPDATE stage
 		<set>
@@ -100,6 +100,12 @@
 			<if test="stageEndTime != null">STAGE_END_TIME = #{stageEndTime},</if>
 			<if test="stageSellerId != null">STAGE_SELLER_ID = #{stageSellerId}</if>
 		</set>
+		WHERE STAGE_NO = #{stageNo}
+	</update>
+	<!-- 공연장 번호로 공연장 예약상태 변경 -->
+	<update id="updateStageForStageReservation" parameterType="map">
+		UPDATE stage
+		SET stageReservation = #{stageReservation}
 		WHERE STAGE_NO = #{stageNo}
 	</update>
 	

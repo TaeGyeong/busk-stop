@@ -7,6 +7,7 @@ import java.util.Map;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
+import com.buskstop.vo.StageReservation;
 
 public interface StageService {
 	/**
@@ -20,6 +21,12 @@ public interface StageService {
 	 * @param stageImage
 	 */
 	void insertStageImage(StageImage stageImage);
+	
+	/**
+	 * 공연장예약 등록
+	 * @param stageReservation
+	 */
+	void insertStageReservation(StageReservation stageReservation);
 
 	Stage selectStageByStageNo(int stageNo);
 
@@ -82,5 +89,19 @@ public interface StageService {
 			String nameSearch);
 
 	Map<String, Object> selectStageByName(int page, String nameSearch, Date startDate, Date endDate);
-
+	
+	/**
+	 * 공연장 번호를 받아서 예약진행중이라면 조회
+	 * @param stageNo
+	 * @return
+	 */
+	StageReservation selectStageReservationByStageNoforRentalStateCode(int stageNo);
+	
+	/**
+	 * 공연장 번호를 받아서 예약 상태 변경
+	 * @param stageNo
+	 * @param stageReservation
+	 * @return
+	 */
+	Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation);
 }

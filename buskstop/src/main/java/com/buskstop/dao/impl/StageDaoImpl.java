@@ -54,6 +54,15 @@ public class StageDaoImpl implements StageDao{
 	public int updateStage(Stage stage) {
 		return session.update(makeSqlId("updateStage"), stage);
 	}
+	
+	@Override
+	public int updateStageForStageReservation(int stageNo, int stageReservation) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("stageNo", stageNo);
+		map.put("stageReservation", stageReservation);
+		
+		return session.update(makeSqlId("updateStageForStageReservation"), map);
+	}
 
 	@Override
 	public int selectStageCountByLocation(String stageLocation, Date startDate, Date endDate) {
