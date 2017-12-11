@@ -239,7 +239,7 @@ $(document).ready(function(){
 		<!-- Board Content End-->
 		<div>
 			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.getUserId }">
+				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
 					<input type="submit" value="수정" onclick="updatePerformance();" class="btn btn-default">
 					<input type="submit" value="삭제" onclick="deletePerformance();" class="btn btn-default">
 				</c:if>
