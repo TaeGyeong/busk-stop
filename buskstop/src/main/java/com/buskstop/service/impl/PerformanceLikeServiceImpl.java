@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.buskstop.dao.PerformanceLikeDao;
 import com.buskstop.service.PerformanceLikeService;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
 
 @Service
@@ -40,4 +41,10 @@ public class PerformanceLikeServiceImpl implements PerformanceLikeService{
 	public List<PerformanceLike> selectAllPerformanceLike(){
 		return dao.selectAllPerformanceLike();
 	}
+
+	@Override
+	public List<Performance> performanceByLikeId(String id) {
+		return dao.selectPerformanceByLikeId(id);
+	}
+
 }

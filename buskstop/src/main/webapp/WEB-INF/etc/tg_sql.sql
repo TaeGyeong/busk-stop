@@ -20,6 +20,8 @@ select * from premium_stage --189291
 select * from premium_stage_option
 select * from premium_stage_image
 
+insert into video_like (VIDEO_LIKE_NO,VIDEO_LIKE_USER_ID) values (3,'id-2')
+
 -- 검색 TEST
 insert into PREMIUM_STAGE_OPTION (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO) values (1,'2017-12-10',0,189291);
 insert into premium_stage_option (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO)values(2,'2017-12-12',0,398719);
