@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container-inline">
 	<c:forEach items="${requestScope.map.imageList }" var="image">
@@ -76,28 +76,22 @@
 			<th>대관날짜</th>
 			<th>대관시간</th>
 			<th>예약상태</th>
-			<th>신청자ID</th>
-			<th> </th>
-			<th> </th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${requestScope.map.dateList }" var="dList">
+		<c:forEach items="${requestScope.map.dateList }" var="dateOption">
 			<tr>
-				<td>${dList.PremiumStageOption.stageRentalDate }</td>
+				<td><fmt:formatDate value="${dateOption.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 				<td>
-					<c:forEach items="${requestScope.map.dateList }" var="tList">
-					<c:choose>
-						<c:when test="${requestScope.map.dateList.PremiumStageOption.optionNo eq requestScope.map.timeList.PremiumStageTime.optionNo }">
-							${tList.PremiumStageTime.timeCode}
-						</c:when>
-					</c:choose>
+					<c:forEach items="${requestScope.map.timeList }" var="timeOption">
+						<c:choose>
+							<c:when test="${dateOption.optionNo eq timeOption.optionNo }">
+								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시,
+							</c:when>
+						</c:choose>
 					</c:forEach>
 				</td>
-				<td>${dList.PremiumStageOption.stageState }</td>
-				<td>${requestScope.map.premiumStage.stageLocation }</td>
-				<td>${requestScope.map.premiumStage.stageArea }</td>
-				<td>${requestScope.map.premiumStage.stageCost }</td>
+				<td>${dateOption.stageState }</td>
 			</tr>
 		</c:forEach>
 	</tbody>

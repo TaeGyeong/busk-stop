@@ -24,6 +24,13 @@
 				box-sizing: inherit;
 				margin: 10px 0;
 				}
+	table {
+	border-spacing: 150px;
+	}
+	table td {
+	width: 300px;
+	background: white;
+	}
 </style>
 <script>
 $(document).ready(function(){
@@ -162,48 +169,42 @@ function readURL(input){
 		</div>
 		
 		<div class="form-group">
-			&nbsp;&nbsp;<label>주차장 유무</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>음주</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>식사 판매</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>외부음식 반입 </label>
-			<br><label style="font-weight: normal;">
-			<input type="radio" name="stageParking" value="1">주차장 완비</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageDrinking" value="1">음주 가능</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodSell" value="1">식사 판매</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodRestriction" value="1">반입 가능</label>
+		<table>
+		<tr>
+			<td>주차장 유무</td>
+			<td>음주</td>
+			<td>식사 판매</td>
+			<td>외부음식 반입</td>
+		</tr>
+			<tr style="font-weight: normal;">
+			<td><input type="radio" name="stageParking" value="1">주차장 완비</td>
 			
-			<br><label style="font-weight: normal;">
-			<input type="radio" name="stageParking" value="0">주차장 없음</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageDrinking" value="0">음주 불가</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodSell" value="0">식사 미판매</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodRestriction" value="0">반입 불가</label>
+			<td><input type="radio" name="stageDrinking" value="1">음주 가능</td>
+			
+			<td><input type="radio" name="stageFoodSell" value="1">식사 판매</td>
+			
+			<td><input type="radio" name="stageFoodRestriction" value="1">반입 가능</td>
+				
+		</tr>
+		<tr>
+			<td><input type="radio" name="stageParking" value="0">주차장 없음</td>
+			
+			<td><input type="radio" name="stageDrinking" value="0">음주 불가</td>
+			
+			<td><input type="radio" name="stageFoodSell" value="0">식사 미판매</td>
+			
+			<td><input type="radio" name="stageFoodRestriction" value="0">반입 불가</td>
+		</tr>
+		</table>
 		</div>
 		
 		<div class="form-group">
 			<label>대관일</label>
-			<input type="Date" name="stageRentalDate" id="stageRentalDate">
-		</div>
-		<div>
+			<input type="Date" name="stageRentalDate" id="stageRentalDate" required="required">
 			<label>시작 시간</label> 
-			
 			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required" style="width: 150px;">
-		<!--<input type="time" name="stageStartTime" id="stageStartTime" required="required">
-			<button type="button" id="dateBtn">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
-		</div>
-		<div>
 			<label>끝나는 시간</label> 
 			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required" style="width: 150px;">
-
-		<!--<input type="time" name="stageEndTime" id="stageEndTime" required="required">	
-			<button type="button" id="dateBtn2">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
 		</div>
 		<br>
 		<!-- 예약가능 여부 -->
