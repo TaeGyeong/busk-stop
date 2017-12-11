@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
@@ -19,9 +19,20 @@ $(document).ready(function(){
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 	
+	$('input.timepicker').timepicker({
+		
+	});
+	
 	$("#performanceTime").timepicker({
-		step: 120,            //시간간격 : 5분
-		timeFormat: "H:i"    //시간:분 으로표시
+		timeFormat: 'hh:mm p',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 });
 
@@ -43,6 +54,7 @@ function readURL(input){
 }
 
 </script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <h2>공연정보 등록</h2>
 <form action="${initParam.rootPath }/member/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
 	
@@ -66,11 +78,11 @@ function readURL(input){
 		<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
 		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 	</div>
-		<div class="form-group">
+		<div class="form-group">	
 			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2">공연시간</label><input type="text" name="performanceTime" value="" placeholder="시간선택" id="performanceTime" required size="8" maxlength="5" required="required">
+			<label class="col-sm-2">공연시간</label><input type="timepicker" name="performanceTime" placeholder="시간선택" id="performanceTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 		</div>
 		<div class="form-group">
 			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>

@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buskstop.service.StageService;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
+import com.buskstop.vo.StageReservation;
 import com.buskstop.vo.User;
 
 @Controller
@@ -198,6 +199,25 @@ public class StageController {
 //		map.put("userId", id);
 		
 		return new ModelAndView("stage/stageDetailView.tiles", "map", map);
+	}
+	
+	@RequestMapping("/insertStageRservation")
+	public String insertStageReservation(@ModelAttribute StageReservation stageReservation) {
+		
+		String msg = null;
+		
+		int stageNo = stageReservation.getStageNo();
+		
+		// 예약진행중이지 않다면
+		if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
+			service.insertStageReservation(stageReservation);
+			service.updateStageForStageReservation(stageNo, 0);
+			msg = "예약 신청이 완료 되었습니다.";
+		}else { //진행중인 예약이 있다면
+			msg = "이미 진행중인 예약이 있습니다.";
+		}
+		
+		return msg;
 	}
 	
 }

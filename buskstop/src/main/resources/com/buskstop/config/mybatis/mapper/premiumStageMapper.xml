@@ -121,4 +121,63 @@
 		)
 		WHERE RN >= #{begin}
 	</select>
+	
+	<select id="selectSearchStageCount" parameterType="Map" resultType="_int">
+		SELECT	COUNT(P.ESTABLISH_NO)
+		FROM 	PREMIUM_STAGE P , PREMIUM_STAGE_OPTION O
+		<where>
+				P.ESTABLISH_NO = O.ESTABLISH_NO(+)
+			<if test="nameSearch !=null">
+				AND P.STAGE_NAME LIKE '%'||#{nameSearch}||'%'
+			</if>
+			<if test="locationSearch != null">
+				AND P.STAGE_LOCATION LIKE '%'||#{locationSearch}||'%' 
+			</if>
+			<if test="idSearch != null">
+				AND P.OPERATOR_USER_ID = #{idSearch}
+			</if>
+			<if test="startDate != null">
+				AND O.STAGE_RENTAL_DATE	>= #{startDate}
+			</if>
+			<if test="endDate !=null ">
+				AND O.STAGE_RENTAL_DATE &lt;= #{endDate}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectSearchStage" parameterType="Map" resultMap="premiumStage-resultmap">
+		SELECT 	P.ESTABLISH_NO,
+				P.OPERATOR_USER_ID,
+				P.OPERATOR_NO,
+				P.STAGE_NAME,
+				P.STAGE_LOCATION,
+				P.STAGE_AREA,
+				P.STAGE_COST,
+				P.STAGE_INSTRUMENT,
+				P.STAGE_CONTENT,
+				P.STAGE_PARKING,
+				P.STAGE_DRINKING,
+				P.STAGE_FOOD_SELL,
+				P.STAGE_FOOD_RESTRICTION,
+				P.STAGE_IMAGE
+		FROM	PREMIUM_STAGE P, PREMIUM_STAGE_OPTION O
+		<where>
+				P.ESTABLISH_NO = O.ESTABLISH_NO(+)
+			<if test="nameSearch !=null">
+				AND P.STAGE_NAME LIKE '%'||#{nameSearch}||'%'
+			</if>
+			<if test="locationSearch != null">
+				AND P.STAGE_LOCATION LIKE '%'||#{locationSearch}||'%'
+			</if>
+			<if test="idSearch != null">
+				AND P.OPERATOR_USER_ID = #{idSearch}
+			</if>
+			<if test="startDate != null">
+				AND O.STAGE_RENTAL_DATE	>= #{startDate}
+			</if>
+			<if test="endDate !=null ">
+				AND O.STAGE_RENTAL_DATE &lt;= #{endDate}
+			</if>	
+		</where>
+	</select>
 </mapper>

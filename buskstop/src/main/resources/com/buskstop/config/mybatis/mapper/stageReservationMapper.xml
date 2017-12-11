@@ -1,3 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="stageReservationMapper"></mapper>
+<mapper namespace="com.buskstop.config.mybatis.mapper.stageReservationMapper">
+
+	<sql id="column-stageReservation">
+		RENTAL_NO,
+		RENTAL_USER_ID,
+		STAGE_NO,
+		RENTAL_DATE,
+		RENTAL_STATE_CODE,
+		RENTAL_REG_TIME
+	</sql>
+
+	<resultMap type="StageReservation" id="stage-reservation-resultmap">
+		<id column="RENTAL_NO" property="rentalNoNumber"/>
+		<result column="RENTAL_USER_ID" property="rentalUserId"/>
+		<result column="STAGE_NO" property="stageNo"/>
+		<result column="RENTAL_DATE" property="rentalDate"/>
+		<result column="RENTAL_STATE_CODE" property="rentalStateCode"/>
+		<result column="RENTAL_REG_TIME" property="rentalRegTime"/>
+	</resultMap>
+	
+	<!-- 공연장 예약 등록 -->
+	<insert id="insertStageReservation" parameterType="StageReservation">
+		<selectKey keyProperty="rentalNoNumber" resultType="_int" order="BEFORE">
+			SELECT RENTAL_NO_SEQ.nextval FROM dual
+		</selectKey>
+		insert into STAGE_RESERVATION (<include refid="column-stageReservation"/>)
+		values(#{rentalNoNumber}, #{rentalUserId}, #{stageNo}, #{rentalDate},
+		#{rentalStateCode}, sysdate);
+	</insert>
+	
+	<!-- 공연장 번호를 받아서 예약 진행 중인 것이 있으면 조회 -->
+	<select id="selectStageReservationByStageNoforRentalStateCode" resultMap="stage-reservation-resultmap" parameterType="_int">
+		select *
+		from STAGE_RESERVATION
+		where STAGE_NO = #{stageNo}
+		and RENTAL_STATE_CODE = 1
+	</select>
+	
+</mapper>

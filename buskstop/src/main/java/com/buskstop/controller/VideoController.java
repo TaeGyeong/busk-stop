@@ -130,14 +130,7 @@ public class VideoController {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
 		System.out.println("category - " + category);
-
-		// id 넘기기위해 request
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-
-		String userId = ((User) authentication.getPrincipal()).getUserId();
-		request.setAttribute("userId", userId);
-
+		
 		// response
 		if(category.equals("performance")) {
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);

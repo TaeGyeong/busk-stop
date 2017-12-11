@@ -32,8 +32,7 @@ public class PremiumStageOptionDaoImpl implements PremiumStageOptionDao{
 
 	@Override
 	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(makeSqlId("selectPremiumStageOptionByEstablishNo"), establishNo);
 	}
 
 }

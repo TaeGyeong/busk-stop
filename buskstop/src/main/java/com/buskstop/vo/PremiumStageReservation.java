@@ -9,7 +9,7 @@ public class PremiumStageReservation {
 		private int reservationNo; //예약신청 번호
 		private String UserId; //예약신청자 ID
 		private int establishNo; //사업장번호
-		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date reservationRegTime;//예약 신청자 신청시간
 		private int optionNo;//예약옵션번호
 		

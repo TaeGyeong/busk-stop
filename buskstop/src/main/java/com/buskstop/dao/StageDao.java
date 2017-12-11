@@ -2,6 +2,7 @@ package com.buskstop.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.buskstop.vo.Stage;
 
@@ -37,6 +38,14 @@ public interface StageDao {
 	 * @return
 	 */
 	int updateStage(Stage stage);
+	
+	/**
+	 * 공연장번호를 받아서 예약상태 변경
+	 * @param stageNo
+	 * @param stageReservation
+	 * @return
+	 */
+	int updateStageForStageReservation(int stageNo, int stageReservation);
 
 
 	int selectStageCountById(String stageSellerId, Date startDate, Date endDate);
