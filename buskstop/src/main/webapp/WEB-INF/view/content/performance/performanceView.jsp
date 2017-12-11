@@ -127,9 +127,9 @@ select {
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation }</p>
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
-					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd"/> <fmt:formatDate value="${item.performance }" pattern="hh:mm"/>
+					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">작성자 : ${item.performanceUserId }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">등록된 시간 : <fmt:formatDate value="${item.performanceRegTime }" pattern="HH:mm"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${item.performanceHits }</p>
 					 
 				</div>
