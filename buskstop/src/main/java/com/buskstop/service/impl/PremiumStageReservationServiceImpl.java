@@ -57,9 +57,8 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	}
 
 	@Override
-	public int removePremiumStageOption(int reservationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removePremiumStageOption(int optionNo) {
+		return optionDao.deletePremiumStageOption(optionNo);
 	}
 
 	@Override

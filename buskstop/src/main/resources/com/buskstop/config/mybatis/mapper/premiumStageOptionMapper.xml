@@ -7,6 +7,7 @@
 		OPTION_NO,
 		STAGE_RENTAL_DATE,
 		STAGE_STATE,
+		STAGE_COST,
 		ESTABLISH_NO
 	</sql>
 	
@@ -19,10 +20,11 @@
 		<id column="OPTION_NO" property="optionNo"/>
 		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
 		<result column="STAGE_STATE" property="stageState"/>
+		<result column="STAGE_COST" property="stageCost"/>
 		<result column="ESTABLISH_NO" property="establishNo"/>
 	</resultMap>
 	
-	<insert id="insertPremiumStageOption">
+	<insert id="insertPremiumStageOption" parameterType="PremiumStageOption">
 		<selectKey keyProperty="optionNo" resultType="_int" order="BEFORE">
 			select PREMIUM_OPTION_NO_SEQ.nextval from dual
 		</selectKey>
@@ -30,8 +32,14 @@
 		VALUES		(#{optionNo},
 					 #{stageRentalDate},
 					 #{stageState},
+					 #{stageCost},
 					 #{establishNo})
 	</insert>
+	
+	<delete id="deletePremiumStageOption" parameterType="_int">
+		DELETE FROM PREMIUM_STAGE_OPTION 
+		WHERE	option_no = #{value}
+	</delete>
 	
 	<select id="selectPremiumStageOptionByEstablishNo" parameterType="PremiumStageOption" resultMap="premiumOption-resultMap">
 		<include refid="premiumOption-select-sql"/>

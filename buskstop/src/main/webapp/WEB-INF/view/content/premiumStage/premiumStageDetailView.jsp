@@ -20,7 +20,6 @@
 			<th>장소명</th>
 			<th>주소</th>
 			<th>면적</th>
-			<th>가격</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -30,7 +29,6 @@
 			<td>${requestScope.map.premiumStage.stageName }</td>
 			<td>${requestScope.map.premiumStage.stageLocation }</td>
 			<td>${requestScope.map.premiumStage.stageArea }</td>
-			<td>${requestScope.map.premiumStage.stageCost }</td>
 		</tr>
 	</tbody>
 </table>

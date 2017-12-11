@@ -13,7 +13,6 @@ public class PremiumStage implements Serializable {
 	private String stageName; // 장소명
 	private String stageLocation; // 주소
 	private int stageArea; // 면적
-	private int stageCost;
 	private String stageInstrument;
 	private String stageContent;
 	private int stageParking;
@@ -29,73 +28,16 @@ public class PremiumStage implements Serializable {
 	}
 
 	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
-			int stageArea, int stageCost, String stageImage) {
+			int stageArea, String stageInstrument, String stageContent, int stageParking, int stageDrinking,
+			int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage, String stageImage,
+			List<String> oldImage) {
+		super();
 		this.establishNum = establishNum;
 		this.operatorUserId = operatorUserId;
 		this.operatorNo = operatorNo;
 		this.stageName = stageName;
 		this.stageLocation = stageLocation;
 		this.stageArea = stageArea;
-		this.stageCost = stageCost;
-		this.stageImage = stageImage;
-	}
-
-	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
-			int stageArea, int stageCost, int stageParking, int stageDrinking, int stageFoodSell,
-			int stageFoodRestriction, List<MultipartFile> multiImage, String stageImage) {
-		this.establishNum = establishNum;
-		this.operatorUserId = operatorUserId;
-		this.operatorNo = operatorNo;
-		this.stageName = stageName;
-		this.stageLocation = stageLocation;
-		this.stageArea = stageArea;
-		this.stageCost = stageCost;
-		this.stageParking = stageParking;
-		this.stageDrinking = stageDrinking;
-		this.stageFoodSell = stageFoodSell;
-		this.stageFoodRestriction = stageFoodRestriction;
-		this.multiImage = multiImage;
-		this.stageImage = stageImage;
-	}
-	
-	
-
-	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
-			int stageArea, int stageCost, String stageInstrument, String stageContent, int stageParking,
-			int stageDrinking, int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage,
-			String stageImage) {
-		this.establishNum = establishNum;
-		this.operatorUserId = operatorUserId;
-		this.operatorNo = operatorNo;
-		this.stageName = stageName;
-		this.stageLocation = stageLocation;
-		this.stageArea = stageArea;
-		this.stageCost = stageCost;
-		this.stageInstrument = stageInstrument; // 악기
-		this.stageContent = stageContent; // 내용
-		this.stageParking = stageParking;
-		this.stageDrinking = stageDrinking;
-		this.stageFoodSell = stageFoodSell;
-		this.stageFoodRestriction = stageFoodRestriction;
-		this.multiImage = multiImage;
-		this.stageImage = stageImage;
-	}
-	
-	
-	
-	
-
-	public PremiumStage(int establishNum, String operatorUserId, int operatorNo, String stageName, String stageLocation,
-			int stageArea, int stageCost, String stageInstrument, String stageContent, int stageParking,
-			int stageDrinking, int stageFoodSell, int stageFoodRestriction, List<MultipartFile> multiImage,
-			String stageImage, List<String> oldImage) {
-		this.establishNum = establishNum;
-		this.operatorUserId = operatorUserId;
-		this.operatorNo = operatorNo;
-		this.stageName = stageName;
-		this.stageLocation = stageLocation;
-		this.stageArea = stageArea;
-		this.stageCost = stageCost;
 		this.stageInstrument = stageInstrument;
 		this.stageContent = stageContent;
 		this.stageParking = stageParking;
@@ -105,32 +47,6 @@ public class PremiumStage implements Serializable {
 		this.multiImage = multiImage;
 		this.stageImage = stageImage;
 		this.oldImage = oldImage;
-	}
-	
-	
-
-	public List<String> getOldImage() {
-		return oldImage;
-	}
-
-	public void setOldImage(List<String> oldImage) {
-		this.oldImage = oldImage;
-	}
-
-	public String getStageInstrument() {
-		return stageInstrument;
-	}
-
-	public void setStageInstrument(String stageInstrument) {
-		this.stageInstrument = stageInstrument;
-	}
-
-	public String getStageContent() {
-		return stageContent;
-	}
-
-	public void setStageContent(String stageContent) {
-		this.stageContent = stageContent;
 	}
 
 	public int getEstablishNum() {
@@ -181,12 +97,20 @@ public class PremiumStage implements Serializable {
 		this.stageArea = stageArea;
 	}
 
-	public int getStageCost() {
-		return stageCost;
+	public String getStageInstrument() {
+		return stageInstrument;
 	}
 
-	public void setStageCost(int stageCost) {
-		this.stageCost = stageCost;
+	public void setStageInstrument(String stageInstrument) {
+		this.stageInstrument = stageInstrument;
+	}
+
+	public String getStageContent() {
+		return stageContent;
+	}
+
+	public void setStageContent(String stageContent) {
+		this.stageContent = stageContent;
 	}
 
 	public int getStageParking() {
@@ -237,6 +161,24 @@ public class PremiumStage implements Serializable {
 		this.stageImage = stageImage;
 	}
 
+	public List<String> getOldImage() {
+		return oldImage;
+	}
+
+	public void setOldImage(List<String> oldImage) {
+		this.oldImage = oldImage;
+	}
+
+	@Override
+	public String toString() {
+		return "PremiumStage [establishNum=" + establishNum + ", operatorUserId=" + operatorUserId + ", operatorNo="
+				+ operatorNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation + ", stageArea="
+				+ stageArea + ", stageInstrument=" + stageInstrument + ", stageContent=" + stageContent
+				+ ", stageParking=" + stageParking + ", stageDrinking=" + stageDrinking + ", stageFoodSell="
+				+ stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction + ", multiImage=" + multiImage
+				+ ", stageImage=" + stageImage + ", oldImage=" + oldImage + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -248,7 +190,6 @@ public class PremiumStage implements Serializable {
 		result = prime * result + ((operatorUserId == null) ? 0 : operatorUserId.hashCode());
 		result = prime * result + stageArea;
 		result = prime * result + ((stageContent == null) ? 0 : stageContent.hashCode());
-		result = prime * result + stageCost;
 		result = prime * result + stageDrinking;
 		result = prime * result + stageFoodRestriction;
 		result = prime * result + stageFoodSell;
@@ -295,8 +236,6 @@ public class PremiumStage implements Serializable {
 				return false;
 		} else if (!stageContent.equals(other.stageContent))
 			return false;
-		if (stageCost != other.stageCost)
-			return false;
 		if (stageDrinking != other.stageDrinking)
 			return false;
 		if (stageFoodRestriction != other.stageFoodRestriction)
@@ -327,17 +266,5 @@ public class PremiumStage implements Serializable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "PremiumStage [establishNum=" + establishNum + ", operatorUserId=" + operatorUserId + ", operatorNo="
-				+ operatorNo + ", stageName=" + stageName + ", stageLocation=" + stageLocation + ", stageArea="
-				+ stageArea + ", stageCost=" + stageCost + ", stageInstrument=" + stageInstrument + ", stageContent="
-				+ stageContent + ", stageParking=" + stageParking + ", stageDrinking=" + stageDrinking
-				+ ", stageFoodSell=" + stageFoodSell + ", stageFoodRestriction=" + stageFoodRestriction
-				+ ", multiImage=" + multiImage + ", stageImage=" + stageImage + ", oldImage=" + oldImage + "]";
-	}
-	
-	
 	
 }

@@ -77,14 +77,13 @@ public class PremiumStageController {
 		map.put("imageList", imageList);
 		map.put("premiumStage", stage);
 		
-		List<PremiumStageOption> dateList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
+		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
 		List<PremiumStageTime> timeList = null;
-		for(PremiumStageOption o : dateList) {
+		for(PremiumStageOption o : optionList) {
 			timeList = reservationService.selectPremiumStageTimeByOptionNo(o.getOptionNo());
 		}
-		map.put("dateList", dateList);
+		map.put("optionList", optionList);
 		map.put("timeList", timeList);
-		System.out.println(dateList+" - "+timeList);
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
 	}
 
