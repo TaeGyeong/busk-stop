@@ -116,4 +116,18 @@ public interface StageService {
 	 * @param stageNo
 	 */
 	void cancelStageReservation(int stageNo);
+	
+	/**
+	 * 공급자 아이디를 받아서 공연장 조회
+	 * @param stageSellerId
+	 * @return
+	 */
+	List<Stage> selectStagebyStageSellerId(String stageSellerId);
+	
+	/**
+	 * 공연장 아이디로 공연장예약 정보 조회
+	 * @param stageNo
+	 * @return
+	 */
+	List<StageReservation> selectStageReservationByStageNo(int stageNo);
 }

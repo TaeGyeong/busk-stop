@@ -384,5 +384,11 @@
 		) where rn >= #{begin}
 	</select>
 	
+	<!-- 공급자 id로 등록된 공연장 가져오기 -->
+	<select id="selectStagebyStageSellerId" parameterType="String" resultMap="stage-resultmap">
+		select *
+		from stage
+		where stage_seller_id = #{stageSellerId}
+	</select>
 	
 </mapper>

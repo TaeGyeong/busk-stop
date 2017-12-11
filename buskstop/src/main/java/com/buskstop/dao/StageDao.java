@@ -93,4 +93,10 @@ public interface StageDao {
 
 	int selectStageCountByLocationAndNameNoDate(String locationSearch, String nameSearch);
 
+	/**
+	 * 공급자아이디로 공연장 select
+	 * @param stageSellerId
+	 * @return
+	 */
+	List<Stage> selectStagebyStageSellerId(String stageSellerId);
 }

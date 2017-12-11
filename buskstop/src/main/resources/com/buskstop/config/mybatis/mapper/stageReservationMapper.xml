@@ -44,4 +44,11 @@
 		where STAGE_NO = #{stageNo}
 		and RENTAL_STATE_CODE = 1
 	</update>
+	
+	<!-- 공연장번호로 공연장예약정보 조회 -->
+	<select id="selectStageReservationByStageNo" parameterType="_int" resultMap="stage-reservation-resultmap">
+		select *
+		from STAGE_RESERVATION
+		where STAGE_NO = #{stageNo}
+	</select>
 </mapper>

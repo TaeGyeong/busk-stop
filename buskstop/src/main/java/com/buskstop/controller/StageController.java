@@ -262,4 +262,24 @@ public class StageController {
 		return "예약이 취소되었습니다";
 	}
 	
+	//공급자 공연장 신청자 조회
+	@RequestMapping("/selectMyStageSupply")
+	public ModelAndView selectStageReservationStatement(@RequestParam String stageSellerId){
+		List<StageReservation> stageReser = null;
+		
+		// 공급자 아이디로 공급장 뽑아오기
+		List<Stage> stages = service.selectStagebyStageSellerId(stageSellerId);
+		for(Stage stage : stages) {
+			// 조회된 공급장들의 공급장아이디 뽑아와서 그 공급장들의 예약 정보 뽑아오기
+			int stageNo = stage.getStageNo();
+			List<StageReservation> stageReservations = service.selectStageReservationByStageNo(stageNo);
+			for(StageReservation stageReservation : stageReservations) {
+				//공연장예약 정보에 공연장 이름을 넣어주기
+				stageReservation.setStageName(stage.getStageName());
+				//리스트에 담기
+				stageReser.add(stageReservation);
+			}
+		}
+		return new ModelAndView("myPage/myStageSupplyView.tiles", "stageReservation", stageReser);
+	}
 }

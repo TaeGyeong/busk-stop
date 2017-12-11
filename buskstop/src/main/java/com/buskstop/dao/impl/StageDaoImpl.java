@@ -280,5 +280,10 @@ public class StageDaoImpl implements StageDao{
 		return session.selectOne(makeSqlId("selectStageCountByLocationAndNameNoDate"),map);
 	}
 	
+	@Override 
+	public List<Stage> selectStagebyStageSellerId(String stageSellerId){
+		return session.selectList(makeSqlId("selectStagebyStageSellerId"), stageSellerId);
+	}
+	
 }
 
