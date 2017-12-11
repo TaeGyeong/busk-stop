@@ -27,8 +27,24 @@ public class PerformaceLikeController {
 
 	@RequestMapping("/performanceLike")
 	@ResponseBody
-	public String performanceLike(@RequestParam String num) {
-		int Cnum = Integer.parseInt(num);
+	public String performanceLike(@RequestParam(required=false) String num, @RequestParam(required=false) String no) {
+		
+		String no2 = null;
+		
+		int Cnum = 0;
+		
+		if(num == null) {
+			// 먼저 . 의 인덱스를 찾는다
+	        int idx = no.indexOf(".");
+	        // . 앞부분을 추출
+	        // substring은 첫번째 지정한 인덱스는 포함하지 않는다.
+	        // 아래의 경우는 첫번째 문자열 부터 추출된다.
+	        no2 = no.substring(0, idx);
+	        Cnum = Integer.parseInt(no2);
+		}else {
+			Cnum = Integer.parseInt(num);
+		}
+		
 		int findNum = 0;
 		String findStr = null;
 

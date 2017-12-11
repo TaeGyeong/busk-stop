@@ -53,6 +53,9 @@ $(document).ready(function(){
 			"dataType":"text",
 			"success":function(count){
 				$(".likeBtn").html("<span class='glyphicon glyphicon-heart'></span>"+count);
+			},
+			"error":function(){
+				alert("로그인 후 이용가능한 기능 입니다.");
 			}
 		});
 	});

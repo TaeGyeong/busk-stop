@@ -17,12 +17,15 @@
 				"url":"${initParam.rootPath}/performanceLike.do",
 				"context" : this,
 				"data":{
-					"num":$(this).parent().parent().children("td:eq(0)").text(),
+					"no":$(this).parent().parent().parent().children("div").children("p:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType":"text",
 				"success":function(count){
 					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
+				},
+				"error":function(){
+					alert("로그인 후 이용가능한 기능입니다.");
 				}
 			});
 		});
@@ -133,7 +136,7 @@ select {
 					 
 				</div>
 				<div>
-				<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
+					<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
 				</div>
 			</div>
 		</c:forEach>
