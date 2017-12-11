@@ -61,7 +61,6 @@
 	<mvc:view-controller path="/mapTest3.do" view-name="performance/mapTest3.tiles"/>
 	<mvc:view-controller path="/searchStageByAddress.do" view-name="performance/searchStageByAddress.tiles2"/>
 	<mvc:view-controller path="/searchStageByKeyword.do" view-name="performance/searchStageByKeyword.tiles2"/>
-	<mvc:view-controller path="/premiumStageEnterDate.do" view-name="premiumStage/premiumStageEnterDate.tiles"/>
 	
 	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
