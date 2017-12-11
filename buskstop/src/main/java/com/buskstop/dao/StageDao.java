@@ -45,7 +45,7 @@ public interface StageDao {
 	 * @param stageReservation
 	 * @return
 	 */
-	int updateStageForStageReservation(int stageNo, int stageReservation);
+	int updateStageForStageReservation(int stageReservation, int stageNo);
 
 
 	int selectStageCountById(String stageSellerId, Date startDate, Date endDate);

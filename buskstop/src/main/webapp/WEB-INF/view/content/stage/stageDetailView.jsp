@@ -25,18 +25,21 @@ $(document).ready(function(){
 			"url" : "${initParam.rootPath}/insertStageRservation.do",
 			"type" : "post",
 			"data" : {
-				"rentalNoNumber" : "0",
+				"rentalNoNumber" : 0,
 				"stageNo" : "${requestScope.map.stage.stageNo}",
-				"rentalDate" : "${requestScope.map.stage.stageRentalDate}",
-				"rentalStateCode" : "1",
-				"rentalUserId" : "${user}"
+				
+				"rentalStateCode" : 1,
+				"rentalUserId" : "${requestScope.map.userId}",
+				'${_csrf.parameterName}':'${_csrf.token}'
 			},
 			"dataType":"text",
 			"success":function(msg){
 				alert(msg);
+				location.reload();
 			},
-			"error":function(msg){
-				alert(msg);
+			"error":function(jqXHR, textStatus, errorThrown, msg){
+				alert(msg + textStatus + " : " + errorThrown);
+				location.reload();
 			}
 		});
 	});
@@ -217,7 +220,7 @@ $(document).ready(function(){
 				</c:when>
 				<c:otherwise>
 					예약 불가
-					<button type="button" class="btn btn-danger" onclick="alert('예약 불가능한 공연장 입니다.');">예약불가</button>
+					<button type="button" class="btn btn-danger" onclick="alert('이미 예약된 공연장입니다.');">예약불가</button>
 				</c:otherwise>
 			</c:choose>
 			<br>

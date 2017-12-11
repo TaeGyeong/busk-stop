@@ -233,12 +233,12 @@ public class StageServiceImpl implements StageService{
 	}
 	
 	@Override
-	public Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation){
+	public Map<String, Object> updateStageForStageReservation(int stageReservation, int stageNo){
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("stageNo", stageNo);
 		map.put("stageReservation", stageReservation);
+		map.put("stageNo", stageNo);
 		
-		stageDao.updateStageForStageReservation(stageNo, stageReservation);
+		stageDao.updateStageForStageReservation(stageReservation, stageNo);
 		
 		return map;
 	}

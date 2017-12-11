@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 	
 	$("#performanceTime").timepicker({
-		timeFormat: 'hh:mm p',
+		timeFormat: 'HH:mm',
 	    interval: 60,
 	    minTime: '00',
 	    maxTime: '23:00',

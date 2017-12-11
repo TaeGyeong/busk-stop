@@ -23,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -189,32 +190,52 @@ public class StageController {
 		Stage stage = service.selectStageByStageNo(stageNo);
 		List<StageImage> stageImage = service.selectStageImageByStageNo(stageNo);
 		
-//		SecurityContext context = SecurityContextHolder.getContext();
-//		Authentication authentication = context.getAuthentication();
-//		String id = ((User)authentication.getPrincipal()).getUserId();
+		String id = null;
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("stage", stage);
-		map.put("stageImage", stageImage);
-//		map.put("userId", id);
+		
+		try {
+			SecurityContext context = SecurityContextHolder.getContext();
+			Authentication authentication = context.getAuthentication();
+			id = ((User)authentication.getPrincipal()).getUserId();
+		}catch (Exception e) {
+			id = "0";
+		}finally {
+			map.put("stage", stage);
+			map.put("stageImage", stageImage);
+			map.put("userId", id);
+		}
 		
 		return new ModelAndView("stage/stageDetailView.tiles", "map", map);
 	}
 	
-	@RequestMapping("/insertStageRservation")
-	public String insertStageReservation(@ModelAttribute StageReservation stageReservation) {
+	@RequestMapping(value="/insertStageRservation", produces = "application/text; charset=utf8")
+	public @ResponseBody String insertStageReservation(@ModelAttribute StageReservation stageReservation) {
+		
+		System.out.println(stageReservation);
+			
+		int stageNo = stageReservation.getStageNo();
 		
 		String msg = null;
 		
-		int stageNo = stageReservation.getStageNo();
+		Stage stage = service.selectStageByStageNo(stageNo);
+		Date rentalD = stage.getStageRentalDate();
 		
-		// 예약진행중이지 않다면
-		if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
-			service.insertStageReservation(stageReservation);
-			service.updateStageForStageReservation(stageNo, 0);
-			msg = "예약 신청이 완료 되었습니다.";
-		}else { //진행중인 예약이 있다면
-			msg = "이미 진행중인 예약이 있습니다.";
+		stageReservation.setRentalDate(rentalD);
+		
+		System.out.println(stageReservation);
+		
+		if(!stageReservation.getRentalUserId().equals("0")) {
+			// 예약진행중이지 않다면
+			if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
+				service.insertStageReservation(stageReservation);
+				service.updateStageForStageReservation(0, stageNo);
+				msg = "예약이 성공적으로 완료되었습니다";
+			}else { //진행중인 예약이 있다면
+				msg = "이미 진행중인 예약이 있는 공연장입니다.";
+			}
+		}else {//로그인한 회원이 아닐 경우
+			msg = "로그인 후 사용가능한 기능 입니다.";
 		}
 		
 		return msg;

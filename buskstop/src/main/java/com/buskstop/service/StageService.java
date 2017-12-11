@@ -103,7 +103,7 @@ public interface StageService {
 	 * @param stageReservation
 	 * @return
 	 */
-	Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation);
+	Map<String, Object> updateStageForStageReservation(int stageReservation, int stageNo);
 	
 	Map<String, Object> selectStageByLocationAndNameNoDate(int page, String locationSearch, String nameSearch);
 
