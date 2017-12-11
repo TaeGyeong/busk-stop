@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.buskstop.dao.FollowDao;
 import com.buskstop.service.FollowService;
+import com.buskstop.vo.Artist;
 import com.buskstop.vo.Follow;
 
 @Service
@@ -37,6 +38,10 @@ public class FollowServiceImpl implements FollowService{
 			}
 		}
 		return false;
+	}
+	
+	public List<Artist> followArtistList(String userId){
+		return dao.selectFollowArtistById(userId);
 	}
 	
 	

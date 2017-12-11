@@ -7,6 +7,19 @@
 		<result column="PERFORMANCE_LIKE_USER_ID" property="performanceLikeUserId"/>
 	</resultMap>
 	
+	<resultMap type="performance" id="performance-resultmap">
+		<id column="performance_no" property="performanceNo"/>
+		<result column="performance_name" property="performanceName"/>
+		<result column="performance_title" property="performanceTitle"/>
+		<result column="performance_location" property="performanceLocation"/>
+		<result column="performance_date" property="performanceDate"/>
+		<result column="performance_hits" property="performanceHits"/>
+		<result column="performance_content" property="performanceContent"/>
+		<result column="performance_image" property="performanceImage"/>
+		<result column="performance_user_id" property="performanceUserId"/>
+		<result column="performance_reg_time" property="performanceRegTime"/>
+	</resultMap>
+	
 	<!-- 좋아요 추가(클릭시) -->
 	<insert id="insertPerformanceLike" parameterType="performanceLike">
 		INSERT INTO PERFORMANCE_LIKE
@@ -39,5 +52,15 @@
 	<select id="selectAllPerformanceLike" resultMap="performanceLike-resultMap">
 		select *
 		from PERFORMANCE_LIKE
+	</select>
+	
+	<!-- 좋아요 id로 공연정보 조회 -->
+	<select id="selectPerformanceByLikeId" parameterType="string" resultMap="performance-resultmap">
+		SELECT 	P.PERFORMANCE_NO, P.PERFORMANCE_NAME, P.PERFORMANCE_TITLE, 
+				P.PERFORMANCE_LOCATION, P.PERFORMANCE_DATE, P.PERFORMANCE_HITS,
+				P.PERFORMANCE_CONTENT, P.PERFORMANCE_IMAGE, P.PERFORMANCE_USER_ID, P.PERFORMANCE_REG_TIME
+		FROM 	PERFORMANCE P, PERFORMANCE_LIKE L
+		WHERE 	P.PERFORMANCE_USER_ID = L.PERFORMANCE_LIKE_USER_ID(+)	
+		AND 	P.PERFORMANCE_USER_ID = #{value} 
 	</select>
 </mapper>

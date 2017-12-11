@@ -2,6 +2,7 @@ package com.buskstop.service;
 
 import java.util.List;
 
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
 
 public interface PerformanceLikeService {
@@ -33,4 +34,11 @@ public interface PerformanceLikeService {
 	int countPerformanceLikeByPerformanceLikeNo(int num);
 	
 	List<PerformanceLike> selectAllPerformanceLike();
+	
+	/**
+	 * id로 좋아요를 누른 공연글을 제공하는 서비스.
+	 * @param id
+	 * @return
+	 */
+	List<Performance> performanceByLikeId(String id);
 }
