@@ -39,6 +39,13 @@ public class StageController {
 	@Autowired
 	private StageService service;
 	
+	private String getUserId() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		
+		return ((User)authentication.getPrincipal()).getUserId();
+	}
+	
 	
 	@RequestMapping("/stageReservation")
 	public ModelAndView selectStage(@ModelAttribute Stage stage) {

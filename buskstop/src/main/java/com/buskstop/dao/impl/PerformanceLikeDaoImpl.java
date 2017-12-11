@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.PerformanceLikeDao;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
 
 @Repository
@@ -43,4 +44,11 @@ public class PerformanceLikeDaoImpl implements PerformanceLikeDao{
 	public List<PerformanceLike>selectAllPerformanceLike(){
 		return session.selectList(makeSqlId("selectAllPerformanceLike"));
 	}
+
+	@Override
+	public List<Performance> selectPerformanceByLikeId(String id) {
+		return session.selectList(makeSqlId("selectPerformanceByLikeId"), id );
+	}
+	
+	
 }

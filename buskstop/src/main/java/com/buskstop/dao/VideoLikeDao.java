@@ -2,7 +2,7 @@ package com.buskstop.dao;
 
 import java.util.List;
 
-import com.buskstop.vo.User;
+import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
 
 public interface VideoLikeDao {
@@ -21,4 +21,10 @@ public interface VideoLikeDao {
 	int deleteVideoLike(VideoLike like);
 	
 	List<VideoLike> selectLikeUserByVideoNum(int num);
+	/**
+	 * 유저 id로 video list 데이터 조회
+	 * @param id
+	 * @return
+	 */
+	public List<Video> selectVideoByVideoLikeId(String id);
 }

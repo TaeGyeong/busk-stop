@@ -312,13 +312,15 @@ function deletePerformance(performanceNo){
 		<div>
 			<img src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
 			<div class="text-center">
-				<span>${requestScope.map.artist.artistName }</span>
-				<span>${requestScope.map.artist.performance }</span>
-				<span>${requestScope.map.artistSns }</span>
+				<span>${requestScope.map.artist.artistName }</span><br>
+				<span>${requestScope.map.artist.performance }</span><br>
+				<span>${requestScope.map.artist.artistSns }</span><br>
 			</div>
-			<div class="text-right" id="follow" style="overflow:hidden">
-				<button type="button" id="followBtn"></button>
-			</div>
+			<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
+				<div class="text-right" id="follow" style="overflow:hidden">
+					<button type="button" id="followBtn"></button>
+				</div>
+			</c:if>
 		</div>
 	</div>
 
