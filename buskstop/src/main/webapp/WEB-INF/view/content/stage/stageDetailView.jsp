@@ -49,10 +49,13 @@ $(document).ready(function(){
 	table{
 		width:100%;
 		border-collapse: collapse;
+		border-spacing: 150px;
 	}
 	td{
 		padding: 5px;
 		text-align: center;
+		width: 300px;
+		background: white;
 		
 	}
 	select{
@@ -61,7 +64,7 @@ $(document).ready(function(){
 	#container{
 		width:960px;
 		margin : 0 auto;
-	}
+	}	
 </style>
 <div id="container">
 	<h1>DETAIL VIEW - 공연장 글 읽기 </h1>
@@ -80,6 +83,39 @@ $(document).ready(function(){
 		</div>
 	</div>
 	
+	
+	<div>
+		<c:forEach var="img" items="${requestScope.map.stageImage }">
+			<p style="color:#515151; font-size: 16px; padding:20px;">
+				<img src="${initParam.rootPath }/stageImage/${img.stageImageLocation }.jpg" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+			</p>
+		</c:forEach>
+	</div>
+	
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+		<label> 내용 : </label>
+			${requestScope.map.stage.stageContent}
+		</p>
+	</div>
+	
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<label>구비된 악기 : </label>
+			${requestScope.map.stage.stageInstrument}
+		</p>
+	</div>
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<label>예약 날짜 : </label>
+			<fmt:formatDate value="${requestScope.map.stage.stageRentalDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
+			<fmt:formatDate value="${requestScope.map.stage.stageStartTime}" pattern="HH시 mm분"/>&nbsp;
+			~&nbsp;<fmt:formatDate value="${requestScope.map.stage.stageEndTime}" pattern="HH시 mm분"/>
+		</p>
+	</div>
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
@@ -129,99 +165,73 @@ $(document).ready(function(){
 	</div>
 	
 	<div>
-		<c:forEach var="img" items="${requestScope.map.stageImage }">
-			<p style="color:#515151; font-size: 16px; padding:20px;">
-				<img src="${initParam.rootPath }/stageImage/${img.stageImageLocation }.jpg" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
-			</p>
-		</c:forEach>
-	</div>
-	
-	<div>
 		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			${requestScope.map.stage.stageContent}
-		</p>
-	</div>
-	
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>구비된 악기 : </label>
-			${requestScope.map.stage.stageInstrument}
-		</p>
-	</div>
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>예약 날짜 : </label>
-			<fmt:formatDate value="${requestScope.map.stage.stageRentalDate}" pattern="yyyy-MM-dd"/> <br>
-			<label>예약 시간 : </label> <br>
-			<label>시작 시간 - </label> <fmt:formatDate value="${requestScope.map.stage.stageStartTime}" pattern="HH시 mm분"/> <br>
-			<label>끝 시간 - </label> <fmt:formatDate value="${requestScope.map.stage.stageEndTime}" pattern="HH시 mm분"/>
-		</p>
-	</div>
-	
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>주차장 유무 : </label>
+		<table>
+			<tr>
+				<td> ↓ 주차장 유무  ↓</td>
+				<td> ↓ 음주가능 여부 ↓  </td>
+				<td> ↓ 외부음식 반입 여부 ↓ </td>
+				<td> ↓ 식사 판매  ↓ </td>
+				<td> ↓ 에약가능 여부 ↓ </td>
+			</tr>
+			<tr>
+			<td>
 			<c:set var="parking" value="${requestScope.map.stage.stageParking }"/>
 			<c:choose>
 				<c:when test="${parking eq 1}">
-					주차장 완비
+					완비
 				</c:when>
 				<c:otherwise>
-					주차장미비
+					미비
 				</c:otherwise>
 			</c:choose>
-			<br>
-			<label>음주가능 여부 : </label>
+			</td>
+			<td>
 			<c:set var="drinking" value="${requestScope.map.stage.stageDrinking }"/>
 			<c:choose>
 				<c:when test="${drinking eq 1}">
-					음주 가능
+					O
 				</c:when>
 				<c:otherwise>
-					음주 불가
+					X
 				</c:otherwise>
 			</c:choose>
-			<br>
-			<label>음식 (유료)제공 여부 : </label>
+			</td>
+			<td>
 			<c:set var="foodSell" value="${requestScope.map.stage.stageFoodSell }"/>
 			<c:choose>
 				<c:when test="${foodSell eq 1}">
-					음식 제공
+					O
 				</c:when>
 				<c:otherwise>
-					음식 미제공
+					X
 				</c:otherwise>
 			</c:choose>
-			<br>
-			<label>외부음식 반입 가능 여부 : </label>
+			</td>
+			<td>
 			<c:set var="foodRestriction" value="${requestScope.map.stage.stageFoodRestriction }"/>
 			<c:choose>
 				<c:when test="${foodRestriction eq 1}">
-					반입 가능
+					O
 				</c:when>
 				<c:otherwise>
-					반입 불가
+					X
 				</c:otherwise>
 			</c:choose>
-			<br>
-			<label>예약 가능 여부 : </label>
+			</td>
+			<td>
 			<c:set var="reservation" value="${requestScope.map.stage.stageReservation }"/>
 			<c:choose>
 				<c:when test="${reservation eq 1}">
-					예약 가능
 					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
 				</c:when>
 				<c:otherwise>
-					예약 불가
 					<button type="button" class="btn btn-danger" onclick="alert('예약 불가능한 공연장 입니다.');">예약불가</button>
 				</c:otherwise>
 			</c:choose>
-			<br>
-		</p>
+			</td>
+			</tr>
+	</table>
 	</div>
 	
 	<div class="button_box" style="width: 100%;">
@@ -229,7 +239,7 @@ $(document).ready(function(){
 		<!-- Board Content End-->
 		<div>
 			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
+				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.getUserId }">
 					<input type="submit" value="수정" onclick="updatePerformance();" class="btn btn-default">
 					<input type="submit" value="삭제" onclick="deletePerformance();" class="btn btn-default">
 				</c:if>

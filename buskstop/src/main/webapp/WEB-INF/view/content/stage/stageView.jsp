@@ -25,9 +25,6 @@
 			} 
 			
 		})
-		
-		
-
 	});
 	
 	function goDetail(root, no){
@@ -118,6 +115,9 @@ select {
 </style>
 <div id="container">
 	<hr>
+	<h1>일반 공연장</h1>
+	<hr>
+	
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
 		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
 		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
@@ -133,39 +133,25 @@ select {
 		<button type="submit" name="search" class="submit">검색</button>
 		<sec:csrfInput/>
 	</form>
-	
 	<hr>
-	<h1>대관 목록</h1>
-	<hr>
-	<table id="stageReservation" style="display: table;">
-		<thead id="thead">
-		<tr>
-			<td>번호 </td>
-			<td>제목</td>
-			<td>대관장소</td>
-			<td>대관날짜</td>
-			<td>등록 시간</td>
-			<td>공급자</td>
-			<td>예약 여부</td>
-		</tr>
-		</thead>
-		<tbody id="tbody">
-				<c:forEach items="${requestScope.map.list}" var="item">
-					<tr style="cursor: pointer;">
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"></fmt:formatDate></td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
-					<c:if test="${item.stageReservation==0}">예약불가</c:if>
-					<c:if test="${item.stageReservation==1}">예약가능</c:if></td>
-					</tr>
-				</c:forEach>
-		</tbody>
-	</table>
-	
+	<div class="row">
+		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
+			<div class="thumbnail col-sm-4" style="cursor: pointer;">
+				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+				<div class="caption" >
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">가격 : ${item.stageCost}, 면적 : ${item.stageArea}</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+					<fmt:formatDate value="${item.stageRentalDate}" pattern="yy-MM-dd"/>&nbsp;&nbsp;&nbsp;
+					<fmt:formatDate value="${item.stageStartTime}" pattern="HH:mm"/>~~<fmt:formatDate value="${item.stageEndTime }" pattern="HH:mm"/></p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 - ${item.stageSellerId }
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">등록된 시간 - <fmt:formatDate value="${item.stageRegTime }" pattern="HH:mm"/></p>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	 
 	<div style="width: 100%;">
 		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
 	</div>
