@@ -41,6 +41,12 @@
 		WHERE	option_no = #{value}
 	</delete>
 	
+	<update id="updatePremiumStageOptionStageState" parameterType="PremiumStageOption">
+		UPDATE	PREMIUM_STAGE_OPTION
+		SET		stage_state = #{stageState}
+		WHERE	option_no = #{optionNo}
+	</update>
+	
 	<select id="selectPremiumStageOptionByEstablishNo" parameterType="PremiumStageOption" resultMap="premiumOption-resultMap">
 		<include refid="premiumOption-select-sql"/>
 		WHERE establish_no = #{value}

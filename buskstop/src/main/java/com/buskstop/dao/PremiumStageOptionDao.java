@@ -26,4 +26,11 @@ public interface PremiumStageOptionDao {
 	 * @return
 	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo);
+	
+	/**
+	 * 옵션상태 변경
+	 * @param option
+	 * @return
+	 */
+	int updatePremiumStageOptionStageState(PremiumStageOption option);
 }

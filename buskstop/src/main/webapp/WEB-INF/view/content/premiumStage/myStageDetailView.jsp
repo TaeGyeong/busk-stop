@@ -2,6 +2,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+${document}.ready(function(){
+	
+	$("#acceptance").on("click", function(){
+		var stateCode = (this).val();
+		$.ajax({
+			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
+			"type":"post",
+			"data":{"optionNo":stateCode,
+					"stageState":2
+			},
+			"dataType":"json",
+			"success":function(){
+				
+			},
+			"error":function(a,b,c){
+				alert(c);
+			}
+		});
+	});
+	
+	$("#rejection").on("click", function(){
+		var stateCode = (this).val();
+		$.ajax({
+			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
+			"type":"post",
+			"data":{"optionNo":stateCode,
+					"stageState":0
+			},
+			"dataType":"json",
+			"success":function(){
+				
+			},
+			"error":function(a,b,c){
+				alert(c);
+			}
+		});
+	});
+});
+
+
+
+</script>
+
 <div class="container-inline">
 	<c:forEach items="${requestScope.map.imageList }" var="image">
 		<img src="${initParam.rootPath }/supplierImage/${image }" onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
@@ -105,10 +151,8 @@
 					<c:choose>
 						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
 						<c:when test="${dateOption.stageState ==1}">
-							<from action="">
-								<button class="btn btn-defalut">수락</button>
-								<button class="btn btn-defalut">거절</button>
-							</from>
+							<button class="btn btn-defalut" id="acceptance" value="${dateOption.optionNo }">수락</button>
+							<button class="btn btn-defalut" id="rejection" value="${dateOption.optionNo }">거절</button>
 						</c:when>
 					</c:choose>
 				</td>
