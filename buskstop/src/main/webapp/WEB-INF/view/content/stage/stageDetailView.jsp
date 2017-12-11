@@ -25,18 +25,40 @@ $(document).ready(function(){
 			"url" : "${initParam.rootPath}/insertStageRservation.do",
 			"type" : "post",
 			"data" : {
-				"rentalNoNumber" : "0",
+				"rentalNoNumber" : 0,
 				"stageNo" : "${requestScope.map.stage.stageNo}",
-				"rentalDate" : "${requestScope.map.stage.stageRentalDate}",
-				"rentalStateCode" : "1",
-				"rentalUserId" : "${user}"
+				"rentalStateCode" : 1,
+				"rentalUserId" : "${requestScope.map.userId}",
+				'${_csrf.parameterName}':'${_csrf.token}'
 			},
 			"dataType":"text",
 			"success":function(msg){
 				alert(msg);
+				location.reload();
 			},
-			"error":function(msg){
+			"error":function(jqXHR, textStatus, errorThrown, msg){
+				alert(msg + textStatus + " : " + errorThrown);
+				location.reload();
+			}
+		});
+	});
+	
+	$("#cancelBtn").on("click", function(){
+		$.ajax({
+			"url" : "${initParam.rootPath}/cancelStageReservation.do",
+			"type" : "post",
+			"data" : {
+				"stageNo" : "${requestScope.map.stage.stageNo}",
+				'${_csrf.parameterName}':'${_csrf.token}'
+			},
+			"dataType":"text",
+			"success":function(msg){
 				alert(msg);
+				location.reload();
+			},
+			"error":function(jqXHR, textStatus, errorThrown, msg){
+				alert(msg + textStatus + " : " + errorThrown);
+				location.reload();
 			}
 		});
 	});
@@ -110,7 +132,7 @@ $(document).ready(function(){
 	<div>
 		<hr style="float:bottom">
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>예약 날짜 : </label>
+			<label>예약 가능 날짜 : </label>
 			<fmt:formatDate value="${requestScope.map.stage.stageRentalDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
 			<fmt:formatDate value="${requestScope.map.stage.stageStartTime}" pattern="HH시 mm분"/>&nbsp;
 			~&nbsp;<fmt:formatDate value="${requestScope.map.stage.stageEndTime}" pattern="HH시 mm분"/>
@@ -152,7 +174,7 @@ $(document).ready(function(){
 		
 				        // 인포윈도우로 장소에 대한 설명을 표시합니다
 				        var infowindow = new daum.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">${requestScope.stage.stageName}</div>'
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">${requestScope.map.stage.stageName}</div>'
 				        });
 				        infowindow.open(map, marker);
 		
@@ -168,8 +190,8 @@ $(document).ready(function(){
 		<hr style="float:bottom">
 		<table>
 			<tr>
-				<td> ↓ 주차장 유무  ↓</td>
-				<td> ↓ 음주가능 여부 ↓  </td>
+				<td> ↓ 주차장 ↓</td>
+				<td> ↓ 음주가능 여부 ↓</td>
 				<td> ↓ 외부음식 반입 여부 ↓ </td>
 				<td> ↓ 식사 판매  ↓ </td>
 				<td> ↓ 에약가능 여부 ↓ </td>
@@ -224,6 +246,10 @@ $(document).ready(function(){
 			<c:choose>
 				<c:when test="${reservation eq 1}">
 					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
+				</c:when>
+				<c:when test="${requestScope.map.userId eq requestScope.map.rentalUserId }">
+					예약 불가
+					<button type="button" class="btn btn-default" id="cancelBtn">예약취소</button>
 				</c:when>
 				<c:otherwise>
 					<button type="button" class="btn btn-danger" onclick="alert('예약 불가능한 공연장 입니다.');">예약불가</button>

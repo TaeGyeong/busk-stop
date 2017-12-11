@@ -17,12 +17,15 @@
 				"url":"${initParam.rootPath}/performanceLike.do",
 				"context" : this,
 				"data":{
-					"num":$(this).parent().parent().children("td:eq(0)").text(),
+					"no":$(this).parent().parent().parent().children("div").children("p:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType":"text",
 				"success":function(count){
 					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
+				},
+				"error":function(){
+					alert("로그인 후 이용가능한 기능입니다.");
 				}
 			});
 		});
@@ -122,18 +125,19 @@ select {
 		<hr>
 		<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
-			<div class="thumbnail col-sm-4">
+			<div class="thumbnail col-sm-4" style="cursor:pointer;">
 				<img src="${initParam.rootPath }/supplierImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
-					<fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd"/>
+					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">작성자 : ${item.performanceUserId }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">등록된 시간 : <fmt:formatDate value="${item.performanceRegTime }" pattern="HH:mm"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${item.performanceHits }</p>
 					 
 				</div>
 				<div>
-				<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
+					<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
 				</div>
 			</div>
 		</c:forEach>

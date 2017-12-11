@@ -17,4 +17,11 @@ public interface StageReservationDao {
 	 * @return
 	 */
 	StageReservation selectStageReservationByStageNoforRentalStateCode(int stageNo);
+	
+	/**
+	 * 공연장 번호를 받아서 진행중인 예약 취소
+	 * @param stageNo
+	 * @return
+	 */
+	int cancelStageReservation(int stageNo);
 }

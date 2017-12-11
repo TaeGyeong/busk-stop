@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<link rel="stylesheet" href="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.css">
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <style type="text/css">
 	/* 	
 		공연장 대관 등록 개발용 CSS
@@ -40,13 +40,6 @@ $(document).ready(function(){
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
 	});
-	$("#dateBtn").on("click", function(){
-		$("#stageSDate").val($("#stageRentalDate").val() + " " + $("#stageStartTime").val());
-	});
-	$("#dateBtn2").on("click", function(){
-		$("#stageEDate").val($("#stageRentalDate").val() + " " + $("#stageEndTime").val());
-	});
-	
 	$("#selectStage").on("click", function(){
 		
 	});
@@ -59,22 +52,27 @@ $(document).ready(function(){
 	});
 	
 	$("#stageStartTime").timepicker({
-		step: 60, //시간간격
-		timeFormat: "H:i",
-		interval: 60,
-		dynamic: false,
-		dropdown: true,
-		scrollbar: true
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 	
 	$("#stageEndTime").timepicker({
-		step: 60, //시간간격
-		timeFormat: "H:i",
-		interval: 60,
-		dynamic: false,
-		dropdown: true,
-		scrollbar: true
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
+	
 });
 
 $(function(){
@@ -93,6 +91,19 @@ function readURL(input){
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
+function timeCheck(){
+	if(document.checkForm.stageStartTime.value >= document.checkForm.stageEndTime.value){
+		alert("끝나는 시간이 시작 시간보다 같거나 빠를 순 없습니다.");
+		return false;
+	} else {
+		alert("굿잡");
+		return true;
+	}
+	
+}
+
+
 </script>
 
 <h2>공연장 대관 등록</h2>
@@ -108,7 +119,7 @@ function readURL(input){
 <div style="width:960px; margin:auto;">
 	<h1>대관 공연장 등록하기</h1>
 	
-	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data">
+	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data" name="checkForm" onsubmit="return timeCheck();">
 		<%-- 공연장 번호 hidden --%>
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
@@ -192,15 +203,15 @@ function readURL(input){
 			<label>대관일</label>
 			<input type="Date" name="stageRentalDate" id="stageRentalDate" required="required">
 			<label>시작 시간</label> 
-			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="20" maxlength="5" required="required">
+			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 			<label>끝나는 시간</label> 
-			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="20" maxlength="5" required="required">
+			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 		</div>
 		<br>
 		<!-- 예약가능 여부 -->
 		<input type="hidden" name="stageReservation" value="1">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
-		<button type="submit" class="btn btn-default">등록</button>
+		<button type="submit" class="btn btn-default" >등록</button>
 		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
 	</form>
 </div>

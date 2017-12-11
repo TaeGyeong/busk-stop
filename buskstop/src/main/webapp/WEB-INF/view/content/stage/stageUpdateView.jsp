@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <script>
 $(document).ready(function(){
 	$(document).on("click", "#addImage", function(){
@@ -26,6 +28,34 @@ $(document).ready(function(){
 	$(document).on("click", "#delBtn", function(){
 		$(this).parent().prev().attr("name", "delImage");
 		$(this).parent().remove();
+	});
+	
+	$('input.timepicker').timepicker({
+		
+	});
+	
+	$("#stageStartTime").timepicker({
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
+	});
+	
+	$("#stageEndTime").timepicker({
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 });
 
@@ -168,19 +198,29 @@ function readURL(input){
 		</c:choose>
 	</div>
 	
+	<c:set var="reservation" value="${requestScope.stage.stageReservation }"/>
+	<c:choose>
+		<c:when test="${reservation eq 1}">
+			<input type="hidden" name="stageReservation" value="1">
+		</c:when>
+		<c:otherwise>
+			<input type="hidden" name="stageReservation" value="0">
+		</c:otherwise>
+	</c:choose>
+	
 	<div class="form-group">
 		<label>대관일</label>
 		<input type="Date" name="stageRentalDate" id="stageRentalDate" value='<fmt:formatDate value="${requestScope.stage.stageRentalDate }" pattern="yyyy-MM-dd"/>'>
 	</div>
 	<div>
 		<label>시작 시간</label> 
-		<input type="time" name="stageStartTime" id="stageStartTime" required="required" value="${requestScope.stage.stageStartTime }">
+		<input type="timepicker" name="stageStartTime" id="stageStartTime" required="required" value="${requestScope.stage.stageStartTime }">
 		<!--	<button type="button" id="dateBtn">날짜 확인</button>
 			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
 	</div>
 	<div>
 		<label>끝나는 시간</label> 
-		<input type="time" name="stageEndTime" id="stageEndTime" required="required" value="${requestScope.stage.stageEndTime }">
+		<input type="timepicker" name="stageEndTime" id="stageEndTime" required="required" value="${requestScope.stage.stageEndTime }">
 		<!--	<button type="button" id="dateBtn2">날짜 확인</button>
 			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
 	</div>

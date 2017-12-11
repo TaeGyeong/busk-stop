@@ -53,6 +53,9 @@ $(document).ready(function(){
 			"dataType":"text",
 			"success":function(count){
 				$(".likeBtn").html("<span class='glyphicon glyphicon-heart'></span>"+count);
+			},
+			"error":function(){
+				alert("로그인 후 이용가능한 기능 입니다.");
 			}
 		});
 	});
@@ -276,7 +279,7 @@ function deletePerformance(performanceNo){
 		<!-- Board Content End-->
 		<div>
 			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId }">
+				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
 					<input type="submit" value="수정" onclick="updatePerformance();">
 					<input type="submit" value="삭제" onclick="deletePerformance();">
 				</c:if>
