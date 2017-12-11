@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.VideoLikeDao;
-import com.buskstop.vo.User;
+import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
 
 
@@ -30,6 +30,11 @@ public class VideoLikeDaoImpl implements VideoLikeDao {
 	@Override
 	public List<VideoLike> selectLikeUserByVideoNum(int videoNum) {
 		return session.selectList(makeSqlId("selectLikeUserByVideoNum"), videoNum);
+	}
+	
+	@Override
+	public List<Video> selectVideoByVideoLikeId(String id){
+		return session.selectList(makeSqlId("selectVideoByVideoLikeId"), id);
 	}
 	
 	private String makeSqlId(String id) {

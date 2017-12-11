@@ -5,6 +5,16 @@
 		FOLLOWING_ID , FOLLOWER_ID
 	</sql>
 	
+	<sql id="artist-column">
+		ARTIST_USER_ID,
+		ARTIST_NAME,
+		ARTIST_PERFORMANCE,
+		ARTIST_PROFILE,
+		ARTIST_IMAGE,
+		ARTIST_MEMBERS,
+		ARTIST_SNS
+	</sql>
+	
 	<sql id="select-follow-sql">
 		SELECT
 		<include refid="follow-column"/>
@@ -14,6 +24,16 @@
 	<resultMap type="follow" id="follow-resultmap">
 		<id column="FOLLOWING_ID" property="userId"/>
 		<result column="FOLLOWER_ID" property="followerId"/>
+	</resultMap>
+	
+	<resultMap type="artist" id="artist-resultmap">
+		<id column="ARTIST_USER_ID" property="artistId"/>
+		<result column="ARTIST_NAME" property="artistName"/>
+		<result column="ARTIST_PERFORMANCE" property="performance"/>
+		<result column="ARTIST_PROFILE" property="profile"/>
+		<result column="ARTIST_IMAGE" property="artistImage"/>
+		<result column="ARTIST_MEMBERS" property="artistMembers"/>
+		<result column="ARTIST_SNS" property="artistSns"/>
 	</resultMap>
 	
 	<insert id="insertFollow" parameterType="follow">
@@ -32,6 +52,13 @@
 	<select id="selectFollowByUserId" parameterType="string" resultMap="follow-resultmap">
 		<include refid="select-follow-sql"/>
 		WHERE FOLLOWING_ID = #{value}
+	</select>
+	
+	<select id="selectFollowArtistById" parameterType="string" resultMap="artist-resultmap">
+		SELECT 	<include refid="artist-column"/>
+		FROM	ARTIST A, FOLLOW F
+		WHERE	A.ARTIST_USER_ID = F.FOLLOWER_ID
+		AND		F.FOLLOWING_ID = #{value}
 	</select>
 
 </mapper>

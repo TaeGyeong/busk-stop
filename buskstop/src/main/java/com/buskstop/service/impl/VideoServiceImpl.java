@@ -35,6 +35,11 @@ public class VideoServiceImpl implements VideoService {
 		videoLikeDao.deleteVideoLike(like);
 	}
 	
+	@Override
+	public List<Video> selectVideoByVideoLikeId(String id){
+		return videoLikeDao.selectVideoByVideoLikeId(id);
+	}
+	
 	///////////동영상///////////
 	
 	//동영상 등록

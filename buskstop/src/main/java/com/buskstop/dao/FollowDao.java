@@ -2,6 +2,7 @@ package com.buskstop.dao;
 
 import java.util.List;
 
+import com.buskstop.vo.Artist;
 import com.buskstop.vo.Follow;
 
 public interface FollowDao {
@@ -25,4 +26,11 @@ public interface FollowDao {
 	 * @return
 	 */
 	List<Follow> selectFollowByUserId(String userId);
+	
+	/**
+	 * userId로 팔로우 정보를 select
+	 * @param userId
+	 * @return
+	 */
+	List<Artist> selectFollowArtistById(String userId);
 }
