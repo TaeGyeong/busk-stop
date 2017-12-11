@@ -242,4 +242,9 @@ public class StageServiceImpl implements StageService{
 		
 		return map;
 	}
+	
+	@Override
+	public void cancelStageReservation(int stageNo) {
+		stageReservationDao.cancelStageReservation(stageNo);
+	}
 }

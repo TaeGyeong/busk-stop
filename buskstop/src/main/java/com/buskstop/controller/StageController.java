@@ -191,8 +191,21 @@ public class StageController {
 		List<StageImage> stageImage = service.selectStageImageByStageNo(stageNo);
 		
 		String id = null;
+		String rentalUserId = null;
 		
 		Map<String, Object> map = new HashMap<>();
+		
+		map.put("stage", stage);
+		map.put("stageImage", stageImage);
+		
+		try {
+			StageReservation stageReservation = service.selectStageReservationByStageNoforRentalStateCode(stageNo);
+			rentalUserId = stageReservation.getRentalUserId();
+		}catch(Exception e){
+			rentalUserId = "0";
+		}finally {
+			map.put("rentalUserId", rentalUserId);
+		}
 		
 		try {
 			SecurityContext context = SecurityContextHolder.getContext();
@@ -201,8 +214,6 @@ public class StageController {
 		}catch (Exception e) {
 			id = "0";
 		}finally {
-			map.put("stage", stage);
-			map.put("stageImage", stageImage);
 			map.put("userId", id);
 		}
 		
@@ -212,8 +223,6 @@ public class StageController {
 	@RequestMapping(value="/insertStageRservation", produces = "application/text; charset=utf8")
 	public @ResponseBody String insertStageReservation(@ModelAttribute StageReservation stageReservation) {
 		
-		System.out.println(stageReservation);
-			
 		int stageNo = stageReservation.getStageNo();
 		
 		String msg = null;
@@ -222,8 +231,6 @@ public class StageController {
 		Date rentalD = stage.getStageRentalDate();
 		
 		stageReservation.setRentalDate(rentalD);
-		
-		System.out.println(stageReservation);
 		
 		if(!stageReservation.getRentalUserId().equals("0")) {
 			// 예약진행중이지 않다면
@@ -239,6 +246,13 @@ public class StageController {
 		}
 		
 		return msg;
+	}
+	
+	@RequestMapping(value="/cancelStageReservation", produces="application/text; charset=utf8")
+	public @ResponseBody String cancelStageReservation(@RequestParam int stageNo) {
+		service.cancelStageReservation(stageNo);
+		service.updateStageForStageReservation(1, stageNo);
+		return "예약이 취소되었습니다";
 	}
 	
 }

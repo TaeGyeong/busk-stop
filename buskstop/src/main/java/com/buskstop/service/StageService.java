@@ -111,4 +111,9 @@ public interface StageService {
 
 	Map<String, Object> selectStageByNameAndIdNoDate(int page, String nameSearch, String idSearch);
 
+	/**
+	 * 공연장 번호를 받아서 진행중인 예약취소
+	 * @param stageNo
+	 */
+	void cancelStageReservation(int stageNo);
 }

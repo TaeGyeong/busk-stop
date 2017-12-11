@@ -43,6 +43,26 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$("#cancelBtn").on("click", function(){
+		$.ajax({
+			"url" : "${initParam.rootPath}/cancelStageReservation.do",
+			"type" : "post",
+			"data" : {
+				"stageNo" : "${requestScope.map.stage.stageNo}",
+				'${_csrf.parameterName}':'${_csrf.token}'
+			},
+			"dataType":"text",
+			"success":function(msg){
+				alert(msg);
+				location.reload();
+			},
+			"error":function(jqXHR, textStatus, errorThrown, msg){
+				alert(msg + textStatus + " : " + errorThrown);
+				location.reload();
+			}
+		});
+	});
 });
 </script>
 <style type="text/css">
@@ -217,6 +237,10 @@ $(document).ready(function(){
 				<c:when test="${reservation eq 1}">
 					예약 가능
 					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
+				</c:when>
+				<c:when test="${requestScope.map.userId eq requestScope.map.rentalUserId }">
+					예약 불가
+					<button type="button" class="btn btn-default" id="cancelBtn">예약취소</button>
 				</c:when>
 				<c:otherwise>
 					예약 불가
