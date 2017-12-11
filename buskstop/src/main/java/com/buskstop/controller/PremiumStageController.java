@@ -3,7 +3,6 @@ package com.buskstop.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,13 +19,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.PremiumStage;
+import com.buskstop.vo.PremiumStageOption;
+import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.User;
 
 @Controller
@@ -38,6 +38,9 @@ public class PremiumStageController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PremiumStageReservationService reservationService;
 
 	// service.selectSupplierById 는 id로 프리미엄공연장 리스트를 부르는 service인데 이름수정하기 귀찮아서 그냥함.★
 
@@ -75,16 +78,24 @@ public class PremiumStageController {
 		map.put("premiumStage", stage);
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
 	}
-
-	/********************** premiumStage 정보수정 페이지로 이동 **********************/
-	@RequestMapping("/producer/goStageUpdateView")
-	public ModelAndView goUpdateView(int establishNum) {
+	/***********premiumStage Option등록 후 정보보기 페이지**************************/
+	@RequestMapping("/producer/myStageDetailConfirm")
+	public ModelAndView viewMyStageConfirm(int establishNum) {
 		List<String> imageList = service.selectImageLocation(establishNum);
 		PremiumStage stage = service.viewByEstablishNum(establishNum);
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("imageList", imageList);
 		map.put("premiumStage", stage);
-		return new ModelAndView("premiumStage/updateStageView.tiles", "map", map);
+		
+		List<PremiumStageOption> dateList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
+		List<PremiumStageTime> timeList = null;
+		for(PremiumStageOption o : dateList) {
+			timeList = reservationService.selectPremiumStageTimeByOptionNo(o.getOptionNo());
+		}
+		map.put("dateList", dateList);
+		map.put("timeList", timeList);
+		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
 	}
 
 	/************************
@@ -229,22 +240,6 @@ public class PremiumStageController {
 		map.put("list", list);
 		
 		
-		return new ModelAndView("premiumStage/premiumStageListView.tiles","map",map);
-	}
-	
-	@RequestMapping("/searchPremiumStage")
-	public ModelAndView searchPremiumStage(
-			@RequestParam(required=false) String nameSearch, 
-			@RequestParam(required=false) String locationSearch,
-			@RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
-			@RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate,
-			@RequestParam(required=false) String idSearch ) {
-		
-		List<PremiumStage> list = null;
-		Map<String, Object> map = null;
-		
-		int page=1;
-		map = service.searchPremiumStage(nameSearch, locationSearch, startDate, endDate, idSearch, page); // service를 통해 받는다. (searchPremiumStage)
 		return new ModelAndView("premiumStage/premiumStageListView.tiles","map",map);
 	}
 	

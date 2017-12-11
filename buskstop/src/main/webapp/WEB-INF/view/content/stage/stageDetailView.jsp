@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
+<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 function updatePerformance(){	
 	var output = "";
@@ -16,6 +18,29 @@ function deletePerformance(performanceNo){
 	output+=location.href='${initParam.rootPath }/deleteStage.do?stageNo=${param.stageNo}';
 	
 }
+
+$(document).ready(function(){
+	$("#reservationBtn").on("click", function(){
+		$.ajax({
+			"url" : "${initParam.rootPath}/insertStageRservation.do",
+			"type" : "post",
+			"data" : {
+				"rentalNoNumber" : "0",
+				"stageNo" : "${requestScope.map.stage.stageNo}",
+				"rentalDate" : "${requestScope.map.stage.stageRentalDate}",
+				"rentalStateCode" : "1",
+				"rentalUserId" : "${user}"
+			},
+			"dataType":"text",
+			"success":function(msg){
+				alert(msg);
+			},
+			"error":function(msg){
+				alert(msg);
+			}
+		});
+	});
+});
 </script>
 <style type="text/css">
 	table, td{
@@ -188,7 +213,7 @@ function deletePerformance(performanceNo){
 			<c:choose>
 				<c:when test="${reservation eq 1}">
 					예약 가능
-					<button type="button" class="btn btn-success">예약하기</button>
+					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
 				</c:when>
 				<c:otherwise>
 					예약 불가

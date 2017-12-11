@@ -74,4 +74,6 @@ public interface PremiumStageReservationService {
 	 * @return
 	 */
 	List<Integer> selectPremiumStageTimeByByStageRentalDate(Date date);
+	
+	List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo);
 }

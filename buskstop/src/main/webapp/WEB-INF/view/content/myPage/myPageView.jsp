@@ -4,13 +4,6 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-function onMenu(this){
-	$(this).next().css("display","none");
-}
-
-function outMenu(this){
-	$(this).next().css("display","show");
-}
 
 function sendForm(formId){
 	document.getElementById(formId).submit();
@@ -42,10 +35,10 @@ function sendForm(formId){
 
 <div class="container col-sm-3" style="float:left;">
 	<form action="${initParam.rootPath }/registerArtistView.do">
-		<button class="btn-default">아티스트 등록.</button>
+		<button class="btn btn-default">아티스트 등록.</button>
 	</form>
 	<form action="${initParam.rootPath }/registerSupplierView.do">
-		<button class="btn-default">공연장공급자 등록.</button>
+		<button class="btn btn-default">공연장공급자 등록.</button>
 	</form>
 	<form action="${initParam.rootPath }/updateMemberInfo.do">
 		<sec:csrfInput/>
@@ -71,3 +64,5 @@ function sendForm(formId){
 <form>
 	<input type="hidden" >
 </form>
+	<a class="btn btn-default" href="${initParam.rootPath }/updateMemberInfo.do" role="button">회원정보수정</a><br>
+	<a class="btn btn-default" href="${initParam.rootPath }/member/out_member_form.do" role="button">회원탈퇴</a>
