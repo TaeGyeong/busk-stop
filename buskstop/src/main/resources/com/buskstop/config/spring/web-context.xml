@@ -16,7 +16,7 @@
 	<mvc:view-controller path="/index.do" view-name="index.tiles"/>
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
-	<mvc:view-controller path="/myPageView.do" view-name="myPage/myPageView.tiles"/>
+	<mvc:view-controller path="/myPageView.do" view-name="mymypage/myPageView.myTiles"/>
 	<mvc:view-controller path="/member/performanceRegisterView.do" view-name="performance/performanceRegisterView.tiles"/>
 	<mvc:view-controller path="/artist/performanceRegisterView.do" view-name="performance/artistPerformanceRegisterView.tiles"/>
 	<mvc:view-controller path="/registerSuccessView.do" view-name="user/registerSuccessView.tiles"/>
@@ -37,12 +37,12 @@
 	<mvc:view-controller path="/artist/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
 	<mvc:view-controller path="/producer/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
 	<!-- 회원정보수정링크 -->
-	<mvc:view-controller path="/updateMemberInfo.do" view-name="myPage/updateMemberCategory.tiles"/>
+	<mvc:view-controller path="/updateMemberInfo.do" view-name="myPage/updateMemberCategory.myTiles"/>
 	<mvc:view-controller path="/updateMemberView.do" view-name="myPage/updateMemberView.tiles"/>
 	<mvc:view-controller path="/updateSuccess.do" view-name="myPage/updateSuccess.tiles"/>
 	
 	<!-- 회원탈퇴 링크 -->
-	<mvc:view-controller path="/member/out_member_form.do" view-name="member/out_member_form.tiles"/>
+	<mvc:view-controller path="/member/out_member_form.do" view-name="member/out_member_form.myTiles"/>
 	
 	<!-- 공연장관련 링크 -->
 	<mvc:view-controller path="/stageUpdateView.do" view-name="stage/stageUpdateView.tiles"/>
@@ -55,6 +55,10 @@
 	
 	<!-- 403 권한 없음 에러 페이지 -->
 	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
+	
+	<!-- 관리자 페이지 링크 -->
+	<mvc:view-controller path="/admin/adminPage.do" view-name="admin/adminPage.tiles"/>
+	<mvc:view-controller path="/admin/registAdmin.do" view-name="admin/registAdmin.tiles"/>
 	
 	<!-- test link -->
 	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>
