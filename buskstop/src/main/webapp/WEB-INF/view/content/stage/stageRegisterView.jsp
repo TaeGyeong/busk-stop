@@ -75,6 +75,14 @@ $(document).ready(function(){
 		dropdown: true,
 		scrollbar: true
 	});
+	
+	$(".submit").click(function(){
+		if($("#stageStartTime").val > $("#stageEndTIme").val){
+			alert("시간을 다시 선택해주세요.");
+			return false;
+		}
+			
+		})
 });
 
 $(function(){

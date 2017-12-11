@@ -110,7 +110,7 @@ $(document).ready(function(){
 	<div>
 		<hr style="float:bottom">
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<label>예약 날짜 : </label>
+			<label>예약 가능 날짜 : </label>
 			<fmt:formatDate value="${requestScope.map.stage.stageRentalDate}" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;
 			<fmt:formatDate value="${requestScope.map.stage.stageStartTime}" pattern="HH시 mm분"/>&nbsp;
 			~&nbsp;<fmt:formatDate value="${requestScope.map.stage.stageEndTime}" pattern="HH시 mm분"/>
@@ -152,7 +152,7 @@ $(document).ready(function(){
 		
 				        // 인포윈도우로 장소에 대한 설명을 표시합니다
 				        var infowindow = new daum.maps.InfoWindow({
-				            content: '<div style="width:150px;text-align:center;padding:6px 0;">${requestScope.stage.stageName}</div>'
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">${requestScope.map.stage.stageName}</div>'
 				        });
 				        infowindow.open(map, marker);
 		
@@ -168,8 +168,8 @@ $(document).ready(function(){
 		<hr style="float:bottom">
 		<table>
 			<tr>
-				<td> ↓ 주차장 유무  ↓</td>
-				<td> ↓ 음주가능 여부 ↓  </td>
+				<td> ↓ 주차장 ↓</td>
+				<td> ↓ 음주가능 여부 ↓</td>
 				<td> ↓ 외부음식 반입 여부 ↓ </td>
 				<td> ↓ 식사 판매  ↓ </td>
 				<td> ↓ 에약가능 여부 ↓ </td>
