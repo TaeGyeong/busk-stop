@@ -40,13 +40,6 @@ $(document).ready(function(){
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
 	});
-	$("#dateBtn").on("click", function(){
-		$("#stageSDate").val($("#stageRentalDate").val() + " " + $("#stageStartTime").val());
-	});
-	$("#dateBtn2").on("click", function(){
-		$("#stageEDate").val($("#stageRentalDate").val() + " " + $("#stageEndTime").val());
-	});
-	
 	$("#selectStage").on("click", function(){
 		
 	});
@@ -58,16 +51,11 @@ $(document).ready(function(){
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 	
-	$('input.timepicker').timepicker({
-		
-	});
-	
 	$("#stageStartTime").timepicker({
 		timeFormat: 'HH:mm',
 	    interval: 60,
 	    minTime: '00',
 	    maxTime: '23:00',
-	    defaultTime: '11',
 	    startTime: '00:00',
 	    dynamic: false,
 	    dropdown: true,
@@ -79,20 +67,12 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: '00',
 	    maxTime: '23:00',
-	    defaultTime: '11',
 	    startTime: '00:00',
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: true
 	});
 	
-	$(".submit").click(function(){
-		if($("#stageStartTime").val > $("#stageEndTIme").val){
-			alert("시간을 다시 선택해주세요.");
-			return false;
-		}
-			
-		})
 });
 
 $(function(){
@@ -111,6 +91,19 @@ function readURL(input){
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
+function timeCheck(){
+	if(document.checkForm.stageStartTime.value >= document.checkForm.stageEndTime.value){
+		alert("끝나는 시간이 시작 시간보다 같거나 빠를 순 없습니다.");
+		return false;
+	} else {
+		alert("굿잡");
+		return true;
+	}
+	
+}
+
+
 </script>
 
 <h2>공연장 대관 등록</h2>
@@ -126,7 +119,7 @@ function readURL(input){
 <div style="width:960px; margin:auto;">
 	<h1>대관 공연장 등록하기</h1>
 	
-	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data">
+	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data" name="checkForm" onsubmit="return timeCheck();">
 		<%-- 공연장 번호 hidden --%>
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
@@ -218,7 +211,7 @@ function readURL(input){
 		<!-- 예약가능 여부 -->
 		<input type="hidden" name="stageReservation" value="1">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
-		<button type="submit" class="btn btn-default">등록</button>
+		<button type="submit" class="btn btn-default" >등록</button>
 		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
 	</form>
 </div>
