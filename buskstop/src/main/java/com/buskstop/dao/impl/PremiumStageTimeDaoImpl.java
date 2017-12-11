@@ -27,6 +27,7 @@ public class PremiumStageTimeDaoImpl implements PremiumStageTimeDao{
 
 	@Override
 	public List<Integer> selectPremiumStageTimeByStageRentalDate(Date date) {
+		
 		return session.selectList(makeSqlId("selectPremiumStageTimeByStageRentalDate"), date);
 	}
 
