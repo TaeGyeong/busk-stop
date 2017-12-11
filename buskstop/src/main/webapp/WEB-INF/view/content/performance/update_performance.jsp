@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
@@ -23,8 +24,25 @@ $(document).ready(function(){
 		top1 = (screen.availHeight - 500) / 2;
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
+	
+	$('input.timepicker').timepicker({
+		
+	});
+	
+	$("#performanceTime").timepicker({
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
+	});
 });
 </script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <body>
 	<form action="${initParam.rootPath }/performanceUpdate2.do"
 		method="post" enctype="multipart/form-data">
@@ -58,7 +76,7 @@ $(document).ready(function(){
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2">수정할 공연시간</label>
-			<input type="time" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
+			<input type="timepicker" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">
 			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>

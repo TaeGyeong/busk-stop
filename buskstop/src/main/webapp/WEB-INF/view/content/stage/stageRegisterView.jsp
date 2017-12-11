@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<link rel="stylesheet" href="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.css">
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <style type="text/css">
 	/* 	
 		공연장 대관 등록 개발용 CSS
@@ -58,22 +58,32 @@ $(document).ready(function(){
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 	
+	$('input.timepicker').timepicker({
+		
+	});
+	
 	$("#stageStartTime").timepicker({
-		step: 60, //시간간격
-		timeFormat: "H:i",
-		interval: 60,
-		dynamic: false,
-		dropdown: true,
-		scrollbar: true
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 	
 	$("#stageEndTime").timepicker({
-		step: 60, //시간간격
-		timeFormat: "H:i",
-		interval: 60,
-		dynamic: false,
-		dropdown: true,
-		scrollbar: true
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    defaultTime: '11',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 	
 	$(".submit").click(function(){
@@ -200,9 +210,9 @@ function readURL(input){
 			<label>대관일</label>
 			<input type="Date" name="stageRentalDate" id="stageRentalDate" required="required">
 			<label>시작 시간</label> 
-			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="20" maxlength="5" required="required">
+			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 			<label>끝나는 시간</label> 
-			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="20" maxlength="5" required="required">
+			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 		</div>
 		<br>
 		<!-- 예약가능 여부 -->

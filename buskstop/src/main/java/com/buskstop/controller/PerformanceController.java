@@ -272,15 +272,22 @@ public class PerformanceController {
 		list = likeCounter(list);
 		performance = list.get(0);
 		
-		// 접속한 사용자의 id값 조회
-//		SecurityContext context = SecurityContextHolder.getContext();
-//		Authentication authentication = context.getAuthentication();
-//		String id = ((User)authentication.getPrincipal()).getUserId();
-		
+		String id = null;
 		// 값으로 보낼 map
 		Map<String,Object> map = new HashMap<>();
-		map.put("performance", performance);
-//		map.put("userId", id);
+		
+		try {
+			// 접속한 사용자의 id값 조회
+			SecurityContext context = SecurityContextHolder.getContext();
+			Authentication authentication = context.getAuthentication();
+			id = ((User)authentication.getPrincipal()).getUserId();
+		}catch (Exception e) {
+			//사용자가 로그아웃 상태일 경우
+			id = "0";
+		}finally {
+			map.put("performance", performance);
+			map.put("userId", id);
+		}
 		
 		return new ModelAndView("performance/performanceDetailView.tiles","map", map);
 	}

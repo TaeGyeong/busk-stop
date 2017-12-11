@@ -27,7 +27,7 @@
 		</selectKey>
 		insert into STAGE_RESERVATION (<include refid="column-stageReservation"/>)
 		values(#{rentalNoNumber}, #{rentalUserId}, #{stageNo}, #{rentalDate},
-		#{rentalStateCode}, sysdate);
+		#{rentalStateCode}, sysdate)
 	</insert>
 	
 	<!-- 공연장 번호를 받아서 예약 진행 중인 것이 있으면 조회 -->
@@ -38,4 +38,10 @@
 		and RENTAL_STATE_CODE = 1
 	</select>
 	
+	<update id="cancelStageReservation" parameterType="_int">
+		update STAGE_RESERVATION
+		set RENTAL_STATE_CODE = 0
+		where STAGE_NO = #{stageNo}
+		and RENTAL_STATE_CODE = 1
+	</update>
 </mapper>
