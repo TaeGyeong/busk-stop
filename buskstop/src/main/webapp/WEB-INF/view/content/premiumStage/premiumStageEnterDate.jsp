@@ -122,6 +122,7 @@ function enterOption(){
 	$("input[name='registerCost']").each(function(){
 		costList.push($(this).val());
 	});
+	alert(costList);
 	if(dateList.length==0){
 		alert("선택된 옵션이 없습니다");
 		return;
@@ -139,9 +140,9 @@ function enterOption(){
 	    document.getElementById("registerOption").appendChild(z);
 	    
 	    var x = document.createElement("INPUT");
-	    z.setAttribute("type", "hidden");
-	    z.setAttribute("name", "costList");
-	    z.setAttribute("value", costList);
+	    x.setAttribute("type", "hidden");
+	    x.setAttribute("name", "costList");
+	    x.setAttribute("value", costList);
 	    document.getElementById("registerOption").appendChild(x);
 	}
 	document.getElementById("registerOption").submit();
@@ -190,7 +191,7 @@ function enterOption(){
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.map.dateList }" var="dateOption">
+			<c:forEach items="${requestScope.map.optionList }" var="dateOption">
 				<tr>
 					<td><fmt:formatDate value="${dateOption.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 					<td>

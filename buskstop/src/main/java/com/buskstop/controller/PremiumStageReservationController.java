@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,16 +36,15 @@ public class PremiumStageReservationController {
 	 */
 	@RequestMapping("/producer/goPremiumStageEnterDate")
 	public ModelAndView goPremiumStageEnterDate (@RequestParam int establishNo) {
-		List<PremiumStageOption> dateList = service.selectPremiumStageOptionByEstablishNo(establishNo);
+		List<PremiumStageOption> optionList = service.selectPremiumStageOptionByEstablishNo(establishNo);
 		List<PremiumStageTime> timeList = null;
-		for(PremiumStageOption o : dateList) {
+		for(PremiumStageOption o : optionList) {
 			timeList = service.selectPremiumStageTimeByOptionNo(o.getOptionNo());
 		}
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("establishNo", establishNo);
-		map.put("dateList", dateList);
+		map.put("optionList", optionList);
 		map.put("timeList", timeList);
-		System.out.println(dateList+" - "+timeList);
+//		System.out.println(optionList+" - "+timeList);
 		return new ModelAndView("premiumStage/premiumStageEnterDate.tiles", "map", map);
 	}
 	
@@ -59,12 +59,17 @@ public class PremiumStageReservationController {
 	@RequestMapping("/producer/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
 												@RequestParam(value="timeList") List<List<Integer>> timeList,
-												@RequestParam(value="costList") Integer[] costList,
-												@RequestParam int establishNo) throws ParseException {
+												@RequestParam(value="costList") List<Integer> costList,
+												@RequestParam int establishNo,
+												BindingResult r) throws ParseException {
+		System.out.println(r);
+		System.out.println(r.getErrorCount());
 		
 		for(int i=0; i<dateList.length; i++) {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateList[i]);
-			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList[i], establishNo);
+			System.out.println(costList);
+//			int cost = Integer.parseInt() ;
+			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo);
 			int j = service.createPremiumStageOption(option);
 			System.out.println("confirm addoption - "+j);
 		}
@@ -87,8 +92,8 @@ public class PremiumStageReservationController {
 	@RequestMapping("/producer/readPremiumStageReservationTimeByStageRentalDate")
 	public @ResponseBody List<Integer> readPremiumStageReservationTimeByStageRentalDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date reservationDate){
 		Date stageRentalDate = reservationDate;
-		System.out.println("선택한 대관일 - "+stageRentalDate);
-		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");
+		/*System.out.println("선택한 대관일 - "+stageRentalDate);
+		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");*/
 		return service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate);
 	}
 	
