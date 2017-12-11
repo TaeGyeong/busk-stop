@@ -103,7 +103,7 @@ public interface StageService {
 	 * @param stageReservation
 	 * @return
 	 */
-	Map<String, Object> updateStageForStageReservation(int stageNo, int stageReservation);
+	Map<String, Object> updateStageForStageReservation(int stageReservation, int stageNo);
 	
 	Map<String, Object> selectStageByLocationAndNameNoDate(int page, String locationSearch, String nameSearch);
 
@@ -111,4 +111,9 @@ public interface StageService {
 
 	Map<String, Object> selectStageByNameAndIdNoDate(int page, String nameSearch, String idSearch);
 
+	/**
+	 * 공연장 번호를 받아서 진행중인 예약취소
+	 * @param stageNo
+	 */
+	void cancelStageReservation(int stageNo);
 }

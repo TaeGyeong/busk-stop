@@ -76,17 +76,6 @@ public class PremiumStageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("imageList", imageList);
 		map.put("premiumStage", stage);
-		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
-	}
-	/***********premiumStage Option등록 후 정보보기 페이지**************************/
-	@RequestMapping("/producer/myStageDetailConfirm")
-	public ModelAndView viewMyStageConfirm(int establishNum) {
-		List<String> imageList = service.selectImageLocation(establishNum);
-		PremiumStage stage = service.viewByEstablishNum(establishNum);
-
-		Map<String, Object> map = new HashMap<>();
-		map.put("imageList", imageList);
-		map.put("premiumStage", stage);
 		
 		List<PremiumStageOption> dateList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
 		List<PremiumStageTime> timeList = null;
@@ -95,6 +84,7 @@ public class PremiumStageController {
 		}
 		map.put("dateList", dateList);
 		map.put("timeList", timeList);
+		System.out.println(dateList+" - "+timeList);
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
 	}
 

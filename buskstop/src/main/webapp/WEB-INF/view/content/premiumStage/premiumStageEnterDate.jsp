@@ -18,19 +18,26 @@ $(document).ready(function(){
 				/* alert("일단 성공으로");
 				alert(list.length); */
 				$("#timeCodeList").remove();
+				var n = 1;
+				var reg = 0;
+				var i=0;
 				if(list.length != 0){
-					for(var i=0; i<24; i++){
+					for(i=0; i<24; i++){
+						reg = 0;
 						for(var j=0; j<list.length; j++){
-							if(i != this.val()){
-								alert("list가 null아님");
-								$("#reservationTime").append('<label>'+i+'<input type="checkbox" id="timeCode" name="timeCode" value="'+this.val()+'"></label>');
+							n = 1 + i;
+							if(i == list[j]){
+								reg = 1;
+								j = list.length;
 							}
+						}
+						if(reg == 0){
+							$("#reservationTime").append('<label>'+i+' ~ '+n+'시<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label><br>');
 						}
 					}
 				}else{
 					/* alert("list가 null"); */
 					$("#reservationTime").append('<div id="timeCodeList"></div>');
-					var n = 1;
 					for(var i=0; i<24; i++){
 						n = 1 + i;
 						$("#timeCodeList").append('<label>'+i+' ~ '+n+'시<input type="checkbox" id="timeCode" name="timeCode" value="'+i+'"></label><br>');

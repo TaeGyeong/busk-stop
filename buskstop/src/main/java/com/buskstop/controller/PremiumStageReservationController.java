@@ -63,7 +63,7 @@ public class PremiumStageReservationController {
 			}
 		}
 		
-		return new ModelAndView("redirect:/producer/myStageDetailConfirm","establishNum",establishNo);
+		return new ModelAndView("redirect:/producer/myStageDetail.do","establishNum",establishNo);
 	}
 	
 	@RequestMapping("/addPremiumStageOptionBasket")
