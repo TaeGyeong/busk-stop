@@ -35,39 +35,6 @@
 		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
 	}
 	
-	function dateChange(a){
-		alert("gg");
-		var now = new Date();
-		var year = now.getYear();
-		var month= now.getMonth()+1;
-		if(month+"").length<2{
-			month = "0"+month;
-		}
-		var day = now.getDate();
-		if((day+"").length<2){
-			day = "0"+day;
-		}
-		
-		today = year+""+month+""+day;
-		
-		var inputDate = document.frmWork.stageStartTime.value;
-		var startTime = "${requestScope.map.stage.stageRentalDate}";
-		var dateSplit = startTime.split("-");
-		
-		year = dateSplit[0];
-		month = dateSplit[1];
-		day = dateSplit[2];
-		startTime = year+""+month+""+day;
-		
-		if(parseInt(startTime)==parseInt(today)){
-			a=0;
-			return a;
-		} else {
-			a=1;
-			return a;
-		}
-	}
-	
 
 </script>
 <style type="text/css">
@@ -179,17 +146,10 @@ select {
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 					<fmt:formatDate value="${item.stageRentalDate}" pattern="yy-MM-dd"/>&nbsp;&nbsp;&nbsp;
 					<fmt:formatDate value="${item.stageStartTime}" pattern="HH:mm"/>~~<fmt:formatDate value="${item.stageEndTime }" pattern="HH:mm"/></p>
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 - ${item.stageSellerId }
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
-					등록된 시간 - <fmt:formatDate value="${item.stageRegTime }" pattern="HH:mm"/>
-					
-					</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 - ${item.stageSellerId }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">등록된 시간 - <fmt:formatDate value="${item.stageRegTime }" pattern="HH:mm"/></p>
 				</div>
 			</div>
-			
-
-
-
 		</c:forEach>
 	</div>
 	 
