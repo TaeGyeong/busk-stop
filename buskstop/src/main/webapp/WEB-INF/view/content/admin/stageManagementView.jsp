@@ -10,16 +10,13 @@ $(document).ready(function(){
 			$("#sDate").css("display","inline");
 			$("#eDate").css("display","inline");
 			$("#searchBar").css("display","none");
-			$("#reservation").css("display","none");
 		} else if ($(this).val()=='reservation') {
 			$("#sDate").css("display","none");
 			$("#eDate").css("display","none");
-			$("#reservation").css("display","inline");
 			$("#searchBar").css("display","none");
 		} else {
 			$("#sDate").css("display","none");
 			$("#eDate").css("display","none");
-			$("#reservation").css("display","none");
 			$("#searchBar").css("display","inline");
 		}
 	});
@@ -32,13 +29,12 @@ $(document).ready(function(){
 	<form action="${initParam.rootPath }/admin/stageSearch.do" method="post" class="form-group col-sm-6">
 		<select id="searchSelect" name="category" class="col-sm-3 form-controll">
 			<option value="id">등록자 ID</option>
-			<option value="reservation">예약가능여부</option>
 			<option value="registTime">등록시간</option>
 		</select>
 		<div id="searchDiv" class="col-sm-9">
-			<select id="reservation" name="reserve" style="display:none;">
-				<option value="0">예약가능</option>
-				<option value="1">예약완료</option>
+			<select id="reservation" name="reserve">
+				<option value="1">예약가능</option>
+				<option value="0">예약완료</option>
 			</select>
 			<input class="form-controll" id="sDate" type="date" name="sDate" style="display:none;">
 			<input class="form-controll" id="eDate" type="date" name="eDate" style="display:none;">
@@ -65,6 +61,7 @@ $(document).ready(function(){
 				<th>예약상태</th>
 				<th>등록시간</th>
 				<th>별점</th>
+				<th>상세보기</th>
 				<th>수정</th>
 				<th>삭제</th>
 			</tr>
@@ -78,9 +75,23 @@ $(document).ready(function(){
 					<td>${stage.stageLocation }</td>
 					<td><fmt:formatDate value="${stage.stageRentalDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td>${stage.stageContent }</td>
-					<td>${stage.stageReservation }</td>
+					<c:choose>
+						<c:when test="${stage.stageReservation eq 1 }">
+							<td>예약가능</td>
+						</c:when>
+						<c:otherwise>
+							<td>예약완료</td>
+						</c:otherwise>
+					</c:choose>
 					<td><fmt:formatDate value="${stage.stageRegTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td>${stage.starpointAvg }</td>
+					<td>
+						<form action="${initParam.rootPath }/stageDetail.do" method="post">
+							<sec:csrfInput/>
+							<input type="hidden" name="stageNo"	value="${stage.stageNo }">
+							<button class="btn btn-default">상세보기</button>
+						</form>
+					</td>
 					<td>
 						<form action="${initParam.rootPath }/admin/updateStage.do" method="post">
 							<sec:csrfInput/>

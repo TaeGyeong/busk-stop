@@ -176,4 +176,25 @@
 			</if>	
 		</where>
 	</select>
+	
+	<!-- 관리자용 -->
+	<select id="selectPremiumStage" resultMap="premiumStage-resultmap">
+		<include refid="premium-select-sql"/>
+	</select>
+	
+	<select id="selectPremiumStageBySearch" parameterType="Map" resultMap="premiumStage-resultmap">
+		SELECT	<include refid="premiumStage-column-sql"/>
+		FROM	PREMIUM_STAGE
+		<where>
+			<if test="establishNum != null">
+				ESTABLISH_NO = #{establishNum }
+			</if>
+			<if test="operatorUserId != null">
+				OPERATOR_USER_ID LIKE '%'||#{operatorUserId }||'%'
+			</if>
+			<if test="stageLocation != null">
+				STAGE_LOCATION LIKE '%'||#{stageLocation }||'%'
+			</if>
+		</where>
+	</select>
 </mapper>

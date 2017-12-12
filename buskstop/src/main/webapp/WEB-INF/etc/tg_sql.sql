@@ -28,7 +28,7 @@ insert into video_like (VIDEO_LIKE_NO,VIDEO_LIKE_USER_ID) values (3,'id-2')
 insert into PREMIUM_STAGE_OPTION (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO) values (1,'2017-12-10',0,189291);
 insert into premium_stage_option (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, ESTABLISH_NO)values(2,'2017-12-12',0,398719);
 
-
+insert into stage
 
 delete from authority where user_id = 'id-10';
 

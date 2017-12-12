@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<!-- 
+	관리자가 프리미엄 공연장 수정하는 페이지.
+ -->
+
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
@@ -14,6 +18,7 @@ function submitChk(){
 	document.getElementById("registerForm").submit();	
 }
 
+
 function deleteImage(form){
 	$(form).parent().remove();
 }
@@ -24,7 +29,7 @@ function deleteImage(form){
 
 
 <div>
-	<form class="" action="${initParam.rootPath }/producer/premiumStageUpdate.do" method="post" enctype="multipart/form-data" id="registerForm">
+	<form class="" action="${initParam.rootPath }/admin/updatePremium.do" method="post" enctype="multipart/form-data" id="registerForm">
 		<sec:csrfInput/>
 		
 		<input type="hidden" name="establishNum" value="${requestScope.map.premiumStage.establishNum }" required="required"><br>
@@ -99,19 +104,9 @@ function deleteImage(form){
 		
 		<hr>
 		
-		<button class="btn btn-primary" type="button" onclick=submitChk(); >등록</button>
+		<button class="btn btn-primary" type="button" onclick=submitChk(); >수정</button>
 		
 		<hr>
 		
 	</form>
-	
-	<br>
-	
-	<form action="${initParam.rootPath }/producer/deleteStage.do" method="post">
-		<sec:csrfInput/>
-		<input type="hidden" name="userId" value='<sec:authentication property="principal.userId"/>'>
-		<input type="hidden" name="establishNum" value="${requestScope.map.premiumStage.establishNum }">
-		<button class="btn btn-primary" type="submit" id="deleteBtn">삭제</button>
-	</form>
-		
 </div>

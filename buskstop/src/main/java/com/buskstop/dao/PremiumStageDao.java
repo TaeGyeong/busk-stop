@@ -78,4 +78,17 @@ public interface PremiumStageDao {
 	 * @return
 	 */
 	List<PremiumStage> selectSearchStage(HashMap<String, Object> map ,int start, int end);
+	
+	/**
+	 * 모든 PremiumStage Object select.
+	 * @return
+	 */
+	List<PremiumStage> selectPremiumStage();
+	
+	/**
+	 * 검색어를 담은 map으로 PremiumStage 객체 list select.
+	 * @param map
+	 * @return
+	 */
+	List<PremiumStage> selectPremiumStageBySearch(HashMap<String, String> map);
 }
