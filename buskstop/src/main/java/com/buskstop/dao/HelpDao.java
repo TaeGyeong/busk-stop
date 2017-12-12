@@ -9,6 +9,10 @@ public interface HelpDao {
 	int insertHelp(Help help);
 	
 	Help selectHelpByHelpNum(int helpNum);
+
+	int deleteHelpByHelpNum(int helpNum);
+
+	int updateHelp(Help help);
 	
 	
 }

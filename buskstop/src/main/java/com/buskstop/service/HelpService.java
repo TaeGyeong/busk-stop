@@ -11,4 +11,8 @@ public interface HelpService {
 	void insertHelp(Help help);
 
 	Help selectHelpByHelpNum(int helpNum);
+
+	void updateHelp(Help help);
+
+	int deleteHelpByHelpNum(int helpNum);
 }

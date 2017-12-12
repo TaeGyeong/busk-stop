@@ -45,8 +45,7 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 
 	@Override
 	public List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return reservationDao.selectPremiumStageReservationByUserId(userId);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,11 +69,20 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
 		return optionDao.updatePremiumStageOptionStageState(option);
 	}
+	
+	@Override
+	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo){
+		return optionDao.selectPremiumStageOptionByEstablishNoJoin(establishNo);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public int createPremiumStageTime(PremiumStageTime time) {
-		return timeDao.insertPremiumStageTime(time);
+	public int createPremiumStageTime(PremiumStageOption option) {
+		int result = 0;
+		for(int i : option.getTimeList()) {
+			result += timeDao.insertPremiumStageTime(new PremiumStageTime(option.getOptionNo(), i));
+		}
+		return result;
 	}
 
 	@Override

@@ -178,23 +178,23 @@ function timeCheck(){
 			<td>외부음식 반입</td>
 		</tr>
 			<tr style="font-weight: normal;">
-			<td><input type="radio" name="stageParking" value="1">주차장 완비</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageParking" value="1">주차장 완비</label></td>
 			
-			<td><input type="radio" name="stageDrinking" value="1">음주 가능</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="1">음주 가능</label></td>
 			
-			<td><input type="radio" name="stageFoodSell" value="1">식사 판매</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="1">식사 판매</label></td>
 			
-			<td><input type="radio" name="stageFoodRestriction" value="1">반입 가능</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="1">반입 가능</label></td>
 				
 		</tr>
 		<tr>
-			<td><input type="radio" name="stageParking" value="0">주차장 없음</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageParking" value="0">주차장 없음</label></td>
 			
-			<td><input type="radio" name="stageDrinking" value="0">음주 불가</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageDrinking" value="0">음주 불가</label></td>
 			
-			<td><input type="radio" name="stageFoodSell" value="0">식사 미판매</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageFoodSell" value="0">식사 미판매</label></td>
 			
-			<td><input type="radio" name="stageFoodRestriction" value="0">반입 불가</td>
+			<td><label style="font-weight: normal;"><input type="radio" name="stageFoodRestriction" value="0">반입 불가</label></td>
 		</tr>
 		</table>
 		</div>

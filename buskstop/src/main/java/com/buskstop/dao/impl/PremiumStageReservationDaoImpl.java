@@ -39,8 +39,7 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 
 	@Override
 	public List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(makeSqlId("selectPremiumStageReservationByUserId"), userId);
 	}
 
 

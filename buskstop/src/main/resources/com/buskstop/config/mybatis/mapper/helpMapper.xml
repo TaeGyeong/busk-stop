@@ -19,7 +19,7 @@
 		<result column="help_category" property="helpCategory"/>
 		<result column="help_title" property="helpTitle"/>
 		<result column="help_content" property="helpContent"/>
-		<result column="help_image" property="helpImage1"/>
+		<result column="help_image" property="helpImage"/>
 		<result column="help_image2" property="helpImage2"/>
 		<result column="help_user_id" property="helpUserId"/>
 		<result column="help_reg_time" property="helpRegTime"/>
@@ -35,7 +35,7 @@
 			   #{helpCategory}, 
 			   #{helpTitle}, 
 			   #{helpContent}, 
-			   #{helpImage1},
+			   #{helpImage},
 			   #{helpImage2}, 
 			   #{helpUserId},
 			   sysdate)
@@ -55,14 +55,13 @@
 	<update id="updateHelp" parameterType="Help">
 	update help
 	<set>
-		<if test="helpTitle != null">help_title=#{helpTitle},</if>
-		<if test="helpCategory != null ">help_category=#{helpCategory},</if>
-		<if test="helpContent != null "> help_Content=#{helpContent},</if>
-		<if test="helpImage != null">help_image=#{helpImage},</if>
-		<if test="helpImage2 != null">help_image=#{helpImage1}</if>
+		<if test="helpCategory != null">help_category = #{helpCategory},</if>
+		<if test="helpTitle != null">help_title = #{helpTitle},</if>
+		<if test="helpContent != null">help_content = #{helpContent},</if>
+		<if test="helpImage != null">help_image = #{helpImage},</if>
+		<if test="helpUserId != null">help_user_id = #{helpUserId},</if>
 	</set>
 	where help_no=#{helpNum}
-	
 	</update>
 	
 	

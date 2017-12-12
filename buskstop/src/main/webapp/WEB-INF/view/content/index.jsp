@@ -28,6 +28,8 @@
 		<li><a href="${initParam.rootPath }/helpView.do">고객센터 게시물 목록</a></li>
 		<li><a href="${initParam.rootPath }/helpRegisterView.do">고객센터 게시글 등록</a></li>
 		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 상세보기</a></li>
+		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 수정</a></li>
+		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 삭제</a></li>
 		<h5>premiumStage</h5>
 		<li><a href="${initParam.rootPath }/premiumStageEnterDate.do">프리미엄 공연장 대관일 등록</a></li>
 		<h5>공연장 예약 상태</h5>
@@ -36,5 +38,12 @@
 <sec:authorize access="isAuthenticated()">
 	<input type="text" name="stageSellerId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
 </sec:authorize>
-	<button>내공연장 예약 상태 보기</button>
+	<button>내가 등록한 공연장 예약 상태 보기</button>
+</form>
+
+<form action="${initParam.rootPath }/selectMyStageApply.do">
+<sec:authorize access="isAuthenticated()">
+	<input type="text" name="rentalUserId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
+</sec:authorize>
+	<button>내가 신청한 공연장 예약 상태 보기</button>
 </form>

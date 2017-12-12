@@ -227,7 +227,7 @@ insert into HELP values(4, '문의게시판', '좋네요', '정말좋아요', 'c
 insert into HELP values(5, '신고게시판', '너신고', '신고합니다', 'c://img/img5', 'c://img/img5-1', 'kimbo88','2017-08-27');
 insert into HELP values(6, '문의게시판', '아아아아아아', '안되요', 'c://img/img6', 'c://img/img6-1', 'sim1','2017-08-18');
 
-select * from help where help_no='1';
+select * from help;
 /* 고객센터 댓글 */
 insert into HELP_COMMENT values(1, 1, '네네네네네네네', 'yunee33','2017-07-10');
 insert into HELP_COMMENT values(2, 2, 'sp2sp2', 'no33432','2017-07-11');

@@ -51,19 +51,42 @@
 		select *
 		from STAGE_RESERVATION
 		where STAGE_NO = #{stageNo}
+		order by RENTAL_NO desc
 	</select>
 	
 	<!-- 공급자가 예약 승인 -->
 	<update id="successStageReservation" parameterType="_int">
 		update STAGE_RESERVATION
 		set RENTAL_STATE_CODE = 2
-		where STAGE_NO = #{stageNo}
+		where RENTAL_NO = #{rentalNo}
 	</update>
 	
 	<!-- 공급자가 예약 거절 -->
 	<update id="rejectStageReservation" parameterType="_int">
 		update STAGE_RESERVATION
 		set RENTAL_STATE_CODE = 0
-		where STAGE_NO = #{stageNo}
+		where RENTAL_NO = #{rentalNo}
+	</update>
+	
+	<!-- 사용자가 신청한 예약 내역 조회 -->
+	<select id="selectMyStageApply" parameterType="String" resultMap="stage-reservation-resultmap">
+		select *
+		from STAGE_RESERVATION
+		where RENTAL_USER_ID = #{rentalUserId}
+		order by rental_no desc
+	</select>
+	
+	<!-- 대관번호로 공연장 예약정보 뽑아오기 -->
+	<select id="selectStageReservationByRentalNo" parameterType="_int" resultMap="stage-reservation-resultmap">
+		select *
+		from STAGE_RESERVATION
+		where rental_no = #{rentalNo}
+	</select>
+	
+	<!-- 사용자가 예약 신청 취소 -->
+	<update id="cancelStageReservationByRentalNo" parameterType="_int">
+		update stage_reservation
+		set rental_state_code = 3
+		where rental_no = #{rentalNo}
 	</update>
 </mapper>
