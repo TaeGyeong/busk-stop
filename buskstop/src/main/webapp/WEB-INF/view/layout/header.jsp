@@ -46,8 +46,16 @@
 		<%--인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴 --%>
 		<sec:authorize access="isAuthenticated()">
 			<ul class="col-sm-12">
-				<li class="col-sm-6"><a id="logout" style="cursor: pointer;">로그아웃</a>
-				<li class="col-sm-6"><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
+				<li class="col-sm-4"><a id="logout" style="cursor: pointer;">로그아웃</a>
+				<li class="col-sm-4"><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
+				<li class="col-sm-4"><a href="${initParam.rootPath }/member/myPageView.do">new마이페이지</a>
+			</ul>
+		</sec:authorize>
+		
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<ul class="col-sm-12">
+				<li class="col-sm-6"><a href="${initParam.rootPath }/admin/adminPage.do">관리자페이지</a></li>
+				<li class="col-sm-6"><a href="${initParam.rootPath }/admin/registAdmin.do">관리자 등록</a></li>
 			</ul>
 		</sec:authorize>
 	</div>

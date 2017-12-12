@@ -27,7 +27,6 @@ import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.PremiumStageOption;
-import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.User;
 
 @Controller
@@ -66,7 +65,7 @@ public class PremiumStageController {
 		return new ModelAndView("premiumStage/choiceEditStage.tiles", "list", service.selectSupplierById(userId));
 	}
 
-	/********************** premiumStage 정보보기 페이지 **********************/
+	/********************** premiumStage 공급자용 상세보기 페이지 **********************/
 	@RequestMapping("/producer/myStageDetail")
 	public ModelAndView viewMyStage(int establishNum) {
 		// 이미지 목록 가져오고 스테이지 정보가져와서 보내기.
@@ -77,14 +76,25 @@ public class PremiumStageController {
 		map.put("imageList", imageList);
 		map.put("premiumStage", stage);
 		
-		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
-		List<PremiumStageTime> timeList = null;
-		for(PremiumStageOption o : optionList) {
-			timeList = reservationService.selectPremiumStageTimeByOptionNo(o.getOptionNo());
-		}
+		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNoJoin(establishNum);
 		map.put("optionList", optionList);
-		map.put("timeList", timeList);
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
+	}
+	
+	@RequestMapping("/goPremiumStageDetailView")
+	public ModelAndView goPremiumStageDetailView(int establishNo) {
+		// 이미지 목록 가져오고 스테이지 정보가져와서 보내기.
+		List<String> imageList = service.selectImageLocation(establishNo);
+		PremiumStage stage = service.viewByEstablishNum(establishNo);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("imageList", imageList);
+		map.put("premiumStage", stage);
+		
+		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNoJoin(establishNo);
+		map.put("optionList", optionList);
+		
+		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
 	}
 
 	/************************

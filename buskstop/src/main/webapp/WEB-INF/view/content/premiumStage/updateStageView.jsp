@@ -14,12 +14,6 @@ function submitChk(){
 	document.getElementById("registerForm").submit();	
 }
 
-$(document).ready(function(){
-	$("#deleteBtn").on("click",function(){
-				
-	});
-});
-
 function deleteImage(form){
 	$(form).parent().remove();
 }

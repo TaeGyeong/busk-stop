@@ -1,0 +1,274 @@
+package com.buskstop.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.buskstop.service.PremiumStageReservationService;
+import com.buskstop.service.PremiumStageService;
+import com.buskstop.service.StageService;
+import com.buskstop.service.UserService;
+import com.buskstop.vo.PremiumStage;
+import com.buskstop.vo.PremiumStageOption;
+import com.buskstop.vo.Stage;
+import com.buskstop.vo.StageImage;
+import com.buskstop.vo.User;
+
+@Controller
+@RequestMapping("/admin/")
+public class AdminController {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private StageService stageService;
+
+	@Autowired
+	private PremiumStageService premiumService;
+
+	@Autowired
+	private PremiumStageReservationService reservationService;
+
+	/********************************* 회원관리 *********************************/
+
+	@RequestMapping("member")
+	public ModelAndView goMemberManagement() {
+		return new ModelAndView("admin/memberManagementView.tiles", "list", userService.selectAllUser());
+	}
+
+	@RequestMapping("searchMember")
+	public ModelAndView searchMemberManagement(String authority, String search) {
+		return new ModelAndView("admin/memberManagementView.tiles", "list",
+				userService.searchMemberManagement(authority, search));
+	}
+
+	@RequestMapping("dropUser")
+	public ModelAndView dropUserManagement(String userId) {
+		List<User> list = userService.dropAndSelectUser(userId);
+		return new ModelAndView("admin/memberManagementView.tiles", "list", list);
+	}
+
+	/********************************* 공연장관리 *********************************/
+
+	// 관리 페이지 메인.
+	@RequestMapping("stage")
+	public ModelAndView goStageManagement() {
+		List<Stage> list = stageService.selectStage();
+		for (Stage s : list) {
+			System.out.println(s);
+		}
+		return new ModelAndView("admin/stageManagementView.tiles", "list", list);
+	}
+
+	// 관리자 공연 정보 수정
+	@RequestMapping("updateStage")
+	public ModelAndView updateAdminStageByStageNo(@RequestParam int stageNo) {
+		Stage stage = stageService.selectStageByStageNo(stageNo);
+		List<StageImage> stageImage = stageService.selectStageImageByStageNo(stageNo);
+		stage.setStageImage(stageImage);
+		return new ModelAndView("admin/adminStageUpdateView.tiles", "stage", stage);
+	}
+
+	// 관리자 공연정보 수정 후 관리자 공연관리 페이지로 이동.
+	@RequestMapping("updateStageChange")
+	public ModelAndView updateAdminStageChange(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq,
+			HttpServletRequest request) throws IllegalStateException, IOException {
+		// 공연장 변경
+		stageService.updateStage(stage);
+
+		// 파일 경로
+		String dir = request.getServletContext().getRealPath("/stageImage");
+
+		// 넘어온 파일을 리스트로 저장
+		List<MultipartFile> mf = mhsq.getFiles("imgs");
+		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+		} else {
+			for (int i = 0; i < mf.size(); i++) {
+				// 파일 중복명 처리, 저장되는 파일 이름
+				String fileName = UUID.randomUUID().toString();
+				// 파일 저장
+				File upImage = new File(dir, fileName + ".jpg");
+				mf.get(i).transferTo(upImage);
+				StageImage uploadImage = new StageImage(0, fileName, stage.getStageNo());
+				stageService.insertStageImage(uploadImage);
+			}
+		}
+
+		int delImageInt = 0;
+		// 삭제한 이미지 삭제
+		String[] delImage = request.getParameterValues("delImage");
+		if (delImage != null) {
+			for (int i = 0; i < delImage.length; i++) {
+				delImageInt = Integer.parseInt(delImage[i]);
+				stageService.deleteStageImageByStageImageNo(delImageInt);
+			}
+		}
+
+		return new ModelAndView("redirect:/admin/stage.do");
+	}
+
+	// 관리자 공연장 삭제.
+	@RequestMapping("deleteStage")
+	public ModelAndView deleteAdminStage(@RequestParam int stageNo) {
+		stageService.deleteStageImageByStageNo(stageNo);
+		stageService.deleteStageByStageNo(stageNo);
+
+		return new ModelAndView("redirect:/admin/stage.do");
+	}
+
+	// 관리자페이지 공연장 정보 조회
+	@RequestMapping("stageSearch")
+	public ModelAndView stageSearch(@RequestParam(value = "category", required = false) String category,
+			@RequestParam(value = "reserve", required = false) String reserve,
+			@RequestParam(value = "sDate", required = false, defaultValue = "1000-00-00") String sDate,
+			@RequestParam(value = "eDate", required = false, defaultValue = "5000-00-00") String eDate,
+			@RequestParam(value = "userId", required = false) String userId) throws ParseException {
+
+		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+		Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(eDate);
+
+		List<Stage> list = stageService.searchStageByAdmin(reserve, startDate, endDate, userId);
+		return new ModelAndView("admin/stageManagementView.tiles", "list", list);
+	}
+
+	/********************************* 프리미엄 공연장관리 *********************************/
+
+	@RequestMapping("premiumStage")
+	public ModelAndView goPremiumStageManagement() {
+		List<PremiumStage> list = premiumService.selectAllPremiumStage(); // premiumService
+
+		return new ModelAndView("admin/premiumManagementView.tiles", "list", list);
+	}
+
+	@RequestMapping("searchPremiumStageAdmin")
+	public ModelAndView searchPremiumStageManagement(
+			@RequestParam(value = "category", defaultValue = "not") String category,
+			@RequestParam(value = "search") String search) {
+
+		if (category.equals("not")) {
+			goPremiumStageManagement();
+		}
+		
+		System.out.println("아아아아아아");
+
+		// category 와 search를 매개변수로 가지는 service. (검색어에 맞게 premium stage list return)
+		List<PremiumStage> list = premiumService.selectPremiumStageByAdmin(category, search);
+
+		return new ModelAndView("admin/premiumManagementView.tiles", "list", list);
+	}
+
+	// 프리미엄공연장 상세보기
+	@RequestMapping("premiumStageDetail")
+	public ModelAndView premiumStageDetail(int establishNum) {
+		
+		PremiumStage stage = premiumService.viewByEstablishNum(establishNum);
+		List<String> imageList = premiumService.selectImageLocation(establishNum);
+		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNo(establishNum);
+
+		//test
+		System.out.println(stage);
+		for(String s : imageList) {
+			System.out.println(s);
+		}
+		
+		for(PremiumStageOption o : optionList) {
+			System.out.println(o);
+		}
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("premiumStage", stage);
+		map.put("imageList", imageList);
+		map.put("optionList", optionList);
+
+		return new ModelAndView("admin/premiumStageDetailView.tiles", "map", map);
+	}
+
+	// 프리미엄 공연장 수정창으로 가는 controller
+	@RequestMapping("goUpdateView")
+	public ModelAndView adminUpdatePremiumView(int establishNum) {
+
+		// 정보조회.
+		PremiumStage stage = premiumService.viewByEstablishNum(establishNum);
+		List<String> imageList = premiumService.selectImageLocation(establishNum);
+
+		// list를 담을 map
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("premiumStage", stage);
+		map.put("imageList", imageList);
+
+		return new ModelAndView("admin/adminUpdatePremiumView.tiles", "map", map);
+	}
+
+	@RequestMapping("updatePremium")
+	public ModelAndView adminUpdatePremium(@ModelAttribute PremiumStage stage, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+
+		// 파라미터로 넘어온 image들
+		List<MultipartFile> list = stage.getMultiImage();
+		// 테이블에 넣을 image들
+		List<String> imageList = new ArrayList<>();
+		if (!(stage.getOldImage() == null) && !(stage.getOldImage().size() == 0)) {
+			for (String s : stage.getOldImage()) {
+				imageList.add(s);
+			}
+		}
+		if (!(list == null) && !(list.size() == 0)) {
+			for (MultipartFile image : list) {
+				int i = 0;
+				String dir = request.getServletContext().getRealPath("/supplierImage");
+				String fileName = UUID.randomUUID().toString();
+				File upImage = new File(dir, fileName + ".jpg");
+				image.transferTo(upImage);
+				if (i == 0) {
+					// 첫번째 사진은 premium supplier의 대표사진으로 등록한다.
+					stage.setStageImage(fileName + ".jpg");
+					i = 1;
+				}
+
+				imageList.add(fileName + ".jpg");
+			}
+		}
+
+		// service에서 처리해 줄것 : image 기존거 삭제 & 추가 / supplier 의 정보 update
+		stage = premiumService.updatePremiumStage(stage.getEstablishNum(), imageList, stage);
+		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNo(stage.getEstablishNum());
+		
+		// map에 넣어서 보낸다.
+		Map<String, Object> map = new HashMap<>();
+		map.put("imageList", imageList);
+		map.put("premiumStage", stage);
+		map.put("optionList", optionList);
+		
+		return new ModelAndView("admin/premiumStageDetailView.tiles", "map", map);
+
+	}
+
+	// 삭제버튼 눌렀을 때.
+	@RequestMapping("deletePremium")
+	public ModelAndView adminDeletePremium(int establishNum, String userId) {
+		// 삭제.
+		premiumService.deletePremiumStage(establishNum, userId);
+		// 리턴.
+		return new ModelAndView("admin/premiumManagementView.tiles", "list", premiumService.selectAllPremiumStage());
+	}
+
+}

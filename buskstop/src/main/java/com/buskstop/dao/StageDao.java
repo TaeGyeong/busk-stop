@@ -1,6 +1,7 @@
 package com.buskstop.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,18 @@ public interface StageDao {
 
 	int selectStageCountByLocationAndNameNoDate(String locationSearch, String nameSearch);
 
+	/**
+	 * 공연정보와 리뷰정보를 동시에 가져오는 dao.
+	 * @return
+	 */
+	List<Stage> selectStageAndReview();
+	
+	/**
+	 * 검색조건에 맞는 Stage object list 가져오는 dao.
+	 * @return
+	 */
+	List<Stage> selectStageBySearch(HashMap<String, Object> map);
+	
 	/**
 	 * 공급자아이디로 공연장 select
 	 * @param stageSellerId

@@ -1,34 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+</script>
 
-<!-- requestScope.map.premiumStage / imgaeList(이미지 파일명 리스트)  -->
-
-
-
-<!-- 프리미엄 공연장 사진목록뿌려주기. -->
 <div class="container-inline">
 	<c:forEach items="${requestScope.map.imageList }" var="image">
-		<img src="${initParam.rootPath }/stageImage/${image }" onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
+		<img src="${initParam.rootPath }/supplierImage/${image }" onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
 			style="width:300px; height:300px;">
 	</c:forEach>
 </div>
 <table class="table">
 	<thead>
 		<tr>
-			<th>사업장번호</th>
-			<th>사업자번호</th>
 			<th>장소명</th>
 			<th>주소</th>
 			<th>면적</th>
+			<th>설명</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>${requestScope.map.premiumStage.establishNum }</td>
-			<td>${requestScope.map.premiumStage.operatorNo }</td>
 			<td>${requestScope.map.premiumStage.stageName }</td>
 			<td>${requestScope.map.premiumStage.stageLocation }</td>
 			<td>${requestScope.map.premiumStage.stageArea }</td>
+			<td>${requestScope.map.premiumStage.stageContent }</td>
 		</tr>
 	</tbody>
 </table>
@@ -69,5 +67,35 @@
 				</c:choose>
 			</td>
 		</tr>
+	</tbody>
+</table>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>대관날짜</th>
+			<th>대관시간</th>
+			<th>가격</th>
+			<th>신청</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${requestScope.map.optionList }" var="option">
+			<tr>
+				<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
+				<td>
+					<c:forEach items="${option.timeList }" var="timeOption">
+								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
+					</c:forEach>
+				</td>
+				<td>${option.stageCost }</td>
+				<td>
+					<form action="${initParam.rooPath }/member/createPremiumStageReservation.do" method="post">
+						<sec:csrfInput/>
+						<button type="submit" class="btn btn-default">신청</button>
+					</form>
+				</td>
+			</tr>
+		</c:forEach>
 	</tbody>
 </table>

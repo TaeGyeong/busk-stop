@@ -11,6 +11,10 @@ public class User implements Serializable{
 	private String userPhoneNum;
 	private String email;
 	
+	// 탈퇴유무
+	private int outCheck;
+	// 관리자용.
+	private String authority;
 	
 	public User() {}
 	public User(String userId, String userName, String password, String userAddress, String userPhoneNum,
@@ -21,6 +25,44 @@ public class User implements Serializable{
 		this.userAddress = userAddress;
 		this.userPhoneNum = userPhoneNum;
 		this.email = email;
+	}
+	
+	public User(String userId, String userName, String password, String userAddress, String userPhoneNum, String email,
+			String authority) {
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.userAddress = userAddress;
+		this.userPhoneNum = userPhoneNum;
+		this.email = email;
+		this.authority = authority;
+	}
+	
+	
+	
+	public User(String userId, String userName, String password, String userAddress, String userPhoneNum, String email,
+			int outCheck, String authority) {
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.userAddress = userAddress;
+		this.userPhoneNum = userPhoneNum;
+		this.email = email;
+		this.outCheck = outCheck;
+		this.authority = authority;
+	}
+	
+	public int getOutCheck() {
+		return outCheck;
+	}
+	public void setOutCheck(int outCheck) {
+		this.outCheck = outCheck;
+	}
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 	public String getUserId() {
 		return userId;

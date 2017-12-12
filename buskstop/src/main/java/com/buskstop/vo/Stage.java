@@ -30,6 +30,9 @@ public class Stage implements Serializable{
 	private Date stageEndTime;
 	
 	
+	private List<StageReview> reviewList;
+	private int starpointAvg;
+	
 	public Stage() {
 	}
 
@@ -58,6 +61,90 @@ public class Stage implements Serializable{
 		this.stageEndTime = stageEndTime;
 	}
 
+	
+
+	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea,
+			String stageInstrument, String stageContent, int stageParking, int stageDrinking, int stageFoodSell,
+			int stageFoodRestriction, int stageReservation, String stageSellerId, Date stageRegTime,
+			Date stageRentalDate, List<StageImage> stageImage, Date stageStartTime, Date stageEndTime,
+			float averageStarPoint) {
+		this.stageNo = stageNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageCost = stageCost;
+		this.stageArea = stageArea;
+		this.stageInstrument = stageInstrument;
+		this.stageContent = stageContent;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
+		this.stageRegTime = stageRegTime;
+		this.stageRentalDate = stageRentalDate;
+		this.stageImage = stageImage;
+		this.stageStartTime = stageStartTime;
+		this.stageEndTime = stageEndTime;
+	}
+
+	
+	
+	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea,
+			String stageInstrument, String stageContent, int stageParking, int stageDrinking, int stageFoodSell,
+			int stageFoodRestriction, int stageReservation, String stageSellerId, Date stageRegTime,
+			Date stageRentalDate, List<StageImage> stageImage, Date stageStartTime, Date stageEndTime,
+			List<StageReview> reviewList) {
+		this.stageNo = stageNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageCost = stageCost;
+		this.stageArea = stageArea;
+		this.stageInstrument = stageInstrument;
+		this.stageContent = stageContent;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
+		this.stageRegTime = stageRegTime;
+		this.stageRentalDate = stageRentalDate;
+		this.stageImage = stageImage;
+		this.stageStartTime = stageStartTime;
+		this.stageEndTime = stageEndTime;
+		this.reviewList = reviewList;
+	}
+
+	
+	
+	public Stage(int stageNo, String stageName, String stageLocation, int stageCost, int stageArea,
+			String stageInstrument, String stageContent, int stageParking, int stageDrinking, int stageFoodSell,
+			int stageFoodRestriction, int stageReservation, String stageSellerId, Date stageRegTime,
+			Date stageRentalDate, List<StageImage> stageImage, Date stageStartTime, Date stageEndTime,
+			List<StageReview> reviewList, int starpointAvg) {
+		this.stageNo = stageNo;
+		this.stageName = stageName;
+		this.stageLocation = stageLocation;
+		this.stageCost = stageCost;
+		this.stageArea = stageArea;
+		this.stageInstrument = stageInstrument;
+		this.stageContent = stageContent;
+		this.stageParking = stageParking;
+		this.stageDrinking = stageDrinking;
+		this.stageFoodSell = stageFoodSell;
+		this.stageFoodRestriction = stageFoodRestriction;
+		this.stageReservation = stageReservation;
+		this.stageSellerId = stageSellerId;
+		this.stageRegTime = stageRegTime;
+		this.stageRentalDate = stageRentalDate;
+		this.stageImage = stageImage;
+		this.stageStartTime = stageStartTime;
+		this.stageEndTime = stageEndTime;
+		this.reviewList = reviewList;
+		this.starpointAvg = starpointAvg;
+	}
+
 
 	@Override
 	public String toString() {
@@ -68,6 +155,28 @@ public class Stage implements Serializable{
 				+ ", stageReservation=" + stageReservation + ", stageSellerId=" + stageSellerId + ", stageRegTime="
 				+ stageRegTime + ", stageRentalDate=" + stageRentalDate + ", stageImage=" + stageImage
 				+ ", stageStartTime=" + stageStartTime + ", stageEndTime=" + stageEndTime + "]";
+	}
+
+	
+	
+	
+	public int getStarpointAvg() {
+		return starpointAvg;
+	}
+
+
+	public void setStarpointAvg(int starpointAvg) {
+		this.starpointAvg = starpointAvg;
+	}
+
+
+	public List<StageReview> getReviewList() {
+		return reviewList;
+	}
+
+
+	public void setReviewList(List<StageReview> reviewList) {
+		this.reviewList = reviewList;
 	}
 
 

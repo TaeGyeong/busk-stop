@@ -40,6 +40,104 @@
 		<result column="STAGE_START_TIME" property="stageStartTime"/>
 		<result column="STAGE_END_TIME" property="stageEndTime"/>
 	</resultMap>
+	<!-- 관리자용 별점 포함의 공연장 정보 -->
+	<select id="selectStageAndReview" resultMap="stage-review-resultmap">
+		SELECT	S.STAGE.NO,
+				S.STAGE_NAME,
+				S.STAGE_LOCATION,
+				S.STAGE_COST,
+				S.STAGE_AREA,
+				S.STAGE_INSTRUMENT,
+				S.STAGE_CONTENT,
+				S.STAGE_PARKING,
+				S.STAGE_DRINKING,
+				S.STAGE_FOOD_SELL,
+				S.STAGE_FOOD_RESTRICTION,
+				S.STAGE_RESERVATION,
+				S.STAGE_SELLER_ID,
+				S.STAGE_REG_TIME,
+				S.STAGE_RENTAL_DATE,
+				S.STAGE_START_TIME,
+				S.STAGE_END_TIME,
+				
+				R.STAGE_NO,
+				R.STAGE_REVIEW_USER_ID,
+				R.STAR_SCORE,
+				R.STAGE_COMMENT,
+				R.STAGE_COMMENT_REG_TIME
+		FROM	STAGE S, STAGE_REVIEW R
+		WHERE	S.STAGE_NO = R.STAGE_NO
+	</select>
+	
+	<select id="selectStageBySearch" parameterType="Map" resultMap="stage-review-resultmap">
+		SELECT	S.STAGE_NO,
+				S.STAGE_NAME,
+				S.STAGE_LOCATION,
+				S.STAGE_COST,
+				S.STAGE_AREA,
+				S.STAGE_INSTRUMENT,
+				S.STAGE_CONTENT,
+				S.STAGE_PARKING,
+				S.STAGE_DRINKING,
+				S.STAGE_FOOD_SELL,
+				S.STAGE_FOOD_RESTRICTION,
+				S.STAGE_RESERVATION,
+				S.STAGE_SELLER_ID,
+				S.STAGE_REG_TIME,
+				S.STAGE_RENTAL_DATE,
+				S.STAGE_START_TIME,
+				S.STAGE_END_TIME,
+				
+				R.STAGE_NO,
+				R.STAGE_REVIEW_USER_ID,
+				R.STAR_SCORE,
+				R.STAGE_COMMENT,
+				R.STAGE_COMMENT_REG_TIME
+		FROM	STAGE S, STAGE_REVIEW R
+		<where>
+			S.STAGE_NO = R.STAGE_NO (+)
+			<if test="reservation != null">
+			AND		S.STAGE_RESERVATION = #{reservation}		
+			</if>		
+			<if test="sDate != null">
+			AND		S.STAGE_REG_TIME >= #{sDate}
+			</if>
+			<if test="eDate != null">
+			AND		S.STAGE_REG_TIME &lt;= #{eDate}
+			</if>
+			<if test="userId != null">
+			AND		S.STAGE_SELLER_ID LIKE '%'||#{userId }||'%'
+			</if>
+		</where>		
+	</select>
+	
+	<resultMap type="Stage" id="stage-review-resultmap">
+		<id column="STAGE_NO" property="stageNo"/>
+		<result column="STAGE_NAME" property="stageName"/>
+		<result column="STAGE_LOCATION" property="stageLocation"/>
+		<result column="STAGE_COST" property="stageCost"/>
+		<result column="STAGE_AREA" property="stageArea"/>
+		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
+		<result column="STAGE_CONTENT" property="stageContent"/>
+		<result column="STAGE_PARKING" property="stageParking"/>
+		<result column="STAGE_DRINKING" property="stageDrinking"/>
+		<result column="STAGE_FOOD_SELL" property="stageFoodSell"/>
+		<result column="STAGE_FOOD_RESTRICTION" property="stageFoodRestriction"/>
+		<result column="STAGE_RESERVATION" property="stageReservation"/>
+		<result column="STAGE_SELLER_ID" property="stageSellerId"/>
+		<result column="STAGE_REG_TIME" property="stageRegTime"/>
+		<result column="STAGE_RENTAL_DATE" property="stageRentalDate"/>
+		<result column="STAGE_START_TIME" property="stageStartTime"/>
+		<result column="STAGE_END_TIME" property="stageEndTime"/>
+		
+		<collection property="reviewList" ofType="StageReview">
+			<id column="STAGE_NO" property="stageNo"/>
+			<id column="STAGE_REVIEW_USER_ID" property="userId"/>
+			<result column="STAR_SCORE" property="starScore"/>
+			<result column="STAGE_COMMENT" property="comment"/>
+			<result column="STAGE_COMMENT_REG_TIME" property="commentRegTime"/>
+		</collection>
+	</resultMap>
 	
 	<!-- 공연장 insert -->
 	<insert id="insertStage" parameterType="Stage">

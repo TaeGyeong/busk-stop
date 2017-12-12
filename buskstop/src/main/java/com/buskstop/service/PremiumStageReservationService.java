@@ -66,6 +66,8 @@ public interface PremiumStageReservationService {
 	 */
 	int updatePremiumStageOptionStageState(PremiumStageOption option);
 	
+	List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo);
+	
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
@@ -73,7 +75,7 @@ public interface PremiumStageReservationService {
 	 * @param time
 	 * @return
 	 */
-	int createPremiumStageTime(PremiumStageTime time);
+	int createPremiumStageTime(PremiumStageOption option);
 	
 	/**
 	 * 옵션번호로 해당 시간코드들 조회

@@ -160,4 +160,24 @@ public interface PremiumStageService {
 	 */
 	Map<String, Object> searchPremiumStage(String nameSearch, String locationSearch, Date startDate, Date endDate,
 			String idSearch, int page);
+
+	
+	
+	/****************************************************************
+	 * 							관리자용 service.
+	 ****************************************************************/
+	
+	/**
+	 * 모든 프리미엄 공연장 정보를 가져오는 service.
+	 * @return
+	 */
+	List<PremiumStage> selectAllPremiumStage();
+	
+	/**
+	 * 검색한 정보에 해당하는 PremiumStage 객체 list 를 제공하는 service.
+	 * @param category
+	 * @param search
+	 * @return
+	 */
+	List<PremiumStage> selectPremiumStageByAdmin(String category, String search);
 }

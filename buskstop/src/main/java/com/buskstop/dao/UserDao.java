@@ -1,5 +1,8 @@
 package com.buskstop.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.buskstop.vo.User;
 
 public interface UserDao {
@@ -44,4 +47,17 @@ public interface UserDao {
 	 * @return
 	 */
 	String selectUserIdByEmail(String email);
+	
+	/**
+	 * 모든 유저정보 select (admin)
+	 * @return
+	 */
+	List<User> selectAllUserAndAuthority();
+	
+	/**
+	 * 검색 조건에 맞는 유저정보 select (admin)
+	 * @param map
+	 * @return
+	 */
+	List<User> selectByAuthorityAndUserId(HashMap<String,String> map);
 }
