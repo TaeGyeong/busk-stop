@@ -1,8 +1,10 @@
 package com.buskstop.controller;
 
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +13,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.PremiumStageReservationService;
+import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.PremiumStageOption;
 import com.buskstop.vo.PremiumStageTime;
 
@@ -32,9 +37,18 @@ public class PremiumStageReservationController {
 	 * @param establishNo
 	 * @return
 	 */
-	@RequestMapping("/goPremiumStageEnterDate")
+	@RequestMapping("/producer/goPremiumStageEnterDate")
 	public ModelAndView goPremiumStageEnterDate (@RequestParam int establishNo) {
-		return new ModelAndView("premiumStageEnterDate.do", "establishNo", establishNo);
+		List<PremiumStageOption> optionList = service.selectPremiumStageOptionByEstablishNo(establishNo);
+		List<PremiumStageTime> timeList = null;
+		for(PremiumStageOption o : optionList) {
+			timeList = service.selectPremiumStageTimeByOptionNo(o.getOptionNo());
+		}
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("optionList", optionList);
+		map.put("timeList", timeList);
+//		System.out.println(optionList+" - "+timeList);
+		return new ModelAndView("premiumStage/premiumStageEnterDate.tiles", "map", map);
 	}
 	
 	/**
@@ -45,16 +59,22 @@ public class PremiumStageReservationController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping("/enterPremiumStageOption")
+	@RequestMapping("/producer/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
 												@RequestParam(value="timeList") List<List<Integer>> timeList,
-												@RequestParam int establishNo) throws ParseException {
+												@RequestParam(value="costList") List costList,
+												@RequestParam int establishNo,
+												BindingResult r) throws ParseException {
+		System.out.println(r);
+		System.out.println(r.getErrorCount());
 		
-		for(String d : dateList) {
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(d);
-			PremiumStageOption option = new PremiumStageOption(0, date, 0, establishNo);
-			int i = service.createPremiumStageOption(option);
-			System.out.println("confirm addoption - "+i);
+		for(int i=0; i<dateList.length; i++) {
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateList[i]);
+			System.out.println(costList);
+/*//			int cost = Integer.parseInt() ;
+			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo);
+			int j = service.createPremiumStageOption(option);
+			System.out.println("confirm addoption - "+j);*/
 		}
 		for(List<Integer> list : timeList) {
 			for(Integer t : list) {
@@ -63,36 +83,7 @@ public class PremiumStageReservationController {
 			}
 		}
 		
-		return new ModelAndView("redirect:/producer/myStageDetail.do","establishNum",establishNo);
-	}
-	
-	@RequestMapping("/addPremiumStageOptionBasket")
-	public @ResponseBody Map<String, Object> addPremiumStageOptionBasket(
-					@RequestParam(value="reservationDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date reservationDate, 
-					@RequestParam(value="timeCode[]") List<Integer> timeCode) {
-		/*System.out.println(reservationDate+" - "+timeCode+" - test");*/
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("reservationDate",new SimpleDateFormat("yyyy-MM-dd").format(reservationDate));
-		map.put("timeCode", timeCode);
-		return map;
-	}
-	
-	/**
-	 * 사업장 번호로 옵션과 해당 시간코드까지 조회
-	 * @param establishNo
-	 * @return
-	 */
-	@RequestMapping("/readPremiumStageOption")
-	public ModelAndView readPremiumStageOption(int establishNo) {
-		List<PremiumStageOption> dateList = service.selectPremiumStageOptionByEstablishNo(establishNo);
-		List<PremiumStageTime> timeList = null;
-		for(PremiumStageOption o : dateList) {
-			timeList = service.selectPremiumStageTimeByOptionNo(o.getOptionNo());
-		}
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("dateList", dateList);
-		map.put("timeList", timeList);
-		return new ModelAndView("","map", map);
+		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo",establishNo);
 	}
 	
 	/**
@@ -101,12 +92,23 @@ public class PremiumStageReservationController {
 	 * @param stageRentalDate
 	 * @return
 	 */
-	@RequestMapping("/readPremiumStageReservationTimeByStageRentalDate")
+	@RequestMapping("/producer/readPremiumStageReservationTimeByStageRentalDate")
 	public @ResponseBody List<Integer> readPremiumStageReservationTimeByStageRentalDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date reservationDate){
 		Date stageRentalDate = reservationDate;
-		System.out.println("선택한 대관일 - "+stageRentalDate);
-		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");
+		/*System.out.println("선택한 대관일 - "+stageRentalDate);
+		System.out.println(service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate)+" - premiumReservationController");*/
 		return service.selectPremiumStageTimeByByStageRentalDate(stageRentalDate);
+	}
+	
+	@RequestMapping("/producer/deletePremiumStageOption")
+	public ModelAndView deletePremiumStageOption(@RequestParam int optionNo, @RequestParam int establishNo) {
+		service.removePremiumStageOption(optionNo);
+		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo",establishNo);
+	}
+	
+	@RequestMapping("/producer/changePremiumStageStateToZero")
+	public @ResponseBody void updatePremiumStageOptionStageState(@ModelAttribute PremiumStageOption option){
+		service.updatePremiumStageOptionStageState(option);
 	}
 	
 }

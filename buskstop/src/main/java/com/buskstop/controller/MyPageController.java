@@ -185,7 +185,7 @@ public class MyPageController {
 		map.put("imageList", imageList);
 		
 		// response
-		return new ModelAndView("stage/premiumStageDetailView.tiles", "map", map);
+		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
 	}
 
 	/**************************************

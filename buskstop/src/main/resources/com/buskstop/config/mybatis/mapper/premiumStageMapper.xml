@@ -10,7 +10,6 @@
 		STAGE_NAME,
 		STAGE_LOCATION,
 		STAGE_AREA,
-		STAGE_COST,
 		STAGE_INSTRUMENT,
 		STAGE_CONTENT,
 		STAGE_PARKING,
@@ -32,7 +31,6 @@
 		<result column="STAGE_NAME" property="stageName"/>
 		<result column="STAGE_LOCATION" property="stageLocation"/>
 		<result column="STAGE_AREA" property="stageArea"/>
-		<result column="STAGE_COST" property="stageCost"/>
 		<result column="STAGE_INSTRUMENT" property="stageInstrument"/>
 		<result column="STAGE_CONTENT" property="stageContent"/>
 		<result column="STAGE_PARKING" property="stageParking"/>
@@ -52,7 +50,6 @@
 			#{stageName},
 			#{stageLocation},
 			#{stageArea},
-			#{stageCost},
 			#{stageInstrument},
 			#{stageContent},
 			#{stageParking},
@@ -70,7 +67,6 @@
 				STAGE_NAME = #{stageName},
 				STAGE_LOCATION = #{stageLocation},
 				STAGE_AREA = #{stageArea},
-				STAGE_COST = #{stageCost},
 				STAGE_INSTRUMENT = #{stageInstrument},
 				STAGE_CONTENT = #{stageContent},
 				STAGE_PARKING = #{stageParking},

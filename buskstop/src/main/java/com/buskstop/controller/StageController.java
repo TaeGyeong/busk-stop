@@ -40,6 +40,9 @@ public class StageController {
 	@Autowired
 	private StageService service;
 	
+	@Autowired(required=true)
+	private HttpServletRequest request;
+	
 	private String getUserId() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
@@ -58,7 +61,7 @@ public class StageController {
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
 //		System.out.println("넘어오냐"+stage.getStageStartTime());
 //		System.out.println("넘어오냐"+stage.getStageEndTime());
-		
+		stage.setStageReservation(0);
 		service.insertStage(stage);
 		//파일 경로
 		String dir = request.getServletContext().getRealPath("/stageImage");
@@ -90,8 +93,18 @@ public class StageController {
 		Map<String, Object> map = null;
 		int page=1;
 		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		}catch (Exception e) {
+			
+		}
 		if(locationSearch==null && nameSearch==null && startDate==null && endDate==null && idSearch==null ) {
 			map = service.selectAllStage(page);
+			locationSearch="";
+			nameSearch="";
+			startDate=null;
+			endDate=null;
+			idSearch="";
 		}
 		else {
 		if(locationSearch=="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="" ) {
@@ -128,10 +141,10 @@ public class StageController {
 		map.put("list", list);
 		
 		map.put("stageLocation", locationSearch);
-		map.put("nameSearch", nameSearch);
+		map.put("stageName", nameSearch);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
-		map.put("idSearch", idSearch);
+		map.put("stageSellerId", idSearch);
 		
 		return new ModelAndView("stage/stageView.tiles","map",map);
 		

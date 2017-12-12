@@ -68,6 +68,8 @@ DROP SEQUENCE STAGE_NO_SEQ;
 /* 대관 예약(주문) */
 DROP TABLE STAGE_RESERVATION 
 	CASCADE CONSTRAINTS;
+	
+DROP SEQUENCE RENTAL_NO_SEQ;
 
 /*---공연장 사진-----------------------------------------------------------------------*/
 
