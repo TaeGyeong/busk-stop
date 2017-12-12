@@ -84,7 +84,10 @@ select {
 	background-color: #337ab7;
 }
 
-
+#ct_cs{
+	width:960px;
+	margin: auto;
+}
 </style>
 <article id="ct_cs">
 		<div class="tb_box">
