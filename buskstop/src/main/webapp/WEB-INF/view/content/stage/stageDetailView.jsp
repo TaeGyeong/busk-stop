@@ -194,7 +194,7 @@ $(document).ready(function(){
 				<td> ↓ 음주가능 여부 ↓</td>
 				<td> ↓ 외부음식 반입 여부 ↓ </td>
 				<td> ↓ 식사 판매  ↓ </td>
-				<td> ↓ 에약가능 여부 ↓ </td>
+				<td> ↓ 예약가능 여부 ↓ </td>
 			</tr>
 			<tr>
 			<td>
@@ -248,7 +248,6 @@ $(document).ready(function(){
 					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
 				</c:when>
 				<c:when test="${requestScope.map.userId eq requestScope.map.rentalUserId }">
-					예약 불가
 					<button type="button" class="btn btn-default" id="cancelBtn">예약취소</button>
 				</c:when>
 				<c:otherwise>

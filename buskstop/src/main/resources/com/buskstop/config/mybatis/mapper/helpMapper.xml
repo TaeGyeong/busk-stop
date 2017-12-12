@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="helpMapper">
+<mapper namespace="com.buskstop.config.mybatis.mapper.helpMapper">
 
-	<!-- Help 테이블 -->
 	<sql id="column-help">
 		help_no,
 		help_category,
@@ -22,7 +21,7 @@
 		<result column="help_content" property="helpContent"/>
 		<result column="help_image" property="helpImage1"/>
 		<result column="help_image2" property="helpImage2"/>
-		<result column="help_user_id" property="user"/>
+		<result column="help_user_id" property="helpUserId"/>
 		<result column="help_reg_time" property="helpRegTime"/>
 	</resultMap>
 	
@@ -35,10 +34,48 @@
 		values(#{helpNum}, 
 			   #{helpCategory}, 
 			   #{helpTitle}, 
-			   #{helpContentent}, 
+			   #{helpContent}, 
 			   #{helpImage1},
 			   #{helpImage2}, 
-			   #{user},
+			   #{helpUserId},
 			   sysdate)
 	</insert>
+	
+	
+	<select id="selectHelpByHelpNum" resultType="help" parameterType="_int">
+	select <include refid="column-help"/>
+	from help 
+	where help_no = #{helpNum}
+	</select>
+	
+	<delete id="deleteHelpByHelpNum" parameterType="_int">
+	delete from help where help_no=#{helpNum}
+	</delete>
+	
+	<update id="updateHelp" parameterType="Help">
+	update help
+	<set>
+		<if test="helpTitle != null">help_title=#{helpTitle},</if>
+		<if test="helpCategory != null ">help_category=#{helpCategory},</if>
+		<if test="helpContent != null "> help_Content=#{helpContent},</if>
+		<if test="helpImage != null">help_image=#{helpImage},</if>
+		<if test="helpImage2 != null">help_image=#{helpImage1}</if>
+	</set>
+	where help_no=#{helpNum}
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
