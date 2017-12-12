@@ -255,7 +255,7 @@ public class StageController {
 			if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
 				service.insertStageReservation(stageReservation);
 				service.updateStageForStageReservation(0, stageNo);
-				msg = "예약이 성공적으로 완료되었습니다";
+				msg = "예약 신청이 성공적으로 완료되었습니다";
 			}else { //진행중인 예약이 있다면
 				msg = "이미 진행중인 예약이 있는 공연장입니다.";
 			}
