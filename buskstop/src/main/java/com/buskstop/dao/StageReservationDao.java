@@ -1,5 +1,7 @@
 package com.buskstop.dao;
 
+import java.util.List;
+
 import com.buskstop.vo.StageReservation;
 
 public interface StageReservationDao {
@@ -24,4 +26,25 @@ public interface StageReservationDao {
 	 * @return
 	 */
 	int cancelStageReservation(int stageNo);
+	
+	/**
+	 * 공연장 번호로 공연장예약 정보 조회
+	 * @param stageNo
+	 * @return
+	 */
+	List<StageReservation> selectStageReservationByStageNo(int stageNo);
+
+	/**
+	 * 공급자가 예약 승인
+	 * @param stageNo
+	 * @return
+	 */
+	int successStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 거절
+	 * @param stageNo
+	 * @return
+	 */
+	int rejectStageReservation(int stageNo);
 }

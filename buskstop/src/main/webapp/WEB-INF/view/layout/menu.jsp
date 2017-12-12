@@ -119,7 +119,7 @@
                <li class="col-sm-12" style="padding: 0;"><a href="#">구매희망</a></li>
             </ul>
          </li>
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">고객센터</a></li>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/helpView.do">고객센터</a></li>
       </ul>
    </div>
    <%-- 임시용 --%>

@@ -23,5 +23,12 @@ public class HelpServiceImpl implements HelpService{
 	public void insertHelp(Help help) {
 	}
 
+	@Override
+	public Help selectHelpByHelpNum(int helpNum) {
+		System.out.println("서비스"+helpNum);
+		return dao.selectHelpByHelpNum(helpNum);
+	}
+
+
 		
 }

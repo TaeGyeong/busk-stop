@@ -14,6 +14,7 @@ public class StageReservation {
 	private int rentalStateCode;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date rentalRegTime;
+	private String stageName;
 	
 	public StageReservation() {}
 	
@@ -26,12 +27,7 @@ public class StageReservation {
 		this.rentalStateCode = rentalStateCode;
 		this.rentalRegTime = rentalRegTime;
 	}
-	@Override
-	public String toString() {
-		return "StageReservation [rentalNoNumber=" + rentalNoNumber + ", rentalUserId=" + rentalUserId + ", stageNo="
-				+ stageNo + ", rentalDate=" + rentalDate + ", rentalStateCode=" + rentalStateCode + ", rentalRegTime="
-				+ rentalRegTime + "]";
-	}
+	
 	public int getRentalNoNumber() {
 		return rentalNoNumber;
 	}
@@ -68,6 +64,15 @@ public class StageReservation {
 	public void setRentalRegTime(Date rentalRegTime) {
 		this.rentalRegTime = rentalRegTime;
 	}
+	
+	public String getStageName() {
+		return stageName;
+	}
+
+	public void setStageName(String stageName) {
+		this.stageName = stageName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,9 +82,11 @@ public class StageReservation {
 		result = prime * result + ((rentalRegTime == null) ? 0 : rentalRegTime.hashCode());
 		result = prime * result + rentalStateCode;
 		result = prime * result + ((rentalUserId == null) ? 0 : rentalUserId.hashCode());
+		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
 		result = prime * result + stageNo;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,11 +115,21 @@ public class StageReservation {
 				return false;
 		} else if (!rentalUserId.equals(other.rentalUserId))
 			return false;
+		if (stageName == null) {
+			if (other.stageName != null)
+				return false;
+		} else if (!stageName.equals(other.stageName))
+			return false;
 		if (stageNo != other.stageNo)
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "StageReservation [rentalNoNumber=" + rentalNoNumber + ", rentalUserId=" + rentalUserId + ", stageNo="
+				+ stageNo + ", rentalDate=" + rentalDate + ", rentalStateCode=" + rentalStateCode + ", rentalRegTime="
+				+ rentalRegTime + ", stageName=" + stageName + "]";
+	}
 
 }

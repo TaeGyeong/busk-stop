@@ -46,9 +46,6 @@ function deleteImage(form){
 		<span>면적(m^2)</span><br>
 		<input type="number" name="stageArea" value="${requestScope.map.premiumStage.stageArea }" required="required"><br>
 		
-		<span>가격 (시간 당)</span><br>
-		<input type="number" name="stageCost" value="${requestScope.map.premiumStage.stageCost }" required="required"><br>
-		
 		<span>구비된 악기</span>
 		<input type="text" name="stageInstrument" value="${requestScope.map.premiumStage.stageInstrument }">
 		

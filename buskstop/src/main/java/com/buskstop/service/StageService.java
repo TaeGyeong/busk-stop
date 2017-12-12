@@ -134,4 +134,35 @@ public interface StageService {
 	 * @return
 	 */
 	List<Stage> searchStageByAdmin(String reservation, Date sDate, Date eDate,String userId);
+	/**
+	 * 공급자 아이디를 받아서 공연장 조회
+	 * @param stageSellerId
+	 * @return
+	 */
+	List<Stage> selectStagebyStageSellerId(String stageSellerId);
+	
+	/**
+	 * 공연장 아이디로 공연장예약 정보 조회
+	 * @param stageNo
+	 * @return
+	 */
+	List<StageReservation> selectStageReservationByStageNo(int stageNo);
+	
+	/**
+	 * 공급자가 예약 승인
+	 * @param stageNo
+	 */
+	void successStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 취소
+	 * @param stageNo
+	 */
+	void rejectStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 취소할 경우 예약 가능 상태 변경
+	 * @param stageNo
+	 */
+	void rejectStageByStageNo(int stageNo);
 }
