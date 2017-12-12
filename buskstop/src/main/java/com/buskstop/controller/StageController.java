@@ -60,9 +60,6 @@ public class StageController {
 	//공연장 등록
 	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
-//		System.out.println("넘어오냐"+stage.getStageStartTime());
-//		System.out.println("넘어오냐"+stage.getStageEndTime());
-		stage.setStageReservation(0);
 		service.insertStage(stage);
 		//파일 경로
 		String dir = request.getServletContext().getRealPath("/stageImage");
