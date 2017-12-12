@@ -25,7 +25,9 @@ public class HelpDaoImpl implements HelpDao{
 	
 	@Override
 	public int insertHelp(Help help) {
-		return session.insert(makeSqlId("insertHelp"), help);
+		int i = session.insert(makeSqlId("insertHelp"), help);
+		System.out.println(i);
+		return i;
 	}
 
 	@Override
