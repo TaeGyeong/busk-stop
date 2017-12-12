@@ -389,6 +389,7 @@
 		select *
 		from stage
 		where stage_seller_id = #{stageSellerId}
+		order by stage_no desc
 	</select>
 	
 	<!-- 공급자가 예약취소할 경우 예약 가능 여부 변경 -->

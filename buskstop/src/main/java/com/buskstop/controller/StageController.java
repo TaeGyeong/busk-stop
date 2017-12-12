@@ -296,8 +296,8 @@ public class StageController {
 	
 	//공급자가 예약승인
 	@RequestMapping(value="/successStageReservation", produces="application/text; charset=utf8")
-	public @ResponseBody String successStageReservation(@RequestParam String stageNo) {
-		int stageNum = Integer.parseInt(stageNo);
+	public @ResponseBody String successStageReservation(@RequestParam String rentalNo) {
+		int stageNum = Integer.parseInt(rentalNo);
 		
 		service.successStageReservation(stageNum);
 		return "예약이 수락되었습니다.";
@@ -305,12 +305,41 @@ public class StageController {
 	
 	//공급자가 예약취소
 	@RequestMapping(value="/rejectStageReservation", produces="application/text; charset=utf8")
-	public @ResponseBody String rejectStageReservation(@RequestParam String stageNo) {
-		int stageNum = Integer.parseInt(stageNo);
+	public @ResponseBody String rejectStageReservation(@RequestParam String rentalNo) {
+		int stageNum = Integer.parseInt(rentalNo);
+		
+		int stageNo = service.selectStageReservationByRentalNo(stageNum).getStageNo();
 		
 		service.rejectStageReservation(stageNum);
-		service.rejectStageByStageNo(stageNum);
+		service.rejectStageByStageNo(stageNo);
 		
 		return "예약이 거절되었습니다.";
+	}
+	
+	//신청자 공연장 신청 내역 조회
+	@RequestMapping("/selectMyStageApply")
+	public ModelAndView selectMyStageApply(@RequestParam String rentalUserId) {
+		List<StageReservation> stageReser = new ArrayList<StageReservation>();
+		
+		//신청자 아이디로 공연장 뽑아오기
+		List<StageReservation> stageReservations = service.selectMyStageApply(rentalUserId);
+		for(StageReservation stageReservation : stageReservations) {
+			int stageNo = stageReservation.getStageNo();
+			Stage stage = service.selectStageByStageNo(stageNo);
+			stageReservation.setStageName(stage.getStageName());
+			stageReservation.setStageSellerId(stage.getStageSellerId());
+			stageReser.add(stageReservation);
+		}
+		
+		return new ModelAndView("myPage/myStageApplyView.tiles", "stageReservation", stageReser);
+	}
+	
+	//신청자가 예약 취소
+	@RequestMapping(value="/cancelStageReservation2", produces="application/text; charset=utf8")
+	public @ResponseBody String cancelStageReservationByStageNo(@RequestParam String rentalNo) {
+		int rentalNum = Integer.parseInt(rentalNo);
+		
+		service.cancelStageReservationByRentalNo(rentalNum);
+		return "예약이 취소 되었습니다.";
 	}
 }

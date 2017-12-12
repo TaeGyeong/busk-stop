@@ -259,17 +259,32 @@ public class StageServiceImpl implements StageService{
 	}
 	
 	@Override
-	public void successStageReservation(int stageNo) {
-		stageReservationDao.successStageReservation(stageNo);
+	public void successStageReservation(int rentalNo) {
+		stageReservationDao.successStageReservation(rentalNo);
 	}
 	
 	@Override
-	public void rejectStageReservation(int stageNo) {
-		stageReservationDao.rejectStageReservation(stageNo);
+	public void rejectStageReservation(int rentalNo) {
+		stageReservationDao.rejectStageReservation(rentalNo);
 	}
 	
 	@Override
 	public void rejectStageByStageNo(int stageNo) {
 		stageDao.rejectStageByStageNo(stageNo);
+	}
+	
+	@Override
+	public List<StageReservation> selectMyStageApply(String rentalUserId){
+		return stageReservationDao.selectMyStageApply(rentalUserId);
+	}
+	
+	@Override
+	public StageReservation selectStageReservationByRentalNo(int rentalNo) {
+		return stageReservationDao.selectStageReservationByRentalNo(rentalNo);
+	}
+	
+	@Override
+	public void cancelStageReservationByRentalNo(int rentalNo) {
+		stageReservationDao.cancelStageReservationByRentalNo(rentalNo);
 	}
 }

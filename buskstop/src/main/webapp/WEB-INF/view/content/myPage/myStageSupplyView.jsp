@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
@@ -11,7 +12,7 @@ $(document).ready(function(){
 				"url":"${initParam.rootPath}/successStageReservation.do",
 				"type" : "post",
 				"data" : {
-					"stageNo" : $(this).parent().parent().children("td:eq(0)").text(),
+					"rentalNo" : $(this).parent().parent().children("td:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType" : "text",
@@ -20,7 +21,7 @@ $(document).ready(function(){
 					location.reload();
 				},
 				"error": function(jqXHR, textStatus, errorThrown){
-					alert(msg + textStatus + " : " + errorThrown);
+					alert(textStatus + " : " + errorThrown);
 					location.reload();
 				}
 			});
@@ -35,7 +36,7 @@ $(document).ready(function(){
 				"url":"${initParam.rootPath}/rejectStageReservation.do",
 				"type" : "post",
 				"data" : {
-					"stageNo" : $(this).parent().parent().children("td:eq(0)").text(),
+					"rentalNo" : $(this).parent().parent().children("td:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType" : "text",
@@ -44,7 +45,7 @@ $(document).ready(function(){
 					location.reload();
 				},
 				"error": function(jqXHR, textStatus, errorThrown){
-					alert(msg + textStatus + " : " + errorThrown);
+					alert(textStatus + " : " + errorThrown);
 					location.reload();
 				}
 			});
@@ -59,7 +60,7 @@ $(document).ready(function(){
 <table style="text-align: center;">
 	<thead>
 		<tr>
-			<td>공연장 번호</td>
+			<td>대관 번호</td>
 			<td>공연장 이름</td>
 			<td>대관 날짜</td>
 			<td>신청자 id</td>
@@ -69,10 +70,10 @@ $(document).ready(function(){
 	<tbody>
 		<c:forEach items="${requestScope.stageReservation }" var="item">
 		<tr style="height: 50px;">
-			<td>${item.stageNo }</td>
-			<td>${item.stageName }</td><!-- 유저 정보 보여주는 페이지를 링크 하면 될것 같아요 -->
-			<td>${item.rentalDate }</td>
-			<td>${item.rentalUserId }</td>
+			<td>${item.rentalNoNumber }</td>
+			<td>${item.stageName }</td>
+			<td><fmt:formatDate value="${item.rentalDate }" pattern="yyyy년 MM월 dd일"/></td>
+			<td>${item.rentalUserId }</td><!-- 유저 정보 보여주는 페이지를 링크 하면 될것 같아요 -->
 			<c:choose>
 				<c:when test="${item.rentalStateCode eq 0 }">
 				<td style="font-weight: bold;">
@@ -82,6 +83,11 @@ $(document).ready(function(){
 				<c:when test="${item.rentalStateCode eq 2 }">
 				<td style="font-weight: bold;">
 					수락됨
+				</td>
+				</c:when>
+				<c:when test="${item.rentalStateCode eq 3 }">
+				<td style="font-weight: bold;">
+					취소됨
 				</td>
 				</c:when>
 				<c:otherwise>
