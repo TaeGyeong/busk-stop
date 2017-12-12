@@ -70,7 +70,7 @@ $(document).ready(function(){
 		<c:forEach items="${requestScope.stageReservation }" var="item">
 		<tr style="height: 50px;">
 			<td>${item.stageNo }</td>
-			<td>${item.stageName }</td>
+			<td>${item.stageName }</td><!-- 유저 정보 보여주는 페이지를 링크 하면 될것 같아요 -->
 			<td>${item.rentalDate }</td>
 			<td>${item.rentalUserId }</td>
 			<c:choose>
