@@ -477,10 +477,13 @@ select {
 				</select>
 				<input type="text" id="keystr" name="key" title="검색어 입력" value="">
 				<i class="btn_search"><button type="submit">검색</button></i>
-				<button onclick="location.href='${initParam.rootPath}/helpRegisterView.do'">글쓰기</button>
+				
 				</fieldset>
 			</form>
 			
 		</div>
+		
+		<button onclick="location.href='${initParam.rootPath}/helpRegisterView.do'">글쓰기</button>
+		
 	</article>
 
