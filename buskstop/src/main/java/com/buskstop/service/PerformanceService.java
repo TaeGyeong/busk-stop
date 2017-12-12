@@ -145,4 +145,27 @@ public interface PerformanceService {
 	 * @return
 	 */
 	List<Performance> selectPerformanceById(String id);
+	
+	/**
+	 * 일반 공연정보 전체목록 조회.
+	 * @return
+	 */
+	List<Performance> selectNormalPerformance();
+	
+	/**
+	 * 검색조건을 파라미터로 Performance list 제공하는 service
+	 * @param category
+	 * @param search
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	List<Performance> selectPerformanceBySearch(String category,String search,Date startDate,Date endDate,int code);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	List<Performance> selectArtistPerformance();
+	
 }

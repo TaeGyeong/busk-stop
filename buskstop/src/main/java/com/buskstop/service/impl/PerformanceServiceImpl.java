@@ -204,86 +204,116 @@ public class PerformanceServiceImpl implements PerformanceService {
 	
 	// 공연정보 검색
 		// 제목으로 검색 페이징
-		@Override
-		public Map<String, Object> selectArtistPerformanceByPerformanceTitle(int page,String performanceTitle) {
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceTitle(int page,String performanceTitle) {
 
-			HashMap<String, Object> map = new HashMap<>();
-			//PagingBean 생성
-			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByTitle(performanceTitle), page);
-			
-			map.put("pageBean", pb);
-			List<Performance> list = dao.selectArtistPerformanceByPerformanceTitle(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceTitle);		
-			map.put("list", list);
-			
-			return map;
-		}
-
-		// 작성자로 검색 페이징
-		@Override
-		public Map<String, Object> selectArtistPerformanceByPerformanceUserId(int page, String userId) {
-
-			HashMap<String, Object> map = new HashMap<>();
-			//PagingBean 생성
-			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByUserId(userId), page);
-			
-			map.put("pageBean", pb);
-			List<Performance> list = dao.selectArtistPerformanceByPerformanceUserId(pb.getBeginItemInPage(), pb.getEndItemInPage(), userId);
-			map.put("list", list);
-			
-			return map;
-		}
-
-		//공연장소로 검색 페이징
-		@Override
-		public Map<String, Object> selectArtistPerformanceByPerformanceLocation(int page, String performanceLocation) {
-
-			HashMap<String, Object> map = new HashMap<>();
-			//PagingBean 생성
-			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByLocation(performanceLocation), page);
-			
-			map.put("pageBean", pb);
-			List<Performance> list = dao.selectArtistPerformanceByPerformanceLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceLocation);
-			map.put("list", list);
-			
-			return map;
-		}
-
-		//공연이름으로 검색 페이징
-		@Override
-		public Map<String, Object> selectArtistPerformanceByPerformanceName(int page, String performanceName) {
-
-			HashMap<String, Object> map = new HashMap<>();
-			//PagingBean 생성
-			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceName(performanceName), page);
-			
-			map.put("pageBean", pb);
-			List<Performance> list = dao.selectArtistPerformanceByPerformanceName(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceName);
-			map.put("list", list);
-			
-			return map;
-		}
-
-		@Override
-		public Map<String, Object> selectArtistPerformanceByPerformanceContent(int page, String performanceContent) {
-
-			HashMap<String, Object> map = new HashMap<>();
-			//PagingBean 생성
-			PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceContent(performanceContent), page);
-			
-			map.put("pageBean", pb);
-			List<Performance> list = dao.selectArtistPerformanceByPerformanceContent(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceContent);
-			map.put("list", list);
-			
-			return map;
-		}
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByTitle(performanceTitle), page);
 		
-		//############################# id를 이용해서 공연정보 조회 ###########################//
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceTitle(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceTitle);		
+		map.put("list", list);
+		
+		return map;
+	}
 
-		@Override
-		public List<Performance> selectPerformanceById(String id) {
-			return dao.selectArtistPerformanceById(id);
-		}
+	// 작성자로 검색 페이징
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceUserId(int page, String userId) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByUserId(userId), page);
 		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceUserId(pb.getBeginItemInPage(), pb.getEndItemInPage(), userId);
+		map.put("list", list);
 		
+		return map;
+	}
+
+	//공연장소로 검색 페이징
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceLocation(int page, String performanceLocation) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByLocation(performanceLocation), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceLocation(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceLocation);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	//공연이름으로 검색 페이징
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceName(int page, String performanceName) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceName(performanceName), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceName(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceName);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectArtistPerformanceByPerformanceContent(int page, String performanceContent) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCountByPerformanceContent(performanceContent), page);
+		
+		map.put("pageBean", pb);
+		List<Performance> list = dao.selectArtistPerformanceByPerformanceContent(pb.getBeginItemInPage(), pb.getEndItemInPage(), performanceContent);
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	//############################# id를 이용해서 공연정보 조회 ###########################//
+
+	@Override
+	public List<Performance> selectPerformanceById(String id) {
+		return dao.selectArtistPerformanceById(id);
+	}
+
+	//############################ 관리자용 service by 태경 ############################//
+	
+	@Override
+	public List<Performance> selectNormalPerformance() {
+		return dao.selectPerformance(0);
+	}
+	
+	public List<Performance> selectArtistPerformance(){
+		return dao.selectPerformance(1);
+	}
+
+	@Override
+	public List<Performance> selectPerformanceBySearch(String category, String search, Date startDate, Date endDate,int code) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		if(category.equals("name")) {
+			map.put("name", search);
+		} else if (category.equals("location")) {
+			map.put("location", search);
+		} else if (category.equals("userId")) {
+			map.put("userId", search);
+		} 
+		
+		map.put("sDate", startDate);
+		map.put("eDate", endDate);
+		map.put("code", code);
+		
+		return dao.selectPerformanceByAdminSearch(map);
+	}
+
 	
 }

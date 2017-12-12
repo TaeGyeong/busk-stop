@@ -1,6 +1,7 @@
 package com.buskstop.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.buskstop.vo.Performance;
@@ -170,4 +171,23 @@ public interface PerformanceDao {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	List<Performance> selectArtistPerformanceById(String id);
+	
+	/**
+	 * code값을 받아 일반 혹은 아티스트로 구분한 Performance list select.
+	 * @return
+	 */
+	List<Performance> selectPerformance(int code);
+	
+	/**
+	 * map에 검색조건을 담아 Performance 를 select하는 DAO.
+	 * @param map
+	 * @return
+	 */
+	List<Performance> selectPerformanceByAdminSearch(HashMap<String, Object> map);
+
+	/**
+	 * 모든 아티스트 공연정보를 조회한다.
+	 * @return
+	 */
+	List<Performance> selectAllArtistPerformance();
 }
