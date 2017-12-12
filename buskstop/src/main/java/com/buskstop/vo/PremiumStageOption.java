@@ -13,12 +13,12 @@ public class PremiumStageOption {
 	private int stageState;//옵션의 예약 상태 - 0:신청대기, 1:수락대기, 2:대관완료
 	private int stageCost;// 옵션별 가격
 	private int establishNo; //사업장 번호
-	private List<PremiumStageTime> timeList;
+	private List<Integer> timeList;
 	
 	public PremiumStageOption() {}
 
 	public PremiumStageOption(int optionNo, Date stageRentalDate, int stageState, int stageCost, int establishNo,
-			List<PremiumStageTime> timeList) {
+			List<Integer> timeList) {
 		this.optionNo = optionNo;
 		this.stageRentalDate = stageRentalDate;
 		this.stageState = stageState;
@@ -67,11 +67,11 @@ public class PremiumStageOption {
 		this.establishNo = establishNo;
 	}
 
-	public List<PremiumStageTime> getTimeList() {
+	public List<Integer> getTimeList() {
 		return timeList;
 	}
 
-	public void setTimeList(List<PremiumStageTime> timeList) {
+	public void setTimeList(List<Integer> timeList) {
 		this.timeList = timeList;
 	}
 

@@ -8,16 +8,17 @@ public class PremiumStageOptionList {
 	
 	public PremiumStageOptionList() {}
 
-	public PremiumStageOptionList(List<PremiumStageOption> option) {
-		this.optionList = option;
+	public PremiumStageOptionList(List<PremiumStageOption> optionList) {
+		super();
+		this.optionList = optionList;
 	}
 
-	public List<PremiumStageOption> getOption() {
+	public List<PremiumStageOption> getOptionList() {
 		return optionList;
 	}
 
-	public void setOption(List<PremiumStageOption> option) {
-		this.optionList = option;
+	public void setOptionList(List<PremiumStageOption> optionList) {
+		this.optionList = optionList;
 	}
 
 	@Override
@@ -49,5 +50,4 @@ public class PremiumStageOptionList {
 			return false;
 		return true;
 	}
-	
 }

@@ -6,7 +6,6 @@
 
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-
 </script>
 
 <div id="container">
@@ -31,6 +30,11 @@
 				<div class="caption">
 					<p class="text-center">${item.stageName }</p>
 					<p class="text-center">${item.stageLocation }</p>
+					<form action="${initParam.rootPath }/goPremiumStageDetailView.do" method="post" id="goDetail">
+						<input type="hidden" name="establishNo" value="${item.establishNum }">
+						<center><button type="submit" class="btn btn-default">상세보기</button></center>
+						<sec:csrfInput/>
+					</form>
 				</div>
 			</div>
 		</c:forEach>

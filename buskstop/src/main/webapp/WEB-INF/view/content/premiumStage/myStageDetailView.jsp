@@ -4,45 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-
-/* $(document).ready(function(){
-	
-	$("#acceptance").on("click", function(){
-		var stateCode = (this).val();
-		$.ajax({
-			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
-			"type":"post",
-			"data":{"optionNo":stateCode,
-					"stageState":2
-			},
-			"dataType":"json",
-			"success":function(){
-				(this).remove();
-			},
-			"error":function(a,b,c){
-				alert(c);
-			}
-		});
-	});
-	
-	$("#rejection").on("click", function(){
-		var stateCode = (this).val();
-		$.ajax({
-			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
-			"type":"post",
-			"data":{"optionNo":stateCode,
-					"stageState":0
-			},
-			"dataType":"json",
-			"success":function(){
-				
-			},
-			"error":function(a,b,c){
-				alert(c);
-			}
-		});
-	});
-}); */
 function changeStageState(stateCode){
 	var x = document.createElement("INPUT");
     x.setAttribute("type", "hidden");
@@ -51,8 +12,6 @@ function changeStageState(stateCode){
     document.getElementById("changeStageState").appendChild(x);
 	document.getElementById("changeStageState").submit();
 }
-
-
 </script>
 
 <div class="container-inline">
@@ -133,37 +92,33 @@ function changeStageState(stateCode){
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${requestScope.map.optionList }" var="dateOption">
+		<c:forEach items="${requestScope.map.optionList }" var="option">
 			<tr>
-				<td><fmt:formatDate value="${dateOption.stageRentalDate }" pattern="yyy/MM/dd"/></td>
+				<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 				<td>
-					<c:forEach items="${requestScope.map.timeList }" var="timeOption">
-						<c:choose>
-							<c:when test="${dateOption.optionNo eq timeOption.optionNo }">
-								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시,
-							</c:when>
-						</c:choose>
+					<c:forEach items="${option.timeList }" var="timeOption">
+								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
 					</c:forEach>
 				</td>
-				<td>${dateOption.stageCost }</td>
+				<td>${option.stageCost }</td>
 				<td>
 					<c:choose>
-						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
-						<c:when test="${dateOption.stageState ==1}">수락대기</c:when>
+						<c:when test="${option.stageState == 2}">대관완료</c:when>
+						<c:when test="${option.stageState ==1}">수락대기</c:when>
 						<c:otherwise>신청대기</c:otherwise>
 					</c:choose>
 				</td>
 				<td></td>
 				<td>
 					<c:choose>
-						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
-						<c:when test="${dateOption.stageState ==1}">
+						<c:when test="${option.stageState == 2}">대관완료</c:when>
+						<c:when test="${option.stageState ==1}">
 							<form action="${initParam.rootPath }/producer/changePremiumStageState.do" method="post" id="changeStageState">
 								<sec:csrfInput/>
 								<button type="button" class="btn btn-defalut" id="acceptance" onclick="changeStageState('2')">수락</button>
 								<button type="button" class="btn btn-defalut" id="rejection" onclick="changeStageState('0')">거절</button>
-								<input type="hidden" name="optionNo" value="${dateOption.optionNo }">
-								<input type="hidden" name="establishNo" value="${dateOption.establishNo}"> 
+								<input type="hidden" name="optionNo" value="${option.optionNo }">
+								<input type="hidden" name="establishNo" value="${option.establishNo}"> 
 							</form>
 						</c:when>
 					</c:choose>
