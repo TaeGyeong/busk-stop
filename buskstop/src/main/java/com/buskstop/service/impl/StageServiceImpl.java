@@ -13,10 +13,12 @@ import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.StageDao;
 import com.buskstop.dao.StageImageDao;
 import com.buskstop.dao.StageReservationDao;
+import com.buskstop.dao.StageReviewDao;
 import com.buskstop.service.StageService;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.StageReservation;
+import com.buskstop.vo.StageReview;
 
 @Service
 public class StageServiceImpl implements StageService{
@@ -30,6 +32,9 @@ public class StageServiceImpl implements StageService{
 	
 	@Autowired
 	private StageReservationDao stageReservationDao;
+	
+	@Autowired
+	private StageReviewDao stageReviewDao;
 	
 	@Override
 	public void insertStage(Stage stage) {
@@ -247,4 +252,36 @@ public class StageServiceImpl implements StageService{
 	public void cancelStageReservation(int stageNo) {
 		stageReservationDao.cancelStageReservation(stageNo);
 	}
+	
+	
+	
+	/************************ 관리자페이지용도 - 건들지마시오 (태경) ************************/
+	
+	public List<Stage> selectStageManagement() {
+		List<Stage> list = stageDao.selectStageAndReview();
+		
+		for(Stage s : list) {
+			List<StageReview> reviewList = s.getReviewList();
+			int sum = 0;
+			for(StageReview r : reviewList) {
+				sum += r.getStarScore();
+			}
+			s.setStarpointAvg(sum);
+		}
+		return list;
+	}
+
+	@Override
+	public List<Stage> searchStageByAdmin(String reservation, Date sDate, Date eDate, String userId) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("reservation", reservation);
+		map.put("sDate", sDate);
+		map.put("eDate", eDate);
+		map.put("userId", userId);
+		
+		System.out.println(map);
+		
+		return stageDao.selectStageBySearch(map);
+	}
+	
 }

@@ -10,9 +10,15 @@
 <br>
 <a href="${initParam.rootPath }/admin/member.do">회원관리</a>
 <br>
-<a href="${initParam.rootPath }/admin/stage.do">공연장관리</a>
+<a href="${initParam.rootPath }">일반공연정보관리</a>
 <br>
-<a href="${initParam.rootPath }">공연정보관리</a>
+<a href="${initParam.rootPath }">아티스트공연정보관리</a>
+<br>
+<a href="${initParam.rootPath }/admin/stage.do">일반공연장관리</a>
+<br>
+<a href="${initParam.rootPath }/admin/premiumStage.do">프리미엄공연장관리</a>
+<br>
+<a href="${initParam.rootPath }">공연장게시판 공지등록하기</a>
 <br>
 <a href="${initParam.rootPath }">영상관리</a>
 <br>

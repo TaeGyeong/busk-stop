@@ -116,4 +116,22 @@ public interface StageService {
 	 * @param stageNo
 	 */
 	void cancelStageReservation(int stageNo);
+	
+	/* ######################################################### */
+	
+	/**
+	 * 관리자가 볼 stage정보들을 제공하는 service.
+	 * @return
+	 */
+	List<Stage> selectStageManagement();
+	
+	/**
+	 * 검색조건에 맞는 stage 를 제공하는 service.
+	 * @param reservation
+	 * @param sDate
+	 * @param eDate
+	 * @param userId
+	 * @return
+	 */
+	List<Stage> searchStageByAdmin(String reservation, Date sDate, Date eDate,String userId);
 }
