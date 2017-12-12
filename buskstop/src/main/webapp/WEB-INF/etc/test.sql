@@ -354,3 +354,23 @@ select hc.*
 from HELP h, HELP_COMMENT hc
 where h.help_no = hc.help_no
 and h.help_no = 1; /* 조회갈 게시글 id */	
+
+
+
+
+
+/*help test*/
+insert into HELP (
+		 help_no,
+		 help_category,
+		 help_title,
+		 help_content,
+		 help_user_id,
+		 help_reg_time) 
+values (3, 
+	'카테2', 
+	'제목2', 
+	'내용2', 
+	'admin3', 
+	sysdate);
+	select * from help;

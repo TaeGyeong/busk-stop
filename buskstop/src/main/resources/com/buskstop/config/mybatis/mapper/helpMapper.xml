@@ -28,12 +28,12 @@
 	
 	<!-- 고객센터 게시판 글 insert -->
 	<insert id="insertHelp" parameterType="Help">
-		<selectKey keyProperty="helpNo" resultType="_int" order="BEFORE">
+		<selectKey keyProperty="helpNum" resultType="_int" order="BEFORE">
 			select HELP_NO_SEQ.nextval from dual
 		</selectKey>
 		insert into HELP (<include refid="column-help"/>)
 		values(#{helpNum}, 
-			   #{helpCategoty}, 
+			   #{helpCategory}, 
 			   #{helpTitle}, 
 			   #{helpContentent}, 
 			   #{helpImage1},
