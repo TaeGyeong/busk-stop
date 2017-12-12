@@ -7,13 +7,13 @@
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 
-function updatePerformance(){	
+function updateHelp(){	
 	var output = "";
-	output+=location.href='${initParam.rootPath }/updateStage.do?helpNum=${param.helpNum}';
+	output+=location.href='${initParam.rootPath }/updateHelp2.do?helpNum=${param.helpNum}';
 	
 }
 
-function deletePerformance(performanceNo){
+function deleteHelp(helpNum){
 	
 	var output = "";
 	output+=location.href='${initParam.rootPath }/deleteHelp.do?helpNum=${param.helpNum}';
@@ -79,12 +79,9 @@ function deletePerformance(performanceNo){
 
 	<div class="button_box" style="width: 100%;">
 		<div>
-			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.help.helpUserId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updatePerformance();" class="btn btn-default">
-					<input type="submit" value="삭제" onclick="deletePerformance();" class="btn btn-default">
-				</c:if>
-			</sec:authorize>
+				<input type="submit" value="수정" onclick="updateHelp();" class="btn btn-default">
+					<input type="submit" value="삭제" onclick="deleteHelp();" class="btn btn-default">
+				
 			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
 	</div>

@@ -33,5 +33,15 @@ public class HelpDaoImpl implements HelpDao{
 		System.out.println("오냐"+helpNum);
 		return session.selectOne(makeSqlId("selectHelpByHelpNum"), helpNum);
 	}
+	
+	@Override
+	public int updateHelp(Help help) {
+		return session.update(makeSqlId("updateHelp"),help);
+	}
+	
+	@Override
+	public int deleteHelpByHelpNum(int helpNum) {
+		return session.delete(makeSqlId("deleteHelpByHelpNum"),helpNum);
+	}
 
 }

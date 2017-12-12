@@ -1,10 +1,12 @@
 package com.buskstop.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.HelpService;
@@ -27,7 +30,10 @@ public class HelpController {
 
 	@Autowired
 	private HelpService service;
-
+	
+	@Autowired
+	private HttpServletRequest request;
+	
 	/*
 	 * @RequestMapping("/helpRegister") public ModelAndView
 	 * insertPerformance(@ModelAttribute Help help, HttpServletRequest request)
@@ -68,4 +74,45 @@ public class HelpController {
 
 		return new ModelAndView("help/helpDetailView.tiles", "map", map);
 	}
+	
+	@RequestMapping("/deleteHelp")
+	public String deleteHelp(@RequestParam int helpNum) {
+		service.deleteHelpByHelpNum(helpNum);
+		return "help/helpDetailView.tiles"; // 여기엔 목록으로 이동 
+	}
+	
+	@RequestMapping("/updateHelp")
+	public ModelAndView udpateHelp(@ModelAttribute Help help) throws IllegalStateException, IOException {
+		
+		MultipartFile multiImage = help.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			//디렉토리
+			String dir = request.getServletContext().getRealPath("/helpImage");
+			String fileName = UUID.randomUUID().toString();
+			File upImage = new File(dir, fileName+".jpg");
+			multiImage.transferTo(upImage);
+			help.setHelpImage(fileName+".jpg");
+		}
+		service.updateHelp(help);
+		int helpNum = help.getHelpNum();
+		return new ModelAndView("helpDetailView.do?helpNum"+helpNum,"help",help);
+				
+	}
+	
+	@RequestMapping("/updateHelp2")
+	public ModelAndView updateHelp2(@RequestParam int helpNum) {
+		Help help = service.selectHelpByHelpNum(helpNum);
+		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

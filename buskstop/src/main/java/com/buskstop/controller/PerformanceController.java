@@ -126,13 +126,8 @@ public class PerformanceController {
 	
 	@RequestMapping("/deletePerformance")
 	public String deletePerformance(@RequestParam int performanceNo) {
-		if(service.getPerformanceByPerformanceNo(performanceNo).getPerformanceUserId().equals(getUserId())) {
 			service.deletePerformanceByPerformance(performanceNo);
 			return "selectPerformance.do";
-			} else {
-				String error="performanceDetailView.do?performanceNo="+performanceNo; 
-				return error;
-			}
 	}
 	
 	/*********************** 공연정보 조회 Controller ***********************/
