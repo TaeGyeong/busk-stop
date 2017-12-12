@@ -136,6 +136,11 @@ public class StageController {
 		
 		list = (List<Stage>)map.get("list");
 		System.out.println("나오는 리스트 "+list);
+		
+		for(Stage stage : list) {
+			stage.setStageImage(service.selectStageImageByStageNo(stage.getStageNo()));
+		}
+		
 		map.put("list", list);
 		
 		map.put("stageLocation", locationSearch);
