@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 var optionNo = 0;
@@ -215,3 +216,8 @@ function enterOption(){
 		</tbody>
 	</table>
 </div>
+<form action="${initParam.rootPath }/producer/myStageDetail.do" method="post">
+	<sec:csrfInput/>
+	<input type="hidden" name="establishNum" value="${requestScope.map.establishNo }">
+	<button class="btn btn-default" type="submit">공연장 상세보기로 이동</button>
+</form>

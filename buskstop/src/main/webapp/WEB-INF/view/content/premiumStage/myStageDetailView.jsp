@@ -5,7 +5,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-${document}.ready(function(){
+/* $(document).ready(function(){
 	
 	$("#acceptance").on("click", function(){
 		var stateCode = (this).val();
@@ -17,7 +17,7 @@ ${document}.ready(function(){
 			},
 			"dataType":"json",
 			"success":function(){
-				
+				(this).remove();
 			},
 			"error":function(a,b,c){
 				alert(c);
@@ -42,8 +42,14 @@ ${document}.ready(function(){
 			}
 		});
 	});
-});
-
+}); */
+function changeStageState(optionNo){
+	 var x = document.createElement("INPUT");
+	    x.setAttribute("type", "hidden");
+	    x.setAttribute("name", "costList");
+	    x.setAttribute("value", costList);
+	    document.getElementById("registerOption").appendChild(x);
+}
 
 
 </script>
@@ -162,5 +168,5 @@ ${document}.ready(function(){
 </table>
 <form action="${initParam.rootPath }/producer/goPremiumStageEnterDate.do" method="get">
 	<input type="hidden" name="establishNo" value="${requestScope.map.premiumStage.establishNum }">
-	<button class="btn btn-default" type="submit">대관일 등록으로 이동</button>
+	<button class="btn btn-default" type="submit">대관일 등록/수정 으로 이동</button>
 </form>

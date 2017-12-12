@@ -45,6 +45,7 @@ public class PremiumStageReservationController {
 			timeList = service.selectPremiumStageTimeByOptionNo(o.getOptionNo());
 		}
 		HashMap<String, Object> map = new HashMap<>();
+		map.put("establishNo", establishNo);
 		map.put("optionList", optionList);
 		map.put("timeList", timeList);
 //		System.out.println(optionList+" - "+timeList);
@@ -61,20 +62,15 @@ public class PremiumStageReservationController {
 	 */
 	@RequestMapping("/producer/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
-												@RequestParam(value="timeList") List<List<Integer>> timeList,
-												@RequestParam(value="costList") List costList,
-												@RequestParam int establishNo,
-												BindingResult r) throws ParseException {
-		System.out.println(r);
-		System.out.println(r.getErrorCount());
-		
+												@RequestParam List<List<Integer>> timeList,
+												@RequestParam List<Integer> costList,
+												@RequestParam int establishNo) throws ParseException {
 		for(int i=0; i<dateList.length; i++) {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateList[i]);
 			System.out.println(costList);
-/*//			int cost = Integer.parseInt() ;
 			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo);
 			int j = service.createPremiumStageOption(option);
-			System.out.println("confirm addoption - "+j);*/
+//			System.out.println("confirm addoption - "+j);
 		}
 		for(List<Integer> list : timeList) {
 			for(Integer t : list) {
