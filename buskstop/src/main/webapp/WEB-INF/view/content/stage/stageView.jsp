@@ -141,13 +141,13 @@ select {
 				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+					공연 날짜 : <fmt:formatDate value="${item.stageRentalDate}" pattern="yyyy년 MM월 dd일"/>&nbsp;&nbsp;
+					<fmt:formatDate value="${item.stageStartTime}" pattern="HH:mm"/>~~<fmt:formatDate value="${item.stageEndTime }" pattern="HH:mm"/></p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">가격 : ${item.stageCost}, 면적 : ${item.stageArea}</p>
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
-					<fmt:formatDate value="${item.stageRentalDate}" pattern="yy-MM-dd"/>&nbsp;&nbsp;&nbsp;
-					<fmt:formatDate value="${item.stageStartTime}" pattern="HH:mm"/>~~<fmt:formatDate value="${item.stageEndTime }" pattern="HH:mm"/></p>
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 - ${item.stageSellerId }</p>
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">등록된 시간 - <fmt:formatDate value="${item.stageRegTime }" pattern="HH:mm"/></p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">등록된 시간 : <fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH:mm"/></p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 : ${item.stageSellerId }</p>
 				</div>
 			</div>
 		</c:forEach>

@@ -7,4 +7,8 @@ public interface HelpDao {
 	void insertHelp();
 	
 	int insertHelp(Help help);
+	
+	Help selectHelpByHelpNum(int helpNum);
+	
+	
 }

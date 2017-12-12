@@ -263,7 +263,40 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 		
 		return returnMap;
 	}
+
+	/*********************************************************************/
+	
+	@Override
+	public List<PremiumStage> selectAllPremiumStage() {
+		List<PremiumStage> list = supplierDao.selectPremiumStage();
+		return list;
+	}
+
+	@Override
+	public List<PremiumStage> selectPremiumStageByAdmin(String category, String search) {
+		HashMap<String, String> map = new HashMap<>();
+		
+		if(category.equals("establishNo")) {
+			map.put("establishNum", search);
+		} else if(category.equals("userId")) {
+			map.put("operatorUserId", search);
+		} else if(category.equals("location")) {
+			map.put("stageLocation", search);
+		}
+		
+		return supplierDao.selectPremiumStageBySearch(map);
+	}
 	
 	
+	public Map<String,Object> selectPremiumDetailView(int establishNum){
+		HashMap<String, Object> map = new HashMap<>();
+		PremiumStage stage = supplierDao.selectStageByEstablishNum(establishNum);
+		List<String> list = premiumImageDao.selectImageByEstablishNum(establishNum);
+		
+		map.put("premiumStage", stage);
+		map.put("imageList", list);
+		
+		return map;
+	}
 
 }

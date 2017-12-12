@@ -87,7 +87,6 @@ public class StageController {
 									   @RequestParam(required=false) String nameSearch, 
 									   @RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, 
 									   @RequestParam(required=false) @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws Exception{
-		System.out.println("컨트롤러"+idSearch+startDate+endDate+locationSearch+nameSearch);
 		List<Stage> list = null;
 		Map<String, Object> map = null;
 		int page=1;
@@ -156,8 +155,9 @@ public class StageController {
 		List<StageImage> stageImage = service.selectStageImageByStageNo(stageNo);
 		stage.setStageImage(stageImage);
 		return new ModelAndView("stageUpdateView.do", "stage", stage);
-		
 	}
+	
+
 	
 	//공연정보 받아서 수정
 	@RequestMapping("/updateStageChange")

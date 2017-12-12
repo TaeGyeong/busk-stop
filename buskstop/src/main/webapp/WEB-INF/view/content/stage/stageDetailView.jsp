@@ -194,7 +194,7 @@ $(document).ready(function(){
 				<td> ↓ 음주가능 여부 ↓</td>
 				<td> ↓ 외부음식 반입 여부 ↓ </td>
 				<td> ↓ 식사 판매  ↓ </td>
-				<td> ↓ 에약가능 여부 ↓ </td>
+				<td> ↓ 예약가능 여부 ↓ </td>
 			</tr>
 			<tr>
 			<td>

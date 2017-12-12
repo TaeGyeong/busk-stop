@@ -28,4 +28,10 @@ public class HelpDaoImpl implements HelpDao{
 		return session.insert(makeSqlId("insertHelp"), help);
 	}
 
+	@Override
+	public Help selectHelpByHelpNum(int helpNum) {
+		System.out.println("오냐"+helpNum);
+		return session.selectOne(makeSqlId("selectHelpByHelpNum"), helpNum);
+	}
+
 }

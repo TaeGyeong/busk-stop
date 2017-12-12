@@ -220,13 +220,14 @@ insert into STUDENTS values(4,'RRRR', 'nam8118','2017-08-18');
 insert into STUDENTS values(5,'KKKK', 'kimbo88','2017-08-19');
 
 /* 고객센터 */
-insert into HELP values(1, '신고게시판', '신고합니다', '부적절한 게시물을 올렸습니다.', 'c://img/img1', 'c://img/img1-1', 'kimbo88','2017-08-10');
-insert into HELP values(2, '문의게시판', '문의합니다', '문의', 'c://img/img2', 'c://img/img2-1', 'kimm990','2017-08-20');
-insert into HELP values(3, '문의게시판', '문문비행운', '좋아요좋아요', 'c://img/img3', 'c://img/img3-1', 'kimbo88','2017-08-25');
+insert into HELP values(1, '신고게시판', '신고합니다', '부적절한 게시물을 올렸습니다.', '', '', 'yoonkyu','2017-08-10');
+insert into HELP values(2, '문의게시판', '문의합니다', '문의', 'c://img/img2', 'c://img/img2-1', 'yoonkyu','2017-08-20');
+insert into HELP values(3, '문의게시판', '문문비행운', '좋아요좋아요', '', '', 'yoonkyu','2017-08-25');
 insert into HELP values(4, '문의게시판', '좋네요', '정말좋아요', 'c://img/img4', 'c://img/img4-1', 'yunee33','2017-08-30');
 insert into HELP values(5, '신고게시판', '너신고', '신고합니다', 'c://img/img5', 'c://img/img5-1', 'kimbo88','2017-08-27');
 insert into HELP values(6, '문의게시판', '아아아아아아', '안되요', 'c://img/img6', 'c://img/img6-1', 'sim1','2017-08-18');
 
+select * from help where help_no='1';
 /* 고객센터 댓글 */
 insert into HELP_COMMENT values(1, 1, '네네네네네네네', 'yunee33','2017-07-10');
 insert into HELP_COMMENT values(2, 2, 'sp2sp2', 'no33432','2017-07-11');

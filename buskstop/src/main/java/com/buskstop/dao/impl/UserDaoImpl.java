@@ -1,5 +1,8 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,9 +47,16 @@ public class UserDaoImpl implements UserDao{
 	public String selectUserIdByEmail(String email) {
 		return session.selectOne(makeSqlId("selectUserIdByEmail"), email);
 	}
-	
-	
-	
+
+	@Override
+	public List<User> selectAllUserAndAuthority() {
+		return session.selectList(makeSqlId("selectAllUserAndAuthority"));
+	}
+
+	@Override
+	public List<User> selectByAuthorityAndUserId(HashMap<String, String> map) {
+		return session.selectList(makeSqlId("selectByAuthorityAndUserId"),map);
+	}
 
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.userMapper."+id;
