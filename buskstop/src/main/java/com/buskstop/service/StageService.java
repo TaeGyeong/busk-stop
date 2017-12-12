@@ -130,4 +130,22 @@ public interface StageService {
 	 * @return
 	 */
 	List<StageReservation> selectStageReservationByStageNo(int stageNo);
+	
+	/**
+	 * 공급자가 예약 승인
+	 * @param stageNo
+	 */
+	void successStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 취소
+	 * @param stageNo
+	 */
+	void rejectStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 취소할 경우 예약 가능 상태 변경
+	 * @param stageNo
+	 */
+	void rejectStageByStageNo(int stageNo);
 }

@@ -30,10 +30,10 @@
 		<h5>premiumStage</h5>
 		<li><a href="${initParam.rootPath }/premiumStageEnterDate.do">프리미엄 공연장 대관일 등록</a></li>
 		<h5>공연장 예약 상태</h5>
-		<li><a href="${initParam.rootPath }/selectMyStageSupply.do?stageSellerId=">내공연장 예약 상태 보기</a></li>
 			
-<form action="${initParam.rootPath }/selectMyStageSupply.do" disp>
+<form action="${initParam.rootPath }/selectMyStageSupply.do">
 <sec:authorize access="isAuthenticated()">
-	<input type="text" value='<sec:authentication property="principal.userId"/>'>
+	<input type="text" name="stageSellerId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
 </sec:authorize>
+	<button>내공연장 예약 상태 보기</button>
 </form>

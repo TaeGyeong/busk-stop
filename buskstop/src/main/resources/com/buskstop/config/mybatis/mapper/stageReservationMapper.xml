@@ -38,6 +38,7 @@
 		and RENTAL_STATE_CODE = 1
 	</select>
 	
+	<!-- 사용자가 예약 취소 -->
 	<update id="cancelStageReservation" parameterType="_int">
 		update STAGE_RESERVATION
 		set RENTAL_STATE_CODE = 0
@@ -51,4 +52,18 @@
 		from STAGE_RESERVATION
 		where STAGE_NO = #{stageNo}
 	</select>
+	
+	<!-- 공급자가 예약 승인 -->
+	<update id="successStageReservation" parameterType="_int">
+		update STAGE_RESERVATION
+		set RENTAL_STATE_CODE = 2
+		where STAGE_NO = #{stageNo}
+	</update>
+	
+	<!-- 공급자가 예약 거절 -->
+	<update id="rejectStageReservation" parameterType="_int">
+		update STAGE_RESERVATION
+		set RENTAL_STATE_CODE = 0
+		where STAGE_NO = #{stageNo}
+	</update>
 </mapper>

@@ -38,5 +38,14 @@ public class StageReservationDaoImpl implements StageReservationDao{
 	public List<StageReservation> selectStageReservationByStageNo(int stageNo){
 		return session.selectList(makeSqlId("selectStageReservationByStageNo"), stageNo);
 	}
+	
+	@Override
+	public int successStageReservation(int stageNo) {
+		return session.update(makeSqlId("successStageReservation"), stageNo);
+	}
 		
+	@Override
+	public int rejectStageReservation(int stageNo) {
+		return session.update(makeSqlId("rejectStageReservation"), stageNo);
+	}
 }

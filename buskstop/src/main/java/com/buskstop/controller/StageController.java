@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -265,7 +266,7 @@ public class StageController {
 	//공급자 공연장 신청자 조회
 	@RequestMapping("/selectMyStageSupply")
 	public ModelAndView selectStageReservationStatement(@RequestParam String stageSellerId){
-		List<StageReservation> stageReser = null;
+		List<StageReservation> stageReser = new ArrayList<StageReservation>();
 		
 		// 공급자 아이디로 공급장 뽑아오기
 		List<Stage> stages = service.selectStagebyStageSellerId(stageSellerId);
@@ -281,5 +282,25 @@ public class StageController {
 			}
 		}
 		return new ModelAndView("myPage/myStageSupplyView.tiles", "stageReservation", stageReser);
+	}
+	
+	//공급자가 예약승인
+	@RequestMapping(value="/successStageReservation", produces="application/text; charset=utf8")
+	public @ResponseBody String successStageReservation(@RequestParam String stageNo) {
+		int stageNum = Integer.parseInt(stageNo);
+		
+		service.successStageReservation(stageNum);
+		return "예약이 수락되었습니다.";
+	}
+	
+	//공급자가 예약취소
+	@RequestMapping(value="/rejectStageReservation", produces="application/text; charset=utf8")
+	public @ResponseBody String rejectStageReservation(@RequestParam String stageNo) {
+		int stageNum = Integer.parseInt(stageNo);
+		
+		service.rejectStageReservation(stageNum);
+		service.rejectStageByStageNo(stageNum);
+		
+		return "예약이 거절되었습니다.";
 	}
 }

@@ -391,4 +391,10 @@
 		where stage_seller_id = #{stageSellerId}
 	</select>
 	
+	<!-- 공급자가 예약취소할 경우 예약 가능 여부 변경 -->
+	<update id="rejectStageByStageNo" parameterType="_int">
+		update stage
+		set stage_reservation = 1
+		where stage_no = #{stageNo}
+	</update>
 </mapper>

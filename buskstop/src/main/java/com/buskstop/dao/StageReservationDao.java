@@ -33,4 +33,18 @@ public interface StageReservationDao {
 	 * @return
 	 */
 	List<StageReservation> selectStageReservationByStageNo(int stageNo);
+
+	/**
+	 * 공급자가 예약 승인
+	 * @param stageNo
+	 * @return
+	 */
+	int successStageReservation(int stageNo);
+	
+	/**
+	 * 공급자가 예약 거절
+	 * @param stageNo
+	 * @return
+	 */
+	int rejectStageReservation(int stageNo);
 }

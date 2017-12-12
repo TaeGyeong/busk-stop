@@ -257,4 +257,19 @@ public class StageServiceImpl implements StageService{
 	public List<StageReservation> selectStageReservationByStageNo(int stageNo){
 		return stageReservationDao.selectStageReservationByStageNo(stageNo);
 	}
+	
+	@Override
+	public void successStageReservation(int stageNo) {
+		stageReservationDao.successStageReservation(stageNo);
+	}
+	
+	@Override
+	public void rejectStageReservation(int stageNo) {
+		stageReservationDao.rejectStageReservation(stageNo);
+	}
+	
+	@Override
+	public void rejectStageByStageNo(int stageNo) {
+		stageDao.rejectStageByStageNo(stageNo);
+	}
 }
