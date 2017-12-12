@@ -59,6 +59,13 @@ public interface PremiumStageReservationService {
 	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo);
 	
+	/**
+	 * 옵션번호 변경
+	 * @param option
+	 * @return
+	 */
+	int updatePremiumStageOptionStageState(PremiumStageOption option);
+	
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	/**

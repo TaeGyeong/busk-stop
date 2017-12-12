@@ -66,6 +66,10 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 		return optionDao.selectPremiumStageOptionByEstablishNo(establishNo);
 	}
 
+	@Override
+	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
+		return optionDao.updatePremiumStageOptionStageState(option);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -82,5 +86,6 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo) {
 		return timeDao.selectPremiumStageTimeByOptionNo(optionNo);
 	}
+
 
 }

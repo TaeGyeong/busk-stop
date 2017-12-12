@@ -160,7 +160,7 @@ select {
 			<ul class="pagination">
 				<%-- 첫페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectAllStage.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">&lt;&lt;</a>
+					<a href="${initParam.rootPath }/selectAllStage.do?page=1&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">&lt;&lt;</a>
 				</li>
 				<%--
 					이전 페이지 그룹 처리
@@ -169,7 +169,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">◀</a>
+							<a href="${initParam.rootPath }/selectAllStage.do?page=&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">◀</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -193,7 +193,7 @@ select {
 				  		</c:when>
 						<c:otherwise>
 							<li>
-								<a href="${initParam.rootPath }/selectAllStage.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">${num }</a>
+								<a href="${initParam.rootPath }/selectAllStage.do?page=${num}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">${num }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -205,7 +205,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">▶</a>
+							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.endPage + 1}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&startDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">▶</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -216,7 +216,7 @@ select {
 				</c:choose>
 				<%-- 마지막 페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">&gt;&gt;</a>
+					<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.totalPage}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">&gt;&gt;</a>
 				</li>
 			</ul>
 		</div>

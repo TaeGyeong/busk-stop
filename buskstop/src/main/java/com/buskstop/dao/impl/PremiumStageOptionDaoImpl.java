@@ -34,4 +34,9 @@ public class PremiumStageOptionDaoImpl implements PremiumStageOptionDao{
 		return session.selectList(makeSqlId("selectPremiumStageOptionByEstablishNo"), establishNo);
 	}
 
+	@Override
+	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
+		return session.update(makeSqlId("updatePremiumStageOptionStageState"), option);
+	}
+
 }

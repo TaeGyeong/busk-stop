@@ -1,8 +1,10 @@
 package com.buskstop.controller;
 
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +62,7 @@ public class PremiumStageReservationController {
 	@RequestMapping("/producer/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
 												@RequestParam(value="timeList") List<List<Integer>> timeList,
-												@RequestParam(value="costList") List<Integer> costList,
+												@RequestParam(value="costList") List costList,
 												@RequestParam int establishNo,
 												BindingResult r) throws ParseException {
 		System.out.println(r);
@@ -68,10 +71,10 @@ public class PremiumStageReservationController {
 		for(int i=0; i<dateList.length; i++) {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateList[i]);
 			System.out.println(costList);
-//			int cost = Integer.parseInt() ;
+/*//			int cost = Integer.parseInt() ;
 			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo);
 			int j = service.createPremiumStageOption(option);
-			System.out.println("confirm addoption - "+j);
+			System.out.println("confirm addoption - "+j);*/
 		}
 		for(List<Integer> list : timeList) {
 			for(Integer t : list) {
@@ -102,4 +105,10 @@ public class PremiumStageReservationController {
 		service.removePremiumStageOption(optionNo);
 		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo",establishNo);
 	}
+	
+	@RequestMapping("/producer/changePremiumStageStateToZero")
+	public @ResponseBody void updatePremiumStageOptionStageState(@ModelAttribute PremiumStageOption option){
+		service.updatePremiumStageOptionStageState(option);
+	}
+	
 }
