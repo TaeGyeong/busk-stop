@@ -66,6 +66,8 @@ public interface PremiumStageReservationService {
 	 */
 	int updatePremiumStageOptionStageState(PremiumStageOption option);
 	
+	List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo);
+	
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	/**

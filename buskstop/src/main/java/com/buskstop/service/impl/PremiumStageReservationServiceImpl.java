@@ -70,6 +70,11 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
 		return optionDao.updatePremiumStageOptionStageState(option);
 	}
+	
+	@Override
+	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo){
+		return optionDao.selectPremiumStageOptionByEstablishNoJoin(establishNo);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override

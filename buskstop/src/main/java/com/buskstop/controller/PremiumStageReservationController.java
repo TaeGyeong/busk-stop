@@ -1,19 +1,14 @@
 package com.buskstop.controller;
 
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.PremiumStageReservationService;
-import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.PremiumStageOption;
+import com.buskstop.vo.PremiumStageOptionList;
 import com.buskstop.vo.PremiumStageTime;
 
 @Controller
@@ -60,7 +55,7 @@ public class PremiumStageReservationController {
 	 * @return
 	 * @throws ParseException
 	 */
-	@RequestMapping("/producer/enterPremiumStageOption")
+	/*@RequestMapping("/producer/enterPremiumStageOption")
 	public ModelAndView enterPremiumStageOption(@RequestParam String[] dateList,
 												@RequestParam List<List<Integer>> timeList,
 												@RequestParam List<Integer> costList,
@@ -68,7 +63,7 @@ public class PremiumStageReservationController {
 		for(int i=0; i<dateList.length; i++) {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateList[i]);
 			System.out.println(costList);
-			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo);
+			PremiumStageOption option = new PremiumStageOption(0, date, 0, costList.get(i), establishNo, null);
 			int j = service.createPremiumStageOption(option);
 //			System.out.println("confirm addoption - "+j);
 		}
@@ -80,6 +75,15 @@ public class PremiumStageReservationController {
 		}
 		
 		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo",establishNo);
+	}*/
+	@RequestMapping("/producer/enterPremiumStageOption")
+	public ModelAndView enterPremiumStageOption(@ModelAttribute PremiumStageOptionList optionList) throws ParseException {
+		System.out.println(optionList);
+		List<PremiumStageOption> list = optionList.getOption();
+		for(PremiumStageOption option : list) {
+			service.createPremiumStageOption(option);
+		}
+		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo", list.get(0).getEstablishNo());
 	}
 	
 	/**
@@ -102,9 +106,10 @@ public class PremiumStageReservationController {
 		return new ModelAndView("redirect:/producer/goPremiumStageEnterDate.do","establishNo",establishNo);
 	}
 	
-	@RequestMapping("/producer/changePremiumStageStateToZero")
-	public @ResponseBody void updatePremiumStageOptionStageState(@ModelAttribute PremiumStageOption option){
+	@RequestMapping("/producer/changePremiumStageState")
+	public ModelAndView updatePremiumStageOptionStageState(@ModelAttribute PremiumStageOption option){
 		service.updatePremiumStageOptionStageState(option);
+		return new ModelAndView("redirect:/producer/myStageDetail.do","establishNum",option.getEstablishNo());
 	}
 	
 }

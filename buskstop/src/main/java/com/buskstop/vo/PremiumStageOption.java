@@ -1,6 +1,7 @@
 package com.buskstop.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,16 +13,18 @@ public class PremiumStageOption {
 	private int stageState;//옵션의 예약 상태 - 0:신청대기, 1:수락대기, 2:대관완료
 	private int stageCost;// 옵션별 가격
 	private int establishNo; //사업장 번호
+	private List<PremiumStageTime> timeList;
 	
 	public PremiumStageOption() {}
 
-	public PremiumStageOption(int optionNo, Date stageRentalDate, int stageState, int stageCost, int establishNo) {
-		super();
+	public PremiumStageOption(int optionNo, Date stageRentalDate, int stageState, int stageCost, int establishNo,
+			List<PremiumStageTime> timeList) {
 		this.optionNo = optionNo;
 		this.stageRentalDate = stageRentalDate;
 		this.stageState = stageState;
 		this.stageCost = stageCost;
 		this.establishNo = establishNo;
+		this.timeList = timeList;
 	}
 
 	public int getOptionNo() {
@@ -64,10 +67,19 @@ public class PremiumStageOption {
 		this.establishNo = establishNo;
 	}
 
+	public List<PremiumStageTime> getTimeList() {
+		return timeList;
+	}
+
+	public void setTimeList(List<PremiumStageTime> timeList) {
+		this.timeList = timeList;
+	}
+
 	@Override
 	public String toString() {
 		return "PremiumStageOption [optionNo=" + optionNo + ", stageRentalDate=" + stageRentalDate + ", stageState="
-				+ stageState + ", stageCost=" + stageCost + ", establishNo=" + establishNo + "]";
+				+ stageState + ", stageCost=" + stageCost + ", establishNo=" + establishNo + ", timeList=" + timeList
+				+ "]";
 	}
 
 	@Override
@@ -79,6 +91,7 @@ public class PremiumStageOption {
 		result = prime * result + stageCost;
 		result = prime * result + ((stageRentalDate == null) ? 0 : stageRentalDate.hashCode());
 		result = prime * result + stageState;
+		result = prime * result + ((timeList == null) ? 0 : timeList.hashCode());
 		return result;
 	}
 
@@ -104,7 +117,12 @@ public class PremiumStageOption {
 			return false;
 		if (stageState != other.stageState)
 			return false;
+		if (timeList == null) {
+			if (other.timeList != null)
+				return false;
+		} else if (!timeList.equals(other.timeList))
+			return false;
 		return true;
 	}
-
+	
 }

@@ -89,6 +89,7 @@ $(document).ready(function(){
 		});
 	}); */
 });
+var index = 0;
 function addOption(){
 	var reservationDate = $("#reservationDate").val();
 	var timeCode = new Array();
@@ -104,13 +105,15 @@ function addOption(){
 		var date = "날짜 : "+(reservationDate);
     	date += "/ 시간 : "+(timeCode);
     	date += "/ 가격 : "+(reservationCost);
-		date += "<input type='hidden' id='registerDate' name='registerDate' value="+reservationDate+">"
-		date += "<input type='hidden' id='registerTime' name='registerTime' value="+timeCode+">"
-		date += "<input type='hidden' id='registerCost' name='registerCost' value="+reservationCost+"><hr>"
+    	date += "<input type='hidden' id='registerDate' name='optionList["+index+"].establishNo' value="+${requestScope.map.establishNo}+">"
+		date += "<input type='hidden' id='registerDate' name='optionList["+index+"].stageRentalDate' value="+reservationDate+">"
+		date += "<input type='hidden' id='registerTime' name='optionList["+index+"].timeList' value="+timeCode+">"
+		date += "<input type='hidden' id='registerCost' name='optionList["+index+"].stageCost' value="+reservationCost+"><hr>"
 		$("#reservationOption").append(date);
+		index ++;
 	}
 }
-var dateList = new Array();
+/* var dateList = new Array();
 var timeList = new Array();
 var costList = new Array();
 function enterOption(){
@@ -147,7 +150,7 @@ function enterOption(){
 	    document.getElementById("registerOption").appendChild(x);
 	}
 	document.getElementById("registerOption").submit();
-}
+} */
 
 
 </script>
@@ -170,16 +173,19 @@ function enterOption(){
 	<input type="number" name="reservationCost" id="reservationCost" required="required">
 </div>
 <button id="addOption" class="btn btn-default" onclick="addOption()">추가</button>
-<div class="form-group">
-	<label for="reservationOption">옵션</label> 
-	<div id="reservationOption">
-	</div>
-</div>
-<button id="enterOption" type="button" class="btn btn-default" onclick="enterOption()">등록</button>
 <form action="${initParam.rootPath }/producer/enterPremiumStageOption.do" id="registerOption">
+	<div class="form-group">
+		<label for="reservationOption">옵션</label> 
+		<div id="reservationOption">
+		</div>
+	</div>
+	<button id="enterOption" type="submit" class="btn btn-default">등록</button>
+</form>
+<!-- <button id="enterOption" type="button" class="btn btn-default" onclick="enterOption()">등록</button> -->
+<%-- <form action="${initParam.rootPath }/producer/enterPremiumStageOption.do" id="registerOption">
 	<input type="hidden" id="establishNo" name="establishNo" value="${requestScope.map.establishNo }">
 	
-</form>
+</form> --%>
 <div class="form-group">
 	<label for="reservationOptionLsit">내 공연장 대관 옵션목록</label> 
 	<table class="table">
@@ -206,7 +212,8 @@ function enterOption(){
 					</td>
 					<td>${dateOption.stageState }</td>
 					<td>
-						<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do">
+						<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do" method="post">
+							<sec:csrfInput/>
 							<input type="hidden" id="setablishNo" name="establishNo" value="${dateOption.establishNo }">
 							<button type="submit" id="optionNo" name="optionNo" class="btn btn-default" value="${dateOption.optionNo }">삭제</button>
 						</form>

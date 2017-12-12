@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
@@ -43,12 +43,13 @@
 		});
 	});
 }); */
-function changeStageState(optionNo){
-	 var x = document.createElement("INPUT");
-	    x.setAttribute("type", "hidden");
-	    x.setAttribute("name", "costList");
-	    x.setAttribute("value", costList);
-	    document.getElementById("registerOption").appendChild(x);
+function changeStageState(stateCode){
+	var x = document.createElement("INPUT");
+    x.setAttribute("type", "hidden");
+    x.setAttribute("name", "stageState");
+    x.setAttribute("value", stateCode);
+    document.getElementById("changeStageState").appendChild(x);
+	document.getElementById("changeStageState").submit();
 }
 
 
@@ -157,8 +158,13 @@ function changeStageState(optionNo){
 					<c:choose>
 						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
 						<c:when test="${dateOption.stageState ==1}">
-							<button class="btn btn-defalut" id="acceptance" value="${dateOption.optionNo }">수락</button>
-							<button class="btn btn-defalut" id="rejection" value="${dateOption.optionNo }">거절</button>
+							<form action="${initParam.rootPath }/producer/changePremiumStageState.do" method="post" id="changeStageState">
+								<sec:csrfInput/>
+								<button type="button" class="btn btn-defalut" id="acceptance" onclick="changeStageState('2')">수락</button>
+								<button type="button" class="btn btn-defalut" id="rejection" onclick="changeStageState('0')">거절</button>
+								<input type="hidden" name="optionNo" value="${dateOption.optionNo }">
+								<input type="hidden" name="establishNo" value="${dateOption.establishNo}"> 
+							</form>
 						</c:when>
 					</c:choose>
 				</td>
@@ -167,6 +173,7 @@ function changeStageState(optionNo){
 	</tbody>
 </table>
 <form action="${initParam.rootPath }/producer/goPremiumStageEnterDate.do" method="get">
+	<sec:csrfInput/>
 	<input type="hidden" name="establishNo" value="${requestScope.map.premiumStage.establishNum }">
 	<button class="btn btn-default" type="submit">대관일 등록/수정 으로 이동</button>
 </form>

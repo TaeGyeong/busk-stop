@@ -14,10 +14,10 @@ select*from premium_stage_Time;
 SELECT     video_no,   video_title,   video_link,   video_location,   video_content,   video_date,   
 video_artist,   video_category,   video_user_id,   video_reg_time,   video_hits      
 FROM VIDEO      WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like '%잘%'
-insert into PREMIUM_STAGE_OPTION values(1, '2017-12-16', 0, 300000, 1111);
-insert into PREMIUM_STAGE_OPTION values(2, '2018-01-18', 1, 230000, 1111);
-insert into PREMIUM_STAGE_OPTION values(3, '2018-02-03', 2, 610000, 1111);
-insert into PREMIUM_STAGE_OPTION values(4, '2017-12-25', 0, 550000, 1111);
+insert into PREMIUM_STAGE_OPTION values(256, '2017-12-16', 1, 300000, 1111);
+insert into PREMIUM_STAGE_OPTION values(257, '2018-01-18', 1, 230000, 1111);
+insert into PREMIUM_STAGE_OPTION values(324, '2018-02-03', 1, 610000, 1111);
+insert into PREMIUM_STAGE_OPTION values(400, '2017-12-25', 1, 550000, 1111);
 
 
 /*-----------------------------공연정보(아티스트 게시판)---------------------------------*/
