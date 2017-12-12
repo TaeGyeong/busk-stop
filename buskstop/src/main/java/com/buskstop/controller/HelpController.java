@@ -1,3 +1,4 @@
+
 package com.buskstop.controller;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,11 +51,18 @@ public class HelpController {
 	 */
 
 	@RequestMapping("/helpRegister")
-	public ModelAndView insertHelp(@ModelAttribute Help help, HttpServletRequest request)
-			throws IllegalStateException, IOException {
-		System.out.println("Log: @RequestMapping(\"/helpRegister\") public ModelAndView insertHelp() 호출");
+	public ModelAndView insertHelp(@ModelAttribute Help help, BindingResult result,HttpServletRequest request) throws IllegalStateException, IOException {
+		/* log */	
+		//에러 로그
+		System.out.println("Log: 컨트롤러 호출");
+		System.out.println("Log: @RequestMapping(\"/helpRegister\") public ModelAndView insertHelp()");
+		System.out.println(result);
+		System.out.println(result.getErrorCount());
+			
+		
 		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
-		service.insertHelp();
+		System.out.println("컨트롤러 파라미터 : "+help);
+		service.insertHelp(help);
 		return null;
 	}
 
