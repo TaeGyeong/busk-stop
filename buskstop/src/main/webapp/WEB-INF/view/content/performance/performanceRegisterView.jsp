@@ -19,12 +19,8 @@ $(document).ready(function(){
 		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 	
-	$('input.timepicker').timepicker({
-		
-	});
-	
 	$("#performanceTime").timepicker({
-		timeFormat: 'hh:mm p',
+		timeFormat: 'HH:mm',
 	    interval: 60,
 	    minTime: '00',
 	    maxTime: '23:00',

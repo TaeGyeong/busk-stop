@@ -45,7 +45,7 @@ public interface StageDao {
 	 * @param stageReservation
 	 * @return
 	 */
-	int updateStageForStageReservation(int stageNo, int stageReservation);
+	int updateStageForStageReservation(int stageReservation, int stageNo);
 
 
 	int selectStageCountById(String stageSellerId, Date startDate, Date endDate);
@@ -93,4 +93,17 @@ public interface StageDao {
 
 	int selectStageCountByLocationAndNameNoDate(String locationSearch, String nameSearch);
 
+	/**
+	 * 공급자아이디로 공연장 select
+	 * @param stageSellerId
+	 * @return
+	 */
+	List<Stage> selectStagebyStageSellerId(String stageSellerId);
+	
+	/**
+	 * 공급자가 예약 거절할 경우 예약가능 상태 변경
+	 * @param stageNo
+	 * @return
+	 */
+	int rejectStageByStageNo(int stageNo);
 }

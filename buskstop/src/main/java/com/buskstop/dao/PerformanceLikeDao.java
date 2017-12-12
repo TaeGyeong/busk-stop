@@ -2,6 +2,7 @@ package com.buskstop.dao;
 
 import java.util.List;
 
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceLike;
 
 
@@ -24,4 +25,10 @@ public interface PerformanceLikeDao {
 	int countPerformanceLikeByPerformanceLikeNo(int num);
 	
 	List<PerformanceLike> selectAllPerformanceLike();
+	
+	/**
+	 * 유저의 id로 PerformanceList select하는 dao.
+	 * @return
+	 */
+	List<Performance> selectPerformanceByLikeId(String id);
 }

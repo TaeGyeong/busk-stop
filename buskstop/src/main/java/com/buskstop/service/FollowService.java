@@ -2,7 +2,7 @@ package com.buskstop.service;
 
 import java.util.List;
 
-import com.buskstop.vo.Follow;
+import com.buskstop.vo.Artist;
 
 public interface FollowService {
 	/**
@@ -21,4 +21,11 @@ public interface FollowService {
 	 * 언팔로우 service
 	 */
 	void unFollow(String userId, String followingId);
+	
+	/**
+	 * userId로 follow한 아티스트 정보를 제공하는 service.
+	 * @param userId
+	 * @return
+	 */
+	List<Artist> followArtistList(String userId);
 }

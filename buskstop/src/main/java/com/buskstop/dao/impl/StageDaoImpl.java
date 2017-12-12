@@ -56,10 +56,10 @@ public class StageDaoImpl implements StageDao{
 	}
 	
 	@Override
-	public int updateStageForStageReservation(int stageNo, int stageReservation) {
+	public int updateStageForStageReservation(int stageReservation, int stageNo) {
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("stageNo", stageNo);
 		map.put("stageReservation", stageReservation);
+		map.put("stageNo", stageNo);
 		
 		return session.update(makeSqlId("updateStageForStageReservation"), map);
 	}
@@ -280,5 +280,14 @@ public class StageDaoImpl implements StageDao{
 		return session.selectOne(makeSqlId("selectStageCountByLocationAndNameNoDate"),map);
 	}
 	
+	@Override 
+	public List<Stage> selectStagebyStageSellerId(String stageSellerId){
+		return session.selectList(makeSqlId("selectStagebyStageSellerId"), stageSellerId);
+	}
+	
+	@Override
+	public int rejectStageByStageNo(int stageNo) {
+		return session.update(makeSqlId("rejectStageByStageNo"), stageNo);
+	}
 }
 

@@ -25,9 +25,6 @@
 			} 
 			
 		})
-		
-		
-
 	});
 	
 	function goDetail(root, no){
@@ -37,6 +34,7 @@
 	function goRegister(){
 		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
 	}
+	
 
 </script>
 <style type="text/css">
@@ -118,6 +116,9 @@ select {
 </style>
 <div id="container">
 	<hr>
+	<h1>일반 공연장</h1>
+	<hr>
+	
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
 		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
 		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
@@ -133,39 +134,25 @@ select {
 		<button type="submit" name="search" class="submit">검색</button>
 		<sec:csrfInput/>
 	</form>
-	
 	<hr>
-	<h1>대관 목록</h1>
-	<hr>
-	<table id="stageReservation" style="display: table;">
-		<thead id="thead">
-		<tr>
-			<td>번호 </td>
-			<td>제목</td>
-			<td>대관장소</td>
-			<td>대관날짜</td>
-			<td>등록 시간</td>
-			<td>공급자</td>
-			<td>예약 여부</td>
-		</tr>
-		</thead>
-		<tbody id="tbody">
-				<c:forEach items="${requestScope.map.list}" var="item">
-					<tr style="cursor: pointer;">
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageName }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRentalDate }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})"><fmt:formatDate value="${item.stageRegTime }" pattern="yyyy-MM-dd HH시mm분"></fmt:formatDate></td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageSellerId }</td>
-					<td onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
-					<c:if test="${item.stageReservation==0}">예약불가</c:if>
-					<c:if test="${item.stageReservation==1}">예약가능</c:if></td>
-					</tr>
-				</c:forEach>
-		</tbody>
-	</table>
-	
+	<div class="row">
+		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
+			<div class="thumbnail col-sm-4" style="cursor: pointer;">
+				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+				<div class="caption" >
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageLocation }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">가격 : ${item.stageCost}, 면적 : ${item.stageArea}</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+					<fmt:formatDate value="${item.stageRentalDate}" pattern="yy-MM-dd"/>&nbsp;&nbsp;&nbsp;
+					<fmt:formatDate value="${item.stageStartTime}" pattern="HH:mm"/>~~<fmt:formatDate value="${item.stageEndTime }" pattern="HH:mm"/></p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">작성자 - ${item.stageSellerId }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">등록된 시간 - <fmt:formatDate value="${item.stageRegTime }" pattern="HH:mm"/></p>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	 
 	<div style="width: 100%;">
 		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
 	</div>
@@ -174,7 +161,7 @@ select {
 			<ul class="pagination">
 				<%-- 첫페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectAllStage.do?page=1&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">&lt;&lt;</a>
+					<a href="${initParam.rootPath }/selectAllStage.do?page=1&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">&lt;&lt;</a>
 				</li>
 				<%--
 					이전 페이지 그룹 처리
@@ -183,7 +170,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.previousPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.beginPage - 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">◀</a>
+							<a href="${initParam.rootPath }/selectAllStage.do?page=&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">◀</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -207,7 +194,7 @@ select {
 				  		</c:when>
 						<c:otherwise>
 							<li>
-								<a href="${initParam.rootPath }/selectAllStage.do?page=${num}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">${num }</a>
+								<a href="${initParam.rootPath }/selectAllStage.do?page=${num}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">${num }</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -219,7 +206,7 @@ select {
 				<c:choose>
 					<c:when test="${requestScope.map.pageBean.nextPageGroup }">
 						<li>
-							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.endPage + 1}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">▶</a>
+							<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.endPage + 1}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">▶</a>
 						</li>
 					</c:when>
 					<c:otherwise>
@@ -230,7 +217,7 @@ select {
 				</c:choose>
 				<%-- 마지막 페이지로 이동 --%>
 				<li>
-					<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.totalPage}&category=${requestScope.map.category}&search=${requestScope.map.search}&stageDate=${requestScope.map.sDate}">&gt;&gt;</a>
+					<a href="${initParam.rootPath }/selectAllStage.do?page=${requestScope.map.pageBean.totalPage}&locationSearch=${requestScope.map.stageLocation}&nameSearch=${requestScope.map.stageName}&stageDate=${requestScope.map.startDate}&endDate=${requestScope.map.endDate}&stageSellerId=${requestScope.map.startSellerId}">&gt;&gt;</a>
 				</li>
 			</ul>
 		</div>

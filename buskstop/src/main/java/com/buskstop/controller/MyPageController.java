@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,11 +25,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
 import com.buskstop.service.AuthorityService;
+import com.buskstop.service.FollowService;
+import com.buskstop.service.PerformanceLikeService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
+import com.buskstop.service.VideoService;
 import com.buskstop.vo.Artist;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.User;
+import com.buskstop.vo.Video;
 
 @Controller
 public class MyPageController {
@@ -46,6 +50,16 @@ public class MyPageController {
 
 	@Autowired
 	private PremiumStageService stageService;
+	
+	@Autowired
+	private FollowService followService;
+	
+	@Autowired
+	private PerformanceLikeService performanceLikeService;
+	
+	@Autowired
+	private VideoService videoService;
+	
 
 	/**************************************
 	 * 아티스트 & 공급자 권한 조회 controller
@@ -171,7 +185,7 @@ public class MyPageController {
 		map.put("imageList", imageList);
 		
 		// response
-		return new ModelAndView("stage/premiumStageDetailView.tiles", "map", map);
+		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
 	}
 
 	/**************************************
@@ -265,10 +279,44 @@ public class MyPageController {
 		return "redirect:/updateSuccess.do";
 	}
 
-	/*******************************************
-	 * 		대관공급자 정보 조회 & 수정 controller
-	 *******************************************/
 
+	/*******************************************
+	 * 		팔로우한 아티스트 Controller
+	 *******************************************/
+	
+	@RequestMapping("/member/myFollowInfo")
+	public ModelAndView myFollow() {
+		
+		// userId를 입력해서 follow정보를 가져온다.(artist정보)
+		List<Artist> list = followService.followArtistList(getUserId());
+		
+		return new ModelAndView("myPage/myFollowingView.tiles","list",list);
+	}
+	
+	/******************************************
+	 *		좋아요 누른 글 정보 controller 	
+	 ******************************************/
+	@RequestMapping("/member/myLikeInfo")
+	public ModelAndView myLike() {
+		// 좋아요를 누른 공연정보와 영상정보를 가져온다. (map) performancelike, videolike
+		List<Performance> list = performanceLikeService.performanceByLikeId(getUserId());
+		List<Video> videoList = videoService.selectVideoByVideoLikeId(getUserId()); 
+		
+		//test
+		for(Performance p : list) {
+			System.out.println(list);
+		}
+		for(Video v : videoList) {
+			System.out.println(v);
+		}
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("performanceList", list);
+		map.put("videoList", videoList);
+		return new ModelAndView("myPage/myLikeView.tiles","map",map);
+		
+	}
+	
 	// Security context 값을 받아서 userId 를 받는 method
 	private String getUserId() {
 		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();

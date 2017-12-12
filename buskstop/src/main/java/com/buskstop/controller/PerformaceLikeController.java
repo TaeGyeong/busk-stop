@@ -21,68 +21,83 @@ public class PerformaceLikeController {
 
 	@Autowired
 	private PerformanceService service;
-	
+
 	@Autowired
 	private PerformanceLikeService likeService;
-	
+
 	@RequestMapping("/performanceLike")
 	@ResponseBody
-	public String performanceLike(@RequestParam String num) {
-		int Cnum = Integer.parseInt(num);
+	public String performanceLike(@RequestParam(required=false) String num, @RequestParam(required=false) String no) {
+		
+		String no2 = null;
+		
+		int Cnum = 0;
+		
+		if(num == null) {
+			// 먼저 . 의 인덱스를 찾는다
+	        int idx = no.indexOf(".");
+	        // . 앞부분을 추출
+	        // substring은 첫번째 지정한 인덱스는 포함하지 않는다.
+	        // 아래의 경우는 첫번째 문자열 부터 추출된다.
+	        no2 = no.substring(0, idx);
+	        Cnum = Integer.parseInt(no2);
+		}else {
+			Cnum = Integer.parseInt(num);
+		}
+		
 		int findNum = 0;
 		String findStr = null;
-		
+
 		PerformanceLike like = new PerformanceLike(Cnum, getUserId());
 		List<PerformanceLike> list = likeService.selectperformanceLikeByPerformanceLikeNo(Cnum);
-		for(PerformanceLike fl : list) {
-			if(fl.getPerformanceLikeUserId().equals(getUserId())) { //있다면 삭제
+		for (PerformanceLike fl : list) {
+			if (fl.getPerformanceLikeUserId().equals(getUserId())) { // 있다면 삭제
 				likeService.deletePerformanceLike(like);
 				System.out.println("삭제됨");
-				
+
 				findNum = findLikeCount(Cnum);
 				findStr = Integer.toString(findNum);
 				System.out.println(findStr);
-				
+
 				return findStr;
 			}
 		}
-	//없다면 추가한다
-	likeService.insertPerformanceLike(like);
-	System.out.println("추가됨");
-	
-	findNum = findLikeCount(Cnum);
-	findStr = Integer.toString(findNum);
-	System.out.println(findStr);
-	
-	return findStr;
+		// 없다면 추가한다
+		likeService.insertPerformanceLike(like);
+		System.out.println("추가됨");
+
+		findNum = findLikeCount(Cnum);
+		findStr = Integer.toString(findNum);
+		System.out.println(findStr);
+		
+		return findStr;
 	}
-	
+
 	private String getUserId() {
-		return ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
+		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
-	
-	
+
 	public int findLikeCount(int num) {
 		List<Performance> list2 = service.selectAllPerfor();
 		List<PerformanceLike> likeList = likeService.selectAllPerformanceLike();
 		int sendNum = 0;
-		
+
 		int count = 0;
-		for(Performance pf : list2) {
-			for(PerformanceLike pl : likeList) {
-				if(pf.getPerformanceNo() == pl.getPerformanceLikeNo()) {
-					count ++;
+		for (Performance pf : list2) {
+			for (PerformanceLike pl : likeList) {
+				if (pf.getPerformanceNo() == pl.getPerformanceLikeNo()) {
+					count++;
 					pf.setLikeCount(count);
 				}
 			}
 			count = 0;
 		}
-		for(Performance pf : list2) {
-			if(pf.getPerformanceNo() == num) {
+		for (Performance pf : list2) {
+			if (pf.getPerformanceNo() == num) {
 				sendNum = pf.getLikeCount();
 			}
 		}
-		
+
 		return sendNum;
 	}
 }

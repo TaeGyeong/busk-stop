@@ -50,7 +50,7 @@ public interface PremiumStageReservationService {
 	 * @param StageNo
 	 * @return
 	 */
-	int removePremiumStageOption(int reservationNo);
+	int removePremiumStageOption(int optionNo);
 	
 	/**
 	 * 사업장번호로 옵션조회
@@ -58,6 +58,13 @@ public interface PremiumStageReservationService {
 	 * @return
 	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo);
+	
+	/**
+	 * 옵션번호 변경
+	 * @param option
+	 * @return
+	 */
+	int updatePremiumStageOptionStageState(PremiumStageOption option);
 	
 	////////////////////////////////////////////////////////////////////////////////////
 	

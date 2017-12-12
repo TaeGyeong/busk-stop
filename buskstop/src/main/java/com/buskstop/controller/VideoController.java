@@ -26,26 +26,46 @@ public class VideoController {
 	@Autowired
 	private VideoService service;
 
+	// 조회수 업로드
+	@RequestMapping("")
+	public String uploadVideoHits(int videoNo) {
+		
+		// 조회수를 update 하는 service 구현.
+		
+		return null;
+	}
+	
 	//좋아요
-	@RequestMapping("/videoLike")
-	public @ResponseBody String videoLike(@RequestParam int isLike) {
-		System.out.println(isLike);
-		VideoLike like = new VideoLike(1, getUserId());
-		if (isLike == 0) {
-			service.plusLike(like);
-			return "1";
-		} else {
-			service.deleteLike(like);
-			return "0";
+	@RequestMapping("/member/videoLike")
+	public @ResponseBody String videoLike(@RequestParam int videoNo) {
+		//test
+		System.out.println(videoNo);
+		
+		List<VideoLike> list = service.selectLikeUserByNum(videoNo);
+		VideoLike like = new VideoLike(videoNo, getUserId());
+		for(VideoLike v : list) {
+			if(v.getVideoLikeUserId().equals(getUserId())) {
+				service.deleteLike(like);
+				return "0";
+			}
 		}
+		
+		service.plusLike(like);
+		return "1";
+		
 	}
 
-	@RequestMapping("/likeCheck")
-	public ModelAndView likeCheck() {
-		// 좋아요한 회원정보 조회
-		List<VideoLike> list = service.selectLikeUserByNum(1); // 1은 영상번호
+	@RequestMapping("/member/likeCheck")
+	public @ResponseBody String likeCheck(int videoNo) {
+		
+		// 좋아요한 회원정보 조회 (없으면 0, 있으면 1)
+		List<VideoLike> list = service.selectLikeUserByNum(videoNo); // 1은 영상번호
 		String num = "0";
-
+		
+		// 좋아요정보가 없으면 return 0.
+		if(list==null && list.size()==0) {
+			return num;
+		}
 		// user-check
 		for (VideoLike vl : list) {
 			System.out.println(vl);
@@ -53,8 +73,8 @@ public class VideoController {
 				num = "1";
 			}
 		}
-
-		return new ModelAndView("testpage.tiles", "userLike", num);
+		System.out.println(num);
+		return num;
 	}
 
 	private String getUserId() {
@@ -247,6 +267,15 @@ public class VideoController {
 				list = service.viewVideoByContentAndCategory(category, search);
 				return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
 			}
+		}
+		
+		@RequestMapping("/updateVideoHits")
+		public @ResponseBody String updateVideoHits(int videoNo) {
+			Video video = service.viewVideoByVideoNo(videoNo);
+			video.setVideoHits(video.getVideoHits()+1);
+			service.updateVideo(video);
+			
+			return "success";
 		}
 	
 }

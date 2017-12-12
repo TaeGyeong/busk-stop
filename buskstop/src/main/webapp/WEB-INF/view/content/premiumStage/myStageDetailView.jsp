@@ -1,6 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+${document}.ready(function(){
+	
+	$("#acceptance").on("click", function(){
+		var stateCode = (this).val();
+		$.ajax({
+			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
+			"type":"post",
+			"data":{"optionNo":stateCode,
+					"stageState":2
+			},
+			"dataType":"json",
+			"success":function(){
+				
+			},
+			"error":function(a,b,c){
+				alert(c);
+			}
+		});
+	});
+	
+	$("#rejection").on("click", function(){
+		var stateCode = (this).val();
+		$.ajax({
+			"url":"${initParam.rootPath}/producer/updatePremiumStageOptionStageState",
+			"type":"post",
+			"data":{"optionNo":stateCode,
+					"stageState":0
+			},
+			"dataType":"json",
+			"success":function(){
+				
+			},
+			"error":function(a,b,c){
+				alert(c);
+			}
+		});
+	});
+});
+
+
+
+</script>
 
 <div class="container-inline">
 	<c:forEach items="${requestScope.map.imageList }" var="image">
@@ -16,7 +62,6 @@
 			<th>장소명</th>
 			<th>주소</th>
 			<th>면적</th>
-			<th>가격</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +71,6 @@
 			<td>${requestScope.map.premiumStage.stageName }</td>
 			<td>${requestScope.map.premiumStage.stageLocation }</td>
 			<td>${requestScope.map.premiumStage.stageArea }</td>
-			<td>${requestScope.map.premiumStage.stageCost }</td>
 		</tr>
 	</tbody>
 </table>
@@ -75,34 +119,48 @@
 		<tr>
 			<th>대관날짜</th>
 			<th>대관시간</th>
+			<th>가격</th>
 			<th>예약상태</th>
-			<th>신청자ID</th>
-			<th> </th>
-			<th> </th>
+			<th>예약신청자</th>
+			<th>수락/거절</th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${requestScope.map.dateList }" var="dList">
+		<c:forEach items="${requestScope.map.optionList }" var="dateOption">
 			<tr>
-				<td>${dList.PremiumStageOption.stageRentalDate }</td>
+				<td><fmt:formatDate value="${dateOption.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 				<td>
-					<c:forEach items="${requestScope.map.dateList }" var="tList">
-					<c:choose>
-						<c:when test="${requestScope.map.dateList.PremiumStageOption.optionNo eq requestScope.map.timeList.PremiumStageTime.optionNo }">
-							${tList.PremiumStageTime.timeCode}
-						</c:when>
-					</c:choose>
+					<c:forEach items="${requestScope.map.timeList }" var="timeOption">
+						<c:choose>
+							<c:when test="${dateOption.optionNo eq timeOption.optionNo }">
+								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시,
+							</c:when>
+						</c:choose>
 					</c:forEach>
 				</td>
-				<td>${dList.PremiumStageOption.stageState }</td>
-				<td>${requestScope.map.premiumStage.stageLocation }</td>
-				<td>${requestScope.map.premiumStage.stageArea }</td>
-				<td>${requestScope.map.premiumStage.stageCost }</td>
+				<td>${dateOption.stageCost }</td>
+				<td>
+					<c:choose>
+						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
+						<c:when test="${dateOption.stageState ==1}">수락대기</c:when>
+						<c:otherwise>신청대기</c:otherwise>
+					</c:choose>
+				</td>
+				<td></td>
+				<td>
+					<c:choose>
+						<c:when test="${dateOption.stageState == 2}">대관완료</c:when>
+						<c:when test="${dateOption.stageState ==1}">
+							<button class="btn btn-defalut" id="acceptance" value="${dateOption.optionNo }">수락</button>
+							<button class="btn btn-defalut" id="rejection" value="${dateOption.optionNo }">거절</button>
+						</c:when>
+					</c:choose>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-<form action="${initParam.rootPath }/goPremiumStageEnterDate.do" method="get">
+<form action="${initParam.rootPath }/producer/goPremiumStageEnterDate.do" method="get">
 	<input type="hidden" name="establishNo" value="${requestScope.map.premiumStage.establishNum }">
 	<button class="btn btn-default" type="submit">대관일 등록으로 이동</button>
 </form>

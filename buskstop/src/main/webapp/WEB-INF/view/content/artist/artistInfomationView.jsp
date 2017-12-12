@@ -115,10 +115,12 @@ img{
 			<span>${requestScope.map.artist.artistMembers }</span><br>
 			<span>${requestScope.map.artist.artistSns }</span>
 		</div>
-		<div class="col-sm-2" id="follow">
-			<!-- Follow Button -->
-			<button id="followBtn" class="btn btn-primary">팔로우</button>
-		</div>
+		<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
+			<div class="col-sm-2" id="follow">
+				<!-- Follow Button -->
+				<button id="followBtn" class="btn btn-primary">팔로우</button>
+			</div>
+		</c:if>
 	</div>
 </div>
 

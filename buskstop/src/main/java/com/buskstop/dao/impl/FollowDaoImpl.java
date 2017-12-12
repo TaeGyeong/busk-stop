@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.buskstop.dao.FollowDao;
+import com.buskstop.vo.Artist;
 import com.buskstop.vo.Follow;
 
 @Repository
@@ -31,8 +32,12 @@ public class FollowDaoImpl implements FollowDao{
 
 	@Override
 	public List<Follow> selectFollowByUserId(String userId) {
-		System.out.println(userId);
 		return session.selectList(makeSqlId("selectFollowByUserId"), userId);
+	}
+
+	@Override
+	public List<Artist> selectFollowArtistById(String userId) {
+		return session.selectList(makeSqlId("selectFollowArtistById"), userId);
 	}
 	
 }

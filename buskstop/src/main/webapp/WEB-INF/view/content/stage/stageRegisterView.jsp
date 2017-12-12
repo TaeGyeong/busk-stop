@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${initParam.rootPath }/resource/jquery-timepicker/jquery.timepicker.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <style type="text/css">
 	/* 	
 		공연장 대관 등록 개발용 CSS
@@ -23,6 +24,13 @@
 				box-sizing: inherit;
 				margin: 10px 0;
 				}
+	table {
+	border-spacing: 150px;
+	}
+	table td {
+	width: 300px;
+	background: white;
+	}
 </style>
 <script>
 $(document).ready(function(){
@@ -32,13 +40,6 @@ $(document).ready(function(){
 	$(document).on("click", "#deleteImage", function() {
 		$(this).parent().remove();
 	});
-	$("#dateBtn").on("click", function(){
-		$("#stageSDate").val($("#stageRentalDate").val() + " " + $("#stageStartTime").val());
-	});
-	$("#dateBtn2").on("click", function(){
-		$("#stageEDate").val($("#stageRentalDate").val() + " " + $("#stageEndTime").val());
-	});
-	
 	$("#selectStage").on("click", function(){
 		
 	});
@@ -51,14 +52,27 @@ $(document).ready(function(){
 	});
 	
 	$("#stageStartTime").timepicker({
-		step: 120,            //시간간격 : 5분
-		timeFormat: "H:i"    //시간:분 으로표시
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
 	
 	$("#stageEndTime").timepicker({
-		step: 120,            //시간간격 : 5분
-		timeFormat: "H:i"    //시간:분 으로표시
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
 	});
+	
 });
 
 $(function(){
@@ -77,6 +91,19 @@ function readURL(input){
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
+function timeCheck(){
+	if(document.checkForm.stageStartTime.value >= document.checkForm.stageEndTime.value){
+		alert("끝나는 시간이 시작 시간보다 같거나 빠를 순 없습니다.");
+		return false;
+	} else {
+		alert("굿잡");
+		return true;
+	}
+	
+}
+
+
 </script>
 
 <h2>공연장 대관 등록</h2>
@@ -92,7 +119,7 @@ function readURL(input){
 <div style="width:960px; margin:auto;">
 	<h1>대관 공연장 등록하기</h1>
 	
-	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data">
+	<form action="${initParam.rootPath }/stageRegister.do" method="post" enctype="multipart/form-data" name="checkForm" onsubmit="return timeCheck();">
 		<%-- 공연장 번호 hidden --%>
 		<input type="hidden" name="stageNo" value="0">
 		<%-- 등록자 id hidden --%>
@@ -143,54 +170,48 @@ function readURL(input){
 		</div>
 		
 		<div class="form-group">
-			&nbsp;&nbsp;<label>주차장 유무</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>음주</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>식사 판매</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<label>외부음식 반입 </label>
-			<br><label style="font-weight: normal;">
-			<input type="radio" name="stageParking" value="1">주차장 완비</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageDrinking" value="1">음주 가능</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodSell" value="1">식사 판매</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodRestriction" value="1">반입 가능</label>
+		<table>
+		<tr>
+			<td>주차장 유무</td>
+			<td>음주</td>
+			<td>식사 판매</td>
+			<td>외부음식 반입</td>
+		</tr>
+			<tr style="font-weight: normal;">
+			<td><input type="radio" name="stageParking" value="1">주차장 완비</td>
 			
-			<br><label style="font-weight: normal;">
-			<input type="radio" name="stageParking" value="0">주차장 없음</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageDrinking" value="0">음주 불가</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodSell" value="0">식사 미판매</label>
-			<label style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="stageFoodRestriction" value="0">반입 불가</label>
+			<td><input type="radio" name="stageDrinking" value="1">음주 가능</td>
+			
+			<td><input type="radio" name="stageFoodSell" value="1">식사 판매</td>
+			
+			<td><input type="radio" name="stageFoodRestriction" value="1">반입 가능</td>
+				
+		</tr>
+		<tr>
+			<td><input type="radio" name="stageParking" value="0">주차장 없음</td>
+			
+			<td><input type="radio" name="stageDrinking" value="0">음주 불가</td>
+			
+			<td><input type="radio" name="stageFoodSell" value="0">식사 미판매</td>
+			
+			<td><input type="radio" name="stageFoodRestriction" value="0">반입 불가</td>
+		</tr>
+		</table>
 		</div>
 		
 		<div class="form-group">
 			<label>대관일</label>
-			<input type="Date" name="stageRentalDate" id="stageRentalDate">
-		</div>
-		<div>
+			<input type="Date" name="stageRentalDate" id="stageRentalDate" required="required">
 			<label>시작 시간</label> 
-			
-			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required">
-		<!--<input type="time" name="stageStartTime" id="stageStartTime" required="required">
-			<button type="button" id="dateBtn">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageSDate" id="stageSDate" required="required"> -->
-		</div>
-		<div>
+			<input type="text" name="stageStartTime" value="" placeholder="시간선택"  id="stageStartTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 			<label>끝나는 시간</label> 
-			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required">
-
-		<!--<input type="time" name="stageEndTime" id="stageEndTime" required="required">	
-			<button type="button" id="dateBtn2">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="stageEDate" id="stageEDate" required="required"> -->
+			<input type="text" name="stageEndTime" value="" placeholder="시간선택"  id="stageEndTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 		</div>
 		<br>
 		<!-- 예약가능 여부 -->
 		<input type="hidden" name="stageReservation" value="1">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
-		<button type="submit" class="btn btn-default">등록</button>
+		<button type="submit" class="btn btn-default" >등록</button>
 		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
 	</form>
 </div>

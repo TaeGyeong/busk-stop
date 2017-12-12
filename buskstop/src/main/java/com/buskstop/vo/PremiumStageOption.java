@@ -10,14 +10,17 @@ public class PremiumStageOption {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date stageRentalDate; //시간 아닌 날짜만
 	private int stageState;//옵션의 예약 상태 - 0:신청대기, 1:수락대기, 2:대관완료
+	private int stageCost;// 옵션별 가격
 	private int establishNo; //사업장 번호
 	
 	public PremiumStageOption() {}
 
-	public PremiumStageOption(int optionNo, Date stageRentalDate, int stageState, int establishNo) {
+	public PremiumStageOption(int optionNo, Date stageRentalDate, int stageState, int stageCost, int establishNo) {
+		super();
 		this.optionNo = optionNo;
 		this.stageRentalDate = stageRentalDate;
 		this.stageState = stageState;
+		this.stageCost = stageCost;
 		this.establishNo = establishNo;
 	}
 
@@ -45,6 +48,14 @@ public class PremiumStageOption {
 		this.stageState = stageState;
 	}
 
+	public int getStageCost() {
+		return stageCost;
+	}
+
+	public void setStageCost(int stageCost) {
+		this.stageCost = stageCost;
+	}
+
 	public int getEstablishNo() {
 		return establishNo;
 	}
@@ -56,7 +67,7 @@ public class PremiumStageOption {
 	@Override
 	public String toString() {
 		return "PremiumStageOption [optionNo=" + optionNo + ", stageRentalDate=" + stageRentalDate + ", stageState="
-				+ stageState + ", establishNo=" + establishNo + "]";
+				+ stageState + ", stageCost=" + stageCost + ", establishNo=" + establishNo + "]";
 	}
 
 	@Override
@@ -65,6 +76,7 @@ public class PremiumStageOption {
 		int result = 1;
 		result = prime * result + establishNo;
 		result = prime * result + optionNo;
+		result = prime * result + stageCost;
 		result = prime * result + ((stageRentalDate == null) ? 0 : stageRentalDate.hashCode());
 		result = prime * result + stageState;
 		return result;
@@ -83,6 +95,8 @@ public class PremiumStageOption {
 			return false;
 		if (optionNo != other.optionNo)
 			return false;
+		if (stageCost != other.stageCost)
+			return false;
 		if (stageRentalDate == null) {
 			if (other.stageRentalDate != null)
 				return false;
@@ -92,4 +106,5 @@ public class PremiumStageOption {
 			return false;
 		return true;
 	}
+
 }

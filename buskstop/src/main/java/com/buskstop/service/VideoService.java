@@ -23,7 +23,12 @@ public interface VideoService {
 	 * @return
 	 */
 	public List<VideoLike> selectLikeUserByNum(int num);
-	
+	/**
+	 * 유저가 누른 좋아요 영상목록 조회.
+	 * @param id
+	 * @return
+	 */
+	public List<Video> selectVideoByVideoLikeId(String id);
 	
 	/*######## 동영상 ##########*/
 	/**

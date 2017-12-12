@@ -25,14 +25,18 @@ public class PremiumStageOptionDaoImpl implements PremiumStageOptionDao{
 	}
 
 	@Override
-	public int deletePremiumStageOption(int reservationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deletePremiumStageOption(int optionNo) {
+		return session.delete(makeSqlId("deletePremiumStageOption"), optionNo);
 	}
 
 	@Override
 	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo) {
-		return session.selectOne(makeSqlId("selectPremiumStageOptionByEstablishNo"), establishNo);
+		return session.selectList(makeSqlId("selectPremiumStageOptionByEstablishNo"), establishNo);
+	}
+
+	@Override
+	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
+		return session.update(makeSqlId("updatePremiumStageOptionStageState"), option);
 	}
 
 }

@@ -18,7 +18,7 @@ public interface PremiumStageOptionDao {
 	 * @param StageNo
 	 * @return
 	 */
-	int deletePremiumStageOption(int reservationNo);
+	int deletePremiumStageOption(int optionNo);
 	
 	/**
 	 * 사업장번호로 옵션조회
@@ -26,4 +26,11 @@ public interface PremiumStageOptionDao {
 	 * @return
 	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNo(int establishNo);
+	
+	/**
+	 * 옵션상태 변경
+	 * @param option
+	 * @return
+	 */
+	int updatePremiumStageOptionStageState(PremiumStageOption option);
 }

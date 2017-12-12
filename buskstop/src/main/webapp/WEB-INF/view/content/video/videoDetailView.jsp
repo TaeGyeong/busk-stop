@@ -8,6 +8,9 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	upVideoHits();
+	likeChk();
+	
 	$("#enterVideoCommentBtn").on("click", function(){
 		var videoNo= "${requestScope.video.videoNo }";
 		alert(videoNo);
@@ -90,6 +93,31 @@ $(document).ready(function(){
 			$("#providerBtn").text('댓글보기');
 		}
     });
+    
+    // 좋아요 버튼 ajax.
+    $("#likeBtn").on("click",function(){
+		$.ajax({
+			"url":"${initParam.rootPath }/member/videoLike.do",
+			"type":"post",
+			"data":{
+				"videoNo":"${requestScope.video.videoNo }",
+				"${_csrf.parameterName}":"${_csrf.token}"
+			},
+			"success":function(num){
+				if(num=='1'){
+					$("#likeBtn").css("color","red");
+				} else if(num=='0'){
+					$("#likeBtn").css("color","black");
+				}
+			},
+			"error":function(a,b,c){
+				alert(a);
+				alert(b);
+				alert(c);
+			}
+		});  	
+    });
+    
     
 });
 
@@ -204,6 +232,52 @@ function editComment(videoCommentNo){
 	});
 }
 
+// user의 영상 좋아요 체크.
+function likeChk(){
+	$.ajax({
+		"type":"post",
+		"url":"${initParam.rootPath }/member/likeCheck.do",
+		"data":{
+			"videoNo":"${requestScope.video.videoNo }",
+			"${_csrf.parameterName}":"${_csrf.token}"
+		},
+		"dataType":"text",
+		"success":function(number){
+			if(number =='0'){
+				$("#likeBtn").css("color","black");
+			} else if (number == '1') {
+				$("#likeBtn").css("color","red");
+			}
+		},
+		"error":function(a,b,c){
+			alert(a);
+			alert(b);
+			alert(c);
+		}
+	});
+}
+
+// 조회수 올리기
+function upVideoHits(){
+	$.ajax({
+		"type":"post",
+		"url":"${initParam.rootPath }/updateVideoHits.do",
+		"data":{
+			"videoNo":"${requestScope.video.videoNo }",
+			"${_csrf.parameterName}":"${_csrf.token}"
+		},
+		"dataType":"text",
+		"success":function(txt){
+		},
+		"error":function(a,b,c){
+			alert(a);
+			alert(b);
+			alert(c);
+		}
+	
+	});
+}
+
 </script>
 <style type="text/css">
 table, td {
@@ -311,7 +385,7 @@ div{
 					</tr>
 					<tr>
 						<td>연습 날짜</td>
-						<td>${requestScope.video.videoDate }</td>
+						<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -321,7 +395,7 @@ div{
 					</tr>
 					<tr>
 						<td>공연 날짜</td>
-						<td>${requestScope.video.videoDate }</td>
+						<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
@@ -331,6 +405,9 @@ div{
 		<p style="border: 1px solid #e5e5e5; color:#515151; font-size: 16px; padding:20px;">
 		${requestScope.video.videoContent}
 		</p>
+	</div>
+	<div id="like">
+		<a id="likeBtn" style="cursor:pointer; font-size: 18px; margin-left: 10px; text-decoration: none;"><span class='glyphicon glyphicon-heart'></span></a>
 	</div>
 	
 	<!-- Comment -->

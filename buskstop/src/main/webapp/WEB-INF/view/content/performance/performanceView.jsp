@@ -17,12 +17,15 @@
 				"url":"${initParam.rootPath}/performanceLike.do",
 				"context" : this,
 				"data":{
-					"num":$(this).parent().parent().children("td:eq(0)").text(),
+					"no":$(this).parent().parent().parent().children("div").children("p:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType":"text",
 				"success":function(count){
 					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
+				},
+				"error":function(){
+					alert("로그인 후 이용가능한 기능입니다.");
 				}
 			});
 		});
@@ -120,38 +123,25 @@ select {
 	<div id="container">
 		<h1>VIEW - 일반공연 정보 리스트</h1>
 		<hr>
-		<table id="product_tb" style="display: table;">
-			<thead id="thead">
-				<tr>
-					<td>번호</td>
-					<td>이미지</td>
-					<td>제목</td>
-					<td>공연장소</td>
-					<td>공연날짜</td>
-					<td>작성자</td>
-					<td>작성 시간</td>
-					<td>조회</td>
-					<td>좋아요</td>
-					<!-- <td>좋아요</td> -->
-				</tr>
-			</thead>
-			<tbody id="tbody">
-				<c:forEach items="${requestScope.map.list}" var="item">
-					<tr style="cursor: pointer;">
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><img src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'"></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceTitle} </td>
-						<!-- <c:if test="${item.commentCount > 0}"><span style="color: red;">(${item.commentCount>0})</span></c:if></td> -->
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceDate}" pattern="yyyy-MM-dd HH시mm분"/></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceUserId}</td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})"><fmt:formatDate value="${item.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceHits}</td>
-						<td><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div class="row">
+		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
+			<div class="thumbnail col-sm-4" style="cursor:pointer;">
+				<img src="${initParam.rootPath }/supplierImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
+				<div class="caption" >
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
+					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">작성자 : ${item.performanceUserId }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">등록된 시간 : <fmt:formatDate value="${item.performanceRegTime }" pattern="HH:mm"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${item.performanceHits }</p>
+					 
+				</div>
+				<div>
+					<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 		<br>
 		<form action="${initParam.rootPath }/selectPerformance.do">
 			<select name="category" id="category" style="float: left;">

@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
+			
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -53,6 +54,9 @@ $(document).ready(function(){
 			"dataType":"text",
 			"success":function(count){
 				$(".likeBtn").html("<span class='glyphicon glyphicon-heart'></span>"+count);
+			},
+			"error":function(){
+				alert("로그인 후 이용가능한 기능 입니다.");
 			}
 		});
 	});
@@ -204,13 +208,28 @@ function deletePerformance(performanceNo){
 		</div>
 	</div>
 
+	<div><hr>
+			<div style="float:left; margin-right:5px;">공연 시간</div>
+			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
+		</div>
+	<div>
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+		</p>
+	</div>
+	<div>
+		<hr style="float:bottom">
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			공연 내용 : ${requestScope.map.performance.performanceContent}
+		</p>
+		<hr>
+	</div>
+		<hr>
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
 			<div id="map" style="position:static; width:800px; height:400px"></div>
-			<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
@@ -250,25 +269,8 @@ function deletePerformance(performanceNo){
 				});    
 			</script>
 		</div>
-		<hr>
-		<div>
-			<div style="float:left; margin-right:5px;">공연 시간</div>
-			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
-		</div>
 	</div>
 	<hr>
-	<div>
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
-		</p>
-	</div>
-	<div>
-		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			${requestScope.map.performance.performanceContent}
-		</p>
-		<hr>
-	</div>
 	<div class="button_box" style="width: 100%;">
 		<div style="float: left;">
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
@@ -276,7 +278,7 @@ function deletePerformance(performanceNo){
 		<!-- Board Content End-->
 		<div>
 			<sec:authorize access="isAuthenticated()">
-				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId }">
+				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
 					<input type="submit" value="수정" onclick="updatePerformance();">
 					<input type="submit" value="삭제" onclick="deletePerformance();">
 				</c:if>

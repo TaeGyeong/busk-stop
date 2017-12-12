@@ -1,5 +1,7 @@
 package com.buskstop.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,24 @@ public class StageReservationDaoImpl implements StageReservationDao{
 	public StageReservation selectStageReservationByStageNoforRentalStateCode(int stageNo) {
 		return session.selectOne(makeSqlId("selectStageReservationByStageNoforRentalStateCode"), stageNo);
 	}
+
+	@Override
+	public int cancelStageReservation(int stageNo) {
+		return session.update(makeSqlId("cancelStageReservation"), stageNo);
+	}
+	
+	@Override
+	public List<StageReservation> selectStageReservationByStageNo(int stageNo){
+		return session.selectList(makeSqlId("selectStageReservationByStageNo"), stageNo);
+	}
+	
+	@Override
+	public int successStageReservation(int stageNo) {
+		return session.update(makeSqlId("successStageReservation"), stageNo);
+	}
 		
+	@Override
+	public int rejectStageReservation(int stageNo) {
+		return session.update(makeSqlId("rejectStageReservation"), stageNo);
+	}
 }

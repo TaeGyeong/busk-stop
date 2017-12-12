@@ -57,9 +57,8 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	}
 
 	@Override
-	public int removePremiumStageOption(int reservationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removePremiumStageOption(int optionNo) {
+		return optionDao.deletePremiumStageOption(optionNo);
 	}
 
 	@Override
@@ -67,6 +66,10 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 		return optionDao.selectPremiumStageOptionByEstablishNo(establishNo);
 	}
 
+	@Override
+	public int updatePremiumStageOptionStageState(PremiumStageOption option) {
+		return optionDao.updatePremiumStageOptionStageState(option);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -83,5 +86,6 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo) {
 		return timeDao.selectPremiumStageTimeByOptionNo(optionNo);
 	}
+
 
 }
