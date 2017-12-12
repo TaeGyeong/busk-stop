@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,9 @@ public class StageController {
 	@Autowired
 	private StageService service;
 	
+	@Autowired(required=true)
+	private HttpServletRequest request;
+	
 	private String getUserId() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
@@ -56,9 +60,6 @@ public class StageController {
 	//공연장 등록
 	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
-//		System.out.println("넘어오냐"+stage.getStageStartTime());
-//		System.out.println("넘어오냐"+stage.getStageEndTime());
-		
 		service.insertStage(stage);
 		//파일 경로
 		String dir = request.getServletContext().getRealPath("/stageImage");
@@ -91,8 +92,18 @@ public class StageController {
 		Map<String, Object> map = null;
 		int page=1;
 		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		}catch (Exception e) {
+			
+		}
 		if(locationSearch==null && nameSearch==null && startDate==null && endDate==null && idSearch==null ) {
 			map = service.selectAllStage(page);
+			locationSearch="";
+			nameSearch="";
+			startDate=null;
+			endDate=null;
+			idSearch="";
 		}
 		else {
 		if(locationSearch=="" && nameSearch=="" && startDate!=null && endDate!=null && idSearch=="" ) {
@@ -129,10 +140,10 @@ public class StageController {
 		map.put("list", list);
 		
 		map.put("stageLocation", locationSearch);
-		map.put("nameSearch", nameSearch);
+		map.put("stageName", nameSearch);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
-		map.put("idSearch", idSearch);
+		map.put("stageSellerId", idSearch);
 		
 		return new ModelAndView("stage/stageView.tiles","map",map);
 		
@@ -244,7 +255,7 @@ public class StageController {
 			if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
 				service.insertStageReservation(stageReservation);
 				service.updateStageForStageReservation(0, stageNo);
-				msg = "예약이 성공적으로 완료되었습니다";
+				msg = "예약 신청이 성공적으로 완료되었습니다";
 			}else { //진행중인 예약이 있다면
 				msg = "이미 진행중인 예약이 있는 공연장입니다.";
 			}
@@ -262,4 +273,44 @@ public class StageController {
 		return "예약이 취소되었습니다";
 	}
 	
+	//공급자 공연장 신청자 조회
+	@RequestMapping("/selectMyStageSupply")
+	public ModelAndView selectStageReservationStatement(@RequestParam String stageSellerId){
+		List<StageReservation> stageReser = new ArrayList<StageReservation>();
+		
+		// 공급자 아이디로 공급장 뽑아오기
+		List<Stage> stages = service.selectStagebyStageSellerId(stageSellerId);
+		for(Stage stage : stages) {
+			// 조회된 공급장들의 공급장아이디 뽑아와서 그 공급장들의 예약 정보 뽑아오기
+			int stageNo = stage.getStageNo();
+			List<StageReservation> stageReservations = service.selectStageReservationByStageNo(stageNo);
+			for(StageReservation stageReservation : stageReservations) {
+				//공연장예약 정보에 공연장 이름을 넣어주기
+				stageReservation.setStageName(stage.getStageName());
+				//리스트에 담기
+				stageReser.add(stageReservation);
+			}
+		}
+		return new ModelAndView("myPage/myStageSupplyView.tiles", "stageReservation", stageReser);
+	}
+	
+	//공급자가 예약승인
+	@RequestMapping(value="/successStageReservation", produces="application/text; charset=utf8")
+	public @ResponseBody String successStageReservation(@RequestParam String stageNo) {
+		int stageNum = Integer.parseInt(stageNo);
+		
+		service.successStageReservation(stageNum);
+		return "예약이 수락되었습니다.";
+	}
+	
+	//공급자가 예약취소
+	@RequestMapping(value="/rejectStageReservation", produces="application/text; charset=utf8")
+	public @ResponseBody String rejectStageReservation(@RequestParam String stageNo) {
+		int stageNum = Integer.parseInt(stageNo);
+		
+		service.rejectStageReservation(stageNum);
+		service.rejectStageByStageNo(stageNum);
+		
+		return "예약이 거절되었습니다.";
+	}
 }
