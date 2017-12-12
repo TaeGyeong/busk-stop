@@ -248,7 +248,6 @@ $(document).ready(function(){
 					<button type="button" class="btn btn-success" id="reservationBtn">예약하기</button>
 				</c:when>
 				<c:when test="${requestScope.map.userId eq requestScope.map.rentalUserId }">
-					예약 불가
 					<button type="button" class="btn btn-default" id="cancelBtn">예약취소</button>
 				</c:when>
 				<c:otherwise>
