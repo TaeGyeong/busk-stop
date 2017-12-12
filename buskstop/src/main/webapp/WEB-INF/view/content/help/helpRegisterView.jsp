@@ -93,47 +93,54 @@
 
 <div class="ServiceCenter">
 	<h1 id="head1">고객센터 문의하기</h1>
-	<form action="./helpRegister.do" method="post">
-	   <table class="ServiceCenterTable">
+	<form action="./helpRegister.do" method="post" enctype="multipart/form-data">
+		<table class="ServiceCenterTable">
 			<sec:authorize access="isAuthenticated()">
-			<input type="hidden" name="user" id="UserId" class="form-control" value='<sec:authentication property="principal.userId"/>'>
+				<input type="hidden" name="user" id="UserId" class="form-control" value='<sec:authentication property="principal.userId"/>'>
 			</sec:authorize>
-		
-		   <tr>
-			   <td>ID</td>
-			   <td>
-				   <sec:authorize access="isAuthenticated()">
-				   	<sec:authentication property="principal.userId"/>
-				   </sec:authorize>
-			   </td>
-		   </tr>
-		   <tr>
-			   <td>제목</td>
-			   <td>
-			   <!-- test -->
-			   <!--  <input type="text" id="" name="helpNum" value="0"> -->
-			   <input type="hidden" name="helpNum" id="" class="" required value="0">
-			   <input type="text" id="" name="helpCategory" value="카테고리">
-			   <sec:authorize access="isAuthenticated()">
-			   		<input type="hidden" name="helpUserId" id="helpUserId" class="" value='<sec:authentication property="principal.userId"/>'>
-			   </sec:authorize>
-			   <!-- test end -->
-			   
-			   <input type="text" id="" name="helpTitle" required placeholder="제목을 입력해 주세요."></td>
-		   </tr>
-		   <tr>
-			   <td>내용</td>
-			   <td><textarea id="" name="helpContent" class="" rows="200" required placeholder="내용을 입력해 주세요."></textarea></td>
-		   </tr>
-		   <tr>
-			   <td colspan="2" align="center" id="ButtonTd">
+			<tr>
+				<td>ID</td>
+				<td>
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.userId"/>
+					</sec:authorize>
+				</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td>
+					<!-- test -->
+					<!--  <input type="text" id="" name="helpNum" value="0"> -->
+					<input type="hidden" name="helpNum" id="" class="" required value="0">
+					카테고리
+					<select style="font-size: 14px; height: 20px;" name="helpCategory">
+						<option>신고합니다</option>
+						<option>문의합니다</option>
+					</select>
+					<sec:authorize access="isAuthenticated()">
+						<input type="hidden" name="helpUserId" id="helpUserId" class="" value='<sec:authentication property="principal.userId"/>'>
+					</sec:authorize>
+					<!-- test end -->
+					<input type="text" id="" name="helpTitle" required placeholder="제목을 입력해 주세요.">
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+				이미지 등록
+				<input type="file" name="multiImage">
+					<textarea id="" name="helpContent" class="" rows="200" required placeholder="내용을 입력해 주세요."></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" id="ButtonTd">
 					<div class="ButtonDiv">
 						<button type="submit">등록</button>
 						<button type="reset">취소</button>
 					</div>
-			   </td>
-	       </tr>
-	   </table> 
-	   <sec:csrfInput/><%-- csrf 토큰 --%>  
+				</td>
+			</tr>
+		</table> 
+		<sec:csrfInput/><%-- csrf 토큰 --%>  
 	</form>
 </div>
