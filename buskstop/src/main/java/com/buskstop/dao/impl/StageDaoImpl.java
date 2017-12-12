@@ -33,7 +33,7 @@ public class StageDaoImpl implements StageDao{
 	
 	@Override
 	public List<Stage> selectStage() {
-		return session.selectOne(makeSqlId("selectStage"));
+		return session.selectList(makeSqlId("selectStage"));
 	}
 	
 	@Override
@@ -278,6 +278,16 @@ public class StageDaoImpl implements StageDao{
 		map.put("stageName", nameSearch);
 		map.put("stageLocation", locationSearch);
 		return session.selectOne(makeSqlId("selectStageCountByLocationAndNameNoDate"),map);
+	}
+
+	@Override
+	public List<Stage> selectStageAndReview() {
+		return session.selectList(makeSqlId("selectStageAndReview"));
+	}
+
+	@Override
+	public List<Stage> selectStageBySearch(HashMap<String, Object> map) {
+		return session.selectList(makeSqlId("selectStageBySearch"), map);
 	}
 	
 	@Override 

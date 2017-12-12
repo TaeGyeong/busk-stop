@@ -70,7 +70,7 @@ public class MyPageController {
 			return "/myPageView.do";
 		}
 
-		return "user/registerSupplierView.tiles";
+		return "user/registerSupplierView.myTiles";
 	}
 
 	@RequestMapping("/registerArtistView")
@@ -78,7 +78,7 @@ public class MyPageController {
 		if (authorityService.readArtistAutoritiesByUserId(getUserId())) {
 			return "/myPageView.do";
 		}
-		return "user/registerArtistView.tiles";
+		return "user/registerArtistView.myTiles";
 	}
 
 	/**************************************
@@ -290,7 +290,7 @@ public class MyPageController {
 		// userId를 입력해서 follow정보를 가져온다.(artist정보)
 		List<Artist> list = followService.followArtistList(getUserId());
 		
-		return new ModelAndView("myPage/myFollowingView.tiles","list",list);
+		return new ModelAndView("myPage/myFollowingView.myTiles","list",list);
 	}
 	
 	/******************************************
@@ -302,24 +302,27 @@ public class MyPageController {
 		List<Performance> list = performanceLikeService.performanceByLikeId(getUserId());
 		List<Video> videoList = videoService.selectVideoByVideoLikeId(getUserId()); 
 		
-		//test
-		for(Performance p : list) {
-			System.out.println(list);
-		}
-		for(Video v : videoList) {
-			System.out.println(v);
-		}
-		
+		// list 두개를 map에 넣어서 request로 보낸다.
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("performanceList", list);
 		map.put("videoList", videoList);
-		return new ModelAndView("myPage/myLikeView.tiles","map",map);
+		return new ModelAndView("myPage/myLikeView.myTiles","map",map);
 		
+	}
+	
+	@RequestMapping("/member/myPageView")
+	public ModelAndView myPageMain() {
+		// mypage main에서 보여줄 정보 처리 controller.
+		
+		
+		return new ModelAndView("mymypage/myPageView.myTiles","map",null);
 	}
 	
 	// Security context 값을 받아서 userId 를 받는 method
 	private String getUserId() {
 		return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
 	}
+	
+	
 
 }

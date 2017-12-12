@@ -1,5 +1,7 @@
 package com.buskstop.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
@@ -10,6 +12,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,4 +112,24 @@ public class UserServiceImpl implements UserService {
 		return sb.toString();
 	}
 
+	@Override
+	public List<User> selectAllUser() {
+		return userDao.selectAllUserAndAuthority();
+	}
+
+	@Override
+	public List<User> dropAndSelectUser(String userId) {
+		userDao.dropUpdateUserById(userId);
+		return userDao.selectAllUserAndAuthority();
+	}
+
+	@Override
+	public List<User> searchMemberManagement(String authority, String search) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("authority", authority);
+		map.put("search", search);
+		
+		return userDao.selectByAuthorityAndUserId(map);
+	}
+	
 }

@@ -92,20 +92,38 @@
 <hr>
 
 <div class="ServiceCenter">
-	<h1  id="head1">고객센터 문의하기</h1>
+	<h1 id="head1">고객센터 문의하기</h1>
 	<form action="./helpRegister.do" method="post">
 	   <table class="ServiceCenterTable">
+			<sec:authorize access="isAuthenticated()">
+			<input type="hidden" name="user" id="UserId" class="form-control" value='<sec:authentication property="principal.userId"/>'>
+			</sec:authorize>
+		
 		   <tr>
 			   <td>ID</td>
-			   <td><i>USER_ID_here</i></td>
+			   <td>
+				   <sec:authorize access="isAuthenticated()">
+				   	<sec:authentication property="principal.userId"/>
+				   </sec:authorize>
+			   </td>
 		   </tr>
 		   <tr>
 			   <td>제목</td>
-			   <td><input id="" type="text" name="text" required placeholder="제목을 입력해 주세요."></td>
+			   <td>
+			   <!-- test -->
+			   <!--  <input type="text" id="" name="helpNum" value="0"> -->
+			   <input type="hidden" name="helpNum" id="" class="" required value="0">
+			   <input type="text" id="" name="helpCategory" value="카테고리">
+			   <sec:authorize access="isAuthenticated()">
+			   		<input type="hidden" name="helpUserId" id="helpUserId" class="" value='<sec:authentication property="principal.userId"/>'>
+			   </sec:authorize>
+			   <!-- test end -->
+			   
+			   <input type="text" id="" name="helpTitle" required placeholder="제목을 입력해 주세요."></td>
 		   </tr>
 		   <tr>
 			   <td>내용</td>
-			   <td><textarea id="" class="" rows="200" required placeholder="내용을 입력해 주세요."></textarea></td>
+			   <td><textarea id="" name="helpContent" class="" rows="200" required placeholder="내용을 입력해 주세요."></textarea></td>
 		   </tr>
 		   <tr>
 			   <td colspan="2" align="center" id="ButtonTd">
