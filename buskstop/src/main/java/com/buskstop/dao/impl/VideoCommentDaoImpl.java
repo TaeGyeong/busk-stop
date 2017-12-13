@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -37,6 +38,11 @@ public class VideoCommentDaoImpl implements VideoCommentDao{
 	@Override
 	public int deleteVideoCommentByVideoCommentNo(int videoCommentNo) {
 		return session.delete(makeSqlId("deleteVideoCommentByVideoCommentNo"), videoCommentNo);
+	}
+
+	@Override
+	public List<VideoComment> selectVideoCommentByMap(HashMap<String, Object> map) {
+		return session.selectList(makeSqlId("selectVideoCommentByMap"), map);
 	}
 
 	@Override

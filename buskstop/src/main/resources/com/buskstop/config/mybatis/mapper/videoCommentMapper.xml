@@ -58,4 +58,16 @@
 		WHERE	video_no = #{value}
 	</select>
 
+	<select id="selectVideoCommentByMap" parameterType="Map" resultMap="videoComment-resultmap">
+		<include refid="videoComment-select-sql"/>
+		<where>
+			VIDEO_NO = #{videoNo}
+			<if test="userId != null">
+			AND	VIDEO_COMMENT_USER_ID LIKE '%'||#{userId}||'%'
+			</if>
+			<if test="content != null">
+			AND	VIDEO_COMMENT LIKE '%'||#{content}||'%'
+			</if>
+		</where>
+	</select>
 </mapper>

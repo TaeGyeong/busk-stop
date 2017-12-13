@@ -22,9 +22,9 @@
 <br>
 <a href="${initParam.rootPath }">공연장 리뷰관리</a>
 <br>
-<a href="${initParam.rootPath }">공연정보 댓글관리</a>
+<a href="${initParam.rootPath }/admin/performanceComment.do">공연정보 댓글관리</a>
 <br>
-<a href="${initParam.rootPath }">영상댓글관리</a>
+<a href="${initParam.rootPath }/admin/videoComment.do">영상댓글관리</a>
 <br>
 <a href="${initParam.rootPath }">고객센터</a>
 <br>

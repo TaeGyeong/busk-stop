@@ -37,6 +37,12 @@ public interface PremiumStageReservationService {
 	 */
 	List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId);
 	
+	/**
+	 * 옵션번호로 예약조회
+	 * @param optionNo
+	 * @return
+	 */
+	PremiumStageReservation selectPremiumStageReservationByOptionNo(int optionNo);
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 예약옵션 등록
@@ -66,7 +72,19 @@ public interface PremiumStageReservationService {
 	 */
 	int updatePremiumStageOptionStageState(PremiumStageOption option);
 	
+	/**
+	 * 사업장번호로 옵션정보와 옵션의 시간정보 한번에 
+	 * @param establishNo
+	 * @return
+	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo);
+	
+	/**
+	 * 옵션번호로 옵션정보랑 시간정보까지 조회
+	 * @param optionNo
+	 * @return
+	 */
+	PremiumStageOption selectPremiumStageOptionByOptionNoJoin(int optionNo);
 	
 	////////////////////////////////////////////////////////////////////////////////////
 	

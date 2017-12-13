@@ -21,23 +21,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.PerformanceCommentService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.StageService;
 import com.buskstop.service.UserService;
+import com.buskstop.service.VideoCommentService;
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.Performance;
+import com.buskstop.vo.PerformanceComment;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.PremiumStageOption;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.User;
 import com.buskstop.vo.Video;
+import com.buskstop.vo.VideoComment;
 
 @Controller
 @RequestMapping("/admin/")
@@ -59,7 +64,13 @@ public class AdminController {
 	private PerformanceService performanceService;
 	
 	@Autowired
+	private PerformanceCommentService performanceCommentService;
+	
+	@Autowired
 	private VideoService videoService;
+	
+	@Autowired
+	private VideoCommentService videoCommentService;
 
 	/********************************* 회원관리 *********************************/
 
@@ -455,4 +466,49 @@ public class AdminController {
 		return new ModelAndView("admin/videoManageView.tiles","list",list);
 	}
 	
+	/*********************** 영상 댓글 관리 ***********************/
+	
+	// 영상댓글 관리 창으로 이동하는 controller
+	@RequestMapping("videoComment")
+	public ModelAndView videoCommentView() {
+		List<Video> list = videoService.selectVideo();
+		return new ModelAndView("admin/videoCommentManage.tiles","list",list);
+	}
+	
+	// 영상 번호로 댓글 목록을 보내는 controller (ajax)
+	@RequestMapping("videoCommentList")
+	public @ResponseBody List<VideoComment> returnComment(int videoNo,String userId, String content){
+		System.out.println(videoNo);
+		System.out.println(userId);
+		System.out.println(content);
+		List<VideoComment> list = videoCommentService.searchVideoCommentByAdmin(videoNo, userId, content); 
+		return list;
+	}
+	
+	@RequestMapping("deleteVideoComment")
+	public ModelAndView deleteVideoComment(int videoCommentNo) {
+		videoCommentService.deleteVideoCommentByVideoCommentNo(videoCommentNo);
+		return videoCommentView();
+	}
+	
+	/*********************** 공연정보 댓글 관리 ***********************/
+	
+	@RequestMapping("performanceComment")
+	public ModelAndView performanceComment() {
+		
+		List<Performance> list = performanceService.selectAllPerfor(); 
+		return new ModelAndView("admin/performanceCommentManage.tiles","list",list);
+	}
+	
+	@RequestMapping("performanceCommentList")
+	public @ResponseBody List<PerformanceComment> searchPerformanceComment(int performanceNo, String userId, String content) {
+		List<PerformanceComment> list =  performanceCommentService.searchPerformanceComment(performanceNo, userId, content);
+		return list; 
+	}
+	
+	@RequestMapping("deletePerformanceComment")
+	public ModelAndView deletePerformanceComment(int performanceCommentNo){
+		performanceCommentService.deletePerformanceComment(performanceCommentNo);
+		return performanceComment();
+	}
 }

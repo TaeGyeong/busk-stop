@@ -138,7 +138,8 @@ function addOption(){
 				<th>대관날짜</th>
 				<th>대관시간</th>
 				<th>예약상태</th>
-				<th>        </th>
+				<th>가격</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -147,16 +148,19 @@ function addOption(){
 					<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 					<td>
 						<c:forEach items="${option.timeList }" var="timeOption">
-							${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
+							${timeOption}시 - ${timeOption+1}시<br>
 						</c:forEach>
 					</td>
 					<td>${option.stageState }</td>
+					<td>${option.stageCost }</td>
 					<td>
-						<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do" method="post">
-							<sec:csrfInput/>
-							<input type="hidden" id="setablishNo" name="establishNo" value="${option.establishNo }">
-							<button type="submit" id="optionNo" name="optionNo" class="btn btn-default" value="${option.optionNo }">삭제</button>
-						</form>
+						<c:if test="${option.stageState == 0}">
+							<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do" method="post">
+								<sec:csrfInput/>
+								<input type="hidden" id="setablishNo" name="establishNo" value="${option.establishNo }">
+								<button type="submit" id="optionNo" name="optionNo" class="btn btn-default" value="${option.optionNo }">삭제</button>
+							</form>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>

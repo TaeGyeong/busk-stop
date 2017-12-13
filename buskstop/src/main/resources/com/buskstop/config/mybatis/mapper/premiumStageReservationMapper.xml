@@ -20,21 +20,39 @@
 		SELECT <include refid="premiumReservation-column-sql"/>
 	</sql>
 	
+	<!-- <sql id="select-join-option-sql">
+		SELECT	r.reservation_no,
+				r.user_id,
+				r.establish_no,
+				r.reservation_reg_time,
+				r.option_no
+				o.stage_rental_date,
+				o.time_list
+	</sql> -->
+	
 	<resultMap type="PremiumStageReservation" id="premiumReservation-resultMap">
 		<id column="RESERVATION_NO" property="reservationNo"/>
-		<result column="USER_ID" property="userId"/>
+		<result column="USER_ID" property="reservationUserId"/>
 		<result column="ESTABLISH_NO" property="establishNo"/>
 		<result column="RESERVATION_REG_TIME" property="reservationRegTime"/>
 		<result column="OPTION_NO" property="optionNo"/>
 	</resultMap>
+	<!-- <resultMap type="PremiumStageReservation" id="reservation-join-option-resultMap" extends="premiumReservation-resultMap">
+		<association property="reservation" javaType="PremiumStageOption">
+			<id column="OPTION_NO" property="optionNo"/>
+			<result property="stageRentalDate" column="publisher_name" />
+			<result property="timeList" column="publisher_name" />
+			<result property="stageCost" column="publisher_phone" />
+		</association>
+	</resultMap> -->
 	
 	<insert id="insertPremiumStageReservation" parameterType="PremiumStageReservation">
 		<selectKey keyProperty="reservationNo" resultType="_int" order="BEFORE">
-			select PREMIUM_STAGE_RESERVATION_NO_SEQ.nextval from dual
+			select PREMIUM_RESERVATION_NO_SEQ.nextval from dual
 		</selectKey>
 		INSERT INTO	PREMIUM_STAGE_RESERVATION
 		VALUES		(#{reservationNo},
-					 #{userId},
+					 #{reservationUserId},
 					 #{establishNo},
 					 sysdate,
 					 #{optionNo})
@@ -53,6 +71,11 @@
 	<select id="selectPremiumStageReservationByUserId" parameterType="String" resultMap="premiumReservation-resultMap">
 		<include refid="premiumReservation-select-sql"/>
 		WHERE	user_id = #{value}
+	</select>
+	
+	<select id="selectPremiumStageReservationByOptionNo" parameterType="_int" resultMap="premiumReservation-resultMap">
+		<include refid="premiumReservation-select-sql"/>
+		WHERE	option_no = #{value}
 	</select>
 	
 </mapper>
