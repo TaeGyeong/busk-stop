@@ -95,7 +95,7 @@ public class PremiumStageReservationController {
 	 * @param option
 	 * @return
 	 */
-	@RequestMapping("/producer/changePremiumStageState")
+	@RequestMapping("/changePremiumStageState")
 	public ModelAndView updatePremiumStageOptionStageState(@ModelAttribute PremiumStageOption option){
 		service.updatePremiumStageOptionStageState(option);
 		return new ModelAndView("redirect:/producer/myStageDetail.do","establishNum",option.getEstablishNo());

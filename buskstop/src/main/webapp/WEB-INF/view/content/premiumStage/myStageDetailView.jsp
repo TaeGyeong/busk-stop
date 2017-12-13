@@ -21,7 +21,6 @@ $(document).ready(function(){
 			"data":{"optionNo":$('#goUserDetail').val()},
 			"dataType":"json",
 			"success":function(user){
-				alert("성공");
 				var data = "<br><p>";
 				data += "신청자 이름 : "+user.userName;
 				data += "<br>신청자 연락처 : "+user.userPhoneNum+"</p>";
@@ -139,7 +138,7 @@ function removeUserInfo(){
 					<c:choose>
 						<c:when test="${option.stageState == 2}">대관완료</c:when>
 						<c:when test="${option.stageState ==1}">
-							<form action="${initParam.rootPath }/producer/changePremiumStageState.do" method="post" id="changeStageState">
+							<form action="${initParam.rootPath }/changePremiumStageState.do" method="post" id="changeStageState">
 								<sec:csrfInput/>
 								<button type="button" class="btn btn-defalut" id="acceptance" onclick="changeStageState('2')">수락</button>
 								<button type="button" class="btn btn-defalut" id="rejection" onclick="changeStageState('0')">거절</button>
@@ -151,7 +150,9 @@ function removeUserInfo(){
 				</td>
 				<td>
 					<div id="userInfo">
-						<button type="button" class="btn btn-default" id="goUserDetail" name="goUserDetail" value="${option.optionNo }">신청자 정보보기</button>
+						<c:if test="${option.stageState != 0 }">
+							<button type="button" class="btn btn-default" id="goUserDetail" name="goUserDetail" value="${option.optionNo }">신청자 정보보기</button>
+						</c:if>	
 					</div>
 				</td>
 			</tr>
