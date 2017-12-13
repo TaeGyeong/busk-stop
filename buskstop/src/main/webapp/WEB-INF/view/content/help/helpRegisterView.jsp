@@ -163,6 +163,7 @@
 				<td>첨부파일</td>
 				<td>
 					<input type="file" name="multiImage" style="border-style:none">
+					<input type="file" name="multiImage2" style="border-style:none">
 				</td>
 			</tr>
 			

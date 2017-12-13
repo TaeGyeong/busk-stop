@@ -43,7 +43,7 @@ public class StageController {
 	
 	@Autowired(required=true)
 	private HttpServletRequest request;
-	
+		
 	private String getUserId() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
@@ -67,7 +67,8 @@ public class StageController {
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> mf = mhsq.getFiles("imgs");
 		if(mf.size()==1 && mf.get(0).getOriginalFilename().equals("")) {
-		}else {	for(int i=0; i< mf.size(); i++) {
+		}else {	
+			for(int i=0; i< mf.size(); i++) {
 				//파일 중복명 처리, 저장되는 파일 이름
 				String fileName = UUID.randomUUID().toString();
 				//파일 저장
