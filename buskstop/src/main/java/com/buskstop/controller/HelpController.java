@@ -135,14 +135,14 @@ public class HelpController {
 		
 		service.updateHelp(help);
 		int helpNum = help.getHelpNum();
-		return new ModelAndView("helpDetailView.do?helpNum"+helpNum,"help",help);
+		return new ModelAndView("redirect:/helpDetail.do?helpNum="+helpNum,"help",help);
 				
 	}
 	
 	@RequestMapping("/updateHelp2")
 	public ModelAndView updateHelp2(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
-		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+		return new ModelAndView("help/helpUpdate.tiles","help",help);
 	}
 	
 	@RequestMapping("/selectHelp")
