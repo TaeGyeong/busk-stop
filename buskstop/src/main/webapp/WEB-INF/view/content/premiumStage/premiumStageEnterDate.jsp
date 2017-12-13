@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 var optionNo = 0;
 $(document).ready(function(){
 	$("#selectTime").on("click",function(){
-		alert($("#reservationDate").val());
 		$.ajax({
 			"url":"${initParam.rootPath}/producer/readPremiumStageReservationTimeByStageRentalDate.do",
 			"type":"get",
@@ -18,8 +18,6 @@ $(document).ready(function(){
 		    	$("#timeCodeList").remove();
 		    },
 			"success":function(list){
-				/* alert("일단 성공으로");
-				alert(list.length); */
 				$("#timeCodeList").remove();
 				var n = 1;
 				var reg = 0;
@@ -40,7 +38,6 @@ $(document).ready(function(){
 						}
 					}
 				}else{
-					/* alert("list가 null"); */
 					$("#reservationTime").append('<div id="timeCodeList"></div>');
 					for(var i=0; i<24; i++){
 						n = 1 + i;
@@ -53,47 +50,39 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	/* $("#addOption").on("click",function(){
-		var reservationDate = $("#reservationDate").val();
-		var timeCode = new Array();
-		$("input[name='timeCode']:checked").each(function(){
-			timeCode.push($(this).val());
-		});
-		if(timeCode.length==0){
-    		return;
-    	}
-		alert(timeCode.join(","));
-		$.ajax({
-			"url":"${initParam.rootPath}/addPremiumStageOptionBasket.do",
-			"type":"get",
-			"data":{
-				"reservationDate":reservationDate,
-				"timeCode":timeCode
-			},
-			"dataType":"json",
-		    "async": "false",
-		    "success":function(map){
-		    	$("#timeCodeList").remove();
-		    	optionNo += 1;
-		    	var date = "날짜 : "+(map.reservationDate);
-		    	date += "/ 시간 : "+(map.timeCode);
-		    	date += "<input type='hidden' id='registerDate' name='registerDate' value="+map.reservationDate+"/>"
-		    	date += "<input type='hidden' id='registerTime' name='registerTime' value="+map.timeCode+"/><hr>"
-		    	$("#reservationOption").append(date);
-		    },
-		    "error":function(a,b,c){
-		    	alert(c);
-		    }
-		});
-	}); */
 });
+var index = 0;
 function addOption(){
 	var reservationDate = $("#reservationDate").val();
 	var timeCode = new Array();
 	$("input[name='timeCode']:checked").each(function(){
 		timeCode.push($(this).val());
 	});
+	var registerDate = new Array();
+	var registerTime = new Array();
+	if(index != 0){
+		$("input[id='registerDate']").each(function(){
+			registerDate.push($(this).val());
+		});
+		/* $("input[id='registerTime']").each(function(){
+			registerTime.push($(this).val());
+		}); */
+		for(var i=0; i<registerDate.length; i++){
+			if(registerDate[i] == reservationDate){
+				registerTime = $("input[name='optionList["+i+"].timeList']").val();
+				for(var j=0; j<registerTime.length; j++){
+					for(var r=j; r<timeCode.length; r++){
+						if(registerTime[j] == timeCode[r]){
+							alert("시간중복! 날짜별 시간을 확인해주세요.");
+							$("#timeCodeList").remove();
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	var reservationCost = $("#reservationCost").val();
 	if(timeCode.length==0){
 		alert("시간을 선택해주세요");
@@ -103,51 +92,14 @@ function addOption(){
 		var date = "날짜 : "+(reservationDate);
     	date += "/ 시간 : "+(timeCode);
     	date += "/ 가격 : "+(reservationCost);
-		date += "<input type='hidden' id='registerDate' name='registerDate' value="+reservationDate+">"
-		date += "<input type='hidden' id='registerTime' name='registerTime' value="+timeCode+">"
-		date += "<input type='hidden' id='registerCost' name='registerCost' value="+reservationCost+"><hr>"
+    	date += "<input type='hidden' id='establishNo' name='optionList["+index+"].establishNo' value="+${requestScope.map.establishNo}+">"
+		date += "<input type='hidden' id='registerDate' name='optionList["+index+"].stageRentalDate' value="+reservationDate+">"
+		date += "<input type='hidden' id='registerTime' name='optionList["+index+"].timeList' value="+timeCode+">"
+		date += "<input type='hidden' id='registerCost' name='optionList["+index+"].stageCost' value="+reservationCost+"><hr>"
 		$("#reservationOption").append(date);
+		index ++;
 	}
 }
-var dateList = new Array();
-var timeList = new Array();
-var costList = new Array();
-function enterOption(){
-	$("input[name='registerDate']").each(function(){
-		dateList.push($(this).val());
-	});
-	$("input[name='registerTime']").each(function(){
-		timeList.push($(this).val());
-	});
-	$("input[name='registerCost']").each(function(){
-		costList.push($(this).val());
-	});
-	alert(costList);
-	if(dateList.length==0){
-		alert("선택된 옵션이 없습니다");
-		return;
-	}else{
-	    var y = document.createElement("INPUT");
-	    y.setAttribute("type", "hidden");
-	    y.setAttribute("name", "dateList");
-	    y.setAttribute("value", dateList);
-	    document.getElementById("registerOption").appendChild(y);
-	    
-	    var z = document.createElement("INPUT");
-	    z.setAttribute("type", "hidden");
-	    z.setAttribute("name", "timeList");
-	    z.setAttribute("value", timeList);
-	    document.getElementById("registerOption").appendChild(z);
-	    
-	    var x = document.createElement("INPUT");
-	    x.setAttribute("type", "hidden");
-	    x.setAttribute("name", "costList");
-	    x.setAttribute("value", costList);
-	    document.getElementById("registerOption").appendChild(x);
-	}
-	document.getElementById("registerOption").submit();
-}
-
 
 </script>
 
@@ -169,15 +121,14 @@ function enterOption(){
 	<input type="number" name="reservationCost" id="reservationCost" required="required">
 </div>
 <button id="addOption" class="btn btn-default" onclick="addOption()">추가</button>
-<div class="form-group">
-	<label for="reservationOption">옵션</label> 
-	<div id="reservationOption">
+<form action="${initParam.rootPath }/producer/enterPremiumStageOption.do" id="registerOption" method="post">
+	<div class="form-group">
+		<label for="reservationOption">옵션</label> 
+		<div id="reservationOption">
+		</div>
 	</div>
-</div>
-<button id="enterOption" type="button" class="btn btn-default" onclick="enterOption()">등록</button>
-<form action="${initParam.rootPath }/producer/enterPremiumStageOption.do" id="registerOption">
-	<input type="hidden" id="establishNo" name="establishNo" value="${requestScope.map.establishNo }">
-	
+	<button id="enterOption" type="submit" class="btn btn-default">등록</button>
+	<sec:csrfInput/>
 </form>
 <div class="form-group">
 	<label for="reservationOptionLsit">내 공연장 대관 옵션목록</label> 
@@ -191,23 +142,20 @@ function enterOption(){
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.map.optionList }" var="dateOption">
+			<c:forEach items="${requestScope.map.optionList }" var="option">
 				<tr>
-					<td><fmt:formatDate value="${dateOption.stageRentalDate }" pattern="yyy/MM/dd"/></td>
+					<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 					<td>
-						<c:forEach items="${requestScope.map.timeList }" var="timeOption">
-							<c:choose>
-								<c:when test="${dateOption.optionNo eq timeOption.optionNo }">
-									${timeOption.timeCode}시 - ${timeOption.timeCode+1}시,
-								</c:when>
-							</c:choose>
+						<c:forEach items="${option.timeList }" var="timeOption">
+							${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
 						</c:forEach>
 					</td>
-					<td>${dateOption.stageState }</td>
+					<td>${option.stageState }</td>
 					<td>
-						<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do">
-							<input type="hidden" id="setablishNo" name="establishNo" value="${dateOption.establishNo }">
-							<button type="submit" id="optionNo" name="optionNo" class="btn btn-default" value="${dateOption.optionNo }">삭제</button>
+						<form action="${initParam.rootPath }/producer/deletePremiumStageOption.do" method="post">
+							<sec:csrfInput/>
+							<input type="hidden" id="setablishNo" name="establishNo" value="${option.establishNo }">
+							<button type="submit" id="optionNo" name="optionNo" class="btn btn-default" value="${option.optionNo }">삭제</button>
 						</form>
 					</td>
 				</tr>
@@ -215,3 +163,8 @@ function enterOption(){
 		</tbody>
 	</table>
 </div>
+<form action="${initParam.rootPath }/producer/myStageDetail.do" method="post">
+	<sec:csrfInput/>
+	<input type="hidden" name="establishNum" value="${requestScope.map.establishNo }">
+	<button class="btn btn-default" type="submit">공연장 상세보기로 이동</button>
+</form>

@@ -62,8 +62,19 @@ public class HelpController {
 		
 		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
 		System.out.println("컨트롤러 파라미터 : "+help);
+		
+		// 파일 업로드 처리
+		MultipartFile multiImage = help.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			//디렉토리
+			String dir = request.getServletContext().getRealPath("/helpImage");
+			String fileName = UUID.randomUUID().toString();
+			File upImage = new File(dir, fileName+".jpg");
+			multiImage.transferTo(upImage);
+			help.setHelpImage(fileName+".jpg");
+		}
 		service.insertHelp(help);
-		return null;
+		return new ModelAndView("help/helpView.tiles");//임시 경로
 	}
 
 	@RequestMapping("/helpDetailView")

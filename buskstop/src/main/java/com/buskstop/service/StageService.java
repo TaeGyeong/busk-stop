@@ -152,17 +152,33 @@ public interface StageService {
 	 * 공급자가 예약 승인
 	 * @param stageNo
 	 */
-	void successStageReservation(int stageNo);
+	void successStageReservation(int rentalNo);
 	
 	/**
 	 * 공급자가 예약 취소
 	 * @param stageNo
 	 */
-	void rejectStageReservation(int stageNo);
+	void rejectStageReservation(int rentalNo);
 	
 	/**
 	 * 공급자가 예약 취소할 경우 예약 가능 상태 변경
 	 * @param stageNo
 	 */
 	void rejectStageByStageNo(int stageNo);
+	
+	/**
+	 * 사용자가 신청한 예약 내역 조회
+	 * @param rentalUserId
+	 * @return
+	 */
+	List<StageReservation> selectMyStageApply(String rentalUserId);
+	
+	/**
+	 * 대관번호로 예약정보 뽑아오기
+	 * @param rentalNo
+	 * @return
+	 */
+	StageReservation selectStageReservationByRentalNo(int rentalNo);
+	
+	void cancelStageReservationByRentalNo(int rentalNo);
 }

@@ -50,4 +50,9 @@
 		WHERE	establish_no = #{value}
 	</select>
 	
+	<select id="selectPremiumStageReservationByUserId" parameterType="String" resultMap="premiumReservation-resultMap">
+		<include refid="premiumReservation-select-sql"/>
+		WHERE	user_id = #{value}
+	</select>
+	
 </mapper>

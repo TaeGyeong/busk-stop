@@ -138,7 +138,7 @@ select {
 	<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
 			<div class="thumbnail col-sm-4" style="cursor: pointer;">
-				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+				<img src="${initParam.rootPath }/stageImage/${item.stageImage[0].stageImageLocation }.jpg" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">

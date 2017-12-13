@@ -15,6 +15,16 @@
 		SELECT	<include refid="premiumOption-column-sql"/>
 		FROM	PREMIUM_STAGE_OPTION
 	</sql>
+	<sql id="select-join-time-sql">
+		SELECT	o.option_no,
+				o.stage_rental_date,
+				o.stage_state,
+				o.stage_cost,
+				o.establish_no,
+				t.time_code
+		FROM	premium_stage_option o, premium_stage_time t
+		WHERE	o.option_no = t.option_no(+)
+	</sql>
 	
 	<resultMap type="PremiumStageOption" id="premiumOption-resultMap">
 		<id column="OPTION_NO" property="optionNo"/>
@@ -22,6 +32,11 @@
 		<result column="STAGE_STATE" property="stageState"/>
 		<result column="STAGE_COST" property="stageCost"/>
 		<result column="ESTABLISH_NO" property="establishNo"/>
+	</resultMap>
+	<resultMap type="PremiumStageOption" id="option-join-time-resultmap" extends="premiumOption-resultMap">
+		<collection property="timeList" ofType="PremiumStageTime">
+			<result column="time_code" property="timeCode"/>
+		</collection>
 	</resultMap>
 	
 	<insert id="insertPremiumStageOption" parameterType="PremiumStageOption">
@@ -50,5 +65,10 @@
 	<select id="selectPremiumStageOptionByEstablishNo" parameterType="PremiumStageOption" resultMap="premiumOption-resultMap">
 		<include refid="premiumOption-select-sql"/>
 		WHERE establish_no = #{value}
+	</select>
+	
+	<select id="selectPremiumStageOptionByEstablishNoJoin" parameterType="_int" resultMap="option-join-time-resultmap">
+		<include refid="select-join-time-sql"/>
+		AND	o.establish_no = #{value}
 	</select>
 </mapper>

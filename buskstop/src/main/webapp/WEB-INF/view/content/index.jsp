@@ -38,5 +38,12 @@
 <sec:authorize access="isAuthenticated()">
 	<input type="text" name="stageSellerId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
 </sec:authorize>
-	<button>내공연장 예약 상태 보기</button>
+	<button>내가 등록한 공연장 예약 상태 보기</button>
+</form>
+
+<form action="${initParam.rootPath }/selectMyStageApply.do">
+<sec:authorize access="isAuthenticated()">
+	<input type="text" name="rentalUserId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
+</sec:authorize>
+	<button>내가 신청한 공연장 예약 상태 보기</button>
 </form>

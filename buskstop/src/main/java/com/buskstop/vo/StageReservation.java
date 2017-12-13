@@ -15,6 +15,7 @@ public class StageReservation {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date rentalRegTime;
 	private String stageName;
+	private String stageSellerId;
 	
 	public StageReservation() {}
 	
@@ -73,6 +74,14 @@ public class StageReservation {
 		this.stageName = stageName;
 	}
 
+	public String getStageSellerId() {
+		return stageSellerId;
+	}
+
+	public void setStageSellerId(String stageSellerId) {
+		this.stageSellerId = stageSellerId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,6 +93,7 @@ public class StageReservation {
 		result = prime * result + ((rentalUserId == null) ? 0 : rentalUserId.hashCode());
 		result = prime * result + ((stageName == null) ? 0 : stageName.hashCode());
 		result = prime * result + stageNo;
+		result = prime * result + ((stageSellerId == null) ? 0 : stageSellerId.hashCode());
 		return result;
 	}
 
@@ -122,6 +132,11 @@ public class StageReservation {
 			return false;
 		if (stageNo != other.stageNo)
 			return false;
+		if (stageSellerId == null) {
+			if (other.stageSellerId != null)
+				return false;
+		} else if (!stageSellerId.equals(other.stageSellerId))
+			return false;
 		return true;
 	}
 
@@ -129,7 +144,7 @@ public class StageReservation {
 	public String toString() {
 		return "StageReservation [rentalNoNumber=" + rentalNoNumber + ", rentalUserId=" + rentalUserId + ", stageNo="
 				+ stageNo + ", rentalDate=" + rentalDate + ", rentalStateCode=" + rentalStateCode + ", rentalRegTime="
-				+ rentalRegTime + ", stageName=" + stageName + "]";
+				+ rentalRegTime + ", stageName=" + stageName + ", stageSellerId=" + stageSellerId + "]";
 	}
 
 }

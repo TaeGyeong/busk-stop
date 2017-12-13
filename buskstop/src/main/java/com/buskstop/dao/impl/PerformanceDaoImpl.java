@@ -339,5 +339,22 @@ public class PerformanceDaoImpl implements PerformanceDao {
 	public List<Performance> selectArtistPerformanceById(String id) {
 		return session.selectList(makeSqlId("selectArtistPerformanceById"), id);
 	}
+
+	// PERFORMANCE LIST DAO.
+	@Override
+	public List<Performance> selectPerformance(int code) {
+		return session.selectList(makeSqlId("adminSelectPerformance"), code);
+	}
+
+	// Admin Search Dao.
+	@Override
+	public List<Performance> selectPerformanceByAdminSearch(HashMap<String, Object> map) {
+		return session.selectList(makeSqlId("selectPerformanceByAdminSearch"), map);
+	}
+
+	@Override
+	public List<Performance> selectAllArtistPerformance() {
+		return session.selectList(makeSqlId("selectAllArtistPerformance"));
+	}
 	
 }

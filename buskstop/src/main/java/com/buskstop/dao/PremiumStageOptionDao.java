@@ -33,4 +33,7 @@ public interface PremiumStageOptionDao {
 	 * @return
 	 */
 	int updatePremiumStageOptionStageState(PremiumStageOption option);
+	
+	List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo);
+	
 }
