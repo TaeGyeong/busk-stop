@@ -27,4 +27,11 @@ public interface VideoLikeDao {
 	 * @return
 	 */
 	public List<Video> selectVideoByVideoLikeId(String id);
+	
+	/**
+	 * videoNo 를 받아서 전체 VideoLike 정보를 delete
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoLikeByVideoNo(int videoNo);
 }

@@ -18,9 +18,7 @@
 <br>
 <a href="${initParam.rootPath }/admin/premiumStage.do">프리미엄공연장관리</a>
 <br>
-<a href="${initParam.rootPath }">공연장게시판 공지등록하기</a>
-<br>
-<a href="${initParam.rootPath }">영상관리</a>
+<a href="${initParam.rootPath }/admin/video.do">영상관리</a>
 <br>
 <a href="${initParam.rootPath }">공연장 리뷰관리</a>
 <br>
@@ -30,6 +28,7 @@
 <br>
 <a href="${initParam.rootPath }">고객센터</a>
 <br>
+<a href="${initParam.rootPath }">공연장게시판 공지등록하기</a>
 
 <div id="registForm">
 	<div>

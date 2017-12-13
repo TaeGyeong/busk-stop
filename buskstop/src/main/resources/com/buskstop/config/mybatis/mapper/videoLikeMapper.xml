@@ -26,6 +26,13 @@
 		DELETE FROM VIDEO_LIKE
 		WHERE VIDEO_LIKE_NO = #{videoLikeNum} AND VIDEO_LIKE_USER_ID = #{videoLikeUserId}
 	</delete>
+	
+	<delete id="deleteVideoLikeByVideoNo">
+		DELETE FROM VIDEO_LIKE
+		WHERE VIDEO_LIKE_NO = #{value}
+	</delete>
+	
+	
 	<resultMap type="videoLike" id="videoLike-resultmap">
 		<id column="VIDEO_LIKE_NO" property="videoLikeNum"/>
 		<result column="VIDEO_LIKE_USER_ID" property="videoLikeUserId"/>

@@ -30,12 +30,14 @@ import com.buskstop.service.PremiumStageReservationService;
 import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.StageService;
 import com.buskstop.service.UserService;
+import com.buskstop.service.VideoService;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.PremiumStageOption;
 import com.buskstop.vo.Stage;
 import com.buskstop.vo.StageImage;
 import com.buskstop.vo.User;
+import com.buskstop.vo.Video;
 
 @Controller
 @RequestMapping("/admin/")
@@ -55,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	private PerformanceService performanceService;
+	
+	@Autowired
+	private VideoService videoService;
 
 	/********************************* 회원관리 *********************************/
 
@@ -428,4 +433,26 @@ public class AdminController {
 		List<Performance> list = performanceService.selectPerformanceBySearch(category, search, startDate,endDate,1);
 		return new ModelAndView("admin/artistPerformanceManageView.tiles","list", list);
 	}
+	
+	/*********************** 영상관리 ***********************/
+	
+	// 카테고리 선택으로 이동하는 controller
+	@RequestMapping("video")
+	public String adminVideoMain() {
+		return "admin/videoCategoryChoice.tiles";
+	}
+	// 관리를 할 video 목록으로 보내주는 controller
+	@RequestMapping("videoList")
+	public ModelAndView videoList(String category) {
+		
+		List<Video> list = videoService.viewAllVideo(category);
+		return new ModelAndView("admin/videoManageView.tiles","list",list);
+	}
+	
+	@RequestMapping("deleteVideo")
+	public ModelAndView deleteVideo(int videoNo) {
+		List<Video> list = videoService.deleteVideoAndSelect(videoNo);
+		return new ModelAndView("admin/videoManageView.tiles","list",list);
+	}
+	
 }

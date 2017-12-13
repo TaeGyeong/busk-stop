@@ -38,5 +38,10 @@ public class VideoCommentDaoImpl implements VideoCommentDao{
 	public int deleteVideoCommentByVideoCommentNo(int videoCommentNo) {
 		return session.delete(makeSqlId("deleteVideoCommentByVideoCommentNo"), videoCommentNo);
 	}
+
+	@Override
+	public int deleteVideoCommentByVideoNo(int videoNo) {
+		return session.delete(makeSqlId("deleteVideoCommentByVideoNo"), videoNo);
+	}
 	
 }
