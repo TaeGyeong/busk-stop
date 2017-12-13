@@ -63,8 +63,22 @@ function deleteHelp(helpNum){
 	
 	<div>
 		<p style="color:#515151; font-size:16px; padding:20px;">
-			<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
-			<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage2}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
+			<!-- 이미지가 아무것도 입력 되어있지 않았다면 아무것도 출력 안함 -->
+			<c:if test="${requestScope.map.help.helpImage == null && requestScope.map.help.helpImage2 == null}">
+			
+			</c:if>
+			<!-- 이미지가 하나만 입력 되었다면 하나만 출력 -->
+			<c:if test="${requestScope.map.help.helpImage != null && requestScope.map.help.helpImage2 == null}">
+				<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
+			</c:if>
+			<c:if test="${requestScope.map.help.helpImage == null && requestScope.map.help.helpImage2 != null}">
+				<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage2}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
+			</c:if>
+			<!-- 이미지가 두개 입력 되었다면 두개 모두 출력 -->
+			<c:if test="${requestScope.map.help.helpImage != null && requestScope.map.help.helpImage2 != null}">
+				<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
+				<img src="${initParam.rootPath }/helpImage/${requestScope.map.help.helpImage2}" onerror="this.src='${initParam.rootPath }/helpImage/no-image.png;'">
+			</c:if>
 		</p>
 	</div>
 	

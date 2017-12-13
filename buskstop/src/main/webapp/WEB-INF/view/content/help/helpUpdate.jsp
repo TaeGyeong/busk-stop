@@ -15,9 +15,11 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="id">수정할 카테고리 </label> <input type="text"
-				name="helpCategory" id="category" class="form-control"
-				value="${requestScope.help.helpCategory }">
+			<label for="id">수정할 카테고리 </label>
+			<select name="helpCategory" class="form-control">
+				<option>신고합니다</option>
+				<option>문의합니다</option>
+			</select>
 		</div>
 		
 		<div class="form-group">
@@ -34,9 +36,11 @@
 		<div class="form-group">
 			<label for="helpImage">이미지</label> <input type="file"
 				name="multiImage" id="multiImage" class="form-control">
+				<input type="file"
+				name="multiImage2" id="multiImage2" class="form-control">
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" style="display: none;">
 			 <label for="userId">사용자 id </label> 
 			<input type="text"
 				name="helpUserId" id="helpUserId" class="form-control"

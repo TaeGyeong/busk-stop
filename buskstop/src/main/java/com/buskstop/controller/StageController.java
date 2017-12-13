@@ -43,7 +43,7 @@ public class StageController {
 	
 	@Autowired(required=true)
 	private HttpServletRequest request;
-	
+		
 	private String getUserId() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
@@ -58,7 +58,7 @@ public class StageController {
 		return new ModelAndView("stageView.do","stage",stage);
 	}
 	//공연장 등록
-	@RequestMapping("/stageRegister")
+	@RequestMapping("/member/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
 		service.insertStage(stage);
 		//파일 경로
@@ -67,7 +67,8 @@ public class StageController {
 		//넘어온 파일을 리스트로 저장
 		List<MultipartFile> mf = mhsq.getFiles("imgs");
 		if(mf.size()==1 && mf.get(0).getOriginalFilename().equals("")) {
-		}else {	for(int i=0; i< mf.size(); i++) {
+		}else {	
+			for(int i=0; i< mf.size(); i++) {
 				//파일 중복명 처리, 저장되는 파일 이름
 				String fileName = UUID.randomUUID().toString();
 				//파일 저장
@@ -257,7 +258,9 @@ public class StageController {
 		
 		if(!stageReservation.getRentalUserId().equals("0")) {
 			// 예약진행중이지 않다면
-			if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
+			if(stageReservation.getRentalUserId().equals(stage.getStageSellerId())) {
+				msg = "공급자는 자신의 공급장을 예약 할 수 없습니다.";
+			}else if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
 				service.insertStageReservation(stageReservation);
 				service.updateStageForStageReservation(0, stageNo);
 				msg = "예약 신청이 성공적으로 완료되었습니다";
