@@ -42,7 +42,7 @@
 	</insert>
 	
 	
-	<select id="selectHelpByHelpNum" resultType="help" parameterType="_int">
+	<select id="selectHelpByHelpNum" resultMap="help-resultmap" parameterType="_int">
 	select <include refid="column-help"/>
 	from help 
 	where help_no = #{helpNum}
@@ -85,4 +85,72 @@
 		from help
 	</select>
 	
+	<!-- 고객센터 제목으로 조회 페이징 -->
+	<select id="selectHelpByHelpTitle" resultMap="help-resultmap" parameterType="map">
+		select <include refid="column-help"/>	
+		from(
+			select rownum rn, <include refid="column-help"/>
+			from(	
+				select *
+				from help
+				where help_title like '%'||#{helpTitle}||'%'
+				order by help_no desc
+			)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	
+	<!-- 고객센터 제목으로 조회 카운트 -->
+	<select id="countHelpByHelpTitle" resultType="_int" parameterType="String">
+		select count(*)
+		from help
+		where help_title like '%'||#{helpTitle}||'%'
+	</select>
+	
+	<!-- 고객센터 내용으로 조회 페이징 -->
+	<select id="selectHelpByHelpContent" resultMap="help-resultmap" parameterType="map">
+		select <include refid="column-help"/>	
+		from(
+			select rownum rn, <include refid="column-help"/>
+			from(	
+				select *
+				from help
+				where help_content like '%'||#{helpContent}||'%'
+				order by help_no desc
+			)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	
+	<!-- 고객센터 내용으로 조회 카운트 -->
+	<select id="countHelpByHelpContent" resultType="_int" parameterType="String">
+		select count(*)
+		from help
+		where help_content like '%'||#{helpContent}||'%'
+	</select>
+	
+	<!-- 고객센터 작성자로 조회 페이징 -->
+	<select id="selectHelpByHelpUserId" resultMap="help-resultmap" parameterType="map">
+		select <include refid="column-help"/>	
+		from(
+			select rownum rn, <include refid="column-help"/>
+			from(	
+				select *
+				from help
+				where help_user_id like '%'||#{helpUserId}||'%'
+				order by help_no desc
+			)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
+	
+	<!-- 고객센터 작성자로 조회 카운트 -->
+	<select id="countHelpByHelpUserId" resultType="_int" parameterType="String">
+		select count(*)
+		from help
+		where help_user_id like '%'||#{helpUserId}||'%'
+	</select>
 </mapper>

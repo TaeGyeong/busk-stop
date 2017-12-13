@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 
 @Controller
@@ -77,15 +78,13 @@ public class HelpController {
 		return new ModelAndView("/selectHelp.do");
 	}
 
-	@RequestMapping("/helpDetailView")
+	@RequestMapping("/helpDetail")
 	public ModelAndView helpDetail(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
+		System.out.println(help);
 		String id = null;
-		List<Help> list = new ArrayList<Help>();
-		list.add(help);
-		help = list.get(0);
 		Map<String, Object> map = new HashMap<>();
-
+		
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
 		id = ((User) authentication.getPrincipal()).getUserId();
@@ -126,18 +125,30 @@ public class HelpController {
 	}
 	
 	@RequestMapping("/selectHelp")
-	public ModelAndView viewAllHelp() {
+	public ModelAndView viewAllHelp(@RequestParam(required = false) String category, @RequestParam(required = false) String search) {
 		int page = 1;
-		List<Help> list = new ArrayList<>();
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = null;
 		
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
-		} catch (Exception e) {
-
+		} catch (Exception e) {}
+		
+		if(category != null) {
+			if(category.equals("title")) {
+				map = service.selectHelpByHelpTitle(page, search);
+			}else if(category.equals("content")) {
+				map = service.selectHelpByHelpContent(page, search);
+			}else if(category.equals("user")) {
+				map = service.selectHelpByHelpUserId(page, search);
+			}
+		} else {
+			map = service.selectAllHelp(page);
+			category = "title";
+			search = "";
 		}
 		
-		map = service.selectAllHelp(page);
+		map.put("search", search);
+		map.put("category", category);
 		
 		return new ModelAndView("help/helpView.tiles", "map", map);
 	}

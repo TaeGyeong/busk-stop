@@ -65,4 +65,46 @@ public class HelpServiceImpl implements HelpService{
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> selectHelpByHelpTitle(int page, String helpTitle) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		PagingBean pb = new PagingBean(dao.countHelpByHelpTitle(helpTitle), page);
+		map.put("pageBean", pb);
+		
+		List<Help> list = dao.selectHelpByHelpTitle(pb.getBeginItemInPage(), pb.getEndItemInPage(), helpTitle);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectHelpByHelpContent(int page, String helpContent) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		
+		PagingBean pb = new PagingBean(dao.countHelpByHelpContent(helpContent), page);
+		map.put("pageBean", pb);
+		
+		List<Help> list = dao.selectHelpByHelpContent(pb.getBeginItemInPage(), pb.getEndItemInPage(), helpContent);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selectHelpByHelpUserId(int page, String helpUserId) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		PagingBean pb = new PagingBean(dao.countHelpByHelpUserId(helpUserId), page);
+		map.put("pageBean", pb);
+		
+		List<Help> list = dao.selectHelpByHelpUserId(pb.getBeginItemInPage(), pb.getEndItemInPage(), helpUserId);
+		map.put("list", list);
+		
+		return map;
+	}
+
 }
