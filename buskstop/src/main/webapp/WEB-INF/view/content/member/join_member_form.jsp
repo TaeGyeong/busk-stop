@@ -21,9 +21,12 @@ $(document).ready(function(){
 				if(message=='new'){
 					alert("사용가능한 id 입니다.");
 					$("#id").addClass("disable");
+					$("#idCheck").val("true");
+					document.getElementById("id").readOnly=true;
 				} else if(message=='duplicated'){
 					alert('이미 사용중인 id 입니다.');
 					document.getElementById("id").value='';
+					$("#idCheck").val("false");
 				}
 			},
 			"error":function(a,b,c){
@@ -32,6 +35,14 @@ $(document).ready(function(){
 				alert(c);
 			}
 		});
+	});
+	
+	$("#joinBtn").on("click",function(){
+		if($("#idCheck").val()=='false'){
+			alert("ID 중복체크를 해주세요");
+		} else {
+			$(this).parent().submit();
+		}
 	});
 });
 
@@ -56,6 +67,8 @@ function idCheck(){
 		alert("공백은 사용하실 수 없습니다.");
 		$("#id").val('');
 	}
+	
+	
 }
 
 function nameCheck(){
@@ -82,41 +95,47 @@ function phonenumCheck(){
 	if(!pattern.test(str)){
 		alert("번호는 숫자로만 입력해주세요.");
 		$("#phoneNumber").val("");
+	} else if (!(str.length>=10 && str.length<=11)) {
+		alert("휴대폰번호는 10자리 혹은 11자리로 입력해주세요!");
+		$("#phoneNumber").val("");
 	}
 }
 
 </script>
-<div class="container">
+<input type="hidden" value="false" id="idCheck">
+<br><br>
+<div class="container text-center" style="margin-top:15%;">
 	<h1>회원가입</h1>
 	<form action="${initParam.rootPath }/join_member.do" id="submitForm" method="post">
 		<div class="form-group">
 			<label for="id">ID</label>
-			<input type="text" name="userId" id="id" onblur=idCheck(); required="required" class="input-group">
+			<input type="text" name="userId" id="id" onblur=idCheck(); required="required" class="form-control">
+			<br>
 			<button type="button" id="duplicatedCheckBtn" class="btn-primary">id 중복체크</button>
 		</div>
 		<div class="form-group">
 			<label for="password">비밀번호</label> 
-			<input type="password" name="password" required="required" class="input-group">
+			<input type="password" name="password" required="required" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="name">이름</label> 
-			<input type="text" name="userName" id="name" onblur=nameCheck(); required="required" class="input-group">
+			<input type="text" name="userName" id="name" onblur=nameCheck(); required="required" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="address">주소</label> 
-			<input type="text" name="userAddress" id="address" required="required" class="input-group">
+			<input type="text" name="userAddress" id="address" required="required" class="form-control">
 		</div>
 	
 		<div class="form-group">
 			<label for="phoneNumber">핸드폰번호</label> 
-			<input type="text" name="userPhoneNum" id="phoneNumber" onblur=phonenumCheck(); required="required" class="input-group">
+			<input type="text" name="userPhoneNum" id="phoneNumber" onblur=phonenumCheck(); required="required" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="email">이메일주소</label> 
-			<input type="text" name="email" id="email" class="input-group" required="required">
+			<input type="text" name="email" id="email" class="form-control" required="required">
 		</div>
 		<%-- csrf 토큰 --%>
 		<sec:csrfInput />
-		<button id="joinBtn" class="btn-primary">가입</button>
+		<button id="joinBtn" type="button" class="btn-primary">가입</button>
 	</form>
 </div>
