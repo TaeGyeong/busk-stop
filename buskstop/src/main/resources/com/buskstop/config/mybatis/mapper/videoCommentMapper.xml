@@ -48,6 +48,11 @@
 	WHERE		video_comment_no = #{videoCommentNo}
 	</delete>
 	
+	<delete id="deleteVideoCommentByVideoNo" parameterType="_int">
+		DELETE 	FROM 	VIDEO_COMMENT
+		WHERE	VIDEO_NO = #{value}
+	</delete>
+	
 	<select id="selectVideoCommentByVideoNo" parameterType="_int" resultMap="videoComment-resultmap">
 		<include refid="videoComment-select-sql"/>
 		WHERE	video_no = #{value}
