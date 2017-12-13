@@ -29,4 +29,11 @@ public interface VideoCommentDao {
 
 	int deleteVideoCommentByVideoCommentNo(int videoCommentNo);
 	
+	/**
+	 * 동영상에 관련된 모든 comment delete dao.
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoCommentByVideoNo(int videoNo);
+	
 }
