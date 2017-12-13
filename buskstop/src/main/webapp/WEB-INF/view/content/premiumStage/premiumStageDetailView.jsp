@@ -4,7 +4,15 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	if($("#regist").val()=='success'){
+		alert("공연장 등록완료. 재로그인해주세요.")
+	}
+	
+});
+
 </script>
+<input type="hidden" id="regist" value="${requestScope.map.regist }">
 
 <div class="container-inline">
 	<c:forEach items="${requestScope.map.imageList }" var="image">

@@ -3,6 +3,9 @@ package com.buskstop.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.buskstop.dao.VideoCommentDao;
 import com.buskstop.dao.VideoDao;
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.Video;
@@ -21,6 +24,9 @@ public class VideoServiceImpl implements VideoService {
 	
 	@Autowired
 	private VideoDao dao;
+	
+	@Autowired
+	private VideoCommentDao commentDao;
 	
 	////////////좋아요////////////
 	// 좋아요 추가.
@@ -103,5 +109,26 @@ public class VideoServiceImpl implements VideoService {
 	public List<Video> viewVideoByContentAndCategory(String videoCategory, String videoContent) {
 		return dao.selectVideoByContentAndCategory(videoCategory, videoContent);
 	}
+
+	/******* admin용 삭제 후 조회 service ******/
+
+	@Override
+	@Transactional
+	public List<Video> deleteVideoAndSelect(int videoNo) {
+		
+		// commentDao.delete (video에 달려 있는 댓글을 모두 지우자.)
+		commentDao.deleteVideoCommentByVideoNo(videoNo);
+		// 좋아요도 지워야지.
+		videoLikeDao.deleteVideoLikeByVideoNo(videoNo);
+		
+		// video 정보 가져오고 지우고 보내기
+		Video video = dao.selectVideoByVideoNo(videoNo);
+		dao.deleteVideoByVideoNum(videoNo);
+		
+		return dao.selectAllVideoByCategory(video.getVideoCategory());
+	}
+	
+	
+	
 
 }

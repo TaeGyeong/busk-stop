@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 
 @Controller
@@ -74,18 +75,16 @@ public class HelpController {
 			help.setHelpImage(fileName+".jpg");
 		}
 		service.insertHelp(help);
-		return new ModelAndView("help/helpView.tiles");//임시 경로
+		return new ModelAndView("/selectHelp.do");
 	}
 
-	@RequestMapping("/helpDetailView")
+	@RequestMapping("/helpDetail")
 	public ModelAndView helpDetail(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
+		System.out.println(help);
 		String id = null;
-		List<Help> list = new ArrayList<Help>();
-		list.add(help);
-		help = list.get(0);
 		Map<String, Object> map = new HashMap<>();
-
+		
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
 		id = ((User) authentication.getPrincipal()).getUserId();
@@ -98,7 +97,7 @@ public class HelpController {
 	@RequestMapping("/deleteHelp")
 	public String deleteHelp(@RequestParam int helpNum) {
 		service.deleteHelpByHelpNum(helpNum);
-		return "help/helpDetailView.tiles"; // 여기엔 목록으로 이동 
+		return "/selectHelp.do"; // 여기엔 목록으로 이동 
 	}
 	
 	@RequestMapping("/updateHelp")
@@ -123,6 +122,35 @@ public class HelpController {
 	public ModelAndView updateHelp2(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
 		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+	}
+	
+	@RequestMapping("/selectHelp")
+	public ModelAndView viewAllHelp(@RequestParam(required = false) String category, @RequestParam(required = false) String search) {
+		int page = 1;
+		Map<String, Object> map = null;
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) {}
+		
+		if(category != null) {
+			if(category.equals("title")) {
+				map = service.selectHelpByHelpTitle(page, search);
+			}else if(category.equals("content")) {
+				map = service.selectHelpByHelpContent(page, search);
+			}else if(category.equals("user")) {
+				map = service.selectHelpByHelpUserId(page, search);
+			}
+		} else {
+			map = service.selectAllHelp(page);
+			category = "title";
+			search = "";
+		}
+		
+		map.put("search", search);
+		map.put("category", category);
+		
+		return new ModelAndView("help/helpView.tiles", "map", map);
 	}
 	
 	
