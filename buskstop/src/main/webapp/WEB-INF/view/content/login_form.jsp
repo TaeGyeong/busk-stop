@@ -6,16 +6,18 @@
 	<br>
 	<div class="form-group">
 		<label for="inputId">ID</label>
-		<input type="text" id="inputId" name="userId" autofocus class="input-group">
+		<input type="text" id="inputId" name="userId" autofocus class="form-control">
 	</div>
 		
 	<div class="form-group">
 		<label for="inputPassword">Password</label>
-		<input type="password" name="userPassword" id="inputPassword" class="input-group">
+		<input type="password" name="userPassword" id="inputPassword" class="form-control">
 	</div>
 	
 	<button type="submit" class="btn-primary">로그인</button>
 </form>
+<br><br>
 
 <span><a href="${initParam.rootPath }/findId.do">ID 찾기</a></span>
+<br>
 <span><a href="${initParam.rootPath }/findPassword.do">비밀번호 찾기</a></span>

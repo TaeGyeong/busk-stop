@@ -84,6 +84,10 @@
 		<include refid="video-select-sql"/>
 		WHERE	video_no = #{value}	
 	</select>
+	
+	<select id="selectVideo" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+	</select>
 
 	<!-- 카테고리별 검색 -->
 	<select id="selectAllVideoByCategory" parameterType="string" resultMap="video-resultmap">
