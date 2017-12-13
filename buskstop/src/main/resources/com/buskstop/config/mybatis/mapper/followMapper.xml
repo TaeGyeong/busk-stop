@@ -60,5 +60,11 @@
 		WHERE	A.ARTIST_USER_ID = F.FOLLOWER_ID
 		AND		F.FOLLOWING_ID = #{value}
 	</select>
-
+	
+	<!-- 날 팔로우한 사람들을 조회 -->
+	<select id="selectFollowByFollowerId" parameterType="String" resultMap="follow-resultmap">
+		SELECT <include refid="follow-column"/>
+		FROM FOLLOW
+		WHERE FOLLOWER_ID = #{follower_id}
+	</select>
 </mapper>

@@ -86,7 +86,7 @@
    
    <!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
    <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
-   <div class="main_menu col-sm-12">
+   <div class="main_menu col-sm-12" style="height: 80px;">
       <ul class="col-sm-12">
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연정보</a>
             <ul id="sub_menu" class="col-sm-12" style="padding: 0;">

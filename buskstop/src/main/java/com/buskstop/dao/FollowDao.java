@@ -33,4 +33,11 @@ public interface FollowDao {
 	 * @return
 	 */
 	List<Artist> selectFollowArtistById(String userId);
+	
+	/**
+	 * 날 팔로우한 사람들을 조회
+	 * @param followerId
+	 * @return
+	 */
+	List<Follow> selectFollowByFollowerId(String followerId);
 }

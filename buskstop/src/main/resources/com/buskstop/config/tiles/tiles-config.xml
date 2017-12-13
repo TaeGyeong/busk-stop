@@ -34,4 +34,15 @@
 	<definition name="*/*.myTiles" extends="myPageTemplate">
 		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
 	</definition>
+	
+	<definition name="myPageTemp" template="/WEB-INF/view/layout/myPageTemp.jsp">
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp" />
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
+		<put-attribute name="profile" value="/WEB-INF/view/content/myPage/profile.jsp"/>
+	</definition>
+	
+	<definition name="*/*.myTemp" extends="myPageTemp">
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
+	</definition>
 </tiles-definitions>		
