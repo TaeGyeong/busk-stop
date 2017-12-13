@@ -147,7 +147,7 @@ function addOption(){
 					<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
 					<td>
 						<c:forEach items="${option.timeList }" var="timeOption">
-							${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
+							${timeOption}시 - ${timeOption+1}시<br>
 						</c:forEach>
 					</td>
 					<td>${option.stageState }</td>

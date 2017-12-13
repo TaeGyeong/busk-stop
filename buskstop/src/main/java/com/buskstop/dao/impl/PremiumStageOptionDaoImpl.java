@@ -44,4 +44,9 @@ public class PremiumStageOptionDaoImpl implements PremiumStageOptionDao{
 		return session.selectList(makeSqlId("selectPremiumStageOptionByEstablishNoJoin"), establishNo);
 	}
 
+	@Override
+	public PremiumStageOption selectPremiumStageOptionByOptionNoJoin(int optionNo) {
+		return session.selectOne(makeSqlId("selectPremiumStageOptionByOptionNoJoin"), optionNo);
+	}
+
 }

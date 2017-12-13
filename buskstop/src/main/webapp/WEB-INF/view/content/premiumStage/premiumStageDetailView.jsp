@@ -81,21 +81,30 @@
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.map.optionList }" var="option">
-			<tr>
-				<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
-				<td>
-					<c:forEach items="${option.timeList }" var="timeOption">
-								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
-					</c:forEach>
-				</td>
-				<td>${option.stageCost }</td>
-				<td>
-					<form action="${initParam.rooPath }/member/createPremiumStageReservation.do" method="post">
-						<sec:csrfInput/>
-						<button type="submit" class="btn btn-default">신청</button>
-					</form>
-				</td>
-			</tr>
+			<c:if test="${option.stageState == 0 }">
+				<tr>
+					<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyyy/MM/dd"/></td>
+					<td>
+						<c:forEach items="${option.timeList }" var="timeOption">
+									${timeOption}시 - ${timeOption+1}시<br>
+						</c:forEach>
+					</td>
+					<td>${option.stageCost }</td>
+					<td>
+						<form action="${initParam.rootPath }/member/createPremiumStageReservation.do" >
+							<sec:csrfInput/>
+							<sec:authorize access="isAuthenticated()">
+								<input type="hidden" name="reservationUserId" id="reservationUserId"
+									class="form-control"
+									value='<sec:authentication property="principal.userId"/>'>
+							</sec:authorize>
+							<input type="hidden" name="establishNo" value="${option.establishNo }">
+							<input type="hidden" name="optionNo" value="${option.optionNo }">
+							<button type="submit" class="btn btn-default">신청</button>
+						</form>
+					</td>
+				</tr>
+			</c:if>
 		</c:forEach>
 	</tbody>
 </table>

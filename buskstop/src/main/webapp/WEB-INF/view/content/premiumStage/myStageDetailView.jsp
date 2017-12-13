@@ -12,6 +12,33 @@ function changeStageState(stateCode){
     document.getElementById("changeStageState").appendChild(x);
 	document.getElementById("changeStageState").submit();
 }
+
+$(document).ready(function(){
+	$("#goUserDetail").on("click",function(){
+		$.ajax({
+			"url":"${initParam.rootPath}/producer/readReservationUserDetail.do",
+			"type":"get",
+			"data":{"optionNo":$('#goUserDetail').val()},
+			"dataType":"json",
+			"success":function(user){
+				alert("성공");
+				var data = "<br><p>";
+				data += "신청자 이름 : "+user.userName;
+				data += "<br>신청자 연락처 : "+user.userPhoneNum+"</p>";
+				data += "<br><button type='button' onclick='removeUserInfo()' class='btn btn-default'>닫기</button>"
+				$("#userInfo").append('<div id="userDetail">'+data+'</div>');
+			},
+			"error":function(a,b,c){
+				alert(b);
+				alert(c);
+			}
+		});
+	});	
+});
+
+function removeUserInfo(){
+	document.getElementById("userDetail").remove();
+}
 </script>
 
 <div class="container-inline">
@@ -87,28 +114,27 @@ function changeStageState(stateCode){
 			<th>대관시간</th>
 			<th>가격</th>
 			<th>예약상태</th>
-			<th>예약신청자</th>
 			<th>수락/거절</th>
+			<th>예약신청자</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${requestScope.map.optionList }" var="option">
 			<tr>
-				<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyy/MM/dd"/></td>
+				<td><fmt:formatDate value="${option.stageRentalDate }" pattern="yyyy/MM/dd"/></td>
 				<td>
 					<c:forEach items="${option.timeList }" var="timeOption">
-								${timeOption.timeCode}시 - ${timeOption.timeCode+1}시<br>
+								${timeOption}시 - ${timeOption+1}시<br>
 					</c:forEach>
 				</td>
 				<td>${option.stageCost }</td>
 				<td>
 					<c:choose>
 						<c:when test="${option.stageState == 2}">대관완료</c:when>
-						<c:when test="${option.stageState ==1}">수락대기</c:when>
+						<c:when test="${option.stageState == 1}">수락대기</c:when>
 						<c:otherwise>신청대기</c:otherwise>
 					</c:choose>
 				</td>
-				<td></td>
 				<td>
 					<c:choose>
 						<c:when test="${option.stageState == 2}">대관완료</c:when>
@@ -122,6 +148,11 @@ function changeStageState(stateCode){
 							</form>
 						</c:when>
 					</c:choose>
+				</td>
+				<td>
+					<div id="userInfo">
+						<button type="button" class="btn btn-default" id="goUserDetail" name="goUserDetail" value="${option.optionNo }">신청자 정보보기</button>
+					</div>
 				</td>
 			</tr>
 		</c:forEach>

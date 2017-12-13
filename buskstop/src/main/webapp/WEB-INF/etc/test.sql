@@ -8,6 +8,7 @@ select*from video
 WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like'%잘%'
 select * from performance;
 select*from PREMIUM_STAGE;
+select*from PREMIUM_STAGE_RESERVATION;
 alter premium_stage_option set stge_rental_date at='yyyy-mm-dd';
 select*from premium_stage_option;
 select*from premium_stage_Time;
