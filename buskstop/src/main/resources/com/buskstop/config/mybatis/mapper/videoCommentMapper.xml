@@ -48,9 +48,26 @@
 	WHERE		video_comment_no = #{videoCommentNo}
 	</delete>
 	
+	<delete id="deleteVideoCommentByVideoNo" parameterType="_int">
+		DELETE 	FROM 	VIDEO_COMMENT
+		WHERE	VIDEO_NO = #{value}
+	</delete>
+	
 	<select id="selectVideoCommentByVideoNo" parameterType="_int" resultMap="videoComment-resultmap">
 		<include refid="videoComment-select-sql"/>
 		WHERE	video_no = #{value}
 	</select>
 
+	<select id="selectVideoCommentByMap" parameterType="Map" resultMap="videoComment-resultmap">
+		<include refid="videoComment-select-sql"/>
+		<where>
+			VIDEO_NO = #{videoNo}
+			<if test="userId != null">
+			AND	VIDEO_COMMENT_USER_ID LIKE '%'||#{userId}||'%'
+			</if>
+			<if test="content != null">
+			AND	VIDEO_COMMENT LIKE '%'||#{content}||'%'
+			</if>
+		</where>
+	</select>
 </mapper>

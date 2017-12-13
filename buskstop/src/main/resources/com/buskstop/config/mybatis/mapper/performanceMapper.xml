@@ -418,4 +418,41 @@
 				AND PERFORMANCE_CODE = 1
 		ORDER BY PERFORMANCE_DATE DESC	
 	</select>
+	
+	<!-- 관리자용 -->
+	<select id="adminSelectPerformance" parameterType="_int" resultMap="performance-resultmap">
+		SELECT	<include refid="column-performance"/>
+		FROM 	PERFORMANCE
+		WHERE	PERFORMANCE_CODE = #{value}
+	</select>
+	
+	<select id="selectPerformanceByAdminSearch" parameterType="Map" resultMap="performance-resultmap">
+		SELECT 	<include refid="column-performance"/>
+		FROM	PERFORMANCE
+		<where>
+			PERFORMANCE_CODE = #{code}
+			<if test="name != null">
+				AND		PERFORMANCE_NAME LIKE '%'||#{name}||'%'	
+			</if>
+			<if test="location != null">
+				AND		PERFORMANCE_LOCATION LIKE '%'||#{location}||'%'
+			</if>
+			<if test="userId != null">
+				AND		PERFORMANCE_USER_ID LIKE '%'||#{userId}||'%'
+			</if>
+			<if test="sDate != null">
+				AND		PERFORMANCE_DATE >= #{sDate}
+			</if>
+			<if test="eDate != null">
+				AND		PERFORMANCE_DATE &lt;= #{eDate}
+			</if>
+		</where>
+	</select>
+	
+	<!-- admin -->
+	<select id="selectAllArtistPerformance" resultMap="performance-resultmap">
+		SELECT	<include refid="column-performance"/>
+		FROM	PERFORMANCE
+		WHERE	PERFORMANCE_CODE = 1
+	</select>
 </mapper>

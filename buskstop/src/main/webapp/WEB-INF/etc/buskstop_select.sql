@@ -15,7 +15,7 @@
 					and stage_rental_date <= '2017-12-20'
 					)
 	where stage_instrument like '%기타%'
-					 	
+	
 	
 /* 공연장 검색 후 조회수 */
 

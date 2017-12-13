@@ -37,6 +37,11 @@ public class VideoLikeDaoImpl implements VideoLikeDao {
 		return session.selectList(makeSqlId("selectVideoByVideoLikeId"), id);
 	}
 	
+	@Override
+	public int deleteVideoLikeByVideoNo(int videoNo) {
+		return session.delete(makeSqlId("deleteVideoLikeByVideoNo"), videoNo);
+	}
+
 	private String makeSqlId(String id) {
 		return "com.buskstop.config.mybatis.mapper.videoLikeMapper."+id;
 	}

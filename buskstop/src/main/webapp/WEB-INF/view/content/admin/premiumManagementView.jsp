@@ -4,18 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script>
 $(document).ready(function(){
-	$("#searchCategory").on("change",function(){
-		if($("#searchCategory").val()=='establishNo'){
-			alert("est");
-			
-		} else if($("#searchCategory").val()=='userId'){
-			alert("userid");
-			
-		} else if($("#searchCategory").val()=='location'){
-			alert("location");
-		}
-	});
-	
 	$("#searchBtn").on("click",function(){
 		if($("#searchCategory").val()==''){
 			alert("검색할 내용을 선택해주세요.")

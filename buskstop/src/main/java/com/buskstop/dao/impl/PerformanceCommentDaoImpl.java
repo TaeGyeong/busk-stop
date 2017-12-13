@@ -1,5 +1,6 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,6 +43,11 @@ public class PerformanceCommentDaoImpl implements PerformanceCommentDao{
 //		System.out.println("dao까지");
 //		System.out.println(session.delete(makeSql("deletePerformanceCommentByPerformanceCommentNo"),performanceCommentNo));
 		return session.delete(makeSql("deletePerformanceCommentByPerformanceCommentNo"),performanceCommentNo);
+	}
+
+	@Override
+	public List<PerformanceComment> selectPerformanceComment(HashMap<String, Object> map) {
+		return session.selectList(makeSql("selectPerformanceComment"), map);
 	}
 	
 }

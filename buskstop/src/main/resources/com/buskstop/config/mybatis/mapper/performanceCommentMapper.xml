@@ -48,7 +48,23 @@
 		where performance_comment_no = #{performanceCommentNo}
 	</update>
 	
-	
-	
+	<select id="selectPerformanceComment" parameterType="Map" resultMap="performanceComment-resultmap">
+		SELECT	PERFORMANCE_COMMENT_NO,
+				PERFORMANCE_NO,
+				PERFORMANCE_COMMENT_USER_ID,
+				PERFORMANCE_COMMENT,
+				PERFORMANCE_COMMENT_REG_TIME
+		FROM	PERFORMANCE_COMMENT
+		<where>
+			PERFORMANCE_NO = #{performanceNo}		
+			<if test="userId != null">
+			AND	PERFORMANCE_COMMENT_USER_ID	LIKE '%'||#{userId}||'%'
+			</if>
+			<if test="content != null">
+			AND	PERFORMANCE_COMMENT LIKE '%'||#{content}||'%'
+			</if>
+		</where>
+	</select>
+
 
 </mapper>

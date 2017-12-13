@@ -98,4 +98,17 @@ public interface VideoService {
 	 * @return
 	 */
 	List<Video> viewVideoByContentAndCategory(String videoCategory, String videoContent);
+	
+	/**
+	 * video 정보 삭제 후 category 반환해주는 service.
+	 * @param videoNo
+	 * @return
+	 */
+	List<Video> deleteVideoAndSelect(int videoNo);
+	
+	/**
+	 * 모든 video 정보 제공하는 service.
+	 * @return
+	 */
+	List<Video> selectVideo();
 }

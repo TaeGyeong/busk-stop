@@ -184,6 +184,8 @@ public class MyPageController {
 		map.put("premiumStage", supplier);
 		map.put("imageList", imageList);
 		
+		map.put("regist", "success");
+		
 		// response
 		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
 	}

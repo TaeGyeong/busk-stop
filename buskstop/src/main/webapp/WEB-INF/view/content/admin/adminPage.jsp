@@ -10,26 +10,25 @@
 <br>
 <a href="${initParam.rootPath }/admin/member.do">회원관리</a>
 <br>
-<a href="${initParam.rootPath }">일반공연정보관리</a>
+<a href="${initParam.rootPath }/admin/performance.do">일반공연정보관리</a>
 <br>
-<a href="${initParam.rootPath }">아티스트공연정보관리</a>
+<a href="${initParam.rootPath }/admin/adminPerformance.do">아티스트공연정보관리</a>
 <br>
 <a href="${initParam.rootPath }/admin/stage.do">일반공연장관리</a>
 <br>
 <a href="${initParam.rootPath }/admin/premiumStage.do">프리미엄공연장관리</a>
 <br>
-<a href="${initParam.rootPath }">공연장게시판 공지등록하기</a>
-<br>
-<a href="${initParam.rootPath }">영상관리</a>
+<a href="${initParam.rootPath }/admin/video.do">영상관리</a>
 <br>
 <a href="${initParam.rootPath }">공연장 리뷰관리</a>
 <br>
-<a href="${initParam.rootPath }">공연정보 댓글관리</a>
+<a href="${initParam.rootPath }/admin/performanceComment.do">공연정보 댓글관리</a>
 <br>
-<a href="${initParam.rootPath }">영상댓글관리</a>
+<a href="${initParam.rootPath }/admin/videoComment.do">영상댓글관리</a>
 <br>
 <a href="${initParam.rootPath }">고객센터</a>
 <br>
+<a href="${initParam.rootPath }">공연장게시판 공지등록하기</a>
 
 <div id="registForm">
 	<div>

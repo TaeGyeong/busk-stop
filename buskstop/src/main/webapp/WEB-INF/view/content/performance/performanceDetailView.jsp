@@ -183,6 +183,22 @@ function deletePerformance(performanceNo){
 	.likeBtn{
 		cursor: pointer;
 	}
+	 .btn_comm {
+	 	float:left;display:block;width:70px;height:27px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sample_button_control.png) no-repeat
+	}
+    
+	.btn_linkMap {
+		background-position:0 0;
+	}
+    .btn_resetMap {
+    	background-position:-69px 0;
+    }
+    .btn_linkRoadview {
+    	background-position:0 0;
+    }
+    .btn_resetRoadview {
+   		background-position:-69px 0;
+    }
 
 </style>
 </head>
@@ -230,6 +246,10 @@ function deletePerformance(performanceNo){
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
 			<div id="map" style="position:static; width:800px; height:400px"></div>
+			<div class="wrap_button">
+            <a class="btn_comm btn_linkMap" target="_blank" onclick="moveDaumMap(this)"></a> <!-- 지도 크게보기 버튼입니다 -->
+            <a class="btn_comm btn_resetMap" target="_blank" onclick="resetDaumMap()"></a> <!-- 지도 크게보기 버튼입니다 -->
+        	</div>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
@@ -251,7 +271,8 @@ function deletePerformance(performanceNo){
 				var zoomControl = new daum.maps.ZoomControl();
 				map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 				var currentTypeId;
-				
+				var resulty;
+				var resultx;
 				
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch('${requestScope.map.performance.performanceLocation}', function(result, status) {
@@ -260,7 +281,8 @@ function deletePerformance(performanceNo){
 				     if (status === daum.maps.services.Status.OK) {
 		
 				        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-						
+						resulty = result[0].y;
+						resultx = result[0].x;
 				    	// 지도의 현재 레벨을 얻어옵니다
 						var level = map.getLevel();
 						var resultDiv = document.getElementById('result');  
@@ -279,11 +301,27 @@ function deletePerformance(performanceNo){
 		
 				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				        map.setCenter(coords);
+				        
 				    }
 				 
 				});
 				
-				
+				//지도 이동 이벤트 핸들러
+				function moveDaumMap(self){
+				    
+				    var center = map.getCenter(), 
+				        lat = center.getLat(),
+				        lng = center.getLng();
+
+				    self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${requestScope.map.performance.performanceName}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
+				}
+
+				//지도 초기화 이벤트 핸들러
+				function resetDaumMap(){
+					map.setCenter(new daum.maps.LatLng(resulty, resultx));; //지도를 초기화 했던 값으로 다시 셋팅합니다.
+				    map.setLevel(mapOption.level);
+				}
+
 			</script>
 		</div>
 	</div>

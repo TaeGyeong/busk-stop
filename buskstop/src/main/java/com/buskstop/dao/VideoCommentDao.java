@@ -1,5 +1,6 @@
 package com.buskstop.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.buskstop.vo.VideoComment;
@@ -29,4 +30,16 @@ public interface VideoCommentDao {
 
 	int deleteVideoCommentByVideoCommentNo(int videoCommentNo);
 	
+	/**
+	 * 동영상에 관련된 모든 comment delete dao.
+	 * @param videoNo
+	 * @return
+	 */
+	int deleteVideoCommentByVideoNo(int videoNo);
+	
+	/**
+	 * 검색어를 담은 map 으로 videocomment list 를 select.
+	 * @return
+	 */
+	List<VideoComment> selectVideoCommentByMap(HashMap<String, Object> map);
 }

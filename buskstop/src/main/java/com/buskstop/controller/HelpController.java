@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
+import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 
 @Controller
@@ -62,19 +63,38 @@ public class HelpController {
 		
 		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
 		System.out.println("컨트롤러 파라미터 : "+help);
+		
+		// 파일 업로드 처리
+		String dir = request.getServletContext().getRealPath("/helpImage");
+		String fileName = null;
+		File upImage = null;
+		
+		MultipartFile multiImage = help.getMultiImage();
+		if(multiImage!=null && !multiImage.isEmpty()) {
+			fileName = UUID.randomUUID().toString();
+			upImage = new File(dir, fileName+".jpg");
+			multiImage.transferTo(upImage);
+			help.setHelpImage(fileName+".jpg");
+		}
+		
+		MultipartFile multiImage2 = help.getMultiImage2();
+		if(multiImage2!=null && !multiImage2.isEmpty()) {
+			fileName = UUID.randomUUID().toString();
+			upImage = new File(dir, fileName+".jpg");
+			multiImage2.transferTo(upImage);
+			help.setHelpImage2(fileName+".jpg");
+		}
 		service.insertHelp(help);
-		return null;
+		return new ModelAndView("/selectHelp.do");
 	}
 
-	@RequestMapping("/helpDetailView")
+	@RequestMapping("/helpDetail")
 	public ModelAndView helpDetail(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
+		System.out.println(help);
 		String id = null;
-		List<Help> list = new ArrayList<Help>();
-		list.add(help);
-		help = list.get(0);
 		Map<String, Object> map = new HashMap<>();
-
+		
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
 		id = ((User) authentication.getPrincipal()).getUserId();
@@ -87,31 +107,71 @@ public class HelpController {
 	@RequestMapping("/deleteHelp")
 	public String deleteHelp(@RequestParam int helpNum) {
 		service.deleteHelpByHelpNum(helpNum);
-		return "help/helpDetailView.tiles"; // 여기엔 목록으로 이동 
+		return "/selectHelp.do"; // 여기엔 목록으로 이동 
 	}
 	
 	@RequestMapping("/updateHelp")
 	public ModelAndView udpateHelp(@ModelAttribute Help help) throws IllegalStateException, IOException {
 		
+		String dir = request.getServletContext().getRealPath("/helpImage");
+		String fileName = UUID.randomUUID().toString();
+		File upImage = null;
+		
 		MultipartFile multiImage = help.getMultiImage();
 		if(multiImage!=null && !multiImage.isEmpty()) {
 			//디렉토리
-			String dir = request.getServletContext().getRealPath("/helpImage");
-			String fileName = UUID.randomUUID().toString();
-			File upImage = new File(dir, fileName+".jpg");
+			upImage = new File(dir, fileName+".jpg");
 			multiImage.transferTo(upImage);
 			help.setHelpImage(fileName+".jpg");
 		}
+		
+		MultipartFile multiImage2 = help.getMultiImage2();
+		if(multiImage2!=null && !multiImage2.isEmpty()) {
+			//디렉토리
+			upImage = new File(dir, fileName+".jpg");
+			multiImage2.transferTo(upImage);
+			help.setHelpImage2(fileName+".jpg");
+		}
+		
 		service.updateHelp(help);
 		int helpNum = help.getHelpNum();
-		return new ModelAndView("helpDetailView.do?helpNum"+helpNum,"help",help);
+		return new ModelAndView("redirect:/helpDetail.do?helpNum="+helpNum,"help",help);
 				
 	}
 	
 	@RequestMapping("/updateHelp2")
 	public ModelAndView updateHelp2(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
-		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+		return new ModelAndView("help/helpUpdate.tiles","help",help);
+	}
+	
+	@RequestMapping("/selectHelp")
+	public ModelAndView viewAllHelp(@RequestParam(required = false) String category, @RequestParam(required = false) String search) {
+		int page = 1;
+		Map<String, Object> map = null;
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) {}
+		
+		if(category != null) {
+			if(category.equals("title")) {
+				map = service.selectHelpByHelpTitle(page, search);
+			}else if(category.equals("content")) {
+				map = service.selectHelpByHelpContent(page, search);
+			}else if(category.equals("user")) {
+				map = service.selectHelpByHelpUserId(page, search);
+			}
+		} else {
+			map = service.selectAllHelp(page);
+			category = "title";
+			search = "";
+		}
+		
+		map.put("search", search);
+		map.put("category", category);
+		
+		return new ModelAndView("help/helpView.tiles", "map", map);
 	}
 	
 	

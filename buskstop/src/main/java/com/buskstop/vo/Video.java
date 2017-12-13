@@ -2,6 +2,7 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,6 +21,8 @@ public class Video implements Serializable{
 
 	private String videoUserId;
 	private int videoHits;//조회수
+	
+	private List<VideoComment> commentList;
 	
 	public Video() {
 	}
@@ -66,6 +69,37 @@ public class Video implements Serializable{
 		this.videoHits = videoHits;
 	}
 	
+	
+	
+	public Video(int videoNo, String videoTitle, String videoLink, String videoLocation, String videoContent,
+			Date videoDate, String videoArtist, String videoCategory, Date videoRegTime, String videoUserId,
+			int videoHits, List<VideoComment> commentList) {
+		this.videoNo = videoNo;
+		this.videoTitle = videoTitle;
+		this.videoLink = videoLink;
+		this.videoLocation = videoLocation;
+		this.videoContent = videoContent;
+		this.videoDate = videoDate;
+		this.videoArtist = videoArtist;
+		this.videoCategory = videoCategory;
+		this.videoRegTime = videoRegTime;
+		this.videoUserId = videoUserId;
+		this.videoHits = videoHits;
+		this.commentList = commentList;
+	}
+
+	
+	
+	public List<VideoComment> getCommentList() {
+		return commentList;
+	}
+
+
+	public void setCommentList(List<VideoComment> commentList) {
+		this.commentList = commentList;
+	}
+
+
 	public int getVideoNo() {
 		return videoNo;
 	}
@@ -175,13 +209,13 @@ public class Video implements Serializable{
 		this.videoHits = videoHits;
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoLink=" + videoLink
 				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
 				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoRegTime=" + videoRegTime
-				+ ", videoUserId=" + videoUserId + ", videoHits=" + videoHits + "]";
+				+ ", videoUserId=" + videoUserId + ", videoHits=" + videoHits + ", commentList=" + commentList + "]";
 	}
 
 	@Override

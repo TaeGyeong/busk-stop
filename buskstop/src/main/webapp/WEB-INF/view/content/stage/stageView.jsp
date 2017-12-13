@@ -31,9 +31,6 @@
 		document.location.href= root+'/stageDetail.do?stageNo='+no
 	}
 	
-	function goRegister(){
-		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
-	}
 	
 
 </script>
@@ -138,7 +135,7 @@ select {
 	<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
 			<div class="thumbnail col-sm-4" style="cursor: pointer;">
-				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+				<img src="${initParam.rootPath }/stageImage/${item.stageImage[0].stageImageLocation }.jpg" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
@@ -154,7 +151,11 @@ select {
 	</div>
 	 
 	<div style="width: 100%;">
-		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
+		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')">
+			<form action="${initParam.rootPath}/member/stageRegister.do">
+				<button class="btn btn-default" style="float: right;">작성</button>
+			</form>
+		</sec:authorize>
 	</div>
 
 	<div style="text-align: center; width: 100%;">
