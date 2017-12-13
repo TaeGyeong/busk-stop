@@ -1,4 +1,14 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script>
+	function goDetail(root, no){
+		document.location.href= root+'/helpDetailView.do?helpNum='+no;
+	}
+</script>
+
 <h1>고객센터</h1>
 <style type="text/css">
 
@@ -104,22 +114,24 @@ select {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="num">4951</td>
-					<td class="sort">서비스</td>
-					<td class="subject"><a href="http://help.ticketmonster.co.kr/notice?no=4943" data-serial="4943">[공지] 슈퍼마트 무료배송 기준 금액 변경 안내</a></td>
-					<td class="date">2017.12.05</td>
+				<c:forEach items="${requestScope.map.list }" var="item">
+				<tr onclick="goDetail('${initParam.rootPath}', ${item.helpNum })">
+					<td class="num">${item.helpNum }</td>
+					<td class="sort">${item.helpCategory }</td>
+					<td class="subject">${item.helpTitle }</td>
+					<td class="date"><fmt:formatDate value="${item.helpRegTime }" pattern="yyyy-MM-dd"/></td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
 <div class="uio_base_srch">
-	<form id="schform" name="schform" action="http://help.ticketmonster.co.kr/notice" method="get">
+	<form id="schform" name="schform" >
 		<fieldset>
 		<legend>검색</legend>
 		<select title="검색 구분" name="keyfield" style="width:70px">
-		<option value="all">전체</option>
+			<option value="all">전체</option>
 			<option value="b_title">제목</option>
 			<option value="b_contents">내용</option>
 		</select>
@@ -128,5 +140,60 @@ select {
 		
 		</fieldset>
 	</form>
+	<%-- 페이징 --%>
+	<p/>
+	<div style="text-align: center; width: 100%;">
+		<ul class="pagination">
+			<%-- 첫 페이지 --%>
+			<li>
+				<a href="${initParam.rootPath }/selectHelp.do?page=1">&lt;&lt;</a>
+			</li>
+			<%-- 이전 페이지 그룹 --%>
+			<c:choose>
+				<c:when test="${requestScope.map.pageBean.previousPageGroup }">
+					<li>
+						<a href="${initParam.rootPath }/selectHelp.do?page=${requestScope.map.pageBean.beginPage - 1}">◀</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="disabled">
+						<a href="#">◀</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			<%-- 현재 페이지가 속한 페이지 그룹내의 페이지들 링크 --%>
+			<c:forEach begin="${requestScope.map.pageBean.beginPage }" end="${requestScope.map.pageBean.endPage }" var="num">
+				<c:choose>
+					<c:when test="${num == requestScope.map.pageBean.page }">
+						<li class="active">
+							<a href="#">${num }</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li>
+							<a href="${initParam.rootPath }/selectHelp.do?page=${num}">${num }</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<%-- 다음 페이지 그룹 --%>
+			<c:choose>
+				<c:when test="${requestScope.map.pageBean.nextPageGroup }">
+					<li>
+						<a href="${initParam.rootPath }/selectHelp.do?page=${requestScope.map.pageBean.endPage + 1}">▶</a>		
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="disabled">
+						<a href="#">▶</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			<%-- 마지막 페이지 --%>
+			<li>
+				<a href="${initParam.rootPath }/selectHelp.do?page=${requestScope.map.pageBean.totalPage}">&gt;&gt;</a>
+			</li>
+		</ul>
+	</div>
 </div>
 <button onclick="location.href='${initParam.rootPath}/helpRegisterView.do'">글쓰기</button>

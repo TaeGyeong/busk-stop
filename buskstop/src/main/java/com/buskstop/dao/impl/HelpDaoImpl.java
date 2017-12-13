@@ -1,5 +1,8 @@
 package com.buskstop.dao.impl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,6 +47,20 @@ public class HelpDaoImpl implements HelpDao{
 	@Override
 	public int deleteHelpByHelpNum(int helpNum) {
 		return session.delete(makeSqlId("deleteHelpByHelpNum"),helpNum);
+	}
+	
+	@Override
+	public List<Help> selectAllHelp(int beginItemNum, int endItemNum){
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("begin", beginItemNum);
+		map.put("end", endItemNum);
+		
+		return session.selectList(makeSqlId("selectAllHelp"), map);
+	}
+	
+	@Override
+	public int selectAllHelpCount() {
+		return session.selectOne(makeSqlId("selectAllHelpCount"));
 	}
 
 }

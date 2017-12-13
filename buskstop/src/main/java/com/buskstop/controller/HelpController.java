@@ -74,7 +74,7 @@ public class HelpController {
 			help.setHelpImage(fileName+".jpg");
 		}
 		service.insertHelp(help);
-		return new ModelAndView("help/helpView.tiles");//임시 경로
+		return new ModelAndView("/selectHelp.do");
 	}
 
 	@RequestMapping("/helpDetailView")
@@ -98,7 +98,7 @@ public class HelpController {
 	@RequestMapping("/deleteHelp")
 	public String deleteHelp(@RequestParam int helpNum) {
 		service.deleteHelpByHelpNum(helpNum);
-		return "help/helpDetailView.tiles"; // 여기엔 목록으로 이동 
+		return "/selectHelp.do"; // 여기엔 목록으로 이동 
 	}
 	
 	@RequestMapping("/updateHelp")
@@ -123,6 +123,23 @@ public class HelpController {
 	public ModelAndView updateHelp2(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
 		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+	}
+	
+	@RequestMapping("/selectHelp")
+	public ModelAndView viewAllHelp() {
+		int page = 1;
+		List<Help> list = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		
+		try {
+			page = Integer.parseInt(request.getParameter("page"));
+		} catch (Exception e) {
+
+		}
+		
+		map = service.selectAllHelp(page);
+		
+		return new ModelAndView("help/helpView.tiles", "map", map);
 	}
 	
 	

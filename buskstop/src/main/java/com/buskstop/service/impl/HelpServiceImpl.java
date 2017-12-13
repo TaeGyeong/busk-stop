@@ -1,8 +1,13 @@
 package com.buskstop.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.buskstop.common.util.PagingBean;
 import com.buskstop.dao.HelpDao;
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
@@ -44,5 +49,20 @@ public class HelpServiceImpl implements HelpService{
 		return dao.deleteHelpByHelpNum(helpNum);
 	}
 
+	@Override
+	public Map<String, Object> selectAllHelp(int page) {
 		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		//PagingBean 생성
+		PagingBean pb = new PagingBean(dao.selectAllHelpCount(), page);
+		
+		map.put("pageBean", pb);
+		List<Help> list = dao.selectAllHelp(pb.getBeginItemInPage(), pb.getEndItemInPage());
+		
+		map.put("list", list);
+		
+		return map;
+	}
+
 }

@@ -64,17 +64,25 @@
 	where help_no=#{helpNum}
 	</update>
 	
+	<!-- 고객센터 전체 조회 페이징 -->
+	<select id="selectAllHelp" resultMap="help-resultmap" parameterType="map">
+		select <include refid="column-help"/>
+		from(
+			select rownum rn, <include refid="column-help"/>
+			from(
+				select *
+				from help
+				order by help_no desc
+			)
+			where rownum &lt;= #{end}
+		)
+		where rn >= #{begin}
+	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<!-- 고객센터 전체 조회 count -->
+	<select id="selectAllHelpCount" resultType="_int">
+		select count(*)
+		from help
+	</select>
 	
 </mapper>
