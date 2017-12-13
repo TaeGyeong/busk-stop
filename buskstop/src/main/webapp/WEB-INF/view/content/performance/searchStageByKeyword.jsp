@@ -86,6 +86,14 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 //사용자가 선택한 변수를 담을 객체
 var stageLocation = null;
 
+
+var mapTypeControl = new daum.maps.MapTypeControl();
+map.addControl(mapTypeControl, daum.maps.ControlPosition.RIGHT);
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+
+
 // 키워드로 장소를 검색합니다
 searchPlaces();
 

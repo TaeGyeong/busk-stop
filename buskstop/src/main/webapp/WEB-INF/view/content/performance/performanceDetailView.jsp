@@ -245,7 +245,7 @@ function deletePerformance(performanceNo){
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
-			<div id="map" style="position:static; width:800px; height:400px"></div>
+			<div id="map" style="position:static; width:900px; height:400px"></div>
 			<div class="wrap_button">
             <a class="btn_comm btn_linkMap" target="_blank" onclick="moveDaumMap(this)"></a> <!-- 지도 크게보기 버튼입니다 -->
             <a class="btn_comm btn_resetMap" target="_blank" onclick="resetDaumMap()"></a> <!-- 지도 크게보기 버튼입니다 -->

@@ -5,14 +5,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 	
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
-<script>
-function updatePerformance(){	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
+<script type="text/javascript">
+function updatestage(){	
 	var output = "";
 	output+=location.href='${initParam.rootPath }/updateStage.do?stageNo=${param.stageNo}';
 	
 }
 
-function deletePerformance(performanceNo){
+function deletestage(stageNo){
 	
 	var output = "";
 	output+=location.href='${initParam.rootPath }/deleteStage.do?stageNo=${param.stageNo}';
@@ -20,6 +21,30 @@ function deletePerformance(performanceNo){
 }
 
 $(document).ready(function(){
+	listComment();
+	$("#btnComment").on("click",function(){
+        
+		$.ajax({                
+            "url": "${initParam.rootPath }/stageCommentInsert.do",
+            "type": "get",
+            "data" : {
+            	"stageNo":"${requestScope.map.stage.stageNo}",
+            	"stageComment":$("#stageComment").val(),
+            	'${_csrf.parameterName}':'${_csrf.token}'
+            },
+            "dataType":"text",
+            success: function(){
+                alert("댓글이 등록되었습니다.");
+                listComment();
+                document.getElementById("stageComment").value="";
+            },
+           	"error":function(){
+           		alert("오류 발생");
+           		
+           	}
+        });
+     });
+	
 	$("#reservationBtn").on("click", function(){
 		$.ajax({
 			"url" : "${initParam.rootPath}/insertStageRservation.do",
@@ -63,6 +88,88 @@ $(document).ready(function(){
 		});
 	});
 });
+
+function listComment(){
+    $.ajax({
+        //"dataType":"json",
+        "url" : "/buskstop/stageCommentList.do",
+        "type": "get",
+        "data" : {"stageNo":"${requestScope.map.stage.stageNo}"},
+        "dataType" : "json",
+        "success" : function(result){
+            var output = "";
+            $.each(result, function(){ 
+            	output += '<div class="stageComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                output += '<div class="listComment'+this.stageCommentUserId+'">'+'작성자 : '+this.stageCommentUserId+' / 등록 일자 : '+this.stageCommentRegTime;
+                output += '<a onclick="updateCommentText('+this.stageCommentUserId+',\''+this.stageComment+'\');"> 수정 </a>';
+                output += '<a onclick="deleteComment('+this.stageCommentUserId+');"> 삭제 </a> </div>';
+                output += '<div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
+                output += '</div></div>';
+            });
+            $("#stageCommentList").html(output);
+        },
+        "error":function(){
+       		//alert("오류 발생");
+       	}
+    });
+}
+   
+function deleteComment(stageCommentNo){
+    
+	$.ajax({                
+        "url": "${initParam.rootPath }/stageCommentDelete.do",
+        "type": "post",
+        "data" : {
+        	"stageCommentNo":stageCommentNo,
+        	'${_csrf.parameterName}':'${_csrf.token}'
+        },
+        "dataType":"text",
+        "success": function(){
+            alert("댓글이 삭제되었습니다.");
+            listComment();
+        },
+        "error":function(){
+        	alert("에러 뜸 ㅠㅠ");
+        }
+    });
+ }
+ 
+ 
+function updateCommentText(stageCommentNo,stageComment){
+	
+    var output ="";
+    	output += '<div class="input-group">';
+    	output += '<input type="text" class="form-control" name="pComment'+stageCommentNo+'" value="'+stageComment+'"/>';
+    	output += '<span class="input-group-btn">'
+    	output += '<button class="btn btn-default" type="button" onclick="updateComment('+stageCommentNo+');">수정</button>';
+    	output += '<button class="btn btn-default" type="button" onclick="listComment();">수정 취소</button>';
+    	output += ' </span></div>';
+       
+       $(".pComment"+stageCommentNo).html(output);
+}
+
+function updateComment(stageCommentNo){
+		var UpdatestageComment = $("[name=pComment"+stageCommentNo+"]").val();
+	$.ajax({
+		"url": "${initParam.rootPath }/stageCommentUpdate.do",
+	    "type": "get",
+	    "data" : {
+	    	"stageCommentNo":stageCommentNo,
+	    	"UpdatestageComment":UpdatestageComment,
+	    	'${_csrf.parameterName}':'${_csrf.token}'
+	    },
+	    "dataType":"text",
+	    "success" : function(){
+	    	alert("댓글이 수정되었습니다.");
+	    	listComment();
+	    },
+	    "error":function(){
+	    	alert("댓글을 입력해주세요.");
+	    }
+		
+	});
+	
+}
 </script>
 <style type="text/css">
 	table, td{
@@ -86,7 +193,23 @@ $(document).ready(function(){
 	#container{
 		width:960px;
 		margin : 0 auto;
-	}	
+	}
+	.btn_comm {
+	 	float:left;display:block;width:70px;height:27px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sample_button_control.png) no-repeat
+	}
+    
+	.btn_linkMap {
+		background-position:0 0;
+	}
+    .btn_resetMap {
+    	background-position:-69px 0;
+    }
+    .btn_linkRoadview {
+    	background-position:0 0;
+    }
+    .btn_resetRoadview {
+   		background-position:-69px 0;
+    }	
 </style>
 <div id="container">
 	<h1>DETAIL VIEW - 공연장 글 읽기 </h1>
@@ -142,14 +265,17 @@ $(document).ready(function(){
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
-			<div id="map" style="position:static; width:800px; height:400px"></div>
-			<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
+			<div id="map" style="position:static; width:900px; height:400px"></div>
+			<div class="wrap_button">
+            <a class="btn_comm btn_linkMap" target="_blank" onclick="moveDaumMap(this)"></a> <!-- 지도 크게보기 버튼입니다 -->
+            <a class="btn_comm btn_resetMap" target="_blank" onclick="resetDaumMap()"></a> <!-- 지도 크게보기 버튼입니다 -->
+        	</div>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
+			        level: 3, // 지도의 확대 레벨
+			        scrollwheel : false
 			    };  
 	
 				// 지도를 생성합니다    
@@ -157,6 +283,15 @@ $(document).ready(function(){
 		
 				// 주소-좌표 변환 객체를 생성합니다
 				var geocoder = new daum.maps.services.Geocoder();
+				
+				var mapTypeControl = new daum.maps.MapTypeControl();
+				map.addControl(mapTypeControl, daum.maps.ControlPosition.RIGHT);
+				var zoomControl = new daum.maps.ZoomControl();
+				map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+				
+				var currentTypeId;
+				var resulty;
+				var resultx;
 		
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch('${requestScope.map.stage.stageLocation}', function(result, status) {
@@ -165,7 +300,8 @@ $(document).ready(function(){
 				     if (status === daum.maps.services.Status.OK) {
 		
 				        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-		
+				        resulty = result[0].y;
+						resultx = result[0].x;
 				        // 결과값으로 받은 위치를 마커로 표시합니다
 				        var marker = new daum.maps.Marker({
 				            map: map,
@@ -181,7 +317,22 @@ $(document).ready(function(){
 				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				        map.setCenter(coords);
 				    } 
-				});    
+				});   
+				//지도 이동 이벤트 핸들러
+				function moveDaumMap(self){
+				    
+				    var center = map.getCenter(), 
+				        lat = center.getLat(),
+				        lng = center.getLng();
+
+				    self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${requestScope.map.performance.performanceName}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
+				}
+
+				//지도 초기화 이벤트 핸들러
+				function resetDaumMap(){
+					map.setCenter(new daum.maps.LatLng(resulty, resultx));; //지도를 초기화 했던 값으로 다시 셋팅합니다.
+				    map.setLevel(mapOption.level);
+				}
 			</script>
 		</div>
 	</div>
@@ -265,8 +416,8 @@ $(document).ready(function(){
 		<div>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updatePerformance();" class="btn btn-default">
-					<input type="submit" value="삭제" onclick="deletePerformance();" class="btn btn-default">
+					<input type="submit" value="수정" onclick="updatestage();" class="btn btn-default">
+					<input type="submit" value="삭제" onclick="deletestage();" class="btn btn-default">
 				</c:if>
 			</sec:authorize>
 			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>

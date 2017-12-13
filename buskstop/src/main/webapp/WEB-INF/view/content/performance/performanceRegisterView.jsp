@@ -16,7 +16,7 @@ $(document).ready(function(){
 		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
 		left1 = (screen.availWidth - 600) / 2;
 		top1 = (screen.availHeight - 500) / 2;
-		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+		window.open(address, "newWin", 'width=800 ,height=600 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 	
 	$("#performanceTime").timepicker({
@@ -24,7 +24,6 @@ $(document).ready(function(){
 	    interval: 60,
 	    minTime: '00',
 	    maxTime: '23:00',
-	    defaultTime: '11',
 	    startTime: '00:00',
 	    dynamic: false,
 	    dropdown: true,
@@ -70,15 +69,15 @@ function readURL(input){
 	<div class="form-group">
 		<label for="performanceLocation">공연장소</label>
 		<input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required" readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">  
-		<!-- <input type="text" name="performanceLocation" id="performanceLocation" class="form-control" required="required"> -->
-		<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
+		<%-- --><input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2"> --%>
 		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
 	</div>
+	<br>
 		<div class="form-group">	
-			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
+			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" required="required">
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2">공연시간</label><input type="timepicker" name="performanceTime" placeholder="시간선택" id="performanceTime" required size="8" maxlength="5" required="required" style="width: 150px;">
+			<label class="col-sm-2">공연시간</label><input type="Timepicker" name="performanceTime" placeholder="시간선택" id="performanceTime" required size="8" maxlength="5" required="required" style="width: 150px;">
 		</div>
 		<div class="form-group">
 			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>

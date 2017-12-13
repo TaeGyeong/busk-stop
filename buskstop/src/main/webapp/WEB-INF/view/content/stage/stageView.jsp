@@ -32,7 +32,7 @@
 	}
 	
 	function goRegister(){
-		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
+		document.location.href= "${initParam.rootPath}/member/stageRegister.do";
 	}
 	
 

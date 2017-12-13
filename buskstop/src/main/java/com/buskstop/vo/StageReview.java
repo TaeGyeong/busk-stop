@@ -2,64 +2,99 @@ package com.buskstop.vo;
 
 import java.io.Serializable;
 
+import com.buskstop.common.util.DateJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class StageReview implements Serializable{
 	private int stageNo;
-	private String userId;
+	private int stageCommentNo;
 	private int starScore;
-	private String comment;
-	private String commentRegTime;
+	private String stageCommentUserId;
+	private String stageComment;
+	@JsonSerialize(using=DateJsonSerializer.class)
+	private String stageCommentRegTime;
 	
 	public StageReview() {
 	}
-	
-	public StageReview(int stageNo, String userId, int starScore, String comment, String commentRegTime) {
+
+	public StageReview(int stageNo, int stageCommentNo, int starScore, String stageCommentUserId, String stageComment,
+			String stageCommentRegTime) {
 		this.stageNo = stageNo;
-		this.userId = userId;
+		this.stageCommentNo = stageCommentNo;
 		this.starScore = starScore;
-		this.comment = comment;
-		this.commentRegTime = commentRegTime;
+		this.stageCommentUserId = stageCommentUserId;
+		this.stageComment = stageComment;
+		this.stageCommentRegTime = stageCommentRegTime;
 	}
+
+	@Override
+	public String toString() {
+		return "StageReview [stageNo=" + stageNo + ", stageCommentNo=" + stageCommentNo + ", starScore=" + starScore
+				+ ", stageCommentUserId=" + stageCommentUserId + ", stageComment=" + stageComment
+				+ ", stageCommentRegTime=" + stageCommentRegTime + "]";
+	}
+
 	public int getStageNo() {
 		return stageNo;
 	}
-	public void setStageNo(int stageNo) {
-		this.stageNo = stageNo;
+
+	public int getStageCommentNo() {
+		return stageCommentNo;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+
 	public int getStarScore() {
 		return starScore;
 	}
+
+	public String getStageCommentUserId() {
+		return stageCommentUserId;
+	}
+
+	public String getStageComment() {
+		return stageComment;
+	}
+
+	public String getStageCommentRegTime() {
+		return stageCommentRegTime;
+	}
+
+	public void setStageNo(int stageNo) {
+		this.stageNo = stageNo;
+	}
+
+	public void setStageCommentNo(int stageCommentNo) {
+		this.stageCommentNo = stageCommentNo;
+	}
+
 	public void setStarScore(int starScore) {
 		this.starScore = starScore;
 	}
-	public String getComment() {
-		return comment;
+
+	public void setStageCommentUserId(String stageCommentUserId) {
+		this.stageCommentUserId = stageCommentUserId;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+
+	public void setStageComment(String stageComment) {
+		this.stageComment = stageComment;
 	}
-	public String getCommentRegTime() {
-		return commentRegTime;
+
+	public void setStageCommentRegTime(String stageCommentRegTime) {
+		this.stageCommentRegTime = stageCommentRegTime;
 	}
-	public void setCommentRegTime(String commentRegTime) {
-		this.commentRegTime = commentRegTime;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + ((commentRegTime == null) ? 0 : commentRegTime.hashCode());
+		result = prime * result + ((stageComment == null) ? 0 : stageComment.hashCode());
+		result = prime * result + stageCommentNo;
+		result = prime * result + ((stageCommentRegTime == null) ? 0 : stageCommentRegTime.hashCode());
+		result = prime * result + ((stageCommentUserId == null) ? 0 : stageCommentUserId.hashCode());
 		result = prime * result + stageNo;
 		result = prime * result + starScore;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -69,31 +104,32 @@ public class StageReview implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		StageReview other = (StageReview) obj;
-		if (comment == null) {
-			if (other.comment != null)
+		if (stageComment == null) {
+			if (other.stageComment != null)
 				return false;
-		} else if (!comment.equals(other.comment))
+		} else if (!stageComment.equals(other.stageComment))
 			return false;
-		if (commentRegTime == null) {
-			if (other.commentRegTime != null)
+		if (stageCommentNo != other.stageCommentNo)
+			return false;
+		if (stageCommentRegTime == null) {
+			if (other.stageCommentRegTime != null)
 				return false;
-		} else if (!commentRegTime.equals(other.commentRegTime))
+		} else if (!stageCommentRegTime.equals(other.stageCommentRegTime))
+			return false;
+		if (stageCommentUserId == null) {
+			if (other.stageCommentUserId != null)
+				return false;
+		} else if (!stageCommentUserId.equals(other.stageCommentUserId))
 			return false;
 		if (stageNo != other.stageNo)
 			return false;
 		if (starScore != other.starScore)
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "StageReview [stageNo=" + stageNo + ", userId=" + userId + ", starScore=" + starScore + ", comment="
-				+ comment + ", commentRegTime=" + commentRegTime + "]";
-	}
+	
+	
+	
+	
 	
 }
