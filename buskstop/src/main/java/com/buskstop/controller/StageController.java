@@ -257,7 +257,9 @@ public class StageController {
 		
 		if(!stageReservation.getRentalUserId().equals("0")) {
 			// 예약진행중이지 않다면
-			if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
+			if(stageReservation.getRentalUserId().equals(stage.getStageSellerId())) {
+				msg = "공급자는 자신의 공급장을 예약 할 수 없습니다.";
+			}else if(service.selectStageReservationByStageNoforRentalStateCode(stageNo) == null) {
 				service.insertStageReservation(stageReservation);
 				service.updateStageForStageReservation(0, stageNo);
 				msg = "예약 신청이 성공적으로 완료되었습니다";
