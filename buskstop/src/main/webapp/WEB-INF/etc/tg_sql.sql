@@ -34,6 +34,7 @@ insert into stage
 select * from performance group by performance_no
 
 delete from authority where user_id = 'id-10';
+delete from artist where artist_id
 
 		SELECT  P.PERFORMANCE_NO, COUNT(PERFORMANCE_USER_ID)
 		FROM	PERFORMANCE P , PERFORMANCE_LIKE L

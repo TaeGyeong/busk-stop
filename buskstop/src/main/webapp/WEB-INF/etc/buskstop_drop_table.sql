@@ -211,6 +211,8 @@ DROP TABLE STUDENTS
 /* 고객센터 */
 DROP TABLE HELP 
 	CASCADE CONSTRAINTS;
+	
+DROP SEQUENCE HELP_NO_SEQ;
 
 /*---고객센터댓글------------------------------------------------------------------------*/
 

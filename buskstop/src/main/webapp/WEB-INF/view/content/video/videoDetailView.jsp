@@ -458,12 +458,7 @@ div{
 <div>
 	<div style="border: 1px solid #e5e5e5; height:0 auto; padding: 10px">
 		<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-		
-		<!-- 댓글을 펼치고 숨기기 위한 곳. -->
-		<div id="provider">
-			<button class="btn btn-default" id="providerBtn">댓글보기</button>
-		</div>
-		
+
 		<!-- 댓글목록이 보여질 div -->
 		<div id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
 		</div>
@@ -473,6 +468,12 @@ div{
 				<button id="enterVideoCommentBtn" type="button">등록</button>
 			</div>
 		</sec:authorize>
+		
+		<!-- 댓글을 펼치고 숨기기 위한 곳. -->
+		<div id="provider">
+			<button class="btn btn-default" id="providerBtn">댓글보기</button>
+		</div>
+		
 	</div>
 </div>
 <!-- Comment End-->
