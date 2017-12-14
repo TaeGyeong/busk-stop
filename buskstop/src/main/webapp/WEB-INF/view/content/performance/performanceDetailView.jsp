@@ -73,12 +73,14 @@ function listComment(){
         "success" : function(result){
             var output = "";
             $.each(result, function(){ 
-            	output += '<div class="performanceComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+            	output += '<div class="performanceComment" style="border-top:1px solid darkgray; margin-bottom: 15px;">';
                 output += '<div class="listComment'+this.performanceCommentNo+'">'+'작성자 : '+this.performanceCommentUserId+' / 등록 일자 : '+this.performanceCommentRegTime;
+                output += '<sec:authorize access="isAuthenticated()">'
+                if(this.performanceCommentUserId=='${requestScope.map.userId}'){
                 output += '<a onclick="updateCommentText('+this.performanceCommentNo+',\''+this.performanceComment+'\');"> 수정 </a>';
-                output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a> </div>';
-                output += '<div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
-                output += '</div></div>';
+                output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a>';
+                }output += '</sec:authorize><div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
+                output += '</div></div></div>';
             });
             $("#performanceCommentList").html(output);
         },

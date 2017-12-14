@@ -48,9 +48,9 @@ $(document).ready(function(){
 					if(this.videoCommentUserId=='${requestScope.map.userId }'){
 						txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
 						txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
-						txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
+					}txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
 						txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
-					}
+					
 					txt+="</div></div>";
 				});
 				$("#videoCommentList").html(txt);

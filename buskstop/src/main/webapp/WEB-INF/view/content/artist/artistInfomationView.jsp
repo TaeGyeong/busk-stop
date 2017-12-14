@@ -99,9 +99,22 @@ img{
 	height:50%;
 	width:50%;
 }
+
+h2 {
+    color: pink;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+td {
+	word-break: keep-all;
+}
+
+span {
+	word-break: keep-all;
+}
 </style>
 <!-- 아티스트 정보 (프로필) -->
-<div class="container-inline" style="top-margin:100%; height:100%;">
+<div class="container-inline" style="top-margin:100%; left-padding:100%; height:100%;">
 	<h2>${requestScope.map.artist.artistName } 프로필</h2>
 	<div class="row">
 		<div class="col-sm-5" style="vertical-align:middel;">
@@ -142,7 +155,7 @@ img{
 <!-- 아티스트 공연정보 조회 -->
 <div class="container" style="top-margin:300px;">
 	<h2>${requestScope.map.artist.artistName }님이 올린 공연</h2>
-	<table style="border:solid black 1px">
+	<table style="border:solid black 1px" >
 	<tr>
 		<th>공연 번호</th>
 		<th>공연제목</th>
