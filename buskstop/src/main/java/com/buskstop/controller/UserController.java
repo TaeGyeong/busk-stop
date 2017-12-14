@@ -46,7 +46,7 @@ public class UserController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setPassword(encoder.encode(user.getPassword()));
 		service.joinMember(user, new Authority(user.getUserId(), "ROLE_MEMBER"));
-		return "index.tiles";
+		return "main.tiles";
 	}
 	
 	/************************ 회원수정 전 비밀번호 체크 컨트롤러 ************************/

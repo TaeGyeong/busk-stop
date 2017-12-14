@@ -13,7 +13,7 @@ $(document).ready(function(){
 	upVideoHits();
 	likeChk();
 	
-	$("#enterVideoCommentBtn").on("click", function(){
+	$("#enterVideoCommentBtn").on("click",function() {
 		var videoNo= "${requestScope.map.video.videoNo }";
 		alert(videoNo);
 	
@@ -27,9 +27,15 @@ $(document).ready(function(){
 			"dataType":"json",
 			"beforesend":function(){
 				alert("${requestScope.map.video.videoNo }");
-				if($("#videoComment").text()==null){
+				alert($("#videoComment").text());
+				if($("#videoComment").val()==null){
 					alert("댓글을 입력해주세요.");
 					document.getElementById("#videoComment").focus();
+					return false;
+				} else if($("#videoComment").val()=='댓글을 입력하세요.'){
+					alert("댓글을 입력해주세요.");
+					document.getElementById("#videoComment").focus();
+					return false;
 				}
 			},
 			
@@ -459,21 +465,24 @@ div{
 	<div style="border: 1px solid #e5e5e5; height:0 auto; padding: 10px">
 		<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 
-		<!-- 댓글목록이 보여질 div -->
-		<div id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
-		</div>
+		
 		<sec:authorize access="isAuthenticated()">			 
-			<div style="float:right">
-				<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요.">
-				<button id="enterVideoCommentBtn" type="button">등록</button>
+			<div class="row">
+				<input class="col-sm-6 col-sm-offset-2 input-control" id="videoComment" name="videoContent" placeholder="댓글을 입력하세요." required="required">
+				<button class="col-sm-2 btn btn-default" id="enterVideoCommentBtn" type="button">등록</button>
 			</div>
 		</sec:authorize>
 		
 		<!-- 댓글을 펼치고 숨기기 위한 곳. -->
-		<div id="provider">
-			<button class="btn btn-default" id="providerBtn">댓글보기</button>
+		<div class="row">
+			<div class="col-sm-12" id="provider">
+				<button class="btn btn-default" id="providerBtn">댓글보기</button>
+			</div>
+			<!-- 댓글목록이 보여질 div -->
+			<div class="col-sm-12" id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
+			
+			</div>
 		</div>
-		
 	</div>
 </div>
 <!-- Comment End-->
