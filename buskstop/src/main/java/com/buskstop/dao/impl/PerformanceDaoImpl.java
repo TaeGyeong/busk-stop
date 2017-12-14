@@ -357,4 +357,18 @@ public class PerformanceDaoImpl implements PerformanceDao {
 		return session.selectList(makeSqlId("selectAllArtistPerformance"));
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public List<Performance> selectPerformanceByLikeCount(){
+		return session.selectList(makeSqlId("selectPerformanceByLikeCount"));
+	}
+
+	@Override
+	public int selectArtistPerformanceCountById(String userId) {
+		return session.selectOne(makeSqlId("selectArtistPerformanceCount"),userId);
+	}
+	
+	
+	
 }

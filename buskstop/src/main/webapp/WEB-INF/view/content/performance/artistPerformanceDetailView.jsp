@@ -317,9 +317,11 @@ function deletePerformance(performanceNo){
 				<span>${requestScope.map.artist.artistSns }</span><br>
 			</div>
 			<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
-				<div class="text-right" id="follow" style="overflow:hidden">
-					<button type="button" id="followBtn"></button>
-				</div>
+				<sec:authorize access="isAuthenticated()">	
+					<div class="text-right" id="follow" style="overflow:hidden">
+						<button type="button" id="followBtn"></button>
+					</div>
+				</sec:authorize>
 			</c:if>
 		</div>
 	</div>

@@ -180,4 +180,10 @@ public interface PremiumStageService {
 	 * @return
 	 */
 	List<PremiumStage> selectPremiumStageByAdmin(String category, String search);
+	
+	/**
+	 * 랜덤으로 4개의 프리미엄스테이지를 뽑아 제공하는 service.
+	 * @return
+	 */
+	List<PremiumStage> mainPremiumStage();
 }

@@ -314,7 +314,15 @@ public class PerformanceController {
 		// 사용자 id 체크
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
-		String id = ((User) authentication.getPrincipal()).getUserId();
+		String id = "";
+		
+		try {
+			if(authentication.getPrincipal()!=null) {
+				id = ((User) authentication.getPrincipal()).getUserId();
+			}
+		} catch(Exception e) {
+			
+		}
 
 		// attribute 로 보낼 Map 생성.
 		Map<String, Object> map = new HashMap<>();

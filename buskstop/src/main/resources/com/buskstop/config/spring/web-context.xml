@@ -13,7 +13,7 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 링크 -->
-	<mvc:view-controller path="/index.do" view-name="index.tiles"/>
+	<!-- <mvc:view-controller path="/index.do" view-name="index.tiles"/> -->
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
 	<mvc:view-controller path="/myPageView.do" view-name="mymypage/myPageView.myTiles"/>
@@ -60,6 +60,9 @@
 	<!-- 관리자 페이지 링크 -->
 	<mvc:view-controller path="/admin/adminPage.do" view-name="admin/adminPage.tiles"/>
 	<mvc:view-controller path="/admin/registAdmin.do" view-name="admin/registAdmin.tiles"/>
+	
+	<!-- 예전 index. -->
+	<mvc:view-controller path="/beforeIndex.do" view-name="index.tiles"/>
 	
 	<!-- test link -->
 	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>

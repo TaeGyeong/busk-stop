@@ -190,4 +190,17 @@ public interface PerformanceDao {
 	 * @return
 	 */
 	List<Performance> selectAllArtistPerformance();
+	
+	/**
+	 * 좋아요 수를 카운트해서 위에서부터 정렬 Dao.
+	 * @return
+	 */
+	List<Performance> selectPerformanceByLikeCount();
+
+	/**
+	 * 사용자의 performance 글 개수를 select 하는 dao.
+	 * @param userId
+	 * @return
+	 */
+	int selectArtistPerformanceCountById(String userId);
 }

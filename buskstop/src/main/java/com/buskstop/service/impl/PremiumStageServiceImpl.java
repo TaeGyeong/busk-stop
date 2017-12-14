@@ -1,5 +1,6 @@
 package com.buskstop.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -298,5 +299,37 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 		
 		return map;
 	}
+
+	@Override
+	public List<PremiumStage> mainPremiumStage() {
+		List<PremiumStage> list = supplierDao.selectPremiumStage();
+		List<PremiumStage> newList = new ArrayList<>();
+		
+		if(list.size()<5) {
+			newList.addAll(list);
+		} else {
+			for(Integer i : randomFourNumber(list.size())) {
+				newList.add(list.get(i));
+			}
+		}
+		
+		return newList;
+	}
+	
+	public List<Integer> randomFourNumber(int size){
+
+		List<Integer> list = new ArrayList<>();
+		for(int i=0;i<4;i++) {
+			list.add((int)Math.random()*(size-1));
+			for(int j=size;j>0;j--) {
+				if(list.get(i)==list.get(j)) {
+					i--;
+				}
+			}
+		}
+		
+		return list;
+	}
+	
 
 }

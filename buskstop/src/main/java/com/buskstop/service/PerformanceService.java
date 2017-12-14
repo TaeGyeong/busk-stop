@@ -168,4 +168,10 @@ public interface PerformanceService {
 	 */
 	List<Performance> selectArtistPerformance();
 	
+	/**
+	 * 좋아요수가 많은 Performance 객체 정리.
+	 * @return
+	 */
+	List<Performance> selectTopLikePerformance();
+	
 }

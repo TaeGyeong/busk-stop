@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 window.onload = function followSearch(){
@@ -122,10 +123,12 @@ img{
 			<span></span>
 		</div>
 		<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
-			<div class="col-sm-2" id="follow">
-				<!-- Follow Button -->
-				<button id="followBtn" class="btn btn-primary">팔로우</button>
-			</div>
+			<sec:authorize access="isAuthenticated()">
+				<div class="col-sm-2" id="follow">
+					<!-- Follow Button -->
+					<button id="followBtn" class="btn btn-primary">팔로우</button>
+				</div>
+			</sec:authorize>
 		</c:if>
 	</div>
 </div>

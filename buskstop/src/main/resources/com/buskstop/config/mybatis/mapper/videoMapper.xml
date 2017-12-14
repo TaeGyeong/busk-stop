@@ -123,6 +123,23 @@
 	<select id="selectVideoByArtistId" parameterType="map" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE VIDEO_USER_ID = #{videoUserId}
+		
+	<resultMap type="video" id="videoNo-likeCount-resultmap">
+		<id column="VIDEO_LIKE_NO" property="videoNo"/>
+		<result column="COUNT(*)" property="likeCount"/>
+	</resultMap>
+	<select id="selectVideoByLikeCount" resultMap="videoNo-likeCount-resultmap">
+		SELECT 	VIDEO_LIKE_NO, COUNT(*)
+		FROM 	VIDEO_LIKE
+		GROUP BY VIDEO_LIKE_NO
+		ORDER BY COUNT(*) DESC
+	</select>
+	
+	<select id="selectUserVideoCount" parameterType="string" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	VIDEO
+		WHERE 	video_user_id = #{value}
+	
 	</select>
 	
 </mapper>
