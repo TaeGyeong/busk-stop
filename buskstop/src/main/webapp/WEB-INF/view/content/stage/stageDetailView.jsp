@@ -434,8 +434,7 @@ function deleteStage(stageNo){
 					<input type="submit" value="수정" onclick="updateStage();" class="btn btn-default">
 					<input type="submit" value="삭제" onclick="deleteStage();" class="btn btn-default">
 				</c:if>
-			</sec:authorize>
-			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
+			
 			
 			
 			<div id="stageCommentList" style="float: left; width: 100%;"></div>
@@ -453,6 +452,8 @@ function deleteStage(stageNo){
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 		</div>		
+		</sec:authorize>
+			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
 	</div>
 </div>

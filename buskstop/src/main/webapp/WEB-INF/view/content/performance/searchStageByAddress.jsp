@@ -145,6 +145,15 @@ function moveDaumMap(self){
     self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${requestScope.map.performance.performanceName}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
 }
 
+function confirmStage(){
+	if(locationStage==null){
+		alert("정확한 위치를 선택해주세요!");
+	}else{
+		opener.document.getElementById("performanceLocation").value = locationStage;
+		window.close();
+	}
+}
+
 </script>
 <br>
 <div id="floating-panel">

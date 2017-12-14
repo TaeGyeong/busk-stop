@@ -7,12 +7,7 @@ $(document).ready(function(){
 	$("#regBtn").on("click", function(){
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
 		$("#stageRegForm").submit();
-	});
-	
-	$("#selectStage").on("click", function(){
-		
-	});
-	
+	});	
 	$("#searchStage").on("click", function(){
 		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
 		left1 = (screen.availWidth - 600) / 2;

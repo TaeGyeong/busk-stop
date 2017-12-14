@@ -17,7 +17,7 @@ $(document).ready(function(){
 		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
 		left1 = (screen.availWidth - 600) / 2;
 		top1 = (screen.availHeight - 500) / 2;
-		window.open(address, "newWin", 'width=600 ,height=500 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+		window.open(address, "newWin", 'width=800 ,height=600 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
 });
 </script>

@@ -337,18 +337,16 @@ function deletePerformance(performanceNo){
 					<input type="submit" value="수정" onclick="updatePerformance();">
 					<input type="submit" value="삭제" onclick="deletePerformance();">
 				</c:if>
-			</sec:authorize>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
-		</div>
 		
-		<p/><p/><p/>
-		
-		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 		</div>
+			</sec:authorize>
+		</div>
+			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
+		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	</div>
 </div>
 </body>
