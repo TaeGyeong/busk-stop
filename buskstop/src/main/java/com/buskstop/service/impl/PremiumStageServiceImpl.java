@@ -301,15 +301,19 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 	}
 
 	@Override
-	public List<PremiumStage> mainPremiumStage() {
+	public List<PremiumStage> mainPremiumStage(){
 		List<PremiumStage> list = supplierDao.selectPremiumStage();
 		List<PremiumStage> newList = new ArrayList<>();
-		
-		if(list.size()<5) {
-			newList.addAll(list);
-		} else {
-			for(Integer i : randomFourNumber(list.size())) {
-				newList.add(list.get(i));
+		System.out.println(list);
+		if(list.size()==0) {
+			return null;
+		}else {
+			if(list.size()<5) {
+				newList.addAll(list);
+			}else {
+				for(Integer i : randomFourNumber(list.size())) {
+					newList.add(list.get(i));
+				}
 			}
 		}
 		
@@ -319,6 +323,9 @@ public class PremiumStageServiceImpl implements PremiumStageService {
 	public List<Integer> randomFourNumber(int size){
 
 		List<Integer> list = new ArrayList<>();
+		if(list.size()==0) {
+			return null;
+		}
 		for(int i=0;i<4;i++) {
 			list.add((int)Math.random()*(size-1));
 			for(int j=size;j>0;j--) {
