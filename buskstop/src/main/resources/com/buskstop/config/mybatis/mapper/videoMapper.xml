@@ -123,11 +123,13 @@
 	<select id="selectVideoByArtistId" parameterType="map" resultMap="video-resultmap">
 		<include refid="video-select-sql"/>
 		WHERE VIDEO_USER_ID = #{videoUserId}
+		</select>
 		
 	<resultMap type="video" id="videoNo-likeCount-resultmap">
 		<id column="VIDEO_LIKE_NO" property="videoNo"/>
 		<result column="COUNT(*)" property="likeCount"/>
 	</resultMap>
+	
 	<select id="selectVideoByLikeCount" resultMap="videoNo-likeCount-resultmap">
 		SELECT 	VIDEO_LIKE_NO, COUNT(*)
 		FROM 	VIDEO_LIKE
