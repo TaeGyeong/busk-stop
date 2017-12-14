@@ -502,12 +502,14 @@ div{
 	<c:if test="${requestScope.map.video.videoUserId eq requestScope.map.userId }">
 		<div class="col-sm-1">
 			<form action="" method="post">
+				<sec:csrfInput/>
 				<button class="btn btn-warning">수정</button>
 			</form>
 		</div>
 		<!-- 삭제 -->
 		<div class="col-sm-1">
 			<form action="" method="post">
+				<sec:csrfInput/>
 				<button class="btn btn-danger">삭제</button>
 			</form>
 		</div>
