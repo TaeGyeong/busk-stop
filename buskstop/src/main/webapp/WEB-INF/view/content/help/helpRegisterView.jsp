@@ -109,11 +109,10 @@
 <div class="ServiceCenter">
 	<h1 id="head1">고객센터 문의하기</h1>
 	<div class="demand">
-		<p><b>고객센터 글 등록(helpRegisterView.do)</b><br><br>
-			<b>요구사항 :</b> 한 개의 고객센터 글을 등록한다.<br>
-			- 내용 : 사용자 ID, 제목, 내용을 필수로 입력받고<br>첨부 파일을 선택적으로 입력 받는다.<br>
-	 		+ 댓글을 통하여 답변 할 수 있도록 댓글 기능을 추가 한다.<br>
-	 		++ 시간 가용시 - 문의 내용을 비밀로 하기 위해 비밀글 기능을 추가 한다.
+		<p><b>고객센터</b><br><br>
+			<b>주의:</b> 불필요한 내용의 글을 올리지 마십시오.<br>
+			- 내용 : 신고 또는 문의할 내용만 작성하시기 바랍니다.<br>신고 시 첨부 파일이 있다면 많은 도움이 됩니다.<br>
+	 		+ 답글 작성이 오래 걸릴 수 있으니 양해 바랍니다.<br>
 		</p>
 	</div>
 	<form action="./helpRegister.do" method="post" enctype="multipart/form-data">

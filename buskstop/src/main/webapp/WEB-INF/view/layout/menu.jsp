@@ -86,9 +86,10 @@
    
    <!-- <li><a href="${initParam.rootPath }/youtubeTest.do">유튜브테스트</a></li> -->
    <%--인증 관련 없는 메뉴 (로그인 여부와 관련없이 나올 메뉴) --%>
-   <div class="main_menu col-sm-12" style="height: 80px;">
+   <div>
+   <div class="main_menu col-sm-12 text-center" style="height: 80px;">
       <ul class="col-sm-12">
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연정보</a>
+         <li class="col-sm-2 col-sm-offset-2 col-xs-12" style="padding: 0;"><a href="#">공연정보</a>
             <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
                <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectPerformance.do">일반공연정보</a></li>
                <li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectArtistPerformance.do">아티스트공연정보</a></li>
@@ -110,6 +111,7 @@
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectHelp.do">고객센터</a></li>
       </ul>
    </div>
+   </div>
    <%-- 임시용 --%>
    <!-- 아티스트 홍보 영상 페이지로 이동하는 폼 hidden -->
    <form action="${initParam.rootPath }/videoListCategory.do" method="post" style="display: none;" id="goArtistVideoForm">
@@ -126,6 +128,7 @@
       <sec:csrfInput/>
       <input type="hidden" name="category" value="practice"/>
    </form>
+   
 
 <script>
 $(document).ready(function(){
