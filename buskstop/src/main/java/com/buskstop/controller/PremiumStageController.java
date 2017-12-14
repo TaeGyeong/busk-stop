@@ -33,6 +33,9 @@ import com.buskstop.vo.User;
 public class PremiumStageController {
 
 	@Autowired
+	MyPageController mpc;
+	
+	@Autowired
 	private PremiumStageService service;
 	
 	@Autowired
@@ -44,9 +47,12 @@ public class PremiumStageController {
 	// service.selectSupplierById 는 id로 프리미엄공연장 리스트를 부르는 service인데 이름수정하기 귀찮아서 그냥함.★
 
 	@RequestMapping("/producer/menu")
-	public String goPremiumStageEdit() {
+	public ModelAndView goPremiumStageEdit() {
+		ModelAndView mav = mpc.profileInfo();
 		// 프리미엄 대관공급자 선택메뉴로 이동하는 controller
-		return "premiumStage/premiumStageEditCategory.tiles";
+		mav.setViewName("premiumStage/premiumStageEditCategory.myTemp");
+		
+		return mav;
 	}
 
 	/**********************
@@ -55,19 +61,29 @@ public class PremiumStageController {
 	// 조회
 	@RequestMapping("/producer/selectViewPremiumStage")
 	public ModelAndView selectPremiumStageView(String userId) {
+		ModelAndView mav = mpc.profileInfo();
 		// userId로 사용자가 등록한 premiumstage list 객체를 전달.
-		return new ModelAndView("premiumStage/choiceViewStage.tiles", "list", service.selectSupplierById(userId));
+		mav.addObject("list", service.selectSupplierById(userId));
+		mav.setViewName("premiumStage/choiceViewStage.myTemp");
+		return mav;
 	}
 
 	// 수정
 	@RequestMapping("/producer/selectEditPremiumStage")
 	public ModelAndView selectPremiumStageEdit(String userId) {
-		return new ModelAndView("premiumStage/choiceEditStage.tiles", "list", service.selectSupplierById(userId));
+		ModelAndView mav = mpc.profileInfo();
+		
+		mav.addObject("list", service.selectSupplierById(userId));
+		mav.setViewName("premiumStage/choiceEditStage.myTemp");
+		return mav;
 	}
 
 	/********************** premiumStage 공급자용 상세보기 페이지 **********************/
 	@RequestMapping("/producer/myStageDetail")
 	public ModelAndView viewMyStage(int establishNum) {
+		
+		ModelAndView mav = mpc.profileInfo();
+		
 		// 이미지 목록 가져오고 스테이지 정보가져와서 보내기.
 		List<String> imageList = service.selectImageLocation(establishNum);
 		PremiumStage stage = service.viewByEstablishNum(establishNum);
@@ -78,7 +94,11 @@ public class PremiumStageController {
 		
 		List<PremiumStageOption> optionList = reservationService.selectPremiumStageOptionByEstablishNoJoin(establishNum);
 		map.put("optionList", optionList);
-		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
+		
+		mav.addObject("map", map);
+		mav.setViewName("premiumStage/myStageDetailView.myTemp");
+		
+		return mav;
 	}
 	
 	/**
@@ -183,7 +203,12 @@ public class PremiumStageController {
 	
 	@RequestMapping("/producer/goAddPremiumStage")
 	public ModelAndView goAddPremiumStagePage(String userId) {
-		return new ModelAndView("premiumStage/addPremiumStage.tiles","userId",userId);
+		ModelAndView mav = mpc.profileInfo();
+		
+		mav.addObject("userId", userId);
+		mav.setViewName("premiumStage/addPremiumStage.myTemp");
+		
+		return mav;
 	}
 	
 	/*****************************
@@ -194,6 +219,8 @@ public class PremiumStageController {
 	
 	@RequestMapping("/producer/addPremiumStage")
 	public ModelAndView addPremiumStage(@ModelAttribute PremiumStage stage, HttpServletRequest request) throws IllegalStateException, IOException {
+		
+		ModelAndView mav = mpc.profileInfo();
 		
 		// Image 설정
 		List<MultipartFile> list = stage.getMultiImage();
@@ -222,7 +249,10 @@ public class PremiumStageController {
 		map.put("premiumStage", stage);
 		map.put("imageList", imageList);
 		
-		return new ModelAndView("premiumStage/myStageDetailView.tiles","map",map);
+		mav.addObject("map",map);
+		mav.setViewName("premiumStage/myStageDetailView.myTemp");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/selectPremiumStage")

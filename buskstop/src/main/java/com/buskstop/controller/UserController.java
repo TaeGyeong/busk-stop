@@ -116,7 +116,9 @@ public class UserController {
 				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
 			}*/
 		default :
-			return new ModelAndView("/index.do","",null);
+			mav.addObject("", null);
+			mav.setViewName("/member/myPageMain.do");
+			return mav;
 		}
 	}
 	

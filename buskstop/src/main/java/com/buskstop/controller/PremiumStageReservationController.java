@@ -27,6 +27,9 @@ import com.buskstop.vo.User;
 public class PremiumStageReservationController {
 
 	@Autowired
+	MyPageController mpc;
+	
+	@Autowired
 	UserService userService;
 	
 	@Autowired 
@@ -40,11 +43,18 @@ public class PremiumStageReservationController {
 	 */
 	@RequestMapping("/producer/goPremiumStageEnterDate")
 	public ModelAndView goPremiumStageEnterDate (@RequestParam int establishNo) {
+		
+		ModelAndView mav = mpc.profileInfo();
+		
 		List<PremiumStageOption> optionList = service.selectPremiumStageOptionByEstablishNoJoin(establishNo);
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("establishNo", establishNo);
 		map.put("optionList", optionList);
-		return new ModelAndView("premiumStage/premiumStageEnterDate.tiles", "map", map);
+		
+		mav.addObject("map", map);
+		mav.setViewName("premiumStage/premiumStageEnterDate.myTemp");
+		
+		return mav;
 	}
 	
 	/**
