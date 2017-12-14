@@ -88,13 +88,15 @@ function listComment(){
         "success" : function(result){
             var output = "";
             $.each(result, function(){ 
-            	output += '<div class="stageComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+            	output += '<div class="stageComment" style="border-top:1px solid darkgray; margin-bottom: 15px;">';
                 output += '<div class="listComment'+this.stageCommentUserId+'">별점 :'+outStar(this.starScore);
                 output += '&nbsp;&nbsp; 작성자 : '+this.stageCommentUserId+' &nbsp;&nbsp; 등록 일자 : '+this.stageCommentRegTime;
+                output += '<sec:authorize access="isAuthenticated()">'
+                if(this.performanceCommentUserId=='${requestScope.map.userId}'){
                 output += '<a onclick="updateCommentText(\''+this.stageCommentUserId+'\',\''+this.stageComment+'\');">&nbsp;&nbsp;&nbsp;수정 </a>';
-                output += '<a onclick="deleteComment(\''+this.stageCommentUserId+'\');">&nbsp;&nbsp;삭제 </a> </div>';
-                output += '<div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
-                output += '</div></div>';
+                output += '<a onclick="deleteComment(\''+this.stageCommentUserId+'\');">&nbsp;&nbsp;삭제 </a>';
+                }output += '</sec:authorize><div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
+                output += '</div></div></div>';
             });
             $("#stageCommentList").html(output);
         },

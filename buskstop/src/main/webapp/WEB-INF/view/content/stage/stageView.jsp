@@ -99,6 +99,12 @@ select {
 #product_tb tbody tr:nth-child(2n):hover{
 	background-color: #337ab7;
 }
+.imgSize {
+    width: auto; height: auto;
+    max-width: 225px;
+    max-height: 225px;
+}
+
 </style>
 <div id="container">
 	<hr>
@@ -111,12 +117,6 @@ select {
 		<input type="date" name="startDate" id="startDate">
 		<input type="date" name="endDate" id="endDate">
 		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
-		<%--
-		<input type="checkbox" name="box" value="주차장">주차장 유무 
-		<input type="checkbox" name="box" value="음주">음주 가능
-		<input type="checkbox" name="box" value="식사">식사 가능
-		<input type="checkbox" name="box" value="외부음식">외부음식 반입 가능
-		 --%>
 		<button type="submit" name="search" class="submit">검색</button>
 		<sec:csrfInput/>
 	</form>
@@ -124,7 +124,7 @@ select {
 	<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
 			<div class="thumbnail col-sm-4" style="cursor: pointer;">
-				<img src="${initParam.rootPath }/stageImage/${item.stageImage[0].stageImageLocation }.jpg" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
+				<img class="imgSize" src="${initParam.rootPath }/stageImage/${item.stageImage[0].stageImageLocation }.jpg" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">${item.stageNo}.  ${item.stageName }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.stageNo})">
