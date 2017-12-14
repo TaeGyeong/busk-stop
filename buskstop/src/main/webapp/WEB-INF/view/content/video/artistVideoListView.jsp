@@ -33,7 +33,7 @@ tr:hover{
 }
 
 </style>
-<form action="${initParam.rootPath }/viewArtistVideoListByTitle.do">
+<form action="${initParam.rootPath }/viewArtistVideoListByTitle.do" method="post">
 	<sec:csrfInput/>
 	<select name="filter">
 		<option value="title">제목</option>

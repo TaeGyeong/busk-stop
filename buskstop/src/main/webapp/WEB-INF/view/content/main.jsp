@@ -22,13 +22,12 @@ function goVideoDetail(root, no){
 	width:400px;
 }
 
-	
 </style>
 
 <div class="container">
 	<div class="row">
 		<div class="col-sm-5">
-			<br><br><br>
+			
 			
 			<div>
 				<h2 class="text-center">추천 공연정보</h2>
@@ -114,13 +113,6 @@ function goVideoDetail(root, no){
 				</a>
 			
 			</div>
-			
-			<!-- 빈공간 -->
-			<div class="col-sm-4">
-				<p></p>
-			</div>
-			
-			
 			<div>
 				<h2 class="text-center">추천 공연영상</h2>
 			</div>
