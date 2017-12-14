@@ -17,7 +17,6 @@ public class PerformanceCommentServiceImpl implements PerformanceCommentService{
 	
 	@Override
 	public List<PerformanceComment> listComment(int performanceNo){
-//		System.out.println("서비스까지는 오냐?");
 		return dao.listComment(performanceNo);
 	}
 	
@@ -28,13 +27,11 @@ public class PerformanceCommentServiceImpl implements PerformanceCommentService{
 	
 	@Override
 	public int deletePerformanceCommentByPerformanceCommentNo(int performanceCommentNo) {
-//		System.out.println("서비스까지");
 		return dao.deletePerformanceCommentByPerformanceCommentNo(performanceCommentNo);
 	}
 	
 	@Override
 	public void updatePerformanceComment(PerformanceComment performanceComment) {
-//		System.out.println("서비스까지 오지");
 		dao.updatePerformanceComment(performanceComment);
 	}
 

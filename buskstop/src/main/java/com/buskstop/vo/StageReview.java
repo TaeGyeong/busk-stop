@@ -7,39 +7,41 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class StageReview implements Serializable{
 	private int stageNo;
-	private int stageCommentNo;
 	private int starScore;
 	private String stageCommentUserId;
 	private String stageComment;
-	@JsonSerialize(using=DateJsonSerializer.class)
+//	@JsonSerialize(using=DateJsonSerializer.class)
 	private String stageCommentRegTime;
 	
 	public StageReview() {
 	}
-
-	public StageReview(int stageNo, int stageCommentNo, int starScore, String stageCommentUserId, String stageComment,
+	
+	public StageReview(int stageNo, int starScore, String stageCommentUserId, String stageComment,
 			String stageCommentRegTime) {
 		this.stageNo = stageNo;
-		this.stageCommentNo = stageCommentNo;
 		this.starScore = starScore;
 		this.stageCommentUserId = stageCommentUserId;
 		this.stageComment = stageComment;
 		this.stageCommentRegTime = stageCommentRegTime;
 	}
+	public StageReview(int stageNo, String stageComment) {
+		this.stageNo = stageNo;
+		this.stageComment = stageComment;
+	}
+
 
 	@Override
 	public String toString() {
-		return "StageReview [stageNo=" + stageNo + ", stageCommentNo=" + stageCommentNo + ", starScore=" + starScore
-				+ ", stageCommentUserId=" + stageCommentUserId + ", stageComment=" + stageComment
-				+ ", stageCommentRegTime=" + stageCommentRegTime + "]";
+		return "StageReview [stageNo=" + stageNo + ", starScore=" + starScore + ", stageCommentUserId="
+				+ stageCommentUserId + ", stageComment=" + stageComment + ", stageCommentRegTime=" + stageCommentRegTime
+				+ "]";
 	}
+
+
+
 
 	public int getStageNo() {
 		return stageNo;
-	}
-
-	public int getStageCommentNo() {
-		return stageCommentNo;
 	}
 
 	public int getStarScore() {
@@ -62,10 +64,6 @@ public class StageReview implements Serializable{
 		this.stageNo = stageNo;
 	}
 
-	public void setStageCommentNo(int stageCommentNo) {
-		this.stageCommentNo = stageCommentNo;
-	}
-
 	public void setStarScore(int starScore) {
 		this.starScore = starScore;
 	}
@@ -82,18 +80,23 @@ public class StageReview implements Serializable{
 		this.stageCommentRegTime = stageCommentRegTime;
 	}
 
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((stageComment == null) ? 0 : stageComment.hashCode());
-		result = prime * result + stageCommentNo;
 		result = prime * result + ((stageCommentRegTime == null) ? 0 : stageCommentRegTime.hashCode());
 		result = prime * result + ((stageCommentUserId == null) ? 0 : stageCommentUserId.hashCode());
 		result = prime * result + stageNo;
 		result = prime * result + starScore;
 		return result;
 	}
+
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -108,8 +111,6 @@ public class StageReview implements Serializable{
 			if (other.stageComment != null)
 				return false;
 		} else if (!stageComment.equals(other.stageComment))
-			return false;
-		if (stageCommentNo != other.stageCommentNo)
 			return false;
 		if (stageCommentRegTime == null) {
 			if (other.stageCommentRegTime != null)
@@ -127,9 +128,7 @@ public class StageReview implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 	
 	
 }
