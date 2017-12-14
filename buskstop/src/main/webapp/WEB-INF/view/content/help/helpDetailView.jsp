@@ -46,7 +46,7 @@ function deleteHelp(helpNum){
 function updateComment(comment, commentNo){
 	document.getElementById(commentNo).remove();
 	var updateReg = "#update"+commentNo;
-	txt = '<input type="text" class="form-control" name="helpComment" value="'+comment+'"/>';
+	txt = '<input type="text" class="form-control" name="helpComment" value="'+comment+'" required="required">';
 	txt += '<button type="submit">등록</button>';
 	$(updateReg).append(txt);
 }
@@ -120,16 +120,6 @@ function updateComment(comment, commentNo){
 			${requestScope.map.help.helpContent}
 		</p>
 	</div>
-	
-	<div>
-		<div class="row">
-			<input class="col-sm-10" style="height:40px;" type="text" name="" placeholder="댓글을 입력해주세요." required="required">
-			<button class="btn btn-primary col-sm-2">등록</button>
-		</div>
-		<div id="comment">
-						
-		</div>
-	</div>
 
 	<div class="button_box" style="width: 100%; ">
 		<div style="float:right;">
@@ -140,14 +130,14 @@ function updateComment(comment, commentNo){
 		</div>
 	</div>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<div class="form-group" style="margin-top : 5em;">
+	<div class="row" style="margin-top : 5em;">
 		<form action="${initParam.rootPath }/admin/enterHelpComment.do" method="post">
 			<sec:csrfInput/>
 			<input type="hidden" name="helpNo" value="${requestScope.map.help.helpNum }">
 			<input type="hidden" name="helpCommentId" value="${requestScope.map.help.helpUserId }">
 			<div style="float: left; width: 100%; border: 1px;">
-				<input name="helpComment" id="helpComment" placeholder="답글" class="form-control">
-				<button type="submit" id="btnComment" style="float:right; margin-top: 10px">답글 등록</button>
+				<input type="text" name="helpComment" id="helpComment" placeholder="답글" class="col-sm-10" required="required" style="margin: 20px">
+				<button class="btn btn-primary col-sm-1" type="submit" id="btnComment" style="float:right; margin-top: 10px">답글 등록</button>
 			</div>
 		</form>
 	</div>

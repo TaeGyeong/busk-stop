@@ -18,7 +18,7 @@
 	
 	<!-- 공연장대관공급자수정폼 -->
 	<!-- premiumStageController로 이동 -->
-	<form action="${initParam.rootPath }/producer/menu.do" method="post">
+	<form action="${initParam.rootPath }/producer/menu.do" method="get">
 		<sec:csrfInput/>
 		<button>공연장대관정보수정</button>
 	</form>
