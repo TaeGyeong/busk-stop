@@ -123,9 +123,10 @@ function updateComment(comment, commentNo){
 
 	<div class="button_box" style="width: 100%; ">
 		<div style="float:right;">
-				<input type="submit" value="수정" onclick="updateHelp();" class="btn btn-default">
+				<c:if test="${requestScope.map.help.helpUserId eq requestScope.map.userId }">
+					<input type="submit" value="수정" onclick="updateHelp();" class="btn btn-default">
 					<input type="submit" value="삭제" onclick="deleteHelp();" class="btn btn-default">
-				
+				</c:if>
 			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
 	</div>

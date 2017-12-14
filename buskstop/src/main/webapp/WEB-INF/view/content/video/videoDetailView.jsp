@@ -1,4 +1,6 @@
-<%@page import="java.util.Date"%>
+<%@page import="org.springframework.web.context.annotation.RequestScope"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.buskstop.vo.User"%>
 <%@page import="com.buskstop.vo.Video"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,19 +14,19 @@ $(document).ready(function(){
 	likeChk();
 	
 	$("#enterVideoCommentBtn").on("click", function(){
-		var videoNo= "${requestScope.video.videoNo }";
+		var videoNo= "${requestScope.map.video.videoNo }";
 		alert(videoNo);
 	
 		$.ajax({
 			"url": "${initParam.rootPath}/member/enterVideoComment.do",
 			"type":"POST",
-			"data":{"videoNo":"${requestScope.video.videoNo }",
+			"data":{"videoNo":"${requestScope.map.video.videoNo }",
 					"videoComment":$("#videoComment").val(),
 					"${_csrf.parameterName}":"${_csrf.token}"
 			},
 			"dataType":"json",
 			"beforesend":function(){
-				alert("${requestScope.video.videoNo }");
+				alert("${requestScope.map.video.videoNo }");
 				if($("#videoComment").text()==null){
 					alert("댓글을 입력해주세요.");
 					document.getElementById("#videoComment").focus();
@@ -37,11 +39,11 @@ $(document).ready(function(){
 					txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
 					txt+=" / 작성자 : "+this.videoCommentUserId;
 					txt+=" / 등록 일자 : "+this.videoCommentRegTime;
-					if(this.videoCommentUserId=='${requestScope.video.videoUserId }'){
+					if(this.videoCommentUserId=='${requestScope.map.userId }'){
 						txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
 						txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
 						txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
-						txt+="<input type='hidden' name='videoNo' value='${requestScope.video.videoNo}'>";
+						txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
 					}
 					txt+="</div></div>";
 				});
@@ -61,7 +63,7 @@ $(document).ready(function(){
 	    		"url":"${initParam.rootPath }/readVideoComment.do",
 	    		"type":"POST",
 	    		"data":{
-	    			"videoNo":"${requestScope.video.videoNo }",
+	    			"videoNo":"${requestScope.map.video.videoNo }",
 	    			"${_csrf.parameterName}":"${_csrf.token}"
 	    		},
 	    		"dataType":"json",
@@ -71,11 +73,11 @@ $(document).ready(function(){
 						txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
 						txt+=" / 작성자 : "+this.videoCommentUserId;
 						txt+=" / 등록 일자 : "+this.videoCommentRegTime;
-						if(this.videoCommentUserId=='${requestScope.video.videoUserId }'){
+						if(this.videoCommentUserId=='${requestScope.map.userId }'){
 							txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
 							txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
 							txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
-							txt+="<input type='hidden' name='videoNo' value='${requestScope.video.videoNo}'>";
+							txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
 						}
 						txt+="</div></div>";
 					});
@@ -100,7 +102,7 @@ $(document).ready(function(){
 			"url":"${initParam.rootPath }/member/videoLike.do",
 			"type":"post",
 			"data":{
-				"videoNo":"${requestScope.video.videoNo }",
+				"videoNo":"${requestScope.map.video.videoNo }",
 				"${_csrf.parameterName}":"${_csrf.token}"
 			},
 			"success":function(num){
@@ -127,7 +129,7 @@ function refreshComment(){
     		"url":"${initParam.rootPath }/readVideoComment.do",
     		"type":"POST",
     		"data":{
-    			"videoNo":"${requestScope.video.videoNo }",
+    			"videoNo":"${requestScope.map.video.videoNo }",
     			"${_csrf.parameterName}":"${_csrf.token}"
     		},
     		"dataType":"json",
@@ -137,11 +139,11 @@ function refreshComment(){
 					txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
 					txt+=" / 작성자 : "+this.videoCommentUserId;
 					txt+=" / 등록 일자 : "+this.videoCommentRegTime;
-					if(this.videoCommentUserId=='${requestScope.video.videoUserId }'){
+					if(this.videoCommentUserId=='${requestScope.map.userId }'){
 						txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
 						txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
 						txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
-						txt+="<input type='hidden' name='videoNo' value='${requestScope.video.videoNo}'>";
+						txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
 					}
 					txt+="</div></div>";
 				});
@@ -176,11 +178,11 @@ function deleteComment(videoCommentNo){
 				txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
 				txt+=" / 작성자 : "+this.videoCommentUserId;
 				txt+=" / 등록 일자 : "+this.videoCommentRegTime;
-				if(this.videoCommentUserId=='${requestScope.video.videoUserId }'){
+				if(this.videoCommentUserId=='${requestScope.map.userId }'){
 					txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
 					txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
 					txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
-					txt+="<input type='hidden' name='videoNo' value='${requestScope.video.videoNo}'>";
+					txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
 				}
 				txt+="</div></div>";
 			});
@@ -238,7 +240,7 @@ function likeChk(){
 		"type":"post",
 		"url":"${initParam.rootPath }/member/likeCheck.do",
 		"data":{
-			"videoNo":"${requestScope.video.videoNo }",
+			"videoNo":"${requestScope.map.video.videoNo }",
 			"${_csrf.parameterName}":"${_csrf.token}"
 		},
 		"dataType":"text",
@@ -263,7 +265,7 @@ function upVideoHits(){
 		"type":"post",
 		"url":"${initParam.rootPath }/updateVideoHits.do",
 		"data":{
-			"videoNo":"${requestScope.video.videoNo }",
+			"videoNo":"${requestScope.map.video.videoNo }",
 			"${_csrf.parameterName}":"${_csrf.token}"
 		},
 		"dataType":"text",
@@ -325,7 +327,7 @@ div{
 	<hr>
 	<hr>
 	<div class="row"> 
-		<div class="col-sm-12" style="font-size:30px; text-color:#01153F;">${requestScope.video.videoTitle}</div>
+		<div class="col-sm-12" style="font-size:30px; text-color:#01153F;">${requestScope.map.video.videoTitle}</div>
 	</div>
 	<br><br>
 	<hr>
@@ -340,9 +342,9 @@ div{
 			</thead>
 			<tbody>
 				<tr>
-					<td class="text-center">${requestScope.video.videoUserId}</td>
-					<td class="text-center"><fmt:formatDate value="${requestScope.video.videoRegTime}" pattern="yyyy-MM-dd"/></td>
-					<td class="text-center">${requestScope.video.videoHits}</td>
+					<td class="text-center">${requestScope.map.video.videoUserId}</td>
+					<td class="text-center"><fmt:formatDate value="${requestScope.map.video.videoRegTime}" pattern="yyyy-MM-dd"/></td>
+					<td class="text-center">${requestScope.map.video.videoHits}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -354,7 +356,7 @@ div{
 		<!-- youtube -->
 		<div class="col-sm-9" style="float:left; ">
 			<div id="player">
-				<input type="hidden" id="link" value="${requestScope.video.videoLink }">
+				<input type="hidden" id="link" value="${requestScope.map.video.videoLink }">
 			</div> 
 		</div>
 	
@@ -405,27 +407,27 @@ div{
 					</tr>
 					<tr>
 						<td>아티스트</td> 
-						<td>${requestScope.video.videoArtist}</td>
+						<td>${requestScope.map.video.videoArtist}</td>
 					</tr>
 					<c:choose>
-						<c:when test="${requestScope.video.videoCategory=='practice' }">
+						<c:when test="${requestScope.map.video.videoCategory=='practice' }">
 							<tr>
 								<td>연습장소</td> 
-								<td>${requestScope.video.videoLocation }</td>
+								<td>${requestScope.map.video.videoLocation }</td>
 							</tr>
 							<tr>
 								<td>연습 날짜</td>
-								<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/></td>
+								<td><fmt:formatDate value="${requestScope.map.video.videoDate }" pattern="yyyy-MM-dd"/></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<tr>
 								<td>공연장소</td> 
-								<td>${requestScope.video.videoLocation }</td>
+								<td>${requestScope.map.video.videoLocation }</td>
 							</tr>
 							<tr>
 								<td>공연 날짜</td>
-								<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
+								<td><fmt:formatDate value="${requestScope.map.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
@@ -442,7 +444,7 @@ div{
 <div class="row">
 	<div class="col-sm-12">
 		<p style="border: 1px solid #e5e5e5; color:#515151; font-size: 16px; padding:20px;">
-			${requestScope.video.videoContent}
+			${requestScope.map.video.videoContent}
 		</p>
 	</div>
 </div>
@@ -481,23 +483,25 @@ div{
 	<!-- 수정 -->
 	<div class="col-sm-1 col-sm-offset-8">
 		<form action="${initParam.rootPath }/videoListCategory.do">
-			<input type="hidden" name="category" value="${requestScope.video.videoCategory }">
+			<input type="hidden" name="category" value="${requestScope.map.video.videoCategory }">
 			<button class="btn btn-default">목록으로</button>
 		</form>
 		<!-- <button style="padding:10px">이전 글로</button>
 		<button style="padding:10px">다음 글로</button> -->
 	</div>
-	<div class="col-sm-1">
-		<form action="" method="post">
-			<button class="btn btn-warning">수정</button>
-		</form>
-	</div>
-	<!-- 삭제 -->
-	<div class="col-sm-1">
-		<form action="" method="post">
-			<button class="btn btn-danger">삭제</button>
-		</form>
-	</div>
+	<c:if test="${requestScope.map.video.videoUserId eq requestScope.map.userId }">
+		<div class="col-sm-1">
+			<form action="" method="post">
+				<button class="btn btn-warning">수정</button>
+			</form>
+		</div>
+		<!-- 삭제 -->
+		<div class="col-sm-1">
+			<form action="" method="post">
+				<button class="btn btn-danger">삭제</button>
+			</form>
+		</div>
+	</c:if>
 </div>
 	
 
