@@ -126,11 +126,15 @@ public class UserController {
 	
 	@RequestMapping("/idDuplicatedCheck")
 	public @ResponseBody String DuplicatedCheck(String id) {
-		System.out.println(id);
-		if(service.selectMemberById(id)==null) {
-			return "new";
-		} else {
-			return "duplicated";
+//		System.out.println(id);
+		if(!id.isEmpty()) {
+			if(service.selectMemberById(id)==null) {
+				return "new";
+			} else {
+				return "duplicated";
+			}
+		}else {
+			return "empty";
 		}
 	}
 	

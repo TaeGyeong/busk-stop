@@ -17,14 +17,18 @@ $(document).ready(function(){
 			},
 			"dataType":"text",
 			"success":function(message){
-				alert(message);
+				/* alert(message); */
 				if(message=='new'){
-					alert("사용가능한 id 입니다.");
+					alert("사용가능한 아이디 입니다.");
 					$("#id").addClass("disable");
 					$("#idCheck").val("true");
 					document.getElementById("id").readOnly=true;
 				} else if(message=='duplicated'){
-					alert('이미 사용중인 id 입니다.');
+					alert('이미 사용중인 아이디 입니다.');
+					document.getElementById("id").value='';
+					$("#idCheck").val("false");
+				} else if(message=='empty'){
+					alert('사용할 아이디를 입력해주세요');
 					document.getElementById("id").value='';
 					$("#idCheck").val("false");
 				}
