@@ -1,5 +1,6 @@
 package com.buskstop.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +99,16 @@ public class VideoController {
 	@RequestMapping("/readVideoByVideoNo")
 	public ModelAndView readVideoByVideoNo(@RequestParam int videoNo) {
 		Video video = service.viewVideoByVideoNo(videoNo);
-		return new ModelAndView("video/videoDetailView.tiles", "video", video);
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
+		Authentication authentication = context.getAuthentication();
+		String userId = ((User) authentication.getPrincipal()).getUserId();
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("video", video);
+		map.put("userId", userId);
+		return new ModelAndView("video/videoDetailView.tiles", "map", map);
 	}
 
 	/**
