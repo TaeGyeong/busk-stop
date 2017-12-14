@@ -115,19 +115,21 @@ img{
 			<span>프로필 : ${requestScope.map.artist.profile }</span><br>
 			<span>
 			<c:choose> 
-			<c:when test="${requestScope.map.artist.artistMembers!=null}">아티스트 : ${requestScope.map.artist.artistMembers }</c:when>
-			<c:otherwise>솔로</c:otherwise></c:choose></span><br>
-			<c:choose>
+			<c:when test="${requestScope.map.artist.artistMembers!=null}">그룹명 : ${requestScope.map.artist.artistMembers }</c:when>
+			<c:otherwise></c:otherwise></c:choose></span><br>
+			
+			<span><c:choose>
 			<c:when test="${requestScope.map.artist.artistSns!=null}">아티스트 SNS : ${requestScope.map.artist.artistMembers }</c:when>
-			<c:otherwise>아티스트 SNS : 없음</c:otherwise></c:choose></span>
-			<span></span>
+			<c:otherwise>아티스트 SNS : 없음</c:otherwise></c:choose></span><br>
+			<span>팔로우 수 : ${requestScope.map.followerCount }명</span>	
 		</div>
+		
 		<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
 			<sec:authorize access="isAuthenticated()">
 				<div class="col-sm-2" id="follow">
 					<!-- Follow Button -->
 					<button id="followBtn" class="btn btn-primary">팔로우</button>
-				</div>
+		</div>
 			</sec:authorize>
 		</c:if>
 	</div>
@@ -139,7 +141,7 @@ img{
 
 <!-- 아티스트 공연정보 조회 -->
 <div class="container" style="top-margin:300px;">
-	<h2>공연정보</h2>
+	<h2>${requestScope.map.artist.artistName }님이 올린 공연</h2>
 	<table style="border:solid black 1px">
 	<tr>
 		<th>공연 번호</th>
@@ -160,16 +162,15 @@ img{
 		</c:forEach>
 	</table>
 </div>
-
+<hr>
 <!-- 아티스트 공연홍보영상 -->
 <div class="container">
-	<h2>공연홍보영상</h2>
+	<h2>${requestScope.map.artist.artistName }님이 올린 영상</h2>
 	<table style="border:solid black 1px;">
 		<tr class="row">
 			<th class="col-sm-4">사진</th>
 			<th class="col-sm-2">제목</th>
 			<th class="col-sm-2">장소</th>
-			<th class="col-sm-2">영상촬영일</th>
 			<th class="col-sm-2">등록시간</th>
 		</tr>
 		<c:forEach items="${requestScope.map.videoList }" var="video">
@@ -183,15 +184,9 @@ img{
 				<td class="col-sm-2">
 					${video.videoLocation }
 				</td>
-				<td class="col-sm-2">
-					<fmt:formatDate value="${video.videoDate }" pattern="yyyy-MM-dd HH시 mm분"/> 
-				</td>
-				<td class="col-sm-2"><fmt:formatDate value="${video.videoRegTime }" pattern="yyyy-MM-dd HH시 mm분"/></td>
+				<td class="col-sm-2"><fmt:formatDate value="${video.videoRegTime }" pattern="yyyy-MM-dd   HH시 mm분"/></td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
-
-
-</body>
-</html>
+<br>
