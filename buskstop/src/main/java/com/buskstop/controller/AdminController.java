@@ -26,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.HelpCommentService;
+import com.buskstop.service.HelpService;
 import com.buskstop.service.PerformanceCommentService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.service.PremiumStageReservationService;
@@ -34,6 +36,8 @@ import com.buskstop.service.StageService;
 import com.buskstop.service.UserService;
 import com.buskstop.service.VideoCommentService;
 import com.buskstop.service.VideoService;
+import com.buskstop.vo.Help;
+import com.buskstop.vo.HelpComment;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.PerformanceComment;
 import com.buskstop.vo.PremiumStage;
@@ -71,6 +75,11 @@ public class AdminController {
 	
 	@Autowired
 	private VideoCommentService videoCommentService;
+	
+	@Autowired
+	private HelpService helpService;
+	
+	@Autowired HelpCommentService helpCommentService;
 
 	/********************************* 회원관리 *********************************/
 
@@ -511,4 +520,46 @@ public class AdminController {
 		performanceCommentService.deletePerformanceComment(performanceCommentNo);
 		return performanceComment();
 	}
+	
+	/************************ 고객센터 글 관리 *************************/
+	/*@RequestMapping("/helpDetail")
+	public ModelAndView helpDetail(@RequestParam int helpNum) {
+		Help help = helpService.selectHelpByHelpNum(helpNum);
+		System.out.println(help);
+		String id = null;
+		Map<String, Object> map = new HashMap<>();
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		id = ((User) authentication.getPrincipal()).getUserId();
+		map.put("help", help);
+		map.put("userId", id);
+		
+		List<HelpComment> list = helpCommentService.selectHelpCommentByHelpNo(helpNum);
+		map.put("helpCommentList", list);
+
+		return new ModelAndView("admin/helpDetailView.tiles", "map", map);
+	}*/
+	
+	
+	/************************ 고객센터 답글 관리 **************************/
+	
+	@RequestMapping("enterHelpComment")
+	public ModelAndView enterHelpComment(@ModelAttribute HelpComment helpComment) {
+		helpCommentService.insertHelpComment(helpComment);
+		return new ModelAndView("redirect:/helpDetail.do", "helpNum", helpComment.getHelpNo());
+	}
+	
+	@RequestMapping("removeHelpComment")
+	public ModelAndView removeHelpComment(@RequestParam int helpCommentNo, @RequestParam int helpNo) {
+		helpCommentService.deleteHelpComment(helpCommentNo);
+		return new ModelAndView("redirect:/helpDetail.do", "helpNum", helpNo);
+	}
+	
+	@RequestMapping("updateHelpComment")
+	public ModelAndView updateHelpComment(@ModelAttribute HelpComment helpComment) {
+		helpCommentService.updateHelpComment(helpComment);
+		return new ModelAndView("redirect:/helpDetail.do", "helpNum", helpComment.getHelpNo());
+	}
+	
 }

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.buskstop.service.ArtistService;
+import com.buskstop.service.FollowService;
 import com.buskstop.service.PerformanceService;
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.Artist;
+import com.buskstop.vo.Follow;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 import com.buskstop.vo.Video;
@@ -32,6 +34,9 @@ public class ArtistController {
 	@Autowired
 	private VideoService videoService;
 	
+	@Autowired
+	private FollowService followService;
+	
 	@RequestMapping("/artist/readArtist")
 	public ModelAndView readArtist() {
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -47,8 +52,10 @@ public class ArtistController {
 		
 		// 아티스트 상세정보 조회시에 필요한 정보들 조회. 
 		Artist artist = service.readArtistByUserId(artistId);
-		List<Video> videoList = videoService.viewVideoByUserIdAndCategory("artist", artist.getArtistId());
+		List<Video> videoList = videoService.viewVideoByArtist(artist.getArtistId());
 		List<Performance> performanceList = performanceService.selectPerformanceById(artistId);
+		List<Follow> follower = followService.selectFollowByFollowerId(artistId);
+		int followerCount = follower.size();
 		
 		// 사용자의 id 조회
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -69,6 +76,7 @@ public class ArtistController {
 		map.put("videoList", videoList);
 		map.put("performanceList", performanceList);
 		map.put("userId", userId);
+		map.put("followerCount", followerCount);
 		
 		return new ModelAndView("artist/artistInfomationView.tiles","map",map);
 	}

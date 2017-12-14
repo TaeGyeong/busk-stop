@@ -159,7 +159,7 @@ function confirmStage(){
 <div id="floating-panel">
 	주소로 검색 : <input id="address" type="text">
 	<input id="submit" type="button" value="검색하기" onclick="geocodeAddress(geocoder, map)">&nbsp;&nbsp;&nbsp;&nbsp;
-	<button id="confirm" type="button" value="" onclick="confirmStage()">확인</button>
+	<button id="confirm" type="button" value="" onclick="confirmStage();">확인</button>
 </div>
 </body>
 </html>

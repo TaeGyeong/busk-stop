@@ -11,6 +11,7 @@ import com.buskstop.dao.VideoCommentDao;
 import com.buskstop.dao.VideoDao;
 import com.buskstop.dao.VideoLikeDao;
 import com.buskstop.service.VideoService;
+
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
@@ -107,6 +108,12 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public List<Video> viewVideoByContentAndCategory(String videoCategory, String videoContent) {
 		return dao.selectVideoByContentAndCategory(videoCategory, videoContent);
+	}
+	
+	// 게시자 id로만 동영상 조회
+	@Override
+	public List<Video> viewVideoByArtist(String videoArtist){
+		return dao.selectVideoByArtistId(videoArtist);
 	}
 
 	/******* admin용 삭제 후 조회 service ******/

@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.HelpCommentService;
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
+import com.buskstop.vo.HelpComment;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 
@@ -33,6 +35,9 @@ public class HelpController {
 
 	@Autowired
 	private HelpService service;
+	
+	@Autowired
+	private HelpCommentService helpCommentService;
 	
 	@Autowired
 	private HttpServletRequest request;
@@ -80,7 +85,7 @@ public class HelpController {
 	@RequestMapping("/helpDetail")
 	public ModelAndView helpDetail(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
-		System.out.println(help);
+//		System.out.println(help);
 		String id = null;
 		Map<String, Object> map = new HashMap<>();
 		
@@ -89,6 +94,9 @@ public class HelpController {
 		id = ((User) authentication.getPrincipal()).getUserId();
 		map.put("help", help);
 		map.put("userId", id);
+		
+		List<HelpComment> list = helpCommentService.selectHelpCommentByHelpNo(helpNum);
+		map.put("helpCommentList", list);
 
 		return new ModelAndView("help/helpDetailView.tiles", "map", map);
 	}

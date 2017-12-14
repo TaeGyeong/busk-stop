@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
@@ -44,6 +43,13 @@ function deleteHelp(helpNum){
 	
 }
 
+function updateComment(comment, commentNo){
+	document.getElementById(commentNo).remove();
+	var updateReg = "#update"+commentNo;
+	txt = '<input type="text" class="form-control" name="helpComment" value="'+comment+'"/>';
+	txt += '<button type="submit">등록</button>';
+	$(updateReg).append(txt);
+}
 </script>
 <style type="text/css">
 	table, td{
@@ -109,8 +115,8 @@ function deleteHelp(helpNum){
 	 
 	<div>
 		<hr style="float:bottom">
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-		<label> 내용 : </label>
+		<label> 문의 글 내용 : </label>
+		<p style="color:#515151; font-size: 16px; padding:20px; border: 1px solid #AAAAAA;">
 			${requestScope.map.help.helpContent}
 		</p>
 	</div>
@@ -125,13 +131,57 @@ function deleteHelp(helpNum){
 		</div>
 	</div>
 
-	<div class="button_box" style="width: 100%;">
-		<div>
+	<div class="button_box" style="width: 100%; ">
+		<div style="float:right;">
 				<input type="submit" value="수정" onclick="updateHelp();" class="btn btn-default">
 					<input type="submit" value="삭제" onclick="deleteHelp();" class="btn btn-default">
 				
 			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
+	</div>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<div class="form-group" style="margin-top : 5em;">
+		<form action="${initParam.rootPath }/admin/enterHelpComment.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="helpNo" value="${requestScope.map.help.helpNum }">
+			<input type="hidden" name="helpCommentId" value="${requestScope.map.help.helpUserId }">
+			<div style="float: left; width: 100%; border: 1px;">
+				<input name="helpComment" id="helpComment" placeholder="답글" class="form-control">
+				<button type="submit" id="btnComment" style="float:right; margin-top: 10px">답글 등록</button>
+			</div>
+		</form>
+	</div>
+	</sec:authorize>
+	<div id="helpCommentList" style="float: left; width: 100%; margin-top: 5em;">
+		<c:forEach items="${requestScope.map.helpCommentList }" var="comment">
+			<div id="${comment.helpCommentNo }">
+				<div style="float: right;">등록 시간 : <fmt:formatDate value="${comment.helpCommentRegTime }"/></div>
+				<p style="color:#515151; font-size: 16px; padding:20px;">
+					<label> 답글 : </label>
+					${comment.helpComment}
+				</p>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<form action="${initParam.rootPath }/admin/removeHelpComment.do" method="post">
+						<sec:csrfInput/>
+						<input type="hidden" name="helpCommentNo" value="${comment.helpCommentNo }">
+						<input type="hidden" name="helpNo" value="${requestScope.map.help.helpNum }">
+						<div style="width: 100%;">
+						<div style="float: right;">
+							<button type="submit" >삭제</button>
+							<button type="button" onclick="updateComment('${comment.helpComment}', '${comment.helpCommentNo }')">수정</button>
+						</div>
+						</div>
+					</form>
+				</sec:authorize>
+			</div>
+			<hr style="float:bottom;width: 100%;">
+			<form action="${initParam.rootPath}/admin/updateHelpComment.do">
+				<div id="update${comment.helpCommentNo }">
+					<input type="hidden" name="helpCommentNo" value="${comment.helpCommentNo }">
+					<input type="hidden" name="helpNo" value="${requestScope.map.help.helpNum }">
+				</div>
+			</form>
+		</c:forEach>
 	</div>
 
 </div>
