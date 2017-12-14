@@ -1,12 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#dateBtn").on("click", function(){
@@ -19,8 +15,19 @@ $(document).ready(function(){
 		top1 = (screen.availHeight - 500) / 2;
 		window.open(address, "newWin", 'width=800 ,height=600 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
 	});
+	$("#performanceTime").timepicker({
+		timeFormat: 'HH:mm',
+	    interval: 60,
+	    minTime: '00',
+	    maxTime: '23:00',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
+	});
 });
 </script>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 	<h2>공연정보 등록</h2>
 	<form action="${initParam.rootPath }/artist/performanceRegister.do" method="post" class="performance_register_form" enctype="multipart/form-data">
 		
@@ -49,7 +56,7 @@ $(document).ready(function(){
 			<label class="col-sm-2">공연일시</label><input type="date" name="performanceDay" id="performanceDay" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2">공연시간</label><input type="time" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
+			<label class="col-sm-2">공연시간</label><input type="Timepicker" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
 		</div>
 		<div class="form-group">
 			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>
@@ -75,10 +82,7 @@ $(document).ready(function(){
 		
 		<!-- 공연장 번호 -->
 		<button type="submit" class="btn btn-default">등록</button> 
-		<button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/performanceView.do'">취소</button>
+		<button type="button" class="btn btn-default" onclick="location.href='${initParam.rootPath}/selectArtistPerformance.do'">취소</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	
-	
-</body>
-</html>
