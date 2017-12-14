@@ -121,6 +121,8 @@ select {
     width: auto; height: auto;
     max-width: 225px;
     max-height: 225px;
+    border-radius: 10px;
+    word-break: keep-all;
 }
 
 </style>

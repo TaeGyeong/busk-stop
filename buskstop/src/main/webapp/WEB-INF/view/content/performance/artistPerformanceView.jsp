@@ -114,9 +114,11 @@ select {
 	background-color: #337ab7;
 }
 .imgSize {
-    width: auto; height: auto;
+      width: auto; height: auto;
     max-width: 225px;
     max-height: 225px;
+    border-radius: 10px;
+    word-break: keep-all;
 }
 
 </style>
