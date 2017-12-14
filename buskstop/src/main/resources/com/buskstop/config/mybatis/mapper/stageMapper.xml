@@ -132,10 +132,10 @@
 		
 		<collection property="reviewList" ofType="StageReview">
 			<id column="STAGE_NO" property="stageNo"/>
-			<id column="STAGE_REVIEW_USER_ID" property="userId"/>
+			<id column="STAGE_REVIEW_USER_ID" property="stageCommentUserId"/>
 			<result column="STAR_SCORE" property="starScore"/>
-			<result column="STAGE_COMMENT" property="comment"/>
-			<result column="STAGE_COMMENT_REG_TIME" property="commentRegTime"/>
+			<result column="STAGE_COMMENT" property="stageComment"/>
+			<result column="STAGE_COMMENT_REG_TIME" property="stageCommentRegTime"/>
 		</collection>
 	</resultMap>
 	

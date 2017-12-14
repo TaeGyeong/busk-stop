@@ -89,15 +89,17 @@ public class HelpController {
 		String id = null;
 		Map<String, Object> map = new HashMap<>();
 		
-		SecurityContext context = SecurityContextHolder.getContext();
+		/*SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
-		id = ((User) authentication.getPrincipal()).getUserId();
+		id = ((User) authentication.getPrincipal()).getUserId();*/
 		map.put("help", help);
-		map.put("userId", id);
+		
+		if(helpCommentService.selectHelpCommentByHelpNo(helpNum)==null) {
+			return new ModelAndView("help/helpDetailView.tiles","map",map);
+		}
 		
 		List<HelpComment> list = helpCommentService.selectHelpCommentByHelpNo(helpNum);
 		map.put("helpCommentList", list);
-
 		return new ModelAndView("help/helpDetailView.tiles", "map", map);
 	}
 	

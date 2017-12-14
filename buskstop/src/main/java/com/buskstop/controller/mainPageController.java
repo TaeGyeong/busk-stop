@@ -43,7 +43,9 @@ public class mainPageController {
 		List<PremiumStage> premiumList = premiumService.mainPremiumStage();
 		
 		// scope에 map 넣기.
-		map.putAll(artistService.recommendArtist());
+		if(artistService.recommendArtist() != null) {
+			map.putAll(artistService.recommendArtist());
+		}
 		map.put("performance", performancelist);
 		map.put("video", videoList);
 		map.put("premium", premiumList);
