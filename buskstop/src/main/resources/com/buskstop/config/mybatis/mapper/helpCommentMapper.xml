@@ -38,4 +38,35 @@
 		
 	</insert>
 	
+	<delete id="deleteHelpComment" parameterType="_int">
+		DELETE FROM HELP_COMMENT
+		WHERE  help_comment_no = #{value}
+	</delete>
+	
+	<update id="updateHelpComment" parameterType="HelpComment">
+		UPDATE	HELP_COMMENT
+		SET		help_comment = #{helpComment}
+		WHERE	help_comment_no = #{helpCommentNo}
+	</update>
+	
+	<select id="selectAllHelpComment" resultMap="helpComment-resultMap">
+		<include refid="select-helpComment-sql"/>
+		ORDER BY help_comment_no asc
+	</select>
+	
+	<select id="selectHelpCommentByUserId" parameterType="String" resultMap="helpComment-resultMap">
+		<include refid="select-helpComment-sql"/>
+		WHERE	help_comment_id = #{value}
+	</select>
+	
+	<select id="selectHelpCommentByComment" parameterType="String" resultMap="helpComment-resultMap">
+		<include refid="select-helpComment-sql"/>
+		WHERE	help_comment like '%'|| #{value} ||'%'
+	</select>
+	
+	<select id="selectHelpCommentByHelpNo" parameterType="_int" resultMap="helpComment-resultMap">
+		<include refid="select-helpComment-sql"/>
+		WHERE	help_no = #{value}
+	</select>
+	
 </mapper>
