@@ -106,7 +106,10 @@ select {
     border-radius: 10px;
     word-break: keep-all;
 }
+.SearchBox{
+	text-align: center;
 
+}
 </style>
 <div id="container">
 	<hr>
@@ -114,11 +117,11 @@ select {
 	<hr>
 	
 	<form class="stageReservation" action="${initParam.rootPath}/selectAllStage.do">
-		<input type="text" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
-		<input type="text" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
-		<input type="date" name="startDate" id="startDate">
-		<input type="date" name="endDate" id="endDate">
-		<input type="text" name="idSearch" id="idSearch" placeholder="공급자로 검색">
+		<input type="text" class="SearchBox" name="nameSearch" id="nameSearch" placeholder="공연장 이름으로 검색">
+		<input type="text" class="SearchBox" name="locationSearch" id="locationSearch" placeholder="장소명으로 검색">
+		<input type="date" class="SearchBox" name="startDate" id="startDate">
+		<input type="date" class="SearchBox" name="endDate" id="endDate">
+		<input type="text" class="SearchBox" name="idSearch" id="idSearch" placeholder="공급자로 검색">
 		<button type="submit" name="search" class="submit">검색</button>
 		<sec:csrfInput/>
 	</form>
