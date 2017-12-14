@@ -30,9 +30,6 @@
 		document.location.href= root+'/stageDetail.do?stageNo='+no
 	}
 	
-	function goRegister(){
-		document.location.href= "${initParam.rootPath}/stage/stageRegisterView.do";
-	}
 	
 </script>
 <style type="text/css">
@@ -143,7 +140,11 @@ select {
 	</div>
 	 
 	<div style="width: 100%;">
-		<button class="btn btn-default" style="float: right;" onclick="goRegister()">작성</button>
+		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')">
+			<form action="${initParam.rootPath}/member/stageRegister.do">
+				<button class="btn btn-default" style="float: right;">작성</button>
+			</form>
+		</sec:authorize>
 	</div>
 
 	<div style="text-align: center; width: 100%;">

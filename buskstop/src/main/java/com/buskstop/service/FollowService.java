@@ -3,6 +3,7 @@ package com.buskstop.service;
 import java.util.List;
 
 import com.buskstop.vo.Artist;
+import com.buskstop.vo.Follow;
 
 public interface FollowService {
 	/**
@@ -28,4 +29,11 @@ public interface FollowService {
 	 * @return
 	 */
 	List<Artist> followArtistList(String userId);
+	
+	/**
+	 * 날 팔로우 한 사람들을 조회
+	 * @param FollowerId
+	 * @return
+	 */
+	List<Follow> selectFollowByFollowerId(String FollowerId);
 }

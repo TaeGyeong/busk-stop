@@ -28,7 +28,11 @@ public class StageReview implements Serializable{
 		this.stageNo = stageNo;
 		this.stageComment = stageComment;
 	}
-
+	public StageReview(int stageNo, int starScore, String stageComment) {
+		this.stageNo = stageNo;
+		this.starScore = starScore;
+		this.stageComment = stageComment;
+	}
 
 	@Override
 	public String toString() {

@@ -163,6 +163,7 @@
 				<td>첨부파일</td>
 				<td>
 					<input type="file" name="multiImage" style="border-style:none">
+					<input type="file" name="multiImage2" style="border-style:none">
 				</td>
 			</tr>
 			
@@ -170,7 +171,7 @@
 				<td colspan="2" align="center" id="ButtonTd" style="border-top: 1px solid #1e1e1e;">
 					<div class="ButtonDiv">
 						<button type="submit">등록</button>
-						<button type="reset">취소</button>
+						<button type="button" onclick="location.href='${initParam.rootPath}/selectHelp.do'">취소</button>
 					</div>
 				</td>
 			</tr>

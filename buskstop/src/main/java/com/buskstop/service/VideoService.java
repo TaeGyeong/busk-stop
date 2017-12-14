@@ -105,4 +105,10 @@ public interface VideoService {
 	 * @return
 	 */
 	List<Video> deleteVideoAndSelect(int videoNo);
+	
+	/**
+	 * 모든 video 정보 제공하는 service.
+	 * @return
+	 */
+	List<Video> selectVideo();
 }

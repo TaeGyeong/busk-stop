@@ -29,7 +29,9 @@ public class StageReviewServiceImpl implements StageReviewService{
 
 	@Override
 	public void updateStageComment(StageReview sComment2) {
+		System.out.println("가기 전 "+sComment2);
 		dao.updateStageComment(sComment2);
+		System.out.println(sComment2);
 	}
 
 	@Override

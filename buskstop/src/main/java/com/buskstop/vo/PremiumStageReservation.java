@@ -1,43 +1,44 @@
 package com.buskstop.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class PremiumStageReservation {
 
 		private int reservationNo; //예약신청 번호
-		private String UserId; //예약신청자 ID
-		private int establishNo; //사업장번호
+		private String reservationUserId; //예약신청자 ID
+		private int establishNo;//사업장번호
 		@DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date reservationRegTime;//예약 신청자 신청시간
+		
+		private PremiumStageOption option; //부모타입 변수
 		private int optionNo;//예약옵션번호
 		
 		public PremiumStageReservation() {}
-
-		public PremiumStageReservation(int reservationNo, String userId, int establishNo, Date reservationRegTime,
-				int optionNo) {
-			this.reservationNo = reservationNo;
-			UserId = userId;
-			this.establishNo = establishNo;
-			this.reservationRegTime = reservationRegTime;
-			this.optionNo = optionNo;
-		}
 
 		public int getReservationNo() {
 			return reservationNo;
 		}
 
-		public void setReservationNo(int reservationNo) {
+		public PremiumStageReservation(int reservationNo, String reservationUserId, int establishNo,
+				Date reservationRegTime, PremiumStageOption option, int optionNo) {
+			super();
 			this.reservationNo = reservationNo;
+			this.reservationUserId = reservationUserId;
+			this.establishNo = establishNo;
+			this.reservationRegTime = reservationRegTime;
+			this.option = option;
+			this.optionNo = optionNo;
 		}
 
-		public String getUserId() {
-			return UserId;
+		public String getReservationUserId() {
+			return reservationUserId;
 		}
 
-		public void setUserId(String userId) {
-			UserId = userId;
+		public void setReservationUserId(String reservationUserId) {
+			this.reservationUserId = reservationUserId;
 		}
 
 		public int getEstablishNo() {
@@ -56,6 +57,14 @@ public class PremiumStageReservation {
 			this.reservationRegTime = reservationRegTime;
 		}
 
+		public PremiumStageOption getOption() {
+			return option;
+		}
+
+		public void setOption(PremiumStageOption option) {
+			this.option = option;
+		}
+
 		public int getOptionNo() {
 			return optionNo;
 		}
@@ -64,15 +73,27 @@ public class PremiumStageReservation {
 			this.optionNo = optionNo;
 		}
 
+		public void setReservationNo(int reservationNo) {
+			this.reservationNo = reservationNo;
+		}
+
+		@Override
+		public String toString() {
+			return "PremiumStageReservation [reservationNo=" + reservationNo + ", reservationUserId="
+					+ reservationUserId + ", establishNo=" + establishNo + ", reservationRegTime=" + reservationRegTime
+					+ ", option=" + option + ", optionNo=" + optionNo + "]";
+		}
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((UserId == null) ? 0 : UserId.hashCode());
 			result = prime * result + establishNo;
+			result = prime * result + ((option == null) ? 0 : option.hashCode());
 			result = prime * result + optionNo;
 			result = prime * result + reservationNo;
 			result = prime * result + ((reservationRegTime == null) ? 0 : reservationRegTime.hashCode());
+			result = prime * result + ((reservationUserId == null) ? 0 : reservationUserId.hashCode());
 			return result;
 		}
 
@@ -85,12 +106,12 @@ public class PremiumStageReservation {
 			if (getClass() != obj.getClass())
 				return false;
 			PremiumStageReservation other = (PremiumStageReservation) obj;
-			if (UserId == null) {
-				if (other.UserId != null)
-					return false;
-			} else if (!UserId.equals(other.UserId))
-				return false;
 			if (establishNo != other.establishNo)
+				return false;
+			if (option == null) {
+				if (other.option != null)
+					return false;
+			} else if (!option.equals(other.option))
 				return false;
 			if (optionNo != other.optionNo)
 				return false;
@@ -101,12 +122,11 @@ public class PremiumStageReservation {
 					return false;
 			} else if (!reservationRegTime.equals(other.reservationRegTime))
 				return false;
+			if (reservationUserId == null) {
+				if (other.reservationUserId != null)
+					return false;
+			} else if (!reservationUserId.equals(other.reservationUserId))
+				return false;
 			return true;
-		}
-
-		@Override
-		public String toString() {
-			return "PremiumStageReservation [reservationNo=" + reservationNo + ", UserId=" + UserId + ", establishNo="
-					+ establishNo + ", reservationRegTime=" + reservationRegTime + ", optionNo=" + optionNo + "]";
 		}
 }

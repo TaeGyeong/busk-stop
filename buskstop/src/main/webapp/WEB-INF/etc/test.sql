@@ -8,6 +8,7 @@ select*from video
 WHERE VIDEO_CATEGORY = 'practice' AND VIDEO_CONTENT like'%잘%'
 select * from performance;
 select*from PREMIUM_STAGE;
+select*from PREMIUM_STAGE_RESERVATION;
 alter premium_stage_option set stge_rental_date at='yyyy-mm-dd';
 select*from premium_stage_option;
 select*from premium_stage_Time;
@@ -18,6 +19,10 @@ insert into PREMIUM_STAGE_OPTION values(256, '2017-12-16', 1, 300000, 1111);
 insert into PREMIUM_STAGE_OPTION values(257, '2018-01-18', 1, 230000, 1111);
 insert into PREMIUM_STAGE_OPTION values(324, '2018-02-03', 1, 610000, 1111);
 insert into PREMIUM_STAGE_OPTION values(400, '2017-12-25', 1, 550000, 1111);
+SELECT PERFORMANCE_LIKE_NO, COUNT(*)
+FROM PERFORMANCE_LIKE
+GROUP BY PERFORMANCE_LIKE_NO
+ORDER BY COUNT(*)
 
 
 /*-----------------------------공연정보(아티스트 게시판)---------------------------------*/

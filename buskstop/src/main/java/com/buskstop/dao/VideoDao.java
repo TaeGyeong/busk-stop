@@ -73,4 +73,10 @@ public interface VideoDao {
 	 */
 	List<Video> selectVideoByContentAndCategory(String videoCategory, String videoContent);
 	
+	/**
+	 * 전체 Video 객체 select.
+	 * @return
+	 */
+	List<Video> selectVideo();
+	
 }

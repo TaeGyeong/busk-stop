@@ -31,6 +31,7 @@ import com.buskstop.service.PremiumStageService;
 import com.buskstop.service.UserService;
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.Artist;
+import com.buskstop.vo.Follow;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.PremiumStage;
 import com.buskstop.vo.User;
@@ -326,5 +327,30 @@ public class MyPageController {
 	}
 	
 	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping("/member/myPageMain")
+	public ModelAndView myPage() {
+		ModelAndView mav = new ModelAndView();
+		
+		User user = userService.selectMemberById(getUserId());
+		
+		Artist artist = artistService.readArtistByUserId(getUserId());
+		
+		List<Artist> following = followService.followArtistList(getUserId());
+		int followingCount = following.size();
+		
+		List<Follow> follower = followService.selectFollowByFollowerId(getUserId());
+		int followerCount = follower.size();
+		
+		mav.addObject("artist", artist);
+		mav.addObject("user", user);
+		mav.addObject("followingCount", followingCount);
+		mav.addObject("followerCount", followerCount);
+		mav.setViewName("myPage/profile.myTemp");
+		
+		return mav;
+	}
 
 }

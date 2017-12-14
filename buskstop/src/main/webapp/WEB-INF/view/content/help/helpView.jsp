@@ -71,7 +71,7 @@ select {
 	<button onclick="location.href='${initParam.rootPath}/helpRegisterView.do'">글쓰기</button>
 </div>
 <div class="uio_base_srch">
-	<form id="schform" name="schform" >
+	<form id="schform" name="schform" action="${initParam.rootPath }/selectHelp.do">
 		<fieldset>
 		<legend>검색</legend>
 		<select title="검색 구분" name="category" style="width:70px">

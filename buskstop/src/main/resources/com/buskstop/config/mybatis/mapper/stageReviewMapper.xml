@@ -38,11 +38,9 @@
 	
 
 	<update id="updateStageComment" parameterType="StageReview">
-		update stage_Comment
-		
+		update STAGE_REVIEW
 		set	stage_comment = #{stageComment}
-		
-		where stage_comment_user_id = #{stageCommentUserId}
+		where STAGE_COMMENT_USER_ID = #{stageCommentUserId}
 	</update>
 	
 

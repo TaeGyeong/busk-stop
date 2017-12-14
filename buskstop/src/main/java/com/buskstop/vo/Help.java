@@ -17,11 +17,26 @@ public class Help implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date helpRegTime;
 	private MultipartFile multiImage;
+	private MultipartFile multiImage2;
 	
 	public Help() {
 	}
 	
-	
+	public Help(int helpNum, String helpCategory, String helpTitle, String helpContent, String helpImage,
+			String helpImage2, String helpUserId, Date helpRegTime, MultipartFile multiImage,
+			MultipartFile multiImage2) {
+		this.helpNum = helpNum;
+		this.helpCategory = helpCategory;
+		this.helpTitle = helpTitle;
+		this.helpContent = helpContent;
+		this.helpImage = helpImage;
+		this.helpImage2 = helpImage2;
+		this.helpUserId = helpUserId;
+		this.helpRegTime = helpRegTime;
+		this.multiImage = multiImage;
+		this.multiImage2 = multiImage2;
+	}
+
 	public int getHelpNum() {
 		return helpNum;
 	}
@@ -111,6 +126,15 @@ public class Help implements Serializable{
 		this.multiImage = multiImage;
 	}
 
+	public MultipartFile getMultiImage2() {
+		return multiImage2;
+	}
+
+
+	public void setMultiImage2(MultipartFile multiImage2) {
+		this.multiImage2 = multiImage2;
+	}
+
 
 	@Override
 	public String toString() {
@@ -118,21 +142,6 @@ public class Help implements Serializable{
 				+ ", helpContent=" + helpContent + ", helpImage=" + helpImage + ", helpImage2=" + helpImage2
 				+ ", helpUserId=" + helpUserId + ", helpRegTime=" + helpRegTime + ", multiImage=" + multiImage + "]";
 	}
-
-
-	public Help(int helpNum, String helpCategory, String helpTitle, String helpContent, String helpImage,
-			String helpImage2, String helpUserId, Date helpRegTime, MultipartFile multiImage) {
-		this.helpNum = helpNum;
-		this.helpCategory = helpCategory;
-		this.helpTitle = helpTitle;
-		this.helpContent = helpContent;
-		this.helpImage = helpImage;
-		this.helpImage2 = helpImage2;
-		this.helpUserId = helpUserId;
-		this.helpRegTime = helpRegTime;
-		this.multiImage = multiImage;
-	}
-
 
 	@Override
 	public int hashCode() {

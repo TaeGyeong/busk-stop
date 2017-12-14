@@ -47,7 +47,7 @@
 		<sec:authorize access="isAuthenticated()">
 			<ul class="col-sm-12">
 				<li class="col-sm-4"><a id="logout" style="cursor: pointer;">로그아웃</a>
-				<li class="col-sm-4"><a href="${initParam.rootPath }/myPageView.do">마이페이지</a></li>
+				<li class="col-sm-4"><a href="${initParam.rootPath }/member/myPageMain.do">마이페이지</a></li>
 				<li class="col-sm-4"><a href="${initParam.rootPath }/member/myPageView.do">new마이페이지</a>
 			</ul>
 		</sec:authorize>

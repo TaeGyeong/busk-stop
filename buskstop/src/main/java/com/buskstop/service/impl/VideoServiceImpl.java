@@ -128,7 +128,12 @@ public class VideoServiceImpl implements VideoService {
 		return dao.selectAllVideoByCategory(video.getVideoCategory());
 	}
 	
+	// 모든 video 정보 (where 없이 전체)
+
 	
+	public List<Video> selectVideo(){
+		return dao.selectVideo();
+	}
 	
 
 }

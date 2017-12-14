@@ -1,5 +1,6 @@
 package com.buskstop.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,14 @@ public class VideoCommentServiceImpl implements VideoCommentService{
 		return dao.deleteVideoCommentByVideoCommentNo(videoCommentNo);
 	}
 
+	@Override
+	public List<VideoComment> searchVideoCommentByAdmin(int videoNo, String userId, String content) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("videoNo", videoNo);
+		map.put("userId", userId);
+		map.put("content", content);
+		
+		return dao.selectVideoCommentByMap(map);
+	}
+	
 }

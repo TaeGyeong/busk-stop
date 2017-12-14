@@ -65,14 +65,24 @@ public class HelpController {
 		System.out.println("컨트롤러 파라미터 : "+help);
 		
 		// 파일 업로드 처리
+		String dir = request.getServletContext().getRealPath("/helpImage");
+		String fileName = null;
+		File upImage = null;
+		
 		MultipartFile multiImage = help.getMultiImage();
 		if(multiImage!=null && !multiImage.isEmpty()) {
-			//디렉토리
-			String dir = request.getServletContext().getRealPath("/helpImage");
-			String fileName = UUID.randomUUID().toString();
-			File upImage = new File(dir, fileName+".jpg");
+			fileName = UUID.randomUUID().toString();
+			upImage = new File(dir, fileName+".jpg");
 			multiImage.transferTo(upImage);
 			help.setHelpImage(fileName+".jpg");
+		}
+		
+		MultipartFile multiImage2 = help.getMultiImage2();
+		if(multiImage2!=null && !multiImage2.isEmpty()) {
+			fileName = UUID.randomUUID().toString();
+			upImage = new File(dir, fileName+".jpg");
+			multiImage2.transferTo(upImage);
+			help.setHelpImage2(fileName+".jpg");
 		}
 		service.insertHelp(help);
 		return new ModelAndView("/selectHelp.do");
@@ -103,25 +113,36 @@ public class HelpController {
 	@RequestMapping("/updateHelp")
 	public ModelAndView udpateHelp(@ModelAttribute Help help) throws IllegalStateException, IOException {
 		
+		String dir = request.getServletContext().getRealPath("/helpImage");
+		String fileName = UUID.randomUUID().toString();
+		File upImage = null;
+		
 		MultipartFile multiImage = help.getMultiImage();
 		if(multiImage!=null && !multiImage.isEmpty()) {
 			//디렉토리
-			String dir = request.getServletContext().getRealPath("/helpImage");
-			String fileName = UUID.randomUUID().toString();
-			File upImage = new File(dir, fileName+".jpg");
+			upImage = new File(dir, fileName+".jpg");
 			multiImage.transferTo(upImage);
 			help.setHelpImage(fileName+".jpg");
 		}
+		
+		MultipartFile multiImage2 = help.getMultiImage2();
+		if(multiImage2!=null && !multiImage2.isEmpty()) {
+			//디렉토리
+			upImage = new File(dir, fileName+".jpg");
+			multiImage2.transferTo(upImage);
+			help.setHelpImage2(fileName+".jpg");
+		}
+		
 		service.updateHelp(help);
 		int helpNum = help.getHelpNum();
-		return new ModelAndView("helpDetailView.do?helpNum"+helpNum,"help",help);
+		return new ModelAndView("redirect:/helpDetail.do?helpNum="+helpNum,"help",help);
 				
 	}
 	
 	@RequestMapping("/updateHelp2")
 	public ModelAndView updateHelp2(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
-		return new ModelAndView("help/helpUpdate.tiles","Help",help);
+		return new ModelAndView("help/helpUpdate.tiles","help",help);
 	}
 	
 	@RequestMapping("/selectHelp")

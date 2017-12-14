@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html>
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
 <script type="text/javascript">
@@ -19,7 +18,7 @@ $(document).ready(function(){
             "type": "get",
             "data" : {
             	"stageNo":"${requestScope.map.stage.stageNo}",
-            	"starScore": "starScore.options[startScore.selectedIndex].value+1",
+            	"starScore": $("select[name = starScore]").val(),
             	"stageComment":$("#stageComment").val(),
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
@@ -90,10 +89,11 @@ function listComment(){
             var output = "";
             $.each(result, function(){ 
             	output += '<div class="stageComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-                output += '<div class="listComment">별점 : '+this.starScore+'작성자 : '+this.stageCommentUserId+' / 등록 일자 : '+this.stageCommentRegTime;
-                output += '<a onclick="updateCommentText('+this.stageCommentUserId+',\''+this.stageComment+'\');"> 수정 </a>';
-                output += '<a onclick="deleteComment('+this.stageCommentUserId+');"> 삭제 </a> </div>';
-                output += '<div> <p> 내용 : '+this.stageComment +'</p>';
+                output += '<div class="listComment'+this.stageCommentUserId+'">별점 :'+outStar(this.starScore);
+                output += '&nbsp;&nbsp; 작성자 : '+this.stageCommentUserId+' &nbsp;&nbsp; 등록 일자 : '+this.stageCommentRegTime;
+                output += '<a onclick="updateCommentText(\''+this.stageCommentUserId+'\',\''+this.stageComment+'\');">&nbsp;&nbsp;&nbsp;수정 </a>';
+                output += '<a onclick="deleteComment(\''+this.stageCommentUserId+'\');">&nbsp;&nbsp;삭제 </a> </div>';
+                output += '<div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
                 output += '</div></div>';
             });
             $("#stageCommentList").html(output);
@@ -104,13 +104,27 @@ function listComment(){
     });
 }
 
-function deleteComment(stageCommentNo){
+function outStar(starScore){
+	if(starScore==1){
+		return "★☆☆☆☆";
+	} else if(starScore==2){
+		return "★★☆☆☆";
+	} else if(starScore==3){
+		return "★★★☆☆";
+	} else if(starScore==4){
+		return "★★★★☆";
+	} else if(starScore==5){
+		return "★★★★★";
+	}
+}
+
+function deleteComment(stageCommentUserId){
     
 	$.ajax({                
         "url": "${initParam.rootPath }/stageCommentDelete.do",
         "type": "post",
         "data" : {
-        	"stageCommentNo":stageCommentNo,
+        	"stageCommentUserId":stageCommentUserId,
         	'${_csrf.parameterName}':'${_csrf.token}'
         },
         "dataType":"text",
@@ -125,27 +139,25 @@ function deleteComment(stageCommentNo){
  }
  
  
-function updateCommentText(stageCommentNo,stageComment){
-	
+function updateCommentText(stageCommentUserId,stageComment){
     var output ="";
-    	output += '<div class="input-group">';
-    	output += '<input type="text" class="form-control" name="pComment'+stageCommentNo+'" value="'+stageComment+'"/>';
-    	output += '<span class="input-group-btn">'
-    	output += '<button class="btn btn-default" type="button" onclick="updateComment('+stageCommentNo+');">수정</button>';
-    	output += '<button class="btn btn-default" type="button" onclick="listComment();">수정 취소</button>';
-    	output += ' </span></div>';
-       
-       $(".pComment"+stageCommentNo).html(output);
+    output += '<div class="input-group">';
+	output += '<input type="text" class="form-control" name="pComment'+stageCommentUserId+'" value="'+stageComment+'"/>';
+	output += '<span class="input-group-btn">';
+	output += '<button class="btn btn-default" type="button" onclick="updateComment(\''+stageCommentUserId+'\');">수정</button>';
+	output += '<button class="btn btn-default" type="button" onclick="listComment();">수정 취소</button>';
+	output += ' </span></div>';
+	$(".pComment"+stageCommentUserId).html(output);
 }
 
-function updateComment(stageCommentNo){
-		var UpdatestageComment = $("[name=pComment"+stageCommentNo+"]").val();
+function updateComment(stageCommentUserId){
+	var UpdateStageComment = $("[name=pComment"+stageCommentUserId+"]").val();
 	$.ajax({
 		"url": "${initParam.rootPath }/stageCommentUpdate.do",
 	    "type": "get",
 	    "data" : {
-	    	"stageCommentNo":stageCommentNo,
-	    	"UpdatestageComment":UpdatestageComment,
+	    	"stageCommentUserId":stageCommentUserId,
+	    	"UpdateStageComment":UpdateStageComment,
 	    	'${_csrf.parameterName}':'${_csrf.token}'
 	    },
 	    "dataType":"text",
@@ -161,13 +173,13 @@ function updateComment(stageCommentNo){
 	
 }
 
-function updatestage(){	
+function updateStage(){	
 	var output = "";
 	output+=location.href='${initParam.rootPath }/updateStage.do?stageNo=${param.stageNo}';
 	
 }
 
-function deletestage(stageNo){
+function deleteStage(stageNo){
 	
 	var output = "";
 	output+=location.href='${initParam.rootPath }/deleteStage.do?stageNo=${param.stageNo}';
@@ -419,8 +431,8 @@ function deletestage(stageNo){
 		<div>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updatestage();" class="btn btn-default">
-					<input type="submit" value="삭제" onclick="deletestage();" class="btn btn-default">
+					<input type="submit" value="수정" onclick="updateStage();" class="btn btn-default">
+					<input type="submit" value="삭제" onclick="deleteStage();" class="btn btn-default">
 				</c:if>
 			</sec:authorize>
 			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>

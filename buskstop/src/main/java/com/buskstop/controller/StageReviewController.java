@@ -32,8 +32,8 @@ public class StageReviewController {
 	
 	@RequestMapping("/stageCommentInsert")
 	@ResponseBody
-	public void insertStageComment(int stageNo, String stageComment) {
-	StageReview sComment = new StageReview(stageNo, stageComment);
+	public void insertStageComment(@RequestParam int stageNo, @RequestParam String stageComment, @RequestParam int starScore) {
+	StageReview sComment = new StageReview(stageNo, starScore,stageComment);
 	// 인증해서 아이디값 세팅
 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	sComment.setStageCommentUserId(((User)authentication.getPrincipal()).getUserId());
@@ -45,6 +45,7 @@ public class StageReviewController {
 	@RequestMapping("/stageCommentUpdate")
 	@ResponseBody
 	public void updateStageComment(String stageCommentUserId, String UpdateStageComment) {
+		System.out.println("수정 오나요 컨트롤러까지"+stageCommentUserId);
 		StageReview sComment2 = new StageReview();
 		sComment2.setStageCommentUserId(stageCommentUserId);
 		sComment2.setStageComment(UpdateStageComment);
@@ -52,13 +53,13 @@ public class StageReviewController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		sComment2.setStageCommentUserId(((User)authentication.getPrincipal()).getUserId());
 		
-		service.updateStageComment(sComment2);
-		
+		service.updateStageComment(sComment2);		
 	}
 	
 	@RequestMapping("/stageCommentDelete")
 	@ResponseBody
 	public String deleteStageComment(String stageCommentUserId) {
+		System.out.println("삭제 오나요 컨트롤러까지");
 		service.deleteStageCommentByStageCommentUserId(stageCommentUserId);
 		return "redirect:/allSelectStage.do";
 	}
