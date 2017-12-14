@@ -152,9 +152,7 @@ select {
 	 
 	<div style="width: 100%;">
 		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')">
-			<form action="${initParam.rootPath}/member/stageRegister.do">
-				<button class="btn btn-default" style="float: right;">작성</button>
-			</form>
+			<a href="${initParam.rootPath}/stage/stageRegisterView.do" class="btn btn-default" style="float: right;">작성</a>
 		</sec:authorize>
 	</div>
 
