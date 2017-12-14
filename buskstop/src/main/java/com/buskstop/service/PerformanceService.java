@@ -174,4 +174,10 @@ public interface PerformanceService {
 	 * @return
 	 */
 	List<Performance> selectMyPerformance(String performanceUserId);
+	/**
+	 * 좋아요수가 많은 Performance 객체 정리.
+	 * @return
+	 */
+	List<Performance> selectTopLikePerformance();
+	
 }

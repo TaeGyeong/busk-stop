@@ -61,6 +61,18 @@
 		AND		F.FOLLOWING_ID = #{value}
 	</select>
 	
+	<resultMap type="artist" id="artist-followcount-resultmap">
+		<id property="artistId" column="FOLLOWER_ID"/>
+		<result property="followCount" column="COUNT(*)"/>
+	</resultMap>
+	
+	<select id="selectArtistFollowCount" resultMap="artist-followcount-resultmap">
+		SELECT 	FOLLOWER_ID, COUNT(*)
+		FROM	FOLLOW
+		GROUP BY FOLLOWER_ID
+		ORDER BY COUNT(*) DESC
+	</select>
+
 	<!-- 날 팔로우한 사람들을 조회 -->
 	<select id="selectFollowByFollowerId" parameterType="String" resultMap="follow-resultmap">
 		SELECT <include refid="follow-column"/>

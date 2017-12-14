@@ -22,7 +22,7 @@
 }
 
 .main_menu>ul>li:hover {
-	background-color: #999;
+	background-color: #F9A2EB;
 }
 
 .main_menu>ul>li:hover>a {
@@ -105,18 +105,6 @@
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goArtistVideo">홍보영상</a></li>
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goPerformanceVideo">공연영상</a></li>
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goPracticeVideo">연습영상</a></li>
-            </ul>
-         </li>
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#" style="padding: 0;">재능거래</a>
-            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-               <li class="col-sm-12" style="padding: 0;"><a href="#">멤버구인</a></li>
-               <li class="col-sm-12" style="padding: 0;"><a href="#">레슨구인</a></li>
-            </ul>
-         </li>
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">중고거래</a>
-            <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
-               <li class="col-sm-12" style="padding: 0;"><a href="#">판매목록</a></li>
-               <li class="col-sm-12" style="padding: 0;"><a href="#">구매희망</a></li>
             </ul>
          </li>
          <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/selectHelp.do">고객센터</a></li>

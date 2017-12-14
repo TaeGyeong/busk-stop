@@ -71,5 +71,5 @@
 	</div>
 	<button id="registBtn" type="button" class="btn btn-default">등록</button>
 	<button type="button" class="btn btn-default"
-		onclick="location.href='${initParam.rootPath}/index.do'">취소</button>
+		onclick="location.href='${initParam.rootPath}/videoListCategory.do?category=practice'">취소</button>
 </form> 

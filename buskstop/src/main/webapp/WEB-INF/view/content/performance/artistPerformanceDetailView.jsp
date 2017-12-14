@@ -317,14 +317,16 @@ function deletePerformance(performanceNo){
 				<span>${requestScope.map.artist.artistSns }</span><br>
 			</div>
 			<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
-				<div class="text-right" id="follow" style="overflow:hidden">
-					<button type="button" id="followBtn"></button>
-				</div>
+				<sec:authorize access="isAuthenticated()">	
+					<div class="text-right" id="follow" style="overflow:hidden">
+						<button type="button" id="followBtn"></button>
+					</div>
+				</sec:authorize>
 			</c:if>
 		</div>
 	</div>
 
-	<!-- Board Content -->
+	<!-- 아티스트 지도 -->
 	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
 		<div>
 			<h3>${requestScope.map.performance.performanceNo}. ${requestScope.map.performance.performanceTitle}</h3>
@@ -336,19 +338,29 @@ function deletePerformance(performanceNo){
 			<div style="float:right;">${requestScope.map.performance.performanceUserId}<strong>님</strong></div>
 		</div>
 	</div>
+	
+	<div>
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+		</p>
+		<p style="color:#515151; font-size: 16px; padding:20px;">
+		${requestScope.map.performance.performanceContent}
+		</p>
+	</div>
 
 	<div style="border-bottom: 1px solid #e5e5e5; overflow : hidden; padding : 5px; background: #f9f9f9; ">
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
-			<div id="map" style="position:static; width:800px; height:400px"></div>
+			<div id="map" style="position:static; width:900px; height:400px"></div>
 			<script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
 			        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
+			        level: 3, // 지도의 확대 레벨
+			        scrollwheel : false
 			    };  
 	
 				// 지도를 생성합니다    
@@ -356,6 +368,15 @@ function deletePerformance(performanceNo){
 		
 				// 주소-좌표 변환 객체를 생성합니다
 				var geocoder = new daum.maps.services.Geocoder();
+				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+				var mapTypeControl = new daum.maps.MapTypeControl();
+				map.addControl(mapTypeControl, daum.maps.ControlPosition.RIGHT);
+				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+				var zoomControl = new daum.maps.ZoomControl();
+				map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+				var currentTypeId;
+				var resulty;
+				var resultx;
 		
 				// 주소로 좌표를 검색합니다
 				geocoder.addressSearch('${requestScope.map.performance.performanceLocation}', function(result, status) {
@@ -364,7 +385,9 @@ function deletePerformance(performanceNo){
 				     if (status === daum.maps.services.Status.OK) {
 		
 				        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-		
+				        resulty = result[0].y;
+						resultx = result[0].x;
+				    	
 				        // 결과값으로 받은 위치를 마커로 표시합니다
 				        var marker = new daum.maps.Marker({
 				            map: map,
@@ -381,23 +404,32 @@ function deletePerformance(performanceNo){
 				        map.setCenter(coords);
 				    } 
 				});    
+				//지도 이동 이벤트 핸들러
+				function moveDaumMap(self){
+				    
+				    var center = map.getCenter(), 
+				        lat = center.getLat(),
+				        lng = center.getLng();
+
+				    self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${requestScope.map.performance.performanceName}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
+				}
+
+				//지도 초기화 이벤트 핸들러
+				function resetDaumMap(){
+					map.setCenter(new daum.maps.LatLng(resulty, resultx));; //지도를 초기화 했던 값으로 다시 셋팅합니다.
+				    map.setLevel(mapOption.level);
+				}
+
 			</script>
 		</div>
 		<hr>
+	</div>
 		<div>
 			<div style="float:left; margin-right:5px;">공연 시간</div>
 			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
 		</div>
-	</div>
-
-	<div>
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
-		</p>
-		<p style="color:#515151; font-size: 16px; padding:20px;">
-		${requestScope.map.performance.performanceContent}
-		</p>
-	</div>
+<hr>
+	
 	<div class="button_box" style="width: 100%;">
 		<div style="float: left;">
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
@@ -410,16 +442,15 @@ function deletePerformance(performanceNo){
 			<input type="submit" value="삭제" onclick="deletePerformance();">
 		</c:if>
 	</sec:authorize>
-		<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
+		<button type="button" onclick="location.href='${initParam.rootPath }/selectArtistPerformance.do'">목록</button>
 
 	</div>
-	<p/><p/><p/>
-	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	<div style="float: left; width: 100%;">
 		<textarea name="content" id="performanceComment" 
 		cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 		<button type="button" id="btnComment">댓글 등록</button>
 	</div>
+	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	
 	</div>
 </div>

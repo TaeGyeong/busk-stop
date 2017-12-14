@@ -29,6 +29,15 @@ public class Performance implements Serializable{
 	
 	public Performance() {}
 	
+	
+	
+	public Performance(int performanceNo, int likeCount) {
+		this.performanceNo = performanceNo;
+		this.likeCount = likeCount;
+	}
+
+
+
 	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
 			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
 			MultipartFile multiImage, String performanceUserId, Date performanceRegTime, int likeCount,
@@ -51,6 +60,25 @@ public class Performance implements Serializable{
 	
 	
 	
+	public Performance(int performanceNo, String performanceName, String performanceTitle, String performanceLocation,
+			Date performanceDate, int performanceHits, String performanceContent, String performanceImage,
+			MultipartFile multiImage, String performanceUserId, int performanceCode, Date performanceRegTime,
+			int likeCount) {
+		this.performanceNo = performanceNo;
+		this.performanceName = performanceName;
+		this.performanceTitle = performanceTitle;
+		this.performanceLocation = performanceLocation;
+		this.performanceDate = performanceDate;
+		this.performanceHits = performanceHits;
+		this.performanceContent = performanceContent;
+		this.performanceImage = performanceImage;
+		this.multiImage = multiImage;
+		this.performanceUserId = performanceUserId;
+		this.performanceCode = performanceCode;
+		this.performanceRegTime = performanceRegTime;
+		this.likeCount = likeCount;
+	}
+
 	public int getPerformanceCode() {
 		return performanceCode;
 	}

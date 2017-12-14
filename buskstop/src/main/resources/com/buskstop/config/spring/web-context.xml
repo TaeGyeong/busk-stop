@@ -13,7 +13,7 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 링크 -->
-	<mvc:view-controller path="/index.do" view-name="index.tiles"/>
+	<!-- <mvc:view-controller path="/index.do" view-name="index.tiles"/> -->
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<mvc:view-controller path="/join_member_form.do" view-name="member/join_member_form.tiles"/>
 	<mvc:view-controller path="/myPageView.do" view-name="mymypage/myPageView.myTiles"/>
@@ -27,7 +27,7 @@
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
-	
+	<mvc:view-controller path="/stageDetailView.do" view-name="stage/stageDetailView.tiles"/>
 	<!-- 고객센터 링크 -->
 	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>
 	<mvc:view-controller path="/helpRegisterView.do" view-name="help/helpRegisterView.tiles"/>
@@ -56,6 +56,9 @@
 	<!-- 관리자 페이지 링크 -->
 	<mvc:view-controller path="/admin/adminPage.do" view-name="admin/adminPage.tiles"/>
 	<mvc:view-controller path="/admin/registAdmin.do" view-name="admin/registAdmin.tiles"/>
+	
+	<!-- 예전 index. -->
+	<mvc:view-controller path="/beforeIndex.do" view-name="index.tiles"/>
 	
 	<!-- test link -->
 	<mvc:view-controller path="/youtubeTest.do" view-name="youtubeTest.tiles"/>

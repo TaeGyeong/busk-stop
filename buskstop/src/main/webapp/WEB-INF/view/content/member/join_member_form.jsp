@@ -10,7 +10,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			"url":"${initParam.rootPath }/idDuplicatedCheck.do",
-			"type":"POST",
+			"type":"get",
 			"data":{
 				"id":$('#id').val(),
 				"${_csrf.parameterName}":"${_csrf.token}"		

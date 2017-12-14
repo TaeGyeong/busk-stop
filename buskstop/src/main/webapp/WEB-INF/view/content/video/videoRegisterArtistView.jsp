@@ -8,8 +8,19 @@
 			$("#videoLink").val(txt);
 			document.getElementById("registForm").submit();
 		});
-	});
 	
+		$("#selectStage").on("click", function(){
+			
+		});
+		
+		$("#searchStage").on("click", function(){
+			var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+			left1 = (screen.availWidth - 600) / 2;
+			top1 = (screen.availHeight - 500) / 2;
+			window.open(address, "newWin", 'width=800 ,height=600 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+		});
+	
+	});
 	function rink(txt){
 		var video_id = txt.split('v=')[1];
 	    var ampersandPosition = video_id.indexOf('&');
@@ -33,11 +44,13 @@
 			name="videoLink" id="videoLink" class="form-control"
 			required="required">
 	</div>
+	
 	<div class="form-group">
-		<label for="videoLocation">공연장소</label> <input type="text"
-			name="videoLocation" id="videoLocation"
-			class="form-control" required="required">
-	</div>
+			<label>공연장 주소</label>
+			<input type="text" id="performanceLocation" name="videoLocation" class="form-control" required="required" readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">
+			<%--<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2"> --%>
+			<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
+		</div>
 	
 	<div class="form-group">
 		<label for="videoDate">공연날짜</label> <input type="date"
@@ -68,5 +81,5 @@
 	</div>
 	<button id="registBtn" class="btn btn-default">등록</button>
 	<button type="button" class="btn btn-default"
-		onclick="location.href='${initParam.rootPath}/index.do'">취소</button>
+		onclick="location.href='${initParam.rootPath}/videoListCategory.do?category=artist'">취소</button>
 </form>

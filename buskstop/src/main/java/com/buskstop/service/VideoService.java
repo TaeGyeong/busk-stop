@@ -118,4 +118,12 @@ public interface VideoService {
 	 * @return
 	 */
 	List<Video> selectMyVideo(String videoUserId);
+	
+	List<Video> viewVideoByArtist(String videoArtist);
+	
+	/**
+	 * 좋아요가 많은 순서대로 video select.
+	 * @return
+	 */
+	List<Video> selectTopLikeVideo();
 }

@@ -16,17 +16,18 @@
 <div class="map_wrap">
     <div id="map" style="width:100%; height:100%; position:relative; overflow:hidden;"></div>
     <div class="hAddr">
-        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span class="title"> 주소정보</span>
         <span id="centerAddr"></span>
     </div>
 </div>
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
+
 <script type="text/javascript">
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 1 // 지도의 확대 레벨
+        center: new daum.maps.LatLng(37.402235, 127.106691), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -40,6 +41,13 @@ var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입�
     
 //사용자가 지정한 정확한 위치를 저장 할 변수
 var locationStage;
+    
+var mapTypeControl = new daum.maps.MapTypeControl();
+map.addControl(mapTypeControl, daum.maps.ControlPosition.RIGHT);
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+
 
 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -56,7 +64,7 @@ daum.maps.event.addListener(map, 'click', function(mouseEvent) {
             detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
             
             var content = '<div class="bAddr">' +
-                            '<span class="title">법정동 주소정보</span>' + 
+                            '<span class="title">클릭한 주소정보</span>' + 
                             detailAddr + 
                         '</div>';
 
@@ -127,6 +135,16 @@ function geocodeAddress(geocoder, map){
 	    } 
 	}); 
 }
+//지도 이동 이벤트 핸들러
+function moveDaumMap(self){
+    
+    var center = map.getCenter(), 
+        lat = center.getLat(),
+        lng = center.getLng();
+
+    self.href = 'http://map.daum.net/link/map/' + encodeURIComponent('${requestScope.map.performance.performanceName}') + ',' + lat + ',' + lng; //Daum 지도로 보내는 링크
+}
+
 function confirmStage(){
 	if(locationStage==null){
 		alert("정확한 위치를 선택해주세요!");
@@ -137,10 +155,11 @@ function confirmStage(){
 }
 
 </script>
+<br>
 <div id="floating-panel">
-	<input id="address" type="text">
-	<input id="submit" type="button" value="Geocode" onclick="geocodeAddress(geocoder, map)"><br>
-	<button id="confirm" type="button" value="" onclick="confirmStage()">확인</button>
+	주소로 검색 : <input id="address" type="text">
+	<input id="submit" type="button" value="검색하기" onclick="geocodeAddress(geocoder, map)">&nbsp;&nbsp;&nbsp;&nbsp;
+	<button id="confirm" type="button" value="" onclick="confirmStage();">확인</button>
 </div>
 </body>
 </html>

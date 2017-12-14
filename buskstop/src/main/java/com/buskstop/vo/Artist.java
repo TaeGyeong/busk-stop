@@ -14,11 +14,18 @@ public class Artist implements Serializable {
 	private MultipartFile multiImage;
 	private String artistMembers;
 	private String artistSns;
+	
+	//
+	private int followCount;
+	
 	public Artist() {
 	}
 	
-	
-	
+	public Artist(String artistId, int followCount) {
+		this.artistId = artistId;
+		this.followCount = followCount;
+	}
+
 	public Artist(String artistName, String performance, String profile, MultipartFile multiImage, String artistMembers,
 			String artistSns) {
 		this.artistName = artistName;
@@ -45,6 +52,14 @@ public class Artist implements Serializable {
 	
 	
 	
+	public int getFollowCount() {
+		return followCount;
+	}
+
+	public void setFollowCount(int followCount) {
+		this.followCount = followCount;
+	}
+
 	public String getArtistId() {
 		return artistId;
 	}
@@ -180,7 +195,8 @@ public class Artist implements Serializable {
 	public String toString() {
 		return "Artist [artistId=" + artistId + ", artistName=" + artistName + ", performance=" + performance
 				+ ", profile=" + profile + ", artistImage=" + artistImage + ", multiImage=" + multiImage
-				+ ", artistMembers=" + artistMembers + ", artistSns=" + artistSns + "]";
+				+ ", artistMembers=" + artistMembers + ", artistSns=" + artistSns + ", followCount=" + followCount
+				+ "]";
 	}
 
 	
