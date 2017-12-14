@@ -17,7 +17,6 @@ public class HelpComment {
 
 	public HelpComment(int helpCommentNo, int helpNo, String helpComment, String helpCommentId,
 			Date helpCommentRegTime) {
-		super();
 		this.helpCommentNo = helpCommentNo;
 		this.helpNo = helpNo;
 		this.helpComment = helpComment;

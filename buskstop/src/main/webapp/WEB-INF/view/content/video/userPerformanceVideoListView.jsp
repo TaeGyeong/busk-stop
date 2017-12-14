@@ -14,7 +14,9 @@ document.getAttribute('value').submit();
 }); */
 </script>
 <style type="text/css">
-
+td:hover{
+	cursor:pointer;
+}
 
 </style>
 
@@ -38,7 +40,7 @@ document.getAttribute('value').submit();
 </div>
 <br><hr><br>
 <div>
-	<table class="table table-hover">
+	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
 				<th class="col-sm-1 text-center">동영상번호</th>
@@ -46,7 +48,7 @@ document.getAttribute('value').submit();
 				<th class="col-sm-2 text-center">공연사진</th>
 				<th class="col-sm-2 text-center">장소</th>
 				<th class="col-sm-3 text-center">날짜</th>
-				<th class="col-sm-1 text-center">사용자 아이디</th>
+				<th class="col-sm-1 text-center">작성자</th>
 				<th class="col-sm-1 text-center">등록시간</th>
 			</tr>
 		</thead>

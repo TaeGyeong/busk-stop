@@ -87,20 +87,24 @@ public class ArtistServiceImpl implements ArtistService{
 				returnList.add(editArtist);
 			}
 		}
-		
-		int i = (int)(Math.random()*(returnList.size()-1));
-		Artist artist = returnList.get(i);
-		
-		// 아티스트의 게시물 수.
-		int videoCount =  videoDao.selectUserVideoCount(artist.getArtistId());
-		int performanceCount = performanceDao.selectArtistPerformanceCountById(artist.getArtistId());
-		
-		// 값을 전달할 map.
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("artist", artist);
-		map.put("registCount", videoCount+performanceCount);
-		
-		return map;
+		if(returnList.size() != 0) {
+			int i = (int)(Math.random()*(returnList.size()-1));
+			Artist artist = returnList.get(i);
+			
+			// 아티스트의 게시물 수.
+			int videoCount =  videoDao.selectUserVideoCount(artist.getArtistId());
+			int performanceCount = performanceDao.selectArtistPerformanceCountById(artist.getArtistId());
+			
+			// 값을 전달할 map.
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("artist", artist);
+			map.put("registCount", videoCount+performanceCount);
+			
+			return map;
+		}
+		else {
+			return null;
+		}
 	}
 	
 	
