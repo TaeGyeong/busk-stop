@@ -22,7 +22,7 @@
 }
 
 .main_menu>ul>li:hover {
-	background-color: #999;
+	background-color: #F9A2EB;
 }
 
 .main_menu>ul>li:hover>a {

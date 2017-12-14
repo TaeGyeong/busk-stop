@@ -153,4 +153,12 @@
 		from help
 		where help_user_id like '%'||#{helpUserId}||'%'
 	</select>
+	
+	<!-- 내가 작성한 글 조회 -->
+	<select id="selectMyHelp" resultMap="help-resultmap" parameterType="String">
+		select *
+		from help
+		where help_user_id = #{helpUserId}
+	</select>
+	
 </mapper>

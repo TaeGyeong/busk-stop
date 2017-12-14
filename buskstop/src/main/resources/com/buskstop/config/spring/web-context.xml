@@ -28,20 +28,16 @@
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
 	<mvc:view-controller path="/stageDetailView.do" view-name="stage/stageDetailView.tiles"/>
-	
 	<!-- 고객센터 링크 -->
 	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>
 	<mvc:view-controller path="/helpRegisterView.do" view-name="help/helpRegisterView.tiles"/>
 	
 	<!-- password check link -->
-	<mvc:view-controller path="/member/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
-	<mvc:view-controller path="/artist/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
-	<mvc:view-controller path="/producer/passwordCheck.do" view-name="myPage/passwordCheck.tiles"/>
+	<mvc:view-controller path="/producer/passwordCheck.do" view-name="myPage/passwordCheck.myTemp"/>
 	<!-- 회원정보수정링크 -->
 	<mvc:view-controller path="/updateMemberInfo.do" view-name="myPage/updateMemberCategory.myTiles"/>
 	<mvc:view-controller path="/updateMemberView.do" view-name="myPage/updateMemberView.tiles"/>
-	<mvc:view-controller path="/updateSuccess.do" view-name="myPage/updateSuccess.tiles"/>
-	
+	<mvc:view-controller path="/updateMemberView2.do" view-name="myPage/updateMemberView.myTemp"/>
 	<!-- 회원탈퇴 링크 -->
 	<mvc:view-controller path="/member/out_member_form.do" view-name="member/out_member_form.myTiles"/>
 	

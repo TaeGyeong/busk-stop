@@ -47,4 +47,11 @@ public interface HelpService {
 	 * @return
 	 */
 	Map<String, Object> selectHelpByHelpUserId(int page, String helpUserId);
+
+	/**
+	 * 내가 작성한 글
+	 * @param helpUserId
+	 * @return
+	 */
+	List<Help> selectMyHelp(String helpUserId);
 }

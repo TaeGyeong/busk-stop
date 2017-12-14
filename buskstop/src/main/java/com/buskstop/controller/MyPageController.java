@@ -26,14 +26,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.buskstop.service.ArtistService;
 import com.buskstop.service.AuthorityService;
 import com.buskstop.service.FollowService;
+import com.buskstop.service.HelpService;
 import com.buskstop.service.PerformanceLikeService;
+import com.buskstop.service.PerformanceService;
 import com.buskstop.service.PremiumStageService;
+import com.buskstop.service.StageReservationService;
+import com.buskstop.service.StageService;
 import com.buskstop.service.UserService;
 import com.buskstop.service.VideoService;
 import com.buskstop.vo.Artist;
 import com.buskstop.vo.Follow;
+import com.buskstop.vo.Help;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.PremiumStage;
+import com.buskstop.vo.Stage;
+import com.buskstop.vo.StageReservation;
 import com.buskstop.vo.User;
 import com.buskstop.vo.Video;
 
@@ -61,25 +68,32 @@ public class MyPageController {
 	@Autowired
 	private VideoService videoService;
 	
-
+	@Autowired
+	private StageService userStageService;
+	
+	@Autowired
+	private PerformanceService performanceService;
+	
+	@Autowired
+	private HelpService helpService;
+	
 	/**************************************
 	 * 아티스트 & 공급자 권한 조회 controller
 	 **************************************/
 	@RequestMapping("/registerSupplierView")
-	public String premiumAuthorityCheck() {
-		if (authorityService.checkStageAuthorityByUserId(getUserId())) {
-			return "/myPageView.do";
-		}
-
-		return "user/registerSupplierView.myTiles";
+	public ModelAndView premiumAuthorityCheck() {
+		ModelAndView mav = profileInfo();
+		
+		mav.setViewName("user/registerSupplierView.myTemp");
+		return mav;
 	}
 
 	@RequestMapping("/registerArtistView")
-	public String artistAuthorityCheck() {
-		if (authorityService.readArtistAutoritiesByUserId(getUserId())) {
-			return "/myPageView.do";
-		}
-		return "user/registerArtistView.myTiles";
+	public ModelAndView artistAuthorityCheck() {
+		ModelAndView mav = profileInfo();
+		
+		mav.setViewName("user/registerArtistView.myTemp");
+		return mav;
 	}
 
 	/**************************************
@@ -87,9 +101,11 @@ public class MyPageController {
 	 **************************************/
 	
 	@RequestMapping("/member/registArtist")
-	public String registArtist(@ModelAttribute Artist artist, HttpServletRequest request)
+	public ModelAndView registArtist(@ModelAttribute Artist artist, HttpServletRequest request)
 			throws IllegalStateException, IOException {
 
+		ModelAndView mav = profileInfo();
+		
 		// artist 권한 정보 수정 용도.
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
@@ -120,7 +136,9 @@ public class MyPageController {
 		context.setAuthentication(null);
 
 		// response
-		return "redirect:/registerSuccessView.do";
+		mav.setViewName("user/registerSuccessView.tiles");
+		
+		return mav;
 	}
 
 	/***************************************
@@ -135,6 +153,8 @@ public class MyPageController {
 	@RequestMapping("/member/registSupplier")
 	public ModelAndView registSupplier(@ModelAttribute PremiumStage supplier, HttpServletRequest request)
 			throws IllegalStateException, IOException {
+		
+		ModelAndView mav = profileInfo();
 		
 		// 권한 조회하자.
 		if (authorityService.checkStageAuthorityByUserId(supplier.getOperatorUserId())) {
@@ -187,8 +207,11 @@ public class MyPageController {
 		
 		map.put("regist", "success");
 		
+		mav.addObject("map", map);
+		mav.setViewName("premiumStage/premiumStageDetailView.tiles");
+		
 		// response
-		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
+		return mav;
 	}
 
 	/**************************************
@@ -205,8 +228,8 @@ public class MyPageController {
 	}
 
 	@RequestMapping("/member/updateMember")
-	public String updateMember(@ModelAttribute User user, String newpassword) {
-
+	public ModelAndView updateMember(@ModelAttribute User user, String newpassword) {
+		
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
 
@@ -225,8 +248,11 @@ public class MyPageController {
 
 		System.out.println(newAuthentication);
 		context.setAuthentication(newAuthentication);
-
-		return "redirect:/updateSuccess.do";
+		ModelAndView mav = profileInfo();
+		mav.addObject("user", user);
+		mav.setViewName("myPage/updateSuccess.myTemp");
+		
+		return mav;
 	}
 
 	/**************************************
@@ -234,9 +260,9 @@ public class MyPageController {
 	 **************************************/
 
 	@RequestMapping("/artist/updateArtist")
-	public String updateArtist(@ModelAttribute Artist artist, HttpServletRequest request)
+	public ModelAndView updateArtist(@ModelAttribute Artist artist, HttpServletRequest request)
 			throws IllegalStateException, IOException {
-
+		ModelAndView mav = profileInfo();
 		// 파일처리.
 		MultipartFile multiImage = artist.getMultiImage();
 		if (multiImage != null && !multiImage.isEmpty()) {
@@ -248,12 +274,13 @@ public class MyPageController {
 			multiImage.transferTo(upImage);
 			artist.setArtistImage(fileName + ".jpg");
 		}
-
 		// 아티스트 서비스를 통해 정보를 update 해준다.
 		artistService.updateArtist(artist);
 	
 		// response.
-		return "redirect:/updateSuccess.do";
+		mav.setViewName("myPage/updateSuccess.myTemp");
+		
+		return mav;
 	}
 
 	/**************************************
@@ -301,6 +328,7 @@ public class MyPageController {
 	 ******************************************/
 	@RequestMapping("/member/myLikeInfo")
 	public ModelAndView myLike() {
+		ModelAndView mav = profileInfo();
 		// 좋아요를 누른 공연정보와 영상정보를 가져온다. (map) performancelike, videolike
 		List<Performance> list = performanceLikeService.performanceByLikeId(getUserId());
 		List<Video> videoList = videoService.selectVideoByVideoLikeId(getUserId()); 
@@ -309,8 +337,34 @@ public class MyPageController {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("performanceList", list);
 		map.put("videoList", videoList);
-		return new ModelAndView("myPage/myLikeView.myTiles","map",map);
 		
+		mav.addObject("map", map);
+		mav.setViewName("myPage/myLikeView.myTemp");
+		
+		return mav;
+		
+	}
+	@RequestMapping("/member/myLikePerformance")
+	public ModelAndView myLikePerformance() {
+		ModelAndView mav = profileInfo();
+
+		List<Performance> list = performanceLikeService.performanceByLikeId(getUserId());
+
+		mav.addObject("list", list);		
+		mav.setViewName("myPage/myLikePerformanceView.myTemp");
+		
+		return mav;		
+	}
+	@RequestMapping("/member/myLikeVideo")
+	public ModelAndView myLikeVideo() {
+		ModelAndView mav = profileInfo();
+
+		List<Video> list = videoService.selectVideoByVideoLikeId(getUserId());
+
+		mav.addObject("list", list);		
+		mav.setViewName("myPage/myLikeVideoView.myTemp");
+		
+		return mav;		
 	}
 	
 	@RequestMapping("/member/myPageView")
@@ -332,6 +386,13 @@ public class MyPageController {
 	
 	@RequestMapping("/member/myPageMain")
 	public ModelAndView myPage() {
+		ModelAndView mav = profileInfo();
+		mav.setViewName("myPage/profile.tiles");
+		
+		return mav;
+	}
+	
+	public ModelAndView profileInfo() {
 		ModelAndView mav = new ModelAndView();
 		
 		User user = userService.selectMemberById(getUserId());
@@ -348,9 +409,159 @@ public class MyPageController {
 		mav.addObject("user", user);
 		mav.addObject("followingCount", followingCount);
 		mav.addObject("followerCount", followerCount);
-		mav.setViewName("myPage/profile.myTemp");
 		
 		return mav;
 	}
+	
+	@RequestMapping("/member/MyStageApply")
+	public ModelAndView MyStageApply() {
+		ModelAndView mav = profileInfo();
+		
+		List<StageReservation> stageReser = new ArrayList<StageReservation>();
+		String rentalUserId = getUserId();
+		//신청자 아이디로 공연장 뽑아오기
+		List<StageReservation> stageReservations = userStageService.selectMyStageApply(rentalUserId);
+		for(StageReservation stageReservation : stageReservations) {
+			int stageNo = stageReservation.getStageNo();
+			Stage stage = userStageService.selectStageByStageNo(stageNo);
+			stageReservation.setStageName(stage.getStageName());
+			stageReservation.setStageSellerId(stage.getStageSellerId());
+			stageReser.add(stageReservation);
+		}
+		mav.addObject("stageReservation", stageReser);
+		mav.setViewName("myPage/myStageApplyView.myTemp");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/member/MyStageSupply")
+	public ModelAndView myStageSupply(){
+		ModelAndView mav = profileInfo();
+		
+		List<StageReservation> stageReser = new ArrayList<StageReservation>();
+		String stageSellerId = getUserId();
+		// 공급자 아이디로 공급장 뽑아오기
+		List<Stage> stages = userStageService.selectStagebyStageSellerId(stageSellerId);
+		for(Stage stage : stages) {
+			// 조회된 공급장들의 공급장아이디 뽑아와서 그 공급장들의 예약 정보 뽑아오기
+			int stageNo = stage.getStageNo();
+			List<StageReservation> stageReservations = userStageService.selectStageReservationByStageNo(stageNo);
+			for(StageReservation stageReservation : stageReservations) {
+				//공연장예약 정보에 공연장 이름을 넣어주기
+				stageReservation.setStageName(stage.getStageName());
+				//리스트에 담기
+				stageReser.add(stageReservation);
+			}
+		}
+		mav.addObject("stageReservation", stageReser);
+		mav.setViewName("myPage/myStageSupplyView.myTemp");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/member/updatePage2")
+	public ModelAndView updateMemberForm2() {
+		ModelAndView mav = profileInfo();
+		// id 를 매개변수로 User 객체를 가져온다.
+		User user = userService.selectMemberById(getUserId());
 
+		// User 객체정보를 request에 담아 page 에서 조회한다.
+		
+		mav.addObject("user", user);
+		mav.setViewName("/updateMemberView2.do");
+		return mav;
+	}
+
+	@RequestMapping("/member/updateMember2")
+	public String updateMember2(@ModelAttribute User user, String newpassword) {
+		ModelAndView mav = profileInfo();
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+
+		// 유저정보 업데이트
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setPassword(encoder.encode(newpassword));
+		System.out.println(user);
+		userService.updateMember(user);
+
+		// 권한정보수정
+		List<GrantedAuthority> list = (List<GrantedAuthority>) authentication.getAuthorities();
+
+		// token 재생성 및 권한정보 재수정
+		UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(
+				userService.selectMemberById(getUserId()), null, list);
+
+		System.out.println(newAuthentication);
+		context.setAuthentication(newAuthentication);
+
+		mav.setViewName("redirect:/updateSuccess.myTemp");
+		return "redirect:/updateSuccess.myTemp";
+	}
+	
+	//내가 작성한 글
+	//공연정보
+	@RequestMapping("/member/selectMyPerformance")
+	public ModelAndView selectMyPerformance() {
+		ModelAndView mav = profileInfo();
+		
+		List<Performance> list = performanceService.selectMyPerformance(getUserId());
+		
+		mav.addObject("list", list);
+		mav.setViewName("myPage/myPerformanceView.myTemp");
+		
+		return mav;
+	}
+	
+	//공연 영상
+	@RequestMapping("/member/selectMyVideo")
+	public ModelAndView selectMyVideo() {
+		ModelAndView mav = profileInfo();
+		
+		List<Video> list = videoService.selectMyVideo(getUserId());
+		
+		mav.addObject("list", list);
+		mav.setViewName("myPage/myVideoView.myTemp");
+		
+		return mav;
+	}
+	
+	//고객 센터
+	@RequestMapping("/member/selectMyHelp")
+	public ModelAndView selectMyHelp() {
+		ModelAndView mav = profileInfo();
+		
+		List<Help> list = helpService.selectMyHelp(getUserId());
+		
+		mav.addObject("list", list);
+		mav.setViewName("myPage/myHelpView.myTemp");
+		
+		return mav;
+	}
+	
+	//공연장
+	@RequestMapping("/member/selectMyStage")
+	public ModelAndView selectMyStage() {
+		ModelAndView mav = profileInfo();
+		
+		List<Stage> list = userStageService.selectMyStage(getUserId());
+		
+		for(Stage stage : list) {
+			stage.setStageImage(userStageService.selectStageImageByStageNo(stage.getStageNo()));
+		}
+		
+		mav.addObject("list", list);
+		mav.setViewName("myPage/myStageView.myTemp");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/member/outMember")
+	public ModelAndView outMember() {
+		ModelAndView mav = profileInfo();
+		
+		mav.setViewName("member/out_member_form.myTemp");
+		
+		return mav;
+	}
 }

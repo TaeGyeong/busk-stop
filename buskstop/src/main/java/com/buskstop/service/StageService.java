@@ -181,4 +181,11 @@ public interface StageService {
 	StageReservation selectStageReservationByRentalNo(int rentalNo);
 	
 	void cancelStageReservationByRentalNo(int rentalNo);
+	
+	/**
+	 * 내가 작성한 글
+	 * @param stageSellerId
+	 * @return
+	 */
+	List<Stage> selectMyStage(String stageSellerId);
 }

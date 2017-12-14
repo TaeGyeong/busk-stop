@@ -280,7 +280,7 @@ function upVideoHits(){
 
 </script>
 <style type="text/css">
-table, td {
+/* table, td {
 	border: 1px solid black;
 }
 
@@ -292,7 +292,7 @@ table {
 td {
 	padding: 5px;
 	text-align: center;
-}
+} */
 
 select {
 	width: 150px;
@@ -323,19 +323,42 @@ div{
 </style>
 <div id="container">
 	<hr>
-	<h2>동영상 상세보기</h2>
 	<hr>
-	<!-- youtube -->
-	<div style="float:left; ">
-			<div style="float:left; margin-right:5px;">${requestScope.video.videoNo}. ${requestScope.video.videoTitle}</div> 
-			<div style="float:right; margin-right:15px; ">조회수 : ${requestScope.video.videoHits}</div>
-			<div style="float:right; margin-right:15px; ">등록일자 : ${requestScope.video.videoRegTime}</div>
-			<div style="float:right; margin-right:15px; ">게시자 : ${requestScope.video.videoUserId} 님</div>
-			<div style="float:left; margin-right:20px; width:800 px">
-			<%-- <iframe width="800" height="750" src="${requestScope.video.videoLink }" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> --%>
-			<div id="player"><input type="hidden" id="link" value="${requestScope.video.videoLink }"></div> 
-			</div>
+	<div class="row"> 
+		<div class="col-sm-12" style="font-size:30px; text-color:#01153F;">${requestScope.video.videoTitle}</div>
 	</div>
+	<br><br>
+	<hr>
+	<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="text-center">게시자</th>
+					<th class="text-center">등록일자</th>
+					<th class="text-center">조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center">${requestScope.video.videoUserId}</td>
+					<td class="text-center"><fmt:formatDate value="${requestScope.video.videoRegTime}" pattern="yyyy-MM-dd"/></td>
+					<td class="text-center">${requestScope.video.videoHits}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<%-- <iframe width="800" height="750" src="${requestScope.video.videoLink }" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> --%>
+	<div class="row">
+		<!-- youtube -->
+		<div class="col-sm-9" style="float:left; ">
+			<div id="player">
+				<input type="hidden" id="link" value="${requestScope.video.videoLink }">
+			</div> 
+		</div>
+	
+		
 	<!-- youtube iframe api -->
 	<script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -366,98 +389,116 @@ div{
       }
 
     </script>
-    
-    
 	<!-- youtube END -->
-	<table id="product_tb" style="display: table;">
-		<thead id="thead">
-		</thead>
-		<tbody id="tbody">
-			<tr>
-				<td>아티스트</td> 
-				<td>${requestScope.video.videoArtist}</td>
-			</tr>
-			<c:choose>
-				<c:when test="${requestScope.video.videoCategory=='practice' }">
+	
+	<!-- 내용 table -->
+		<div class="col-sm-3">
+			<h2 class="text-center">아티스트 정보</h2>
+			<hr>
+			<hr>
+			<table class="table" id="product_tb" >
+				
+				<tbody>
+					<!-- 아티스트 프로필을 보여주면 좋지 않을까? -->
 					<tr>
-						<td>연습장소</td> 
-						<td>${requestScope.video.videoLocation }</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td>연습 날짜</td>
-						<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
+						<td>아티스트</td> 
+						<td>${requestScope.video.videoArtist}</td>
 					</tr>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td>공연장소</td> 
-						<td>${requestScope.video.videoLocation }</td>
-					</tr>
-					<tr>
-						<td>공연 날짜</td>
-						<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-	</table>
-	<div>
+					<c:choose>
+						<c:when test="${requestScope.video.videoCategory=='practice' }">
+							<tr>
+								<td>연습장소</td> 
+								<td>${requestScope.video.videoLocation }</td>
+							</tr>
+							<tr>
+								<td>연습 날짜</td>
+								<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/></td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>공연장소</td> 
+								<td>${requestScope.video.videoLocation }</td>
+							</tr>
+							<tr>
+								<td>공연 날짜</td>
+								<td><fmt:formatDate value="${requestScope.video.videoDate }" pattern="yyyy-MM-dd"/> </td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+			
+			
+		</div>
+	</div>
+</div>
+
+
+<!-- 내용 -->
+<div class="row">
+	<div class="col-sm-12">
 		<p style="border: 1px solid #e5e5e5; color:#515151; font-size: 16px; padding:20px;">
-		${requestScope.video.videoContent}
+			${requestScope.video.videoContent}
 		</p>
 	</div>
-	<div id="like">
-		<a id="likeBtn" style="cursor:pointer; font-size: 18px; margin-left: 10px; text-decoration: none;"><span class='glyphicon glyphicon-heart'></span></a>
-	</div>
-	
-	<!-- Comment -->
-	<div>
-		<div style="border: 1px solid #e5e5e5; height: 500px; padding: 10px">
-			<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-			
-			<!-- 댓글을 펼치고 숨기기 위한 곳. -->
-			<div id="provider">
-				<button id="providerBtn">댓글보기</button>
+</div>
+
+
+<div id="like">
+	<a id="likeBtn" style="cursor:pointer; font-size: 18px; margin-left: 10px; text-decoration: none;"><span class='glyphicon glyphicon-heart'></span></a>
+</div>
+
+<!-- Comment -->
+<div>
+	<div style="border: 1px solid #e5e5e5; height:0 auto; padding: 10px">
+		<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
+		
+		<!-- 댓글을 펼치고 숨기기 위한 곳. -->
+		<div id="provider">
+			<button class="btn btn-default" id="providerBtn">댓글보기</button>
+		</div>
+		
+		<!-- 댓글목록이 보여질 div -->
+		<div id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
+		</div>
+		<sec:authorize access="isAuthenticated()">			 
+			<div style="float:right">
+				<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요.">
+				<button id="enterVideoCommentBtn" type="button">등록</button>
 			</div>
-			
-			<!-- 댓글목록이 보여질 div -->
-			<div id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
-			</div>
-			<sec:authorize access="isAuthenticated()">			 
-				<div style="float:right">
-					<input id="videoComment" name="videoContent" placeholder="댓글을 입력하세요.">
-					<button id="enterVideoCommentBtn" type="button">등록</button>
-				</div>
-			</sec:authorize>
-		</div>
+		</sec:authorize>
 	</div>
-	<!-- Comment End-->
-	
-	<!-- button -->
-	<div>
-		<!-- 게시글 수정 & 삭제 -->
-		<!-- 수정 -->
-		<div>
-			<form action="" method="post">
-				<button>수정</button>
-			</form>
-		</div>
-		<!-- 삭제 -->
-		<div>
-			<form action="" method="post">
-				<button>삭제</button>
-			</form>
-		</div>
-	</div>
-	<div style="float:right; margin-bottom: 100px">
+</div>
+<!-- Comment End-->
+
+<!-- button -->
+<div class="row">
+	<!-- 게시글 수정 & 삭제 -->
+	<!-- 수정 -->
+	<div class="col-sm-1 col-sm-offset-8">
 		<form action="${initParam.rootPath }/videoListCategory.do">
-		<input type="hidden" name="category" value="${requestScope.video.videoCategory }">
-		<button style="padding:10px">목록으로</button>
+			<input type="hidden" name="category" value="${requestScope.video.videoCategory }">
+			<button class="btn btn-default">목록으로</button>
 		</form>
 		<!-- <button style="padding:10px">이전 글로</button>
 		<button style="padding:10px">다음 글로</button> -->
 	</div>
-	
+	<div class="col-sm-1">
+		<form action="" method="post">
+			<button class="btn btn-warning">수정</button>
+		</form>
+	</div>
+	<!-- 삭제 -->
+	<div class="col-sm-1">
+		<form action="" method="post">
+			<button class="btn btn-danger">삭제</button>
+		</form>
+	</div>
 </div>
+	
 
 

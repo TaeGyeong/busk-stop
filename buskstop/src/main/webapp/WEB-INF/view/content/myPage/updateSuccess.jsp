@@ -9,7 +9,7 @@
 <body>
 Success!
 
-<form action="${initParam.rootPath }/myPageView.do">
+<form action="${initParam.rootPath }/member/myPageMain.do">
 	<sec:csrfInput/>
 	<button>마이페이지</button>
 </form>

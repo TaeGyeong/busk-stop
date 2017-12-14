@@ -496,4 +496,11 @@
 		set stage_reservation = 1
 		where stage_no = #{stageNo}
 	</update>
+	
+	<!-- 내가 작성한 글 -->
+	<select id="selectMyStage" parameterType="String" resultMap="stage-resultmap">
+		select *
+		from stage
+		where STAGE_SELLER_ID = #{stageSellerId}
+	</select>
 </mapper>

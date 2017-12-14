@@ -30,8 +30,11 @@
 	</header>
 	<!-- 메인 -->
 	<div class="container">
-		<section class="content">
+		<section class="profile">
 			<tiles:insertAttribute name="profile"/>
+		</section>
+		<section class="content">
+			<tiles:insertAttribute name="content"/>
 		</section>
 	</div>
 	<!-- 푸터 -->

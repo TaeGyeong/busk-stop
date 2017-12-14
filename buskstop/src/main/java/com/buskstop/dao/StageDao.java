@@ -119,4 +119,11 @@ public interface StageDao {
 	 * @return
 	 */
 	int rejectStageByStageNo(int stageNo);
+	
+	/**
+	 * 내가 작성한 글
+	 * @param sellerUserId
+	 * @return
+	 */
+	List<Stage> selectMyStage(String stageSellerId);
 }

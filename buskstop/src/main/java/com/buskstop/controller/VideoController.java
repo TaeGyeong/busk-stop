@@ -225,7 +225,7 @@ public class VideoController {
 		}
 	}
 	
-	//개인연습영상 카테고리에서 제목으로 영상 조회
+		//개인연습영상 카테고리에서 제목으로 영상 조회
 		@RequestMapping("/viewArtistVideoListByTitle")
 		public ModelAndView viewArtistVideoListByTitle(@RequestParam String category, 
 												 @RequestParam String filter, 
@@ -234,16 +234,16 @@ public class VideoController {
 			// response
 			if(filter.equals("title")) {
 				list = service.viewVideoByTitleAndCategory(category, search);
-				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+				return new ModelAndView("video/artistVideoListView.tiles","list",list);
 			}else if (filter.equals("userId")) {
 				list = service.viewVideoByUserIdAndCategory(category, search);
-				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+				return new ModelAndView("video/artistVideoListView.tiles","list",list);
 			}else if (filter.equals("artist")) {
 				list = service.viewVideoByArtistAndCategory(category, search);
-				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+				return new ModelAndView("video/artistVideoListView.tiles","list",list);
 			}else {
 				list = service.viewVideoByContentAndCategory(category, search);
-				return new ModelAndView("video/userArtistVideoListView.tiles","list",list);
+				return new ModelAndView("video/artistVideoListView.tiles","list",list);
 			}
 		}
 		

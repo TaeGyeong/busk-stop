@@ -107,4 +107,8 @@ public class HelpServiceImpl implements HelpService{
 		return map;
 	}
 
+	@Override
+	public List<Help> selectMyHelp(String helpUserId){
+		return dao.selectMyHelp(helpUserId);
+	}
 }

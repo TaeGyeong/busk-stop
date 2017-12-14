@@ -299,7 +299,7 @@ public class StageController {
 				stageReser.add(stageReservation);
 			}
 		}
-		return new ModelAndView("myPage/myStageSupplyView.tiles", "stageReservation", stageReser);
+		return new ModelAndView("myPage/myStageSupplyView.myTemp", "stageReservation", stageReser);
 	}
 	
 	//공급자가 예약승인

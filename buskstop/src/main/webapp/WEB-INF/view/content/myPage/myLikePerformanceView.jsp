@@ -9,9 +9,6 @@ function goPerformanceDetail(id){
 function goVideoDetail(id){
 	document.getElementById(id).submit();
 }
-function goHelpDetail(id){
-	document.getElementById(id).submit();
-}
 
 </script>
 
@@ -23,17 +20,18 @@ img{
 }
 </style>
 
+<!-- like 공연정보 -->
 <div class="col-sm-12">
-	<h2>고객센터</h2>
+	<h2>공연정보</h2>
 	<div class="thumbnail col-sm-12" style="float: left;">
-		<c:forEach items="${requestScope.list }" var="help">
+		<c:forEach items="${requestScope.list }" var="performance">
 			<div class="caption text-center col-sm-3" style="float: left;">
-				<img src="${initParam.rootPath }/helpImage/${help.helpImage }" 
-				onerror='this.src="${initParam.rootPath }/helpImage/no-image.png"'
-				onclick="goHelpDetail(${help.helpNum });" >
-				<span>${help.helpTitle }</span>
-				<form action="${initParam.rootPath }/helpDetail.do" id="${help.helpNum }">
-					<input type="hidden" name="helpNum" value="${help.helpNum }">
+				<img src="${initParam.rootPath }/performanceImage/${performance.performanceImage }" 
+				onerror='this.src="${initParam.rootPath }/performanceImage/no-image.png"'
+				onclick="goPerformanceDetail(${performance.performanceNo }65);" >
+				<span>${performance.performanceTitle }</span>
+				<form action="${initParam.rootPath }/performanceDetailView.do" id="${performance.performanceNo }65">
+					<input type="hidden" name="performanceNo" value="${performance.performanceNo }">
 				</form>
 			</div>
 		</c:forEach>
