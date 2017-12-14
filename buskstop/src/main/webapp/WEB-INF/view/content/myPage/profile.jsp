@@ -148,7 +148,7 @@ $(document).ready(function(){
 	</div>
 </div>
 <!-- 마이페이지 목록 박스 -->
-<nav style="width: 100%; text-align: center; height: 50px; float: left; margin-top: 10px;">
+<nav style="width: 100%; text-align: center; height: 80px; float: left; margin-top: 10px;">
 	<div style="width: 80%; height: 100%; margin-left: 10%; float: left;">
 		<div class="my_menu" style="height: 50%; width: 100%; float: left;">
 			<ul>
