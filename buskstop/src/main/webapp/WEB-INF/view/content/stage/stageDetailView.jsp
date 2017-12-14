@@ -29,7 +29,7 @@ $(document).ready(function(){
                 document.getElementById("stageComment").value="";
             },
            	"error":function(){
-           		alert("오류 발생");
+           		alert("리뷰는 한 번씩 밖에 달지 못합니다.이미 올린 글을 수정 해주시기 바랍니다.");
            		
            	}
         });
@@ -99,7 +99,7 @@ function listComment(){
             $("#stageCommentList").html(output);
         },
         "error":function(){
-       		alert("리슽 오류 발생");
+       		alert("리스트 오류 발생");
        	}
     });
 }
@@ -115,7 +115,7 @@ function outStar(starScore){
 		return "★★★★☆";
 	} else if(starScore==5){
 		return "★★★★★";
-	}
+	} 
 }
 
 function deleteComment(stageCommentUserId){
@@ -445,7 +445,7 @@ function deleteStage(stageNo){
 				<option value="2">★★☆☆☆</option>
 				<option value="3">★★★☆☆</option>
 				<option value="4">★★★★☆</option>
-				<option value="5">★★★★★</option>
+				<option value="5" selected="selected">★★★★★</option>
 			</select>
 			</div>
 		<div style="float: left; width: 100%;">
