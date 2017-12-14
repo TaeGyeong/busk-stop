@@ -30,10 +30,10 @@
 			select HELP_COMMENT_NO_SEQ.nextval from dual
 		</selectKey>
 		INSERT INTO	HELP_COMMENT
-		VALUES		(#{helpCommentNo),
+		VALUES		(#{helpCommentNo},
 					 #{helpNo},
-					 #{helpComment),
-					 #{helpCommentId),
+					 #{helpComment},
+					 #{helpCommentId},
 					 sysdate)
 		
 	</insert>
