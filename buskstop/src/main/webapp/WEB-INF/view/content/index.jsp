@@ -25,9 +25,8 @@
 		<li><a href="${initParam.rootPath }/stageUpdateView.do">공연장수정</a></li>
 		<li><a href="${initParam.rootPath }/updateStage.do?stageNo=1">공연장수정테스트</a></li>
 		<h5>고객센터</h5>
-		<li><a href="${initParam.rootPath }/helpView.do">고객센터 게시물 목록</a></li>
+		<li><a href="${initParam.rootPath }/selectHelp.do">고객센터 게시물 목록</a></li>
 		<li><a href="${initParam.rootPath }/helpRegisterView.do">고객센터 게시글 등록</a></li>
-		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 상세보기</a></li>
 		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 수정</a></li>
 		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 삭제</a></li>
 		<h5>premiumStage</h5>

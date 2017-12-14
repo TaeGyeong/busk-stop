@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.buskstop.service.HelpCommentService;
 import com.buskstop.service.HelpService;
 import com.buskstop.vo.Help;
+import com.buskstop.vo.HelpComment;
 import com.buskstop.vo.Performance;
 import com.buskstop.vo.User;
 
@@ -33,6 +35,9 @@ public class HelpController {
 
 	@Autowired
 	private HelpService service;
+	
+	@Autowired
+	private HelpCommentService helpCommentService;
 	
 	@Autowired
 	private HttpServletRequest request;
@@ -55,14 +60,14 @@ public class HelpController {
 	public ModelAndView insertHelp(@ModelAttribute Help help, BindingResult result,HttpServletRequest request) throws IllegalStateException, IOException {
 		/* log */	
 		//에러 로그
-		System.out.println("Log: 컨트롤러 호출");
+	/*	System.out.println("Log: 컨트롤러 호출");
 		System.out.println("Log: @RequestMapping(\"/helpRegister\") public ModelAndView insertHelp()");
 		System.out.println(result);
 		System.out.println(result.getErrorCount());
 			
 		
 		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
-		System.out.println("컨트롤러 파라미터 : "+help);
+		System.out.println("컨트롤러 파라미터 : "+help);*/
 		
 		// 파일 업로드 처리
 		String dir = request.getServletContext().getRealPath("/helpImage");
@@ -91,7 +96,7 @@ public class HelpController {
 	@RequestMapping("/helpDetail")
 	public ModelAndView helpDetail(@RequestParam int helpNum) {
 		Help help = service.selectHelpByHelpNum(helpNum);
-		System.out.println(help);
+//		System.out.println(help);
 		String id = null;
 		Map<String, Object> map = new HashMap<>();
 		
@@ -100,6 +105,9 @@ public class HelpController {
 		id = ((User) authentication.getPrincipal()).getUserId();
 		map.put("help", help);
 		map.put("userId", id);
+		
+		List<HelpComment> list = helpCommentService.selectHelpCommentByHelpNo(helpNum);
+		map.put("helpCommentList", list);
 
 		return new ModelAndView("help/helpDetailView.tiles", "map", map);
 	}
