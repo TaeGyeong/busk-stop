@@ -58,7 +58,7 @@ public class StageController {
 		return new ModelAndView("stageView.do","stage",stage);
 	}
 	//공연장 등록
-	@RequestMapping("/member/stageRegister")
+	@RequestMapping("/stageRegister")
 	public ModelAndView insertStage(@ModelAttribute Stage stage, MultipartHttpServletRequest mhsq, HttpServletRequest request) throws IllegalStateException, IOException {
 		service.insertStage(stage);
 		//파일 경로
@@ -282,10 +282,10 @@ public class StageController {
 	}
 	
 	//공급자 공연장 신청자 조회
-	@RequestMapping("/selectMyStageSupply")
-	public ModelAndView selectStageReservationStatement(@RequestParam String stageSellerId){
+	@RequestMapping("/member/selectMyStageSupply")
+	public ModelAndView selectStageReservationStatement(){
 		List<StageReservation> stageReser = new ArrayList<StageReservation>();
-		
+		String stageSellerId = getUserId();
 		// 공급자 아이디로 공급장 뽑아오기
 		List<Stage> stages = service.selectStagebyStageSellerId(stageSellerId);
 		for(Stage stage : stages) {
@@ -325,10 +325,10 @@ public class StageController {
 	}
 	
 	//신청자 공연장 신청 내역 조회
-	@RequestMapping("/selectMyStageApply")
-	public ModelAndView selectMyStageApply(@RequestParam String rentalUserId) {
+	@RequestMapping("/member/selectMyStageApply")
+	public ModelAndView selectMyStageApply() {
 		List<StageReservation> stageReser = new ArrayList<StageReservation>();
-		
+		String rentalUserId = getUserId();
 		//신청자 아이디로 공연장 뽑아오기
 		List<StageReservation> stageReservations = service.selectMyStageApply(rentalUserId);
 		for(StageReservation stageReservation : stageReservations) {

@@ -245,7 +245,7 @@ function deletePerformance(performanceNo){
 		<div style="position:static; float:left;">
 			<div style="float:left; margin-right:5px; width:100%;">공연장소</div> 
 			<%-- <div style="float:left; margin-right:20px;">${requestScope.performance.performanceLocation }</div> --%>
-			<div id="map" style="position:static; width:800px; height:400px"></div>
+			<div id="map" style="position:static; width:900px; height:400px"></div>
 			<div class="wrap_button">
             <a class="btn_comm btn_linkMap" target="_blank" onclick="moveDaumMap(this)"></a> <!-- 지도 크게보기 버튼입니다 -->
             <a class="btn_comm btn_resetMap" target="_blank" onclick="resetDaumMap()"></a> <!-- 지도 크게보기 버튼입니다 -->
@@ -337,18 +337,16 @@ function deletePerformance(performanceNo){
 					<input type="submit" value="수정" onclick="updatePerformance();">
 					<input type="submit" value="삭제" onclick="deletePerformance();">
 				</c:if>
-			</sec:authorize>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
-		</div>
 		
-		<p/><p/><p/>
-		
-		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 		</div>
+			</sec:authorize>
+		</div>
+			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
+		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	</div>
 </div>
 </body>

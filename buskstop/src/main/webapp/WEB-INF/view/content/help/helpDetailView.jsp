@@ -5,6 +5,30 @@
 
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	
+	
+});
+
+function loadCommentList(){
+	$.ajax({
+		"url":"${initParam.rootPath }/",
+		"type":"",
+		"data":{
+						
+		},
+		"dataType":"json",
+		"success":function(){
+			
+		},
+		"error":function(a,b,c){
+			alert(a);
+			alert(b);
+			alert(c);
+		}
+	});
+}
+
 
 function updateHelp(){	
 	var output = "";
@@ -96,6 +120,16 @@ function updateComment(comment, commentNo){
 			${requestScope.map.help.helpContent}
 		</p>
 	</div>
+	
+	<div>
+		<div class="row">
+			<input class="col-sm-10" style="height:40px;" type="text" name="" placeholder="댓글을 입력해주세요." required="required">
+			<button class="btn btn-primary col-sm-2">등록</button>
+		</div>
+		<div id="comment">
+						
+		</div>
+	</div>
 
 	<div class="button_box" style="width: 100%; ">
 		<div style="float:right;">
@@ -151,3 +185,4 @@ function updateComment(comment, commentNo){
 	</div>
 
 </div>
+

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.buskstop.dao.PremiumStageReservationDao;
 import com.buskstop.dao.PremiumStageTimeDao;
@@ -14,7 +15,7 @@ import com.buskstop.vo.PremiumStageReservation;
 import com.buskstop.vo.PremiumStageTime;
 import com.buskstop.vo.PremiumStageOption;
 
-@Repository
+@Service
 public class PremiumStageReservationServiceImpl implements PremiumStageReservationService{
 	
 	@Autowired

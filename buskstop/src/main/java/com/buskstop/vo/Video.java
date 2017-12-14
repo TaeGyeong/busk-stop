@@ -22,9 +22,17 @@ public class Video implements Serializable{
 	private String videoUserId;
 	private int videoHits;//조회수
 	
+	private int likeCount;
+	
 	private List<VideoComment> commentList;
 	
 	public Video() {
+	}
+
+	
+	public Video(int videoNo, int likeCount) {
+		this.videoNo = videoNo;
+		this.likeCount = likeCount;
 	}
 
 
@@ -90,6 +98,16 @@ public class Video implements Serializable{
 
 	
 	
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+
 	public List<VideoComment> getCommentList() {
 		return commentList;
 	}
@@ -215,7 +233,8 @@ public class Video implements Serializable{
 		return "Video [videoNo=" + videoNo + ", videoTitle=" + videoTitle + ", videoLink=" + videoLink
 				+ ", videoLocation=" + videoLocation + ", videoContent=" + videoContent + ", videoDate=" + videoDate
 				+ ", videoArtist=" + videoArtist + ", videoCategory=" + videoCategory + ", videoRegTime=" + videoRegTime
-				+ ", videoUserId=" + videoUserId + ", videoHits=" + videoHits + ", commentList=" + commentList + "]";
+				+ ", videoUserId=" + videoUserId + ", videoHits=" + videoHits + ", likeCount=" + likeCount
+				+ ", commentList=" + commentList + "]";
 	}
 
 	@Override

@@ -8,7 +8,6 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 
 <script>
-
 	$(document).ready(function(){
 		<%--
 		var nowDate = new Date().toISOString().substr(0, 10).replace('T', ' ');
@@ -32,30 +31,24 @@
 	}
 	
 	
-
 </script>
 <style type="text/css">
-
 table {
 	width: 100%;
 	border-collapse: collapse;
 }
-
 td {
 	padding: 5px;
 	text-align: center;
 }
-
 select {
 	width: 150px;
 	height: 30px;
 }
-
 #container {
 	width: 960px;
 	margin: 0 auto;
 }
-
 #product_tb{
 	border: none;
 }
@@ -97,19 +90,15 @@ select {
 #product_tb img{
 	height : 100px;
 }
-
 #product_tb tbody tr td:nth-child(1) {
 	border-right: 2px #ccc solid;
 }
-
 #product_tb tbody tr:hover{
 	background-color: #ddd;
 }
-
 #product_tb tbody tr:nth-child(2n):hover{
 	background-color: #337ab7;
 }
-
 </style>
 <div id="container">
 	<hr>
@@ -152,9 +141,7 @@ select {
 	 
 	<div style="width: 100%;">
 		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')">
-			<form action="${initParam.rootPath}/member/stageRegister.do">
-				<button class="btn btn-default" style="float: right;">작성</button>
-			</form>
+			<a href="${initParam.rootPath}/stage/stageRegisterView.do" class="btn btn-default" style="float: right;">작성</a>
 		</sec:authorize>
 	</div>
 

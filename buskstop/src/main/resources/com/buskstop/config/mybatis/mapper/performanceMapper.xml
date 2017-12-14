@@ -27,6 +27,7 @@
 		<result column="performance_image" property="performanceImage"/>
 		<result column="performance_user_id" property="performanceUserId"/>
 		<result column="performance_reg_time" property="performanceRegTime"/>
+		<result column="performance_code" property="performanceCode"/>
 	</resultMap>
 	
 	<!-- 공연정보 insert -->
@@ -454,5 +455,23 @@
 		SELECT	<include refid="column-performance"/>
 		FROM	PERFORMANCE
 		WHERE	PERFORMANCE_CODE = 1
+	</select>
+	
+	<resultMap type="performance" id="performance-likecount-resultmap">
+		<id property="performanceNo" column="PERFORMANCE_LIKE_NO"/>
+		<result property="likeCount" column="COUNT(*)"/>
+	</resultMap>
+	
+	<select id="selectPerformanceByLikeCount" resultMap="performance-likecount-resultmap">
+		SELECT 	PERFORMANCE_LIKE_NO, COUNT(*)
+		FROM 	PERFORMANCE_LIKE
+		GROUP BY PERFORMANCE_LIKE_NO
+		ORDER BY COUNT(*) DESC
+	</select>
+	
+	<select id="selectArtistPerformanceCountById" parameterType="string" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	PERFORMANCE
+		WHERE	PERFORMANCE_USER_ID = #{value}
 	</select>
 </mapper>

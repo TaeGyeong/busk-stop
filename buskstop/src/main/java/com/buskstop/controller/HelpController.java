@@ -57,18 +57,7 @@ public class HelpController {
 	 */
 
 	@RequestMapping("/helpRegister")
-	public ModelAndView insertHelp(@ModelAttribute Help help, BindingResult result,HttpServletRequest request) throws IllegalStateException, IOException {
-		/* log */	
-		//에러 로그
-	/*	System.out.println("Log: 컨트롤러 호출");
-		System.out.println("Log: @RequestMapping(\"/helpRegister\") public ModelAndView insertHelp()");
-		System.out.println(result);
-		System.out.println(result.getErrorCount());
-			
-		
-		System.out.println("Log: HelpController.java -> service.insertHelp(); 호출");
-		System.out.println("컨트롤러 파라미터 : "+help);*/
-		
+	public ModelAndView insertHelp(@ModelAttribute Help help,HttpServletRequest request) throws IllegalStateException, IOException {
 		// 파일 업로드 처리
 		String dir = request.getServletContext().getRealPath("/helpImage");
 		String fileName = null;

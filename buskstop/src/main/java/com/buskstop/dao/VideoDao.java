@@ -78,5 +78,20 @@ public interface VideoDao {
 	 * @return
 	 */
 	List<Video> selectVideo();
+
+	List<Video> selectVideoByArtistId(String videoArtist);
+	
+	/**
+	 * 좋아요 count로 정렬한 video list select
+	 * @return
+	 */
+	List<Video> selectVideoByLikeCount();
+	
+	/**
+	 * 아티스트 유저의 영상글 게시물 수 체크.
+	 * @param userId
+	 * @return
+	 */
+	int selectUserVideoCount(String userId);
 	
 }
