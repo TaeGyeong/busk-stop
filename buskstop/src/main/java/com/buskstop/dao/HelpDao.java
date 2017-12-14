@@ -78,4 +78,10 @@ public interface HelpDao {
 	 */
 	int countHelpByHelpUserId(String helpUserId);
 
+	/**
+	 * 내가 작성한 글
+	 * @param helpUserId
+	 * @return
+	 */
+	List<Help> selectMyHelp(String helpUserId);
 }

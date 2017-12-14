@@ -6,4 +6,4 @@
 	<button class="btn btn-default">확인</button>
 </form>
 
-<a class="btn btn-default" href="${initParam.rootPath }/myPageView.do" role="button">취소</a>
+<a class="btn btn-default" href="${initParam.rootPath }/member/myPageMain.do" role="button">취소</a>

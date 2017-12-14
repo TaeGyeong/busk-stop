@@ -192,6 +192,12 @@ public interface PerformanceDao {
 	List<Performance> selectAllArtistPerformance();
 	
 	/**
+	 * 내 공연정보 조회
+	 * @return
+	 */
+	List<Performance> selectMyPerformance(String performanceUserId);
+	
+	/**
 	 * 좋아요 수를 카운트해서 위에서부터 정렬 Dao.
 	 * @return
 	 */

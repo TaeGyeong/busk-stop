@@ -457,6 +457,13 @@
 		WHERE	PERFORMANCE_CODE = 1
 	</select>
 	
+	<!-- 내가 올린 공연 정보 -->
+	<select id="selectMyPerformance" parameterType="String" resultMap="performance-resultmap">
+		select * 
+		from performance
+		where performance_user_id = #{performanceUserId}			
+	</select>
+	
 	<resultMap type="performance" id="performance-likecount-resultmap">
 		<id property="performanceNo" column="PERFORMANCE_LIKE_NO"/>
 		<result property="likeCount" column="COUNT(*)"/>

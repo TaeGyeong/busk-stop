@@ -20,7 +20,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 	@Autowired
 	private PerformanceDao dao;
-
+	
 	// 공연정보 등록
 	@Override
 	@Transactional
@@ -68,7 +68,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 		// PagingBean 생성
 		PagingBean pb = new PagingBean(dao.selectArtistPerformanceCount(), page);
-
+		
 		map.put("pageBean", pb);
 		List<Performance> list = dao.selectArtistPerformance(pb.getBeginItemInPage(), pb.getEndItemInPage());
 
@@ -330,6 +330,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return dao.selectPerformanceByAdminSearch(map);
 	}
 
+	@Override
+	public List<Performance> selectMyPerformance(String performanceUserId){
+		return dao.selectMyPerformance(performanceUserId);
+	}
 	/*********************************
 	 * MAIN에 띄울 용
 	 **************************************/

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +23,9 @@ import com.buskstop.vo.User;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	MyPageController mpc;
 	
 	@Autowired
 	UserService service;
@@ -47,8 +51,28 @@ public class UserController {
 	
 	/************************ 회원수정 전 비밀번호 체크 컨트롤러 ************************/
 	
-	@RequestMapping("/checkUserPassword")
+	@RequestMapping("/member/passwordCheck")
+	public ModelAndView memPassCheck() {
+		ModelAndView mav = mpc.profileInfo();
+		
+		mav.addObject("category", "user");
+		mav.setViewName("myPage/passwordCheck.myTemp");
+		
+		return mav;
+	}
+	@RequestMapping("/artist/passwordCheck")
+	public ModelAndView artPassCheck() {
+		ModelAndView mav = mpc.profileInfo();
+		
+		mav.addObject("category", "artist");
+		mav.setViewName("myPage/passwordCheck.myTemp");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/checkUserPassword", method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView checkPassword(String userId, String password,@RequestParam String category) {
+		ModelAndView mav = mpc.profileInfo();
 		
 		// service로 user 객체생성 후 encoder 객체 생성
 		User user = service.selectMemberById(userId);
@@ -63,16 +87,26 @@ public class UserController {
 		switch(category) {
 		case "user":
 			if(encoder.matches(password, user.getPassword())) {
-				return new ModelAndView("myPage/updateMemberView.tiles","user",user);
+				mav.addObject("user", user);
+				mav.setViewName("myPage/updateMemberView.myTemp");
+				return mav;
 			}else {
-				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
+				mav.addObject("errorMsg", "비밀번호를 확인해주세요.");
+				mav.addObject("category", "user");
+				mav.setViewName("myPage/passwordCheck.myTemp");
+				return mav;
 			}
 		case "artist":
 			Artist artist = artistService.readArtistByUserId(user.getUserId());
 			if(encoder.matches(password, user.getPassword())) {
-				return new ModelAndView("myPage/updateArtistView.tiles","artist",artist);
+				mav.addObject("artist",artist);
+				mav.setViewName("myPage/updateArtistView.myTemp");
+				return mav;
 			}else {
-				return new ModelAndView("myPage/passwordCheck.tiles","errorMsg","비밀번호를 확인해주세요.");
+				mav.addObject("errorMsg","비밀번호를 확인해주세요.");
+				mav.addObject("category", "artist");
+				mav.setViewName("myPage/passwordCheck.myTemp");
+				return mav;
 			}
 		/*case "supplier":
 			PremiumStage supplier = stageService.selectSupplierById(user.getUserId());

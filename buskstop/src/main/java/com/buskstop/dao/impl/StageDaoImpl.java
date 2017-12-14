@@ -299,5 +299,10 @@ public class StageDaoImpl implements StageDao{
 	public int rejectStageByStageNo(int stageNo) {
 		return session.update(makeSqlId("rejectStageByStageNo"), stageNo);
 	}
+	
+	@Override
+	public List<Stage> selectMyStage(String stageSellerId){
+		return session.selectList(makeSqlId("selectMyStage"), stageSellerId);
+	}
 }
 
