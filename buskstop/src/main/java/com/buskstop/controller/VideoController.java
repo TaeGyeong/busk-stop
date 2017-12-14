@@ -159,8 +159,6 @@ public class VideoController {
 	public ModelAndView videoList(@RequestParam String category, HttpServletRequest request) {
 		// category를 매개변수로 받아서 해당 카테고리의 Video 객체를 list로 받아온다.
 		List<Video> list = service.viewAllVideo(category);
-		System.out.println("category - " + category);
-		
 		// response
 		if(category.equals("performance")) {
 			return new ModelAndView("video/userPerformanceVideoListView.tiles","list",list);
