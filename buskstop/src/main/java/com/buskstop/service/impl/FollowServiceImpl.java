@@ -44,5 +44,8 @@ public class FollowServiceImpl implements FollowService{
 		return dao.selectFollowArtistById(userId);
 	}
 	
-	
+	@Override
+	public List<Follow> selectFollowByFollowerId(String followerId){
+		return dao.selectFollowByFollowerId(followerId);
+	}
 }

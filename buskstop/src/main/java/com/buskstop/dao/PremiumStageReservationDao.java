@@ -33,6 +33,12 @@ public interface PremiumStageReservationDao {
 	 * @param userId
 	 * @return
 	 */
-	List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId);
+	List<PremiumStageReservation> selectPremiumStageReservationByUserId(String reservationUserId);
 	
+	/**
+	 * 옵션번호로 예약 조회
+	 * @param optionNo
+	 * @return
+	 */
+	PremiumStageReservation selectPremiumStageReservationByOptionNo(int optionNo);
 }

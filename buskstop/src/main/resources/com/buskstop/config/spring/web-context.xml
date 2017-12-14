@@ -27,6 +27,7 @@
 	<mvc:view-controller path="/videoListCategoryView.do" view-name="video/videoListCategoryView.tiles"/>
 	<mvc:view-controller path="/changeInfoCategoryView.do" view-name="video/changeInfoCategoryView.tiles"/>
 	<mvc:view-controller path="/stageView.do" view-name="stage/stageView.tiles"/>
+	<mvc:view-controller path="/stageDetailView.do" view-name="stage/stageDetailView.tiles"/>
 	
 	<!-- 고객센터 링크 -->
 	<mvc:view-controller path="/helpView.do" view-name="help/helpView.tiles"/>

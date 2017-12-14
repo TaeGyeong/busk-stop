@@ -32,18 +32,17 @@
 		<li><a href="${initParam.rootPath }/helpDetailView.do?helpNum=3">고객센터 삭제</a></li>
 		<h5>premiumStage</h5>
 		<li><a href="${initParam.rootPath }/premiumStageEnterDate.do">프리미엄 공연장 대관일 등록</a></li>
+		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_ARTIST','ROLE_PRODUCER')">
+			<form action="${initParam.rootPath }/member/readPremiumStageReservationByUserId.do" method="post">
+				<sec:csrfInput/>
+				<sec:authorize access="isAuthenticated()">
+					<input type="hidden" name="reservationUserId" id="reservationUserId"
+						class="form-control"
+						value='<sec:authentication property="principal.userId"/>'>
+				</sec:authorize>
+				<button type="submit" claa="btn btn-default">프리미엄 공연장 대관일 등록</button>
+			</form>
+		</sec:authorize>
 		<h5>공연장 예약 상태</h5>
-			
-<form action="${initParam.rootPath }/selectMyStageSupply.do">
-<sec:authorize access="isAuthenticated()">
-	<input type="text" name="stageSellerId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
-</sec:authorize>
-	<button>내가 등록한 공연장 예약 상태 보기</button>
-</form>
-
-<form action="${initParam.rootPath }/selectMyStageApply.do">
-<sec:authorize access="isAuthenticated()">
-	<input type="text" name="rentalUserId" value='<sec:authentication property="principal.userId"/>' style="display: none;">
-</sec:authorize>
-	<button>내가 신청한 공연장 예약 상태 보기</button>
-</form>
+		<li><a href="${initParam.rootPath }/member/selectMyStageSupply.do">내가 등록한 공연장 예약 상태 보기</a></li>
+		<li><a href="${initParam.rootPath }/member/selectMyStageApply.do">내가 신청한 공연장 예약 상태 보기</a></li>

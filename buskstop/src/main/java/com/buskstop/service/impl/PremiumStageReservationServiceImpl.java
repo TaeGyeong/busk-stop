@@ -48,6 +48,10 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId) {
 		return reservationDao.selectPremiumStageReservationByUserId(userId);
 	}
+	
+	public PremiumStageReservation selectPremiumStageReservationByOptionNo(int optionNo) {
+		return reservationDao.selectPremiumStageReservationByOptionNo(optionNo);
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -75,6 +79,11 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo){
 		return optionDao.selectPremiumStageOptionByEstablishNoJoin(establishNo);
 	}
+	
+	@Override
+	public PremiumStageOption selectPremiumStageOptionByOptionNoJoin(int optionNo) {
+		return optionDao.selectPremiumStageOptionByOptionNoJoin(optionNo);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -95,6 +104,4 @@ public class PremiumStageReservationServiceImpl implements PremiumStageReservati
 	public List<PremiumStageTime> selectPremiumStageTimeByOptionNo(int optionNo) {
 		return timeDao.selectPremiumStageTimeByOptionNo(optionNo);
 	}
-
-
 }

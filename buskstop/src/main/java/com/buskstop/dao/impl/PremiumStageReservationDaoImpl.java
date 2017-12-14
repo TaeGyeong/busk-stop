@@ -38,8 +38,13 @@ public class PremiumStageReservationDaoImpl implements PremiumStageReservationDa
 	}
 
 	@Override
-	public List<PremiumStageReservation> selectPremiumStageReservationByUserId(String userId) {
-		return session.selectList(makeSqlId("selectPremiumStageReservationByUserId"), userId);
+	public List<PremiumStageReservation> selectPremiumStageReservationByUserId(String reservationUserId) {
+		return session.selectList(makeSqlId("selectPremiumStageReservationByUserId"), reservationUserId);
+	}
+
+	@Override
+	public PremiumStageReservation selectPremiumStageReservationByOptionNo(int optionNo) {
+		return session.selectOne(makeSqlId("selectPremiumStageReservationByOptionNo"), optionNo);
 	}
 
 

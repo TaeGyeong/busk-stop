@@ -81,6 +81,11 @@ public class PremiumStageController {
 		return new ModelAndView("premiumStage/myStageDetailView.tiles", "map", map);
 	}
 	
+	/**
+	 * 일반 회원용 프리미엄 공급장 상세보기페이지
+	 * @param establishNo
+	 * @return
+	 */
 	@RequestMapping("/goPremiumStageDetailView")
 	public ModelAndView goPremiumStageDetailView(int establishNo) {
 		// 이미지 목록 가져오고 스테이지 정보가져와서 보내기.

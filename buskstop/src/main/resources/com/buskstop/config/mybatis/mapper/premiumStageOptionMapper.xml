@@ -34,8 +34,8 @@
 		<result column="ESTABLISH_NO" property="establishNo"/>
 	</resultMap>
 	<resultMap type="PremiumStageOption" id="option-join-time-resultmap" extends="premiumOption-resultMap">
-		<collection property="timeList" ofType="PremiumStageTime">
-			<result column="time_code" property="timeCode"/>
+		<collection property="timeList" ofType="_int">
+			<result column="time_code"/>
 		</collection>
 	</resultMap>
 	
@@ -70,5 +70,10 @@
 	<select id="selectPremiumStageOptionByEstablishNoJoin" parameterType="_int" resultMap="option-join-time-resultmap">
 		<include refid="select-join-time-sql"/>
 		AND	o.establish_no = #{value}
+	</select>
+	
+	<select id="selectPremiumStageOptionByOptionNoJoin" parameterType="_int" resultMap="option-join-time-resultmap">
+		<include refid="select-join-time-sql"/>
+		AND	o.option_no = #{value}
 	</select>
 </mapper>

@@ -15,7 +15,7 @@
 	color: white;
 	background-color: #BBBBCC;
 	float: left;
-	line-height: 3em;
+	line-height: 3.5em;
 	vertical-align: middle;
 	text-align: center;
 	position: relative;

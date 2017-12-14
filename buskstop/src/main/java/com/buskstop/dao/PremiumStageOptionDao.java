@@ -34,6 +34,18 @@ public interface PremiumStageOptionDao {
 	 */
 	int updatePremiumStageOptionStageState(PremiumStageOption option);
 	
+	/**
+	 * 옵션정보와 그에 해당하는 시간테이블 한번에 조회
+	 * @param establishNo
+	 * @return
+	 */
 	List<PremiumStageOption> selectPremiumStageOptionByEstablishNoJoin(int establishNo);
+	
+	/**
+	 * 옵션번호로 옵션정보와 시간테이블을 한번에 조회
+	 * @param optionNo
+	 * @return
+	 */
+	PremiumStageOption selectPremiumStageOptionByOptionNoJoin(int optionNo);
 	
 }
