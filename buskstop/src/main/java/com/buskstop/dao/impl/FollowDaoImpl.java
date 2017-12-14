@@ -39,5 +39,10 @@ public class FollowDaoImpl implements FollowDao{
 	public List<Artist> selectFollowArtistById(String userId) {
 		return session.selectList(makeSqlId("selectFollowArtistById"), userId);
 	}
+
+	@Override
+	public List<Artist> selectArtistFollowCount() {
+		return session.selectList(makeSqlId("selectArtistFollowCount"));
+	}
 	
 }

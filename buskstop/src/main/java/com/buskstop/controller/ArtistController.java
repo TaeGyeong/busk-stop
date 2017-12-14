@@ -54,7 +54,14 @@ public class ArtistController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
-		String userId = ((User)authentication.getPrincipal()).getUserId();
+		String userId = "";
+		try {
+			if(authentication.getPrincipal()!=null) {
+				userId = ((User) authentication.getPrincipal()).getUserId();
+			}
+		}catch(Exception e) {
+		}
+		
 		
 		// 정보들을 Map에 담아서 전달.
 		Map<String,Object> map = new HashMap<>();

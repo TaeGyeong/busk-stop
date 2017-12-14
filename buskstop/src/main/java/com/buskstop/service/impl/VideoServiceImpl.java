@@ -1,19 +1,18 @@
 package com.buskstop.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.buskstop.dao.VideoCommentDao;
 import com.buskstop.dao.VideoDao;
-import com.buskstop.service.VideoService;
-import com.buskstop.vo.Video;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.buskstop.dao.VideoLikeDao;
 import com.buskstop.service.VideoService;
-import com.buskstop.vo.User;
+import com.buskstop.vo.Performance;
+import com.buskstop.vo.Video;
 import com.buskstop.vo.VideoLike;
 
 @Service
@@ -133,6 +132,32 @@ public class VideoServiceImpl implements VideoService {
 	
 	public List<Video> selectVideo(){
 		return dao.selectVideo();
+	}
+
+	@Override
+	public List<Video> selectTopLikeVideo() {
+		List<Video> list = dao.selectVideoByLikeCount();
+
+		List<Video> returnList = new ArrayList<>();
+		if (list.size() < 3) {
+			for (int i = 0; i < list.size(); i++) {
+				int num = list.get(i).getVideoNo();
+				int likeCount = list.get(i).getLikeCount();
+				Video video = dao.selectVideoByVideoNo(num);
+				video.setLikeCount(likeCount);
+				returnList.add(video);
+			}
+		} else {
+			for (int i = 0; i < 3; i++) {
+				int num = list.get(i).getVideoNo();
+				int likeCount = list.get(i).getLikeCount();
+				Video video= dao.selectVideoByVideoNo(num);
+				video.setLikeCount(likeCount);
+				returnList.add(video);
+			}
+		}
+
+		return returnList;
 	}
 	
 

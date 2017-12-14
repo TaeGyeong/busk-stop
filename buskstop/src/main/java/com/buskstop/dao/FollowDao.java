@@ -33,4 +33,10 @@ public interface FollowDao {
 	 * @return
 	 */
 	List<Artist> selectFollowArtistById(String userId);
+	
+	/**
+	 * 아티스트의 팔로우수를 내림차순으로 정렬해서 select.
+	 * @return
+	 */
+	List<Artist> selectArtistFollowCount();
 }

@@ -21,6 +21,7 @@ select * from video_comment
 select * from premium_stage --189291
 select * from premium_stage_option
 select * from premium_stage_image
+select * from follow
 
 insert into video_like (VIDEO_LIKE_NO,VIDEO_LIKE_USER_ID) values (3,'id-2')
 
@@ -30,8 +31,27 @@ insert into premium_stage_option (OPTION_NO, STAGE_RENTAL_DATE, STAGE_STATE, EST
 
 insert into stage
 
+select * from performance group by performance_no
+
 delete from authority where user_id = 'id-10';
 
+		SELECT  P.PERFORMANCE_NO, COUNT(PERFORMANCE_USER_ID)
+		FROM	PERFORMANCE P , PERFORMANCE_LIKE L
+		GROUP BY P.PERFORMANCE_NO
+		WHERE	P.PERFORMANCE_NO = L.PERFORMANCE_LIKE_NO
+		ORDER BY COUNT(PERFORMANCE_USER_ID) DESC;
+
+
+
+SELECT PERFORMANCE_LIKE_NO, COUNT(*)
+FROM PERFORMANCE_LIKE
+GROUP BY PERFORMANCE_LIKE_NO
+ORDER BY COUNT(*) DESC
+
+		SELECT 	FOLLOWING_ID, COUNT(*)
+		FROM	FOLLOW
+		GROUP BY FOLLOWING_ID
+		ORDER BY COUNT(*) DESC
 
 
 UPDATE VIDEO SET VIDEO_LINK=

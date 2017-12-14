@@ -89,6 +89,15 @@ public class VideoDaoImpl implements VideoDao{
 	public List<Video> selectVideo() {
 		return session.selectList(makeSqlId("selectVideo"));
 	}
-	
+
+	@Override
+	public List<Video> selectVideoByLikeCount() {
+		return session.selectList(makeSqlId("selectVideoByLikeCount"));
+	}
+
+	@Override
+	public int selectUserVideoCount(String userId) {
+		return session.selectOne(makeSqlId("selectUserVideoCount"), userId);
+	}
 	
 }
