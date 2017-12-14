@@ -174,6 +174,7 @@ function goVideoDetail(root, no){
 			<h2 class="text-center">추천 아티스트</h2>
 			
 			<!-- 추천아티스트 프로필 -->
+			
 			<div class="row bg-warning">
 				<div class="col-sm-3">
 					<img style="width:100px; height:100px;" 
@@ -201,11 +202,13 @@ function goVideoDetail(root, no){
 						<form class="form-group" action="${initParam.rootPath }/artistInfo.do" method="post">
 							<sec:csrfInput/>
 							<input class="form-control" type="hidden" name="artistId" value="${requestScope.map.artist.artistId }">
-							<button class="form-control btn-primary">상세정보</button>
+							<c:if test="${requestScope.map.artist }==''">
+								<button class="form-control btn-primary">상세정보</button>
+							</c:if>
 						</form>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<br>
 			<br>
 			
@@ -213,8 +216,8 @@ function goVideoDetail(root, no){
 			<h2 class="text-center">이런 공연장 어떠세요?</h2>
 			<c:forEach items="${requestScope.map.premium }" var="PremiumStage">
 				<div class="thumbnail col-sm-6">
-					<a href="${initParam.rootPath }/goPremiumStageDetailView.do?establishNo=${PremiumStage.establishNum }">
-						<img style="width:230px; height:230px" src="${initParam.rootPath }/stageImage/${PremiumStage.stageImage }">
+					<a href="${initParam.rootPath }/goPremiumStageDetailView.do?establishNo=${premiumStage.establishNum }">
+						<img style="width:230px; height:230px" src="${initParam.rootPath }/stageImage/${premiumStage.stageImage }">
 					</a>
 				</div>
 			</c:forEach>
