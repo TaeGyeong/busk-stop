@@ -190,4 +190,10 @@ public interface PerformanceDao {
 	 * @return
 	 */
 	List<Performance> selectAllArtistPerformance();
+	
+	/**
+	 * 내 공연정보 조회
+	 * @return
+	 */
+	List<Performance> selectMyPerformance(String performanceUserId);
 }

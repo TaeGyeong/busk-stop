@@ -315,5 +315,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return dao.selectPerformanceByAdminSearch(map);
 	}
 
-	
+	@Override
+	public List<Performance> selectMyPerformance(String performanceUserId){
+		return dao.selectMyPerformance(performanceUserId);
+	}
 }

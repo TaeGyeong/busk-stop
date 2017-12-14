@@ -119,4 +119,9 @@
 		WHERE VIDEO_CATEGORY = #{videoCategory} AND VIDEO_CONTENT like '%'||#{videoContent}||'%'
 	</select>
 	
+	<!-- 내가 올린 글 -->
+	<select id="selectMyVideo" parameterType="String" resultMap="video-resultmap">
+		<include refid="video-select-sql"/>
+		WHERE VIDEO_USER_ID = #{videoUserId}
+	</select>
 </mapper>

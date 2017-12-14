@@ -9,7 +9,8 @@ function goPerformanceDetail(id){
 function goVideoDetail(id){
 	document.getElementById(id).submit();
 }
-function goHelpDetail(id){
+
+function goStageDetail(id){
 	document.getElementById(id).submit();
 }
 
@@ -24,16 +25,16 @@ img{
 </style>
 
 <div class="col-sm-12">
-	<h2>고객센터</h2>
+	<h2>공연장</h2>
 	<div class="thumbnail col-sm-12" style="float: left;">
-		<c:forEach items="${requestScope.list }" var="help">
+		<c:forEach items="${requestScope.list }" var="stage">
 			<div class="caption text-center col-sm-3" style="float: left;">
-				<img src="${initParam.rootPath }/helpImage/${help.helpImage }" 
-				onerror='this.src="${initParam.rootPath }/helpImage/no-image.png"'
-				onclick="goHelpDetail(${help.helpNum });" >
-				<span>${help.helpTitle }</span>
-				<form action="${initParam.rootPath }/helpDetail.do" id="${help.helpNum }">
-					<input type="hidden" name="helpNum" value="${help.helpNum }">
+				<img src="${initParam.rootPath }/stageImage/${stage.stageImage[0].stageImageLocation }.jpg" 
+				onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
+				onclick="goStageDetail(${stage.stageNo }65);" >
+				<span>${stage.stageName }</span>
+				<form action="${initParam.rootPath }/stageDetail.do" id="${stage.stageNo }65">
+					<input type="hidden" name="stageNo" value="${stage.stageNo }">
 				</form>
 			</div>
 		</c:forEach>

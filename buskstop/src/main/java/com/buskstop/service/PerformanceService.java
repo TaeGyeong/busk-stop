@@ -168,4 +168,10 @@ public interface PerformanceService {
 	 */
 	List<Performance> selectArtistPerformance();
 	
+	/**
+	 * 내 작성글 보기
+	 * @param performanceUserId
+	 * @return
+	 */
+	List<Performance> selectMyPerformance(String performanceUserId);
 }

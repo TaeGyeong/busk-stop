@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<script>
+$(document).ready(function(){
+	$(".my_menu li").hover(function(){
+		$("ul:first", this).stop().slideDown();
+	}, function(){
+		$("ul:first", this).stop().slideUp();
+	});
+});
+</script>
+
 <style>
 .userProfileTbl tr td:nth-child(1){
 	width: 70px;
@@ -21,10 +31,8 @@
 .my_menu{
 	position: relative;
 	z-index: 1;
-	height: 50px;
 }
 .my_menu>ul>li {
-	float: left;
 	transition: 0.5s;
 }
 .my_menu>ul>li>a {
@@ -40,14 +48,11 @@
 	font-weight: bold;
 	color: #000;
 	text-decoration: none;
-	width: 100%;
-	height: 100%;
 	transition: 0.5s;
 }
 .my_menu li {
 	text-align: center;
 	line-height: 30px;
-	height: 30px;
 }
 
 #my_sub {
@@ -78,9 +83,9 @@
 <h5 style="float: left; font-weight: bold;">${requestScope.user.userName } 님의 마이 페이지</h5>
 </div>
 
-<div style="border: 1px solid #000; width: 100%; height: 180px; float: left; margin-top: 20px;">
+<div style="width: 100%; height: 180px; float: left; margin-top: 20px;">
 	<!-- 일반 사용자 프로필 -->
-	<div style="width: 40%; height: 100%; float: left; margin-left: 10%; border-radius: 10px; background-color: #fafafa;">
+	<div style="width: 40%; height: 100%; float: left; margin-left: 10%; border-radius: 10px; box-shadow:3px 3px #888; background-color: #fafafa;">
 		<!-- default 이미지 -->
 		<div style="background-color: #fff; width: 40%; height: 80%; margin-top: 3%; margin-left: 5%; overflow: hidden;	border-radius: 10px; float: left;">
 			<img alt="img" src="${initParam.rootPath }/myPageImage/myPageDefaultImage.png" style="width: 100%; height: 100%;">
@@ -132,47 +137,51 @@
 	</div>
 </div>
 <!-- 프로필 등록 전용 버튼 박스 -->
-<div style="margin-top: 10px; border: 1px solid #000; width: 100%; height: 40px; float: left;">
+<div style="margin-top: 10px; width: 100%; height: 40px; float: left;">
 	<div style="width: 500px; height: 100%; margin-left: 100px;">
 		<sec:authorize access="!hasRole('ROLE_ARTIST')">
-			<button type="button" style="float: left; margin-left: 10px;" class="btn btn-default">아티스트 프로필 등록</button>
+			<a style="float: left; margin-left: 10px;" class="btn btn-default" href="${initParam.rootPath }/registerArtistView.do">아티스트 프로필 등록</a>
 		</sec:authorize>
 		<sec:authorize access="!hasRole('ROLE_PRODUCER')">
-			<button type="button" style="float: left; margin-left: 10px;" class="btn btn-default">내 공연장 프로필 등록</button>
+			<a type="button" style="float: left; margin-left: 10px;" class="btn btn-default" href="${initParam.rootPath }/registerSupplierView.do">내 공연장 등록</a>
 		</sec:authorize>
 	</div>
 </div>
 <!-- 마이페이지 목록 박스 -->
 <nav style="width: 100%; text-align: center; height: 50px; float: left; margin-top: 10px;">
-	<div style="width: 80%; height: 100%; border: 1px solid #000; margin-left: 10%;">
-		<div class="my_menu" style="height: 50%; width: 100%;">
+	<div style="width: 80%; height: 100%; margin-left: 10%; float: left;">
+		<div class="my_menu" style="height: 50%; width: 100%; float: left;">
 			<ul>
-				<li style="padding: 0; width: 25%;"><a href="#">내가올린 글</a>
+				<li style="padding: 0; width: 25%; float: left;"><a href="${initParam.rootPath }/member/selectMyPerformance.do">내가올린 글</a>
 					<ul id="my_sub" style="padding: 0;">
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">공연정보</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">공연영상</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">공연장대관</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">고객센터</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/selectMyPerformance.do" style="padding: 0;">공연정보</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/selectMyVideo.do" style="padding: 0;">공연영상</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/selectMyStage.do" style="padding: 0;">공연장대관</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/selectMyHelp.do" style="padding: 0;">고객센터</a></li>
 					</ul>
 				</li>
-				<li style="padding: 0; width: 25%;"><a href="#">공연장 내역</a>
+				<li style="padding: 0; width: 25%; float: left;"><a href="${initParam.rootPath }/member/MyStageSupply.do">공연장 내역</a>
 					<ul id="my_sub" style="padding: 0;">
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">신청받은  내역</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">신청한 내역</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/MyStageSupply.do" style="padding: 0;">신청받은  내역</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/MyStageApply.do" style="padding: 0;">신청한 내역</a></li>
 					</ul>
 				</li>
-				<li style="padding: 0; width: 25%;"><a href="#">좋아한 글</a>
+				<li style="padding: 0; width: 25%; float: left;"><a href="${initParam.rootPath }/member/myLikeInfo.do">좋아한 글</a>
 					<ul id="my_sub" style="padding: 0;">
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">공연정보</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">공연영상</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/myLikePerformance.do" style="padding: 0;">공연정보</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/myLikeVideo.do" style="padding: 0;">공연영상</a></li>
 					</ul>
 				</li>
-				<li style="padding: 0; width: 25%;"><a href="#">정보관리</a>
+				<li style="padding: 0; width: 25%; float: left;"><a href="${initParam.rootPath }/member/passwordCheck.do">정보관리</a>
 					<ul id="my_sub" style="padding: 0;">
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">회원정보 수정</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">아티스트정보 수정</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">내 공연장 수정</a></li>
-						<li style="padding: 0; width: 25%;"><a href="#" style="padding: 0;">회원 탈퇴</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/passwordCheck.do" style="padding: 0;">회원정보 수정</a></li>
+						<sec:authorize access="hasRole('ROLE_ARTIST')">
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/artist/passwordCheck.do" style="padding: 0;">아티스트정보 수정</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_PRODUCER')">
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/producer/passwordCheck.do" style="padding: 0;">내 공연장 수정</a></li>
+						</sec:authorize>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/outMember.do" style="padding: 0;">회원 탈퇴</a></li>
 					</ul>
 				</li>
 			</ul>

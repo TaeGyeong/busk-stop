@@ -107,5 +107,10 @@ public class HelpDaoImpl implements HelpDao{
 	public int countHelpByHelpUserId(String helpUserId) {
 		return session.selectOne(makeSqlId("countHelpByHelpUserId"), helpUserId);
 	}
+	
+	@Override
+	public List<Help> selectMyHelp(String helpUserId){
+		return session.selectList(makeSqlId("selectMyHelp"), helpUserId);
+	}
 
 }

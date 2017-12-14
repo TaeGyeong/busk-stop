@@ -455,4 +455,11 @@
 		FROM	PERFORMANCE
 		WHERE	PERFORMANCE_CODE = 1
 	</select>
+	
+	<!-- 내가 올린 공연 정보 -->
+	<select id="selectMyPerformance" parameterType="String" resultMap="performance-resultmap">
+		select * 
+		from performance
+		where performance_user_id = #{performanceUserId}			
+	</select>
 </mapper>

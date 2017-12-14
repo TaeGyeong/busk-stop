@@ -79,4 +79,9 @@ public interface VideoDao {
 	 */
 	List<Video> selectVideo();
 	
+	/**
+	 * 내가 올린 글 조회
+	 * @return
+	 */
+	List<Video> selectMyVideo(String videoUserId);
 }

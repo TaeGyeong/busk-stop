@@ -135,5 +135,8 @@ public class VideoServiceImpl implements VideoService {
 		return dao.selectVideo();
 	}
 	
+	public List<Video> selectMyVideo(String videoUserId){
+		return dao.selectMyVideo(videoUserId);
+	}
 
 }

@@ -111,4 +111,11 @@ public interface VideoService {
 	 * @return
 	 */
 	List<Video> selectVideo();
+	
+	/**
+	 * 내가 올린 글 조회
+	 * @param videoUerId
+	 * @return
+	 */
+	List<Video> selectMyVideo(String videoUserId);
 }
