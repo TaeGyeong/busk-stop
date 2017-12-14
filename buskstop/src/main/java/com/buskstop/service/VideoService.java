@@ -111,4 +111,5 @@ public interface VideoService {
 	 * @return
 	 */
 	List<Video> selectVideo();
+	List<Video> viewVideoByArtist(String videoArtist);
 }

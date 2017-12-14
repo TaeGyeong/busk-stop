@@ -47,8 +47,10 @@ public class ArtistController {
 		
 		// 아티스트 상세정보 조회시에 필요한 정보들 조회. 
 		Artist artist = service.readArtistByUserId(artistId);
-		List<Video> videoList = videoService.viewVideoByUserIdAndCategory("artist", artist.getArtistId());
+		List<Video> videoList = videoService.viewVideoByArtist(artist.getArtistId());
 		List<Performance> performanceList = performanceService.selectPerformanceById(artistId);
+		System.out.println("공연 리스트맞지"+performanceList);
+		System.out.println("비디오 리스트"+videoList);
 		
 		// 사용자의 id 조회
 		SecurityContext context = SecurityContextHolder.getContext();

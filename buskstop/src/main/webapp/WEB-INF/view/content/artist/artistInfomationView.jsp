@@ -109,11 +109,17 @@ img{
 		</div>
 		<div class="col-sm-5" style="vertical-align:middle;">
 			<!-- 아티스트 정보 뿌리기 -->
-			<span>${requestScope.map.artist.artistName }</span><br>
-			<span>${requestScope.map.artist.performance }</span><br>
-			<span>${requestScope.map.artist.profile }</span><br>
-			<span>${requestScope.map.artist.artistMembers }</span><br>
-			<span>${requestScope.map.artist.artistSns }</span>
+			<span>아티스트 명 : ${requestScope.map.artist.artistName }</span><br>
+			<span>장르 : ${requestScope.map.artist.performance }</span><br>
+			<span>프로필 : ${requestScope.map.artist.profile }</span><br>
+			<span>
+			<c:choose> 
+			<c:when test="${requestScope.map.artist.artistMembers!=null}">아티스트 : ${requestScope.map.artist.artistMembers }</c:when>
+			<c:otherwise>솔로</c:otherwise></c:choose></span><br>
+			<c:choose>
+			<c:when test="${requestScope.map.artist.artistSns!=null}">아티스트 SNS : ${requestScope.map.artist.artistMembers }</c:when>
+			<c:otherwise>아티스트 SNS : 없음</c:otherwise></c:choose></span>
+			<span></span>
 		</div>
 		<c:if test="${requestScope.map.artist.artistId ne requestScope.map.userId }">
 			<div class="col-sm-2" id="follow">
@@ -133,7 +139,7 @@ img{
 	<h2>공연정보</h2>
 	<table style="border:solid black 1px">
 	<tr>
-		<th> </th>
+		<th>공연 번호</th>
 		<th>공연제목</th>
 		<th>장소</th>
 		<th>공연날짜</th>
@@ -147,7 +153,6 @@ img{
 				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">${performance.performanceTitle }</td>
 				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">${performance.performanceLocation }</td>
 				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })"><fmt:formatDate value="${performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></td>
-				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">${performance.performanceContent }</td>
 			</tr>
 		</c:forEach>
 	</table>

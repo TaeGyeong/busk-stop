@@ -78,5 +78,7 @@ public interface VideoDao {
 	 * @return
 	 */
 	List<Video> selectVideo();
+
+	List<Video> selectVideoByArtistId(String videoArtist);
 	
 }
