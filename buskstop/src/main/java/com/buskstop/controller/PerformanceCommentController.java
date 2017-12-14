@@ -28,23 +28,31 @@ public class PerformanceCommentController {
 	
 	@RequestMapping("/performanceCommentInsert")
 	@ResponseBody
-	public void insertPerformanceComment(int performanceNo, String performanceComment) throws Exception {
+	public String insertPerformanceComment(int performanceNo, String performanceComment) throws Exception {
+		if(performanceComment.equals("")) {
+			return "empty";
+		}
 		PerformanceComment pComment = new PerformanceComment(performanceNo,performanceComment);
 		// 인증해서 아이디값 세팅
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		pComment.setPerformanceCommentUserId(((User)authentication.getPrincipal()).getUserId());
 		service.insertPerformanceComment(pComment);
+		return "success";
 	}
 	
 	@RequestMapping("/performanceCommentUpdate")
 	@ResponseBody
-	public void updatePerformanceComment(int performanceCommentNo ,String UpdatePerformanceComment) {
+	public String updatePerformanceComment(int performanceCommentNo ,String UpdatePerformanceComment) {
+		if(UpdatePerformanceComment.equals("")) {
+			return "empty";
+		}
 		PerformanceComment pComment2 = new PerformanceComment();
 		pComment2.setPerformanceCommentNo(performanceCommentNo);
 		pComment2.setPerformanceComment(UpdatePerformanceComment);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		pComment2.setPerformanceCommentUserId(((User)authentication.getPrincipal()).getUserId());
 		service.updatePerformanceComment(pComment2);
+		return "success";
 	}
 	
 	@RequestMapping("/performanceCommentDelete")

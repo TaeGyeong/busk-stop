@@ -23,10 +23,13 @@ $(document).ready(function(){
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
             "dataType":"text",
-            success: function(){
-                alert("댓글이 등록되었습니다.");
-                listComment();
-                document.getElementById("stageComment").value="";
+            success: function(message){
+            	if(messge="empty"){
+            		alert("댓글을 입력해주세요");
+            	}else{
+	                listComment();
+	                document.getElementById("stageComment").value="";
+            	}
             },
            	"error":function(){
            		alert("리뷰는 한 번씩 밖에 달지 못합니다.이미 올린 글을 수정 해주시기 바랍니다.");
@@ -82,8 +85,10 @@ $(document).ready(function(){
 function listComment(){
     $.ajax({
         "url" : "/buskstop/stageCommentList.do",
-        "type": "get",
-        "data" : {"stageNo":"${requestScope.map.stage.stageNo}"},
+        "type": "post",
+        "data" : {"stageNo":"${requestScope.map.stage.stageNo}",
+	    	'${_csrf.parameterName}':'${_csrf.token}'
+	    },
         "dataType" : "json",
         "success" : function(result){
             var output = "";
@@ -100,8 +105,10 @@ function listComment(){
             });
             $("#stageCommentList").html(output);
         },
-        "error":function(){
-       		alert("리스트 오류 발생");
+        "error":function(a,b,c){
+       		alert(a);
+       		alert(b);
+       		alert(c);
        	}
     });
 }
@@ -156,7 +163,7 @@ function updateComment(stageCommentUserId){
 	var UpdateStageComment = $("[name=pComment"+stageCommentUserId+"]").val();
 	$.ajax({
 		"url": "${initParam.rootPath }/stageCommentUpdate.do",
-	    "type": "get",
+	    "type": "post",
 	    "data" : {
 	    	"stageCommentUserId":stageCommentUserId,
 	    	"UpdateStageComment":UpdateStageComment,
