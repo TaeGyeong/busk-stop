@@ -4,9 +4,9 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery.timepicker.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#dateBtn").on("click", function(){
-		alert($("#performanceTime").val());
+	$("#regBtn").on("click", function(){
 		$("#performanceDate").val($("#performanceDay").val() + " " + $("#performanceTime").val());
+		$("#stageRegForm").submit();
 	});
 	
 	$("#selectStage").on("click", function(){
@@ -40,7 +40,7 @@ $(document).ready(function(){
 <link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
 <body>
 	<form action="${initParam.rootPath }/performanceUpdate2.do"
-		method="post" enctype="multipart/form-data">
+		method="post" enctype="multipart/form-data" id="stageRegForm">
 	
  		<div class="form-group">
 			<label for="no">공연 번호 </label> <input type="text"
@@ -73,9 +73,8 @@ $(document).ready(function(){
 			<label class="col-sm-2">수정할 공연시간</label>
 			<input type="timepicker" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
 		</div>
-		<div class="form-group">
-			<button type="button" class="btn btn-default col-sm-1" id="dateBtn">날짜 확인</button>
-			<input type="datetime" readonly="readonly" name="performanceDate" id="performanceDate" class="form-control col-sm-3" required="required">
+		<div class="form-group" style="display: none;">
+			<input type="datetime" style="display: none;" readonly="readonly" name="performanceDate" id="performanceDate" class="form-control col-sm-3" required="required">
 		</div>
 		
 		<div class="form-group">
@@ -88,7 +87,7 @@ $(document).ready(function(){
 				name="multiImage" id="multiImage" class="form-control">
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" style="display: none;">
 			 <label for="userId">사용자 id </label> 
 			<input type="text"
 				name="performanceUserId" id="performanceUserId" class="form-control"
@@ -96,7 +95,7 @@ $(document).ready(function(){
 		</div>
 
 
-		<button type="submit" class="btn btn-default">정보수정</button>
+		<button type="button" class="btn btn-default" id="regBtn">정보수정</button>
 		<button type="button" onclick="history.back();">취소</button>
 
 		<sec:csrfInput />
