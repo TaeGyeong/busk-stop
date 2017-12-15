@@ -234,6 +234,23 @@ function deleteStage(stageNo){
     .btn_resetRoadview {
    		background-position:-69px 0;
     }	
+    textarea{
+    	outline: #ffe6ee solid 3px;
+    	resize:none;
+    	width:90%;
+    	height:30px;
+    }
+    
+    button{
+    	float:right;
+    	background-color: #ffe6ee;
+    	border: none;
+    	color: white;
+    	padding:5px;
+    	text-align: center;
+    	color: #e085c2;
+    	font-size : 16px;
+    }
 </style>
 <div id="container">
 	<h1>DETAIL VIEW - 공연장 글 읽기 </h1>
@@ -256,7 +273,7 @@ function deleteStage(stageNo){
 	<div>
 		<c:forEach var="img" items="${requestScope.map.stageImage }">
 			<p style="color:#515151; font-size: 16px; padding:20px;">
-				<img src="${initParam.rootPath }/stageImage/${img.stageImageLocation }.jpg" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+				<img style="width:800px;height:600px;" src="${initParam.rootPath }/stageImage/${img.stageImageLocation }.jpg" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 			</p>
 		</c:forEach>
 	</div>
@@ -436,6 +453,7 @@ function deleteStage(stageNo){
 	
 	<div class="button_box" style="width: 100%;">
 		
+	<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		<!-- Board Content End-->
 		<div>
 			<sec:authorize access="isAuthenticated()">
@@ -446,7 +464,6 @@ function deleteStage(stageNo){
 			
 			
 			
-			<div id="stageCommentList" style="float: left; width: 100%;"></div>
 			<div  style="float: left; width: 100%;">
 			<select name="starScore" size="1">
 				<option value="1">★☆☆☆☆</option>
@@ -461,8 +478,8 @@ function deleteStage(stageNo){
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 		</div>		
+			<div id="stageCommentList" style="float: left; width: 100%;"></div>
 		</sec:authorize>
-			<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		</div>
 	</div>
 </div>

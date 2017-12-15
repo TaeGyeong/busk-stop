@@ -312,7 +312,7 @@ function deletePerformance(performanceNo){
 	<div class="container-inline">
 		<h3>아티스트 정보</h3>
 		<div>
-			<img src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
+			<img style="width:200px;height:200px;" src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
 			<div class="text-center">
 				<span>${requestScope.map.artist.artistName }</span><br>
 				<span>${requestScope.map.artist.performance }</span><br>
@@ -345,7 +345,7 @@ function deletePerformance(performanceNo){
 	
 	<div>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+			<img style="width:800px;height:600px;" src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
 		${requestScope.map.performance.performanceContent}

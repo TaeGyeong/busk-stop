@@ -105,7 +105,7 @@ public class PerformanceController {
 			Performance performance = service.getPerformanceByPerformanceNo(performanceNo);
 			return new ModelAndView("update_performance.do", "Performance", performance);
 		} else
-			return new ModelAndView("performanceDetailView.do?performanceNo=" + performanceNo);
+			return new ModelAndView("member/performanceDetailView.do?performanceNo=" + performanceNo);
 	}
 
 	// 이건 수정하는 부분
@@ -123,7 +123,7 @@ public class PerformanceController {
 		}
 		service.updatePerformance(performance);
 		int performanceNo = performance.getPerformanceNo();
-		return new ModelAndView("performanceDetailView.do?performanceNo=" + performanceNo, "performance", performance);
+		return new ModelAndView("member/performanceDetailView.do?performanceNo=" + performanceNo, "performance", performance);
 	}
 
 	@RequestMapping("/deletePerformance")
@@ -266,7 +266,7 @@ public class PerformanceController {
 
 	/****************************** 상세보기 ******************************/
 
-	@RequestMapping("/performanceDetailView")
+	@RequestMapping("/member/performanceDetailView")
 	public ModelAndView performanceDetailView(@RequestParam int performanceNo) {
 
 		// Performance 정보 조회
