@@ -221,18 +221,6 @@ function deletePerformance(performanceNo){
     	height:30px;
     	 border-color:white;
     }
-    
-    button{
-    	float:right;
-    	background-color: #ffe6ee;
-    	border: none;
-    	color: white;
-    	padding:5px;
-    	text-align: center;
-    	color: #e085c2;
-    	font-size : 16px;
-    }
-
 </style>
 </head>
 <body>
@@ -364,19 +352,26 @@ function deletePerformance(performanceNo){
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
 		<!-- Board Content End-->
-		<br><br><div style="float:right;">
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
+		<br><br><div>
+			<button type="button" style="float:right;" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
-					<input type="submit" value="수정" onclick="updatePerformance();">
-					<input type="submit" value="삭제" onclick="deletePerformance();">
+					<input type="submit" style="float:right;" value="수정" onclick="updatePerformance();">
+					<input type="submit" style="float:right;" value="삭제" onclick="deletePerformance();">
 				</c:if>
-		
+		<br><br>
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;" required="required"></textarea>
-			<button type="button" id="btnComment">댓글 등록</button>
-			<br><br>
+			<button type="button" id="btnComment" style="float:right;
+    	background-color: #ffe6ee;
+    	border: none;
+    	color: white;
+    	padding:5px;
+    	text-align: center;
+    	color: #e085c2;
+    	font-size : 16px;">댓글 등록</button>
+		<br><br>
 		</div>
 			</sec:authorize>
 		</div>

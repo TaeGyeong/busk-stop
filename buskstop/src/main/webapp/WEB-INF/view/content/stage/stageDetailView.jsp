@@ -453,7 +453,7 @@ function deleteStage(stageNo){
 					<input type="submit" style="float:right;" value="삭제" onclick="deleteStage();" class="btn btn-default">
 				</c:if>
 			<div  style="float: left; width: 100%;">
-			<select name="starScore" size="1" style="float:left;height:100%;background-color: #ffe6ee;border: none;">
+			<select name="starScore" size="1" style="height:20px;background-color: #ffe6ee;border: none;">
 				<option value="1">★☆☆☆☆</option>
 				<option value="2">★★☆☆☆</option>
 				<option value="3">★★★☆☆</option>
@@ -466,9 +466,10 @@ function deleteStage(stageNo){
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 			<button type="button" id="btnComment" style="float:right;background-color: #ffe6ee;border: none;color: white;padding:5px;
     	text-align: center;color: #e085c2;font-size : 16px;">댓글 등록</button>
-		</div>		
-			<div id="stageCommentList" style="float: left; width: 100%;"></div>
+		</div>
 		</sec:authorize>
+		<br><br>		
+			<div id="stageCommentList" style="float: left; width: 100%;"></div>
 		</div>
 	</div>
 </div>
