@@ -132,7 +132,7 @@ select {
 		<hr>
 		<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
-			<div class="thumbnail col-sm-4" style="cursor:pointer;width:320px;height:430px;">
+			<div class="thumbnail col-sm-4" style="cursor:pointer;width:320px;height:450px;">
 				<img class="imgSize" src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">Title : ${item.performanceTitle }</p>
@@ -141,7 +141,6 @@ select {
 					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">작성자 : ${item.performanceUserId }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">등록된 시간 : <fmt:formatDate value="${item.performanceRegTime }" pattern="HH:mm"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조회수 : ${item.performanceHits }</p>
-					 
 				</div>
 				<div>
 					<p class="text-center"><a class="likeBtn"><span class="glyphicon glyphicon-heart"></span>${item.likeCount }</a></p>
