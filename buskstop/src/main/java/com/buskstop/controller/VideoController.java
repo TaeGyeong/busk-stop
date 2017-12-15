@@ -103,8 +103,14 @@ public class VideoController {
 		SecurityContext context = SecurityContextHolder.getContext();
 		// SecurityContext 객체에서 Authentication(인증내용)을 받아온다.
 		Authentication authentication = context.getAuthentication();
-		String userId = ((User) authentication.getPrincipal()).getUserId();
 		
+		String userId = null;
+		
+		try {
+			userId = ((User) authentication.getPrincipal()).getUserId();
+		} catch (Exception e) {
+			userId = "";
+		}
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("video", video);
 		map.put("userId", userId);

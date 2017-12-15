@@ -33,10 +33,12 @@ td:hover{
 		<input type="hidden" id ="videoCategory" name="category" value="performance" class="form-control">
 		<button class="btn btn-default" type="submit">검색</button>
 	</form>
-	<form class="col-sm-2 col-sm-offset-4" action="${initParam.rootPath }/member/selectPerformanceVideoCategory.do" method="post">
-		<sec:csrfInput/>
-		<button class="btn btn-default">글쓰기</button>
-	</form>
+	<sec:authorize access="isAuthenticated()">
+		<form class="col-sm-2 col-sm-offset-4" action="${initParam.rootPath }/member/selectPerformanceVideoCategory.do" method="post">
+			<sec:csrfInput/>
+			<button class="btn btn-default">글쓰기</button>
+		</form>
+	</sec:authorize>	
 </div>
 <br><hr><br>
 <div>

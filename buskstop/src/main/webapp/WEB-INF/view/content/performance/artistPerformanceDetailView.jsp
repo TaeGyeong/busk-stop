@@ -296,6 +296,13 @@ function deletePerformance(performanceNo){
 	#artistImage{
 		cursor : pointer;
 	}
+	
+	textArea{
+		outline: #ffe6ee solid 3px;
+    	resize:none;
+    	width:90%;
+    	height:30px;
+    	}
 
 </style>
 </head>
@@ -312,7 +319,7 @@ function deletePerformance(performanceNo){
 	<div class="container-inline">
 		<h3>아티스트 정보</h3>
 		<div>
-			<img src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
+			<img style="width:200px;height:200px;" src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }" id="artistImage" style="width:100px; height:100px;" onerror="this.src='/buskstop/performanceImage/no-image.png;'">
 			<div class="text-center">
 				<span>${requestScope.map.artist.artistName }</span><br>
 				<span>${requestScope.map.artist.performance }</span><br>
@@ -331,11 +338,13 @@ function deletePerformance(performanceNo){
 	<!-- 아티스트 지도 -->
 	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
 		<div>
-			<h3>${requestScope.map.performance.performanceNo}. ${requestScope.map.performance.performanceTitle}</h3>
+			<h3>Title : ${requestScope.map.performance.performanceTitle}</h3>
 		</div>
 		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
-			<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
-			<div style="float:right; margin-left:20px;">조회
+			<div>
+				<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
+				<div style="float:right; margin-left:20px;">조회
+			</div>
 			<div style="float:right; margin-left:20px;"></div><fmt:formatDate value="${requestScope.map.performance.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </div>
 			<div style="float:right;">${requestScope.map.performance.performanceUserId}<strong>님</strong></div>
 		</div>
@@ -343,7 +352,7 @@ function deletePerformance(performanceNo){
 	
 	<div>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+			<img style="width:800px;height:600px;" src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
 		${requestScope.map.performance.performanceContent}
@@ -427,7 +436,7 @@ function deletePerformance(performanceNo){
 		<hr>
 	</div>
 		<div>
-			<div style="float:left; margin-right:5px;">공연 시간</div>
+			<div style="float:left; margin-right:5px">공연 시간</div>
 			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
 		</div>
 <hr>
@@ -440,17 +449,17 @@ function deletePerformance(performanceNo){
 	<div>
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${requestScope.map.userId eq requestScope.map.performance.performanceUserId }">
-			<input type="submit" value="수정" onclick="updatePerformance();">
-			<input type="submit" value="삭제" onclick="deletePerformance();">
+			<input type="submit" style="float:right;" value="수정" onclick="updatePerformance();">
+			<input type="submit" style="float:right;" value="삭제" onclick="deletePerformance();">
 		</c:if>
-	</sec:authorize>
-		<button type="button" onclick="location.href='${initParam.rootPath }/selectArtistPerformance.do'">목록</button>
+		<button type="button" style="float:right;" onclick="location.href='${initParam.rootPath }/selectArtistPerformance.do'">목록</button>
 
-	</div>
 	<div style="float: left; width: 100%;">
 		<textarea name="content" id="performanceComment" 
 		cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 		<button type="button" id="btnComment">댓글 등록</button>
+	</div>
+	</sec:authorize>
 	</div>
 	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	

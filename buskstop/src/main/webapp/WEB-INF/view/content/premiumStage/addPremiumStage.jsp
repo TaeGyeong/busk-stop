@@ -9,7 +9,36 @@ function addPicture(){
 	$("#image").append(txt);
 }
 
+
 function submitChk(){
+	// 사업자번호 체크.
+	var establishNo = $("#establishNo").val();
+	var pattern = /^[0-9]*$/;
+	if(!pattern.test(establishNo)){
+		alert("사업장번호는 숫자로만 입력해주세요.");
+		$("#establishNo").val("");
+		$("#establishNo").focus();
+		return false;
+	} else if(!(establishNo.length==10)) {
+		alert("사업장 번호는 10자리로 입력해주세요.");
+		$("#establishNo").val("");
+		$("#establishNo").focus();
+		return false;
+	}
+	
+	var operatorNo = $("#operatorNo").val();
+	if(!pattern.test(operatorNo)){
+		alert("사업자번호는 숫자로만 입력해주세요.");
+		$("#operatorNo").val("");
+		$("#operatorNo").focus();
+		return false;
+	} else if(!(operatorNo.length==10)){
+		alert("사업자 번호는 10자리로 입력해주세요.");
+		$("#operatorNo").val("");
+		$("#operatorNo").focus();
+		return false;
+	}
+	
 	document.getElementById("registerForm").submit();
 }
 
@@ -17,32 +46,48 @@ function submitChk(){
 </script>
 
 <div>
-	<form action="${initParam.rootPath }/producer/addPremiumStage.do" method="post" enctype="multipart/form-data" id="registerForm">
+	<form class="form-inline col-sm-offset-1" action="${initParam.rootPath }/producer/addPremiumStage.do" method="post" enctype="multipart/form-data" id="registerForm">
 		<sec:csrfInput />
 		<input type="hidden" name="operatorUserId" value="${requestScope.userId }">
 		
 		<!-- ######################## 필수입력 칸 ######################## -->
-		<span>사업장번호</span><br>
-		<input type="text" name="establishNum" id="establishNo" required="required"><br>
 		
-		<span>사업자번호</span><br>
-		<input type="text" name="operatorNo" id="operatorNo" required="required"><br>
+		<div class="form-group">
+			<label>사업장번호</label><br>
+			<input class="form-control" type="text" name="establishNum" id="establishNo" required="required"><br>
+		</div>
+		<br>
 		
-		<span>장소이름</span><br>
-		<input type="text" name="stageName" id="stageName" required="required"><br>
+		<div class="form-group">
+			<label>사업자번호</label><br>
+			<input class="form-control" type="text" name="operatorNo" id="operatorNo" required="required"><br>
+		</div>
 		
-		<span>주소</span><br>
-		<input type="text" name="stageLocation" id="stageLocation" required="required"><br>
-		
-		<span>면적(m^2)</span><br>
-		<input type="number" name="stageArea" id="stageArea" required="required"><br>
-		
-		<span>구비된 악기</span>
-		<input type="text" name="stageInstrument" id="instrument">
-		
-		<span>글 내용</span>
-		<input type="text" name="stageContent" id="content">
-		
+		<br>
+		<div class="form-group">
+			<label>장소이름</label><br>
+			<input class="form-control" type="text" name="stageName" id="stageName" required="required"><br>
+		</div>
+		<br>
+		<div class="form-group">
+			<label>주소</label><br>
+			<input class="form-control" type="text" name="stageLocation" id="stageLocation" required="required"><br>
+		</div>
+		<br>
+		<div class="form-group">
+			<label>면적(m^2)</label><br>
+			<input type="number" name="stageArea" id="stageArea" required="required"><br>
+		</div>
+		<br>
+		<div class="form-group">
+			<label>구비된 악기</label>
+			<input class="form-control" type="text" name="stageInstrument" id="instrument">
+		</div>
+		<br>
+		<div class="form-group">
+			<label>글 내용</label>
+			<textarea class="form-control" name="stageContent" id="content"></textarea>
+		</div>
 		<!-- ################################################################### -->
 		<p><hr><p>
 		<table class="table">

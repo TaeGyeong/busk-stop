@@ -168,6 +168,10 @@ public class PremiumStageController {
 			}
 		}
 		
+		if(imageList.size()==0) {
+			goUpdateView(stage.getEstablishNum());
+		}
+		
 		stage.setStageImage(imageList.get(0));
 
 		// service에서 처리해 줄것 : image 기존거 삭제 & 추가 / supplier 의 정보 update

@@ -1,4 +1,4 @@
-<%@page import="com.buskstop.vo.Performance"%>
+	<%@page import="com.buskstop.vo.Performance"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -69,7 +69,7 @@ function listComment(){
         "url" : "/buskstop/performanceCommentList.do",
         "type": "post",
         "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}",
-        	'${_csrf.parameterName}':'${_csrf.token}'},
+			      	'${_csrf.parameterName}':'${_csrf.token}'},
         "dataType" : "json",
         "success" : function(result){
             var output = "";
@@ -213,7 +213,14 @@ function deletePerformance(performanceNo){
     .btn_resetRoadview {
    		background-position:-69px 0;
     }
-
+    
+    textarea{
+    	outline: #ffe6ee solid 3px;
+    	resize:none;
+    	width:90%;
+    	height:30px;
+    	 border-color:white;
+    }
 </style>
 </head>
 <body>
@@ -228,11 +235,13 @@ function deletePerformance(performanceNo){
 	<!-- Board Content -->
 	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
 		<div>
-			<h3>${requestScope.map.performance.performanceNo}. ${requestScope.map.performance.performanceTitle}</h3>
+			<h3>Title : ${requestScope.map.performance.performanceTitle}</h3>
 		</div>
 		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
-			<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
-			<div style="float:right; margin-left:20px;">조회
+			<div>
+				<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
+				<div style="float:right; margin-left:20px;">조회
+			</div>
 			<div style="float:right; margin-left:20px;"></div><fmt:formatDate value="${requestScope.map.performance.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </div>
 			<div style="float:right;">${requestScope.map.performance.performanceUserId}<strong>님</strong></div>
 		</div>
@@ -244,7 +253,7 @@ function deletePerformance(performanceNo){
 		</div>
 	<div>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+			<img style="width:800px;height:600px;" src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 	</div>
 	<div>
@@ -345,21 +354,29 @@ function deletePerformance(performanceNo){
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
 		<!-- Board Content End-->
-		<div>
+		<br><br><div>
+			<button type="button" style="float:right;" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
-					<input type="submit" value="수정" onclick="updatePerformance();">
-					<input type="submit" value="삭제" onclick="deletePerformance();">
+					<input type="submit" style="float:right;" value="수정" onclick="updatePerformance();">
+					<input type="submit" style="float:right;" value="삭제" onclick="deletePerformance();">
 				</c:if>
-		
+		<br><br>
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;" required="required"></textarea>
-			<button type="button" id="btnComment">댓글 등록</button>
+			<button type="button" id="btnComment" style="float:right;
+    	background-color: #ffe6ee;
+    	border: none;
+    	color: white;
+    	padding:5px;
+    	text-align: center;
+    	color: #e085c2;
+    	font-size : 16px;">댓글 등록</button>
+		<br><br>
 		</div>
 			</sec:authorize>
 		</div>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	</div>
 </div>

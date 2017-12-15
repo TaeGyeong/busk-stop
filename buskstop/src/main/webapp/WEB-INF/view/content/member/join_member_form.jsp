@@ -16,6 +16,12 @@ $(document).ready(function(){
 				"${_csrf.parameterName}":"${_csrf.token}"		
 			},
 			"dataType":"text",
+			"beforeSend":function(){
+				var flag = idCheck();
+				if(flag==false){
+					return false;
+				}
+			},
 			"success":function(message){
 				/* alert(message); */
 				if(message=='new'){
@@ -44,8 +50,12 @@ $(document).ready(function(){
 	$("#joinBtn").on("click",function(){
 		if($("#idCheck").val()=='false'){
 			alert("ID 중복체크를 해주세요");
-		} else {
-			$(this).parent().submit();
+		} else if(!nameCheck()){
+			return false;
+		} else if(!phonenumCheck()){
+			return false;
+		} else{
+			$("#submitForm").submit();
 		}
 	});
 });
@@ -61,33 +71,38 @@ function idCheck(){
 	if(pattern1.test(str)){
 		alert("한글은 사용하실 수 없습니다.");
 		$("#id").val("");
+		return false;
 	}
 	
 	if(pattern2.test(str)){
 		alert("특수문자는 사용하실 수 없습니다.");
-		$("#id").val('');
+		$("#id").val("");
+		return false;
 	}
 	if(pattern3.test(str)){
 		alert("공백은 사용하실 수 없습니다.");
-		$("#id").val('');
+		$("#id").val("");
+		return false;
 	}
-	
-	
 }
 
 function nameCheck(){
 	var str = $("#name").val();
 	
-	var pattern1 = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	var pattern1 = /[^(가-힣a-zA-Z)]/;
 	var pattern2 = /[a-z]/;
 	var pattern3 = /[\s]/;
 	
-	if(!pattern1.test(str) && !pattern2.test(str)){
+	if(!(pattern1.test(str)||pattern2.test(str))){
 		alert("이름은 한글과 영문으로만 입력해주세요.");
 		$("#name").val("");
+		$("#name").focus();
+		return false;
 	} else if(pattern3.test(str)){
 		alert("이름에 공백이 있습니다.");
 		$("#name").val("");
+		$("#name").focus();
+		return false;
 	}
 	
 }
@@ -99,9 +114,11 @@ function phonenumCheck(){
 	if(!pattern.test(str)){
 		alert("번호는 숫자로만 입력해주세요.");
 		$("#phoneNumber").val("");
+		$("#phoneNumber").focus();
 	} else if (!(str.length>=10 && str.length<=11)) {
 		alert("휴대폰번호는 10자리 혹은 11자리로 입력해주세요!");
 		$("#phoneNumber").val("");
+		$("#phoneNumber").focus();
 	}
 }
 
@@ -113,7 +130,7 @@ function phonenumCheck(){
 	<form action="${initParam.rootPath }/join_member.do" id="submitForm" method="post">
 		<div class="form-group">
 			<label for="id">ID</label>
-			<input type="text" name="userId" id="id" onblur=idCheck(); required="required" class="form-control">
+			<input type="text" name="userId" id="id" required="required" class="form-control">
 			<br>
 			<button type="button" id="duplicatedCheckBtn" class="btn-primary">id 중복체크</button>
 		</div>
@@ -123,7 +140,7 @@ function phonenumCheck(){
 		</div>
 		<div class="form-group">
 			<label for="name">이름</label> 
-			<input type="text" name="userName" id="name" onblur=nameCheck(); required="required" class="form-control">
+			<input type="text" name="userName" id="name" required="required" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="address">주소</label> 
@@ -132,7 +149,7 @@ function phonenumCheck(){
 	
 		<div class="form-group">
 			<label for="phoneNumber">핸드폰번호</label> 
-			<input type="text" name="userPhoneNum" id="phoneNumber" onblur=phonenumCheck(); required="required" class="form-control">
+			<input type="text" name="userPhoneNum" id="phoneNumber" required="required" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="email">이메일주소</label> 

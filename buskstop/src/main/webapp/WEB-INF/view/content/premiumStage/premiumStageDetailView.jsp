@@ -15,12 +15,14 @@ $(document).ready(function(){
 <input type="hidden" id="regist" value="${requestScope.map.regist }">
 
 <div class="container-inline">
-	<c:forEach items="${requestScope.map.imageList }" var="image">
-		<img src="${initParam.rootPath }/supplierImage/${image }" onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
-			style="width:300px; height:300px;">
-	</c:forEach>
+	<div class="thumbnail row">
+		<c:forEach items="${requestScope.map.imageList }" var="image">
+			<img class="img-thumbnail col-sm-4" src="${initParam.rootPath }/supplierImage/${image }" onerror='this.src="${initParam.rootPath }/stageImage/no-image.png"'
+				style="width:300px; height:300px;">
+		</c:forEach>
+	</div>
 </div>
-<table class="table">
+<table class="table table-condensed table-bordered">
 	<thead>
 		<tr>
 			<th>장소명</th>
@@ -39,7 +41,7 @@ $(document).ready(function(){
 	</tbody>
 </table>
 
-<table class="table">
+<table class="table table-condensed table-bordered">
 	<thead>
 		<tr>
 			<th>주차가능여부</th>

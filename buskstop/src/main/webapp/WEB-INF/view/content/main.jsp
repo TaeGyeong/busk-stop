@@ -216,8 +216,8 @@ function goVideoDetail(root, no){
 			<h2 class="text-center">이런 공연장 어떠세요?</h2>
 			<c:forEach items="${requestScope.map.premium }" var="PremiumStage">
 				<div class="thumbnail col-sm-6">
-					<a href="${initParam.rootPath }/goPremiumStageDetailView.do?establishNo=${premiumStage.establishNum }">
-						<img style="width:230px; height:230px" src="${initParam.rootPath }/stageImage/${premiumStage.stageImage }">
+					<a href="${initParam.rootPath }/goPremiumStageDetailView.do?establishNo=${PremiumStage.establishNum }">
+						<img style="width:230px; height:230px" src="${initParam.rootPath }/stageImage/${PremiumStage.stageImage }">
 					</a>
 				</div>
 			</c:forEach>
