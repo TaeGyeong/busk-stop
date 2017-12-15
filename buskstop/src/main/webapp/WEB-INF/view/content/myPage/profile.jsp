@@ -179,7 +179,7 @@ $(document).ready(function(){
 						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/artist/passwordCheck.do" style="padding: 0;">아티스트정보 수정</a></li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_PRODUCER')">
-						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/producer/menu.do" style="padding: 0;">공연장정보 수정</a></li>
+						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/producer/selectViewPremiumStage.do?userId=${requestScope.user.userId}" style="padding: 0;">공연장정보 수정</a></li>
 						</sec:authorize>
 						<li style="padding: 0; width: 100%;"><a href="${initParam.rootPath }/member/outMember.do" style="padding: 0;">회원 탈퇴</a></li>
 					</ul>
