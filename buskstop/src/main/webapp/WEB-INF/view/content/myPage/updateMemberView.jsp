@@ -5,41 +5,58 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-// password check
-function passwordChk(){
-	var pw = document.getElementById("firstInsert").value;
-	var pwck = document.getElementById("secondInsert").value;
-	
+
+function submitChk(){
+	// 비밀번호 체크.
+	var pw = $("#firstInsert").val();
+	var pwck = $("#secondInsert").val();
 	if(pw!=pwck){
-		document.getElementById("checkPassword").innerHTML = '비밀번호가 일치하지 않습니다.';
+		alert("비밀번호가 일치하지 않습니다.");
+		$("#firstInsert").val("");
+		$("#secondInsert").val("");
+		$("#firstInsert").focus();
+		return false;
 	}
-	if(pw==pwck){
-		document.getElementById("checkPassword").innerHTML = '일치!';
-	}
-}
-// 이름 체크
-function nameCheck(){
-	var str = $("#name").val();
+	// 이름체크
+	var name = $("#name").val();
 	
-	var pattern = /[ㄱ-ㅎ|가-힣|a-zA-Z]/;
+	var pattern1 = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	var pattern2 = /[a-z]/;
+	var pattern3 = /[\s]/;
 	
-	if(!pattern.test(str)){
+	if(!pattern1.test(name) && !pattern2.test(name)){
 		alert("이름은 한글과 영문으로만 입력해주세요.");
 		$("#name").val("");
-	} 
-}
-
-// 핸드폰번호 체크
-function phonenumCheck(){
-	var str = $("#phoneNumber").val();
+		$("#name").focus();
+		return false;
+	} else if(pattern3.test(name)){
+		alert("이름에 공백이 있습니다.");
+		$("#name").val("");
+		$("#name").focus();
+		return false;
+	}
 	
-	var pattern = /[0-9]/;
+	// 전화번호 체크.
+	var phonenum = $("#phoneNumber").val();
 	
-	if(!pattern.test(str)){
+	var pattern = /^[0-9]*$/;
+	
+	if(!pattern.test(phonenum)){
 		alert("번호는 숫자로만 입력해주세요.");
 		$("#phoneNumber").val("");
+		$("#phoneNumber").focus();
+		return false;
+	} else if (!(phonenum.length>=10 && phonenum.length<=11)) {
+		alert("휴대폰번호는 10자리 혹은 11자리로 입력해주세요!");
+		$("#phoneNumber").val("");
+		$("#phoneNumber").focus();
+		return false;
 	}
+
+	$("#updateForm").submit();
 }
+
+
 
 // mypage로 돌아가는 function
 function backMyPage(){
@@ -60,7 +77,7 @@ function backMyPage(){
 	</div>
 	<br><br>
 	<!-- 전송 form -->
-	<form class="center-block" action="${initParam.rootPath }/member/updateMember.do" method="post">
+	<form class="center-block" id="updateForm" action="${initParam.rootPath }/member/updateMember.do" method="post">
 	
 		<sec:csrfInput/>
 		<input type="hidden" name="userId" value="${requestScope.user.userId }">
@@ -72,14 +89,17 @@ function backMyPage(){
 		
 		<div class="form-group row" id="insert">
 			<label class="col-sm-3" for="secondInsert">비밀번호 재입력 : </label> 
-			<input class="col-sm-3 form-control" type="password" id="secondInsert" name="checkPassword" required="required" onblur=passwordChk();>
+			<input class="col-sm-3 form-control" type="password" id="secondInsert" name="checkPassword" required="required">
+			<div id="checkPassword">
+			
+			</div>
 		</div>
 		
 		
 		<!-- Username -->
 		<div class="form-group row" id="insert">
 			<label class="col-sm-3" for="name">이름 : </label>
-			<input class="col-sm-3 form-control" type="text" id="name" name="userName" required="required" onblur=nameCheck(); placeholder="${requestScope.user.userName }">
+			<input class="col-sm-3 form-control" type="text" id="name" name="userName" required="required" placeholder="${requestScope.user.userName }">
 		</div>
 		
 		<!-- userAddress -->
@@ -91,7 +111,7 @@ function backMyPage(){
 		<!-- userPhoneNum -->
 		<div class="form-group row" id="insert">
 			<label class="col-sm-3" for="phoneNumber">전화번호 : </label>
-			<input class="col-sm-3 form-control" type="text" id="phoneNumber" name="userPhoneNum" required="required" onblur=phonenumCheck(); placeholder="${requestScope.user.userPhoneNum }">
+			<input class="col-sm-3 form-control" type="text" id="phoneNumber" name="userPhoneNum" required="required" placeholder="${requestScope.user.userPhoneNum }">
 		</div>
 		
 		<div class="form-group row" id="insert">
@@ -99,7 +119,7 @@ function backMyPage(){
 			<input class="col-sm-3 form-control" type="text" id="email" name="email" required="required" placeholder="${requestScope.user.email }">	
 		</div>
 		
-		<button class="btn btn-warning" type="submit">수정</button>
+		<button class="btn btn-warning" type="button" onclick=submitChk();>수정</button>
 		<button class="btn btn-danger" id="backBtn" onclick=backMyPage(); >취소</button>
 		
 	</form>
