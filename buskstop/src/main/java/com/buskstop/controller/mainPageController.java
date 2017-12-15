@@ -42,9 +42,9 @@ public class mainPageController {
 		List<Video> videoList = videoService.selectTopLikeVideo();
 		List<PremiumStage> premiumList = premiumService.mainPremiumStage();
 		
-		for(PremiumStage g : premiumList) {
+		/*for(PremiumStage g : premiumList) {
 			System.out.println(g);
-		}
+		}*/
 		
 		// scope에 map 넣기.
 		if(artistService.recommendArtist() != null) {
