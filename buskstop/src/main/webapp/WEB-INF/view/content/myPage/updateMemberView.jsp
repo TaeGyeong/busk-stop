@@ -55,52 +55,52 @@ function backMyPage(){
 
 </style>
 <div class="container">
-	<h2>updateMemberView.jsp</h2>
-	
-	<span>${requestScope.user.userId }님의 회원 정보 수정</span>
-	
-<!-- 전송 form -->
-<form action="${initParam.rootPath }/member/updateMember.do" method="post">
-
-	<sec:csrfInput/>
-	<input type="hidden" name="userId" value="${requestScope.user.userId }">
-	
-	<div id="insert">
-		<span>새로운 비밀번호 : </span> 
-		<input type="password" id="firstInsert" name="newpassword" required="required">
+	<div class="row">
+		<h2 class="text-center">${requestScope.user.userId }님의 회원 정보 수정</h2>
 	</div>
-		<div id="insert">
-		<span>비밀번호 재입력 : </span> 
-		<input type="password" id="secondInsert" name="checkPassword" required="required" onblur=passwordChk();>
-		<span id="checkPassword"></span>
-	</div>
+	<br><br>
+	<!-- 전송 form -->
+	<form class="center-block" action="${initParam.rootPath }/member/updateMember.do" method="post">
 	
-	
-	<!-- Username -->
-	<div id="insert">
-		<span>이름 : </span>
-		<input type="text" id="name" name="userName" required="required" onblur=nameCheck(); placeholder="${requestScope.user.userName }">
-	</div>
-	
-	<!-- userAddress -->
-	<div id="insert">
-		<span>주소 : </span>
-		<input type="text" name="userAddress" required="required" placeholder="${requestScope.user.userAddress }">
-	</div>
-	
-	<!-- userPhoneNum -->
-	<div id="insert">
-		<span>전화번호 : </span>
-		<input type="text" id="phoneNumber" name="userPhoneNum" required="required" onblur=phonenumCheck(); placeholder="${requestScope.user.userPhoneNum }">
-	</div>
-	
-	<div id="insert">
-		<span>이메일 : </span>
-		<input type="text" name="email" required="required" placeholder="${requestScope.user.email }">	
-	</div>
-	
-	<button type="submit">수정</button>
-	<button id="backBtn" onclick=backMyPage(); >취소</button>
-	
-</form>
+		<sec:csrfInput/>
+		<input type="hidden" name="userId" value="${requestScope.user.userId }">
+		
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="firstInsert">새로운 비밀번호 : </label> 
+			<input class="col-sm-3 form-control" type="password" id="firstInsert" name="newpassword" required="required">
+		</div>
+		
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="secondInsert">비밀번호 재입력 : </label> 
+			<input class="col-sm-3 form-control" type="password" id="secondInsert" name="checkPassword" required="required" onblur=passwordChk();>
+		</div>
+		
+		
+		<!-- Username -->
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="name">이름 : </label>
+			<input class="col-sm-3 form-control" type="text" id="name" name="userName" required="required" onblur=nameCheck(); placeholder="${requestScope.user.userName }">
+		</div>
+		
+		<!-- userAddress -->
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="address">주소 : </label>
+			<input class="col-sm-3 form-control"type="text" id="address" name="userAddress" required="required" placeholder="${requestScope.user.userAddress }">
+		</div>
+		
+		<!-- userPhoneNum -->
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="phoneNumber">전화번호 : </label>
+			<input class="col-sm-3 form-control" type="text" id="phoneNumber" name="userPhoneNum" required="required" onblur=phonenumCheck(); placeholder="${requestScope.user.userPhoneNum }">
+		</div>
+		
+		<div class="form-group row" id="insert">
+			<label class="col-sm-3" for="email">이메일 : </label>
+			<input class="col-sm-3 form-control" type="text" id="email" name="email" required="required" placeholder="${requestScope.user.email }">	
+		</div>
+		
+		<button class="btn btn-warning" type="submit">수정</button>
+		<button class="btn btn-danger" id="backBtn" onclick=backMyPage(); >취소</button>
+		
+	</form>
 </div>

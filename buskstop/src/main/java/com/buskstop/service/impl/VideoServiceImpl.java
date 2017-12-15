@@ -62,7 +62,10 @@ public class VideoServiceImpl implements VideoService {
 
 	//동영상 삭제
 	@Override
+	@Transactional
 	public int deleteVideoByVideoNum(int videoNo) {
+		videoLikeDao.deleteVideoLikeByVideoNo(videoNo);
+		commentDao.deleteVideoCommentByVideoNo(videoNo);
 		return dao.deleteVideoByVideoNum(videoNo);
 	}
 
@@ -144,13 +147,24 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public List<Video> selectTopLikeVideo() {
 		List<Video> list = dao.selectVideoByLikeCount();
-
+		for(Video v : list) {
+			System.out.println(v);
+		}
+		System.out.println(list.size());
+		
 		List<Video> returnList = new ArrayList<>();
+		if(list.isEmpty()) {
+			return null;
+		}
+		
 		if (list.size() < 3) {
 			for (int i = 0; i < list.size(); i++) {
 				int num = list.get(i).getVideoNo();
 				int likeCount = list.get(i).getLikeCount();
+				System.out.println(num);
+				System.out.println(likeCount);
 				Video video = dao.selectVideoByVideoNo(num);
+				System.out.println(video);
 				video.setLikeCount(likeCount);
 				returnList.add(video);
 			}
