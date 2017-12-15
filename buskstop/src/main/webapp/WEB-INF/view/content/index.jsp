@@ -39,7 +39,7 @@
 						class="form-control"
 						value='<sec:authentication property="principal.userId"/>'>
 				</sec:authorize>
-				<button type="submit" claa="btn btn-default">프리미엄 공연장 대관일 등록</button>
+				<button type="submit" class="btn btn-default">프리미엄 공연장 대관일 등록</button>
 			</form>
 		</sec:authorize>
 		<h5>공연장 예약 상태</h5>
