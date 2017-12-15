@@ -135,7 +135,7 @@ select {
 			<div class="thumbnail col-sm-4" style="cursor:pointer;width:320px;height:430px;">
 				<img class="imgSize" src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 				<div class="caption" >
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">Title : ${item.performanceTitle }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>

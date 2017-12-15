@@ -246,11 +246,13 @@ function deletePerformance(performanceNo){
 	<!-- Board Content -->
 	<div style="border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow : hidden; position: relative">
 		<div>
-			<h3>${requestScope.map.performance.performanceNo}. ${requestScope.map.performance.performanceTitle}</h3>
+			<h3>Title : ${requestScope.map.performance.performanceTitle}</h3>
 		</div>
 		<div style="float:right; position: absolute; bottom: 10px; right: 0;">
-			<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
-			<div style="float:right; margin-left:20px;">조회
+			<div>
+				<div style="float:right; margin-left:5px;">${requestScope.map.performance.performanceHits}</div>
+				<div style="float:right; margin-left:20px;">조회
+			</div>
 			<div style="float:right; margin-left:20px;"></div><fmt:formatDate value="${requestScope.map.performance.performanceRegTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </div>
 			<div style="float:right;">${requestScope.map.performance.performanceUserId}<strong>님</strong></div>
 		</div>
