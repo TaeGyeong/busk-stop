@@ -219,6 +219,7 @@ function deletePerformance(performanceNo){
     	resize:none;
     	width:90%;
     	height:30px;
+    	 border-color:white;
     }
     
     button{
@@ -362,9 +363,9 @@ function deletePerformance(performanceNo){
 		<div style="float: left;">
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 		<!-- Board Content End-->
-		<br><br><div>
+		<br><br><div style="float:right;">
+			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
 					<input type="submit" value="수정" onclick="updatePerformance();">
@@ -373,7 +374,7 @@ function deletePerformance(performanceNo){
 		
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
-			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left; border-color:white;" required="required"></textarea>
+			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;" required="required"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 			<br><br>
 		</div>

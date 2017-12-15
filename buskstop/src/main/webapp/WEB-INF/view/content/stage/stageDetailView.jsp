@@ -239,18 +239,9 @@ function deleteStage(stageNo){
     	resize:none;
     	width:90%;
     	height:30px;
+    	border-color:white;
     }
     
-    button{
-    	float:right;
-    	background-color: #ffe6ee;
-    	border: none;
-    	color: white;
-    	padding:5px;
-    	text-align: center;
-    	color: #e085c2;
-    	font-size : 16px;
-    }
 </style>
 <div id="container">
 	<h1>DETAIL VIEW - 공연장 글 읽기 </h1>
@@ -453,19 +444,16 @@ function deleteStage(stageNo){
 	
 	<div class="button_box" style="width: 100%;">
 		
-	<button type="button" onclick="history.back();" class="btn btn-default">목록</button>
 		<!-- Board Content End-->
 		<div>
+			<button type="button" style="float:right;" onclick="history.back();" class="btn btn-default">목록</button>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.stage.stageSellerId eq requestScope.map.userId }">
-					<input type="submit" value="수정" onclick="updateStage();" class="btn btn-default">
-					<input type="submit" value="삭제" onclick="deleteStage();" class="btn btn-default">
+					<input type="submit" style="float:right;" value="수정" onclick="updateStage();" class="btn btn-default">
+					<input type="submit" style="float:right;" value="삭제" onclick="deleteStage();" class="btn btn-default">
 				</c:if>
-			
-			
-			
 			<div  style="float: left; width: 100%;">
-			<select name="starScore" size="1">
+			<select name="starScore" size="1" style="float:left;height:100%;background-color: #ffe6ee;border: none;">
 				<option value="1">★☆☆☆☆</option>
 				<option value="2">★★☆☆☆</option>
 				<option value="3">★★★☆☆</option>
@@ -476,7 +464,8 @@ function deleteStage(stageNo){
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="stageComment" 
 			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
-			<button type="button" id="btnComment">댓글 등록</button>
+			<button type="button" id="btnComment" style="float:right;background-color: #ffe6ee;border: none;color: white;padding:5px;
+    	text-align: center;color: #e085c2;font-size : 16px;">댓글 등록</button>
 		</div>		
 			<div id="stageCommentList" style="float: left; width: 100%;"></div>
 		</sec:authorize>

@@ -296,6 +296,13 @@ function deletePerformance(performanceNo){
 	#artistImage{
 		cursor : pointer;
 	}
+	
+	textArea{
+		outline: #ffe6ee solid 3px;
+    	resize:none;
+    	width:90%;
+    	height:30px;
+    	}
 
 </style>
 </head>
@@ -427,7 +434,7 @@ function deletePerformance(performanceNo){
 		<hr>
 	</div>
 		<div>
-			<div style="float:left; margin-right:5px;">공연 시간</div>
+			<div style="float:left; margin-right:5px">공연 시간</div>
 			<div style="float:left;"><fmt:formatDate value="${requestScope.map.performance.performanceDate }" pattern="yyyy-MM-dd HH시mm분"/></div>
 		</div>
 <hr>
@@ -440,17 +447,17 @@ function deletePerformance(performanceNo){
 	<div>
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${requestScope.map.userId eq requestScope.map.performance.performanceUserId }">
-			<input type="submit" value="수정" onclick="updatePerformance();">
-			<input type="submit" value="삭제" onclick="deletePerformance();">
+			<input type="submit" style="float:right;" value="수정" onclick="updatePerformance();">
+			<input type="submit" style="float:right;" value="삭제" onclick="deletePerformance();">
 		</c:if>
-	</sec:authorize>
-		<button type="button" onclick="location.href='${initParam.rootPath }/selectArtistPerformance.do'">목록</button>
+		<button type="button" style="float:right;" onclick="location.href='${initParam.rootPath }/selectArtistPerformance.do'">목록</button>
 
-	</div>
 	<div style="float: left; width: 100%;">
 		<textarea name="content" id="performanceComment" 
 		cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
 		<button type="button" id="btnComment">댓글 등록</button>
+	</div>
+	</sec:authorize>
 	</div>
 	<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	
