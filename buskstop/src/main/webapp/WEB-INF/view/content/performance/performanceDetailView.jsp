@@ -1,4 +1,4 @@
-<%@page import="com.buskstop.vo.Performance"%>
+	<%@page import="com.buskstop.vo.Performance"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -68,7 +68,8 @@ function listComment(){
         //"dataType":"json",
         "url" : "/buskstop/performanceCommentList.do",
         "type": "post",
-        "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}"},
+        "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}",
+        			'${_csrf.parameterName}':'${_csrf.token}'},
         "dataType" : "json",
         "success" : function(result){
             var output = "";
@@ -212,6 +213,24 @@ function deletePerformance(performanceNo){
     .btn_resetRoadview {
    		background-position:-69px 0;
     }
+    
+    textarea{
+    	outline: #ffe6ee solid 3px;
+    	resize:none;
+    	width:90%;
+    	height:30px;
+    }
+    
+    button{
+    	float:right;
+    	background-color: #ffe6ee;
+    	border: none;
+    	color: white;
+    	padding:5px;
+    	text-align: center;
+    	color: #e085c2;
+    	font-size : 16px;
+    }
 
 </style>
 </head>
@@ -243,7 +262,7 @@ function deletePerformance(performanceNo){
 		</div>
 	<div>
 		<p style="color:#515151; font-size: 16px; padding:20px;">
-			<img src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
+			<img style="width:800px;height:600px;" src="${initParam.rootPath }/performanceImage/${requestScope.map.performance.performanceImage }" onerror="this.src='${initParam.rootPath }/performanceImage/no-image.png;'">
 		</p>
 	</div>
 	<div>
@@ -343,8 +362,9 @@ function deletePerformance(performanceNo){
 		<div style="float: left;">
 			좋아요<a class="likeBtn" style="font-size: 18px; margin-left: 10px; text-decoration: none; color: red;"><span class='glyphicon glyphicon-heart'></span>${requestScope.map.performance.likeCount }</a>
 		</div>
+			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 		<!-- Board Content End-->
-		<div>
+		<br><br><div>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${requestScope.map.performance.performanceUserId eq requestScope.map.userId}">
 					<input type="submit" value="수정" onclick="updatePerformance();">
@@ -353,12 +373,12 @@ function deletePerformance(performanceNo){
 		
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
-			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;" required="required"></textarea>
+			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left; border-color:white;" required="required"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
+			<br><br>
 		</div>
 			</sec:authorize>
 		</div>
-			<button type="button" onclick="location.href='${initParam.rootPath }/selectPerformance.do'">목록</button>
 		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	</div>
 </div>
