@@ -74,7 +74,7 @@ public class PremiumStageController {
 		ModelAndView mav = mpc.profileInfo();
 		
 		mav.addObject("list", service.selectSupplierById(userId));
-		mav.setViewName("premiumStage/choiceEditStage.myTemp");
+		mav.setViewName("/producer/goStageUpdateView.do");
 		return mav;
 	}
 
@@ -121,6 +121,18 @@ public class PremiumStageController {
 		
 		return new ModelAndView("premiumStage/premiumStageDetailView.tiles", "map", map);
 	}
+	
+	/********************** premiumStage 정보수정 페이지로 이동 **********************/
+   @RequestMapping("/producer/goStageUpdateView")
+   public ModelAndView goUpdateView(int establishNum) {
+	  System.out.println(establishNum);
+      List<String> imageList = service.selectImageLocation(establishNum);
+      PremiumStage stage = service.viewByEstablishNum(establishNum);
+      Map<String, Object> map = new HashMap<>();
+      map.put("imageList", imageList);
+      map.put("premiumStage", stage);
+      return new ModelAndView("premiumStage/updateStageView.tiles", "map", map);
+   }
 
 	/************************
 	 * premiumStage 정보수정 controller
