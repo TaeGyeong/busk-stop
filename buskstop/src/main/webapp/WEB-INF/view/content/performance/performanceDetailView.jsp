@@ -4,15 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
-<!DOCTYPE html>
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript" src="${initParam.rootPath}/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cf9bb3da4e98eebd3e7696702b01439&libraries=services"></script>
-			
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -22,20 +15,25 @@ $(document).ready(function(){
         
 		$.ajax({                
             "url": "${initParam.rootPath }/performanceCommentInsert.do",
-            "type": "get",
+            "type": "post",
             "data" : {
             	"performanceNo":"${requestScope.map.performance.performanceNo}",
             	"performanceComment":$("#performanceComment").val(),
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
             "dataType":"text",
-            success: function(){
-                alert("댓글이 등록되었습니다.");
+            success: function(message){
+                //alert("댓글이 등록되었습니다.");
+                if(message=="empty"){
+                	alert("댓글을 입력해주세요")
+                }
                 listComment();
                 document.getElementById("performanceComment").value="";
             },
-           	"error":function(){
-           		alert("오류 발생");
+           	"error":function(a,b,c){
+           		alert(a);
+            	alert(b);
+            	alert(c);
            		
            	}
         });
@@ -55,8 +53,10 @@ $(document).ready(function(){
 			"success":function(count){
 				$(".likeBtn").html("<span class='glyphicon glyphicon-heart'></span>"+count);
 			},
-			"error":function(){
-				alert("로그인 후 이용가능한 기능 입니다.");
+			"error":function(a,b,c){
+				alert(a);
+	        	alert(b);
+	        	alert(c);
 			}
 		});
 	});
@@ -67,23 +67,27 @@ function listComment(){
     $.ajax({
         //"dataType":"json",
         "url" : "/buskstop/performanceCommentList.do",
-        "type": "get",
+        "type": "post",
         "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}"},
         "dataType" : "json",
         "success" : function(result){
             var output = "";
             $.each(result, function(){ 
-            	output += '<div class="performanceComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+            	output += '<div class="performanceComment" style="border-top:1px solid darkgray; margin-bottom: 15px;">';
                 output += '<div class="listComment'+this.performanceCommentNo+'">'+'작성자 : '+this.performanceCommentUserId+' / 등록 일자 : '+this.performanceCommentRegTime;
+                output += '<sec:authorize access="isAuthenticated()">'
+                if(this.performanceCommentUserId=='${requestScope.map.userId}'){
                 output += '<a onclick="updateCommentText('+this.performanceCommentNo+',\''+this.performanceComment+'\');"> 수정 </a>';
-                output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a> </div>';
-                output += '<div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
-                output += '</div></div>';
+                output += '<a onclick="deleteComment('+this.performanceCommentNo+');"> 삭제 </a>';
+                }output += '</sec:authorize><div class="pComment'+this.performanceCommentNo+'"> <p> 내용 : '+this.performanceComment +'</p>';
+                output += '</div></div></div>';
             });
             $("#performanceCommentList").html(output);
         },
-        "error":function(){
-       		//alert("오류 발생");
+        "error":function(a,b,c){
+        	alert(a);
+        	alert(b);
+        	alert(c);
        	}
     });
 }
@@ -99,11 +103,13 @@ function deleteComment(performanceCommentNo){
         },
         "dataType":"text",
         "success": function(){
-            alert("댓글이 삭제되었습니다.");
+            //alert("댓글이 삭제되었습니다.");
             listComment();
         },
-        "error":function(){
-        	alert("에러 뜸 ㅠㅠ");
+        "error":function(a,b,c){
+        	alert(a);
+        	alert(b);
+        	alert(c);
         }
     });
  }
@@ -113,7 +119,7 @@ function updateCommentText(performanceCommentNo,performanceComment){
 	
     var output ="";
     	output += '<div class="input-group">';
-    	output += '<input type="text" class="form-control" name="pComment'+performanceCommentNo+'" value="'+performanceComment+'"/>';
+    	output += '<input type="text" class="form-control" name="pComment'+performanceCommentNo+'" value="'+performanceComment+'" required="required">';
     	output += '<span class="input-group-btn">'
     	output += '<button class="btn btn-default" type="button" onclick="updateComment('+performanceCommentNo+');">수정</button>';
     	output += '<button class="btn btn-default" type="button" onclick="listComment();">수정 취소</button>';
@@ -126,19 +132,26 @@ function updateComment(performanceCommentNo){
 		var UpdatePerformanceComment = $("[name=pComment"+performanceCommentNo+"]").val();
 	$.ajax({
 		"url": "${initParam.rootPath }/performanceCommentUpdate.do",
-	    "type": "get",
+	    "type": "post",
 	    "data" : {
 	    	"performanceCommentNo":performanceCommentNo,
 	    	"UpdatePerformanceComment":UpdatePerformanceComment,
 	    	'${_csrf.parameterName}':'${_csrf.token}'
 	    },
 	    "dataType":"text",
-	    "success" : function(){
-	    	alert("댓글이 수정되었습니다.");
-	    	listComment();
+	    "success" : function(message){
+	    	//alert("댓글이 수정되었습니다.");
+	    	if(message=="success"){
+	    		listComment();
+	    	}else{
+	    		alert("댓글을 입력해주세요");
+	    	}
+	    	
 	    },
-	    "error":function(){
-	    	alert("댓글을 입력해주세요.");
+	    "error":function(a,b,c){
+	    	alert(a);
+        	alert(b);
+        	alert(c);
 	    }
 		
 	});
@@ -340,7 +353,7 @@ function deletePerformance(performanceNo){
 		
 		<div style="float: left; width: 100%;">
 			<textarea name="content" id="performanceComment" 
-			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;"></textarea>
+			cols="20" rows="5" placeholder="댓글을 쓰세요" style="float: left;" required="required"></textarea>
 			<button type="button" id="btnComment">댓글 등록</button>
 		</div>
 			</sec:authorize>
@@ -349,4 +362,3 @@ function deletePerformance(performanceNo){
 		<div id="performanceCommentList" style="float: left; width: 100%;"></div>
 	</div>
 </div>
-</body>

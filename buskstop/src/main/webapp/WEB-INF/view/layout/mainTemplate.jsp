@@ -19,7 +19,7 @@ body{
 	background-color:#F8E6E0;
 }
 .container{
-	margin-top:200px;
+	<%--margin-top:200px;--%>
 	padding:0;
 	background-color:WHITE;
 }

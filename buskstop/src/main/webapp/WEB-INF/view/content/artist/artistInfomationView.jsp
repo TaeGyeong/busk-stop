@@ -18,7 +18,7 @@ window.onload = function followSearch(){
 			if(txt=='follow'){
 				$("#follow").html('');
 				// follow 했으면 follow 버튼
-				txt='<button type="button" id="followBtn" class="btn btn-default">팔로우취소</button>';
+				txt='<button type="button" id="followBtn" class="btn btn-primary">팔로우취소</button>';
 				$("#follow").html(txt);
 			} else if (txt=='notFollow'){
 				
@@ -71,7 +71,7 @@ $(document).ready(function(){
 				"dataType":"text",
 				"success":function(txt){
 					alert(txt);
-					txt='<button id="followBtn" class="btn btn-default">팔로우취소</button>';
+					txt='<button id="followBtn" class="btn btn-primary">팔로우취소</button>';
 					$("#follow").html(txt);
 				},
 				"error":function(a,b,c){
@@ -99,16 +99,29 @@ img{
 	height:50%;
 	width:50%;
 }
+
+h2 {
+    color: pink;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    text-align:center;
+    font-family: "Times New Roman", Times, serif;
+    font-weight:bold;
+}
+
+table{
+	border-collapse : initial;
+}
+
 </style>
 <!-- 아티스트 정보 (프로필) -->
-<div class="container-inline" style="top-margin:100%; height:100%;">
+<div class="container-inline" style="top-margin:100%; bottom-margin:100%; height:100%; padding-top:40px; padding-left:40px;">
 	<h2>${requestScope.map.artist.artistName } 프로필</h2>
 	<div class="row">
-		<div class="col-sm-5" style="vertical-align:middel;">
+		<div class="col-sm-5" style="vertical-align:middel;text-align:center;">
 			<!-- 아티스트 프로필 사진 -->
-			<img onerror='this.src="${initParam.rootPath }/artistImage/no-image.png"' src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }">
+			<img style="height:160px; width:280px;" onerror='this.src="${initParam.rootPath }/artistImage/no-image.png"' src="${initParam.rootPath }/artistImage/${requestScope.map.artist.artistImage }">
 		</div>
-		<div class="col-sm-5" style="vertical-align:middle;">
+		<div class="col-sm-3" style="vertical-align:middle;padding-top:25px;">
 			<!-- 아티스트 정보 뿌리기 -->
 			<span>아티스트 명 : ${requestScope.map.artist.artistName }</span><br>
 			<span>장르 : ${requestScope.map.artist.performance }</span><br>
@@ -134,25 +147,21 @@ img{
 		</c:if>
 	</div>
 </div>
-
-<p>
 <hr>
-<p>
 
 <!-- 아티스트 공연정보 조회 -->
-<div class="container" style="top-margin:300px;">
+<div class="container" style="padding:40px;">
 	<h2>${requestScope.map.artist.artistName }님이 올린 공연</h2>
 	<table style="border:solid black 1px">
 	<tr>
-		<th>공연 번호</th>
 		<th>공연제목</th>
 		<th>장소</th>
 		<th>공연날짜</th>
 		<th>공연내용</th>
 	</tr>
-	<c:forEach items="${requestScope.map.performanceList }" var="performance">
+			<c:forEach items="${requestScope.map.performanceList }" var="performance">
 			<tr class="row">
-				<td class="col-sm-4" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">
+				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">
 					<img src="${initParam.rootPath }/performanceImage/${performance.performanceImage }" onerror='this.src="${initParam.rootPath }/performanceImage/no-image.png"' style="width:100px; height:100px;">
 				</td>
 				<td class="col-sm-2" onclick="goDetail('${initParam.rootPath }',${performance.performanceNo })">${performance.performanceTitle }</td>
@@ -163,12 +172,15 @@ img{
 	</table>
 </div>
 <hr>
+
+
+
 <!-- 아티스트 공연홍보영상 -->
-<div class="container">
+<div class="container" style="padding:40px;">
 	<h2>${requestScope.map.artist.artistName }님이 올린 영상</h2>
 	<table style="border:solid black 1px;">
 		<tr class="row">
-			<th class="col-sm-4">사진</th>
+			<th class="col-sm-2">영상 미리보기</th>
 			<th class="col-sm-2">제목</th>
 			<th class="col-sm-2">장소</th>
 			<th class="col-sm-2">등록시간</th>

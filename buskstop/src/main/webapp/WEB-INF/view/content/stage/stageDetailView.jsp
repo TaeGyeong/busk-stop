@@ -23,10 +23,13 @@ $(document).ready(function(){
             	'${_csrf.parameterName}':'${_csrf.token}'
             },
             "dataType":"text",
-            success: function(){
-                alert("댓글이 등록되었습니다.");
-                listComment();
-                document.getElementById("stageComment").value="";
+            success: function(message){
+            	if(messge="empty"){
+            		alert("댓글을 입력해주세요");
+            	}else{
+	                listComment();
+	                document.getElementById("stageComment").value="";
+            	}
             },
            	"error":function(){
            		alert("리뷰는 한 번씩 밖에 달지 못합니다.이미 올린 글을 수정 해주시기 바랍니다.");
@@ -82,24 +85,30 @@ $(document).ready(function(){
 function listComment(){
     $.ajax({
         "url" : "/buskstop/stageCommentList.do",
-        "type": "get",
-        "data" : {"stageNo":"${requestScope.map.stage.stageNo}"},
+        "type": "post",
+        "data" : {"stageNo":"${requestScope.map.stage.stageNo}",
+	    	'${_csrf.parameterName}':'${_csrf.token}'
+	    },
         "dataType" : "json",
         "success" : function(result){
             var output = "";
             $.each(result, function(){ 
-            	output += '<div class="stageComment" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+            	output += '<div class="stageComment" style="border-top:1px solid darkgray; margin-bottom: 15px;">';
                 output += '<div class="listComment'+this.stageCommentUserId+'">별점 :'+outStar(this.starScore);
                 output += '&nbsp;&nbsp; 작성자 : '+this.stageCommentUserId+' &nbsp;&nbsp; 등록 일자 : '+this.stageCommentRegTime;
+                output += '<sec:authorize access="isAuthenticated()">'
+                if(this.performanceCommentUserId=='${requestScope.map.userId}'){
                 output += '<a onclick="updateCommentText(\''+this.stageCommentUserId+'\',\''+this.stageComment+'\');">&nbsp;&nbsp;&nbsp;수정 </a>';
-                output += '<a onclick="deleteComment(\''+this.stageCommentUserId+'\');">&nbsp;&nbsp;삭제 </a> </div>';
-                output += '<div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
-                output += '</div></div>';
+                output += '<a onclick="deleteComment(\''+this.stageCommentUserId+'\');">&nbsp;&nbsp;삭제 </a>';
+                }output += '</sec:authorize><div class="pComment'+this.stageCommentUserId+'"> <p> 내용 : '+this.stageComment +'</p>';
+                output += '</div></div></div>';
             });
             $("#stageCommentList").html(output);
         },
-        "error":function(){
-       		alert("리스트 오류 발생");
+        "error":function(a,b,c){
+       		alert(a);
+       		alert(b);
+       		alert(c);
        	}
     });
 }
@@ -154,7 +163,7 @@ function updateComment(stageCommentUserId){
 	var UpdateStageComment = $("[name=pComment"+stageCommentUserId+"]").val();
 	$.ajax({
 		"url": "${initParam.rootPath }/stageCommentUpdate.do",
-	    "type": "get",
+	    "type": "post",
 	    "data" : {
 	    	"stageCommentUserId":stageCommentUserId,
 	    	"UpdateStageComment":UpdateStageComment,
