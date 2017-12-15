@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script>
 	function goDetail(root, no){
-		document.location.href= root+'/performanceDetailView.do?performanceNo='+no
+		document.location.href= root+'/member/performanceDetailView.do?performanceNo='+no
 	}
 	
 	$(document).ready(function(){
@@ -118,9 +118,9 @@ select {
 	background-color: #337ab7;
 }
 .imgSize {
-    width: auto; height: auto;
+    width: fit-content; 
+    height: fit-content;
     max-width: 225px;
-    max-height: 225px;
     border-radius: 10px;
     word-break: keep-all;
 }
@@ -132,7 +132,7 @@ select {
 		<hr>
 		<div class="row">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
-			<div class="thumbnail col-sm-4" style="cursor:pointer;">
+			<div class="thumbnail col-sm-4" style="cursor:pointer;width:320px;height:430px;">
 				<img class="imgSize" src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 				<div class="caption" >
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
