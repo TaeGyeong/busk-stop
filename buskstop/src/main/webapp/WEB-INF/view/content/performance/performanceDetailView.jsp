@@ -68,7 +68,8 @@ function listComment(){
         //"dataType":"json",
         "url" : "/buskstop/performanceCommentList.do",
         "type": "post",
-        "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}"},
+        "data" : {"performanceNo":"${requestScope.map.performance.performanceNo}",
+        	'${_csrf.parameterName}':'${_csrf.token}'},
         "dataType" : "json",
         "success" : function(result){
             var output = "";
