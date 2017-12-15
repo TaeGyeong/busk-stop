@@ -15,7 +15,6 @@ $(document).ready(function(){
 	
 	$("#enterVideoCommentBtn").on("click",function() {
 		var videoNo= "${requestScope.map.video.videoNo }";
-		alert(videoNo);
 	
 		$.ajax({
 			"url": "${initParam.rootPath}/member/enterVideoComment.do",
@@ -25,14 +24,8 @@ $(document).ready(function(){
 					"${_csrf.parameterName}":"${_csrf.token}"
 			},
 			"dataType":"json",
-			"beforesend":function(){
-				alert("${requestScope.map.video.videoNo }");
-				alert($("#videoComment").text());
-				if($("#videoComment").val()==null){
-					alert("댓글을 입력해주세요.");
-					document.getElementById("#videoComment").focus();
-					return false;
-				} else if($("#videoComment").val()=='댓글을 입력하세요.'){
+			"beforeSend":function(){
+				if($("#videoComment").val()==''){
 					alert("댓글을 입력해주세요.");
 					document.getElementById("#videoComment").focus();
 					return false;
@@ -42,7 +35,7 @@ $(document).ready(function(){
 			"success":function(list){
 				var txt="";
 				$.each(list,function(){
-					txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
+					txt+="<div id='"+this.videoCommentUserId+"'>";
 					txt+=" / 작성자 : "+this.videoCommentUserId;
 					txt+=" / 등록 일자 : "+this.videoCommentRegTime;
 					if(this.videoCommentUserId=='${requestScope.map.userId }'){
@@ -76,7 +69,7 @@ $(document).ready(function(){
 	    		"success":function(list){
 	    			var txt="";
 					$.each(list,function(){
-						txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
+						txt+="<div id='"+this.videoCommentUserId+"'>";
 						txt+=" / 작성자 : "+this.videoCommentUserId;
 						txt+=" / 등록 일자 : "+this.videoCommentRegTime;
 						if(this.videoCommentUserId=='${requestScope.map.userId }'){
@@ -142,7 +135,7 @@ function refreshComment(){
     		"success":function(list){
     			var txt="";
 				$.each(list,function(){
-					txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
+					txt+="<div id='"+this.videoCommentUserId+"'>";
 					txt+=" / 작성자 : "+this.videoCommentUserId;
 					txt+=" / 등록 일자 : "+this.videoCommentRegTime;
 					if(this.videoCommentUserId=='${requestScope.map.userId }'){
@@ -181,7 +174,7 @@ function deleteComment(videoCommentNo){
 			alert("댓글이 삭제되었습니다.");
 			var txt="";
 			$.each(list,function(){
-				txt+="<div id='"+this.videoCommentUserId+"'>"+"댓글번호 : "+this.videoCommentNo;
+				txt+="<div id='"+this.videoCommentUserId+"'>";
 				txt+=" / 작성자 : "+this.videoCommentUserId;
 				txt+=" / 등록 일자 : "+this.videoCommentRegTime;
 				if(this.videoCommentUserId=='${requestScope.map.userId }'){
@@ -214,6 +207,38 @@ function editCommentText(videoCommentNo,videoComment){
     	output += ' </span></div>';
        
        $(".videoComment"+videoCommentNo).html(output);
+}
+
+function listComment(){
+	$.ajax({
+		"url": "${initParam.rootPath}/member/enterVideoComment.do",
+		"type":"POST",
+		"data":{"videoNo":"${requestScope.map.video.videoNo }",
+				"videoComment":$("#videoComment").val(),
+				"${_csrf.parameterName}":"${_csrf.token}"
+		},
+		"dataType":"json",
+		
+		"success":function(list){
+			var txt="";
+			$.each(list,function(){
+				txt+="<div id='"+this.videoCommentUserId+"'>";
+				txt+=" / 작성자 : "+this.videoCommentUserId;
+				txt+=" / 등록 일자 : "+this.videoCommentRegTime;
+				if(this.videoCommentUserId=='${requestScope.map.userId }'){
+					txt+='<a onclick="editCommentText('+this.videoCommentNo+',\''+this.videoComment+'\');"> 수정 </a>';
+					txt+='<a onclick="deleteComment('+this.videoCommentNo+');"> 삭제 </a>';
+					txt+='<div class="videoComment'+this.videoCommentNo+'"> <p> 내용 : '+this.videoComment +'</p></div>';
+					txt+="<input type='hidden' name='videoNo' value='${requestScope.map.video.videoNo}'>";
+				}
+				txt+="</div></div>";
+			});
+			$("#videoCommentList").html(txt);
+			$("#videoCommentList").removeClass('hidden');		
+			$("#providerBtn").text('댓글숨기기');
+			document.getElementById("videoComment").value="";
+		}
+	});
 }
 
 function editComment(videoCommentNo){
@@ -468,7 +493,8 @@ div{
 		
 		<sec:authorize access="isAuthenticated()">			 
 			<div class="row">
-				<input class="col-sm-6 col-sm-offset-2 input-control" id="videoComment" name="videoContent" placeholder="댓글을 입력하세요." required="required">
+				<input class="col-sm-5 col-sm-offset-2 input-control" id="videoComment" name="videoContent" placeholder="댓글을 입력하세요." required="required">
+				<div class="col-sm-1"></div>
 				<button class="col-sm-2 btn btn-default" id="enterVideoCommentBtn" type="button">등록</button>
 			</div>
 		</sec:authorize>
@@ -479,7 +505,7 @@ div{
 				<button class="btn btn-default" id="providerBtn">댓글보기</button>
 			</div>
 			<!-- 댓글목록이 보여질 div -->
-			<div class="col-sm-12" id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">
+			<div class="col-sm-12" id="videoCommentList" style="border-bottom:1px solid darkgray; margin-bottom: 15px; background-color:ghostWhite;">
 			
 			</div>
 		</div>
@@ -501,15 +527,18 @@ div{
 	</div>
 	<c:if test="${requestScope.map.video.videoUserId eq requestScope.map.userId }">
 		<div class="col-sm-1">
-			<form action="" method="post">
+			<form action="${initParam.rootPath }/videoChangeInfoView.do" method="post">
 				<sec:csrfInput/>
+				<input type="hidden" name="videoNo" value="${requestScope.map.video.videoNo }">
 				<button class="btn btn-warning">수정</button>
 			</form>
 		</div>
 		<!-- 삭제 -->
 		<div class="col-sm-1">
-			<form action="" method="post">
+			<form action="${initParam.rootPath }/deleteVideo.do" method="post">
 				<sec:csrfInput/>
+				<input type="hidden" name="videoNo" value="${requestScope.map.video.videoNo }">
+				<input type="hidden" name="category" value="${requestScope.map.video.videoCategory }">
 				<button class="btn btn-danger">삭제</button>
 			</form>
 		</div>

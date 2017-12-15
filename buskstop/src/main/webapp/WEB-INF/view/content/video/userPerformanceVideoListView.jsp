@@ -58,7 +58,7 @@ td:hover{
 					<td class="text-center">${video.videoNo }</td>
 					<td class="text-center">${video.videoTitle }</td>
 					<td>
-						<img src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg">
+						<img class="center-block" style="width:100px; height:100px;" src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg">
 					</td>
 					<td class="text-center">${video.videoLocation }</td>
 					<td class="text-center">

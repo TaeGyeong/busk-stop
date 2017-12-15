@@ -205,9 +205,9 @@ public class VideoController {
 	
 	// 영상 삭제
 	@RequestMapping("/deleteVideo")
-	public String deleteVideo(int videoNo) {
+	public ModelAndView deleteVideo(int videoNo, String category, HttpServletRequest request) {
 		service.deleteVideoByVideoNum(videoNo);
-		return "index.tiles";
+		return videoList(category, request);
 	}
 	
 	//-------------영상 검색조건으로 조회 -----------------//

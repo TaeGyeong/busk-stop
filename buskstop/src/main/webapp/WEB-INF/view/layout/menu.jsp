@@ -101,7 +101,7 @@
          		<li class="col-sm-12" style="padding: 0;"><a href="${initParam.rootPath }/selectPremiumStage.do?page=1" id="goPremiumStage">프리미엄공연장</a></li>
          	</ul>
          </li>
-         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="${initParam.rootPath }/videoListCategoryView.do">공연영상</a>
+         <li class="col-sm-2 col-xs-12" style="padding: 0;"><a href="#">공연영상</a>
             <ul id="sub_menu" class="col-sm-12" style="padding: 0;">
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goArtistVideo">홍보영상</a></li>
                <li class="col-sm-12" style="padding: 0;"><a href="#" id="goPerformanceVideo">공연영상</a></li>

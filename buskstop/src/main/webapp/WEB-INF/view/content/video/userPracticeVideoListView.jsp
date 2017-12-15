@@ -68,7 +68,7 @@ td {
 					<td>${video.videoNo }</td>
 					<td>${video.videoTitle }</td>
 					<td>
-						<img style="width:100px; height:100px" src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg">
+						<img class="center-block" style="width:100px; height:100px" src="https://img.youtube.com/vi/${video.videoLink }/hqdefault.jpg">
 					</td>
 					<td>${video.videoContent }</td>
 					<td>
