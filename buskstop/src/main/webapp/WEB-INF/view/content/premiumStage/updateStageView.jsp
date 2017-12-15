@@ -5,24 +5,49 @@
 <script type="text/javascript" src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	$("#searchStage").on("click", function(){
+		var address = "${initParam.rootPath}/searchStageByAddress.do"; //doGet()방식으로 요청
+		left1 = (screen.availWidth - 600) / 2;
+		top1 = (screen.availHeight - 500) / 2;
+		window.open(address, "newWin", 'width=800 ,height=600 ,top=' + top1 + ',left=' + left1 + ',resizable=no');
+	});
+});
+
 function addPicture(){
-	var txt = '<br><div class="form-group"><input class="form-control" type="file" name="multiImage" id="multiImage" required="required">';
-	txt+='<button type="button" id="imageDelete" onclick=deleteImage(this);>삭제</button></div>';
+	var txt = '<div class="form-group"><input class="form-control" type="file" name="multiImage" id="multiImage" required="required"></div>';
 	$("#image").append(txt);
 }
 
 function submitChk(){
+	// 사업자번호 체크.
+	var pattern = /^[0-9]*$/;
+	var operatorNo = $("#operatorNo").val();
+	if(!pattern.test(operatorNo)){
+		alert("사업자번호는 숫자로만 입력해주세요.");
+		$("#operatorNo").val("");
+		$("#operatorNo").focus();
+		return false;
+	} else if(!(operatorNo.length==10)){
+		alert("사업자 번호는 10자리로 입력해주세요.");
+		$("#operatorNo").val("");
+		$("#operatorNo").focus();
+		return false;
+	}
+	
 	document.getElementById("registerForm").submit();	
 }
 
 function deleteImage(form){
 	$(form).parent().remove();
+	addPicture();
 }
-
-
 
 </script>
 
+<div id="text">
+
+</div>
 
 <div>
 	<form class="form-inline col-sm-offset-1" action="${initParam.rootPath }/producer/premiumStageUpdate.do" method="post" enctype="multipart/form-data" id="registerForm">
@@ -45,8 +70,9 @@ function deleteImage(form){
 		<br>
 		
 		<div class="form-group">
-			<label for="stageLocation">주소</label><br>
-			<input class="form-control" id="stageLocation" type="text" name="stageLocation" value="${requestScope.map.premiumStage.stageLocation }" required="required"><br>
+			<label for="performanceLocation">주소</label><br>
+			<input type="text" name="stageLocation" id="performanceLocation" class="form-control" required="required" readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요."><br>  
+			<input type="button" id="searchStage" value="직접 검색" class="btn btn-default">
 		</div>
 		
 		<br>
@@ -109,6 +135,8 @@ function deleteImage(form){
 		<hr>
 		<button class="btn btn-primary" type="button" onclick=addPicture(); >사진 추가 등록</button>
 		<hr>
+		
+		
 		
 		<div class="inline col-sm-offset-1" id="image">
 			<c:forEach items="${requestScope.map.imageList }" var="image" varStatus="number">

@@ -23,10 +23,10 @@
 	
 	
 	<hr>
-	<div class="row">
+	<div class="row col-sm-offset-1">
 		<c:forEach items="${requestScope.map.list }" var="item" varStatus="num">
-			<div class="thumbnail col-sm-4">
-				<img src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"'>
+			<div class="thumbnail col-sm-4 col-offset-1">
+				<img style="width:100px; height:100px;" src="${initParam.rootPath }/supplierImage/${item.stageImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"'>
 				<div class="caption">
 					<p class="text-center">${item.stageName }</p>
 					<p class="text-center">${item.stageLocation }</p>
