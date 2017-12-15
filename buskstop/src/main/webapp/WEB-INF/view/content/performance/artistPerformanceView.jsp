@@ -17,12 +17,17 @@
 				"url":"${initParam.rootPath}/performanceLike.do",
 				"context" : this,
 				"data":{
-					"num":$(this).parent().parent().children("td:eq(0)").text(),
+					"no":$(this).parent().parent().parent().children("div").children("p:eq(0)").text(),
 					'${_csrf.parameterName}':'${_csrf.token}'
 				},
 				"dataType":"text",
 				"success":function(count){
 					$(this).html("<span class='glyphicon glyphicon-heart'></span>"+count);
+				},
+				"error":function(a,b,c){
+					alert(a);
+					alert(b);
+					alert(c);
 				}
 			});
 		});
@@ -131,7 +136,7 @@ select {
 			<div class="thumbnail col-sm-4" style="cursor:pointer;">
 				<img class="imgSize" src="${initParam.rootPath }/performanceImage/${item.performanceImage }" onerror='this.src="${initParam.rootPath }/supplierImage/no-image.png"' onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 				<div class="caption" >
-					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceNo}. ${item.performanceTitle }</p>
+					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">Title : ${item.performanceTitle }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">${item.performanceLocation }</p>
 					<p class="text-center" onclick="goDetail('${initParam.rootPath }', ${item.performanceNo})">
 					공연 날짜 : <fmt:formatDate value="${item.performanceDate}" pattern="yy-MM-dd hh:mm"/>

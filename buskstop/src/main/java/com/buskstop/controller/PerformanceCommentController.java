@@ -22,8 +22,12 @@ public class PerformanceCommentController {
 	@RequestMapping("/performanceCommentList")
 	@ResponseBody
 	public List<PerformanceComment> performanceCommentList(@RequestParam int performanceNo) throws Exception {
-		List<PerformanceComment> list = service.listComment(performanceNo);
-		return list;
+		if(service.listComment(performanceNo).isEmpty()) {
+			return null;
+		}else {
+			List<PerformanceComment> list = service.listComment(performanceNo);
+			return list;
+		}
 	}
 	
 	@RequestMapping("/performanceCommentInsert")
