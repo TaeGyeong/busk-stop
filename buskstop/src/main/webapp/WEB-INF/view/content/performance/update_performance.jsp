@@ -38,11 +38,13 @@ $(document).ready(function(){
 });
 </script>
 <link rel="stylesheet" href="${initParam.rootPath }/resource/css/jquery.timepicker.min.css">
-<body>
+	<h4 style="margin-left: 20px;"><b>공연정보 수정</b></h4>
+	<hr>
 	<form action="${initParam.rootPath }/performanceUpdate2.do"
-		method="post" enctype="multipart/form-data" id="stageRegForm">
+		method="post" enctype="multipart/form-data" id="stageRegForm"
+		style="width: 60%;" class="performance_register_form center-block">
 	
- 		<div class="form-group">
+ 		<div class="form-group" style="display: none;">
 			<label for="no">공연 번호 </label> <input type="text"
 				name="performanceNo" id="no" class="form-control"
 				value="${param.performanceNo}" readonly>
@@ -62,24 +64,24 @@ $(document).ready(function(){
 			<label for="location">수정할 공연 위치 </label> <input type="text"
 				name="performanceLocation" id="performanceLocation" class="form-control"
 				value="${requestScope.Performance.performanceLocation }"  readonly="readonly" placeholder="버튼을 통해 장소를 검색해 주세요.">
-			<input type="button" id="selectStage" value="대관한 장소 선택" class="btn btn-default col-sm-2">
-		<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-1"><br>
+			<input type="button" id="searchStage" value="직접 검색" class="btn btn-default col-sm-2"><br>
 		</div>
-		<div class="form-group">
-			<label for="date">수정할 공연 날짜 </label> <input type="date"
-				name="performanceDay" id="performanceDay" class="form-control">
+		<br>
+		<div class="form-group col-sm-6">
+			<label class="col-sm-6">공연일시</label> 
+			<input type="date" name="performanceDay" id="performanceDay" class="form-control">
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2">수정할 공연시간</label>
-			<input type="timepicker" name="performanceTime" id="performanceTime" class="form-control col-sm-3" required="required">
+		<div class="form-group col-sm-6">
+			<label class="col-sm-6">공연시간</label>
+			<input type="timepicker" name="performanceTime" id="performanceTime" class="form-control" required="required" readonly="readonly" style="background-color: #fff;">
 		</div>
 		<div class="form-group" style="display: none;">
-			<input type="datetime" style="display: none;" readonly="readonly" name="performanceDate" id="performanceDate" class="form-control col-sm-3" required="required">
+			<input type="datetime" readonly="readonly" name="performanceDate" id="performanceDate" class="form-control" required="required">
 		</div>
 		
+		<label for="content">수정할 공연 내용 </label>
 		<div class="form-group">
-			<label for="content">수정할 공연 내용 </label>
-			<textarea rows="15" cols="150" name="performanceContent" >${requestScope.Performance.performanceContent}</textarea>
+			<textarea rows="15" class="form-control col-sm-12" style="resize: none;" name="performanceContent" >${requestScope.Performance.performanceContent}</textarea>
 		</div>
 
 		<div class="form-group">
@@ -96,7 +98,7 @@ $(document).ready(function(){
 
 
 		<button type="button" class="btn btn-default" id="regBtn">정보수정</button>
-		<button type="button" onclick="history.back();">취소</button>
+		<button type="button" class="btn btn-default" onclick="history.back();">취소</button>
 
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
